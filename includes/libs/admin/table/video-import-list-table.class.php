@@ -1,0 +1,215 @@
+<?php
+
+namespace Vimeotheque\Admin\Table;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+use Vimeotheque\Video_Import;
+
+/**
+ * Class Video_Import_List_Table
+ * @package Vimeotheque\Admin
+ */
+class Video_Import_List_Table extends \WP_List_Table{
+	
+	// holds errors returned by query to Vimeo
+	private $query_errors;
+	
+	function __construct( $args = [] ){
+		// override parent's modes
+		/*
+		$this->modes = array(
+			'list' => __( 'List View', 'cvm_video' ),
+			'grid' => __( 'Grid View', 'cvm_video' )
+		);
+		*/
+		parent::__construct( [
+			'singular' => 'vimeo-video',
+			'plural'   => 'vimeo-videos',
+			'screen'   => isset( $args['screen'] ) ? $args['screen'] : null,
+		] );
+	}
+	
+	/**
+	 * Default column
+	 * @param array $item
+	 * @param string $column
+	 */
+	function column_default( $item, $column ){
+		if( array_key_exists($column, $item) ){
+			return $item[ $column ];
+		}else{
+			return '<span style="color:red">'.sprintf( __('Column <em>%s</em> was not found.', 'cvm_video'), $column ).'</span>';
+		}
+	}
+	
+	/**
+	 * Checkbox column
+	 * @param array $item
+	 */
+	function column_cb( $item ){
+
+		$output = sprintf( '<input type="checkbox" name="cvm_import[]" value="%1$s" id="cvm_video_%1$s" />', $item['video_id'] );
+		return $output;
+		
+	}
+	
+	/**
+	 * Title column
+	 * @param array $item
+	 */
+	function column_title( $item ){	
+		
+		$before = 'private' == $item['privacy'] ? '<span class="dashicons dashicons-hidden" style="color:#CCC;"></span> ' : '';
+		
+		$title = $item['title'];
+		if( isset( $item['type'] ) && $item['type'] ){
+			$title = ' <strong>[' . ucfirst( $item['type'] ) . ']</strong> ' . $title;
+		}
+		
+		$label = sprintf( '<label for="cvm_video_%1$s" class="cvm_video_label">%2$s</label>', $item['video_id'], $before . $title );
+		
+		// row actions
+    	$actions = [
+    		'view' 		=> sprintf( '<a href="https://vimeo.com/%1$s" target="_cvm_vimeo_open">%2$s</a>', $item['video_id'], __('View on Vimeo', 'cvm_video') ),
+	    ];
+    	
+    	return sprintf('%1$s %2$s',
+    		$label,
+    		$this->row_actions( $actions )
+    	);		
+	}
+	
+	
+	
+	/**
+	 * Column for video duration
+	 * @param array $item
+	 */
+	function column_duration( $item ){		
+		return \Vimeotheque\human_time( $item['duration'] );
+	}
+	
+	/**
+	 * Rating column
+	 * @param array $item 
+	 */
+	function column_likes( $item ){
+
+		if( 0 == $item['stats']['likes'] ){
+			return '-';
+		}
+		
+		return sprintf( __('%d likes', 'cvm_video'), $item['stats']['likes'] );
+	}
+	
+	/**
+	 * Views column
+	 * @param array $item
+	 */
+	function column_views( $item ){
+		if( 0 == $item['stats']['views'] ){
+			return '-';
+		}		
+		return number_format( $item['stats']['views'], 0, '.', ',');		
+	}
+	
+	/**
+	 * Date when the video was published
+	 * @param array $item
+	 */
+	function column_published( $item ){
+		if( !$item['published'] ){
+			return __('Unknown', 'cvm_video');
+		}
+		
+		
+		$time = strtotime( $item['published'] );
+		return date('M dS, Y @ H:i:s', $time);
+	}
+		
+	/**
+     * (non-PHPdoc)
+     * @see WP_List_Table::get_bulk_actions()
+     */
+    function get_bulk_actions() {    	
+    	$actions = [
+    		/*'import' => __('Import', 'cvm_video')*/
+	    ];
+    	
+    	//global $mode;
+    	//$this->view_switcher( $mode );
+    	
+    	return $actions;
+    }
+	
+	/**
+     * Returns the columns of the table as specified
+     */
+    function get_columns(){
+        
+		$columns = [
+			'cb'		=> '<input type="checkbox" />',
+			'title'		=> __('Title', 'cvm_video'),
+			'video_id'	=> __('Video ID', 'cvm_video'),
+			'uploader'	=> __('Uploader', 'cvm_video'),
+			'duration'	=> __('Duration', 'cvm_video'),
+			'likes'		=> __('Likes', 'cvm_video'),
+			'views'		=> __('Views', 'cvm_video'),
+			'published' => __('Published', 'cvm_video'),
+		];
+    	return $columns;
+    }
+    
+    function extra_tablenav( $which ){    	
+    	return;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see WP_List_Table::prepare_items()
+     */    
+    function prepare_items() {
+        $per_page 	 = 20;
+		$current_page = $this->get_pagenum();
+
+		$resource = isset($_GET['cvm_feed']) ? $_GET['cvm_feed'] : false;
+		$resource_id = isset($_GET['cvm_query']) ? $_GET['cvm_query'] : false;
+		$user = isset($_GET['cvm_album_user']) ? $_GET['cvm_album_user'] : false;
+
+		$args = [
+			'order' => isset($_GET['cvm_order']) ? $_GET['cvm_order'] : false, // @todo implement new ordering
+    		'results' => $per_page,
+			'page' => $current_page,
+			'query' => isset( $_GET['cvm_search_results'] ) ? $_GET['cvm_search_results'] : false
+		];
+		
+		$import = new Video_Import(
+			$resource,
+			$resource_id,
+			$user,
+			$args
+		);
+		$videos = $import->get_feed();
+        
+		$this->query_errors = $import->get_errors();
+		
+		$total_items = $import->get_total_items();
+		
+    	$this->items 	= $videos;
+        $this->set_pagination_args( [
+            'total_items' => $total_items,                  
+            'per_page'    => $per_page,                     
+            'total_pages' => ceil( $total_items / $per_page )
+        ] );
+    }   
+    
+    /**
+     * Returns any errors issued by the importer
+     */
+    public function get_query_errors(){
+    	return $this->query_errors;	
+    }    
+}

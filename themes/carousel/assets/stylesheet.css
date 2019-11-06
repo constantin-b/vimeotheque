@@ -1,0 +1,98 @@
+.cvm-video-playlist.carousel{
+	display:block;
+	position:relative;
+	max-width:100%;
+}
+
+.cvm-nav-container-bottom{
+	display:block;
+	position:relative;
+	width:100%;
+	margin-top:10px;
+}
+
+.cfvim_carousel{
+	display:block;
+	position:relative;
+	width:0px;
+	margin:-4px auto 10px;
+	padding:0px 2px;
+}
+.cfvim_carousel .cfvim_carousel_inside{
+	display:block;
+	position:relative;
+	width:0px;
+	overflow:hidden;
+}
+	.cfvim_carousel .cfvim_carousel_items{
+		display:block;
+		position:relative;
+		float:left;
+		list-style-type:none;
+		margin:0px;
+		padding:0px!important;
+		width:5000px;
+	}
+		.cfvim_carousel .cfvim_carousel_items .item{
+			display:block;
+			position:relative;
+			float:left;
+			padding:4px 2px;
+			margin:0px;
+		}
+		.cfvim_carousel .cfvim_carousel_items .item a{
+			display:block;
+		}
+		
+			.cfvim_carousel .cfvim_carousel_items .item img{
+				margin:0px;
+				padding:0px;
+				display:block;
+				max-width:none;
+			}
+
+.cfvim_carousel .cvm-vertical-center{
+	position:absolute;
+	top:50%;
+	left:0px;		
+	width:100%;
+	height:0px;
+}			
+
+	.cfvim_carousel .cvm-vertical-center .sidenavs{
+		display:block;
+		position:absolute;
+		line-height:14px!important;
+		padding:4px 2px 3px 4px;
+		border-radius:3px;
+		text-decoration:none;
+		font-size:14px;
+		top:-10px;
+		background:#000;
+	}
+
+	.cfvim_carousel .cvm-vertical-center .nav-back{
+		left:-30px;
+		padding:4px 4px 3px 2px;
+	}
+	.cfvim_carousel .sidenavs.nav-fwd{
+		right:-30px;
+	}
+	
+	
+	.cfvim_carousel .sidenavs.end{
+		color:#CCC;
+	}
+	
+	
+.cvm-video-playlist.carousel .cvm-player{
+	display:block;
+	position:relative;
+	max-width:100%;
+	overflow:hidden;
+	background-image:url(images/loading.gif);
+	background-color:#000000;
+	background-position:center center;
+	background-repeat:no-repeat;		
+}	
+	
