@@ -64,8 +64,8 @@ if( !class_exists( __NAMESPACE__ . '\Latest_Videos_Widget' ) ){
 		 */
 		public function __construct(){
 			
-			$this->post_type = cvm_get_post_type();
-			$this->taxonomy = cvm_get_category();
+			$this->post_type = Plugin::instance()->get_cpt()->get_post_type();
+			$this->taxonomy = Plugin::instance()->get_cpt()->get_post_tax();
 			
 			/* Widget settings. */
 			$widget_options = [
@@ -92,7 +92,13 @@ if( !class_exists( __NAMESPACE__ . '\Latest_Videos_Widget' ) ){
 		 * @see WP_Widget::widget()
 		 */
 		function widget( $args, $instance ){
-			extract($args);
+			/**
+			 * @var string $before_title
+			 * @var string $after_title
+			 * @var string $before_widget
+			 * @var string $after_widget
+			 */
+		    extract( $args );
 			$instance = wp_parse_args( $instance , $this->get_defaults() );
 
 			$posts = absint($instance['cvm_posts_number']);
@@ -200,17 +206,21 @@ if( !class_exists( __NAMESPACE__ . '\Latest_Videos_Widget' ) ){
 			<?php 
 			echo $after_widget;
 		}
-		
+
 		/**
 		 * (non-PHPdoc)
+		 * @param $new_instance
+		 * @param $old_instance
+		 *
+		 * @return array
 		 * @see WP_Widget::update()
 		 */
-		function update($new_instance, $old_instance){
+		function update( $new_instance, $old_instance ){
 	
 			$instance = $old_instance;
 			$instance['cvm_widget_title'] 	= $new_instance['cvm_widget_title'];
 			$instance['cvm_post_type'] 	    = $new_instance['cvm_post_type'];
-			$instance['cvm_taxonomy']       = cvm_get_post_type() == $new_instance['cvm_post_type'] ? cvm_get_category() : 'category';
+			$instance['cvm_taxonomy']       = 'category';
 			$instance['cvm_posts_number'] 	= (int)$new_instance['cvm_posts_number'];
 			$instance['cvm_posts_tax'] 		= (int)$new_instance['cvm_posts_tax'];
 			$instance['cvm_vim_image']	  	= (bool)$new_instance['cvm_vim_image'];
@@ -253,7 +263,7 @@ if( !class_exists( __NAMESPACE__ . '\Latest_Videos_Widget' ) ){
 	                'name' 		=> $this->get_field_name('cvm_post_type'),
 	                'id' 		=> $this->get_field_id('cvm_post_type'),
 	                'options' 	=> [
-	                    cvm_get_post_type() => __( 'Video', 'cvm_video' ),
+	                    Plugin::instance()->get_cpt()->get_post_type() => __( 'Video', 'cvm_video' ),
                         'post' => __( 'Regular post', 'cvm_video' )
 	                ],
 	                'selected'	=> $options['cvm_post_type'],
@@ -371,8 +381,8 @@ if( !class_exists( __NAMESPACE__ . '\Latest_Videos_Widget' ) ){
 		private function get_defaults(){
 			$player_defaults = get_player_settings();
 			$defaults = [
-			    'cvm_post_type' => cvm_get_post_type(),
-				'cvm_taxonomy'  => cvm_get_category(),
+			    'cvm_post_type' => Plugin::instance()->get_cpt()->get_post_type(),
+				'cvm_taxonomy'  => Plugin::instance()->get_cpt()->get_post_tax(),
 				'cvm_widget_title' 	=> '',
 				'cvm_posts_number' 	=> 5,
 				'cvm_posts_tax'		=> -1,
@@ -428,7 +438,12 @@ if( !class_exists( __NAMESPACE__ . '\Video_Categories_Widget' ) ){
 		 * @see WP_Widget::widget()
 		 */
 		function widget( $args, $instance ){
-			
+			/**
+			 * @var string $before_title
+			 * @var string $after_title
+			 * @var string $before_widget
+			 * @var string $after_widget
+			 */
 			extract($args);
 			
 			$widget_title = '';
@@ -437,7 +452,7 @@ if( !class_exists( __NAMESPACE__ . '\Video_Categories_Widget' ) ){
 			}
 			
 			$args = [
-				'taxonomy' => cvm_get_category(),
+				'taxonomy' => Plugin::instance()->get_cpt()->get_post_tax(),
 				'pad_counts' => true,
 				'title_li'	=> false,
 				'show_count' => $instance['post_count'],

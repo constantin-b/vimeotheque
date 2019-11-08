@@ -285,11 +285,11 @@ function cvm_output_playlist( $videos = 'latest', $results = 5, $theme = 'defaul
 			$tax_name = 'category';
 		break;
 		case 'both':
-			$post_type = [ 'post', cvm_get_post_type() ];
+			$post_type = [ 'post', Plugin::instance()->get_cpt()->get_post_type() ];
 		break;	
 		default:
-			$post_type = cvm_get_post_type();
-			$tax_name = cvm_get_category();
+			$post_type = Plugin::instance()->get_cpt()->get_post_type();
+			$tax_name = Plugin::instance()->get_cpt()->get_post_tax();
 		break;	
 	}
 	

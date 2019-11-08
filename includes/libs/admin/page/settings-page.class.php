@@ -10,7 +10,9 @@ use Vimeotheque\Admin\Notice\Admin_Notices;
 use Vimeotheque\Admin\Notice\Notice;
 use Vimeotheque\Options;
 use Vimeotheque\Plugin;
+use Vimeotheque\Post_Type;
 use Vimeotheque\Vimeo_Api\Vimeo_Oauth;
+use WP_Error;
 
 /**
  * Class Settings_Page
@@ -18,13 +20,19 @@ use Vimeotheque\Vimeo_Api\Vimeo_Oauth;
  */
 class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 	/**
-	 * @var \Vimeotheque\Vimeo_Api\Vimeo_Oauth
+	 * @var Vimeo_Oauth
 	 */
 	private $vimeo_oauth;
+
 	/**
-	 * @var \WP_Error
+	 * @var WP_Error
 	 */
 	private $error;
+
+	public function __construct( Post_Type $object ) {
+		parent::__construct( $object );
+		Settings_Helper::init();
+	}
 
 	/**
 	 * Generates page HTML
@@ -32,17 +40,6 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 	public function get_html(){
 		$options = $this->options_obj()->get_options();
 		$player_opt = $this->player_options_obj()->get_options();
-
-		$authorize_url = false;
-		if( !empty( $options['vimeo_consumer_key'] ) && !empty( $options['vimeo_secret_key'] ) && $options['oauth_token'] ){
-			$state = wp_create_nonce( 'cvm_vimeo_state_nonce' );
-			$authorize_url = $this->vimeo_oauth->get_auth_redirect( $state );
-		}
-		
-		$unauthorize_url = false;
-		if( !empty( $options['vimeo_consumer_key'] ) && !empty( $options['vimeo_secret_key'] ) && $options['vimeo_access_granted'] ){
-			$unauthorize_url = menu_page_url('cvm_settings', false) . '&cvm_remove_access=1&nonce=' . wp_create_nonce('cvm-remove-vim-access');
-		}
 
 		/**
 		 * Filter that allows addition of extra tabs to plugin Settings page.
@@ -71,7 +68,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 			$options['vimeo_secret_key'],
 			$options['oauth_secret'],
 			// you must use this instead of menu_page_url() to avoid API error
-			admin_url( 'edit.php?post_type=' . cvm_get_post_type() . '&page=cvm_settings' )
+			admin_url( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings' )
 		);
 
 		if( $this->set_unauth_token() ) {
@@ -83,44 +80,11 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 		 */
 		do_action( 'cvm_settings_on_load', $this->options_obj() );
 
-		if( isset( $_GET['code'] ) && isset( $_GET['state'] ) ){
-			if( wp_verify_nonce( $_GET['state'], 'cvm_vimeo_state_nonce' ) ) {
-				$token = $this->vimeo_oauth->get_auth_token( $_GET['code'] );
-				if ( ! is_wp_error( $token ) ) {
-					$options['oauth_secret']         = $token;
-					$options['vimeo_access_granted'] = true;
-					$this->options_obj()->update_options( $options );
-
-					do_action( 'cvm_granted_plugin_private_access' );
-
-				} else {
-					// erorr - maybe do something?
-				}
-			}
-				
-			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings' );
-			die();
-		}
-		
-		if( isset( $_GET['cvm_remove_access'] ) ){
-			if( check_admin_referer('cvm-remove-vim-access', 'nonce') ){
-				$options['oauth_token'] 			= '';
-				$options['oauth_secret'] 			= '';
-				$options['vimeo_access_granted']	= false;
-				$this->options_obj()->update_options( $options );
-
-				/**
-				 * Action triggered when plugin access to Vimeo account is removed by user
-				 */
-				do_action( 'cvm_removed_plugin_private_access', $this->options_obj() );
-
-				wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings' );
-				die();
-			}
-		}
-		
 		if( isset( $_POST['cvm_wp_nonce'] ) ){
 			if( check_admin_referer('cvm-save-plugin-settings', 'cvm_wp_nonce') ){
+
+				do_action( 'vimeotheque\admin\settings_save' );
+
 				$this->update_settings();
 				$this->update_player_settings();
 			}
@@ -149,7 +113,6 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 	 */
 	private function update_settings(){
 		$defaults = $this->options_obj()->get_defaults();
-		$this->do_registration();
 
 		foreach( $defaults as $key => $val ){
 			if( is_numeric( $val ) ){
@@ -181,6 +144,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 				$defaults['post_slug'] = $plugin_settings['post_slug'];
 			}
 		}
+
 		if( isset( $_POST['taxonomy_slug'] ) ){
 			$tax_slug = sanitize_title( $_POST['taxonomy_slug'] );
 			/**
@@ -193,6 +157,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 				$defaults['taxonomy_slug'] = $plugin_settings['taxonomy_slug'];
 			}
 		}
+
 		if( isset( $_POST['tag_slug'] ) ){
 			$tag_slug = sanitize_title( $_POST['tag_slug'] );
 			if( !empty( $_POST['tag_slug'] ) && $plugin_settings['tag_slug'] !== $tag_slug && $_POST['tag_slug'] != $defaults['post_slug'] && $_POST['tag_slug'] != $defaults['taxonomy_slug'] ){
@@ -211,52 +176,22 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 			){
 				$defaults['oauth_token'] = '';
 				$defaults['oauth_secret'] = '';
-				$defaults['vimeo_access_granted'] = false;
 			}
 		}else{
 			// if the consumer keys are not sent by POST, set the old values
 			$defaults['vimeo_consumer_key'] = $plugin_settings['vimeo_consumer_key'];
 			$defaults['vimeo_secret_key'] = $plugin_settings['vimeo_secret_key'];
 			$defaults['oauth_token'] = $plugin_settings['oauth_token'];
-			$defaults['oauth_secret'] = $plugin_settings['oauth_secret'];
-			$defaults['vimeo_access_granted'] = $plugin_settings['vimeo_access_granted'];
 		}
 
 		$this->options_obj()->update_options( $defaults );
 
-		// update automatic imports
-		if( $plugin_settings['import_frequency'] != $defaults['import_frequency'] ){
-			Plugin::instance()
-			      ->get_importer()
-			      ->update_transient();
-		}
-
 		if( $flush_rules ){
 			// create rewrite ( soft )
 			// register custom post
-			\Vimeotheque\get_method( 'register_post' );
+			Plugin::instance()->get_cpt()->register_post();
 			flush_rewrite_rules();
 		}
-	}
-
-	/**
-	 * Register plugin license
-	 */
-	private function do_registration(){
-
-		$settings = \Vimeotheque\get_settings();
-		if( !empty( $settings['license_key'] ) && $_POST['license_key'] == $settings['license_key'] ){
-			return;
-		}
-		if( empty( $_POST['license_key'] ) ){
-			return;
-		}
-
-		return Plugin::instance()
-		             ->get_update_requests()
-		             ->do_activation(
-		             	trim( $_POST['license_key'] )
-		             );
 	}
 
 	/**
@@ -303,8 +238,6 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 					$options['vimeo_consumer_key'] = '';
 					$options['vimeo_secret_key'] = '';
 					$options['oauth_token'] = '';
-					$options['oauth_secret'] = '';
-					$options['vimeo_access_granted'] = false;
 					// set a notice for the error
 					Admin_Notices::instance()
 					             ->register(
@@ -360,6 +293,12 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 			'cvm-tabs',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/tabs.js',
 			[ 'jquery', 'jquery-ui-tabs' ]
+		);
+
+		wp_enqueue_script(
+			'cvm-settings',
+			VIMEOTHEQUE_URL . 'assets/back-end/js/plugin-settings.js',
+			[ 'jquery' ]
 		);
 
 		wp_enqueue_script(

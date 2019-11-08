@@ -55,14 +55,26 @@ a:hover, a:active, a:focus{
 		margin-left:200px;
 		z-index:1;
 	}
-	
+
+.cvm-tab-labels li.cvm-pro-option a{
+	color:#FF0000!important;
+}
+
 h4{
 	width:100%;
 	border-bottom:1px #CCC solid;
 	margin:0px;
 	padding:0px 0px 10px 0px;
-	font-style:italic;	
+	font-style:italic;
+	line-height:28px;
 }	
+	h4 i{
+		margin-right:4px;
+	}
+	h4 i:before{
+		line-height:29px!important;
+		font-size:20px;
+	}
 
 a.cvm-danger{
 	text-decoration:none;
@@ -81,4 +93,18 @@ a.cvm-extra{
 
 .emphasize{
 	color:#FF7F23;
+}
+
+input[type=number].cvm_width{
+	width:5em;
+}
+
+.cvm-pro-option label{
+	color: #FF0000!important;
+	font-style: italic;
+}
+
+.cvm-hidden-options:before{
+	font-family: dashicons;
+	content: "\f177";
 }

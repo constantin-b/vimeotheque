@@ -112,12 +112,6 @@ class Plugin{
 		$this->register_autoloader();
 		// load dependency files
 		$this->load();
-		// register the post type
-		$this->set_post_type();
-		// set the importer
-		$this->load_importer();
-		// start the front-end
-		$this->load_front_end();
 
 		// activation hook to add the rewrite rules for the custom post type
 		register_activation_hook( __FILE__, [
@@ -125,8 +119,10 @@ class Plugin{
 			'activation_hook'
 		] );
 
-		// store plugin options for later use
-		$this->options = get_settings();
+		add_action( 'plugins_loaded', [
+			$this,
+			'init'
+		], 1 );
 
 		// run this admin init on init to have access to earlier hooks
 		// priority must be set to run very early so that init hooks set
@@ -134,7 +130,18 @@ class Plugin{
 		add_action( 'init', [
 			$this,
 			'admin_init'
-		], -999999999 );
+		], -999999 );
+	}
+
+	public function init(){
+		// register the post type
+		$this->set_post_type();
+		// set the importer
+		$this->load_importer();
+		// start the front-end
+		$this->load_front_end();
+		// store plugin options for later use
+		$this->options = get_settings();
 	}
 
 	/**
@@ -262,6 +269,13 @@ class Plugin{
 	 */
 	public function get_posts_importer(){
 		return $this->posts_import;
+	}
+
+	/**
+	 * @return Admin
+	 */
+	public function get_admin(){
+		return $this->admin;
 	}
 
 	/**

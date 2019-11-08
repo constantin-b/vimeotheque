@@ -7,9 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Exception;
+use Vimeotheque\Admin\Notice\Admin_Notices;
 use Vimeotheque\Admin\Notice\Plugin_Notice;
 use Vimeotheque\Admin\Page\About_Page;
 use Vimeotheque\Admin\Page\Automatic_Import_Page;
+use Vimeotheque\Admin\Page\Go_Pro_Page;
 use Vimeotheque\Admin\Page\List_Videos_Page;
 use Vimeotheque\Admin\Page\Post_Edit_Page;
 use Vimeotheque\Admin\Page\Settings_Page;
@@ -39,10 +41,10 @@ class Admin{
 	private $ajax;
 
 	/**
-	 * Store help screens references
+	 * Pro menu priority
 	 */
-	private $help_screens = [];
-	
+	const PRO_MENU_PRIORITY = 512;
+
 	/**
 	 *
 	 * @param Post_Type $post_type
@@ -55,22 +57,24 @@ class Admin{
 		$this->ajax = new Ajax_Actions( $this->cpt );
 		// start post edit single video page
 		new Post_Edit_Page( $post_type );
+
 		// add extra menu pages
 		add_action( 'admin_menu', [
 				$this, 
 				'menu_pages'
 		], 1 );
+
+		add_action( 'admin_menu', [
+			$this,
+			'pro_menu'
+		], self::PRO_MENU_PRIORITY );
+
 		// add admin capabilities
 		add_action( 'init', [
 			$this,
 			'add_capabilities'
 		], -999 );
 
-		// help screens
-		add_filter( 'contextual_help', [
-				$this, 
-				'contextual_help'
-		], 10, 3 );
 		// add columns to posts table
 		add_filter( 'manage_edit-' . $this->cpt->get_post_type() . '_columns', [
 				$this, 
@@ -85,6 +89,12 @@ class Admin{
 				$this, 
 				'bulk_actions_js'
 		] );
+
+		// alert if setting to import as post type post by default is set on all plugin pages
+		add_action( 'admin_notices', [
+			$this,
+			'admin_notices'
+		], 10 );
 
 		add_action( 'admin_init', [
 			$this,
@@ -101,6 +111,23 @@ class Admin{
 	 * Add subpages for custom post type admin menu
 	 */
 	public function menu_pages(){
+
+		$settings_page = new Settings_Page( $this->cpt );
+		$settings = add_submenu_page(
+			'edit.php?post_type=' . $this->cpt->get_post_type(),
+			__( 'Settings', 'cvm_video' ),
+			__( 'Settings', 'cvm_video' ),
+			'manage_options',
+			'cvm_settings',
+			[
+				$settings_page,
+				'get_html'
+			] );
+		add_action( 'load-' . $settings, [
+			$settings_page,
+			'on_load'
+		] );
+
 		$import_page = new Video_Import_Page( $this->cpt, $this->ajax );
 		$video_import = add_submenu_page(
 			'edit.php?post_type=' . $this->cpt->get_post_type(),
@@ -117,22 +144,6 @@ class Admin{
 				$import_page, 
 				'on_load'
 		] );
-		
-		$automatic_page = new Automatic_Import_Page( $this->cpt );
-		$automatic_import = add_submenu_page(
-			'edit.php?post_type=' . $this->cpt->get_post_type(),
-			__( 'Automatic Vimeo video import', 'cvm_video' ),
-			__( 'Automatic import', 'cvm_video' ),
-			$this->get_capability( 'automatic_import' ),
-			'cvm_auto_import',
-			[
-				$automatic_page, 
-				'get_html'
-			] );
-		add_action( 'load-' . $automatic_import, [
-				$automatic_page, 
-				'on_load'
-		] );
 
 		/**
 		 * Plugin about page. Shown on plugin activation only
@@ -144,7 +155,7 @@ class Admin{
 			__( 'About', 'cvm_video' ),
 			__( 'About', 'cvm_video' ),
 			'activate_plugins',
-			'cvm_about',
+			'vimeotheque_about',
 			[
 				$page,
 				'get_html'
@@ -154,53 +165,68 @@ class Admin{
 			'on_load'
 		] );
 
-		// help screens
-		$this->help_screens[ $automatic_import ] = [
-				[
-					'id' => 'cvm_automatic_import_overview',
-					'title' => __( 'Overview', 'cvm_video' ),
-					'content' => $this->get_contextual_help( 'automatic-import-overview' )
-				],
-				[
-					'id' => 'cvm_automatic_import_frequency',
-					'title' => __( 'Import frequency', 'cvm_video' ),
-					'content' => $this->get_contextual_help( 'automatic-import-frequency' )
-				],
-				[
-					'id' => 'cvm_automatic_import_as_post',
-					'title' => __( 'Import videos as posts', 'cvm_video' ),
-					'content' => $this->get_contextual_help( 'automatic-import-as-post' )
-				]
-		];
-		
-		$settings_page = new Settings_Page( $this->cpt );
-		$settings = add_submenu_page(
-			'edit.php?post_type=' . $this->cpt->get_post_type(),
-			__( 'Settings', 'cvm_video' ),
-			__( 'Settings', 'cvm_video' ),
-			'manage_options',
-			'cvm_settings',
-			[
-				$settings_page, 
-				'get_html'
-			] );
-		add_action( 'load-' . $settings, [
-				$settings_page, 
-				'on_load'
-		] );
-		
 		/**
 		 * Shortcode videos list table
 		 */
 		$v_list = new List_Videos_Page( $this->cpt );
-		$videos_list = add_submenu_page( null, __( 'Videos', 'cvm_video' ), __( 'Videos', 'cvm_video' ), 'edit_posts', 'cvm_videos', [
+		$videos_list = add_submenu_page(
+			null,
+			__( 'Videos', 'cvm_video' ),
+			__( 'Videos', 'cvm_video' ),
+			'edit_posts',
+			'cvm_videos',
+			[
 				$v_list, 
 				'get_html'
-		] );
+			]
+		);
+
 		add_action( 'load-' . $videos_list, [
 				$v_list, 
 				'on_load'
 		] );
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public function pro_menu(){
+		$automatic_page = new Automatic_Import_Page( $this->cpt );
+		$automatic_import = add_submenu_page(
+			'edit.php?post_type=' . $this->cpt->get_post_type(),
+			__( 'Automatic Vimeo video import', 'cvm_video' ),
+			__( 'Automatic import', 'cvm_video' ),
+			$this->get_capability( 'automatic_import' ),
+			'cvm_auto_import',
+			[
+				$automatic_page,
+				'get_html'
+			] );
+
+		add_action( 'load-' . $automatic_import, [
+			$automatic_page,
+			'on_load'
+		] );
+
+
+		$gopro_page = new Go_Pro_Page( $this->cpt );
+		$gopro = add_submenu_page(
+			'edit.php?post_type=' . $this->cpt->get_post_type(),
+			__( 'Go PRO!', 'cvm_video' ),
+			__( 'Go PRO!', 'cvm_video' ),
+			'manage_options',
+			'cvm_go_pro',
+			[
+				$gopro_page,
+				'get_html'
+			]
+		);
+		add_action( 'load-' . $gopro,
+			[
+				$gopro_page,
+				'on_load'
+			]
+		);
 	}
 
 	/**
@@ -228,28 +254,6 @@ class Admin{
 					$r->add_cap( $cap['capability'] );
 				}
 			}
-		}
-	}
-
-	/**
-	 * @param $contextual_help
-	 * @param $screen_id
-	 * @param \WP_Screen $screen
-	 *
-	 * @return mixed
-	 */
-	public function contextual_help( $contextual_help, $screen_id, $screen ){
-		// if not hooks page, return default contextual help
-		if( ! is_array( $this->help_screens ) || ! array_key_exists( $screen_id, $this->help_screens ) ){
-			return $contextual_help;
-		}
-		
-		// current screen help screens
-		$help_screens = $this->help_screens[ $screen_id ];
-		
-		// create help tabs
-		foreach( $help_screens as $help_screen ){
-			$screen->add_help_tab( $help_screen );
 		}
 	}
 
@@ -329,21 +333,29 @@ class Admin{
 		return $actions;
 	}
 
+	public function admin_notices(){
+		if( !isset( $_GET['post_type'] ) || $this->cpt->get_post_type() != $_GET['post_type'] ){
+			return;
+		}
+
+		Admin_Notices::instance()->show_notices();
+	}
+
 	/**
 	 * Triggered on plugin activation
 	 */
 	public function plugin_activation(){
-		set_transient( 'cvm_plugin_activation' , true, 30 );
+		set_transient( 'vimeotheque_activation' , true, 30 );
 	}
 
 	/**
 	 * Admin init callback, redirects to plugin Settings page after plugin activation.
 	 */
 	public function activation_redirect(){
-		$t = get_transient( 'cvm_plugin_activation' );
+		$t = get_transient( 'vimeotheque_activation' );
 		if( $t ){
-			delete_transient( 'cvm_plugin_activation' );
-			wp_redirect( str_replace( '#038;' , '&', menu_page_url( 'cvm_about', false ) ) );
+			delete_transient( 'vimeotheque_activation' );
+			wp_redirect( str_replace( '#038;' , '&', menu_page_url( 'vimeotheque_about', false ) ) );
 			die();
 		}
 	}

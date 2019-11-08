@@ -37,7 +37,7 @@ final class CVM_Vimeo extends \Vimeotheque\Vimeo_Api\Vimeo_Oauth{
 			$options['vimeo_secret_key'],
 			$token,
 			// you must use this instead of menu_page_url() to avoid API error
-			admin_url( 'edit.php?post_type=' . Vimeotheque\cvm_get_post_type() . '&page=cvm_settings' )
+			admin_url( 'edit.php?post_type=' . Vimeotheque\Plugin::instance()->get_cpt()->get_post_type() . '&page=cvm_settings' )
 		);
 	}
 }
@@ -249,14 +249,6 @@ function cvm_get_post_type(){
 
 /**
  * @deprecated
- * @return array
- */
-function cvm_check_theme_support(){
-	return Vimeotheque\has_theme_support();
-}
-
-/**
- * @deprecated
  * @param $post_id
  *
  * @return bool|mixed|void
@@ -351,4 +343,23 @@ function cvm_set_featured_image($post_id, $post_type, $refresh = false){
  */
 function cvm_get_video_data_meta_name(){
 	return Vimeotheque\Plugin::instance()->get_cpt()->get_post_settings()->get_meta_video_data();
+}
+
+/**
+ * General method to access public methods of post type class
+ *
+ * @param string $method - method name
+ * @param array $args
+ *
+ * @return string - result returned by class method
+ */
+function cvm_get_method( $method, $args = [] ){
+	$obj = \Vimeotheque\Plugin::instance()->get_cpt();
+
+	if( !$args ){
+		$result = call_user_func( [ $obj, $method ] );
+	}else{
+		$result = call_user_func_array( [ $obj, $method ], $args);
+	}
+	return $result;
 }
