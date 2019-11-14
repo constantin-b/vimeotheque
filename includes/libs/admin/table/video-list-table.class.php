@@ -86,7 +86,7 @@ class Video_List_Table extends \WP_List_Table{
 		$settings = \Vimeotheque\get_video_settings( $item['ID'] );
 		
 		$form = '<div class="single-video-settings" id="single-video-settings-'.$item['ID'].'">';
-		$form.= '<h4>'.$item['post_title'].' (' . \Vimeotheque\human_time( $meta['duration'] ) . ')</h4>';
+		$form.= '<h4>'.$item['post_title'].' (' . \Vimeotheque\Helper::human_time( $meta['duration'] ) . ')</h4>';
 		$form.= '<label for="cvm_volume'.$item['ID'].'">'.__('Volume', 'cvm_video').'</label> <input size="3" type="text" name="volume['.$item['ID'].']" id="cvm_volume'.$item['ID'].'" value="'.$settings['volume'].'" /><br />';
 		$form.= '<label for="cvm_width'.$item['ID'].'">'.__('Width', 'cvm_video').'</label> <input size="3" type="text" name="width['.$item['ID'].']" id="cvm_width'.$item['ID'].'" value="'.$settings['width'].'" /><br />';
 		
@@ -145,7 +145,7 @@ class Video_List_Table extends \WP_List_Table{
 	 */
 	function column_duration( $item ){
 		$meta = cvm_get_post_video_data( $item['ID'] );
-		return '<span id="duration'.$item['ID'].'">' . \Vimeotheque\human_time($meta['duration']) . '</span>';
+		return '<span id="duration'.$item['ID'].'">' . \Vimeotheque\Helper::human_time($meta['duration']) . '</span>';
 	}
 	
 	/**

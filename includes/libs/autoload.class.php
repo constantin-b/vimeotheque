@@ -73,7 +73,7 @@ class Autoload {
 			'Admin\Notice_Interface' => 'includes/admin/libs/notice-interface.class.php',
 			'Admin\Feed_Import_List_Table' => 'includes/admin/libs/feed-import-list-table.class.php',
 			'Admin\Plugin_Notice' => 'includes/admin/libs/plugin-notice.class.php',
-			'Admin\Post_Edit_Meta_Panels' => 'includes/admin/libs/post-edit-meta-panels.class.php',
+			'Admin\Posts_Import_Meta_Panels' => 'includes/admin/libs/post-edit-meta-panels.class.php',
 			'Admin\Post_Type_Notice' => 'includes/admin/libs/post-type-notice.class.php',
 			'Admin\Video_Import_List_Table' => 'includes/admin/libs/video-import-list-table.class.php',
 			'Admin\Video_List_Table' => 'includes/admin/libs/video-list-table.class.php',

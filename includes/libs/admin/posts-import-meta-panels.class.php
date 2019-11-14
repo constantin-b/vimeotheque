@@ -14,7 +14,7 @@ use Vimeotheque\Post_Type;
  * @author CodeFlavors
  *
  */
-class Post_Edit_Meta_Panels{
+class Posts_Import_Meta_Panels{
 	/**
 	 * Stores the Post_Type object
 	 * @var Post_Type
@@ -35,26 +35,26 @@ class Post_Edit_Meta_Panels{
 	 */
 	public function import_entries_meta(){
 		// plugin options
-		$options = \Vimeotheque\get_settings();
+		$options = \Vimeotheque\Plugin::instance()->get_options();
 		// embed options
 		$player_opt = \Vimeotheque\get_player_settings();
 		// merge the two together
 		$options = array_merge( $options, $player_opt );
-
-		if( isset( $_GET['id'] ) ){
-			$playlist_id = absint($_GET['id']);
-			$options = \Vimeotheque\cvm_get_playlist_settings( $playlist_id );
-
-		}
+		/**
+		 * Allow options override
+         *
+         * @param array $options
+		 */
+		$options = apply_filters( 'vimeotheque\admin\import_meta_panel\post_options', $options );
 		?>
 		<label for="import_description"><?php _e('Set description as', 'cvm_video')?>:</label>
 		<?php 
 			$args = [
 				'options' => [
-					'content' 			=> __('content', 'cvm_video'),
-					'excerpt' 			=> __('excerpt', 'cvm_video'),
-					'content_excerpt' 	=> __('both', 'cvm_video'),
-					'none'				=> __('none', 'cvm_video')
+					'content' => __('content', 'cvm_video'),
+					'excerpt' => __('excerpt', 'cvm_video'),
+					'content_excerpt' => __('both', 'cvm_video'),
+					'none' => __('none', 'cvm_video')
 				],
 				'name' => 'import_description',
 				'selected' => $options['import_description']
@@ -66,71 +66,29 @@ class Post_Edit_Meta_Panels{
 		<?php 
 			$args = [
 				'options' => [
-					'publish' 	=> __('Published', 'cvm_video'),
-					'draft' 	=> __('Draft', 'cvm_video'),
-					'pending'	=> __('Pending', 'cvm_video')
+					'publish' => __('Published', 'cvm_video'),
+					'draft' => __('Draft', 'cvm_video'),
+					'pending' => __('Pending', 'cvm_video')
 				],
-				'name' 		=> 'import_status',
-				'selected' 	=> $options['import_status']
+				'name' => 'import_status',
+				'selected' => $options['import_status']
 			];
 			Helper_Admin::select( $args );
 		?><br />
-		
-		<?php			
-			$dropdown = wp_dropdown_users( [
-				'name' 	=> 'import_user',
-				'id'	=> 'import_user',
-				'hide_if_only_one_author' => true,
-				'who' => 'authors',
-				'selected' => isset( $options['import_user'] ) ? $options['import_user'] : false,
-				'echo' => false
-			] );
-			if( $dropdown ):
-		?>
-		<label for="import_user"><?php _e('Import as user', 'cvm_video')?></label>
-		<?php echo $dropdown;?>
-		<br />
-		<?php endif;?>
-		
-		<label for="import_title"><?php _e('Import titles', 'cvm_video')?> :</label>
-		<input type="checkbox" value="1" id="import_title" name="import_title"<?php Helper_Admin::check( $options['import_title'] );?> /><br />
-		
-		<label for="import_date"><?php _e('Import date', 'cvm_video')?> :</label>
-		<input type="checkbox" value="1" id="import_date" name="import_date"<?php Helper_Admin::check( $options['import_date'] );?> />
-		
-		<div id="cvm-import-embed-settings" style="clear:both; padding-top:5px;">
-			<h4><?php _e('Video embed options', 'cvm_video');?></h4>
-			<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>
-			<?php 
-				$args = [
-					'name' 		=> 'aspect_ratio',
-					'id'		=> 'aspect_ratio',
-					'class'		=> 'aspect_ratio',
-					'selected' 	=> $options['aspect_ratio']
-				];
-				Helper_Admin::aspect_ratio_select( $args );
-			?><br />
-			
-			<label for="cvm_video_position"><?php _e('Display video','cvm_video');?>:</label>
-			<?php 
-				$args = [
-					'options' => [
-						'above-content' => __('Above content', 'cvm_video'),
-						'below-content' => __('Below content', 'cvm_video')
-					],
-					'name' 		=> 'video_position',
-					'id'		=> 'video_position',
-					'selected' 	=> $options['video_position']
-				];
-				Helper_Admin::select( $args );
-			?><br />
-			
-			<label for="loop"><?php _e('Loop video', 'cvm_video')?> :</label>
-			<input type="checkbox" value="1" id="loop" name="loop"<?php Helper_Admin::check( (bool) $options['loop'] );?> /><br />
-			
-			<label for="autoplay"><?php _e('Autoplay video', 'cvm_video')?> :</label>
-			<input type="checkbox" value="1" id="autoplay" name="autoplay"<?php Helper_Admin::check( (bool) $options['autoplay'] );?> /><br />
-		</div>
+
+        <label for="import_title"><?php _e('Import titles', 'cvm_video')?> :</label>
+        <input type="checkbox" value="1" id="import_title" name="import_title"<?php Helper_Admin::check( $options['import_title'] );?> /><br />
+
+
+
+        <?php
+		/**
+		 * Action that allows setting up additional options
+         *
+         * @param array $options
+		 */
+         do_action( 'vimeotheque\admin\import_meta_panel\post_options_fields', $options );
+        ?>
 			
 		<div id="cvm-import-videos-submit-c">
 		    <?php submit_button(
@@ -156,9 +114,11 @@ class Post_Edit_Meta_Panels{
 		
 		$post = new stdClass();
 		$post->ID = -1;
-		
-		$taxonomy = $this->cpt->get_post_tax();
+
+		$taxonomy = $this->get_category_taxonomy();
 		/**
+         * @deprecated Use "vimeotheque\admin\import_meta_panel\category_taxonomy" instead
+         *
 		 * Filter that allows manipulation of category taxonomy to import as any publicly registered post type.
 		 * @param string - category taxonomy
 		 */
@@ -184,16 +144,18 @@ class Post_Edit_Meta_Panels{
 		
 		$post = new stdClass();
 		$post->ID = -1;
-		$post->post_type = $this->cpt->get_post_type();
-		
-		$taxonomy = $this->cpt->get_tag_tax();
+		$post->post_type = $this->get_post_type();
+
+		$taxonomy = $this->get_tag_taxonomy();
 		/**
+         * @deprecated Use "vimeotheque\admin\import_meta_panel\tag_taxonomy" instead
+         *
 		 * Filter that allows manipulation of tag taxonomy to import as any publicly registered post type.
 		 * @param string - tag taxonomy
 		 */
 		$taxonomy = apply_filters( 'cvm_import_tag', $taxonomy );
 		
-		$options = \Vimeotheque\get_settings();
+		$options = \Vimeotheque\Plugin::instance()->get_options();
 		if( isset( $options['import_tags'] ) && $options['import_tags'] ){
 			_e('Please note that any tags retrieved from Vimeo will also be imported and set as post tags.', 'cvm_video');
 		}
@@ -216,16 +178,19 @@ class Post_Edit_Meta_Panels{
 		$screen = get_current_screen();
 		$page_hook = $screen->id;
 
-		$taxonomy = $this->cpt->get_post_tax();
+		$taxonomy = $this->get_category_taxonomy();
 		/**
+         * @deprecated Use "vimeotheque\admin\import_meta_panel\category_taxonomy"
+         *
 		 * Filter that allows manipulation of category taxonomy to import as any publicly registered post type.
 		 * @param string - category taxonomy
 		 */
 		$taxonomy = apply_filters( 'cvm_import_category', $taxonomy );
 		$category = get_taxonomy( $taxonomy );
 
-		$tag_tax = $this->cpt->get_tag_tax();
+		$tag_tax = $this->get_tag_taxonomy();
 		/**
+         * @deprecated Use "vimeotheque\admin\import_meta_panel\tag_taxonomy" instead
 		 * Filter that allows manipulation of tag taxonomy to import as any publicly registered post type.
 		 * @param string - tag taxonomy
 		 */
@@ -261,4 +226,40 @@ class Post_Edit_Meta_Panels{
             );
 		}
     }
+
+	/**
+     * Get the post type
+     *
+	 * @return string
+	 */
+    private function get_post_type(){
+	    return apply_filters(
+	            'vimeotheque\admin\import_meta_panel\post_type',
+                $this->cpt->get_post_type()
+        );
+    }
+
+	/**
+     * Get tag taxonomy
+     *
+	 * @return string
+	 */
+	private function get_tag_taxonomy(){
+		return apply_filters(
+		        'vimeotheque\admin\import_meta_panel\tag_taxonomy',
+                $this->cpt->get_tag_tax()
+        );
+	}
+
+	/**
+     * Get category taxonomy
+     *
+	 * @return string
+	 */
+	private function get_category_taxonomy(){
+		return apply_filters(
+		        'vimeotheque\admin\import_meta_panel\category_taxonomy',
+                $this->cpt->get_post_tax()
+        );
+	}
 }

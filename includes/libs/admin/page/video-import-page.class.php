@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Vimeotheque\Admin\Ajax_Actions;
-use Vimeotheque\Admin\Post_Edit_Meta_Panels;
+use Vimeotheque\Admin\Posts_Import_Meta_Panels;
 use Vimeotheque\Admin\Table\Video_Import_List_Table;
 use Vimeotheque\Post_Type;
 use WP_List_Table;
@@ -32,8 +32,8 @@ class Video_Import_Page extends Page_Init_Abstract implements Page_Interface{
 	private $mode = 'grid';
 	
 	/**
-	 * Store reference to Post_Edit_Meta_Panels object
-	 * @var Post_Edit_Meta_Panels
+	 * Store reference to Posts_Import_Meta_Panels object
+	 * @var Posts_Import_Meta_Panels
 	 */
 	private $meta;
 	/**
@@ -50,7 +50,7 @@ class Video_Import_Page extends Page_Init_Abstract implements Page_Interface{
 	 */
 	public function __construct( Post_Type $object, Ajax_Actions $ajax_obj ){
 		parent::__construct($object);
-		$this->meta = new Post_Edit_Meta_Panels( $object );
+		$this->meta = new Posts_Import_Meta_Panels( $object );
 		$this->ajax_obj = $ajax_obj;
 	}
 
@@ -77,7 +77,12 @@ class Video_Import_Page extends Page_Init_Abstract implements Page_Interface{
 		}else{
 			// add meta boxes
 			$this->meta->add_metaboxes();
-		 
+
+			/**
+			 * Run action on meta boxes display
+			 */
+			do_action( 'vimeotheque\admin\import\add_metaboxes' );
+
 			if( 'list' == $this->mode ){
 				$this->table->prepare_items();
 				$this->output_import_errors( $this->table->get_query_errors() );
@@ -219,6 +224,8 @@ class Video_Import_Page extends Page_Init_Abstract implements Page_Interface{
 			[],
 			'1.0'
 		);
+
+		do_action( 'vimeotheque\admin\video-import-assets' );
 	}
 	
 	/**

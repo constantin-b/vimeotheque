@@ -1,8 +1,13 @@
 (function($){
     
     var pro_options = function(){
-        var trigger = $('.cvm-pro-options-trigger'),
-            data = $(trigger).data(),
+        var trigger = $('.cvm-pro-options-trigger');
+
+        if( trigger.length == 0 ){
+            return;
+        }
+
+        var data = $(trigger).data(),
             items = $( data.selector );
             
         $(document).on( 'click', '.cvm-pro-options-trigger', function(e){

@@ -52,11 +52,8 @@ class Admin{
 	public function __construct( Post_Type $post_type ){
 		// store object reference
 		$this->cpt = $post_type;
-		
-		// start AJAX actions
-		$this->ajax = new Ajax_Actions( $this->cpt );
-		// start post edit single video page
-		new Post_Edit_Page( $post_type );
+
+		add_action( 'wp_loaded', [ $this, 'init' ], 1 );
 
 		// add extra menu pages
 		add_action( 'admin_menu', [
@@ -80,15 +77,11 @@ class Admin{
 				$this, 
 				'extra_columns'
 		] );
+
 		add_action( 'manage_' . $this->cpt->get_post_type() . '_posts_custom_column', [
 				$this, 
 				'output_extra_columns'
 		], 10, 2 );
-		// video thumbnail bulk imports
-		add_action( 'admin_print_scripts-edit.php', [
-				$this, 
-				'bulk_actions_js'
-		] );
 
 		// alert if setting to import as post type post by default is set on all plugin pages
 		add_action( 'admin_notices', [
@@ -108,7 +101,17 @@ class Admin{
 	}
 
 	/**
-	 * Add subpages for custom post type admin menu
+	 * Initialize
+	 */
+	public function init(){
+		// start AJAX actions
+		$this->ajax = new Ajax_Actions( $this->cpt );
+		// start post edit single video page
+		new Post_Edit_Page( $this->cpt );
+	}
+
+	/**
+	 * Add subpage for custom post type admin menu
 	 */
 	public function menu_pages(){
 
@@ -290,49 +293,14 @@ class Admin{
 				echo $meta['video_id'];
 			break;
 			case 'duration':
-				echo \Vimeotheque\human_time( $meta[ 'duration' ] );
+				echo \Vimeotheque\Helper::human_time( $meta[ 'duration' ] );
 			break;
 		}
 	}
 
 	/**
-	 * Hackish method to inject new bulk actions to post table views
-	 * 
-	 * @return null
+	 * Set admin notices
 	 */
-	public function bulk_actions_js(){
-		$screen = get_current_screen();
-		if( 'edit' != $screen->base ){
-			return;
-		}
-		
-		wp_enqueue_script( 'cvm-bulk-actions', VIMEOTHEQUE_URL . 'assets/back-end/js/bulk-actions.js', [
-				'jquery'
-		], '1.0' );
-		
-		wp_enqueue_style( 'cvm-bulk-actions-response', VIMEOTHEQUE_URL . 'assets/back-end/css/video-list.css', false, '1.0' );
-		
-		wp_localize_script( 'cvm-bulk-actions', 'cvm_bulk_actions', [
-				'actions' => $this->bulk_actions(), 
-				'wait' => __( 'Processing, please wait...', 'cvm_video' ), 
-				'wait_longer' => __( 'Not done yet, please be patient...', 'cvm_video' ), 
-				'maybe_error' => __( 'There was an error while importing your thumbnails. Please try again.', 'cvm_video' )
-		] );
-	}
-
-	/**
-	 * Some allowed bulk actions
-	 *
-	 * @return array
-	 */
-	private function bulk_actions(){
-		$actions = [
-				'cvm_thumbnail' => __( 'Import thumbnails', 'cvm_video' )
-		];
-		
-		return $actions;
-	}
-
 	public function admin_notices(){
 		if( !isset( $_GET['post_type'] ) || $this->cpt->get_post_type() != $_GET['post_type'] ){
 			return;
@@ -380,6 +348,7 @@ class Admin{
 	 * @param bool $cap
 	 *
 	 * @return array|mixed
+	 * @throws Exception
 	 */
 	public function get_capability( $cap = false ){
 		$capabilities = [
@@ -415,28 +384,5 @@ class Admin{
 		];
 
 		return $roles;
-	}
-
-	/**
-	 * Gets contextual help content from external file
-	 *
-	 * @param $file
-	 *
-	 * @return bool|false|string
-	 */
-	private function get_contextual_help( $file ){
-		if( !$file ){
-			return false;
-		}
-		$file_path = VIMEOTHEQUE_PATH . 'views/help/' . $file . '.html.php';
-		if( is_file($file_path) ){
-			ob_start();
-			include( $file_path );
-			$help_contents = ob_get_contents();
-			ob_end_clean();
-			return $help_contents;
-		}else{
-			return false;
-		}
 	}
 }

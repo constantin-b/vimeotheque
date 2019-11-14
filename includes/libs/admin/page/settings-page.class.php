@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Vimeotheque\Admin\Notice\Admin_Notices;
 use Vimeotheque\Admin\Notice\Notice;
-use Vimeotheque\Options;
+use Vimeotheque\Options\Options;
 use Vimeotheque\Plugin;
 use Vimeotheque\Post_Type;
 use Vimeotheque\Vimeo_Api\Vimeo_Oauth;
@@ -83,10 +83,17 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 		if( isset( $_POST['cvm_wp_nonce'] ) ){
 			if( check_admin_referer('cvm-save-plugin-settings', 'cvm_wp_nonce') ){
 
-				do_action( 'vimeotheque\admin\settings_save' );
+				do_action( 'vimeotheque\admin\before_settings_save' );
 
-				$this->update_settings();
+				$updated_settings = $this->update_settings();
+
+				do_action( 'vimeotheque\admin\after_settings_save', $updated_settings );
+
+				do_action( 'vimeotheque\admin\before_player_settings_save' );
+
 				$this->update_player_settings();
+
+				do_action( 'vimeotheque\admin\after_player_settings_save' );
 			}
 			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings', false );
 			die();
@@ -192,6 +199,8 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 			Plugin::instance()->get_cpt()->register_post();
 			flush_rewrite_rules();
 		}
+
+		return $defaults;
 	}
 
 	/**
@@ -311,17 +320,17 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 
 	/**
 	 * Get plugin options object
-	 * @return Options
+	 * @return \Vimeotheque\Options\Options
 	 */
 	private function options_obj(){
-		return \Vimeotheque\cvm_load_plugin_settings();
+		return \Vimeotheque\Plugin::instance()->get_options_obj();
 	}
 
 	/**
 	 * Get player options object
-	 * @return Options
+	 * @return \Vimeotheque\Options\Options
 	 */
 	private function player_options_obj(){
-		return \Vimeotheque\cvm_load_player_settings();
+		return \Vimeotheque\Plugin::instance()->get_player_options();
 	}
 }

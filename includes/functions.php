@@ -350,118 +350,9 @@ function cvm_playlist_themes(){
 	];
 }
 
-/*********************************************************************************
- * Plugin settings management
- *********************************************************************************/
-
-/**
- * Utility function, returns plugin default settings
- */
-function cvm_load_plugin_settings(){
-	$defaults = [
-		'public' => true, // post type is public or not
-		'archives' => false, // display video embed on archive pages
-		'post_slug'	=> 'vimeo-video',
-		'taxonomy_slug' => 'vimeo-videos',
-		'tag_slug' => 'vimeo-tag',
-		'import_tags' => false, // import tags retrieved from Vimeo
-		'max_tags' => 3, // how many tags to import
-		'import_title' => true, // import titles on custom posts
-		'import_description' => 'post_content', // import descriptions on custom posts
-		'import_date' => false, // import video date as post date
-		'featured_image' => false, // set thumbnail as featured image; default import on video feed import (takes more time)
-		'image_on_demand' => false, // when true, thumbnails will get imported only when viewing the video post as oposed to being imported on feed importing
-		'import_status' => 'draft', // default import status of videos
-		// Vimeo oAuth
-		'vimeo_consumer_key' => '',
-		'vimeo_secret_key' => '',
-		'oauth_token' => '',// retrieved from Vimeo; gets set after entering valid client ID and client secret
-	];
-
-	/**
-	 * Options filter
-	 * @param array $defaults
-	 */
-	$defaults = apply_filters( 'vimeotheque\options_default', $defaults );
-
-	return Options_Factory::get( '_cvm_plugin_settings', $defaults );
-}
-
-/**
- * Utility function, returns plugin settings
- */
-function get_settings(){
-	$options = cvm_load_plugin_settings();
-	return $options->get_options();
-}
-
-/**
- * Returns WP option name of plugin settings option
- * @return string
- */
-function cvm_get_settings_option_name(){
-	$option = cvm_load_plugin_settings();
-	return $option->get_option_name();
-}
-
-/**
- * @todo - needs to be removed, no autoimport in Lite version
- * Outputs the autoimport URL for conditional importing
- *
- * @param bool $echo
- *
- * @return string
- */
-function autoimport_uri( $echo = true ){
-	$options = get_settings();
-	$output = add_query_arg( array(
-		'cvm_autoimport' => $options[ 'autoimport_param' ]
-	), trailingslashit( get_home_url() ) );
-
-	if( $echo ){
-		echo $output;
-	}
-
-	return $output;
-}
-
 /***********************************************************************************
  * General player settings (from Settings page)
  **********************************************************************************/
-
-/**
- * Global player settings defaults.
- */
-function cvm_load_player_settings(){
-	$defaults = [
-		'title'		=> 1, 	// show video title
-		'byline' 	=> 1, 	// show player controls. Values: 0 or 1
-		'portrait' 	=> 1, 	// show author image
-		'color'		=> '', 	// no color set by default; will use Vimeo's settings
-		///'fullscreen'=> 1,	// deprecated option ont supported by Vimeo player API (0 - fullscreen button hidden; 1 - fullscreen button displayed)
-		'loop'		=> 0,
-		// Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, we’ll revert to standard playback requiring viewers to initiate playback.
-		'autoplay'	=> 0, 	// 0 - on load, player won't play video; 1 - on load player plays video automatically
-		
-		// extra settings
-		'aspect_ratio'		=> '16x9',
-		'width'				=> 640,
-		'video_position' 	=> 'below-content', // in front-end custom post, where to display the video: above or below post content
-		'volume'			=> 25, // video default volume	
-		// extra player settings controllable by widgets/shortcodes
-		'playlist_loop'		=> 0,
-		'js_embed' 			=> true, // if true, embedding is done by JavaScript. If false, embedding is done by PHP by simply placing the iframe code into the page
-	];
-
-	/**
-	 * Filter for player options
-	 * @param array $defaults
-	 */
-	$defaults = apply_filters( 'vimeotheque\player_options_default', $defaults );
-
-	// get Plugin option
-	return Options_Factory::get( '_cvm_player_settings', $defaults );
-}
 
 /**
  * Get general player settings
@@ -470,7 +361,7 @@ function get_player_settings(){
 	/**
 	 * Options object
 	 */
-	$option 	= cvm_load_player_settings()->get_options();
+	$option 	= \Vimeotheque\Plugin::instance()->get_player_options()->get_options();
 
 	// various player outputs may set their own player settings. Return those.
 	global $CVM_PLAYER_SETTINGS;
@@ -483,15 +374,6 @@ function get_player_settings(){
 	}
 	
 	return $option;
-}
-
-/**
- * @return string
- */
-function cvm_get_player_settings_option_name(){
-	$option = cvm_load_player_settings();
-	$name = $option->get_option_name();
-	return $name;
 }
 
 /**************************************************************************************************
@@ -633,18 +515,7 @@ function cvm_update_video_settings( $post_id, $values = false, $_use_defaults = 
  * @return string - formatted time
  */
 function human_time( $seconds ){
-	
-	$seconds = absint( $seconds );
-	
-	if( $seconds < 0 ){
-		return;
-	}
-	
-	$h = floor( $seconds / 3600 );
-	$m = floor( $seconds % 3600 / 60 );
-	$s = floor( $seconds %3600 % 60 );
-	
-	return ( ($h > 0 ? $h . ":" : "") . ( ($m < 10 ? "0" : "") . $m . ":" ) . ($s < 10 ? "0" : "") . $s);
+	return Helper::human_time( $seconds );
 }
 
 /**

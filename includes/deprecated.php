@@ -9,9 +9,9 @@
 
 /**
  * Class CVM_Options_Factory
- * @deprecated - Use Vimeotheque\Options_Factory instead
+ * @deprecated - Use Vimeotheque\Options\Options_Factory instead
  */
-final class CVM_Options_Factory extends Vimeotheque\Options_Factory{}
+final class CVM_Options_Factory extends \Vimeotheque\Options\Options_Factory{}
 
 /**
  * Class CVM_Vimeo
@@ -25,7 +25,7 @@ final class CVM_Vimeo extends \Vimeotheque\Vimeo_Api\Vimeo_Oauth{
 	 * CVM_Vimeo constructor.
 	 */
 	public function __construct() {
-		$options  = Vimeotheque\get_settings();
+		$options  = \Vimeotheque\Plugin::instance()->get_options();
 
 		$token = $options['oauth_token'];
 		if( !empty( $options['oauth_secret'] ) ){
@@ -224,7 +224,7 @@ function cvm_select( $args = [], $echo = true ){
  * @return string
  */
 function cvm_human_time( $seconds ){
-	return Vimeotheque\human_time( $seconds );
+	return \Vimeotheque\Helper::human_time( $seconds );
 }
 
 function cvm_class_method( $method, $args = [] ){
@@ -306,7 +306,7 @@ function cvm_get_tag(){
  * @return array
  */
 function cvm_get_settings(){
-	return Vimeotheque\get_settings();
+	return \Vimeotheque\Plugin::instance()->get_options();
 }
 
 /**

@@ -2,8 +2,6 @@
 
 namespace Vimeotheque\Vimeo_Api;
 
-use function Vimeotheque\human_time;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -64,7 +62,7 @@ class Entry_Format{
 			'category'      => false, // @todo see where categories are stored and process them
 			'tags'          => $this->get_tags(),
 			'duration'      => (int) $this->get_field( 'duration' ),
-			'_duration'     => human_time( (int) $this->get_field( 'duration' ) ),
+			'_duration'     => \Vimeotheque\Helper::human_time( (int) $this->get_field( 'duration' ) ),
 			'thumbnails'    => $this->get_thumbnails(),
 			'stats'         => $this->get_stats(),
 			'privacy'       => $this->get_privacy(),

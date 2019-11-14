@@ -32,7 +32,7 @@ class Ajax_Actions{
 		$actions = $this->__actions();
 		// add wp actions
 		foreach( $actions as $action ){
-			add_action( 'wp_ajax_' . $action['action'], [ $this, $action['callback'] ] );
+			add_action( 'wp_ajax_' . $action['action'], $action['callback'] );
 		}
 	}
 	
@@ -75,50 +75,6 @@ class Ajax_Actions{
 		}
 		
 		die();
-	}
-	
-	/**
-	 * Bulk import thumbnails from posts table action
-	 */
-	public function bulk_import_thumbnails(){
-		$this->__check_referer( 'bulk_import_thumbnails' );
-		if( !current_user_can( 'upload_files' ) ){
-			header('HTTP/1.1 401 Unauthorized');
-			_e( 'You do not have the neccessary permissions.', 'cvm_vimeo' );
-			die();
-		}
-		
-		if( !isset( $_REQUEST['action'] ) && !isset( $_REQUEST['action2'] ) ){
-			wp_send_json_error( __('Sorry, there was an error, please try again.', 'cvm_video') );
-		}
-		
-		if( !isset( $_REQUEST['post'] ) || empty( $_REQUEST['post'] ) ){
-			wp_send_json_error( __('Please select some posts first.', 'cvm_video') );
-		}
-		
-		if( !isset( $_REQUEST['post_type'] ) ){
-			wp_send_json_error( __('Sorry, Vimeo thumbnails could not be imported right now.', 'cvm_video') );
-		}
-		
-		$action = false;
-		if ( isset( $_REQUEST['action'] ) && -1 != $_REQUEST['action'] )
-			$action = $_REQUEST['action'];
-		
-		if ( isset( $_REQUEST['action2'] ) && -1 != $_REQUEST['action2'] )
-			$action = $_REQUEST['action2'];
-		
-		$post_ids = array_map('intval', $_REQUEST['post']);
-		$success = 0;
-		foreach( $post_ids as $post_id ){
-			switch( $action ){
-				case 'cvm_thumbnail':
-					$r = Helper::get_video_post( $post_id )->set_featured_image();
-					$success += $r ? 1 : 0;
-					break;
-			}
-		}
-		
-		wp_send_json_success( sprintf(__('%d Vimeo thumbnails imported.', 'cvm_video'), $success) );
 	}
 	
 	/**
@@ -215,7 +171,7 @@ class Ajax_Actions{
 
 		// if importing a single video apply the settings from plugin
 		if( !isset( $_POST['model']['import'] ) ){
-			$import_options = \Vimeotheque\get_settings();
+			$import_options = \Vimeotheque\Plugin::instance()->get_options();
 		}else {
 			// get the import options
 			$import_options = $this->get_import_options( $_POST['model']['import'] );
@@ -267,83 +223,29 @@ class Ajax_Actions{
 		$native_tag = isset( $source['tax_input'][ $tag_tax ] ) ? (array) $source['tax_input'][ $tag_tax ] : [];
 
 		$import_options = [
-			'theme_import'		=> false,
+			//'theme_import'		=> false,
 			'native_tax'		=> $native_tax,
-			'theme_tax'			=> false,
+			//'theme_tax'			=> false,
 			'native_tag'		=> $native_tag,
-			'theme_tag'			=> false,
+			//'theme_tag'			=> false,
 			'import_description' => $source['import_description'],
 			'import_status' => $source['import_status'],
 			'import_title' => isset( $source['import_title'] ),
-			'import_date' => $source['import_date'],
-			'import_user' => (isset( $source['import_user'] )) ? $source['import_user'] : false,
+			//'import_date' => $source['import_date'],
+			//'import_user' => (isset( $source['import_user'] )) ? $source['import_user'] : false,
 			// embed options
-			'aspect_ratio' => $source['aspect_ratio'],
-			'video_position' => $source['video_position'],
-			'loop' => isset( $source['loop'] ),
-			'autoplay' => isset( $source['autoplay'] )
+			//'aspect_ratio' => $source['aspect_ratio'],
+			//'video_position' => $source['video_position'],
+			//'loop' => isset( $source['loop'] ),
+			//'autoplay' => isset( $source['autoplay'] )
 		];
 
-		return $import_options;
-	}
-
-	/**
-	 * Returns categories for given post type
-	 */
-	public function post_type_categories(){
-
-		if( !isset( $_POST['post_type'] ) ){
-			wp_send_json_error( [ 'message' => __( 'No post type specified', 'cvm_video' ) ] );
-		}
-
-		$taxonomy = cvm_get_category();
-		if( 'post' == $_POST['post_type'] ){
-			$taxonomy = 'category';
-		}
-
-		$args = [
-			'show_option_all' 	=> false,
-			'show_option_none'	=> __('All categories', 'cvm_video'),
-			'orderby' 			=> 'NAME',
-			'order' 			=> 'ASC',
-			'show_count' 		=> true,
-			'hide_empty'		=> false,
-			'selected'			=> false,
-			'hierarchical'		=> true,
-			'name'				=> $_POST['name'],
-			'id'				=> $_POST['id'],
-			'taxonomy'			=> $taxonomy,
-			'hide_if_empty'		=> true,
-			'class'             => 'cvm_widget_taxonomy',
-			'echo'              => false
-		];
-		$select = wp_dropdown_categories( $args );
-		if( !$select ){
-			wp_send_json_error( [ 'message' => __('No categories found.', 'cvm_video' ) ] );
-		}else{
-			wp_send_json_success( [ 'message' => $select ] );
-		}
-	}
-
-	/**
-	 * Outputs a message containing the number of videos from a given feed
-	 */
-	public function api_feed_details(){
-		if( empty( $_POST['type'] ) || empty( $_POST['id'] ) ){
-			_e('Please enter a playlist ID.', 'cvm_video');
-			die();
-		}
-
-		$args = [
-			'page' => 1,
-			'per_page' => 1
-		];
-		$feed 	= new Video_Import( $_POST['type'], $_POST['id'], $_POST['album_user'], $args);
-		$items	= (int) $feed->get_total_items();
-
-		printf( __('Playlist contains %s videos.', 'cvm_video'), number_format_i18n( $items ) );
-
-		die();
+		/**
+		 * Filter the options
+		 *
+		 * @param array $import_options
+		 */
+		return apply_filters( 'vimeotheque\admin\import\ajax_options', $import_options, $source );
 	}
 
 	/**
@@ -356,7 +258,7 @@ class Ajax_Actions{
 			// get Vimeo videos from API when viewing in Grid view bulk import
 			'api_query' => [
 				'action' 	=> 'cvm_get_videos',
-				'callback' 	=> 'vimeo_api_query',
+				'callback' 	=> [ $this, 'vimeo_api_query' ],
 				'nonce' => [
 					'name' 		=> 'nonce',
 					'action' 	=> 'cvm_vimeo_videos_grid_nonce'
@@ -365,23 +267,15 @@ class Ajax_Actions{
 			// import single video from Grid View bulk import
 			'save_video' => [
 				'action' 	=> 'cvm_import_video',
-				'callback'	=> 'import_video',
+				'callback'	=> [ $this, 'import_video' ],
 				'nonce' => [
 					'name' 		=> 'nonce',
 					'action' 	=> 'cvm_vimeo_videos_grid_nonce'
 				]
 			],
-			'bulk_import_thumbnails' => [
-				'action' => 'cvm_thumbnail',
-				'callback' => 'bulk_import_thumbnails',
-				'nonce' => [
-					'name' => '_wpnonce',
-					'action' => 'bulk-posts'
-				]
-			],
 			'import_thumbnail' => [
 				'action' => 'cvm_import_video_thumbnail',
-				'callback' => 'import_thumbnail',
+				'callback' => [ $this, 'import_thumbnail' ],
 				'nonce' => [
 					'name' => '',
 					'action' => ''
@@ -390,40 +284,24 @@ class Ajax_Actions{
 			// list view bulk import
 			'list_view_import_videos' => [
 				'action' => 'cvm_import_videos',
-				'callback' => 'bulk_import_videos',
+				'callback' => [ $this, 'bulk_import_videos' ],
 				'nonce' => [
 					'name' => 'cvm_import_nonce',
 					'action' => 'cvm-import-videos-to-wp'
 				]
-			],
-			// categories according to post type
-			'post_type_categories' => [
-				'action' => 'cvm_post_type_categories',
-				'callback' => 'post_type_categories',
-				'nonce' => [
-					'name' => 'cvm_nonce',
-					'action' => 'cvm-post_type-categories'
-				]
-			],
-			// get api feed details (number of videos)
-			'api_feed_details' => [
-				'action' => 'cvm_check_playlist',
-				'callback' => 'api_feed_details',
-				'nonce' => [
-					'name' => '',
-					'action' => ''
-				]
 			]
 		];
-		
-		return $callbacks;
+
+		$_callbacks = apply_filters( 'vimeotheque\admin\ajax_response', [], $this );
+
+		return array_merge( $_callbacks, $callbacks );
 	}
 	
 	/**
 	 * For a given action key it will perform nonce checking and admin referer verification.
 	 * @param string $key
 	 */
-	protected function __check_referer( $key ){
+	public function __check_referer( $key ){
 		$action = $this->__get_action_data( $key );
 		if( !$action ){
 			wp_die( sprintf( __( 'Action %s not found. Please review!' ), $key ) );
@@ -431,10 +309,13 @@ class Ajax_Actions{
 		
 		check_admin_referer( $action['nonce']['action'], $action['nonce']['name'] );		
 	}
-	
+
 	/**
 	 * Gets all details of a given action from registered actions
+	 *
 	 * @param string $key
+	 *
+	 * @return
 	 */
 	protected function __get_action_data( $key ){
 		$actions = $this->__actions();
@@ -444,28 +325,37 @@ class Ajax_Actions{
 			trigger_error( sprintf( __( 'Action %s not found.'), $key ), E_USER_WARNING);
 		}
 	}
-	
+
 	/**
 	 * Returns the action name for a given key
+	 *
 	 * @param string $action
+	 *
+	 * @return
 	 */
 	public function get_action( $action ){
 		$data = $this->__get_action_data( $action );
 		return $data['action'];
 	}
-	
+
 	/**
 	 * Returns the nonce name for a given key
+	 *
 	 * @param string $action
+	 *
+	 * @return
 	 */
 	public function get_nonce_name( $action ){
 		$data = $this->__get_action_data( $action );
 		return $data['nonce']['name'];
 	}
-	
+
 	/**
 	 * Returns the nonce action for a given key
+	 *
 	 * @param string $action
+	 *
+	 * @return
 	 */
 	public function get_nonce_action( $action ){
 		$data = $this->__get_action_data( $action );

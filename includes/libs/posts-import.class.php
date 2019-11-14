@@ -32,11 +32,11 @@ class Posts_Import{
 	 * Used by automatic updates.
 	 *
 	 * @param $raw_feed
-	 * @param Feed|array $feed
+	 * @param Feed|array $import_options
 	 *
 	 * @return array|void
 	 */
-	public function run_import( $raw_feed, $feed ){
+	public function run_import( $raw_feed, $import_options ){
 		/**
 		 * @var bool $theme_import
 		 * @var array $native_tax
@@ -49,29 +49,70 @@ class Posts_Import{
 		 * @var bool $import_date
 		 * @var int $import_user
 		 */
-		extract( $feed, EXTR_SKIP );
+		extract( $import_options, EXTR_SKIP );
 
 		// get import options
-		$options = get_settings();
+		$options = \Vimeotheque\Plugin::instance()->get_options();
 
 		// overwrite plugin import settings with import settings
 		$options['import_description'] = $import_description;
 		$options['import_status'] = $import_status;
 		$options['import_title'] = $import_title;
-		$options['import_date'] = $import_date;
+		//$options['import_date'] = $import_date;
 
-		$post_type = $this->post_type->get_post_type();
-		$taxonomy = $this->post_type->get_post_tax();
-		$tag_taxonomy = $this->post_type->get_tag_tax();
-		$category = isset( $native_tax ) ? $native_tax : false;
-		$tags = $native_tag;
-		$post_format = 'video';
+		/**
+		 * Filter the import options
+		 *
+		 * @param array $import_options
+		 * @param array $source
+		 */
+		$options = apply_filters( 'vimeotheque\import\options', $options, $import_options );
+
+		/**
+		 * Post type filter
+		 * @param string $post_type
+		 */
+		$post_type = apply_filters( 'vimeotheque\import\post_type',  $this->post_type->get_post_type(), $options );
+
+		/**
+		 * Category taxonomy name filter
+		 * @param string $taxonomy
+		 */
+		$taxonomy = apply_filters( 'vimeotheque\import\post_taxonomy_name', $this->post_type->get_post_tax(), $options );
+
+		/**
+		 * Tag taxonomy name filter
+		 *
+		 * @param string $tag_taxonomy
+		 */
+		$tag_taxonomy = apply_filters( 'vimeotheque\import\tag_taxonomy_name', $this->post_type->get_tag_tax(), $options );
+
+		/**
+		 * Filter categories that are set on post
+		 *
+		 * @param array|bool $category
+		 */
+		$category = apply_filters( 'vimeotheque\import\post_taxonomies', $native_tax, $options );
+
+		/**
+		 * Filter tags that are set on post
+		 *
+		 * @param array|bool $tags
+		 */
+		$tags = apply_filters( 'vimeotheque\import\tag_taxonomies', $native_tag, $options );
+
+		/**
+		 * Filter the post format
+		 *
+		 * @param string $post_format
+		 */
+		$post_format = apply_filters( 'vimeotheque\import\post_format', 'video', $options );
 
 		// post status
 		$post_status	= $this->post_type->get_post_settings()->post_status( $import_status );
 
 		// set user
-		$user = false;
+		$user = isset( $import_user ) ? absint( $import_user ) : false;
 
 		// store results
 		$result = [
@@ -182,7 +223,7 @@ class Posts_Import{
 			if( $post_id ){
 				$result['imported'] += 1;
 				$result['ids'][] = $post_id;
-				cvm_update_video_settings( $post_id, ( is_array( $feed ) ? $feed : $feed->get_options() ), true );
+				cvm_update_video_settings( $post_id, $import_options, true );
 			}
 		}
 
@@ -313,7 +354,7 @@ class Posts_Import{
 
 		// plugin settings; caller can pass their own import options
 		if( !$options ){
-			$options = get_settings();
+			$options = \Vimeotheque\Plugin::instance()->get_options();
 		}
 
 		if( 'private' == $video['privacy'] && 'pending' == $options['import_privacy'] ){

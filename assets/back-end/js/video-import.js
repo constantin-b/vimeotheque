@@ -126,49 +126,5 @@
 				}
 			});			
 		});	
-		
-		
-		
-		var plugin_tax 	= $('#tagsdiv-plugin-cat, #tagsdiv-plugin-tag'),
-			theme_tax 	= $('#tagsdiv-theme-cat, #tagsdiv-theme-tag'),
-			trigger 	= $('#cvm_theme_import');
-		
-		if( trigger.length == 0 ){
-			$('#tagsdiv-plugin-cat, #tagsdiv-plugin-tag').show();
-			$('#cvm-import-embed-settings').show();			
-		}else{		
-			$('#cvm_theme_import').click(function(){	
-				if( theme_tax.length == 0 ){
-					return;
-				}
-							
-				if( $(this).is(':checked') ){
-					$('#tagsdiv-plugin-cat, #tagsdiv-plugin-tag').hide();
-					$('#tagsdiv-theme-cat, #tagsdiv-theme-tag').show();
-					// hide embed options if importing for theme
-					$('#cvm-import-embed-settings').hide();
-				}else{
-					$('#tagsdiv-plugin-cat, #tagsdiv-plugin-tag').show();
-					$('#tagsdiv-theme-cat, #tagsdiv-theme-tag').hide();
-					// show embed options if not importing for theme
-					$('#cvm-import-embed-settings').show();
-				}			
-			});		
-			
-			
-			if( theme_tax.length > 0 ){
-				if( $('#cvm_theme_import').is(':checked') ){
-					$('#tagsdiv-plugin-cat, #tagsdiv-plugin-tag').hide();
-					$('#tagsdiv-theme-cat, #tagsdiv-theme-tag').show();
-					// show embed options if not importing for theme
-					$('#cvm-import-embed-settings').hide();
-				}else{
-					$('#tagsdiv-theme-cat, #tagsdiv-theme-tag').hide();
-					$('#tagsdiv-plugin-cat, #tagsdiv-plugin-tag').show();
-					// hide embed options if not importing for theme
-					$('#cvm-import-embed-settings').show();
-				}	
-			}
-		}	
 	})
 })(jQuery);

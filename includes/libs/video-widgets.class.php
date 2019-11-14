@@ -16,7 +16,7 @@ use Vimeotheque\Admin\Helper_Admin;
 if( !function_exists( 'cvm_widgets' ) ){
 	function cvm_widgets(){
 		// check if posts are public
-		$options = get_settings();
+		$options = \Vimeotheque\Plugin::instance()->get_options();
 		if( isset( $options['public'] ) && $options['public'] ){
 			register_widget( __NAMESPACE__ . '\Latest_Videos_Widget' );
 			register_widget( __NAMESPACE__ . '\Video_Categories_Widget' );
@@ -30,7 +30,7 @@ if( !function_exists( 'cvm_widgets' ) ){
  */
 if( !function_exists( 'cvm_widgets_scripts' ) ){
 	function cvm_widgets_scripts(){
-		$plugin_settings = get_settings();
+		$plugin_settings = \Vimeotheque\Plugin::instance()->get_options();
 		if( isset( $plugin_settings['public'] ) && !$plugin_settings['public'] ){
 			return;
 		}
