@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class About_Page
  * @package Vimeotheque\Admin
  */
-class About_Page extends Page_Init_Abstract implements Page_Interface{
+class About_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * Page output callback

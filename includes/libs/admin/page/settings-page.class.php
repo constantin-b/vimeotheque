@@ -6,8 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Vimeotheque\Admin\Notice\Admin_Notices;
-use Vimeotheque\Admin\Notice\Notice;
+use Vimeotheque\Admin\Admin;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Plugin;
 use Vimeotheque\Post_Type;
@@ -18,7 +17,7 @@ use WP_Error;
  * Class Settings_Page
  * @package Vimeotheque\Admin
  */
-class Settings_Page extends Page_Init_Abstract implements Page_Interface{
+class Settings_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * @var Vimeo_Oauth
 	 */
@@ -28,10 +27,26 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 	 * @var WP_Error
 	 */
 	private $error;
+	/**
+	 * @var Post_Type
+	 */
+	private $cpt;
 
-	public function __construct( Post_Type $object ) {
-		parent::__construct( $object );
+	/**
+	 * Settings_Page constructor.
+	 *
+	 * @param Admin $admin
+	 * @param $page_title
+	 * @param $menu_title
+	 * @param $slug
+	 * @param $parent
+	 * @param $capability
+	 */
+	public function __construct( Admin $admin, $page_title, $menu_title, $slug, $parent, $capability ) {
+		parent::__construct( $admin, $page_title, $menu_title, $slug, $parent, $capability );
 		Settings_Helper::init();
+
+		$this->cpt = $admin->get_post_type();
 	}
 
 	/**
@@ -52,7 +67,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 		 *
 		 * @param array $tabs
 		 */
-		$extra_tabs = apply_filters( 'cvm_register_plugin_settings_tab', [] );
+		$extra_tabs = apply_filters( 'vimeotheque\admin\page\settings_tabs', [] );
 
 		include VIMEOTHEQUE_PATH . 'views/plugin_settings.php';
 	}
@@ -68,7 +83,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 			$options['vimeo_secret_key'],
 			$options['oauth_secret'],
 			// you must use this instead of menu_page_url() to avoid API error
-			admin_url( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings' )
+			admin_url( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=' . $this->get_menu_slug() )
 		);
 
 		if( $this->set_unauth_token() ) {
@@ -77,23 +92,38 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 
 		/**
 		 * Action triggered on settings page load event
+		 *
+		 * @param Options $options
 		 */
-		do_action( 'cvm_settings_on_load', $this->options_obj() );
+		do_action( 'vimeotheque\admin\page\settings_load', $this->options_obj() );
 
 		if( isset( $_POST['cvm_wp_nonce'] ) ){
 			if( check_admin_referer('cvm-save-plugin-settings', 'cvm_wp_nonce') ){
-
+				/**
+				 * Action running before the settings are saved
+				 */
 				do_action( 'vimeotheque\admin\before_settings_save' );
 
 				$updated_settings = $this->update_settings();
 
+				/**
+				 * Action running after the settings are saved
+				 * @param array $updated_settings
+				 */
 				do_action( 'vimeotheque\admin\after_settings_save', $updated_settings );
 
+				/**
+				 * Action running before the player settings are saved
+				 */
 				do_action( 'vimeotheque\admin\before_player_settings_save' );
 
-				$this->update_player_settings();
+				$player_settings = $this->update_player_settings();
 
-				do_action( 'vimeotheque\admin\after_player_settings_save' );
+				/**
+				 * Action running after the player settings are saved
+				 * @param array $player_settings
+				 */
+				do_action( 'vimeotheque\admin\after_player_settings_save', $player_settings );
 			}
 			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings', false );
 			die();
@@ -228,6 +258,8 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 		}
 
 		$this->player_options_obj()->update_options( $defaults );
+
+		return $defaults;
 	}
 
 	/**
@@ -248,10 +280,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 					$options['vimeo_secret_key'] = '';
 					$options['oauth_token'] = '';
 					// set a notice for the error
-					Admin_Notices::instance()
-					             ->register(
-					             	new Notice( $token->get_error_message() )
-					             );
+					parent::set_error( $token->get_error_code(), $token->get_error_message() );
 				}
 
 				$this->options_obj()->update_options( $options );
@@ -323,7 +352,7 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 	 * @return \Vimeotheque\Options\Options
 	 */
 	private function options_obj(){
-		return \Vimeotheque\Plugin::instance()->get_options_obj();
+		return Plugin::instance()->get_options_obj();
 	}
 
 	/**
@@ -331,6 +360,6 @@ class Settings_Page extends Page_Init_Abstract implements Page_Interface{
 	 * @return \Vimeotheque\Options\Options
 	 */
 	private function player_options_obj(){
-		return \Vimeotheque\Plugin::instance()->get_player_options();
+		return Plugin::instance()->get_player_options();
 	}
 }

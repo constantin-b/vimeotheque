@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Ajax_Actions;
 use Vimeotheque\Admin\Posts_Import_Meta_Panels;
 use Vimeotheque\Admin\Table\Video_Import_List_Table;
@@ -17,7 +18,7 @@ use WP_List_Table;
  * @author CodeFlavors
  *
  */
-class Video_Import_Page extends Page_Init_Abstract implements Page_Interface{
+class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
 	/**
 	 * Strores reference to WP  List Table object to display videos
@@ -41,17 +42,22 @@ class Video_Import_Page extends Page_Init_Abstract implements Page_Interface{
 	 * @var Ajax_Actions
 	 */
 	private $ajax_obj;
-	
+
 	/**
-	 * Constructor, fires up the parent __construct() and sets up other variables 
+	 * Constructor, fires up the parent __construct() and sets up other variables
 	 *
-	 * @param Post_Type $object
-	 * @param Ajax_Actions $ajax_obj
+	 * @param Admin $admin
+	 * @param $page_title
+	 * @param $menu_title
+	 * @param $slug
+	 * @param $parent
+	 * @param $capability
 	 */
-	public function __construct( Post_Type $object, Ajax_Actions $ajax_obj ){
-		parent::__construct($object);
-		$this->meta = new Posts_Import_Meta_Panels( $object );
-		$this->ajax_obj = $ajax_obj;
+	public function __construct( Admin $admin, $page_title, $menu_title, $slug, $parent, $capability ){
+		parent::__construct( $admin, $page_title, $menu_title, $slug, $parent, $capability );
+		$this->meta = new Posts_Import_Meta_Panels( $admin->get_post_type() );
+		$this->ajax_obj = $admin->get_ajax();
+		$this->cpt = $admin->get_post_type();
 	}
 
 	/**

@@ -123,7 +123,7 @@ class Plugin{
 		$this->load();
 
 		// activation hook to add the rewrite rules for the custom post type
-		register_activation_hook( __FILE__, [
+		register_activation_hook( VIMEOTHEQUE_FILE, [
 			$this,
 			'activation_hook'
 		] );
@@ -255,12 +255,14 @@ class Plugin{
 	 * @return void
 	 */
 	public function activation_hook(){
+		$this->set_post_type();
 		// register custom post
 		$this->get_cpt()->register_post();
 		// create rewrite ( soft )
 		flush_rewrite_rules( false );
 
-		$this->admin_init();
+		$this->add_admin();
+
 		if( $this->admin ){
 			$this->admin->plugin_activation();
 		}

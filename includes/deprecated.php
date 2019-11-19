@@ -363,3 +363,30 @@ function cvm_get_method( $method, $args = [] ){
 	}
 	return $result;
 }
+
+/**
+ * Deprecated hook
+ *
+ * @param \Vimeotheque\Options\Options $options
+ */
+function _deprecatead_settings_page_load_event( $options ){
+	/**
+	 * Action triggered on settings page load event
+	 * @deprecated
+	 */
+	do_action( 'cvm_settings_on_load', $options );
+}
+
+add_action( 'vimeotheque\admin\page\settings_load', '_deprecatead_settings_page_load_event', 10, 1 );
+
+/**
+ * Deprecated filter
+ *
+ * @param $tabs
+ *
+ * @return mixed|void
+ */
+function _deprecated_settings_tabs( $tabs ){
+	return apply_filters( 'cvm_register_plugin_settings_tab', $tabs );
+}
+add_filter( 'vimeotheque\admin\page\settings_tabs', '_deprecated_settings_tabs', 10, 1 );

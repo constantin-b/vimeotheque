@@ -76,5 +76,31 @@ class Helper{
 		return ( ($h > 0 ? $h . ":" : "") . ( ($m < 10 ? "0" : "") . $m . ":" ) . ($s < 10 ? "0" : "") . $s);
 	}
 
+	/**
+	 * @param $name
+	 * @param bool $type
+	 * @param bool $sanitize
+	 *
+	 * @return bool|mixed
+	 */
+	static public function get_var( $name, $type = false, $sanitize = false ) {
+		$result = false;
+
+		if( !$type ){
+			$result = isset( $_GET[ $name ] ) || isset( $_POST[ $name ] ) ? $_REQUEST[ $name ] : false;
+		}
+
+		$isset = 'POST' == $type ? isset( $_POST[ $name ] ) : isset( $_GET[ $name ] );
+		if( $isset ){
+			$result = $_REQUEST[ $name ];
+		}
+
+		if( $sanitize ){
+			$result = call_user_func( $sanitize, $result );
+		}
+
+		return $result;
+	}
+
 }
 

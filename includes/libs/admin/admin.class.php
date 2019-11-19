@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Exception;
+use Vimeotheque\Admin\Menu\Menu_Pages;
 use Vimeotheque\Admin\Notice\Admin_Notices;
 use Vimeotheque\Admin\Notice\Plugin_Notice;
 use Vimeotheque\Admin\Page\About_Page;
@@ -31,7 +32,7 @@ class Admin{
 	 * 
 	 * @var Post_Type
 	 */
-	private $cpt;
+	private $post_type;
 
 	/**
 	 * Ajax Class reference
@@ -41,9 +42,9 @@ class Admin{
 	private $ajax;
 
 	/**
-	 * Pro menu priority
+	 * @var Menu_Pages
 	 */
-	const PRO_MENU_PRIORITY = 512;
+	private $admin_menu;
 
 	/**
 	 *
@@ -51,20 +52,9 @@ class Admin{
 	 */
 	public function __construct( Post_Type $post_type ){
 		// store object reference
-		$this->cpt = $post_type;
+		$this->post_type = $post_type;
 
-		add_action( 'wp_loaded', [ $this, 'init' ], 1 );
-
-		// add extra menu pages
-		add_action( 'admin_menu', [
-				$this, 
-				'menu_pages'
-		], 1 );
-
-		add_action( 'admin_menu', [
-			$this,
-			'pro_menu'
-		], self::PRO_MENU_PRIORITY );
+		add_action( 'wp_loaded', [ $this, 'init' ], -20 );
 
 		// add admin capabilities
 		add_action( 'init', [
@@ -73,12 +63,12 @@ class Admin{
 		], -999 );
 
 		// add columns to posts table
-		add_filter( 'manage_edit-' . $this->cpt->get_post_type() . '_columns', [
+		add_filter( 'manage_edit-' . $this->post_type->get_post_type() . '_columns', [
 				$this, 
 				'extra_columns'
 		] );
 
-		add_action( 'manage_' . $this->cpt->get_post_type() . '_posts_custom_column', [
+		add_action( 'manage_' . $this->post_type->get_post_type() . '_posts_custom_column', [
 				$this, 
 				'output_extra_columns'
 		], 10, 2 );
@@ -105,130 +95,84 @@ class Admin{
 	 */
 	public function init(){
 		// start AJAX actions
-		$this->ajax = new Ajax_Actions( $this->cpt );
+		$this->ajax = new Ajax_Actions( $this->post_type );
 		// start post edit single video page
-		new Post_Edit_Page( $this->cpt );
+
+		new Post_Edit_Page( $this );
+
+		$this->register_pages();
 	}
 
 	/**
 	 * Add subpage for custom post type admin menu
 	 */
-	public function menu_pages(){
+	public function register_pages(){
 
-		$settings_page = new Settings_Page( $this->cpt );
-		$settings = add_submenu_page(
-			'edit.php?post_type=' . $this->cpt->get_post_type(),
-			__( 'Settings', 'cvm_video' ),
-			__( 'Settings', 'cvm_video' ),
-			'manage_options',
-			'cvm_settings',
-			[
-				$settings_page,
-				'get_html'
-			] );
-		add_action( 'load-' . $settings, [
-			$settings_page,
-			'on_load'
-		] );
-
-		$import_page = new Video_Import_Page( $this->cpt, $this->ajax );
-		$video_import = add_submenu_page(
-			'edit.php?post_type=' . $this->cpt->get_post_type(),
-			__( 'Import videos', 'cvm_video' ),
-			__( 'Import videos', 'cvm_video' ),
-			$this->get_capability('manual_import'),
-			'cvm_import',
-			[
-				$import_page, 
-				'get_html'
-			] );
-		// page load
-		add_action( 'load-' . $video_import, [
-				$import_page, 
-				'on_load'
-		] );
-
-		/**
-		 * Plugin about page. Shown on plugin activation only
-		 * @var \Vimeotheque\Admin\Page\About_Page
-		 */
-		$page = new About_Page( $this->cpt );
-		$about_page = add_submenu_page(
-			null ,
-			__( 'About', 'cvm_video' ),
-			__( 'About', 'cvm_video' ),
-			'activate_plugins',
-			'vimeotheque_about',
-			[
-				$page,
-				'get_html'
-			] );
-		add_action( 'load-' . $about_page, [
-			$page,
-			'on_load'
-		] );
-
-		/**
-		 * Shortcode videos list table
-		 */
-		$v_list = new List_Videos_Page( $this->cpt );
-		$videos_list = add_submenu_page(
-			null,
-			__( 'Videos', 'cvm_video' ),
-			__( 'Videos', 'cvm_video' ),
-			'edit_posts',
-			'cvm_videos',
-			[
-				$v_list, 
-				'get_html'
-			]
+		$this->admin_menu = new Menu_Pages(
+			new Settings_Page(
+				$this,
+				__( 'Settings', 'cvm_video' ),
+				__( 'Settings', 'cvm_video' ),
+				'cvm_settings',
+				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'manage_options'
+			)
 		);
 
-		add_action( 'load-' . $videos_list, [
-				$v_list, 
-				'on_load'
-		] );
-	}
+		$this->admin_menu->register_page(
+			new Video_Import_Page(
+				$this,
+				__( 'Import videos', 'cvm_video' ),
+				__( 'Import videos', 'cvm_video' ),
+				'cvm_import',
+				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				$this->get_capability('manual_import')
+			)
 
-	/**
-	 * @throws Exception
-	 */
-	public function pro_menu(){
-		$automatic_page = new Automatic_Import_Page( $this->cpt );
-		$automatic_import = add_submenu_page(
-			'edit.php?post_type=' . $this->cpt->get_post_type(),
-			__( 'Automatic Vimeo video import', 'cvm_video' ),
-			__( 'Automatic import', 'cvm_video' ),
-			$this->get_capability( 'automatic_import' ),
-			'cvm_auto_import',
-			[
-				$automatic_page,
-				'get_html'
-			] );
-
-		add_action( 'load-' . $automatic_import, [
-			$automatic_page,
-			'on_load'
-		] );
-
-
-		$gopro_page = new Go_Pro_Page( $this->cpt );
-		$gopro = add_submenu_page(
-			'edit.php?post_type=' . $this->cpt->get_post_type(),
-			__( 'Go PRO!', 'cvm_video' ),
-			__( 'Go PRO!', 'cvm_video' ),
-			'manage_options',
-			'cvm_go_pro',
-			[
-				$gopro_page,
-				'get_html'
-			]
 		);
-		add_action( 'load-' . $gopro,
-			[
-				$gopro_page,
-				'on_load'
-			]
+
+		$this->admin_menu->register_page(
+			new About_Page(
+				$this,
+				__( 'About', 'cvm_video' ),
+				__( 'About', 'cvm_video' ),
+				'vimeotheque_about',
+				false,
+				'activate_plugins'
+			)
+		);
+
+		$this->admin_menu->register_page(
+			new List_Videos_Page(
+				$this,
+				__( 'Videos', 'cvm_video' ),
+				__( 'Videos', 'cvm_video' ),
+				'cvm_videos',
+				false,
+				'edit_posts'
+			)
+		);
+
+		$this->admin_menu->register_page(
+			new Automatic_Import_Page(
+				$this,
+				__( 'Automatic Vimeo video import', 'cvm_video' ),
+				__( 'Automatic import', 'cvm_video' ),
+				'vimeotheque_auto_import',
+				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'edit_posts'
+			)
+		);
+
+		$this->admin_menu->register_page(
+			new Go_Pro_Page(
+				$this,
+				__( 'Go PRO!', 'cvm_video' ),
+				__( 'Go PRO!', 'cvm_video' ),
+				'vimeotheque_go_pro',
+				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'edit_posts'
+			)
 		);
 	}
 
@@ -302,7 +246,7 @@ class Admin{
 	 * Set admin notices
 	 */
 	public function admin_notices(){
-		if( !isset( $_GET['post_type'] ) || $this->cpt->get_post_type() != $_GET['post_type'] ){
+		if( !isset( $_GET['post_type'] ) || $this->post_type->get_post_type() != $_GET['post_type'] ){
 			return;
 		}
 
@@ -384,5 +328,26 @@ class Admin{
 		];
 
 		return $roles;
+	}
+
+	/**
+	 * @return Post_Type
+	 */
+	public function get_post_type(){
+		return $this->post_type;
+	}
+
+	/**
+	 * @return Ajax_Actions
+	 */
+	public function get_ajax(){
+		return $this->ajax;
+	}
+
+	/**
+	 * @return Menu_Pages
+	 */
+	public function get_admin_menu() {
+		return $this->admin_menu;
 	}
 }
