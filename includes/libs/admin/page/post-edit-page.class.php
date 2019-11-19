@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Helper_Admin;
 use Vimeotheque\Helper;
 use Vimeotheque\Post_Type;
@@ -15,13 +16,13 @@ use WP_Post;
  * Class Post_Edit_Page
  * @package Vimeotheque\Admin
  */
-class Post_Edit_Page extends Page_Init_Abstract{
+class Post_Edit_Page{
 
 	private $video;
 	private $is_gutenberg = false;
 
-	public function __construct( Post_Type $object ){
-		parent::__construct( $object );
+	public function __construct( Admin $admin ){
+		$this->cpt = $admin->get_post_type();
 		
 		// action on loading post-new page for custom post type. Manages single video import
 		add_action( 'load-post-new.php', [
@@ -113,7 +114,7 @@ class Post_Edit_Page extends Page_Init_Abstract{
 					$this->video[ 'excerpt' ] = apply_filters( 'cvm_video_post_excerpt', $this->video[ 'description' ], $this->video, [] );
 					$this->video[ 'title' ] = apply_filters( 'cvm_video_post_title', $this->video[ 'title' ], $this->video, [] );
 					// single post import date
-					$import_options = \Vimeotheque\get_settings();
+					$import_options = \Vimeotheque\Plugin::instance()->get_options();
 					$post_date = $import_options[ 'import_date' ] ? date( 'Y-m-d H:i:s', strtotime( $this->video[ 'published' ] ) ) : current_time( 'mysql' );
 					$this->video[ 'post_date' ] = apply_filters( 'cvm_video_post_date', $post_date, $this->video, [] );
 
@@ -148,7 +149,7 @@ class Post_Edit_Page extends Page_Init_Abstract{
 			
 			include ABSPATH . 'wp-admin/admin-header.php';
 			
-			$options = \Vimeotheque\get_settings();
+			$options = \Vimeotheque\Plugin::instance()->get_options();
 			if( empty( $options[ 'vimeo_consumer_key' ] ) || empty( $options[ 'vimeo_secret_key' ] ) ){
 			?>
                 <p>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Vimeotheque;
+namespace Vimeotheque\Options;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

@@ -314,7 +314,7 @@ class WP_Customizer{
 	 * @param $panel_id
 	 */
 	public function add_post_option_section( WP_Customize_Manager $customize_manager, $panel_id ){
-	    $options = \Vimeotheque\get_settings();
+	    $options = \Vimeotheque\Plugin::instance()->get_options();
         $section = 'vimeo_video_post_post_section';
 
 		$customize_manager->add_section(
@@ -460,7 +460,7 @@ class WP_Customizer{
 	 * @return string
 	 */
     private function plugin_setting_name( $option, $type = 'plugin_option' ){
-    	$option_name = $type == 'plugin_option' ? \Vimeotheque\cvm_get_settings_option_name() : \Vimeotheque\cvm_get_player_settings_option_name();
+    	$option_name = $type == 'plugin_option' ? \Vimeotheque\Plugin::instance()->get_options_obj()->get_option_name() : \Vimeotheque\Plugin::instance()->get_player_options()->get_option_name();
 	    return sprintf( '%s[%s]', $option_name, $option );
     }
 

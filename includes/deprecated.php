@@ -9,9 +9,9 @@
 
 /**
  * Class CVM_Options_Factory
- * @deprecated - Use Vimeotheque\Options_Factory instead
+ * @deprecated - Use Vimeotheque\Options\Options_Factory instead
  */
-final class CVM_Options_Factory extends Vimeotheque\Options_Factory{}
+final class CVM_Options_Factory extends \Vimeotheque\Options\Options_Factory{}
 
 /**
  * Class CVM_Vimeo
@@ -25,7 +25,7 @@ final class CVM_Vimeo extends \Vimeotheque\Vimeo_Api\Vimeo_Oauth{
 	 * CVM_Vimeo constructor.
 	 */
 	public function __construct() {
-		$options  = Vimeotheque\get_settings();
+		$options  = \Vimeotheque\Plugin::instance()->get_options();
 
 		$token = $options['oauth_token'];
 		if( !empty( $options['oauth_secret'] ) ){
@@ -37,7 +37,7 @@ final class CVM_Vimeo extends \Vimeotheque\Vimeo_Api\Vimeo_Oauth{
 			$options['vimeo_secret_key'],
 			$token,
 			// you must use this instead of menu_page_url() to avoid API error
-			admin_url( 'edit.php?post_type=' . Vimeotheque\cvm_get_post_type() . '&page=cvm_settings' )
+			admin_url( 'edit.php?post_type=' . Vimeotheque\Plugin::instance()->get_cpt()->get_post_type() . '&page=cvm_settings' )
 		);
 	}
 }
@@ -224,7 +224,7 @@ function cvm_select( $args = [], $echo = true ){
  * @return string
  */
 function cvm_human_time( $seconds ){
-	return Vimeotheque\human_time( $seconds );
+	return \Vimeotheque\Helper::human_time( $seconds );
 }
 
 function cvm_class_method( $method, $args = [] ){
@@ -245,14 +245,6 @@ function cvm_class_method( $method, $args = [] ){
  */
 function cvm_get_post_type(){
 	return Vimeotheque\Plugin::instance()->get_cpt()->get_post_type();
-}
-
-/**
- * @deprecated
- * @return array
- */
-function cvm_check_theme_support(){
-	return Vimeotheque\has_theme_support();
 }
 
 /**
@@ -314,7 +306,7 @@ function cvm_get_tag(){
  * @return array
  */
 function cvm_get_settings(){
-	return Vimeotheque\get_settings();
+	return \Vimeotheque\Plugin::instance()->get_options();
 }
 
 /**
@@ -352,3 +344,49 @@ function cvm_set_featured_image($post_id, $post_type, $refresh = false){
 function cvm_get_video_data_meta_name(){
 	return Vimeotheque\Plugin::instance()->get_cpt()->get_post_settings()->get_meta_video_data();
 }
+
+/**
+ * General method to access public methods of post type class
+ *
+ * @param string $method - method name
+ * @param array $args
+ *
+ * @return string - result returned by class method
+ */
+function cvm_get_method( $method, $args = [] ){
+	$obj = \Vimeotheque\Plugin::instance()->get_cpt();
+
+	if( !$args ){
+		$result = call_user_func( [ $obj, $method ] );
+	}else{
+		$result = call_user_func_array( [ $obj, $method ], $args);
+	}
+	return $result;
+}
+
+/**
+ * Deprecated hook
+ *
+ * @param \Vimeotheque\Options\Options $options
+ */
+function _deprecatead_settings_page_load_event( $options ){
+	/**
+	 * Action triggered on settings page load event
+	 * @deprecated
+	 */
+	do_action( 'cvm_settings_on_load', $options );
+}
+
+add_action( 'vimeotheque\admin\page\settings_load', '_deprecatead_settings_page_load_event', 10, 1 );
+
+/**
+ * Deprecated filter
+ *
+ * @param $tabs
+ *
+ * @return mixed|void
+ */
+function _deprecated_settings_tabs( $tabs ){
+	return apply_filters( 'cvm_register_plugin_settings_tab', $tabs );
+}
+add_filter( 'vimeotheque\admin\page\settings_tabs', '_deprecated_settings_tabs', 10, 1 );

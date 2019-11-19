@@ -90,6 +90,19 @@ class Post_Settings{
 	}
 
 	/**
+	 * Check to see if option to import as post is on
+	 *
+	 * @return bool
+	 */
+	public function import_as_post(){
+		if( isset( $this->options['post_type_post'] ) && $this->options['post_type_post'] ){
+			return (bool) $this->options['post_type_post'];
+		}
+
+		return false;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_meta_video_id(){

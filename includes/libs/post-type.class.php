@@ -77,7 +77,7 @@ class Post_Type{
 	    	'menu_name' 			=> __('Videos', 'cvm_video')
 		];
 		
-		$options 	= get_settings();
+		$options 	= \Vimeotheque\Plugin::instance()->get_options();
 		$is_public 	= $options['public'];
 		
 		$args = [

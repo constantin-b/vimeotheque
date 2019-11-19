@@ -34,7 +34,20 @@ function cvm_the_tags( $before = null, $sep, $after, $id = 0 ){
  * @return
  */
 function cvm_get_the_tag_list($before, $sep, $after, $id = 0){
-	return apply_filters( 'cvm_the_tags', get_the_term_list( $id, cvm_get_tag(), $before, $sep, $after ), $before, $sep, $after, $id );
+	return apply_filters(
+		'cvm_the_tags',
+		get_the_term_list(
+			$id,
+			Plugin::instance()->get_cpt()->get_tag_tax(),
+			$before,
+			$sep,
+			$after
+		),
+		$before,
+		$sep,
+		$after,
+		$id
+	);
 }
 
 /**
@@ -48,8 +61,11 @@ function cvm_output_player_data( $echo = true ){
 
 /**
  * Output video parameters as data-* attributes
- * @param array $array - key=>value pairs
- * @param bool $echo	
+ *
+ * @param $attributes
+ * @param bool $echo
+ *
+ * @return string
  */
 function cvm_data_attributes( $attributes, $echo = false ){
 	$result = [];
@@ -72,9 +88,12 @@ function cvm_data_attributes( $attributes, $echo = false ){
 
 /**
  * Outputs the default player size
+ *
  * @param string $before
  * @param string $after
  * @param bool $echo
+ *
+ * @return string
  */
 function cvm_output_player_size( $before = ' style="', $after='"', $echo = true ){
 	$player = get_player_settings();
@@ -89,9 +108,12 @@ function cvm_output_player_size( $before = ' style="', $after='"', $echo = true 
 
 /**
  * Output width according to player
+ *
  * @param string $before
  * @param string $after
  * @param bool $echo
+ *
+ * @return string
  */
 function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
 	$player = get_player_settings();
@@ -200,7 +222,10 @@ function cvm_video_url( $video_id ){
 
 /**
  * Returns embed code for a given video ID
+ *
  * @param string $video_id
+ *
+ * @return string
  */
 function cvm_video_embed( $video_id ){
 	$options = get_player_settings();
@@ -224,14 +249,8 @@ function cvm_video_embed( $video_id ){
  *
  * @return array|bool|string|\WP_Error
  */
-function cvm_query_video( $video_id, $ondemand_id = false ){
-	$feed = $ondemand_id ? 'ondemand_video' : 'video';
-	
-	if( !ctype_digit( $video_id ) ){
-		return cvm_query_ondemand_main_video( $video_id );	
-	}
-	
-	$vimeo = new Video_Import( $feed, $video_id );
+function cvm_query_video( $video_id ){
+	$vimeo = new Video_Import( 'video', $video_id );
 	$result = $vimeo->get_feed();
 	if( !$result ){
 		$error = $vimeo->get_errors();
@@ -243,44 +262,6 @@ function cvm_query_video( $video_id, $ondemand_id = false ){
 }
 
 /**
- * @param $ondemand_id
- *
- * @return array|bool|string|\WP_Error
- */
-function cvm_query_ondemand_main_video( $ondemand_id ){
-
-	$vimeo = new Video_Import( 'ondemand_videos', $ondemand_id );
-	$result = $vimeo->get_feed();
-	if( !$result ){
-		$error = $vimeo->get_errors();
-		if( is_wp_error( $error ) ){
-			return $error;
-		}
-	}
-	
-	$video = false;
-	foreach ( $result as $v ){
-		if( 'main' == $v['type'] ){
-			$video = $v;
-			break;
-		}
-	}
-	
-	return $video;
-}
-
-/**
- * @deprecated 
- * @since 1.3
- * @uses is_video()
- * 
- * Checks that global $post is video post type
- */
-function cvm_is_video_post(){
-	return is_video();
-}
-
-/**
  * Utility function. Checks if a given or current post is video created by the plugin
  *
  * @param bool|int|\WP_Post $post
@@ -289,38 +270,6 @@ function cvm_is_video_post(){
  */
 function is_video( $post = false ){
 	return Helper::get_video_post( $post )->is_video();
-}
-
-/**
- * Get user set post type to which all videos should be imported to
- *
- * @return false|string - returns the user post type set programatically or false if no post type is set using filter 'cvm_import_post_type'
- */
-function cvm_user_post_type(){
-	return get_method( 'get_user_post_type', [ false ] );
-}
-
-/**
- * More efficient strip tags
- *
- * @link  http://www.php.net/manual/en/function.strip-tags.php#110280
- * @param string $string string to strip tags from
- * @return string
- */
-function cvm_strip_tags( $string ) {
-   
-    // ----- remove HTML TAGs -----
-    $string = preg_replace ('/<[^>]*>/', ' ', $string);
-   
-    // ----- remove control characters -----
-    $string = str_replace("\r", '', $string);    // --- replace with empty space
-    $string = str_replace("\n", ' ', $string);   // --- replace with space
-    $string = str_replace("\t", ' ', $string);   // --- replace with space
-   
-    // ----- remove multiple spaces -----
-    $string = trim(preg_replace('/ {2,}/', ' ', $string));
-   
-    return $string;
 }
 
 /**
@@ -358,9 +307,12 @@ function cvm_get_post_video_data( $post ){
 
 /**
  * Calculate player height from given aspect ratio and width
+ *
  * @param string $aspect_ratio
  * @param int $width
- * @param float $ratio - a given ratio; will override aspect ratio if set
+ * @param bool $ratio - a given ratio; will override aspect ratio if set
+ *
+ * @return float|int
  */
 function cvm_player_height( $aspect_ratio, $width, $ratio =  false ){
 	$width = absint($width);
@@ -390,6 +342,7 @@ function cvm_player_height( $aspect_ratio, $width, $ratio =  false ){
  * Available player themes
  */
 function cvm_playlist_themes(){
+	// @todo - create a filter that allows you to add new themes in this list
 	return [
 		'default' 	=> __('Default theme', 'cvm_video'),
 		'carousel' 	=> __('Carousel navigation', 'cvm_video'),
@@ -397,212 +350,9 @@ function cvm_playlist_themes(){
 	];
 }
 
-/**
- * Check if theme is supported by the plugin.
- * Returns false or an array containing a mapping for custom post fields to store information on
- */
-function has_theme_support(){
-	return Theme_Compatibility::instance()->get_theme_compatibility();
-}
-
-/**
- * General method to access public methods of post type class
- *
- * @param string $method - method name
- * @param array $args
- *
- * @return string - result returned by class method
- */
-function get_method( $method, $args = [] ){
-	$obj = Plugin::instance()->get_cpt();
-
-	if( !$args ){
-		$result = call_user_func( [ $obj, $method ] );
-	}else{
-		$result = call_user_func_array( [ $obj, $method ], $args);
-	}	
-	return $result;
-}
-
-/**
- * Get plugin custom post type
- * 
- * @return string
- */
-
-function cvm_get_post_type(){
-	return get_method('get_post_type');
-}
-
-/**
- * Get plugin custom post type "category" taxonomy
- * 
- * @return string
- */
-
-function cvm_get_category(){
-	return get_method('get_post_tax');
-}
-
-/**
- * Get plugin custom post type tag taxonomy
- * 
- * @return string
- */
-
-function cvm_get_tag(){
-	return get_method('get_tag_tax');
-}
-
-/**
- * Get plugin custom post type for automatic import playlists
- * 
- * @return string
- */
-
-function cvm_get_playlist_post_type(){
-	return get_method('get_playlist_post_type');
-}
-
-/**
- * Get playlist meta name that stores playlist details
- * 
- * @return string
- */
-
-function cvm_get_playlist_meta_name(){
-	return get_method('get_playlist_meta_name');
-}
-
-
-
-/*********************************************************************************
- * Plugin settings management
- *********************************************************************************/
-
-/**
- * Utility function, returns plugin default settings
- */
-function cvm_load_plugin_settings(){
-	$defaults = [
-		'public' => true, // post type is public or not
-		'archives' => false, // display video embed on archive pages
-		'homepage' => false, // include custom post type on homepage
-		'main_rss' => false, // include custom post type into the main RSS feed
-		'use_microdata' => false, // put microdata on video pages ( more details on: http://schema.org )
-		'post_type_post' => false, // when true all videos will be imported as post type post and will disregard the theme compatibility layer
-		'check_video_status' => false, // when true, will check imported video posts if still published on Vimeo and embeddable
-		'post_slug'	=> 'vimeo-video',
-		'taxonomy_slug' => 'vimeo-videos',
-		'tag_slug' => 'vimeo-tag',
-		// 'import_categories' => false,
-		'import_tags' => false, // import tags retrieved from Vimeo
-		'max_tags' => 3, // how many tags to import
-		'import_title' => true, // import titles on custom posts
-		'import_description' => 'post_content', // import descriptions on custom posts
-		// 'remove_after_text' => '',
-		'prevent_autoembed' => false, // prevent autoembeds on video posts
-		'make_clickable' => false, // make urls pasted in content clickable
-		'import_date' => false, // import video date as post date
-		'featured_image' => false, // set thumbnail as featured image; default import on video feed import (takes more time)
-		'image_on_demand' => false, // when true, thumbnails will get imported only when viewing the video post as oposed to being imported on feed importing
-		'import_status' => 'draft', // default import status of videos
-		/**
-		 * Videos having user privacy set not public will be:
-		 * - import: imported  
-		 * - pending: imported having status pending
-		 * - skip: skipped from importing
-		 */
-		'import_privacy' => 'import',
-		'import_frequency' => 5, // in minutes
-		'import_quantity' => 20,
-		//'feed_unpublish_on_error' => false, // remove automatic import from queue on feed error
-		//'feed_fail_number_unpublish' => 3, // unpublish if feed query returned error for this many times
-		'conditional_import' => false, // when true, automatic imports will be processed only when custom link is hit (used for CRON Jobs)
-		'autoimport_param' => '', // the value of the variable that must be set when autoimport hits the website (unique for each installation)
-		'page_load_autoimport' => false, // run imports on page load
-
-		// Vimeo oAuth
-		'vimeo_consumer_key' => '',
-		'vimeo_secret_key' => '',
-		'oauth_token' => '',// retrieved from Vimeo; gets set after entering valid client ID and client secret
-		'oauth_secret' => '',// retrieved from Vimeo; gets set after uses authorizes the plugin to query the API on his behalf
-		'vimeo_access_granted' => false,// set when oAuth is done to true
-		'license_key' => ''
-	];
-
-	return Options_Factory::get( '_cvm_plugin_settings', $defaults );
-}
-
-/**
- * Utility function, returns plugin settings
- */
-function get_settings(){
-	$options = cvm_load_plugin_settings();
-	return $options->get_options();
-}
-
-/**
- * Returns WP option name of plugin settings option
- * @return string
- */
-function cvm_get_settings_option_name(){
-	$option = cvm_load_plugin_settings();
-	return $option->get_option_name();
-}
-
-/**
- * Outputs the autoimport URL for conditional importing
- *
- * @param boolean $include_field
- * @param boolean $echo
- * @return string
- */
-function autoimport_uri( $echo = true ){
-	$options = get_settings();
-	$output = add_query_arg( array(
-		'cvm_autoimport' => $options[ 'autoimport_param' ]
-	), trailingslashit( get_home_url() ) );
-
-	if( $echo ){
-		echo $output;
-	}
-
-	return $output;
-}
-
 /***********************************************************************************
  * General player settings (from Settings page)
  **********************************************************************************/
-
-/**
- * Global player settings defaults.
- */
-function cvm_load_player_settings(){
-	$defaults = [
-		'title'		=> 1, 	// show video title
-		'byline' 	=> 1, 	// show player controls. Values: 0 or 1
-		'portrait' 	=> 1, 	// show author image
-		'color'		=> '', 	// no color set by default; will use Vimeo's settings
-		///'fullscreen'=> 1,	// deprecated option ont supported by Vimeo player API (0 - fullscreen button hidden; 1 - fullscreen button displayed)
-		'loop'		=> 0,
-		// Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, we’ll revert to standard playback requiring viewers to initiate playback.
-		'autoplay'	=> 0, 	// 0 - on load, player won't play video; 1 - on load player plays video automatically
-		
-		// extra settings
-		'aspect_ratio'		=> '16x9',
-		'aspect_override'	=> true,
-		'width'				=> 640,
-		'video_position' 	=> 'below-content', // in front-end custom post, where to display the video: above or below post content
-		'volume'			=> 25, // video default volume	
-		// extra player settings controllable by widgets/shortcodes
-		'playlist_loop'		=> 0,
-		'js_embed' 			=> true, // if true, embedding is done by JavaScript. If false, embedding is done by PHP by simply placing the iframe code into the page
-		'allow_override'    => false
-	];
-	// get Plugin option
-	return Options_Factory::get( '_cvm_player_settings', $defaults );
-}
 
 /**
  * Get general player settings
@@ -611,7 +361,7 @@ function get_player_settings(){
 	/**
 	 * Options object
 	 */
-	$option 	= cvm_load_player_settings()->get_options();
+	$option 	= \Vimeotheque\Plugin::instance()->get_player_options()->get_options();
 
 	// various player outputs may set their own player settings. Return those.
 	global $CVM_PLAYER_SETTINGS;
@@ -624,15 +374,6 @@ function get_player_settings(){
 	}
 	
 	return $option;
-}
-
-/**
- * @return string
- */
-function cvm_get_player_settings_option_name(){
-	$option = cvm_load_player_settings();
-	$name = $option->get_option_name();
-	return $name;
 }
 
 /**************************************************************************************************
@@ -768,141 +509,21 @@ function cvm_update_video_settings( $post_id, $values = false, $_use_defaults = 
 	update_post_meta($post_id, Plugin::instance()->get_cpt()->get_post_settings()->get_meta_embed_settings(), $defaults);
 }
 
-/***********************************************************************************
- * Automatic import playlists settings
- ***********************************************************************************/
-
-/**
- * Global playlist settings defaults.
- */
-function cvm_playlist_settings_defaults(){
-	$settings = get_settings();
-	$player_opt = get_player_settings();
-	
-	$defaults = [
-		'type' => '',
-		'id' => '',
-		'album_user' => false,
-		'theme_import' => false,
-		'native_tax' => [],
-		'theme_tax' => [],
-		'native_tag' => [],
-		'theme_tag' => [],
-		'import_description' => $settings['import_description'],
-		'import_status' => $settings['import_status'], // post status of imported videos
-		'import_title' => $settings['import_title'],
-		'import_date' => $settings['import_date'],
-		'import_user' => false,
-		// embed options
-		'aspect_ratio' => $player_opt['aspect_ratio'],
-		'video_position' => $player_opt['video_position'],
-		'loop' => false,
-		'autoplay' => $player_opt['autoplay'],
-		// stats
-		'updated' => false,
-		'total' => 0,
-		'imported' => 0,
-		'errors' => false,
-		'stats' => false,
-		'page' => 1, // default page is 1 (can't be less than 1)
-		'first_video' => false,
-		'last_video' => false,
-		// extra
-		// @todo Implement options in Feed settings when editing
-		'start_date' => false,
-		'no_reiterate' => false,
-		'repeat' => 1,
-		'repeats_left' => 1,		
-	];
-
-	return $defaults;
-}
-
-/**
- * Get general playlist settings
- */
-function cvm_get_playlist_settings( $post_id ){
-	$defaults 	= cvm_playlist_settings_defaults();
-	$option 	= get_post_meta($post_id, cvm_get_playlist_meta_name(), true);	
-	$option = wp_parse_args($option, $defaults);	
-	return $option;
-}
-
 /**
  * Creates from a number of given seconds a readable duration ( HH:MM:SS )
  * @param int $seconds
  * @return string - formatted time
  */
 function human_time( $seconds ){
-	
-	$seconds = absint( $seconds );
-	
-	if( $seconds < 0 ){
-		return;
-	}
-	
-	$h = floor( $seconds / 3600 );
-	$m = floor( $seconds % 3600 / 60 );
-	$s = floor( $seconds %3600 % 60 );
-	
-	return ( ($h > 0 ? $h . ":" : "") . ( ($m < 10 ? "0" : "") . $m . ":" ) . ($s < 10 ? "0" : "") . $s);
+	return Helper::human_time( $seconds );
 }
-
-/*************************************************************************************
- * Admin utils
- *************************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-/******************************************************************************************
- * Automatic import utils
- ******************************************************************************************/
-
-
-
-
-
-
 
 /**
- * Options on how often should automatic update be ran
- * 
- * @return array
+ * @param $path
+ * @param string $medium
+ *
+ * @return string
  */
-function cvm_automatic_update_timing(){	
-	$values = [
-		'1'		=> __('minute', 'cvm_video'),
-		'15' 	=> __('15 minutes', 'cvm_video'),
-		'30' 	=> __('30 minutes', 'cvm_video'),
-		'60'	=> __('hour', 'cvm_video'),
-		'120'	=> __('2 hours', 'cvm_video'),
-		'180'	=> __('3 hours', 'cvm_video'),
-		'360'	=> __('6 hours', 'cvm_video'),
-		'720'	=> __('12 hours', 'cvm_video'),
-		'1440'	=> __('day', 'cvm_video')
-	];
-	return $values;	
-}
-
-
-
-
-
-
-
-
-
-
-
 function cvm_link( $path, $medium = 'doc_link' ){
 	$base = 'https://vimeotheque.com/';
 	$vars = [
@@ -913,8 +534,6 @@ function cvm_link( $path, $medium = 'doc_link' ){
 	$q = http_build_query( $vars );
 	return $base . trailingslashit( $path ) . '?' . $q;
 }
-
-
 
 /**
  * A simple debug function. Doesn't do anything special, only triggers an

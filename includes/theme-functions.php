@@ -94,7 +94,7 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
 	}
 
 	if( $include_duration ){
-		$output .= ' <span class="duration">[' . Vimeotheque\human_time( $cvm_video['video_data']['duration'] ) . ']</span>';
+		$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $cvm_video['video_data']['duration'] ) . ']</span>';
 	}
 
 	if( $echo ){

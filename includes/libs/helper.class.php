@@ -2,6 +2,8 @@
 
 namespace Vimeotheque;
 
+use Vimeotheque\Options\Options;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -11,26 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Vimeotheque
  */
 class Helper{
-	/**
-	 * @param $action
-	 * @param $callback
-	 * @param int $priority
-	 * @param int $args
-	 */
-	static public function add_action( $action, $callback, $priority = 10, $args = 1 ){
-		add_action( $action, $callback, $priority, $args );
-	}
-
-	/**
-	 * @param $action
-	 * @param $callback
-	 * @param int $priority
-	 * @param int $args
-	 */
-	static public function add_filter( $action, $callback, $priority = 10, $args = 1 ){
-		add_filter( $action, $callback, $priority, $args );
-	}
-
 	/**
 	 * Return the access token to Vimeo API
 	 *
@@ -71,7 +53,53 @@ class Helper{
 	 * @return Options
 	 */
 	static public function get_embed_options(){
-		return cvm_load_player_settings();
+		return \Vimeotheque\Plugin::instance()->get_player_options();
+	}
+
+	/**
+	 * Creates from a number of given seconds a readable duration ( HH:MM:SS )
+	 * @param int $seconds
+	 * @return string - formatted time
+	 */
+	public static function human_time( $seconds ){
+
+		$seconds = absint( $seconds );
+
+		if( $seconds < 0 ){
+			return;
+		}
+
+		$h = floor( $seconds / 3600 );
+		$m = floor( $seconds % 3600 / 60 );
+		$s = floor( $seconds %3600 % 60 );
+
+		return ( ($h > 0 ? $h . ":" : "") . ( ($m < 10 ? "0" : "") . $m . ":" ) . ($s < 10 ? "0" : "") . $s);
+	}
+
+	/**
+	 * @param $name
+	 * @param bool $type
+	 * @param bool $sanitize
+	 *
+	 * @return bool|mixed
+	 */
+	static public function get_var( $name, $type = false, $sanitize = false ) {
+		$result = false;
+
+		if( !$type ){
+			$result = isset( $_GET[ $name ] ) || isset( $_POST[ $name ] ) ? $_REQUEST[ $name ] : false;
+		}
+
+		$isset = 'POST' == $type ? isset( $_POST[ $name ] ) : isset( $_GET[ $name ] );
+		if( $isset ){
+			$result = $_REQUEST[ $name ];
+		}
+
+		if( $sanitize ){
+			$result = call_user_func( $sanitize, $result );
+		}
+
+		return $result;
 	}
 
 }

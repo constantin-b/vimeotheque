@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author CodeFlavors
  *
  */
-class List_Videos_Page extends Page_Init_Abstract implements Page_Interface{
+class List_Videos_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * (non-PHPdoc)
 	 * @see Page_Interface::get_html()

@@ -89,7 +89,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	 * @param array $item
 	 */
 	function column_duration( $item ){		
-		return \Vimeotheque\human_time( $item['duration'] );
+		return \Vimeotheque\Helper::human_time( $item['duration'] );
 	}
 	
 	/**

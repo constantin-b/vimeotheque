@@ -6,19 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use Vimeotheque\Post_Type;
-
 /**
  * Class Automatic_Import_Page
  * @package Vimeotheque\Admin
  */
-class Automatic_Import_Page extends Page_Init_Abstract implements Page_Interface{
-	/**
-	 * @param Post_Type $object
-	 */
-	public function __construct( Post_Type $object ){
-		parent::__construct($object);
-	}
+class Automatic_Import_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * (non-PHPdoc)
