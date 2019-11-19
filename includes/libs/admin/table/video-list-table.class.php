@@ -7,6 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Vimeotheque\Admin\Helper_Admin;
+use Vimeotheque\Plugin;
+use Vimeotheque\Helper;
 use WP_Query;
 
 /**
@@ -58,24 +60,30 @@ class Video_List_Table extends \WP_List_Table{
 			break;
 			case 'cpt':
 			default:
-				$this->post_type = cvm_get_post_type();
-				$this->taxonomy = cvm_get_category();
+				$this->post_type = Plugin::instance()->get_cpt()->get_post_type();
+				$this->taxonomy = Plugin::instance()->get_cpt()->get_post_tax();
 			break;	
 		}		
 	}
-	
+
 	/**
 	 * Default column
+	 *
 	 * @param array $item
 	 * @param string $column
+	 *
+	 * @return mixed
 	 */
 	function column_default( $item, $column  ){
-		return $item[$column];
+		return $item[ $column ];
 	}
-	
+
 	/**
 	 * Title
+	 *
 	 * @param array $item
+	 *
+	 * @return string
 	 */
 	function column_post_title( $item ){
 
@@ -116,10 +124,13 @@ class Video_List_Table extends \WP_List_Table{
     	);	
 		
 	}
-	
+
 	/**
 	 * Checkbox column
+	 *
 	 * @param array $item
+	 *
+	 * @return string
 	 */
 	function column_cb( $item ){
 		return sprintf(
@@ -129,28 +140,37 @@ class Video_List_Table extends \WP_List_Table{
 			'cvm-video-'.$item['ID']
 		);
 	}
-	
+
 	/**
 	 * Vimeo video ID column
+	 *
 	 * @param array $item
+	 *
+	 * @return
 	 */
 	function column_video_id( $item ){
 		$meta = cvm_get_post_video_data( $item['ID'] );
 		return $meta['video_id'];
 	}
-	
+
 	/**
 	 * Video duration column
+	 *
 	 * @param array $item
+	 *
+	 * @return string
 	 */
 	function column_duration( $item ){
 		$meta = cvm_get_post_video_data( $item['ID'] );
 		return '<span id="duration'.$item['ID'].'">' . \Vimeotheque\Helper::human_time($meta['duration']) . '</span>';
 	}
-	
+
 	/**
 	 * Display video categories
+	 *
 	 * @param array $item
+	 *
+	 * @return string
 	 */
 	function column_category( $item ){
 		
@@ -174,10 +194,13 @@ class Video_List_Table extends \WP_List_Table{
 			return '&#8212;';
 		}
 	}
-	
+
 	/**
 	 * Date column
+	 *
 	 * @param array $item
+	 *
+	 * @return string
 	 */
 	function column_post_date( $item ){
 		
@@ -186,7 +209,20 @@ class Video_List_Table extends \WP_List_Table{
 		return $output;
 		
 	}
-	
+
+	/**
+	 * Message to be displayed when there are no items
+	 *
+	 * @since 2.0
+	 */
+	public function no_items() {
+	    if( 'posts' == Helper::get_var( 'view', 'GET' ) ) {
+		    _e( 'Sorry, this feature is available only in Vimeotheque PRO.', 'cvm-video' );
+	    }else{
+	        parent::no_items();
+        }
+	}
+
 	/**
 	 * (non-PHPdoc)
 	 * @see WP_List_Table::extra_tablenav()
@@ -260,7 +296,7 @@ class Video_List_Table extends \WP_List_Table{
 		if( 'posts' == $view ){
 			return 'post';
 		}
-		return cvm_get_post_type();
+		return Plugin::instance()->get_cpt()->get_post_type();
 	}
 	
 	/**
@@ -273,7 +309,7 @@ class Video_List_Table extends \WP_List_Table{
 		if( 'post' == $post_type ){
 			return 'category';
 		}
-		return cvm_get_category();
+		return Plugin::instance()->get_cpt()->get_post_tax();
 	}
 	
 	/**
