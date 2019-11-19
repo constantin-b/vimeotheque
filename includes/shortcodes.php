@@ -9,20 +9,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Shortcode to display a single video in post/page
  * Usage:
- * 
+ *
  * [cvm_video id="video_id_from_wp"]
- * 
+ *
  * Complete params:
- * 
+ *
  * - id : video ID from WordPress import (post ID) - required
  * - volume : video volume (number between 1 and 100) - optional
  * - width : width of video (number) - optional; works in conjunction with aspect_ratio
  * - aspect_ratio : aspect ratio of video ( 16x9, 4x3, 2.35x1 ) - optional; needed to calculate height
  * - autoplay : play video on page load ( 0 or 1 ) - optional
  * - controls : display controls on video ( 0 or 1 ) - optional
- * 
+ *
  * @param array $atts
  * @param string $content
+ *
+ * @return bool|string|void
  */
 function cvm_single_video( $atts = [], $content = '' ){
 	// bail out from feeds
@@ -112,8 +114,11 @@ if( !function_exists( 'cvm_embed_video_shortcode' ) ) {
 
 /**
  * Shortcode to display a playlist of videos
+ *
  * @param array $atts
  * @param string $content
+ *
+ * @return string|void
  */
 function cvm_video_playlist( $atts = [], $content = '' ){
 
@@ -268,13 +273,15 @@ function cvm_get_post_types_by_taxonomy( $tax ){
 
 /**
  * Outputs a shortcode/widget
- * 
- * @param array/string $videos - an array of video ids or latest for latest videos
+ *
+ * @param string $videos
  * @param int $results - number of latest videos to retrieve
  * @param string $theme - theme name; must be valid plugin theme
  * @param array $player_settings - settings for player
- * @param string $post_type - retrieve posts or retrieve videos (or both); values: post, vimeo-video, both
- * @param int $taxonomy - the taxonomy to retrieve videos from
+ * @param bool $post_type - retrieve posts or retrieve videos (or both); values: post, vimeo-video, both
+ * @param bool $taxonomy - the taxonomy to retrieve videos from
+ * @param array $theme_settings
+ *
  * @return string - HTML playlist
  */
 function cvm_output_playlist( $videos = 'latest', $results = 5, $theme = 'default', $player_settings = [], $post_type = false, $taxonomy = false, $theme_settings = [] ){
