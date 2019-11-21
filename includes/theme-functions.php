@@ -1,11 +1,17 @@
 <?php
 /**
  * Output video thumbnail
+ *
  * @param string $before
  * @param string $after
  * @param bool $echo
+ *
+ * @return bool|string
  */
 function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
+	/**
+	 * @var \Vimeotheque\Video_Post
+	 */
 	global $cvm_video;
 	if( !$cvm_video ){
 		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
@@ -23,7 +29,7 @@ function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo
 		$size = 'small';
 	}
 
-	$thumbnails = array_values( $cvm_video['video_data']['thumbnails'] );
+	$thumbnails = array_values( $cvm_video->thumbnails );
 
 	if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
 		$img_url = $thumbnails[ $sizes[ $size ] ];
@@ -41,10 +47,16 @@ function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo
 
 /**
  * Returns video image prepared to be preloaded
+ *
  * @param string $size - small (100px width), medium (200px width) or large (640px width)
  * @param bool $echo
+ *
+ * @return bool|string
  */
 function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo = true ){
+	/**
+	 * @var \Vimeotheque\Video_Post
+	 */
 	global $cvm_video;
 	if( !$cvm_video ){
 		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
@@ -64,7 +76,7 @@ function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo 
 
 	$blank = VIMEOTHEQUE_URL . '/assets/front-end/images/blank.png';
 
-	$thumbnails = array_values( $cvm_video['video_data']['thumbnails'] );
+	$thumbnails = array_values( $cvm_video->thumbnails );
 
 	if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
 		$output = sprintf('<img data-src="%s" alt="" src="%s" class="%s" />', $thumbnails[ $sizes[ $size ] ], $blank, $class);
@@ -78,23 +90,26 @@ function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo 
 
 /**
  * Output video title
+ *
  * @param string $before
  * @param string $after
  * @param bool $echo
+ *
+ * @return bool|string
  */
 function cvm_output_title( $include_duration = true,  $before = '', $after = '', $echo = true  ){
+	/**
+	 * @var \Vimeotheque\Video_Post
+	 */
 	global $cvm_video;
 	if( !$cvm_video ){
 		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
 		return false;
 	}
-	$output = '';
-	if( isset( $cvm_video['title'] ) ){
-		$output = $cvm_video['title'];
-	}
+	$output = $cvm_video->get_post()->post_title;
 
 	if( $include_duration ){
-		$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $cvm_video['video_data']['duration'] ) . ']</span>';
+		$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $cvm_video->_duration ) . ']</span>';
 	}
 
 	if( $echo ){
@@ -105,28 +120,32 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
 
 /**
  * Outputs video data
+ *
  * @param string $before
  * @param string $after
  * @param bool $echo
+ *
+ * @return bool|string
  */
 function cvm_output_video_data( $before = " ", $after="", $echo = true ){
+	/**
+	 * @var \Vimeotheque\Video_Post
+	 */
 	global $cvm_video;
 	if( !$cvm_video ){
 		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
 		return false;
 	}
-	$video_settings = Vimeotheque\get_video_settings( $cvm_video['ID'] );
 
-	$video_id 		= $cvm_video['video_data']['video_id'];
 	$data = [
-		'video_id' 	 => $video_id,
-		'autoplay' 	 => $video_settings['autoplay'],
-		'volume'  	 => $video_settings['volume'],
-		'size_ratio' => $video_settings['size_ratio'],
-		'aspect_ratio'=> $video_settings['aspect_ratio']
+		'video_id' 	 => $cvm_video->video_id,
+		'autoplay' 	 => $cvm_video->autoplay,
+		'volume'  	 => $cvm_video->volume,
+		'size_ratio' => $cvm_video->size_ratio,
+		'aspect_ratio'=> $cvm_video->aspect_ratio
 	];
 
-	$output = Vimeotheque\cvm_data_attributes($data);
+	$output = \Vimeotheque\cvm_data_attributes($data);
 	if( $echo ){
 		echo $before.$output.$after;
 	}
@@ -136,15 +155,22 @@ function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 
 /**
  * Returns the permalink to custom post type video
+ *
  * @param bool $echo
+ *
+ * @return bool|false|string
  */
 function cvm_video_post_permalink( $echo  = true ){
+	/**
+	 * @var \Vimeotheque\Video_Post
+	 */
 	global $cvm_video;
 	if( !$cvm_video ){
 		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
 		return false;
 	}
-	$pl = get_permalink( $cvm_video['ID'] );
+
+	$pl = get_permalink( $cvm_video->get_post()->ID );
 	if( $echo ){
 		echo $pl;
 	}
