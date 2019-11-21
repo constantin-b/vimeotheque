@@ -2,6 +2,8 @@
 
 namespace Vimeotheque\Options;
 
+use WP_Error;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -80,9 +82,10 @@ class Options{
 			return $this->options[ $name ];
 		}
 
-		trigger_error( sprintf( 'Options name "%s" is not set.', $name ), E_USER_ERROR );
-
-		return null;
+		return new WP_Error(
+			'vimeotheque-option-missing',
+			sprintf( 'Options name "%s" is not set.', $name )
+		);
 	}
 
 	/**

@@ -6,6 +6,7 @@ use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\WP_Customizer;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
+use Vimeotheque\Shortcode\Shortcode_Factory;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -149,6 +150,8 @@ class Plugin{
 		$this->load_importer();
 		// start the front-end
 		$this->load_front_end();
+
+		new Shortcode_Factory( $this );
 	}
 
 	/**
@@ -249,7 +252,7 @@ class Plugin{
 	}
 
 	/**
-	 * Runs on plugin activation and registeres rewrite rules
+	 * Runs on plugin activation and registers rewrite rules
 	 * for video custom post type
 	 *
 	 * @return void
@@ -389,7 +392,6 @@ class Plugin{
 	 */
 	private function load(){
 		include_once VIMEOTHEQUE_PATH . 'includes/functions.php';
-		include_once VIMEOTHEQUE_PATH . 'includes/shortcodes.php';
 		include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
 	}
 }

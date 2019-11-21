@@ -50,6 +50,106 @@ class Helper{
 	}
 
 	/**
+	 * @param $post
+	 *
+	 * @return array|bool
+	 */
+	static public function get_post_player_size( $post ){
+		$_post = self::get_video_post( $post );
+		if( $_post->is_video() ){
+			$options = $_post->get_embed_options();
+			$height = self::calculate_player_height( $options['aspect_ratio'], $options['width'] );
+			return [
+				'width' => $options['width'],
+				'height' => $height
+			];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Output video parameters as data-* attributes
+	 *
+	 * @param $attributes
+	 * @param bool $echo
+	 *
+	 * @return string
+	 */
+	public static function data_attributes( $attributes, $echo = false ){
+		$result = [];
+		// these variables are not needed by js and will be skipped
+		$exclude = [ 'video_position', 'aspect_override' ];
+		// loop attributes
+		foreach( $attributes as $key=>$value ){
+			// skip values from $exclude
+			if( in_array( $key, $exclude ) ){
+				continue;
+			}
+			$result[] = sprintf( 'data-%s="%s"', $key, $value );
+		}
+		if( $echo ){
+			echo implode(' ', $result);
+		}else{
+			return implode(' ', $result);
+		}
+	}
+
+	/**
+	 * Adds video player script to page
+	 *
+	 * @param bool $include_js
+	 */
+	public static function enqueue_player( $include_js = true ){
+		if( $include_js ) {
+			wp_enqueue_script(
+				'cvm-video-player',
+				VIMEOTHEQUE_URL . 'assets/front-end/js/video-player' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js',
+				[ 'jquery' ],
+				'1.0'
+			);
+		}
+
+		wp_enqueue_style(
+			'cvm-video-player',
+			VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css'
+		);
+	}
+
+	/**
+	 * Calculate player height from given aspect ratio and width
+	 *
+	 * @param string $aspect_ratio
+	 * @param int $width
+	 * @param bool $ratio - a given ratio; will override aspect ratio if set
+	 *
+	 * @return float|int
+	 */
+	public static function calculate_player_height( $aspect_ratio, $width, $ratio =  false ){
+		$width = absint($width);
+
+		if( is_numeric( $ratio ) && $ratio > 0 ){
+			return floor( $width / $ratio );
+		}
+
+		$height = 0;
+		switch( $aspect_ratio ){
+			case '4x3':
+				$height = floor( ($width * 3) / 4 );
+				break;
+			case '16x9':
+			default:
+				$height = floor( ($width * 9) / 16 );
+				break;
+			case '2.35x1':
+				$height = floor( $width / 2.35 );
+				break;
+		}
+
+		return $height;
+	}
+
+	/**
 	 * @return Options
 	 */
 	static public function get_embed_options(){
