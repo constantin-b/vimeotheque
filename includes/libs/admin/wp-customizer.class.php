@@ -76,7 +76,7 @@ class WP_Customizer{
 		$section = 'vimeo_video_post_embed_section';
 
 		$section_description = __( 'Controls how Vimeo videos are embedded into the website.', 'cvm_video' );
-		if( !$options['allow_override'] ){
+		if( isset( $options['allow_override'] ) && !$options['allow_override'] ){
 			$section_description .= '<p style="color:red;">' . __( 'In order to be able to control embedding globally you must first enable option "Override individual posts options" for plugin Vimeotheque PRO, page Settings.', 'cvm_video' ) . '</p>';
 		}
 
@@ -91,7 +91,7 @@ class WP_Customizer{
 		);
 
 		// stop here if override is not allowed
-		if( !$options['allow_override'] ){
+		if( isset( $options['allow_override'] ) && !$options['allow_override'] ){
 			$setting = $this->add_setting(
 				'allow_override',
 				[

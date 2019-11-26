@@ -4,6 +4,7 @@ namespace Vimeotheque;
 
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\WP_Customizer;
+use Vimeotheque\Blocks\Blocks_Factory;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
 use Vimeotheque\Shortcode\Shortcode_Factory;
@@ -152,6 +153,7 @@ class Plugin{
 		$this->load_front_end();
 
 		new Shortcode_Factory( $this );
+		new Blocks_Factory( $this );
 	}
 
 	/**

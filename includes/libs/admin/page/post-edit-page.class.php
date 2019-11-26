@@ -395,7 +395,7 @@ class Post_Edit_Page{
 	 */
     private function is_option_override(  ){
 	    $settings = \Vimeotheque\get_player_settings();
-	    return $settings['allow_override'];
+	    return isset( $settings['allow_override'] ) ? $settings['allow_override'] : false;
     }
 
 	/**

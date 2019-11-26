@@ -384,7 +384,7 @@ function CFVim_post_action(action, value, pid) {
 		var t = $('div[class^="cvm_single_video_player"]:not(.cvm_simple_embed)').Vimeo_VideoPlayer({'elem_data' : true});
 	}); 
 	
-	$(document).ready( function(){
+	$(document).on( 'ready', function(){
 		$('div.cvm_single_video_player.cvm_simple_embed').each( function(){
 			var self = this;
 			cvm_resize_player(this);

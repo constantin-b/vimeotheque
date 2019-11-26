@@ -81,7 +81,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		$this->vimeo_oauth = new Vimeo_Oauth(
 			$options['vimeo_consumer_key'],
 			$options['vimeo_secret_key'],
-			$options['oauth_secret'],
+			$options['oauth_token'],
 			// you must use this instead of menu_page_url() to avoid API error
 			admin_url( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=' . $this->get_menu_slug() )
 		);

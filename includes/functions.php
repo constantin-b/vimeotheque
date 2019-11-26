@@ -413,7 +413,10 @@ function get_video_settings( $post_id = false, $output = false ){
 	$settings = get_player_settings();
 
 	// get values from post
-	$option = $settings['allow_override'] ? $settings : get_post_meta( $post_id, Plugin::instance()->get_cpt()->get_post_settings()->get_meta_embed_settings(), true );
+	$option = isset( $settings['allow_override'] ) && $settings['allow_override'] ?
+		$settings :
+		get_post_meta( $post_id, Plugin::instance()->get_cpt()->get_post_settings()->get_meta_embed_settings(), true );
+
 	// in some cases, this might not be an array and will issue errors; let's prevent this
 	if( !is_array( $option ) ){
 		$option = [];
@@ -506,7 +509,13 @@ function cvm_update_video_settings( $post_id, $values = false, $_use_defaults = 
 		}
 	}	
 	
-	update_post_meta($post_id, Plugin::instance()->get_cpt()->get_post_settings()->get_meta_embed_settings(), $defaults);
+	update_post_meta(
+		$post_id,
+		Plugin::instance()->get_cpt()
+		                  ->get_post_settings()
+		                  ->get_meta_embed_settings(),
+		$defaults
+	);
 }
 
 /**

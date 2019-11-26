@@ -19,7 +19,7 @@ define( 'VIMEOTHEQUE_VERSION', '2.0' );
  * Minimal WP version.
  * Verifies against the current running WP version.
  */
-define( 'VMTQ_PRO_WP_COMPAT', '4.7' );
+define( 'VMTQ_PRO_WP_COMPAT', '5.0' );
 
 if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
 	add_action( 'admin_notices', 'vimeotheque_fail_php_version' );
