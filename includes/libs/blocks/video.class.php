@@ -1,12 +1,8 @@
 <?php
-
-
 namespace Vimeotheque\Blocks;
-
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use function Vimeotheque\cvm_enqueue_player;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -20,7 +16,6 @@ class Video extends Block_Abstract {
 	 * @var false|\WP_Block_Type
 	 */
 	private $block_type;
-
 	/**
 	 * Video constructor.
 	 *
@@ -30,15 +25,10 @@ class Video extends Block_Abstract {
 		parent::__construct( $plugin );
 
 		cvm_enqueue_player();
+
 		$handle = parent::register_script( 'vimeotheque-video-block', 'video' );
 
-		$this->block_type = register_block_type( 'vimeotheque/video', [
-			'attributes' => [
-				'cvm_css' => [
-					'type' => 'string',
-					'default' => 'cvm-video'
-				]
-			],
+		$this->block_type = register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => $handle,
 		] );
 
@@ -52,11 +42,25 @@ class Video extends Block_Abstract {
 						if( !$value ){
 							$value = parent::get_plugin()->get_player_options()->get_options();
 						}
-
 						return json_encode( $value );
 					}
 				],
+				'sanitize_callback' => function( $value ){
+					if( is_array( $value ) ){
+						return $value;
+					}
+
+					$options = json_decode( $value, true );
+					foreach( $options as $key => $value ){
+						if( is_bool( $value ) ){
+							$options[ $key ] = (int) $value;
+						}
+					}
+
+					return $options;
+ 				},
 				'type' => 'string',
+				'default' => false,
 				'auth_callback' => function() {
 					return current_user_can( 'edit_posts' );
 				}
@@ -70,6 +74,7 @@ class Video extends Block_Abstract {
 				'single' => true,
 				'show_in_rest' => true,
 				'type' => 'string',
+				'default' => false,
 				'auth_callback' => function() {
 					return current_user_can( 'edit_posts' );
 				}
@@ -82,8 +87,10 @@ class Video extends Block_Abstract {
 		add_action( 'admin_enqueue_scripts', [ $this, 'init' ] );
 	}
 
+	/**
+	 *
+	 */
 	public function init(){
-
 		global $post;
 		$_post = Helper::get_video_post( $post );
 		if( !$_post->is_video() ){
@@ -93,5 +100,4 @@ class Video extends Block_Abstract {
 			wp_deregister_style( 'vimeotheque-front-video-block' );
 		}
 	}
-
 }

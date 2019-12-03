@@ -70,11 +70,11 @@ class Options{
 	}
 
 	/**
-	 * Get an option
+	 * Get an option. Always check that the required option is not a WP_Error object
 	 *
 	 * @param string $name
 	 *
-	 * @return mixed|null
+	 * @return mixed|WP_Error
 	 */
 	public function get_option( $name ){
 		$options = $this->get_options();

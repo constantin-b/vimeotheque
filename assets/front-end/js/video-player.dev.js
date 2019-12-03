@@ -384,16 +384,21 @@ function CFVim_post_action(action, value, pid) {
 		var t = $('div[class^="cvm_single_video_player"]:not(.cvm_simple_embed)').Vimeo_VideoPlayer({'elem_data' : true});
 	}); 
 	
-	$(document).on( 'ready', function(){
-		$('div.cvm_single_video_player.cvm_simple_embed').each( function(){
+	$(document).ready( function(){
+		cvm_resize_players();
+	} );
+	
+	window.cvm_resize_players = function(){
+		var elems = $('div.cvm_single_video_player.cvm_simple_embed');
+		$(elems).each( function(){
 			var self = this;
 			cvm_resize_player(this);
 			$(window).resize(function(){
 				cvm_resize_player( self );
 			});
-		});		
-	});
-	
+		});	
+	}
+
 	window.cvm_resize_player = function( el ){
 		var d = $(el).data(),
 			width = $(el).width(),			
@@ -402,8 +407,9 @@ function CFVim_post_action(action, value, pid) {
 		
 		if( d.size_ratio > 0 ){
 			height = Math.floor( width / d.size_ratio );
-		}else{			
-			switch( d.aspect_ratio ){
+		}else{		
+			var aspect = $(el).attr( 'data-aspect_ratio' );	
+			switch( aspect ){
 				case '16x9':
 				default:
 					height = Math.floor( (width *  9) / 16 );

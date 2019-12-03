@@ -179,7 +179,8 @@ class Front_End{
 
 		// if js embedding not allowed, embed by placing the iframe dirctly into the post content
 		$embed_html = '<!--video container-->';
-		if( isset( $settings[ 'js_embed' ] ) && !$settings[ 'js_embed' ] ){
+		$js_embed = Plugin::$instance->get_player_options()->get_option( 'js_embed' );
+		if( !is_wp_error( $js_embed ) && !$js_embed ){
 			$params = [
 				'title' => $settings[ 'title' ],
 				'byline' => $settings[ 'byline' ],
@@ -196,7 +197,7 @@ class Front_End{
 			cvm_enqueue_player();
 		}
 
-		$video_container = '<div class="cvm_single_video_player ' . $extra_css . '" ' . $video_data_atts . ' style="width:' . $width . 'px; height:' . $height . 'px; max-width:100%;">' . $embed_html . '</div>';
+		$video_container = '<!--regular embed--><div class="cvm_single_video_player ' . $extra_css . '" ' . $video_data_atts . ' style="width:' . $width . 'px; height:' . $height . 'px; max-width:100%;">' . $embed_html . '</div>';
 
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
 		add_filter( 'the_content', [

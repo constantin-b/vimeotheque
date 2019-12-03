@@ -346,7 +346,7 @@ class Post_Edit_Page{
 
 		$_post = Helper::get_video_post( $post );
 		// video post specific meta boxes
-		if( $_post->is_video() ){
+		if( !$this->is_gutenberg_page() && $_post->is_video() ){
 			add_meta_box(
 			    'cvm-video-settings',
                 __( 'Video settings', 'cvm_video' ),
@@ -365,16 +365,18 @@ class Post_Edit_Page{
                 'high'
             );
 		}
-		
-		// Shortcode meta box
-		add_meta_box(
-		    'cvm-add-video',
-            __( 'Vimeotheque shortcode', 'cvm_video' ),
-            [ $this, 'post_shortcode_meta_box' ],
-            null,
-            'side',
-            'low'
-        );
+
+		if( !$this->is_gutenberg_page() ){
+            // Shortcode meta box
+            add_meta_box(
+                'cvm-add-video',
+                __( 'Vimeotheque shortcode', 'cvm_video' ),
+                [ $this, 'post_shortcode_meta_box' ],
+                null,
+                'side',
+                'low'
+            );
+		}
 	}
 
 	/**
@@ -867,7 +869,9 @@ class Post_Edit_Page{
 		// check nonce
 		check_admin_referer( 'cvm-save-video-settings', 'cvm-video-nonce' );
 		// update post
-		\Vimeotheque\cvm_update_video_settings( $post_id );
+		if( !$this->is_gutenberg_page() ){
+		    \Vimeotheque\cvm_update_video_settings( $post_id );
+		}
 	}
 
 	/**

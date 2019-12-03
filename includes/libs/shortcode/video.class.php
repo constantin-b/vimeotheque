@@ -75,7 +75,7 @@ class Video extends Shortcode_Abstract implements Shortcode_Interface {
 
 		$js_embed = Plugin::instance()->get_player_options()->get_option( 'js_embed' );
 
-		if( !$js_embed ){
+		if( !is_wp_error( $js_embed ) && !$js_embed ){
 			$class[] = 'cvm_simple_embed';
 			$embed_html = sprintf(
 				'<iframe src="%s" width="100%%" height="100%%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',

@@ -229,10 +229,10 @@ class Plugin{
 			'title'	=> 1, 	// show video title
 			'byline' => 1, 	// show player controls. Values: 0 or 1
 			'portrait' => 1, 	// show author image
-			'color'		=> '', 	// no color set by default; will use Vimeo's settings
 			'loop' => 0,
 			// Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, we’ll revert to standard playback requiring viewers to initiate playback.
 			'autoplay' => 0, 	// 0 - on load, player won't play video; 1 - on load player plays video automatically
+			'color'		=> '', 	// no color set by default; will use Vimeo's settings
 			// extra settings
 			'aspect_ratio' => '16x9',
 			'width'	=> 640,

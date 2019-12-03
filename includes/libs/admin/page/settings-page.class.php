@@ -268,7 +268,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	private function set_unauth_token(){
 		$options = $this->options_obj()->get_options();
 		if( !empty( $options['vimeo_consumer_key'] ) && !empty( $options['vimeo_secret_key'] ) ){
-			if( '' == $options['oauth_token'] || '' == $options['oauth_secret'] ){
+			if( empty( $options['oauth_token'] ) || ( isset( $options['oauth_secret'] ) && empty( $options['oauth_secret'] ) ) ){
 				// account token
 				$token = $this->vimeo_oauth->get_unauth_token();
 				if( !is_wp_error( $token ) ){

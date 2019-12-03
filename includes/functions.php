@@ -456,11 +456,12 @@ function get_video_settings( $post_id = false, $output = false ){
 
 /**
  * Update video playback options
- * 
+ *
  * @param int $post_id
- * @param string $values
- * @param string $_use_defaults
- * @return void
+ * @param bool $values
+ * @param bool $_use_defaults
+ *
+ * @return bool
  */
 function cvm_update_video_settings( $post_id, $values = false, $_use_defaults = false ){
 	
@@ -486,7 +487,7 @@ function cvm_update_video_settings( $post_id, $values = false, $_use_defaults = 
 			if( isset( $source[ $key ] ) ){
 				$defaults[ $key ] = (int)$source[ $key ];
 			}else{
-				// if flaged to use the default values, just skip the setting and allow the default
+				// if flagged to use the default values, just skip the setting and allow the default
 				if( $_use_defaults ){
 					continue;
 				}

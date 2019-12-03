@@ -28,7 +28,7 @@ class Blocks_Factory {
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
 
-		add_action( 'init', [ $this, 'register_blocks' ], -99999999999 );
+		add_action( 'init', [ $this, 'register_blocks' ] );
 
 	}
 
