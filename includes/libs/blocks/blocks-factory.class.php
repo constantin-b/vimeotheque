@@ -19,6 +19,10 @@ class Blocks_Factory {
 	 * @var Plugin
 	 */
 	private $plugin;
+	/**
+	 * @var Block_Abstract[] $blocks
+	 */
+	private $blocks = [];
 
 	/**
 	 * Blocks_Factory constructor.
@@ -33,9 +37,30 @@ class Blocks_Factory {
 	}
 
 	/**
-	 *
+	 * Register plugin blocks
 	 */
 	public function register_blocks(){
-		new Video( $this->plugin );
+		$this->blocks['video'] = new Video( $this->plugin );
+	}
+
+	/**
+	 * @return Block_Abstract[]
+	 */
+	public function get_blocks(){
+		return $this->blocks;
+	}
+
+	/**
+	 * @param string $key - block key
+	 * @see Blocks_Factory::register_blocks() for details
+	 *
+	 * @return Block_Abstract
+	 */
+	public function get_block( $key ){
+		if( array_key_exists( $key, $this->blocks ) ){
+			return $this->blocks[ $key ];
+		}else{
+			trigger_error( sprintf('Block %s doesn not exist.', $key ), E_USER_NOTICE );
+		}
 	}
 }
