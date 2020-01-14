@@ -64,6 +64,10 @@ class Plugin{
 	 * @var Front_End
 	 */
 	private $front_end;
+	/**
+	 * @var Blocks_Factory
+	 */
+	private $blocks_factory;
 
 	/**
 	 * Clone.
@@ -157,7 +161,7 @@ class Plugin{
 		$this->load_front_end();
 
 		new Shortcode_Factory( $this );
-		new Blocks_Factory( $this );
+		$this->blocks_factory = new Blocks_Factory( $this );
 	}
 
 	/**
@@ -397,6 +401,18 @@ class Plugin{
 	 */
 	public function get_front_end(){
 		return $this->front_end;
+	}
+
+	/**
+	 *
+	 *
+	 * @param string $key - string key for the block
+	 *
+	 * @return \WP_Block_Type
+	 * @see Blocks_Factory::register_blocks() for all keys
+	 */
+	public function get_block( $key ) {
+		return $this->blocks_factory->get_block( $key )->get_wp_block_type();
 	}
 
 	/**
