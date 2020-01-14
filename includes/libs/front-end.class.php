@@ -1,6 +1,8 @@
 <?php
 namespace Vimeotheque;
 
+use Vimeotheque\Admin\Helper_Admin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -14,6 +16,8 @@ class Front_End{
 	 * @var Plugin
 	 */
 	private $plugin;
+
+	private $embed_filter_priority = 999;
 
 	/**
 	 * Front_End constructor.
@@ -37,14 +41,15 @@ class Front_End{
 		 * be customized in order to protect the content.
 		 * @var integer
 		 */
-		$priority = intval( apply_filters( 'cvm_plugin_embed_content_filter_priority', 999 ) );
+		$this->embed_filter_priority = intval( apply_filters( 'cvm_plugin_embed_content_filter_priority', $this->embed_filter_priority ) );
 
 		// filter content to embed video
+		//*
 		add_filter( 'the_content', [
 			$this,
 			'embed_video'
-		], $priority, 1 );
-
+		], $this->embed_filter_priority, 1 );
+		//*/
 		// add player script
 		add_action( 'wp_print_scripts', [
 			$this,
@@ -111,8 +116,6 @@ class Front_End{
 			return $content;
 		}
 
-		$_post = Helper::get_video_post( $post );
-
 		/**
 		 * Filter that can prevent video embedding by the plugin.
 		 * Useful if user wants to implement
@@ -125,85 +128,16 @@ class Front_End{
 			return $content;
 		}
 
-		if( ! $_post->video_id ){
-			return $content;
-		}
-
-		/**
-		 * Allow embed settings filtering that can change the embedding options
-		 * when the post is displayed.
-		 *
-		 * @var array
-		 *
-		 * @param array $embed_settings - the post video embed settings
-		 * @param object $post - the current post being displayed
-		 * @param array $video - the video details as retrieved from Vimeo
-		 */
-		$settings = apply_filters( 'cvm_video_embed_settings', $_post->get_embed_options(), $post, $_post->get_video_data() );
-
-		$settings[ 'video_id' ] = $_post->video_id;
-
-		/**
-		 * Filter that can be used to modify the width of the embed
-		 *
-		 * @var int
-		 */
-		$width = apply_filters( 'cvm-embed-width', $settings[ 'width' ], $_post->get_video_data(), 'automatic_embed' );
-		/**
-		 * @deprecated
-		 * Filter that can be used to modify the width of the embed
-		 *
-		 * @var int
-		 */
-		$width = apply_filters( 'cvm_embed_width', $width, $_post->get_video_data(), 'automatic_embed' );
-		$height = cvm_player_height( $settings[ 'aspect_ratio' ], $width, $settings[ 'size_ratio' ] );
-
-		/**
-		 *
-		 * @deprecated - Use cvm_video_embed_css_class
-		 */
-		$class = apply_filters( 'cvm_video_post_css_class', [], $post );
-
-		/**
-		 * Filter on video container CSS class to add extra CSS classes
-		 * Name: cvm_video_post_css_class
-		 * Params: - an empty array
-		 * - the post object that will embed the video
-		 *
-		 * @var string
-		 */
-		$class = apply_filters( 'cvm_video_embed_css_class', $class, $post );
-		$extra_css = implode( ' ', ( array ) $class );
-
-		$video_data_atts = cvm_data_attributes( $settings );
-
-		// if js embedding not allowed, embed by placing the iframe dirctly into the post content
-		$embed_html = '<!--video container-->';
-		$js_embed = Plugin::$instance->get_player_options()->get_option( 'js_embed' );
-		if( !is_wp_error( $js_embed ) && !$js_embed ){
-			$params = [
-				'title' => $settings[ 'title' ],
-				'byline' => $settings[ 'byline' ],
-				'portrait' => $settings[ 'portrait' ],
-				'loop' => $settings[ 'loop' ],
-				'color' => $settings[ 'color' ],
-				//'fullscreen' => $settings[ 'fullscreen' ]
-			];
-			$embed_url = 'https://player.vimeo.com/video/' . $_post->video_id . '?' . http_build_query( $params, '', '&' );
-			$extra_css .= ' cvm_simple_embed';
-			$embed_html = '<iframe src="' . $embed_url . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-		}else{
-			// add player script
-			cvm_enqueue_player();
-		}
-
-		$video_container = '<!--regular embed--><div class="cvm_single_video_player ' . $extra_css . '" ' . $video_data_atts . ' style="width:' . $width . 'px; height:' . $height . 'px; max-width:100%;">' . $embed_html . '</div>';
+		$video_container = get_video_embed_html( $post, false );
 
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
 		add_filter( 'the_content', [
 			$GLOBALS[ 'wp_embed' ],
 			'autoembed'
 		], 8 );
+
+		$_post = Helper::get_video_post( $post );
+		$settings = $_post->get_embed_options();
 
 		if( 'below-content' == $settings[ 'video_position' ] ){
 			return $content . $video_container;
@@ -265,5 +199,12 @@ class Front_End{
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function get_embed_filter_priority(){
+		return $this->embed_filter_priority;
 	}
 }
