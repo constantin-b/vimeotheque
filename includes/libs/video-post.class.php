@@ -399,19 +399,23 @@ class Video_Post{
 
 	/**
 	 * @param $key
-	 *
 	 * @param bool $single
+	 * @param array $default - a default value that should be returned in case the meta isn't found
 	 *
 	 * @return mixed
 	 */
-	private function get_meta( $key, $single = true ){
+	private function get_meta( $key, $single = true, $default = [] ){
 		if( $this->_post ){
-			return get_post_meta(
+			$meta = get_post_meta(
 				$this->_post->ID,
 				$key,
 				$single
 			);
+
+			return $meta ? $meta : $default;
 		}
+
+		return $default;
 	}
 
 	/**
