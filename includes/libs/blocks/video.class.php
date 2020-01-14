@@ -3,7 +3,6 @@ namespace Vimeotheque\Blocks;
 use Vimeotheque\Front_End;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
-use function Vimeotheque\cvm_enqueue_player;
 use function Vimeotheque\get_video_embed_html;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,11 +26,9 @@ class Video extends Block_Abstract {
 	public function __construct( Plugin $plugin ) {
 		parent::__construct( $plugin );
 
-		cvm_enqueue_player();
-
 		$handle = parent::register_script( 'vimeotheque-video-block', 'video' );
 
-		$this->block_type = register_block_type( 'vimeotheque/video-position', [
+		$block_type = register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => $handle,
 			'render_callback' => function(){
 				/**
@@ -48,6 +45,7 @@ class Video extends Block_Abstract {
 				return get_video_embed_html( $post, false );
 			}
 		] );
+		parent::register_block_type( $block_type );
 
 		register_post_meta(
 			'',
@@ -102,6 +100,7 @@ class Video extends Block_Abstract {
 		parent::register_style( 'vimeotheque-front-video-block', 'video', 'frontend' );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'init' ] );
+		add_action( 'the_post', [ $this, 'force_video_block' ], -99999, 2 );
 	}
 
 	/**
@@ -111,10 +110,31 @@ class Video extends Block_Abstract {
 		global $post;
 		$_post = Helper::get_video_post( $post );
 		if( !$_post->is_video() ){
-			unregister_block_type( $this->block_type );
+			unregister_block_type( parent::get_wp_block_type() );
 			wp_deregister_script( 'vimeotheque-video-block' );
 			wp_deregister_style( 'vimeotheque-video-block' );
 			wp_deregister_style( 'vimeotheque-front-video-block' );
+		}
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 * @param \WP_Query $query
+	 */
+	public function force_video_block( \WP_Post $post, \WP_Query $query ){
+		if( !is_admin() ){
+			return;
+		}
+
+		$_post = Helper::get_video_post( $post );
+		if( $_post->is_video() && !has_block( parent::get_wp_block_type()->name, $post ) ) {
+			$settings = $_post->get_embed_options();
+
+			if( 'below-content' == $settings[ 'video_position' ] ){
+				$post->post_content .= "\n" . '<!-- wp:' . parent::get_wp_block_type()->name . ' /-->';
+			}else{
+				$post->post_content = '<!-- wp:' . parent::get_wp_block_type()->name . ' /-->' . "\n" . $post->post_content ;
+			}
 		}
 	}
 }
