@@ -31,6 +31,11 @@ class Block_Abstract {
 	private $styles = [];
 
 	/**
+	 * @var \WP_Block_Type
+	 */
+	private $wp_block_type;
+
+	/**
 	 * Block_Abstract constructor.
 	 *
 	 * @param Plugin $plugin
@@ -142,6 +147,17 @@ class Block_Abstract {
 			return false;
 		}
 		return true;
+	}
+
+	protected function register_block_type( \WP_Block_Type $block ){
+		$this->wp_block_type = $block;
+	}
+
+	/**
+	 * @return \WP_Block_Type
+	 */
+	public function get_wp_block_type(){
+		return $this->wp_block_type;
 	}
 
 	/**
