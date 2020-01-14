@@ -1,8 +1,11 @@
 <?php
 namespace Vimeotheque\Blocks;
+use Vimeotheque\Front_End;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use function Vimeotheque\cvm_enqueue_player;
+use function Vimeotheque\get_video_embed_html;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -30,6 +33,20 @@ class Video extends Block_Abstract {
 
 		$this->block_type = register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => $handle,
+			'render_callback' => function(){
+				/**
+				 * Remove default action that embeds the video in front-end
+				 * @see Front_End::embed_video()
+				 */
+				remove_action(
+					'the_content',
+					[ Plugin::$instance->get_front_end(), 'embed_video' ],
+					Plugin::instance()->get_front_end()->get_embed_filter_priority()
+				);
+
+				global $post;
+				return get_video_embed_html( $post, false );
+			}
 		] );
 
 		register_post_meta(
