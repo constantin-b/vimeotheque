@@ -49,7 +49,7 @@ class Post_Type{
 	 */
 	public function __construct( Plugin $plugin ){
 		// custom post type registration and messages
-		add_action('init', [ $this, 'register_post' ], 10);
+		add_action( 'init', [ $this, 'register_post' ], 1 );
 		// custom post type messages
 		add_filter('post_updated_messages', [ $this, 'updated_messages' ] );
 

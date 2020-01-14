@@ -4,6 +4,7 @@ namespace Vimeotheque;
 
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\WP_Customizer;
+use Vimeotheque\Blocks\Blocks_Factory;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
 use Vimeotheque\Shortcode\Shortcode_Factory;
@@ -59,6 +60,14 @@ class Plugin{
 	 * @var Posts_Import
 	 */
 	private $posts_import;
+	/**
+	 * @var Front_End
+	 */
+	private $front_end;
+	/**
+	 * @var Blocks_Factory
+	 */
+	private $blocks_factory;
 
 	/**
 	 * Clone.
@@ -152,6 +161,7 @@ class Plugin{
 		$this->load_front_end();
 
 		new Shortcode_Factory( $this );
+		$this->blocks_factory = new Blocks_Factory( $this );
 	}
 
 	/**
@@ -183,7 +193,7 @@ class Plugin{
 		// start the REST API compatibility
 		new Rest_Api( $this->get_cpt() );
 		// start the front-end functionality
-		new Front_End( $this );
+		$this->front_end = new Front_End( $this );
 	}
 
 	/**
@@ -227,10 +237,10 @@ class Plugin{
 			'title'	=> 1, 	// show video title
 			'byline' => 1, 	// show player controls. Values: 0 or 1
 			'portrait' => 1, 	// show author image
-			'color'		=> '', 	// no color set by default; will use Vimeo's settings
 			'loop' => 0,
 			// Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, we’ll revert to standard playback requiring viewers to initiate playback.
 			'autoplay' => 0, 	// 0 - on load, player won't play video; 1 - on load player plays video automatically
+			'color'		=> '', 	// no color set by default; will use Vimeo's settings
 			// extra settings
 			'aspect_ratio' => '16x9',
 			'width'	=> 640,
@@ -384,6 +394,25 @@ class Plugin{
 	 */
 	public function get_admin(){
 		return $this->admin;
+	}
+
+	/**
+	 * @return Front_End
+	 */
+	public function get_front_end(){
+		return $this->front_end;
+	}
+
+	/**
+	 *
+	 *
+	 * @param string $key - string key for the block
+	 *
+	 * @return \WP_Block_Type
+	 * @see Blocks_Factory::register_blocks() for all keys
+	 */
+	public function get_block( $key ) {
+		return $this->blocks_factory->get_block( $key )->get_wp_block_type();
 	}
 
 	/**

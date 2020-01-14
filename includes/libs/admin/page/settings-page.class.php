@@ -81,7 +81,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		$this->vimeo_oauth = new Vimeo_Oauth(
 			$options['vimeo_consumer_key'],
 			$options['vimeo_secret_key'],
-			$options['oauth_secret'],
+			$options['oauth_token'],
 			// you must use this instead of menu_page_url() to avoid API error
 			admin_url( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=' . $this->get_menu_slug() )
 		);
@@ -268,7 +268,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	private function set_unauth_token(){
 		$options = $this->options_obj()->get_options();
 		if( !empty( $options['vimeo_consumer_key'] ) && !empty( $options['vimeo_secret_key'] ) ){
-			if( '' == $options['oauth_token'] || '' == $options['oauth_secret'] ){
+			if( empty( $options['oauth_token'] ) || ( isset( $options['oauth_secret'] ) && empty( $options['oauth_secret'] ) ) ){
 				// account token
 				$token = $this->vimeo_oauth->get_unauth_token();
 				if( !is_wp_error( $token ) ){

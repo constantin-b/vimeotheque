@@ -298,7 +298,7 @@ class Video_Post{
 		}
 
 		$options_obj = Helper::get_embed_options();
-		if( $options_obj->get_option( 'allow_override' ) ){
+		if( !is_wp_error( $options_obj->get_option( 'allow_override' ) ) ){
 			$options = $options_obj->get_options();
 		}else{
 			$options = $this->get_meta( $this->cpt()->get_post_settings()->get_meta_embed_settings() );
@@ -399,19 +399,23 @@ class Video_Post{
 
 	/**
 	 * @param $key
-	 *
 	 * @param bool $single
+	 * @param array $default - a default value that should be returned in case the meta isn't found
 	 *
 	 * @return mixed
 	 */
-	private function get_meta( $key, $single = true ){
+	private function get_meta( $key, $single = true, $default = [] ){
 		if( $this->_post ){
-			return get_post_meta(
+			$meta = get_post_meta(
 				$this->_post->ID,
 				$key,
 				$single
 			);
+
+			return $meta ? $meta : $default;
 		}
+
+		return $default;
 	}
 
 	/**

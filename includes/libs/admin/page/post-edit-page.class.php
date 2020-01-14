@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Helper_Admin;
 use Vimeotheque\Helper;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Plugin;use Vimeotheque\Post_Type;
 use WP_Post;
 
 /**
@@ -346,7 +346,7 @@ class Post_Edit_Page{
 
 		$_post = Helper::get_video_post( $post );
 		// video post specific meta boxes
-		if( $_post->is_video() ){
+		if( !$this->is_gutenberg_page() && $_post->is_video() ){
 			add_meta_box(
 			    'cvm-video-settings',
                 __( 'Video settings', 'cvm_video' ),
@@ -365,16 +365,18 @@ class Post_Edit_Page{
                 'high'
             );
 		}
-		
-		// Shortcode meta box
-		add_meta_box(
-		    'cvm-add-video',
-            __( 'Vimeotheque shortcode', 'cvm_video' ),
-            [ $this, 'post_shortcode_meta_box' ],
-            null,
-            'side',
-            'low'
-        );
+
+		if( !$this->is_gutenberg_page() ){
+            // Shortcode meta box
+            add_meta_box(
+                'cvm-add-video',
+                __( 'Vimeotheque shortcode', 'cvm_video' ),
+                [ $this, 'post_shortcode_meta_box' ],
+                null,
+                'side',
+                'low'
+            );
+		}
 	}
 
 	/**
@@ -395,7 +397,7 @@ class Post_Edit_Page{
 	 */
     private function is_option_override(  ){
 	    $settings = \Vimeotheque\get_player_settings();
-	    return $settings['allow_override'];
+	    return isset( $settings['allow_override'] ) ? $settings['allow_override'] : false;
     }
 
 	/**
@@ -482,7 +484,14 @@ class Post_Edit_Page{
 		<tr>
 			<th><label for="cvm_video_position"><?php _e('Display video','cvm_video');?>:</label></th>
 			<td>
-            <?php if( $this->is_option_override() ):
+			<?php
+				if( has_block( Plugin::instance()->get_block( 'video' )->name, $post ) ):
+					$this->option_override(
+						'video_position',
+						__( 'Video position option is disabled because we found a Block Editor video block in your post which will be used to position the video into the post content.', 'cvm_video' )
+					);
+			?>
+            <?php elseif( $this->is_option_override() ):
                     $video_positions = [
 	                    'above-content' => __( 'Above post content', 'cvm_video' ),
 	                    'below-content' => __( 'Below post content', 'cvm_video' )
@@ -867,7 +876,9 @@ class Post_Edit_Page{
 		// check nonce
 		check_admin_referer( 'cvm-save-video-settings', 'cvm-video-nonce' );
 		// update post
-		\Vimeotheque\cvm_update_video_settings( $post_id );
+		if( !$this->is_gutenberg_page() ){
+		    \Vimeotheque\cvm_update_video_settings( $post_id );
+		}
 	}
 
 	/**
