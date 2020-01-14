@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Helper_Admin;
 use Vimeotheque\Helper;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Plugin;use Vimeotheque\Post_Type;
 use WP_Post;
 
 /**
@@ -484,7 +484,14 @@ class Post_Edit_Page{
 		<tr>
 			<th><label for="cvm_video_position"><?php _e('Display video','cvm_video');?>:</label></th>
 			<td>
-            <?php if( $this->is_option_override() ):
+			<?php
+				if( has_block( Plugin::instance()->get_block( 'video' )->name, $post ) ):
+					$this->option_override(
+						'video_position',
+						__( 'Video position option is disabled because we found a Block Editor video block in your post which will be used to position the video into the post content.', 'cvm_video' )
+					);
+			?>
+            <?php elseif( $this->is_option_override() ):
                     $video_positions = [
 	                    'above-content' => __( 'Above post content', 'cvm_video' ),
 	                    'below-content' => __( 'Below post content', 'cvm_video' )
