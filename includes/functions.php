@@ -157,21 +157,45 @@ function get_video_embed_html( $post, $echo = true ){
 		return;
 	}
 
+	/**
+	 * Allow embed settings filtering that can change the embedding options
+	 * when the post is displayed.
+	 *
+	 * @var array
+	 *
+	 * @param array $embed_settings - the post video embed settings
+	 * @param object $post - the current post being displayed
+	 * @param array $video - the video details as retrieved from Vimeo
+	 */
+	$settings = apply_filters(
+		'cvm_video_embed_settings',
+		$_post->get_embed_options( true ),
+		get_post( $post ),
+		$_post->get_video_data()
+	);
 
-
-	$settings = $_post->get_embed_options( true );
 	$settings['video_id'] = $_post->video_id;
 
 	/**
 	 * @deprecated - Use cvm_embed_width
 	 */
-	$width 	= apply_filters( 'cvm-embed-width', $settings['width'], $_post->get_video_data(), 'manual_embed' );
+	$width 	= apply_filters(
+		'cvm-embed-width',
+		$settings['width'],
+		$_post->get_video_data(),
+		'manual_embed'
+	);
 
 	/**
 	 * Filter that can be used to modify the width of the embed
 	 * @var int
 	 */
-	$width 	= apply_filters( 'cvm_embed_width', $width, $_post->get_video_data(), 'manual_embed' );
+	$width 	= apply_filters(
+		'cvm_embed_width',
+		$width,
+		$_post->get_video_data(),
+		'manual_embed'
+	);
 
 	$height = cvm_player_height( $settings['aspect_ratio'] , $width, $settings['size_ratio'] );
 
@@ -189,14 +213,44 @@ function get_video_embed_html( $post, $echo = true ){
 	 *
 	 * @var string
 	 */
-	$class = apply_filters( 'cvm_video_embed_css_class', $class, $post );
+	$class = apply_filters(
+		'cvm_video_embed_css_class',
+		$class,
+		$post
+	);
 
 	$extra_css = implode( ' ', (array) $class );
 
-	$video_container = '<div class="cvm_single_video_player ' . $extra_css . '" ' . cvm_data_attributes( $settings ) . ' style="width:' . $width . 'px; height:' . $height.'px; max-width:100%;"><!--video container--></div>';
+	$video_data_atts = cvm_data_attributes( $settings );
 
-	// add player script
-	cvm_enqueue_player();
+	// if js embedding not allowed, embed by placing the iframe dirctly into the post content
+	$embed_html = '<!-- video container -->';
+	$js_embed = Plugin::instance()->get_player_options()->get_option( 'js_embed' );
+	if( !is_wp_error( $js_embed ) && !$js_embed ){
+		$params = [
+			'title' => $settings[ 'title' ],
+			'byline' => $settings[ 'byline' ],
+			'portrait' => $settings[ 'portrait' ],
+			'loop' => $settings[ 'loop' ],
+			'color' => $settings[ 'color' ],
+			//'fullscreen' => $settings[ 'fullscreen' ]
+		];
+		$embed_url = 'https://player.vimeo.com/video/' . $_post->video_id . '?' . http_build_query( $params, '', '&' );
+		$extra_css .= ' cvm_simple_embed';
+		$embed_html = '<iframe src="' . $embed_url . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+	}else{
+		// add player script
+		cvm_enqueue_player();
+	}
+
+	$video_container = sprintf(
+		'<!-- regular embed --><div class="cvm_single_video_player %s" %s style="width:%spx; height:%spx; max-width:100%%;">%s</div>',
+		$extra_css,
+		$video_data_atts,
+		$width,
+		$height,
+		$embed_html
+	);
 
 	if( $echo ) {
 		echo $video_container;
