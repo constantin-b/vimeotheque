@@ -60,6 +60,10 @@ class Plugin{
 	 * @var Posts_Import
 	 */
 	private $posts_import;
+	/**
+	 * @var Front_End
+	 */
+	private $front_end;
 
 	/**
 	 * Clone.
@@ -185,7 +189,7 @@ class Plugin{
 		// start the REST API compatibility
 		new Rest_Api( $this->get_cpt() );
 		// start the front-end functionality
-		new Front_End( $this );
+		$this->front_end = new Front_End( $this );
 	}
 
 	/**
@@ -386,6 +390,13 @@ class Plugin{
 	 */
 	public function get_admin(){
 		return $this->admin;
+	}
+
+	/**
+	 * @return Front_End
+	 */
+	public function get_front_end(){
+		return $this->front_end;
 	}
 
 	/**
