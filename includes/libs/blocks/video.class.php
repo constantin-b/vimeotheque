@@ -15,10 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Video extends Block_Abstract {
 	/**
-	 * @var false|\WP_Block_Type
-	 */
-	private $block_type;
-	/**
 	 * Video constructor.
 	 *
 	 * @param Plugin $plugin

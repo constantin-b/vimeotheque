@@ -55,8 +55,6 @@ registerBlockType( 'vimeotheque/video-position', {
 
 		let opt = JSON.parse( embed_options );
 		const sep = ' : ';
-		//console.log( opt );
-		//console.log( props );
 
 		const renderCustomColorPicker = (value) => {
 			<ColorPicker
@@ -86,7 +84,6 @@ registerBlockType( 'vimeotheque/video-position', {
 				key="1"
 				style = { embedStyle }
 				onLoad = { ( event ) => {
-					console.log('loaded')
 					cvm_resize_player( event.currentTarget )
 				} }
 			>
