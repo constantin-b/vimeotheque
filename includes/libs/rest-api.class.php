@@ -58,7 +58,7 @@ class Rest_Api{
 		$meta = Helper::get_video_post( $post_id )->get_video_data();
 		$response = NULL;
 
-		if( is_array( $meta ) ){
+		if( $meta ){
 			$response = [
 				'video_id'		=> $meta['video_id'],
 				'uploader'		=> $meta['uploader'],
