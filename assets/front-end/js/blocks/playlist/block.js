@@ -35,6 +35,21 @@ registerBlockType( 'vimeotheque/video-playlist', {
             },
             closeModal = () => { setOpen( false ) };
 
+
+        const [posts, setPosts] = useState( [] ),
+            selectPost = ( post ) => {
+                setPosts( [...posts, post ] )
+            },
+            unselectPost = ( post ) => {
+                for( var i = posts.length-1; i >= 0; i--){
+                    if( posts[i].id == post.id ){
+                        posts.splice( i, 1 )
+                        setPosts( [...posts] )
+                        break
+                    }
+                }
+            }
+
         return [
             <Placeholder
                 icon = "playlist-video"
@@ -45,19 +60,35 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     onClick={ openModal }>
                     { __(' Choose posts', 'cvm_video' ) }
                 </Button>
-                { isOpen && (
-                    <Modal
-                        title={ __( 'Choose posts', 'cvm_video' ) }
-                        onRequestClose = { closeModal }
-                        className = 'vimeotheque-posts-list-modal'
-                    >
-                        <VideoPostsList
-                            onClick = { ( postId ) => {
-                                alert( 'clicked ' + postId )
-                            } }
-                        />
-                    </Modal>
-                ) }
+                {
+                    isOpen && (
+                        <Modal
+                            title={ __( 'Choose posts', 'cvm_video' ) }
+                            onRequestClose = { closeModal }
+                            className = 'vimeotheque-posts-list-modal'
+                        >
+                            <div className="wrapper">
+                                <VideoPostsList
+                                    onSelect = { selectPost }
+                                    onRemove = { unselectPost }
+                                    filteredPosts = { posts }
+                                />
+                                <nav className="sidebar">
+                                    <Button
+                                        isPrimary
+                                        onClick={
+                                            ()=>{
+
+                                            }
+                                        }
+                                    >
+                                        {__('Insert playlist', 'cvm_video')}
+                                    </Button>
+                                </nav>
+                            </div>
+                        </Modal>
+                    )
+                }
             </Placeholder>
         ]
     },
