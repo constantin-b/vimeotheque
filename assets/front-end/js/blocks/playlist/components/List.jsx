@@ -1,10 +1,7 @@
+import ListItem from "./ListItem";
+
 const   { apiFetch } = wp,
-    { __ } = wp.i18n,
-    { dateI18n } = wp.date,
-    {
-        Button,
-        ButtonGroup
-    } = wp.components;
+    { __ } = wp.i18n;
 
 class List extends React.Component{
     constructor(props) {
@@ -43,11 +40,11 @@ class List extends React.Component{
     }
 
     componentDidMount(){
-        this.makeRequest()
+       this.makeRequest()
     }
 
     componentDidUpdate( prevProps ){
-        if( this.props.postType != prevProps.postType ){
+        if( this.props.postType != prevProps.postType && 'selected' != prevProps.postType ){
             this.setState({
                 posts:[],
                 loading:false,
@@ -57,79 +54,72 @@ class List extends React.Component{
             return;
         }
 
-        if( ( this.props.page != prevProps.page || this.props.postType != prevProps.postType ) && !this.state.error ) {
+        if( this.props.page != prevProps.page && !this.state.error ) {
             this.makeRequest()
         }
     }
 
-    render(){
-        let messages
-        if( this.state.loading ){
-            messages =  <div className="vimeotheque-loading vimeotheque-post-list-container">
-                            { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
-                        </div>
+    hasPost( post ){
+        for( let _post of this.props.selected ){
+            if( _post.id == post.id ){
+                return true
+            }
+        }
+    }
 
-        }else if( this.state.posts.length == 0 ){
-            messages =  <div className="vimeotheque-error vimeotheque-post-list-container">
-                            {
-                                this.state.error ?
-                                    this.state.error.message :
-                                    __( 'We couldn\'t find any video posts, sorry.', 'cvm_video' )
-                            }
-                        </div>
+    selectText( post ){
+        return this.hasPost( post ) ?
+            __( 'Remove video', 'cvm_video' ) :
+            __( 'Select video', 'cvm_video' )
+    }
+
+    render(){
+        if( !this.state.loading && this.state.posts.length == 0 ){
+            return(
+                <div className="vimeotheque-error">
+                    {
+                        this.state.error ?
+                            this.state.error.message :
+                            __( 'We couldn\'t find any video posts, sorry.', 'cvm_video' )
+                    }
+                </div>
+            )
         }
 
-        console.log( this.state.posts );
-
         return(
-            <div>
+            <div className="vimeotheque-entries-container">
                 <div className="vimeotheque-entries row">
                     {
                         this.state.posts.map(
-                            post => (
-                                <div
-                                    key={ post.id }
-                                    className='col-xs-6  col-sm-4 col-md-3 col-lg-2 grid-element'
-                                >
-                                    <div
-                                        className='cvm-video'
-                                    >
-                                        <div className='cvm-thumbnail'>
-                                            {
-                                                post.vimeo_video != null &&
-                                                    <div>
-                                                        <img src={post.vimeo_video.thumbnails[2]} />
-                                                        <span className='duration'>{post.vimeo_video._duration}</span>
-                                                    </div>
+                            (post, index) => (
+                                <ListItem
+                                    className={
+                                        this.hasPost(post) &&
+                                            'vimeotheque-selected-post'
+                                    }
+                                    post={post}
+                                    onSelect={
+                                        post => {
+                                            if( this.hasPost( post ) ){
+                                                this.props.onRemove( post )
+                                            }else{
+                                                this.props.onSelect( post )
                                             }
-                                        </div>
-                                        <div className='details'>
-                                            <h4>{ post.title.rendered }</h4>
-
-                                            <div className="meta">
-                                                <span className="publish-date">{ dateI18n( 'M d Y', post.date ) }</span>
-                                            </div>
-
-                                            <div className='actions'>
-                                                <Button
-                                                    isTertiary
-                                                    onClick={
-                                                        () => {
-                                                            this.props.onClick( post.id )
-                                                        }
-                                                    }
-                                                >
-                                                    { __( 'Add to list', 'cvm_video' ) }
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        }
+                                    }
+                                    selectText={ this.selectText( post ) }
+                                    key={post.id}
+                                />
                             )
                         )
                     }
                 </div>
-                {messages}
+                {
+                    this.state.loading &&
+                        <div className="vimeotheque-loading">
+                        { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
+                        </div>
+                }
             </div>
         )
     }
@@ -139,7 +129,9 @@ List.defaultProps = {
     postType: 'vimeo-video',
     page: 1,
     perPage: 10,
-    onClick: () => {},
+    selected: [],
+    onSelect: ( post ) => {},
+    onRemove: ( post ) => {},
     onRequestFinish: () => {},
     onRequestError: () => {}
 }
