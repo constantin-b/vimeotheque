@@ -20,15 +20,33 @@ class Playlist extends Block_Abstract {
 	public function __construct( Plugin $plugin ) {
 		parent::__construct( $plugin );
 
-		$handle = parent::register_script( 'vimeotheque-playlist-block', 'playlist' );
+		$handle = parent::register_script(
+			'vimeotheque-playlist-block',
+			'playlist'
+		);
 
-		$block_type = register_block_type( 'vimeotheque/video-playlist', [
-			'editor_script' => $handle
-		] );
+		$block_type = register_block_type(
+			'vimeotheque/video-playlist',
+			[
+				'editor_script' => $handle,
+				'editor_style' => [
+					'vimeotheque-playlist-block',
+					'bootstrap-grid2'
+				]
+			]
+		);
 		parent::register_block_type( $block_type );
 
+		$r = wp_localize_script(
+			$handle,
+			'vmtq',
+			[
+				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg'
+			]
+		);
+
 		parent::register_style( 'vimeotheque-playlist-block', 'playlist' );
-		wp_enqueue_style(
+		wp_register_style(
 			'bootstrap-grid2',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
 			['vimeotheque-playlist-block']
