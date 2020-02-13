@@ -9,7 +9,9 @@ class List extends React.Component{
         this.state = {
             posts: [],
             loading: false,
-            error: false
+            error: false,
+            totalEntries: 0,
+            totalPages: 0
         }
     }
 
@@ -22,15 +24,27 @@ class List extends React.Component{
                 '?page=' + self.props.page +
                 '&per_page=' + self.props.perPage +
                 '&orderby=date&order=desc' +
-                '&vimeothequeMetaKey=true'
+                '&vimeothequeMetaKey=true',
+            parse: false
+        } ).then( ( response ) => {
+            self.setState({
+                totalEntries: response.headers.get( 'X-WP-Total' ),
+                totalPages: response.headers.get( 'X-WP-TotalPages' )
+            })
+
+            return response.json()
         } ).then( posts => {
             let _posts = [...self.state.posts, ...posts]
             self.setState( {
                 posts: _posts,
                 loading: false
             } )
-            self.props.onRequestFinish( _posts.length )
-        } ).catch( ( error )=>{
+            self.props.onRequestFinish({
+                postsCount:  _posts.length,
+                totalEntries: self.state.totalEntries,
+                totalPages: self.state.totalPages
+            })
+        }).catch( ( error )=>{
             self.setState( {
                 error: error,
                 loading: false
@@ -48,13 +62,15 @@ class List extends React.Component{
             this.setState({
                 posts:[],
                 loading:false,
-                error: false
+                error: false,
+                totalEntries: 0,
+                totalPages: 0
             })
             this.makeRequest();
             return;
         }
 
-        if( this.props.page != prevProps.page && !this.state.error ) {
+        if( this.props.page != prevProps.page && !this.state.error && this.props.page <= this.state.totalPages ) {
             this.makeRequest()
         }
     }
