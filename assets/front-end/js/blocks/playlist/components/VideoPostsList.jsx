@@ -22,7 +22,8 @@ class VideoPostsList extends React.Component {
             page: 1,
             loading: false,
             error: false,
-            postsCount:0
+            postsCount:0,
+            totalPages: 0
         }
         this.handlePostTypeChange = this.handlePostTypeChange.bind(this)
         this.handleLoadMore = this.handleLoadMore.bind(this)
@@ -53,11 +54,12 @@ class VideoPostsList extends React.Component {
         )
     }
 
-    requestFinish( postsCount ){
+    requestFinish( result ){
         this.setState({
             loading:false,
             error:false,
-            postsCount: postsCount
+            postsCount: result.postsCount,
+            totalPages: result.totalPages
         })
 
         let scrollHeight = jQuery('.vimeotheque-posts-list-modal')[0].scrollHeight,
@@ -83,7 +85,7 @@ class VideoPostsList extends React.Component {
     }
 
     handleLoadMore(){
-        if( !this.isLoading() && !this.isError() && this.state.postsCount ) {
+        if( !this.isLoading() && !this.isError() && this.state.postsCount && this.state.totalPages > this.state.page ) {
             this.setState({
                 page: this.state.page + 1,
                 loading: true
