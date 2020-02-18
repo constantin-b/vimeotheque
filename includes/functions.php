@@ -328,18 +328,22 @@ function is_video( $post = false ){
 
 /**
  * Adds video player script to page
+ *
+ * @param bool $js_dependency
+ * @param bool $css_dependency
  */
-function cvm_enqueue_player(){
+function cvm_enqueue_player( $js_dependency = false, $css_dependency = false ){
 	wp_enqueue_script(
 		'cvm-video-player',
 		VIMEOTHEQUE_URL . 'assets/front-end/js/video-player' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js',
-		['jquery'],
+		[ 'jquery', $js_dependency ],
 		'1.0'
 	);
 	
 	wp_enqueue_style(
 		'cvm-video-player',
-		VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css'
+		VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css',
+		[ $css_dependency ]
 	);
 }
 
