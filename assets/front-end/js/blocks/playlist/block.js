@@ -1,4 +1,5 @@
 import VideoPostsList from './components/VideoPostsList';
+import VimeothequeServerSideRender from './components/VimeothequeServerSideRender';
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -24,14 +25,10 @@ const 	{ registerBlockType } = wp.blocks,
     { useState } = wp.element;
 
 registerBlockType( 'vimeotheque/video-playlist', {
-    title: __( 'Vimeotheque playlist', 'cvm_video' ),
-    description: __( 'Video playlist block', 'cvm_video' ),
+    title: __( 'Video playlist', 'cvm_video' ),
+    description: __( 'Display a playlist of Vimeo videos', 'cvm_video' ),
     icon: 'playlist-video',
     category: 'widgets',
-
-    attributes: {
-
-    },
 
     example: {
 
@@ -45,101 +42,154 @@ registerBlockType( 'vimeotheque/video-playlist', {
     },
 
     edit: ( props ) => {
+        const
+            {
+                attributes,
+                setAttributes,
+                className
+            } = props,
 
-        const [isOpen, setOpen] = useState( false ),
+            // modal window state
+            [isOpen, setOpen] = useState( false ),
+            // used to load the initial videos returned from DB
+            [isLoaded, setLoaded] = useState( false ),
             openModal = (e) => {
                 e.stopPropagation()
                 setOpen( true )
             },
-            closeModal = () => { setOpen( false ) };
+            closeModal = () => {
+                setOpen( false )
+            },
 
-
-        const [posts, setPosts] = useState( [] ),
+            // posts selection
             selectPost = ( post ) => {
-                setPosts( [...posts, post ] )
+                let vids = [...attributes.videos, post ]
+                setAttributes({
+                    videos: vids
+                })
+                setPostsAttr( vids )
             },
             unselectPost = ( post ) => {
-                for( var i = posts.length-1; i >= 0; i--){
-                    if( posts[i].id == post.id ){
-                        posts.splice( i, 1 )
-                        setPosts( [...posts] )
+                for( var i = attributes.videos.length-1; i >= 0; i--){
+                    if( attributes.videos[i].id == post.id ){
+                        attributes.videos.splice( i, 1 )
+                        setAttributes({
+                            videos: [...attributes.videos]
+                        })
+                        setPostsAttr( attributes.videos )
                         break
                     }
                 }
+            },
+
+            // update processed video IDs
+            setPostsAttr = ( vids )=>{
+                let _posts = []
+                for( var i = vids.length-1; i >= 0; i--){
+                    _posts.push( vids[i].id )
+                }
+                setAttributes({
+                    post_ids: _posts
+                })
             }
 
-        let opt = {
-            width: 900,
-            aspect_ratio: '16x9',
-            title: true,
-            byline: true,
-            portrait: true,
-            loop: false,
-            volume: 70
+        if( !isLoaded ){
+            setPostsAttr( attributes.videos )
+            setLoaded( true );
         }
 
         return [
             <>
                 {
-                    posts.length > 0 &&
-                    <BlockControls>
-                        <div
-                            className='components-toolbar'
-                        >
-                            <Tooltip
-                                text={__('Edit playlist', 'cvm_video')}
-                                position="top"
+                    attributes.videos.length > 0 &&
+                    <>
+                        <BlockControls>
+                            <div
+                                className='components-toolbar'
                             >
-                                <Button
-                                    onClick={ openModal }
+                                <Tooltip
+                                    text={__('Edit playlist', 'cvm_video')}
+                                    position="top"
                                 >
-                                    <Icon
-                                        icon="edit"
-                                    />
-                                </Button>
-                            </Tooltip>
-                        </div>
-                    </BlockControls>
+                                    <Button
+                                        onClick={ openModal }
+                                    >
+                                        <Icon
+                                            icon="edit"
+                                        />
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </BlockControls>
+                        <VimeothequeServerSideRender
+                            block="vimeotheque/video-playlist"
+                            attributes={
+                                {
+                                    theme: attributes.theme,
+                                    layout: attributes.layout,
+                                    aspect_ratio: attributes.aspect_ratio,
+                                    width: attributes.width,
+                                    volume: attributes.volume,
+                                    title: attributes.title,
+                                    byline: attributes.byline,
+                                    portrait: attributes.portrait,
+                                    playlist_loop: attributes.playlist_loop,
+                                    post_ids: attributes.post_ids
+                                }
+                            }
+                            onUpdate = { ( state )=>{
+                                setTimeout( ()=>{
+                                    window.vimeotheque.themeDefault()
+                                    window.vimeotheque.themeCarousel()
+                                }, 5000 )
+                            } }
+                        />
+                    </>
                 }
-                <Placeholder
-                    icon = "playlist-video"
-                    label = { __( 'Video playlist', 'cvm_video' ) }
-                >
-                    <Button
-                        isPrimary
-                        onClick={ openModal }>
-                        { __(' Choose posts', 'cvm_video' ) }
-                    </Button>
-                    {
-                        isOpen && (
-                            <Modal
-                                title={ __( 'Choose posts', 'cvm_video' ) }
-                                onRequestClose = { closeModal }
-                                className = 'vimeotheque-posts-list-modal'
-                            >
-                                <div className="wrapper">
-                                    <VideoPostsList
-                                        onSelect = { selectPost }
-                                        onRemove = { unselectPost }
-                                        filteredPosts = { posts }
-                                    />
-                                    <nav className="sidebar">
-                                        <Button
-                                            isPrimary
-                                            onClick={
-                                                ()=>{
 
-                                                }
+                { attributes.videos.length == 0 &&
+                    <Placeholder
+                        icon="playlist-video"
+                        label={__('Video playlist', 'cvm_video')}
+                    >
+                        <Button
+                            isPrimary
+                            onClick={openModal}>
+                            {__(' Choose posts', 'cvm_video')}
+                        </Button>
+                    </Placeholder>
+                }
+
+                {
+                    isOpen && (
+                        <Modal
+                            title={ __( 'Choose posts', 'cvm_video' ) }
+                            onRequestClose = { closeModal }
+                            className = 'vimeotheque-posts-list-modal'
+                        >
+                            <div className="wrapper">
+                                <VideoPostsList
+                                    onSelect = { selectPost }
+                                    onRemove = { unselectPost }
+                                    filteredPosts = { attributes.videos }
+                                />
+                                <nav className="sidebar">
+                                    <Button
+                                        isPrimary
+                                        onClick={
+                                            ()=>{
+
                                             }
-                                        >
-                                            {__('Insert playlist', 'cvm_video')}
-                                        </Button>
-                                    </nav>
-                                </div>
-                            </Modal>
-                        )
-                    }
-                </Placeholder>
+                                        }
+                                    >
+                                        {__('Insert playlist', 'cvm_video')}
+                                    </Button>
+                                </nav>
+                            </div>
+                        </Modal>
+                    )
+                }
+
             </>,
 
             <InspectorControls>
@@ -149,7 +199,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     <PanelRow>
                         <SelectControl
                             label = { __( 'Theme', 'cvm_video' ) }
-                            value = 'default'
+                            value = {attributes.theme}
                             options = {[
                                 { label: 'Default', value: 'default' },
                                 { label: 'Carousel', value: 'carousel' },
@@ -157,7 +207,9 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             ]}
                             onChange = {
                                 ( value ) => {
-
+                                    setAttributes({
+                                        theme: value
+                                    })
                                 }
                             }
                         />
@@ -167,11 +219,13 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             label = { __( 'Width', 'cvm_video' ) }
                             type = "number"
                             step = "5"
-                            value = { opt.width }
+                            value = { attributes.width }
                             min = "200"
                             onChange = {
                                 ( value ) => {
-
+                                    setAttributes({
+                                        width: value
+                                    })
                                 }
                             }
                         />
@@ -179,7 +233,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     <PanelRow>
                         <SelectControl
                             label = { __( 'Aspect ratio', 'cvm_video' ) }
-                            value = { opt.aspect_ratio }
+                            value = { attributes.aspect_ratio }
                             options = {[
                                 { label: '4x3', value: '4x3' },
                                 { label: '16x9', value: '16x9' },
@@ -187,7 +241,9 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             ]}
                             onChange = {
                                 ( value ) => {
-
+                                    setAttributes({
+                                        aspect_ratio: value
+                                    })
                                 }
                             }
                         />
@@ -201,36 +257,52 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     <PanelRow>
                         <ToggleControl
                             label = { __( 'Show title', 'cvm_video' ) }
-                            checked = {opt.title}
+                            checked = {attributes.title}
                             onChange = {
-                                () => {  }
+                                () => {
+                                    setAttributes({
+                                        title: !attributes.title
+                                    })
+                                }
                             }
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
                             label = { __( 'Show byline', 'cvm_video' ) }
-                            checked = {opt.byline}
+                            checked = {attributes.byline}
                             onChange = {
-                                () => {  }
+                                () => {
+                                    setAttributes({
+                                        byline: !attributes.byline
+                                    })
+                                }
                             }
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
                             label = { __( 'Show portrait', 'cvm_video' ) }
-                            checked = {opt.portrait}
+                            checked = {attributes.portrait}
                             onChange = {
-                                () => {  }
+                                () => {
+                                    setAttributes({
+                                        portrait: !attributes.portrait
+                                    })
+                                }
                             }
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Loop playlis', 'cvm_video' ) }
-                            checked = {opt.loop}
+                            label = { __( 'Loop playlist', 'cvm_video' ) }
+                            checked = {attributes.playlist_loop}
                             onChange =  {
-                                () => { onFormToggleChange( 'loop' ) }
+                                () => {
+                                    setAttributes({
+                                        playlist_loop: !attributes.playlist_loop
+                                    })
+                                }
                             }
                         />
                     </PanelRow>
@@ -240,14 +312,14 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             help = { __( 'Will work only for JS embeds', 'cvm_video' ) }
                             type = "number"
                             step = "1"
-                            value = { opt.volume }
+                            value = { attributes.volume }
                             min = "0"
                             max = "100"
                             onChange = {
                                 ( value ) => {
-                                    opt.volume = ( value >= 0 && value <= 100 ) ? value : opt.volume;
+                                    let vol = ( value >= 0 && value <= 100 ) ? value : attributes.volume;
                                     setAttributes({
-                                        embed_options: JSON.stringify( opt )
+                                        volume: vol
                                     })
                                 }
                             }
