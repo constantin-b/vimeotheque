@@ -1,4 +1,7 @@
 <?php
+
+use Vimeotheque\Video_Post;
+
 /**
  * Output video thumbnail
  *
@@ -10,7 +13,7 @@
  */
 function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
 	/**
-	 * @var \Vimeotheque\Video_Post
+	 * @var Video_Post
 	 */
 	global $cvm_video;
 	if( !$cvm_video ){
@@ -55,7 +58,7 @@ function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo
  */
 function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo = true ){
 	/**
-	 * @var \Vimeotheque\Video_Post
+	 * @var Video_Post
 	 */
 	global $cvm_video;
 	if( !$cvm_video ){
@@ -99,7 +102,7 @@ function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo 
  */
 function cvm_output_title( $include_duration = true,  $before = '', $after = '', $echo = true  ){
 	/**
-	 * @var \Vimeotheque\Video_Post
+	 * @var Video_Post
 	 */
 	global $cvm_video;
 	if( !$cvm_video ){
@@ -129,7 +132,7 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
  */
 function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 	/**
-	 * @var \Vimeotheque\Video_Post
+	 * @var Video_Post
 	 */
 	global $cvm_video;
 	if( !$cvm_video ){
@@ -137,12 +140,14 @@ function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 		return false;
 	}
 
+	$options = $cvm_video->get_embed_options();
+
 	$data = [
 		'video_id' 	 => $cvm_video->video_id,
-		'autoplay' 	 => $cvm_video->autoplay,
-		'volume'  	 => $cvm_video->volume,
-		'size_ratio' => $cvm_video->size_ratio,
-		'aspect_ratio'=> $cvm_video->aspect_ratio
+		'autoplay' 	 => $options['autoplay'],
+		'volume'  	 => $options['volume'],
+		'size_ratio' => $cvm_video->size['ratio'],
+		'aspect_ratio'=> $options['aspect_ratio']
 	];
 
 	$output = \Vimeotheque\cvm_data_attributes($data);
@@ -162,7 +167,7 @@ function cvm_output_video_data( $before = " ", $after="", $echo = true ){
  */
 function cvm_video_post_permalink( $echo  = true ){
 	/**
-	 * @var \Vimeotheque\Video_Post
+	 * @var Video_Post
 	 */
 	global $cvm_video;
 	if( !$cvm_video ){
