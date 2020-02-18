@@ -2,6 +2,7 @@
 namespace Vimeotheque\Blocks;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
+use function Vimeotheque\cvm_enqueue_player;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -28,11 +29,68 @@ class Playlist extends Block_Abstract {
 		$block_type = register_block_type(
 			'vimeotheque/video-playlist',
 			[
+				'attributes' => [
+					'theme' => [
+						'type' => 'string',
+						'default' => 'default'
+					],
+					'layout' => [
+						'type' => 'string',
+						'default' => ''
+					],
+					'aspect_ratio' => [
+						'type' => 'string',
+						'default' => '16x9'
+					],
+					'width' => [
+						'type' => 'string',
+						'default' => 900
+					],
+					'volume' => [
+						'type' => 'string',
+						'default' => 70
+					],
+					'title' => [
+						'type' => 'boolean',
+						'default' => true
+					],
+					'byline' => [
+						'type' => 'boolean',
+						'default' => true
+					],
+					'portrait' => [
+						'type' => 'boolean',
+						'default' => true
+					],
+					'playlist_loop' => [
+						'type' => 'boolean',
+						'default' => false
+					],
+					'videos' => [
+						'type' => 'array',
+						'default' => [],
+						'items' => [
+							'type' => 'number'
+						]
+					],
+					'post_ids' => [
+						'type' => 'array',
+						'default' => [],
+						'items' => [
+							'type' => 'number'
+						]
+					]
+				],
 				'editor_script' => $handle,
 				'editor_style' => [
 					'vimeotheque-playlist-block',
 					'bootstrap-grid2'
-				]
+				],
+				'render_callback' => function( $attr ){
+					$attr['videos'] = implode( ',', $attr['post_ids'] );
+					$playlist = new \Vimeotheque\Shortcode\Playlist( $attr, '' );
+					return $playlist->get_output();
+				}
 			]
 		);
 		parent::register_block_type( $block_type );
@@ -45,12 +103,32 @@ class Playlist extends Block_Abstract {
 			]
 		);
 
-		parent::register_style( 'vimeotheque-playlist-block', 'playlist' );
+		$css_handle = parent::register_style( 'vimeotheque-playlist-block', 'playlist' );
 		wp_register_style(
 			'bootstrap-grid2',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
 			['vimeotheque-playlist-block']
 		);
+
+		cvm_enqueue_player( $handle, $css_handle );
+
+		$themes = ['carousel', 'wall', 'default'];
+		$path = VIMEOTHEQUE_URL . 'themes/';
+		foreach( $themes as $theme ){
+			wp_enqueue_script(
+				'vimeotheque-' . $theme . '-script',
+				$path . $theme . '/assets/script.js',
+				[ $handle ]
+			);
+			wp_enqueue_style(
+				'vimeotheque-' . $theme . '-style',
+				$path . $theme . '/assets/stylesheet.css',
+				[ $css_handle ]
+			);
+		}
+
+		wp_enqueue_script( 'jquery-masonry' );
+
 		//parent::register_style( 'vimeotheque-front-video-block', 'video', 'frontend' );
 
 		//add_action( 'admin_enqueue_scripts', [ $this, 'init' ] );
@@ -100,6 +178,12 @@ class Playlist extends Block_Abstract {
 					'key'     => Plugin::instance()->get_cpt()->get_post_settings()->get_meta_video_data(),
 					'compare' => 'EXISTS'
 				]
+			];
+		}
+
+		if( $request->get_param( 'vimeothequeAllPostType' ) ){
+			$args['post_type'] = [
+				'post', Plugin::instance()->get_cpt()->get_post_type()
 			];
 		}
 
