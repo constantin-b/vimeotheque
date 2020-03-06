@@ -12,6 +12,10 @@
     	background-color:inherit;
     	padding:16px;
     }
+        .sidebar .vimeotheque-search-btn .components-spinner{
+        	float:none;
+        	margin:0px 7px -3px;
+        }
 
 
 .vimeotheque-post-list-container{
@@ -26,11 +30,15 @@
     	clear:both;
     	margin:2em 0;
     	text-align:center;
-    	font-size:1.5em;
+    	font-size:1.6em;
     	width: 100%;
     	font-style:italic;
     	color:#999999;
     }
+        .vimeotheque-loading .components-spinner{
+        	float:none;        	
+        }
+
 
     .vimeotheque-error{
         margin: 2em 0;

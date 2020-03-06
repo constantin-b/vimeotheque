@@ -17,6 +17,7 @@ class PostTypeButton extends React.Component{
         return (
             <Button
                 onClick={this.handleChange}
+                disabled={this.props.disabled}
             >
                 { this.props.text }
             </Button>

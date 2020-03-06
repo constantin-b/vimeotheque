@@ -1,5 +1,6 @@
-import VideoPostsList from './components/VideoPostsList';
-import VimeothequeServerSideRender from './components/VimeothequeServerSideRender';
+import VideoPostsList from './components/VideoPostsList'
+import VimeothequeServerSideRender from './components/VimeothequeServerSideRender'
+import SearchForm from "./components/SearchForm";
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -22,7 +23,8 @@ const 	{ registerBlockType } = wp.blocks,
         InspectorControls,
         BlockControls
     } = wp.blockEditor,
-    { useState } = wp.element;
+    { useState } = wp.element,
+    { select } = wp.data;
 
 registerBlockType( 'vimeotheque/video-playlist', {
     title: __( 'Video playlist', 'cvm_video' ),
@@ -53,6 +55,10 @@ registerBlockType( 'vimeotheque/video-playlist', {
             [isOpen, setOpen] = useState( false ),
             // used to load the initial videos returned from DB
             [isLoaded, setLoaded] = useState( false ),
+            [search, setSearch] = useState( { query: '', category: false } ),
+            [showSearch, setShowSearch] = useState( true ),
+            [taxonomy, setTaxonomy] = useState( 'vimeo-videos' ),
+            [isRequestLoading, setRequestLoading] = useState( false ),
             openModal = (e) => {
                 e.stopPropagation()
                 setOpen( true )
@@ -172,18 +178,45 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     onSelect = { selectPost }
                                     onRemove = { unselectPost }
                                     filteredPosts = { attributes.videos }
+                                    search={ search }
+                                    taxonomy={taxonomy}
+                                    onPostTypeChange = {
+                                        ( postType ) => {
+                                            setShowSearch( 'selected' != postType )
+                                            let tax = 'vimeo-video' == postType ? 'vimeo-videos' : 'categories'
+                                            setTaxonomy( tax )
+                                        }
+                                    }
+                                    onRequestBegin = {
+                                        () => {
+                                            setRequestLoading(true)
+                                        }
+                                    }
+                                    onRequestFinish = {
+                                        () => {
+                                            setRequestLoading(false)
+                                        }
+                                    }
+                                    onRequestError = {
+                                        () => {
+                                            setRequestLoading(false)
+                                        }
+                                    }
                                 />
                                 <nav className="sidebar">
-                                    <Button
-                                        isPrimary
-                                        onClick={
-                                            ()=>{
-
-                                            }
-                                        }
-                                    >
-                                        {__('Insert playlist', 'cvm_video')}
-                                    </Button>
+                                    {
+                                        showSearch &&
+                                            <SearchForm
+                                                blocked = { isRequestLoading }
+                                                taxonomy={ taxonomy }
+                                                values={search}
+                                                onSubmit = {
+                                                    ( value ) => {
+                                                        setSearch( value )
+                                                    }
+                                                }
+                                            />
+                                    }
                                 </nav>
                             </div>
                         </Modal>

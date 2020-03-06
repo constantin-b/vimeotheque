@@ -23,6 +23,7 @@ class ListItem extends React.Component{
     }
 
     render(){
+
         return (
             <div
                 className={`col-xs-6  col-sm-4 col-md-3 col-lg-2 grid-element ${this.props.className}`}
@@ -42,7 +43,7 @@ class ListItem extends React.Component{
                         }
                     </div>
                     <div className='details'>
-                        <h4>{ this.post.title.rendered }</h4>
+                        <h4>{ jQuery('<textarea />').html( this.post.title.rendered ).text() }</h4>
 
                         <div className="meta">
                             <span className="publish-date">{ dateI18n( 'M d Y', this.post.date ) }</span>

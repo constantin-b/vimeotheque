@@ -1,6 +1,9 @@
 import ListItem from "./ListItem";
 
 const   { apiFetch } = wp,
+    {
+        Spinner
+    } = wp.components,
     { __ } = wp.i18n;
 
 class List extends React.Component{
@@ -16,40 +19,46 @@ class List extends React.Component{
     }
 
     makeRequest(){
-        let self = this
-        self.setState( {loading: true} )
+        this.setState( {loading: true} )
+
+        this.props.onRequestBegin();
+
+        let taxQuery = this.props.search.category ? `&${this.props.taxonomy}=${this.props.search.category}` : '';
+
         apiFetch( {
             path: '/wp/v2/' +
-                self.props.postType +
-                '?page=' + self.props.page +
-                '&per_page=' + self.props.perPage +
+                this.props.postType +
+                '?page=' + this.props.page +
+                '&search=' + this.props.search.query +
+                '&per_page=' + this.props.perPage +
                 '&orderby=date&order=desc' +
+                taxQuery +
                 '&vimeothequeMetaKey=true',
             parse: false
-        } ).then( ( response ) => {
-            self.setState({
+        } ).then( response => {
+            this.setState({
                 totalEntries: response.headers.get( 'X-WP-Total' ),
                 totalPages: response.headers.get( 'X-WP-TotalPages' )
             })
 
             return response.json()
         } ).then( posts => {
-            let _posts = [...self.state.posts, ...posts]
-            self.setState( {
+            let _posts = [...this.state.posts, ...posts]
+            this.setState( {
                 posts: _posts,
                 loading: false
             } )
-            self.props.onRequestFinish({
+            this.props.onRequestFinish({
                 postsCount:  _posts.length,
-                totalEntries: self.state.totalEntries,
-                totalPages: self.state.totalPages
+                totalEntries: this.state.totalEntries,
+                totalPages: this.state.totalPages
             })
-        }).catch( ( error )=>{
-            self.setState( {
+        }).catch( error => {
+            this.setState( {
                 error: error,
                 loading: false
             } )
-            self.props.onRequestError( error )
+            this.props.onRequestError( error )
         } );
     }
 
@@ -58,7 +67,10 @@ class List extends React.Component{
     }
 
     componentDidUpdate( prevProps ){
-        if( this.props.postType != prevProps.postType && 'selected' != prevProps.postType ){
+        if(
+            ( this.props.postType != prevProps.postType && 'selected' != prevProps.postType ) ||
+            this.props.search != prevProps.search
+        ){
             this.setState({
                 posts:[],
                 loading:false,
@@ -133,7 +145,8 @@ class List extends React.Component{
                 {
                     this.state.loading &&
                         <div className="vimeotheque-loading">
-                        { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
+                            <Spinner />
+                            { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
                         </div>
                 }
             </div>
@@ -143,11 +156,14 @@ class List extends React.Component{
 
 List.defaultProps = {
     postType: 'vimeo-video',
+    search: { query: '', category: false },
+    taxonomy: false,
     page: 1,
     perPage: 10,
     selected: [],
     onSelect: ( post ) => {},
     onRemove: ( post ) => {},
+    onRequestBegin: () => {},
     onRequestFinish: () => {},
     onRequestError: () => {}
 }
