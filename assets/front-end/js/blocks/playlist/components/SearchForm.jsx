@@ -18,7 +18,7 @@ class SearchForm extends React.Component{
             // the search category selected by user
             category: props.values.category,
             // array of selected category options
-            selected: [],
+            selected: this.props.selectedCategories,
             // current selected taxonomy option is checked to be used in playlist?
             optionSelected: false,
             // was search form submitted
@@ -50,9 +50,9 @@ class SearchForm extends React.Component{
     }
 
     getCategories(){
-        let items = {}
+        let items = []
         this.state.selected.forEach( item => {
-            items[ item ] = this.categories[ item ]
+            items.push( this.categories[ item ] )
         } )
 
         return items
@@ -160,6 +160,7 @@ SearchForm.defaultProps = {
     // when true will disable fields
     blocked: false,
     taxonomy: 'vimeo-videos',
+    selectedCategories: [],
     values: { query: '', category: false },
     // triggers when user submits search form
     onSubmit: () => {},
