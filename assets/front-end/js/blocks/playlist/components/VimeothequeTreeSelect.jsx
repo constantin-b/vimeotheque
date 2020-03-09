@@ -39,6 +39,9 @@ class VimeothequeTreeSelect extends React.Component{
                 loading:false,
                 tree: this.buildTree( categories )
             })
+
+            this.props.onLoad( categories )
+
         } ).catch( error => {
 
         } )
@@ -138,6 +141,8 @@ VimeothequeTreeSelect.defaultProps = {
     label: false,
     noOptionLabel: false,
     onChange: ()=>{},
+    // triggers after ajax request finished and sends categories
+    onLoad: ()=>{},
     selectedId: false,
 }
 

@@ -1,6 +1,7 @@
 import VideoPostsList from './components/VideoPostsList'
 import VimeothequeServerSideRender from './components/VimeothequeServerSideRender'
 import SearchForm from "./components/SearchForm";
+import { size, keys } from 'lodash'
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -211,8 +212,14 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                                 taxonomy={ taxonomy }
                                                 values={search}
                                                 onSubmit = {
-                                                    ( value ) => {
+                                                    value => {
                                                         setSearch( value )
+                                                    }
+                                                }
+                                                onCategorySelect = {
+                                                    // array of selected category ID's
+                                                    categories => {
+                                                        console.log(size(categories))
                                                     }
                                                 }
                                             />
