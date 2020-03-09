@@ -79,6 +79,20 @@ class Playlist extends Block_Abstract {
 						'items' => [
 							'type' => 'number'
 						]
+					],
+					'categories' => [
+						'type' => 'array',
+						'default' => [],
+						'items' => [
+							'type' => 'number'
+						]
+					],
+					'cat_ids' => [
+						'type' => 'array',
+						'default' => [],
+						'items' => [
+							'type' => 'number'
+						]
 					]
 				],
 				'editor_script' => $handle,
@@ -88,6 +102,7 @@ class Playlist extends Block_Abstract {
 				],
 				'render_callback' => function( $attr ){
 					$attr['videos'] = implode( ',', $attr['post_ids'] );
+					$attr['categories'] = implode( ',', $attr['cat_ids'] );
 					$playlist = new \Vimeotheque\Shortcode\Playlist( $attr, '' );
 					return $playlist->get_output();
 				}
