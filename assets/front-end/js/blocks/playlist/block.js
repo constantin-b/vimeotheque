@@ -69,14 +69,14 @@ registerBlockType( 'vimeotheque/video-playlist', {
             },
 
             // posts selection
-            selectPost = ( post ) => {
+            selectPost = (post) => {
                 let vids = [...attributes.videos, post ]
                 setAttributes({
                     videos: vids
                 })
                 setPostsAttr( vids )
             },
-            unselectPost = ( post ) => {
+            unselectPost = (post) => {
                 for( var i = attributes.videos.length-1; i >= 0; i--){
                     if( attributes.videos[i].id == post.id ){
                         attributes.videos.splice( i, 1 )
@@ -88,9 +88,14 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     }
                 }
             },
-
+            updateCategories = (categories) => {
+                setAttributes({
+                    categories: categories
+                })
+                setCatAttr( categories )
+            },
             // update processed video IDs
-            setPostsAttr = ( vids )=>{
+            setPostsAttr = (vids) => {
                 let _posts = []
                 for( var i = vids.length-1; i >= 0; i--){
                     _posts.push( vids[i].id )
@@ -98,17 +103,29 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 setAttributes({
                     post_ids: _posts
                 })
+            },
+            setCatAttr = (categories) => {
+                let _categories = []
+                categories.forEach( (item) => {
+                    _categories.push( item.id )
+                })
+
+                setAttributes({
+                    cat_ids: _categories
+                })
             }
+
 
         if( !isLoaded ){
             setPostsAttr( attributes.videos )
+            setCatAttr( attributes.categories )
             setLoaded( true );
         }
 
         return [
             <>
                 {
-                    attributes.videos.length > 0 &&
+                    ( attributes.videos.length > 0 || attributes.categories.length > 0 ) &&
                     <>
                         <BlockControls>
                             <div
@@ -141,7 +158,8 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     byline: attributes.byline,
                                     portrait: attributes.portrait,
                                     playlist_loop: attributes.playlist_loop,
-                                    post_ids: attributes.post_ids
+                                    post_ids: attributes.post_ids,
+                                    cat_ids: attributes.cat_ids
                                 }
                             }
                             onUpdate = { ( state )=>{
@@ -154,7 +172,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </>
                 }
 
-                { attributes.videos.length == 0 &&
+                { ( attributes.videos.length == 0 && attributes.categories.length == 0  ) &&
                     <Placeholder
                         icon="playlist-video"
                         label={__('Video playlist', 'cvm_video')}
@@ -210,6 +228,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                             <SearchForm
                                                 blocked = { isRequestLoading }
                                                 taxonomy={ taxonomy }
+                                                selectedCategories={attributes.cat_ids}
                                                 values={search}
                                                 onSubmit = {
                                                     value => {
@@ -219,7 +238,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                                 onCategorySelect = {
                                                     // array of selected category ID's
                                                     categories => {
-                                                        console.log(size(categories))
+                                                        updateCategories( categories )
                                                     }
                                                 }
                                             />
