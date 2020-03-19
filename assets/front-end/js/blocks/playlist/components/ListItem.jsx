@@ -16,7 +16,7 @@ class ListItem extends React.Component{
 
     getImageUrl(){
         let imageUrl = noImageUrl;
-        if( 'undefined' != this.post.vimeo_video.thumbnails[2] ){
+        if( undefined !== this.post.vimeo_video.thumbnails[2] ){
             imageUrl = this.post.vimeo_video.thumbnails[2]
         }
         return imageUrl
