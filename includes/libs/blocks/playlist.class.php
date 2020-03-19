@@ -172,9 +172,14 @@ class Playlist extends Block_Abstract {
 	 */
 	private function set_rest_meta_queries(){
 		$post_types = [ 'post', Plugin::instance()->get_cpt()->get_post_type() ];
+		$taxonomies = ['category', Plugin::instance()->get_cpt()->get_post_tax() ];
 
 		foreach( $post_types as $post_type ){
 			add_filter( 'rest_' . $post_type . '_query', [ $this, 'meta_queries' ], 10, 2 );
+		}
+
+		foreach( $taxonomies as $taxonomy ){
+			add_filter( 'rest_' . $taxonomy . '_query', [ $this, 'tax_queries' ], 10, 2 );
 		}
 	}
 
@@ -201,6 +206,11 @@ class Playlist extends Block_Abstract {
 				'post', Plugin::instance()->get_cpt()->get_post_type()
 			];
 		}
+
+		return $args;
+	}
+
+	public function tax_queries( $args, $request ){
 
 		return $args;
 	}
