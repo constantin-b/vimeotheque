@@ -1,5 +1,5 @@
 import VimeothequeTreeSelect from "./VimeothequeTreeSelect"
-import { findIndex, pull, has } from 'lodash'
+import { findIndex, pull, has, concat } from 'lodash'
 
 const { __ } = wp.i18n,
     {
@@ -16,7 +16,7 @@ class SearchForm extends React.Component{
             // the search query entered by user
             query: props.values.query,
             // the search category selected by user
-            category: props.values.category,
+            category: this.sanitizeCategory( props.values.category ),
             // array of selected category options
             selected: this.props.selectedCategories,
             // current selected taxonomy option is checked to be used in playlist?
@@ -28,9 +28,16 @@ class SearchForm extends React.Component{
         this.isChecked = this.isChecked.bind(this)
         this.setCategories = this.setCategories.bind(this)
         this.getCategories = this.getCategories.bind(this)
+        this.sanitizeCategory = this.sanitizeCategory.bind(this)
 
         // all categories returned by VimeothequeTreeSelect
         this.categories = {}
+    }
+
+    // category ID needs to be cast to integer in order for lodash pull to work on it
+    sanitizeCategory( category ){
+        let result = parseInt( category )
+        return isNaN( result ) ? false : result
     }
 
     // verify if category is selected for display in playlist
@@ -47,17 +54,19 @@ class SearchForm extends React.Component{
                 this.categories[ element.id ] = element
             }
         })
+
+        this.props.onCategoriesUpdate( this.categories )
+
     }
 
-    getCategories(){
-        let items = []
-        this.state.selected.forEach( item => {
-            items.push( this.categories[ item ] )
+    getCategories( items ){
+        let _items = []
+        items.forEach( item => {
+            _items.push( this.categories[ item ] )
         } )
 
-        return items
+        return _items
     }
-
 
     render(){
         return (
@@ -84,7 +93,7 @@ class SearchForm extends React.Component{
                     onChange={
                         value => {
                             this.setState({
-                                category: value,
+                                category: this.sanitizeCategory( value ),
                                 optionSelected: this.isChecked( value ),
                                 submitted: false
                             })
@@ -105,21 +114,22 @@ class SearchForm extends React.Component{
                             checked={ this.state.optionSelected }
                             onChange={
                                 ()=>{
-                                    let items = this.state.selected
+                                    let items
                                     if( this.isChecked() ){
+                                        items = pull( this.state.selected, this.state.category )
                                         this.setState({
-                                            selected: pull( items, this.state.category ),
+                                            selected: items,
                                             optionSelected: false
                                         })
                                     }else{
-                                        items.push( this.state.category )
+                                        items = concat( this.state.selected, this.state.category )
                                         this.setState({
                                             selected: items,
                                             optionSelected: true
                                         })
                                     }
 
-                                    this.props.onCategorySelect( this.getCategories() )
+                                    this.props.onCategorySelect( this.getCategories( items ) )
                                 }
                             }
                         />
@@ -165,7 +175,8 @@ SearchForm.defaultProps = {
     // triggers when user submits search form
     onSubmit: () => {},
     // triggers when user selectes category to include in playlist
-    onCategorySelect: () => {}
+    onCategorySelect: () => {},
+    onCategoriesUpdate: ()=>{}
 }
 
 export default SearchForm
