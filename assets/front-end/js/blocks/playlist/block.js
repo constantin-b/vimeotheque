@@ -1,7 +1,9 @@
 import VideoPostsList from './components/VideoPostsList'
 import VimeothequeServerSideRender from './components/VimeothequeServerSideRender'
 import SearchForm from "./components/SearchForm";
-import { size, keys } from 'lodash'
+import { size, keys, map, merge } from 'lodash'
+import CategoryList from "./components/CategoryList";
+import TestComponent from "./components/TestComponent";
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -59,6 +61,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
             [search, setSearch] = useState( { query: '', category: false } ),
             [showSearch, setShowSearch] = useState( true ),
             [taxonomy, setTaxonomy] = useState( 'vimeo-videos' ),
+            [postType, setPostType] = useState( 'vimeo-video' ),
             [isRequestLoading, setRequestLoading] = useState( false ),
             openModal = (e) => {
                 e.stopPropagation()
@@ -197,13 +200,15 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     onSelect = { selectPost }
                                     onRemove = { unselectPost }
                                     filteredPosts = { attributes.videos }
+                                    filteredCategories={attributes.cat_ids}
                                     search={ search }
+                                    postType={postType}
                                     taxonomy={taxonomy}
                                     onPostTypeChange = {
                                         ( postType ) => {
                                             setShowSearch( 'selected' != postType )
-                                            let tax = 'vimeo-video' == postType ? 'vimeo-videos' : 'categories'
-                                            setTaxonomy( tax )
+                                            setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
+                                            setPostType( postType )
                                         }
                                     }
                                     onRequestBegin = {
@@ -224,7 +229,8 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 />
                                 <nav className="sidebar">
                                     {
-                                        showSearch &&
+                                        showSearch ?
+                                        // Show search form if not displaying selected posts/categories
                                             <SearchForm
                                                 blocked = { isRequestLoading }
                                                 taxonomy={ taxonomy }
@@ -241,7 +247,36 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                                         updateCategories( categories )
                                                     }
                                                 }
+                                                onCategoriesUpdate = {
+                                                    categories => {
+                                                        //console.log(categories)
+                                                    }
+                                                }
                                             />
+                                        :
+                                        // Show categories management in sidebar
+                                        <>
+                                            <CategoryList
+                                                taxonomy='vimeo-videos'
+                                                title={ __( 'Vimeotheque categories', 'cvm_video' ) }
+                                                categories={attributes.categories}
+                                                onChange={
+                                                    categories => {
+                                                        updateCategories( categories )
+                                                    }
+                                                }
+                                            />
+
+                                            <CategoryList
+                                                taxonomy='category'
+                                                categories={attributes.categories}
+                                                onChange={
+                                                    categories => {
+                                                        updateCategories( categories )
+                                                    }
+                                                }
+                                            />
+                                        </>
                                     }
                                 </nav>
                             </div>
@@ -395,4 +430,3 @@ registerBlockType( 'vimeotheque/video-playlist', {
     },
 
 } );
-
