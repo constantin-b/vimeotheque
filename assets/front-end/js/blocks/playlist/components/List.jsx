@@ -1,3 +1,4 @@
+import { map, keys } from 'lodash'
 import ListItem from "./ListItem";
 
 const   { apiFetch } = wp,
@@ -23,43 +24,75 @@ class List extends React.Component{
 
         this.props.onRequestBegin();
 
-        let taxQuery = this.props.search.category ? `&${this.props.taxonomy}=${this.props.search.category}` : '';
+        let params = {
+            page: this.props.page,
+            search: this.props.search.query,
+            per_page: this.props.perPage,
+            orderby: 'date',
+            order: 'desc',
+            vimeothequeMetaKey: 'true'
+        }
 
-        apiFetch( {
-            path: '/wp/v2/' +
-                this.props.postType +
-                '?page=' + this.props.page +
-                '&search=' + this.props.search.query +
-                '&per_page=' + this.props.perPage +
-                '&orderby=date&order=desc' +
-                taxQuery +
-                '&vimeothequeMetaKey=true',
-            parse: false
-        } ).then( response => {
+        if( this.props.search.category ){
+            let taxonomy = 'category' == this.props.taxonomy ? 'categories' : this.props.taxonomy
+            params[ taxonomy ] = this.props.search.category
+        }
+
+        let path = `/wp/v2/${this.props.postType}?` + map( keys( params ), key => { return `${key}=${params[ key ]}` } ).join('&'),
+            posts = wp.data.select( 'vimeotheque-post-store' ).getPosts( path )
+
+        if( posts != undefined ){
+            let _posts = [...this.state.posts, ...posts.posts]
             this.setState({
-                totalEntries: response.headers.get( 'X-WP-Total' ),
-                totalPages: response.headers.get( 'X-WP-TotalPages' )
+                totalEntries: posts.total,
+                totalPages: posts.pages,
+                loading: false,
+                posts: _posts
             })
 
-            return response.json()
-        } ).then( posts => {
-            let _posts = [...this.state.posts, ...posts]
-            this.setState( {
-                posts: _posts,
-                loading: false
-            } )
             this.props.onRequestFinish({
                 postsCount:  _posts.length,
-                totalEntries: this.state.totalEntries,
-                totalPages: this.state.totalPages
+                totalEntries: posts.total,
+                totalPages: posts.pages
             })
-        }).catch( error => {
-            this.setState( {
-                error: error,
-                loading: false
-            } )
-            this.props.onRequestError( error )
-        } );
+        }else {
+
+            apiFetch({
+                path: path,
+                method: 'GET',
+                parse: false
+            }).then(response => {
+                this.setState({
+                    totalEntries: response.headers.get('X-WP-Total'),
+                    totalPages: response.headers.get('X-WP-TotalPages')
+                })
+
+                return response.json()
+            }).then(posts => {
+                let _posts = [...this.state.posts, ...posts]
+                this.setState({
+                    posts: _posts,
+                    loading: false
+                })
+                this.props.onRequestFinish({
+                    postsCount: _posts.length,
+                    totalEntries: this.state.totalEntries,
+                    totalPages: this.state.totalPages
+                })
+
+                wp
+                    .data
+                    .dispatch( 'vimeotheque-post-store' )
+                    .addPosts( path, posts, this.state.totalEntries, this.state.totalPages )
+
+            }).catch(error => {
+                this.setState({
+                    error: error,
+                    loading: false
+                })
+                this.props.onRequestError(error)
+            });
+        }
     }
 
     componentDidMount(){
@@ -77,8 +110,7 @@ class List extends React.Component{
                 error: false,
                 totalEntries: 0,
                 totalPages: 0
-            })
-            this.makeRequest();
+            }, this.makeRequest )
             return;
         }
 
@@ -169,3 +201,40 @@ List.defaultProps = {
 }
 
 export default List
+
+// Redux store begin
+import {find} from 'lodash'
+
+// reducer
+const addPostsResource = ( state = [], action ) => {
+    if( action.type == 'ADD_POSTS' ) {
+        return state.concat( [action.payload] )
+    }
+
+    return state
+}
+
+// selector
+const getPosts = ( state, url ) => {
+    let obj = find( state, { url: url } )
+    return obj
+}
+
+// action for adding posts
+const addPosts = ( url, posts, total, pages ) => {
+    return {
+        type: 'ADD_POSTS',
+        payload: {
+            url: url,
+            posts: posts,
+            total: total,
+            pages: pages
+        }
+    }
+}
+
+wp.data.registerStore( 'vimeotheque-post-store', {
+    reducer: addPostsResource,
+    selectors: { getPosts: getPosts },
+    actions: { addPosts: addPosts }
+})
