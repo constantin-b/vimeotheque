@@ -146,7 +146,7 @@ class VideoPostsList extends React.Component {
             />
         }
 
-        let selectedTxt = `${__( 'Selected', 'cvm_video' )} (${this.props.filteredPosts.length})`
+        let selectedTxt = `${__( 'Selected', 'cvm_video' )} (${this.props.filteredPosts.length}/${this.props.filteredCategories.length})`
 
         return (
             <div
@@ -169,7 +169,7 @@ class VideoPostsList extends React.Component {
                         disabled={this.state.loading}
                     />
                     {
-                        this.props.filteredPosts.length > 0 &&
+                        ( this.props.filteredPosts.length > 0 || this.props.filteredCategories.length > 0 ) &&
                         <Button
                             isLink
                             className='selected-posts'
@@ -206,7 +206,8 @@ VideoPostsList.defaultProps = {
     onRequestBegin: () => {},
     onRequestError: () => {},
     onPostTypeChange: () => {},
-    filteredPosts: []
+    filteredPosts: [],
+    filteredCategories: []
 }
 
 export default VideoPostsList;
