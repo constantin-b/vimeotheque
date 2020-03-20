@@ -1,8 +1,14 @@
-import { map, find, without, remove, repeat, compact, concat } from 'lodash'
-import { optionsTree, buildTree, termQueryApplyWithSelect } from "../helpers/functions";
+import { optionsTree } from "../helpers/optionsTree";
+import { termQueryApplyWithSelect } from '../helpers/termQueryApplyWithSelect'
+import { buildTree } from '../helpers/buildTree'
+import {
+    find,
+    without,
+    compact,
+    concat
+} from 'lodash'
 
-const
-    { __ } = wp.i18n,
+const { __ } = wp.i18n,
     {
         CheckboxControl
     } = wp.components
