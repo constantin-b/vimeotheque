@@ -112,6 +112,11 @@ class VideoPostsList extends React.Component {
         }
     }
 
+    selectedClassName( postType, className = '' ){
+        let _className = this.state.postType == postType ? 'active' : 'inactive'
+        return `${_className} ${className}`
+    }
+
     render() {
         let list
         if( this.state.postType == 'selected' ){
@@ -157,12 +162,14 @@ class VideoPostsList extends React.Component {
                     className="vimeotheque-post-type-filter"
                 >
                     <PostTypeButton
+                        className={ this.selectedClassName( 'vimeo-video' ) }
                         postType='vimeo-video'
                         text={__( 'Vimeo Videos', 'cvm_video' )}
                         onClick={ this.handlePostTypeChange }
                         disabled={this.state.loading}
-                    />&nbsp;|&nbsp;
+                    />
                     <PostTypeButton
+                        className={ this.selectedClassName( 'posts' ) }
                         postType='posts'
                         text={__( 'Posts', 'cvm_video' )}
                         onClick={ this.handlePostTypeChange }
@@ -172,7 +179,7 @@ class VideoPostsList extends React.Component {
                         ( this.props.filteredPosts.length > 0 || this.props.filteredCategories.length > 0 ) &&
                         <Button
                             isLink
-                            className='selected-posts'
+                            className={ this.selectedClassName( 'selected', 'selected-posts' ) }
                             disabled={this.state.loading}
                             onClick={
                                 ()=>{
