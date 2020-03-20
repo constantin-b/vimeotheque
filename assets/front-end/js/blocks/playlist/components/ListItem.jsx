@@ -1,4 +1,3 @@
-
 const { __ } = wp.i18n,
     { dateI18n } = wp.date,
     { Button } = wp.components,
@@ -51,7 +50,8 @@ class ListItem extends React.Component{
 
                         <div className='actions'>
                             <Button
-                                isTertiary
+                                className='select-button'
+                                isLink
                                 onClick={
                                     () => {
                                         this.props.onSelect( this.post )
