@@ -1,5 +1,13 @@
-import {termQueryApplyWithSelect, buildTree, optionsTree} from "../helpers/functions";
-import { unescape as unescapeString, repeat, flatMap, compact } from 'lodash'
+import { optionsTree } from "../helpers/optionsTree";
+import { termQueryApplyWithSelect } from '../helpers/termQueryApplyWithSelect'
+import { buildTree } from '../helpers/buildTree'
+import {
+    unescape as unescapeString,
+    repeat,
+    flatMap,
+    compact
+} from 'lodash'
+
 const {
           SelectControl,
           Spinner,
