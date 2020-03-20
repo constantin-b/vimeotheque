@@ -16,6 +16,7 @@ class PostTypeButton extends React.Component{
     render(){
         return (
             <Button
+                className={this.props.className}
                 onClick={this.handleChange}
                 disabled={this.props.disabled}
             >
@@ -23,6 +24,10 @@ class PostTypeButton extends React.Component{
             </Button>
         )
     }
+}
+
+PostTypeButton.defaultProps = {
+    className: ''
 }
 
 export default PostTypeButton;
