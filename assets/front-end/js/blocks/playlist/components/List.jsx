@@ -1,11 +1,19 @@
-import { map, keys } from 'lodash'
 import ListItem from "./ListItem";
+import '../storage/posts'
+import {
+    map,
+    keys
+} from 'lodash'
 
 const   { apiFetch } = wp,
     {
         Spinner
     } = wp.components,
-    { __ } = wp.i18n;
+    {
+        select,
+        dispatch
+    } = wp.data,
+    { __ } = wp.i18n
 
 class List extends React.Component{
     constructor(props) {
@@ -39,7 +47,7 @@ class List extends React.Component{
         }
 
         let path = `/wp/v2/${this.props.postType}?` + map( keys( params ), key => { return `${key}=${params[ key ]}` } ).join('&'),
-            posts = wp.data.select( 'vimeotheque-post-store' ).getPosts( path )
+            posts = select( 'vimeotheque-post-store' ).getPosts( path )
 
         if( posts != undefined ){
             let _posts = [...this.state.posts, ...posts.posts]
@@ -80,10 +88,7 @@ class List extends React.Component{
                     totalPages: this.state.totalPages
                 })
 
-                wp
-                    .data
-                    .dispatch( 'vimeotheque-post-store' )
-                    .addPosts( path, posts, this.state.totalEntries, this.state.totalPages )
+                dispatch( 'vimeotheque-post-store' ).addPosts( path, posts, this.state.totalEntries, this.state.totalPages )
 
             }).catch(error => {
                 this.setState({
@@ -201,40 +206,3 @@ List.defaultProps = {
 }
 
 export default List
-
-// Redux store begin
-import {find} from 'lodash'
-
-// reducer
-const addPostsResource = ( state = [], action ) => {
-    if( action.type == 'ADD_POSTS' ) {
-        return state.concat( [action.payload] )
-    }
-
-    return state
-}
-
-// selector
-const getPosts = ( state, url ) => {
-    let obj = find( state, { url: url } )
-    return obj
-}
-
-// action for adding posts
-const addPosts = ( url, posts, total, pages ) => {
-    return {
-        type: 'ADD_POSTS',
-        payload: {
-            url: url,
-            posts: posts,
-            total: total,
-            pages: pages
-        }
-    }
-}
-
-wp.data.registerStore( 'vimeotheque-post-store', {
-    reducer: addPostsResource,
-    selectors: { getPosts: getPosts },
-    actions: { addPosts: addPosts }
-})
