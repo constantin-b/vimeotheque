@@ -1,5 +1,5 @@
 import ListItem from "./ListItem";
-import '../storage/posts'
+import '../storage/postsQuery'
 import {
     map,
     keys
