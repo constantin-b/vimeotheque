@@ -1,6 +1,7 @@
-import PostTypeButton from "./PostTypeButton";
-import List from "./List";
-import ListSelected from "./ListSelected";
+import PostTypeButton from "./PostTypeButton"
+import List from "./List"
+import ListSelected from "./ListSelected"
+import {isEqual} from 'lodash'
 
 const   { apiFetch } = wp,
         { __ } = wp.i18n,
@@ -57,7 +58,7 @@ class VideoPostsList extends React.Component {
     }
 
     shouldComponentUpdate( nextProps, nextState ){
-        if( this.props.search != nextProps.search ){
+        if( !isEqual( this.props.search, nextProps.search ) ){
             this.setState({
                 page:1,
                 loading:true,
@@ -94,10 +95,10 @@ class VideoPostsList extends React.Component {
         }
 
         this.setState({
-            postType:postType,
-            page:1,
+            postType: postType,
+            page: 1,
             loading:( 'selected' != postType ),
-            postsCount:0
+            postsCount: 0
         })
 
         this.props.onPostTypeChange( postType )
@@ -175,21 +176,18 @@ class VideoPostsList extends React.Component {
                         onClick={ this.handlePostTypeChange }
                         disabled={this.state.loading}
                     />
-                    {
-                        ( this.props.filteredPosts.length > 0 || this.props.filteredCategories.length > 0 ) &&
-                        <Button
-                            isLink
-                            className={ this.selectedClassName( 'selected', 'selected-posts' ) }
-                            disabled={this.state.loading}
-                            onClick={
-                                ()=>{
-                                    this.handlePostTypeChange( 'selected' )
-                                }
+                    <Button
+                        isLink
+                        className={ this.selectedClassName( 'selected', 'selected-posts' ) }
+                        disabled={this.state.loading}
+                        onClick={
+                            ()=>{
+                                this.handlePostTypeChange( 'selected' )
                             }
-                        >
-                            { selectedTxt }
-                        </Button>
-                    }
+                        }
+                    >
+                        { selectedTxt }
+                    </Button>
                 </ButtonGroup>
 
                 { list }
