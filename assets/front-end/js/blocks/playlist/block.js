@@ -209,6 +209,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                             setShowSearch( 'selected' != postType )
                                             setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
                                             setPostType( postType )
+                                            setSearch({query:'', category:false})
                                         }
                                     }
                                     onRequestBegin = {
@@ -234,8 +235,8 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                             <SearchForm
                                                 blocked = { isRequestLoading }
                                                 taxonomy={ taxonomy }
-                                                selectedCategories={attributes.cat_ids}
-                                                values={search}
+                                                selectedCategories={attributes.categories}
+                                                values={ search }
                                                 onSubmit = {
                                                     value => {
                                                         setSearch( value )
