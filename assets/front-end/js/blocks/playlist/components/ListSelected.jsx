@@ -13,7 +13,7 @@ class ListSelected extends React.Component{
 
         if( this.props.posts.length == 0 ){
             messages =  <div className="vimeotheque-error vimeotheque-post-list-container">
-                { __( 'Sorry, nothing yet! Your selected videos will appear here.', 'cvm_video' ) }
+                { __( 'No individual videos selected! Once you select some videos they will appear in this section.', 'cvm_video' ) }
             </div>
         }
 
