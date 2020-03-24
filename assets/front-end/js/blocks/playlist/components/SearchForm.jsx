@@ -1,5 +1,5 @@
 import VimeothequeTreeSelect from "./VimeothequeTreeSelect"
-import { findIndex, pull, has, concat } from 'lodash'
+import { findIndex, pull, has, concat, filter, find } from 'lodash'
 
 const { __ } = wp.i18n,
     {
@@ -17,8 +17,6 @@ class SearchForm extends React.Component{
             query: props.values.query,
             // the search category selected by user
             category: this.sanitizeCategory( props.values.category ),
-            // array of selected category options
-            selected: this.props.selectedCategories,
             // current selected taxonomy option is checked to be used in playlist?
             optionSelected: false,
             // was search form submitted
@@ -34,6 +32,18 @@ class SearchForm extends React.Component{
         this.categories = {}
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        // reset search query
+        if( this.props.taxonomy != nextProps.taxonomy ){
+            this.setState({
+                query: '',
+                category: false
+            })
+        }
+
+        return true
+    }
+
     // category ID needs to be cast to integer in order for lodash pull to work on it
     sanitizeCategory( category ){
         let result = parseInt( category )
@@ -41,10 +51,10 @@ class SearchForm extends React.Component{
     }
 
     // verify if category is selected for display in playlist
-    isChecked( value ){
-        let _value = 'undefined' != typeof value ? value : this.state.category,
-            isIn = -1 != findIndex( this.state.selected, o => { return o == _value } )
-        return isIn
+    isChecked( value = false ){
+        let key = value ? value : this.state.category,
+            found = find( this.props.selectedCategories, { id: this.sanitizeCategory( key ) } )
+        return undefined != found
     }
 
     // store all categories returned by VimeothequeTreeSelect
@@ -114,22 +124,24 @@ class SearchForm extends React.Component{
                             checked={ this.state.optionSelected }
                             onChange={
                                 ()=>{
-                                    let items
+                                    let items,
+                                        optionSelected
+
                                     if( this.isChecked() ){
-                                        items = pull( this.state.selected, this.state.category )
-                                        this.setState({
-                                            selected: items,
-                                            optionSelected: false
-                                        })
+                                        items = filter( this.props.selectedCategories, ( item )=>{
+                                            return item.id != this.state.category
+                                        } )
+                                        optionSelected = false
                                     }else{
-                                        items = concat( this.state.selected, this.state.category )
-                                        this.setState({
-                                            selected: items,
-                                            optionSelected: true
-                                        })
+                                        items = concat( ...this.props.selectedCategories, [ this.categories[ this.state.category ] ] )
+                                        optionSelected = true
                                     }
 
-                                    this.props.onCategorySelect( this.getCategories( items ) )
+                                    this.setState({
+                                        optionSelected: optionSelected
+                                    })
+
+                                    this.props.onCategorySelect( items )
                                 }
                             }
                         />
