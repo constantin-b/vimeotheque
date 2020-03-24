@@ -209,27 +209,9 @@ class Video_Post{
 			return false;
 		}
 
-		if( $this->cpt()->get_post_type() == $this->get_post()->post_type ){
-			return true;
-		}
+		$result = $this->cpt()->get_post_type() == $this->get_post()->post_type;
 
-		// check if post type is post or if it is a user defined post type
-		if
-		(
-			$this->cpt()->get_post_type() == $this->get_post()->post_type
-		){
-			$is_video = get_post_meta(
-				$this->get_post()->ID,
-				$this->cpt()->get_post_settings()->get_meta_video_data(),
-				true
-			);
-
-			if( $is_video ){
-				return true;
-			}
-		}
-
-		return false;
+		return apply_filters( 'vimeotheque\video\is_video', $result, $this );
 	}
 
 	/**
