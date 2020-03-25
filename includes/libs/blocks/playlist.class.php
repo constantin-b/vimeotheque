@@ -211,7 +211,6 @@ class Playlist extends Block_Abstract {
 	}
 
 	public function tax_queries( $args, $request ){
-
 		return $args;
 	}
 }
