@@ -31,6 +31,7 @@
 		right:0px;
 		outline:0px;
 		margin-left:auto;
+		border:none!important;
 	}
 	.cvm-vim-playlist.default.left .cvm-playlist-wrap .playlist-visibility{
 		left:0;
