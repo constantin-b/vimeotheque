@@ -3,6 +3,7 @@
 namespace Vimeotheque\Shortcode;
 
 use Vimeotheque\Helper;
+use Vimeotheque\Playlist\Theme\Theme;
 use Vimeotheque\Video_Post;
 use function Vimeotheque\cvm_get_post_types_by_taxonomy;
 
@@ -65,32 +66,54 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		 */
 		global $cvm_video;
 
-		if( !array_key_exists( $defaults['theme'], \Vimeotheque\cvm_playlist_themes() ) ){
-			$theme = 'default';
-		}else{
-			$theme = $defaults['theme'];
-		}
 		// include theme functions
 		include_once( VIMEOTHEQUE_PATH . '/includes/theme-functions.php' );
-		// include the theme display file
-		include( VIMEOTHEQUE_PATH . 'themes/' . $theme . '/player.php' );
+
+		Helper::enqueue_player();
+
+		if( $defaults['theme'] instanceof Theme ){
+			include $defaults['theme']->get_file();
+
+			wp_enqueue_script(
+				'cvm-vim-player-' . strtolower( $defaults['theme']->get_theme_name() ) ,
+				$defaults['theme']->get_js_url(),
+				[ 'cvm-video-player' ],
+				'1.0'
+			);
+			wp_enqueue_style(
+				'cvm-vim-player-' . strtolower( $defaults['theme']->get_theme_name() ) ,
+				$defaults['theme']->get_style_url(),
+				false,
+				'1.0'
+			);
+		}else{
+			if( !array_key_exists( $defaults['theme'], \Vimeotheque\cvm_playlist_themes() ) ){
+				$theme = 'default';
+			}else{
+				$theme = $defaults['theme'];
+			}
+
+			// include the theme display file
+			include( VIMEOTHEQUE_PATH . 'themes/' . $theme . '/player.php' );
+
+			wp_enqueue_script(
+				'cvm-vim-player-'.$theme,
+				VIMEOTHEQUE_URL . 'themes/' . $theme . '/assets/script.js',
+				[ 'cvm-video-player' ],
+				'1.0'
+			);
+			wp_enqueue_style(
+				'cvm-vim-player-'.$theme,
+				VIMEOTHEQUE_URL . 'themes/' . $theme . '/assets/stylesheet.css',
+				false,
+				'1.0'
+			);
+		}
+
+
 
 		$content = ob_get_contents();
 		ob_end_clean();
-
-		Helper::enqueue_player();
-		wp_enqueue_script(
-			'cvm-vim-player-'.$theme,
-			VIMEOTHEQUE_URL . 'themes/' . $theme . '/assets/script.js',
-			[ 'cvm-video-player' ],
-			'1.0'
-		);
-		wp_enqueue_style(
-			'cvm-vim-player-'.$theme,
-			VIMEOTHEQUE_URL . 'themes/' . $theme . '/assets/stylesheet.css',
-			false,
-			'1.0'
-		);
 
 		// remove custom player settings
 		$CVM_PLAYER_SETTINGS = false;
