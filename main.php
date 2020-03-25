@@ -16,10 +16,11 @@ define( 'VIMEOTHEQUE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIMEOTHEQUE_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIMEOTHEQUE_VERSION', '2.0' );
 /**
- * Minimal WP version.
+ * Minimum WP version.
  * Verifies against the current running WP version.
+ * WP 5.2 required minimum version because it contains React 16.8+ which implements hooks
  */
-define( 'VMTQ_PRO_WP_COMPAT', '5.0' );
+define( 'VMTQ_PRO_WP_COMPAT', '5.2' );
 
 if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
 	add_action( 'admin_notices', 'vimeotheque_fail_php_version' );
