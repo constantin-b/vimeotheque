@@ -7,6 +7,8 @@ use Vimeotheque\Admin\WP_Customizer;
 use Vimeotheque\Blocks\Blocks_Factory;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
+use Vimeotheque\Playlist\Theme\Theme;
+use Vimeotheque\Playlist\Theme\Themes;
 use Vimeotheque\Shortcode\Shortcode_Factory;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -68,6 +70,10 @@ class Plugin{
 	 * @var Blocks_Factory
 	 */
 	private $blocks_factory;
+	/**
+	 * @var Themes
+	 */
+	private $playlist_themes;
 
 	/**
 	 * Clone.
@@ -162,6 +168,8 @@ class Plugin{
 
 		new Shortcode_Factory( $this );
 		$this->blocks_factory = new Blocks_Factory( $this );
+
+		$this->playlist_themes = new Themes( new Theme( VIMEOTHEQUE_PATH . 'themes/default/player.php', __( 'Default', 'cvm_video' ) ) );
 	}
 
 	/**
@@ -401,6 +409,13 @@ class Plugin{
 	 */
 	public function get_front_end(){
 		return $this->front_end;
+	}
+
+	/**
+	 * @return Themes
+	 */
+	public function get_playlist_themes() {
+		return $this->playlist_themes;
 	}
 
 	/**
