@@ -56,6 +56,9 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			}
 		}
 
+		$defaults['theme'] = $player_settings['theme'];
+		$defaults['layout'] = $player_settings['layout'];
+
 		$CVM_PLAYER_SETTINGS = $defaults;
 		/**
 		 * @var Video_Post
@@ -64,6 +67,8 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		if( !array_key_exists( $defaults['theme'], \Vimeotheque\cvm_playlist_themes() ) ){
 			$theme = 'default';
+		}else{
+			$theme = $defaults['theme'];
 		}
 		// include theme functions
 		include_once( VIMEOTHEQUE_PATH . '/includes/theme-functions.php' );

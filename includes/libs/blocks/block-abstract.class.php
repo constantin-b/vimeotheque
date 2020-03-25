@@ -42,51 +42,6 @@ class Block_Abstract {
 	 */
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
-
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_backend_assets' ] );
-		add_action( 'enqueue_block_assets', [ $this, 'enqueue_frontend_assets' ] );
-	}
-
-	public function enqueue_backend_assets(){
-		if( isset( $this->scripts['backend'] ) ){
-			foreach ( $this->scripts['backend'] as $script ){
-				wp_register_script(
-					$script['handle'],
-					VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $script['block'] . '/block.build.js',
-					['wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n', 'wp-components']
-				);
-			}
-		}
-
-		if( isset( $this->styles['backend'] ) ){
-			foreach ( $this->styles['backend'] as $style ){
-				wp_enqueue_style(
-					$style['handle'],
-					VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $style['block'] . '/editor.css'
-				);
-			}
-		}
-	}
-
-	public function enqueue_frontend_assets(){
-		if( isset( $this->scripts['frontend'] ) ){
-			foreach ( $this->scripts['frontend'] as $script ){
-				wp_register_script(
-					$script['handle'],
-					VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $script['block'] . '/block.build.js',
-					['wp-blocks', 'wp-element']
-				);
-			}
-		}
-
-		if( isset( $this->styles['frontend'] ) ){
-			foreach ( $this->styles['frontend'] as $style ){
-				wp_enqueue_style(
-					$style['handle'],
-					VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $style['block'] . '/style.css'
-				);
-			}
-		}
 	}
 
 	/**
@@ -102,15 +57,15 @@ class Block_Abstract {
 				'block'  => $block,
 				'handle' => $handle
 			];
+
+			wp_register_script(
+				$handle,
+				VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/block.build.js',
+				['wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n', 'wp-components']
+			);
+
+			return $handle;
 		}
-		/*
-		wp_register_script(
-			$handle,
-			VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/block.build.js',
-			['wp-blocks', 'wp-element']
-		);
-		*/
-		return $handle;
 	}
 
 	/**
@@ -126,14 +81,14 @@ class Block_Abstract {
 				'block' => $block,
 				'handle' => $handle
 			];
+
+			wp_register_style(
+				$handle,
+				VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/editor.css'
+			);
+
+			return $handle;
 		}
-
-		return $handle;
-	}
-
-	protected function remove_assets(){
-		$this->scripts = [];
-		$this->styles = [];
 	}
 
 	/**
