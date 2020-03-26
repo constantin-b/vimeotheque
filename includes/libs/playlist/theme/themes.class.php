@@ -28,7 +28,11 @@ class Themes {
 	 * @param Theme $theme
 	 */
 	public function register_theme( Theme $theme ){
-		$this->themes[ $theme->get_theme_name() ] = $theme;
+		$this->themes[ $theme->get_folder_name() ] = $theme;
+		$functions = trailingslashit( $theme->get_path() ) . 'functions.php';
+		if( file_exists( $functions ) ){
+			include $functions;
+		}
 	}
 
 	/**
