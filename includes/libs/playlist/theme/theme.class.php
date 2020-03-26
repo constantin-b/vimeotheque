@@ -30,6 +30,10 @@ final class Theme {
 	 * @var string
 	 */
 	private $path;
+	/**
+	 * @var string
+	 */
+	private $folder_name;
 
 
 	/**
@@ -44,7 +48,7 @@ final class Theme {
 
 		$this->url = plugin_dir_url( $file );
 		$this->path = plugin_dir_path( $file );
-
+		$this->folder_name = basename( dirname( $file ) );
 	}
 
 	/**
@@ -87,5 +91,12 @@ final class Theme {
 	 */
 	public function get_file() {
 		return $this->file;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_folder_name() {
+		return $this->folder_name;
 	}
 }
