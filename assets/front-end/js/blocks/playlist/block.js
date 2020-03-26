@@ -169,7 +169,9 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             onUpdate = { ( state )=>{
                                 setTimeout( ()=>{
                                     window.vimeotheque.themeDefault()
-                                    window.vimeotheque.themeCarousel()
+                                    if( undefined != window.vimeotheque.themeCarousel ) {
+                                        window.vimeotheque.themeCarousel()
+                                    }
                                 }, 5000 )
                             } }
                         />
