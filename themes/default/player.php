@@ -1,4 +1,4 @@
-<div class="cvm-vim-playlist default<?php if( isset( $theme_settings['layout'] ) ){ echo ' ' . esc_attr( $theme_settings['layout'] ); } ;?>"<?php cvm_output_width();?>>
+<div class="cvm-vim-playlist default<?php if( !is_wp_error( parent::get_attr('layout') ) ){ echo ' ' . esc_attr( parent::get_attr('layout') ); } ;?>"<?php cvm_output_width();?>>
 	<div class="cvm-player"<?php cvm_output_player_size();?> <?php cvm_output_player_data();?>><!-- player container --></div>
 	<div class="cvm-playlist-wrap">
 		<div class="cvm-playlist">

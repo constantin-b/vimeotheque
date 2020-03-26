@@ -101,6 +101,10 @@ class Playlist extends Block_Abstract {
 					'bootstrap-grid2'
 				],
 				'render_callback' => function( $attr ){
+					$theme = Plugin::$instance->get_playlist_themes()->get_theme( $attr['theme'] );
+					if( $theme ){
+						$attr['theme'] = $theme;
+					}
 					$attr['videos'] = implode( ',', $attr['post_ids'] );
 					$attr['categories'] = implode( ',', $attr['cat_ids'] );
 					$playlist = new \Vimeotheque\Shortcode\Playlist( $attr, '' );
@@ -110,11 +114,32 @@ class Playlist extends Block_Abstract {
 		);
 		parent::register_block_type( $block_type );
 
+		$themes = Plugin::$instance->get_playlist_themes()->get_themes();
+		$_themes = [];
+		foreach( $themes as $key => $theme ){
+			$_themes[] = [
+				'label' => $theme->get_theme_name(),
+				'value' => $key
+			];
+
+			wp_enqueue_script(
+				'vimeotheque-' . strtolower( $key ) . '-script',
+				$theme->get_js_url(),
+				[ $handle ]
+			);
+
+			wp_enqueue_style(
+				'vimeotheque-' . strtolower( $key ) . '-style',
+				$theme->get_style_url()
+			);
+
+ 		}
 		$r = wp_localize_script(
 			$handle,
 			'vmtq',
 			[
-				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg'
+				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg',
+				'themes' => $_themes
 			]
 		);
 
@@ -126,21 +151,6 @@ class Playlist extends Block_Abstract {
 		);
 
 		cvm_enqueue_player( $handle, $css_handle );
-
-		$themes = ['carousel', 'wall', 'default'];
-		$path = VIMEOTHEQUE_URL . 'themes/';
-		foreach( $themes as $theme ){
-			wp_enqueue_script(
-				'vimeotheque-' . $theme . '-script',
-				$path . $theme . '/assets/script.js',
-				[ $handle ]
-			);
-			wp_enqueue_style(
-				'vimeotheque-' . $theme . '-style',
-				$path . $theme . '/assets/stylesheet.css',
-				[ $css_handle ]
-			);
-		}
 
 		wp_enqueue_script( 'jquery-masonry' );
 

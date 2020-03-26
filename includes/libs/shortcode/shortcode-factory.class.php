@@ -24,10 +24,11 @@ class Shortcode_Factory {
 	public function __construct( Plugin $plugin ) {
 
 		$this->plugin = $plugin;
-
+		// legacy shortcodes
 		add_shortcode( 'cvm_video', [ $this, 'process_shortcode' ] );
 		add_shortcode( 'cvm_playlist', [ $this, 'process_shortcode' ] );
 		add_shortcode( 'cvm_video_embed', [ $this, 'process_shortcode' ] );
+		// new style shortcodes
 		add_shortcode( 'vimeotheque_video', [ $this, 'process_shortcode' ] );
 		add_shortcode( 'vimeotheque_video_position', [ $this, 'process_shortcode' ] );
 		add_shortcode( 'vimeotheque_playlist', [ $this, 'process_shortcode' ] );

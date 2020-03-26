@@ -349,7 +349,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * Get plugin options object
-	 * @return \Vimeotheque\Options\Options
+	 * @return Options
 	 */
 	private function options_obj(){
 		return Plugin::instance()->get_options_obj();
@@ -357,7 +357,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * Get player options object
-	 * @return \Vimeotheque\Options\Options
+	 * @return Options
 	 */
 	private function player_options_obj(){
 		return Plugin::instance()->get_player_options();

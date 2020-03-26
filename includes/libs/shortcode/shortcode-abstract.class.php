@@ -50,9 +50,19 @@ class Shortcode_Abstract implements Shortcode_Interface {
 		if( isset( $this->atts[ $attr ] ) ){
 			return $this->atts[ $attr ];
 		}
+
+		return new \WP_Error(
+			'vimeotheque-shortcode-attribute-missing',
+			sprintf(
+				__( 'Shortcode attribute %s is missing.', 'cvm_video' ),
+				$attr
+			)
+		);
 	}
 
 	/**
+	 * Returns the shortcode content inserted by the user
+	 *
 	 * @return mixed
 	 */
 	public function get_content() {

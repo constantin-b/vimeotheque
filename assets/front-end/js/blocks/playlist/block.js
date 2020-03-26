@@ -27,7 +27,8 @@ const 	{ registerBlockType } = wp.blocks,
         BlockControls
     } = wp.blockEditor,
     { useState } = wp.element,
-    { select } = wp.data;
+    { select } = wp.data,
+    {themes} = vmtq;
 
 registerBlockType( 'vimeotheque/video-playlist', {
     title: __( 'Video playlist', 'cvm_video' ),
@@ -168,7 +169,9 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             onUpdate = { ( state )=>{
                                 setTimeout( ()=>{
                                     window.vimeotheque.themeDefault()
-                                    window.vimeotheque.themeCarousel()
+                                    if( undefined != window.vimeotheque.themeCarousel ) {
+                                        window.vimeotheque.themeCarousel()
+                                    }
                                 }, 5000 )
                             } }
                         />
@@ -295,11 +298,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                         <SelectControl
                             label = { __( 'Theme', 'cvm_video' ) }
                             value = {attributes.theme}
-                            options = {[
-                                { label: 'Default', value: 'default' },
-                                { label: 'Carousel', value: 'carousel' },
-                                { label: 'Wall', value: 'wall' },
-                            ]}
+                            options = { themes }
                             onChange = {
                                 ( value ) => {
                                     setAttributes({
