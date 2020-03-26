@@ -4,8 +4,8 @@ namespace Vimeotheque\Shortcode;
 
 use Vimeotheque\Helper;
 use Vimeotheque\Playlist\Theme\Theme;
+use Vimeotheque\Plugin;
 use Vimeotheque\Video_Post;
-use function Vimeotheque\cvm_get_post_types_by_taxonomy;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -24,8 +24,8 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	/**
 	 * Playlist constructor.
 	 *
-	 * @param $atts
-	 * @param $content
+	 * @param array $atts - Shortcode attributes
+	 * @param string $content - Shortcode content
 	 */
 	public function __construct( $atts, $content ) {
 		parent::__construct( $atts, $content );
@@ -42,25 +42,10 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		ob_start();
 
-		// set custom player settings if any
 		global $CVM_PLAYER_SETTINGS;
-		$player_settings = $this->get_options();
+		$embed_options = $this->get_embed_options();
+		$CVM_PLAYER_SETTINGS = $embed_options;
 
-		$defaults = \Vimeotheque\get_player_settings();
-		foreach ( $defaults as $setting => $value ){
-			if( isset( $player_settings[ $setting ] ) ){
-				if( is_numeric( $defaults[ $setting ] ) && $defaults[ $setting ] <= 1 ){
-					$defaults[ $setting ] = 1 == $player_settings[ $setting ] ? 1 : 0;
-				}else{
-					$defaults[ $setting ] = $player_settings[ $setting ];
-				}
-			}
-		}
-
-		$defaults['theme'] = $player_settings['theme'];
-		$defaults['layout'] = $player_settings['layout'];
-
-		$CVM_PLAYER_SETTINGS = $defaults;
 		/**
 		 * @var Video_Post
 		 */
@@ -71,46 +56,27 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		Helper::enqueue_player();
 
-		if( $defaults['theme'] instanceof Theme ){
-			include $defaults['theme']->get_file();
-
-			wp_enqueue_script(
-				'cvm-vim-player-' . strtolower( $defaults['theme']->get_theme_name() ) ,
-				$defaults['theme']->get_js_url(),
-				[ 'cvm-video-player' ],
-				'1.0'
-			);
-			wp_enqueue_style(
-				'cvm-vim-player-' . strtolower( $defaults['theme']->get_theme_name() ) ,
-				$defaults['theme']->get_style_url(),
-				false,
-				'1.0'
-			);
-		}else{
-			if( !array_key_exists( $defaults['theme'], \Vimeotheque\cvm_playlist_themes() ) ){
-				$theme = 'default';
-			}else{
-				$theme = $defaults['theme'];
-			}
-
-			// include the theme display file
-			include( VIMEOTHEQUE_PATH . 'themes/' . $theme . '/player.php' );
-
-			wp_enqueue_script(
-				'cvm-vim-player-'.$theme,
-				VIMEOTHEQUE_URL . 'themes/' . $theme . '/assets/script.js',
-				[ 'cvm-video-player' ],
-				'1.0'
-			);
-			wp_enqueue_style(
-				'cvm-vim-player-'.$theme,
-				VIMEOTHEQUE_URL . 'themes/' . $theme . '/assets/stylesheet.css',
-				false,
-				'1.0'
-			);
+		$theme = $this->get_theme();
+		if( !$theme ){
+			$theme = Plugin::$instance->get_playlist_themes()->get_theme('default');
 		}
 
+		// include theme file
+		include $theme->get_file();
 
+		wp_enqueue_script(
+			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
+			$theme->get_js_url(),
+			[ 'cvm-video-player' ],
+			'1.0'
+		);
+
+		wp_enqueue_style(
+			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
+			$theme->get_style_url(),
+			false,
+			'1.0'
+		);
 
 		$content = ob_get_contents();
 		ob_end_clean();
@@ -126,48 +92,68 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return array
 	 */
-	private function get_options(){
+	private function get_embed_options(){
 		if( $this->options ){
 			return $this->options;
 		}
 
-		$defaults = [
-			'theme' 		=> 'default',
-			'aspect_ratio' 	=> '16x9',
-			'width' 		=> 0,
-			'volume' 		=> 20,
-			'title'			=> 1,
-			'byline'		=> 1,
-			'portrait'		=> 1,
-			'playlist_loop' => 0,
-			'videos' 		=> '',
-			'categories'    => '',
-			'post_type'     => ''
-		];
+		$this->options = Plugin::$instance->get_player_options()->get_options();
+		foreach( $this->options as $key => $value ){
+			$attr = parent::get_attr( $key );
+			if( !is_wp_error( $attr ) ){
+				// some options have value 0 or 1 and need to be processed this way
+				if( in_array( $value, [0, 1] ) ){
+					$attr = absint( $attr );
+				}
 
-		$this->options = wp_parse_args( parent::get_atts(), $defaults );
+				$this->options[ $key ] = $attr;
+			}
+		}
 
 		return $this->options;
 	}
 
 	/**
-	 * @param $name
-	 *
-	 * @return mixed|\WP_Error
+	 * @return mixed|Theme
 	 */
-	private function get_option( $name ){
-		$options = $this->get_options();
-		if( array_key_exists( $name, $options ) ){
-			return $options[ $name ];
+	private function get_theme(){
+		$theme = parent::get_attr('theme');
+		if( !$theme instanceof Theme ){
+			$theme = Plugin::$instance->get_playlist_themes()->get_theme( $theme );
 		}
+		return $theme;
+	}
 
-		return new \WP_Error(
-			'shortcode_option_missing',
-			sprintf(
-				__( 'Option "%s" is missing from shortcode options.', 'cvm_video' ),
-				$name
-			)
-		);
+	/**
+	 * Get videos IDs from attributes
+	 *
+	 * @return array|mixed
+	 */
+	private function get_video_ids(){
+		$video_ids = parent::get_attr('post_ids');
+		if( is_wp_error( $video_ids ) ){
+			$videos = parent::get_attr('videos');
+			if( !is_wp_error( $videos ) ) {
+				$video_ids = explode( ',', $videos );
+			}
+		}
+		return $video_ids;
+	}
+
+	/**
+	 * Get categories IDs from attributes
+	 *
+	 * @return array|mixed
+	 */
+	private function get_categories_ids(){
+		$cat_ids = parent::get_attr( 'cat_ids' );
+		if( is_wp_error( $cat_ids ) ){
+			$categories = parent::get_attr( 'categories' );
+			if( !is_wp_error( $categories ) ){
+				$cat_ids = explode( ',', $categories );
+			}
+		}
+		return $cat_ids;
 	}
 
 	/**
@@ -175,14 +161,13 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	 */
 	private function get_video_posts(){
 		$posts = [];
-		$videos = $this->get_option( 'videos' );
-		if( $videos && !is_wp_error( $videos ) ){
-			$ids = explode( ',', $videos );
+		$videos = $this->get_video_ids();
+		if( !is_wp_error( $videos ) ){
 			$_posts = get_posts( [
 				'post_type' => 'any',
-				'include' => $ids,
-				'posts_per_page' => count( $ids ),
-				'numberposts' => count( $ids ),
+				'include' => $videos,
+				'posts_per_page' => count( $videos ),
+				'numberposts' => count( $videos ),
 				'post_status' => 'publish',
 				'suppress_filters' => true
 			] );
@@ -197,17 +182,16 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			}
 		}
 
-		$categories = $this->get_option( 'categories' );
-		if( $categories && !is_wp_error( $categories ) ){
-			$_categories = explode( ',', $categories );
-			$post_type = $this->get_option( 'post_type' );
+		$categories = $this->get_categories_ids();
+		if( !is_wp_error( $categories ) ){
+			$post_type = parent::get_attr( 'post_type' );
 			if( $post_type && !is_wp_error( $post_type ) ){
 				$_post_type = explode( ',', $post_type );
 			}else{
 				$_post_type = false;
 			}
 
-			$_posts = $this->get_category_post_ids( $_categories, $_post_type );
+			$_posts = $this->get_category_post_ids( $categories, $_post_type );
 			if( $_posts ){
 				$_posts = array_diff_key( $_posts, $posts );
 				$posts = array_merge( $posts, $_posts );
@@ -262,7 +246,6 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		}
 
 		if( $terms ){
-
 			$args = [
 				'post_type' => $this->get_post_types_by_taxonomy( array_keys( $terms ) ),
 				'numberposts' => -1,
@@ -296,19 +279,20 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	}
 
 	/**
-	 * @param $tax
+	 * @param array $taxonomies
 	 *
 	 * @return array
 	 */
-	function get_post_types_by_taxonomy( $tax ){
+	function get_post_types_by_taxonomy( $taxonomies ){
 		$out = [];
-		$post_types = get_post_types();
-		foreach( $post_types as $post_type ){
-			$taxonomies = get_object_taxonomies( $post_type );
-			if( array_intersect( $tax, $taxonomies ) ){
-				$out[] = $post_type;
+
+		foreach( $taxonomies as $tax ){
+			$taxonomy = get_taxonomy( $tax );
+			if( $taxonomy ){
+				$out = array_merge( $out, $taxonomy->object_type );
 			}
 		}
+
 		return $out;
 	}
 
