@@ -2,6 +2,7 @@ const externals = {
     wp: 'wp',
     react: 'React',
     'react-dom': 'ReactDOM',
+    lodash: 'lodash'
 };
 
 const isProduction = process.env.NODE_ENV === 'production';
