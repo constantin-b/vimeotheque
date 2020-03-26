@@ -1,7 +1,13 @@
 <?php
-
 namespace Themes\DefaultTheme;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+/**
+ * Add block editor Playlist Block attributes extension
+ */
 function block_editor(){
 	wp_enqueue_script(
 		'vimeotheque-theme-default-attributes',
