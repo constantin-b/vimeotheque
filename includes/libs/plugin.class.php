@@ -169,7 +169,12 @@ class Plugin{
 		new Shortcode_Factory( $this );
 		$this->blocks_factory = new Blocks_Factory( $this );
 
-		$this->playlist_themes = new Themes( new Theme( VIMEOTHEQUE_PATH . 'themes/default/player.php', __( 'Default', 'cvm_video' ) ) );
+		$this->playlist_themes = new Themes(
+			new Theme(
+				VIMEOTHEQUE_PATH . 'themes/default/player.php',
+				__( 'Default', 'cvm_video' )
+			)
+		);
 	}
 
 	/**
