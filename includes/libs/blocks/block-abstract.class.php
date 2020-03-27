@@ -38,6 +38,19 @@ class Block_Abstract {
 	private $block_script_handle;
 
 	/**
+	 * Stylesheet editor handle
+	 *
+	 * @var string
+	 */
+	private $editor_style_handle;
+	/**
+	 * Front-end styling handle
+	 *
+	 * @var string
+	 */
+	private $style_handle;
+
+	/**
 	 * Block_Abstract constructor.
 	 *
 	 * @param Plugin $plugin
@@ -71,24 +84,35 @@ class Block_Abstract {
 	/**
 	 * @param $handle
 	 * @param $block
-	 * @param string $type
+	 * @param bool $editor_style
 	 *
 	 * @return mixed
 	 */
-	protected function register_style( $handle, $block, $type = 'backend' ){
+	protected function register_style( $handle, $block, $editor_style = false ){
+		$file = $editor_style ? 'editor.css' : 'style.css';
 		wp_register_style(
 			$handle,
-			VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/editor.css'
+			VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/' . $file
 		);
+
+		if( $editor_style ){
+			$this->editor_style_handle = $handle;
+		}else{
+			$this->style_handle = $handle;
+		}
 
 		return $handle;
 	}
 
 	/**
-	 * @param \WP_Block_Type $block
+	 * @param $name
+	 * @param array $args
+	 *
+	 * @return mixed|\WP_Block_Type
 	 */
-	protected function register_block_type( \WP_Block_Type $block ){
-		$this->wp_block_type = $block;
+	protected function register_block_type(  $name, $args = array() ){
+		$this->wp_block_type = register_block_type( $name, $args );
+		return $this->wp_block_type;
 	}
 
 	/**
@@ -112,5 +136,19 @@ class Block_Abstract {
 	 */
 	public function get_script_handle(){
 		return $this->block_script_handle;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_editor_style_handle() {
+		return $this->editor_style_handle;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_style_handle() {
+		return $this->style_handle;
 	}
 }
