@@ -54,13 +54,11 @@ registerBlockType( 'vimeotheque/video', {
             [taxonomy, setTaxonomy] = useState( 'vimeo-videos' ),
             [postType, setPostType] = useState( 'vimeo-video' ),
             [videos, setVideos] = useState( [] ),
-            openModal = (e) => {
+            openModal = e => {
                 e.stopPropagation()
                 setOpen( true )
             },
-            closeModal = () => {
-                setOpen( false )
-            },
+            closeModal = () => setOpen( false ),
             // posts selection
             selectPost = post => {
                 setAttributes({
