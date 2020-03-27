@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Video
  * @package Vimeotheque\Blocks
  */
-class Playlist extends Block_Abstract {
+class Playlist extends Block_Abstract implements Block_Interface {
 	/**
 	 * Video constructor.
 	 *
