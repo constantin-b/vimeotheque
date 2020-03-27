@@ -22,7 +22,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	public function __construct( Plugin $plugin ) {
 		parent::__construct( $plugin );
 
-		$handle = parent::register_script( 'vimeotheque-video-block', 'video' );
+		$handle = parent::register_script( 'vimeotheque-video-block', 'video_position' );
 
 		$block_type = register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => $handle,
