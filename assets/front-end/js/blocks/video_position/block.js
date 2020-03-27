@@ -56,24 +56,11 @@ registerBlockType( 'vimeotheque/video-position', {
 		let opt = JSON.parse( embed_options );
 		const sep = ' : ';
 
-		const renderCustomColorPicker = (value) => {
-			<ColorPicker
-				color={value}
-				onChangeComplete={(color) => onChange(color.hex)}
-				disableAlpha
-			/>
-		};
-
 		const onFormToggleChange = ( varName ) => {
 			opt[ varName ] = !opt[ varName ]
 			setAttributes({
 				embed_options: JSON.stringify( opt )
 			})
-		}
-
-		const embedStyle = {
-			width: opt.width + 'px',
-			maxWidth: '100%'
 		}
 
 		return [
@@ -82,7 +69,12 @@ registerBlockType( 'vimeotheque/video-position', {
 				data-width = { opt.width }
 				data-aspect_ratio = { opt.aspect_ratio }
 				key="1"
-				style = { embedStyle }
+				style = {
+					{
+						width: `${opt.width}px`,
+						maxWidth: '100%'
+					}
+				}
 				onLoad = {
 					event  => cvm_resize_player( event.currentTarget )
 				}
