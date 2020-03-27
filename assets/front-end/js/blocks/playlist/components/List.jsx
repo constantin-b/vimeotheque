@@ -139,8 +139,9 @@ class List extends React.Component{
     }
 
     render(){
-        if( !this.state.loading && this.state.posts.length == 0 ){
-            return(
+        return(
+            !this.state.loading && this.state.posts.length == 0
+                ?
                 <div className="vimeotheque-error">
                     {
                         this.state.error ?
@@ -148,45 +149,42 @@ class List extends React.Component{
                             __( 'We couldn\'t find any video posts, sorry.', 'cvm_video' )
                     }
                 </div>
-            )
-        }
-
-        return(
-            <div className="vimeotheque-entries-container">
-                <div className="vimeotheque-entries row">
-                    {
-                        this.state.posts.map(
-                            (post, index) => (
-                                <ListItem
-                                    className={
-                                        this.hasPost(post) &&
-                                            'vimeotheque-selected-post'
-                                    }
-                                    post={post}
-                                    onSelect={
-                                        post => {
-                                            if( this.hasPost( post ) ){
-                                                this.props.onRemove( post )
-                                            }else{
-                                                this.props.onSelect( post )
+                :
+                <div className="vimeotheque-entries-container">
+                    <div className="vimeotheque-entries row">
+                        {
+                            this.state.posts.map(
+                                (post, index) => (
+                                    <ListItem
+                                        className={
+                                            this.hasPost(post) &&
+                                                'vimeotheque-selected-post'
+                                        }
+                                        post={post}
+                                        onSelect={
+                                            post => {
+                                                if( this.hasPost( post ) ){
+                                                    this.props.onRemove( post )
+                                                }else{
+                                                    this.props.onSelect( post )
+                                                }
                                             }
                                         }
-                                    }
-                                    selectText={ this.selectText( post ) }
-                                    key={post.id}
-                                />
+                                        selectText={ this.selectText( post ) }
+                                        key={post.id}
+                                    />
+                                )
                             )
-                        )
+                        }
+                    </div>
+                    {
+                        this.state.loading &&
+                            <div className="vimeotheque-loading">
+                                <Spinner />
+                                { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
+                            </div>
                     }
                 </div>
-                {
-                    this.state.loading &&
-                        <div className="vimeotheque-loading">
-                            <Spinner />
-                            { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
-                        </div>
-                }
-            </div>
         )
     }
 }
