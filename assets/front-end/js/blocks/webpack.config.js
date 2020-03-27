@@ -10,10 +10,14 @@ const mode = isProduction ? 'production' : 'development';
 
 module.exports = {
     mode,
-    entry: './block.js',
+    entry: {
+        playlist: './playlist/block.js',
+        video_position: './video_position/block.js',
+        video: './video/block.js'
+    },
     output: {
         path: __dirname,
-        filename: 'block.build.js',
+        filename: '[name]/block.build.js',
     },
     externals,
     module: {

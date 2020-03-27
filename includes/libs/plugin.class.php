@@ -4,6 +4,7 @@ namespace Vimeotheque;
 
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\WP_Customizer;
+use Vimeotheque\Blocks\Block_Abstract;
 use Vimeotheque\Blocks\Blocks_Factory;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
@@ -428,11 +429,11 @@ class Plugin{
 	 *
 	 * @param string $key - string key for the block
 	 *
-	 * @return \WP_Block_Type
+	 * @return Block_Abstract - returns the registered block
 	 * @see Blocks_Factory::register_blocks() for all keys
 	 */
 	public function get_block( $key ) {
-		return $this->blocks_factory->get_block( $key )->get_wp_block_type();
+		return $this->blocks_factory->get_block( $key );
 	}
 
 	/**

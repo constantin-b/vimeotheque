@@ -1,9 +1,9 @@
 import VideoPostsList from './components/VideoPostsList'
 import VimeothequeServerSideRender from './components/VimeothequeServerSideRender'
 import SearchForm from "./components/SearchForm";
-import { size, keys, map, merge } from 'lodash'
 import CategoryList from "./components/CategoryList";
-import TestComponent from "./components/TestComponent";
+import ListMenu from "./components/ListMenu";
+import { size, keys, map, merge } from 'lodash'
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -64,14 +64,11 @@ registerBlockType( 'vimeotheque/video-playlist', {
             [taxonomy, setTaxonomy] = useState( 'vimeo-videos' ),
             [postType, setPostType] = useState( 'vimeo-video' ),
             [isRequestLoading, setRequestLoading] = useState( false ),
-            openModal = (e) => {
+            openModal = e => {
                 e.stopPropagation()
                 setOpen( true )
             },
-            closeModal = () => {
-                setOpen( false )
-            },
-
+            closeModal = () => setOpen( false ),
             // posts selection
             selectPost = (post) => {
                 let vids = [...attributes.videos, post ]
@@ -166,7 +163,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     cat_ids: attributes.cat_ids
                                 }
                             }
-                            onUpdate = { ( state )=>{
+                            onUpdate = { state =>{
                                 setTimeout( ()=>{
                                     window.vimeotheque.themeDefault()
                                     if( undefined != window.vimeotheque.themeCarousel ) {
@@ -181,12 +178,12 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 { ( attributes.videos.length == 0 && attributes.categories.length == 0  ) &&
                     <Placeholder
                         icon="playlist-video"
-                        label={__('Video playlist', 'cvm_video')}
+                        label={ __('Video playlist', 'cvm_video') }
                     >
                         <Button
                             isPrimary
-                            onClick={openModal}>
-                            {__(' Choose posts', 'cvm_video')}
+                            onClick={ openModal }>
+                            { __(' Choose posts', 'cvm_video') }
                         </Button>
                     </Placeholder>
                 }
@@ -199,38 +196,39 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             className = 'vimeotheque-posts-list-modal'
                         >
                             <div className="wrapper">
-                                <VideoPostsList
-                                    onSelect = { selectPost }
-                                    onRemove = { unselectPost }
-                                    filteredPosts = { attributes.videos }
-                                    filteredCategories={attributes.cat_ids}
-                                    search={ search }
-                                    postType={postType}
-                                    taxonomy={taxonomy}
-                                    onPostTypeChange = {
-                                        ( postType ) => {
-                                            setShowSearch( 'selected' != postType )
-                                            setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
-                                            setPostType( postType )
-                                            setSearch({query:'', category:false})
+                                <div className="vimeotheque-post-list-container">
+                                    <ListMenu
+                                        postType={postType}
+                                        disabled={isRequestLoading}
+                                        textSelected={ `${__( 'Selected', 'cvm_video' )} ${attributes.videos.length}\\${attributes.cat_ids.length}` }
+                                        onPostTypeChange={
+                                            postType => {
+                                                setShowSearch( 'selected' != postType )
+                                                setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
+                                                setSearch({ query:'', category:false })
+                                                setPostType( postType )
+                                            }
                                         }
-                                    }
-                                    onRequestBegin = {
-                                        () => {
-                                            setRequestLoading(true)
+                                    />
+                                    <VideoPostsList
+                                        onSelect = { selectPost }
+                                        onRemove = { unselectPost }
+                                        filteredPosts = { attributes.videos }
+                                        filteredCategories={ attributes.cat_ids }
+                                        search={ search }
+                                        postType={ postType }
+                                        taxonomy={ taxonomy }
+                                        onRequestBegin = {
+                                            () => setRequestLoading(true)
                                         }
-                                    }
-                                    onRequestFinish = {
-                                        () => {
-                                            setRequestLoading(false)
+                                        onRequestFinish = {
+                                            () => setRequestLoading(false)
                                         }
-                                    }
-                                    onRequestError = {
-                                        () => {
-                                            setRequestLoading(false)
+                                        onRequestError = {
+                                            () => setRequestLoading(false)
                                         }
-                                    }
-                                />
+                                    />
+                                </div>
                                 <nav className="sidebar">
                                     {
                                         showSearch ?
@@ -241,15 +239,11 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                                 selectedCategories={attributes.categories}
                                                 values={ search }
                                                 onSubmit = {
-                                                    value => {
-                                                        setSearch( value )
-                                                    }
+                                                    value => setSearch( value )
                                                 }
                                                 onCategorySelect = {
                                                     // array of selected category ID's
-                                                    categories => {
-                                                        updateCategories( categories )
-                                                    }
+                                                    categories => updateCategories( categories )
                                                 }
                                                 onCategoriesUpdate = {
                                                     categories => {
@@ -265,9 +259,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                                 title={ __( 'Vimeotheque categories', 'cvm_video' ) }
                                                 categories={attributes.categories}
                                                 onChange={
-                                                    categories => {
-                                                        updateCategories( categories )
-                                                    }
+                                                    categories => updateCategories( categories )
                                                 }
                                             />
 
@@ -275,9 +267,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                                 taxonomy='category'
                                                 categories={attributes.categories}
                                                 onChange={
-                                                    categories => {
-                                                        updateCategories( categories )
-                                                    }
+                                                    categories => updateCategories( categories )
                                                 }
                                             />
                                         </>
@@ -300,7 +290,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             value = {attributes.theme}
                             options = { themes }
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     setAttributes({
                                         theme: value
                                     })
@@ -316,7 +306,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             value = { attributes.width }
                             min = "200"
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     setAttributes({
                                         width: value
                                     })
@@ -334,7 +324,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 { label: '2.35x1', value: '2.35x1' },
                             ]}
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     setAttributes({
                                         aspect_ratio: value
                                     })
@@ -410,7 +400,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             min = "0"
                             max = "100"
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     let vol = ( value >= 0 && value <= 100 ) ? value : attributes.volume;
                                     setAttributes({
                                         volume: vol
@@ -425,8 +415,5 @@ registerBlockType( 'vimeotheque/video-playlist', {
         ]
     },
 
-    save: ( props ) => {
-        return null;
-    },
-
+    save: props => null
 } );

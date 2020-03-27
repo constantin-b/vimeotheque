@@ -40,8 +40,9 @@ class Blocks_Factory {
 	 * Register plugin blocks
 	 */
 	public function register_blocks(){
-		$this->blocks['video'] = new Video( $this->plugin );
+		$this->blocks['video_position'] = new Video_Position( $this->plugin );
 		$this->blocks['playlist'] = new Playlist( $this->plugin );
+		$this->blocks['video'] = new Video( $this->plugin );
 	}
 
 	/**

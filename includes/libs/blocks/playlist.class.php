@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Video
  * @package Vimeotheque\Blocks
  */
-class Playlist extends Block_Abstract {
+class Playlist extends Block_Abstract implements Block_Interface {
 	/**
 	 * Video constructor.
 	 *
@@ -25,8 +25,9 @@ class Playlist extends Block_Abstract {
 			'vimeotheque-playlist-block',
 			'playlist'
 		);
+		parent::register_style( 'vimeotheque-playlist-block', 'playlist', true );
 
-		$block_type = register_block_type(
+		parent::register_block_type(
 			'vimeotheque/video-playlist',
 			[
 				'attributes' => [
@@ -95,9 +96,9 @@ class Playlist extends Block_Abstract {
 						]
 					]
 				],
-				'editor_script' => $handle,
+				'editor_script' => parent::get_script_handle(),
 				'editor_style' => [
-					'vimeotheque-playlist-block',
+					parent::get_editor_style_handle(),
 					'bootstrap-grid2'
 				],
 				'render_callback' => function( $attr ){
@@ -112,7 +113,6 @@ class Playlist extends Block_Abstract {
 				}
 			]
 		);
-		parent::register_block_type( $block_type );
 
 		$themes = Plugin::$instance->get_playlist_themes()->get_themes();
 		$_themes = [];
@@ -134,8 +134,9 @@ class Playlist extends Block_Abstract {
 			);
 
  		}
+
 		$r = wp_localize_script(
-			$handle,
+			parent::get_script_handle(),
 			'vmtq',
 			[
 				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg',
@@ -143,36 +144,19 @@ class Playlist extends Block_Abstract {
 			]
 		);
 
-		$css_handle = parent::register_style( 'vimeotheque-playlist-block', 'playlist' );
 		wp_register_style(
 			'bootstrap-grid2',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
-			['vimeotheque-playlist-block']
+			[ parent::get_editor_style_handle() ]
 		);
 
-		cvm_enqueue_player( $handle, $css_handle );
+		cvm_enqueue_player( $handle, parent::get_editor_style_handle() );
 
 		wp_enqueue_script( 'jquery-masonry' );
 
-		//parent::register_style( 'vimeotheque-front-video-block', 'video', 'frontend' );
 
-		//add_action( 'admin_enqueue_scripts', [ $this, 'init' ] );
 
 		$this->set_rest_meta_queries();
-	}
-
-	/**
-	 *
-	 */
-	public function init(){
-		global $post;
-		$_post = Helper::get_video_post( $post );
-		if( $_post->is_video() ){
-			unregister_block_type( parent::get_wp_block_type() );
-			//wp_deregister_script( 'vimeotheque-video-block' );
-			wp_deregister_style( 'vimeotheque-playlist-block' );
-			//wp_deregister_style( 'vimeotheque-front-video-block' );
-		}
 	}
 
 	/**

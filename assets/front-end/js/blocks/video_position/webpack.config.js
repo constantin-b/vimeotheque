@@ -2,7 +2,6 @@ const externals = {
     wp: 'wp',
     react: 'React',
     'react-dom': 'ReactDOM',
-    lodash: 'lodash'
 };
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -19,7 +18,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$|jsx/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -27,7 +26,4 @@ module.exports = {
             },
         ],
     },
-    resolve: {
-        extensions: ['.js','.jsx']
-    }
 };
