@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Video
  * @package Vimeotheque\Blocks
  */
-class Video extends Block_Abstract {
+class Video_Position extends Block_Abstract {
 	/**
 	 * Video constructor.
 	 *
