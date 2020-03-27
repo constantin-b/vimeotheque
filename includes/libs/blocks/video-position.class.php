@@ -1,6 +1,5 @@
 <?php
 namespace Vimeotheque\Blocks;
-use Vimeotheque\Front_End;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use function Vimeotheque\get_video_embed_html;
@@ -22,10 +21,14 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	public function __construct( Plugin $plugin ) {
 		parent::__construct( $plugin );
 
-		$handle = parent::register_script( 'vimeotheque-video-block', 'video_position' );
+		parent::register_script( 'vimeotheque-video-position-block', 'video_position' );
+		parent::register_style( 'vimeotheque-video-block', 'video', true );
+		parent::register_style( 'vimeotheque-front-video-block', 'video' );
 
-		$block_type = register_block_type( 'vimeotheque/video-position', [
-			'editor_script' => $handle,
+		parent::register_block_type( 'vimeotheque/video-position', [
+			'editor_script' => parent::get_script_handle(),
+			'editor_style' => parent::get_editor_style_handle(),
+			'style' => parent::get_style_handle(),
 			'render_callback' => function(){
 				/**
 				 * Remove default action that embeds the video in front-end
@@ -41,7 +44,6 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				return get_video_embed_html( $post, false );
 			}
 		] );
-		parent::register_block_type( $block_type );
 
 		register_post_meta(
 			'',
@@ -92,9 +94,6 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 			]
 		);
 
-		parent::register_style( 'vimeotheque-video-block', 'video' );
-		parent::register_style( 'vimeotheque-front-video-block', 'video', 'frontend' );
-
 		add_action( 'admin_enqueue_scripts', [ $this, 'init' ] );
 		add_action( 'the_post', [ $this, 'force_video_block' ], -99999, 2 );
 	}
@@ -106,10 +105,10 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		global $post;
 		$_post = Helper::get_video_post( $post );
 		if( !$_post->is_video() ){
-			unregister_block_type( parent::get_wp_block_type() );
-			wp_deregister_script( 'vimeotheque-video-block' );
-			wp_deregister_style( 'vimeotheque-video-block' );
-			wp_deregister_style( 'vimeotheque-front-video-block' );
+			unregister_block_type( parent::get_wp_block_type()->name );
+			wp_deregister_script( parent::get_script_handle() );
+			wp_deregister_style( parent::get_editor_style_handle() );
+			wp_deregister_style( parent::get_style_handle() );
 		}
 	}
 
