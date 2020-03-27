@@ -46,18 +46,21 @@ class ListMenu extends React.Component{
                     onClick={ this.handlePostTypeChange }
                     disabled={this.props.disabled}
                 />
-                <Button
-                    isLink
-                    className={ this.selectedClassName( 'selected', 'selected-posts' ) }
-                    disabled={this.props.disabled}
-                    onClick={
-                        ()=>{
-                            this.handlePostTypeChange( 'selected' )
+                {
+                    !this.props.hideSelected &&
+                    <Button
+                        isLink
+                        className={ this.selectedClassName( 'selected', 'selected-posts' ) }
+                        disabled={this.props.disabled}
+                        onClick={
+                            ()=>{
+                                this.handlePostTypeChange( 'selected' )
+                            }
                         }
-                    }
-                >
-                    { this.props.textSelected }
-                </Button>
+                    >
+                        { this.props.textSelected }
+                    </Button>
+                }
             </ButtonGroup>
         )
     }
@@ -67,6 +70,7 @@ ListMenu.defaultProps = {
     postType: 'vimeo-video',
     disabled: false,
     textSelected: __('Selected', 'cvm_video'),
+    hideSelected: false,
     onPostTypeChange: () => {}
 }
 
