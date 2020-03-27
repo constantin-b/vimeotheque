@@ -485,7 +485,7 @@ class Post_Edit_Page{
 			<th><label for="cvm_video_position"><?php _e('Display video','cvm_video');?>:</label></th>
 			<td>
 			<?php
-				if( has_block( Plugin::instance()->get_block( 'video' )->name, $post ) ):
+				if( has_block( Plugin::instance()->get_block( 'video_position' )->name, $post ) ):
 					$this->option_override(
 						'video_position',
 						__( 'Video position option is disabled because we found a Block Editor video block in your post which will be used to position the video into the post content.', 'cvm_video' )
