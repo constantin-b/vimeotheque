@@ -43,7 +43,7 @@ registerBlockType( 'vimeotheque/video-position', {
 		}
 	},
 
-	edit: ( props ) => {
+	edit: props => {
 		const {
 			attributes: {
 				embed_options,
@@ -83,9 +83,9 @@ registerBlockType( 'vimeotheque/video-position', {
 				data-aspect_ratio = { opt.aspect_ratio }
 				key="1"
 				style = { embedStyle }
-				onLoad = { ( event ) => {
-					cvm_resize_player( event.currentTarget )
-				} }
+				onLoad = {
+					event  => cvm_resize_player( event.currentTarget )
+				}
 			>
 				<iframe
 					src={
@@ -122,7 +122,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								label = { __( 'Show title', 'cvm_video' ) }
 								checked = {opt.title}
 								onChange = {
-									() => { onFormToggleChange( 'title' ) }
+									() => onFormToggleChange( 'title' )
 								}
 							/>
 						</PanelRow>
@@ -131,7 +131,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								label = { __( 'Show byline', 'cvm_video' ) }
 								checked = {opt.byline}
 								onChange = {
-									() => { onFormToggleChange( 'byline' ) }
+									() => onFormToggleChange( 'byline' )
 								}
 							/>
 						</PanelRow>
@@ -140,7 +140,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								label = { __( 'Show portrait', 'cvm_video' ) }
 								checked = {opt.portrait}
 								onChange = {
-									() => { onFormToggleChange( 'portrait' ) }
+									() => onFormToggleChange( 'portrait' )
 								}
 							/>
 						</PanelRow>
@@ -149,7 +149,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								label = { __( 'Loop video', 'cvm_video' ) }
 								checked = {opt.loop}
 								onChange =  {
-									() => { onFormToggleChange( 'loop' ) }
+									() => onFormToggleChange( 'loop' )
 								}
 							/>
 						</PanelRow>
@@ -159,7 +159,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								help = { __( "This feature won't work on all browsers.", 'cvm_video' ) }
 								checked = {opt.autoplay}
 								onChange =  {
-									() => { onFormToggleChange( 'autoplay' ) }
+									() => onFormToggleChange( 'autoplay' )
 								}
 							/>
 						</PanelRow>
@@ -173,7 +173,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								min = "0"
 								max = "100"
 								onChange = {
-									( value ) => {
+									value => {
 										opt.volume = ( value >= 0 && value <= 100 ) ? value : opt.volume;
 										setAttributes({
 											embed_options: JSON.stringify( opt )
@@ -196,7 +196,7 @@ registerBlockType( 'vimeotheque/video-position', {
 									value = { opt.width }
 									min = "200"
 									onChange = {
-										( value ) => {
+										value => {
 											opt.width = ( !value || value < 200 ) ? 200 : value;
 											setAttributes({
 												embed_options: JSON.stringify( opt )
@@ -217,7 +217,7 @@ registerBlockType( 'vimeotheque/video-position', {
 									{ label: '2.35x1', value: '2.35x1' },
 								]}
 								onChange = {
-									( value ) => {
+									value => {
 										opt.aspect_ratio = value;
 										setAttributes({
 											embed_options: JSON.stringify( opt )
@@ -237,17 +237,17 @@ registerBlockType( 'vimeotheque/video-position', {
 							<label>
 								{ __( 'Player color', 'cvm_video' ) + sep }
 								<ColorIndicator
-									colorValue = { '#' + opt.color }
+									colorValue = { `#${opt.color}` }
 								/>
-								<span>{ opt.color ? ' #' + opt.color : '' }</span>
+								<span>{ opt.color && `#${opt.color}` }</span>
 							</label>
 						</PanelRow>
 
 						<PanelRow>
 							<ColorPalette
-								value = { '#' + opt.color }
+								value = { `#${opt.color}` }
 								onChange = {
-									( color ) => {
+									color => {
 										opt.color = color.replace( '#', '' );
 										setAttributes({
 											embed_options: JSON.stringify( opt )
@@ -262,8 +262,6 @@ registerBlockType( 'vimeotheque/video-position', {
 		];
 	},
 
-	save: ( props ) => {
-		return null;
-	},
+	save: props => null
 
 } );
