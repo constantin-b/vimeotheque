@@ -1,9 +1,9 @@
 import VideoPostsList from './components/VideoPostsList'
 import VimeothequeServerSideRender from './components/VimeothequeServerSideRender'
 import SearchForm from "./components/SearchForm";
-import { size, keys, map, merge } from 'lodash'
 import CategoryList from "./components/CategoryList";
-import TestComponent from "./components/TestComponent";
+import ListMenu from "./components/ListMenu";
+import { size, keys, map, merge } from 'lodash'
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -199,38 +199,45 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             className = 'vimeotheque-posts-list-modal'
                         >
                             <div className="wrapper">
-                                <VideoPostsList
-                                    onSelect = { selectPost }
-                                    onRemove = { unselectPost }
-                                    filteredPosts = { attributes.videos }
-                                    filteredCategories={attributes.cat_ids}
-                                    search={ search }
-                                    postType={postType}
-                                    taxonomy={taxonomy}
-                                    onPostTypeChange = {
-                                        ( postType ) => {
-                                            setShowSearch( 'selected' != postType )
-                                            setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
-                                            setPostType( postType )
-                                            setSearch({query:'', category:false})
+                                <div className="vimeotheque-post-list-container">
+                                    <ListMenu
+                                        postType={postType}
+                                        disabled={isRequestLoading}
+                                        textSelected={ `${__( 'Selected', 'cvm_video' )} ${attributes.videos.length}\\${attributes.cat_ids.length}` }
+                                        onPostTypeChange={
+                                            ( postType ) => {
+                                                setShowSearch( 'selected' != postType )
+                                                setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
+                                                setSearch({ query:'', category:false })
+                                                setPostType( postType )
+                                            }
                                         }
-                                    }
-                                    onRequestBegin = {
-                                        () => {
-                                            setRequestLoading(true)
+                                    />
+                                    <VideoPostsList
+                                        onSelect = { selectPost }
+                                        onRemove = { unselectPost }
+                                        filteredPosts = { attributes.videos }
+                                        filteredCategories={attributes.cat_ids}
+                                        search={ search }
+                                        postType={postType}
+                                        taxonomy={taxonomy}
+                                        onRequestBegin = {
+                                            () => {
+                                                setRequestLoading(true)
+                                            }
                                         }
-                                    }
-                                    onRequestFinish = {
-                                        () => {
-                                            setRequestLoading(false)
+                                        onRequestFinish = {
+                                            () => {
+                                                setRequestLoading(false)
+                                            }
                                         }
-                                    }
-                                    onRequestError = {
-                                        () => {
-                                            setRequestLoading(false)
+                                        onRequestError = {
+                                            () => {
+                                                setRequestLoading(false)
+                                            }
                                         }
-                                    }
-                                />
+                                    />
+                                </div>
                                 <nav className="sidebar">
                                     {
                                         showSearch ?
