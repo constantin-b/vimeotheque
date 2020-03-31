@@ -187,16 +187,19 @@ registerBlockType( 'vimeotheque/video', {
                                         }
                                     />
                                 </div>
-                                <nav className="sidebar">
-                                    <SearchForm
-                                        blocked = { isRequestLoading }
-                                        taxonomy={ taxonomy }
-                                        values={ search }
-                                        onSubmit = {
-                                            value => setSearch( value )
-                                        }
-                                    />
-                                </nav>
+                                {
+                                    'selected' != postType &&
+                                    <nav className="sidebar">
+                                        <SearchForm
+                                            blocked = { isRequestLoading }
+                                            taxonomy={ taxonomy }
+                                            values={ search }
+                                            onSubmit = {
+                                                value => setSearch( value )
+                                            }
+                                        />
+                                    </nav>
+                                }
                             </div>
                         </Modal>
                     )
