@@ -146,7 +146,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 						
 						<div id="postbox-container-1" class="postbox-container">
 							<div id="side-sortables" class="meta-box-sortables">
-					        	<?php do_meta_boxes( $page_hook, 'side', null );?>
+					        	<?php do_meta_boxes( get_current_screen()->id, 'side', null );?>
 					            <?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );?>
 								<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );?>
 				        	</div>
