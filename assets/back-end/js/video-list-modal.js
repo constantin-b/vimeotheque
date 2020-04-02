@@ -204,14 +204,8 @@
 			$(attsContainer).empty();
 			$(form).show();
 			
-			// check for Gutenberg
-			if( typeof window.parent.wp.data != 'undefined' ){
-				var block = window.parent.wp.blocks.createBlock( 'core/shortcode', { text: shortcode } );
-				window.parent.wp.data.dispatch( 'core/editor' ).insertBlocks( block );
-			}else{
-				window.parent.send_to_editor(shortcode);
-			}
-
+			window.parent.send_to_editor(shortcode);
+			
 			window.parent.jQuery(window.parent.window.CVMVideo_DIALOG_WIN).dialog('close');
 			
 		})
