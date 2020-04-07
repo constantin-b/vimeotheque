@@ -114,6 +114,27 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			]
 		);
 
+		add_action( 'enqueue_block_editor_assets ', [ $this, 'editor_assets' ] );
+
+		//*
+
+
+		//*/
+		wp_register_style(
+			'bootstrap-grid2',
+			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
+			[ parent::get_editor_style_handle() ]
+		);
+
+		$this->set_rest_meta_queries();
+	}
+
+	public function editor_assets(){
+
+		if( !parent::is_active() ){
+			return;
+		}
+
 		$themes = Plugin::$instance->get_playlist_themes()->get_themes();
 		$_themes = [];
 		foreach( $themes as $key => $theme ){
@@ -125,7 +146,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			wp_enqueue_script(
 				'vimeotheque-' . strtolower( $key ) . '-script',
 				$theme->get_js_url(),
-				[ $handle ]
+				[ parent::get_script_handle() ]
 			);
 
 			wp_enqueue_style(
@@ -133,7 +154,8 @@ class Playlist extends Block_Abstract implements Block_Interface {
 				$theme->get_style_url()
 			);
 
- 		}
+		}
+
 
 		$r = wp_localize_script(
 			parent::get_script_handle(),
@@ -144,19 +166,9 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			]
 		);
 
-		wp_register_style(
-			'bootstrap-grid2',
-			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
-			[ parent::get_editor_style_handle() ]
-		);
 
-		cvm_enqueue_player( $handle, parent::get_editor_style_handle() );
-
+		cvm_enqueue_player( parent::get_script_handle(), parent::get_editor_style_handle() );
 		wp_enqueue_script( 'jquery-masonry' );
-
-
-
-		$this->set_rest_meta_queries();
 	}
 
 	/**
