@@ -15,7 +15,7 @@ const SearchForm = ( props ) => {
     return (
         <div className='vimeotheque-search-form'>
             <TextControl
-                label= { `${__( 'Insert video URL or search query', 'cvm_video' )} : ` }
+                label= { `${__( 'Insert Vimeo video URL or video ID', 'cvm_video' )} : ` }
                 help = { __( '', 'cvm_video' ) }
                 value = { query }
                 onChange = {
