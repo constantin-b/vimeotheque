@@ -438,6 +438,13 @@ class Plugin{
 	}
 
 	/**
+	 * @return Blocks_Factory
+	 */
+	public function get_blocks(){
+		return $this->blocks_factory;
+	}
+
+	/**
 	 * Load dependencies
 	 * @return void
 	 */
