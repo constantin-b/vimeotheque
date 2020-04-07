@@ -8,7 +8,7 @@ export const videoQueryApplyWithSelect = ( Component, props ) => {
 
         const [state, setState] = useState( {
             loading: true,
-            video: false,
+            response: false,
             error: false
         } )
 
@@ -16,7 +16,7 @@ export const videoQueryApplyWithSelect = ( Component, props ) => {
             if( !state.loading ){
                 setState({
                     loading: true,
-                    video: false,
+                    response: false,
                     error: false
                 })
             }
@@ -30,7 +30,7 @@ export const videoQueryApplyWithSelect = ( Component, props ) => {
                 result => {
                     setState({
                         loading: false,
-                        video: result,
+                        response: result,
                         error: false
                     })
                 }
@@ -38,7 +38,7 @@ export const videoQueryApplyWithSelect = ( Component, props ) => {
                 error => {
                     setState({
                         loading: false,
-                        video: false,
+                        response: false,
                         error: error
                     })
                 }

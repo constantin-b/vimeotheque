@@ -52,7 +52,7 @@ const VideoQueryBase = ( props ) => {
                                     </Notice>
                                 :
                                 <Video
-                                    data={props.video}
+                                    data={props.response}
                                     onClick={props.onSubmit}
                                     onCancel={props.onCancel}
                                 />
@@ -65,7 +65,7 @@ const VideoQueryBase = ( props ) => {
 
 VideoQueryBase.defaultProps = {
     loading: false,
-    video: false,
+    response: false,
     error: false,
     query: '',
     onSubmit: () => {}

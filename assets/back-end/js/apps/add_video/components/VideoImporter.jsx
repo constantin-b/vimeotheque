@@ -72,6 +72,9 @@ const VideoImporterBase = props => {
 
 VideoImporterBase.defaultProps = {
     video: {},
+    loading: false,
+    response: false,
+    error: false,
     onMessageClose: () => {}
 }
 
