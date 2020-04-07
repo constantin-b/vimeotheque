@@ -46,6 +46,29 @@ class Blocks_Factory {
 	}
 
 	/**
+	 * Unregisters a block
+	 *
+	 * @param $key
+	 *
+	 * @return bool
+	 */
+	public function unregister_block( $key ){
+		if( array_key_exists( $key, $this->blocks ) ){
+			$this->blocks[ $key ]->deactivate();
+			return true;
+		}
+	}
+
+	/**
+	 * Deactivate all blocks
+	 */
+	public function unregister_blocks(){
+		foreach( $this->blocks as $block ){
+			$block->deactivate();
+		}
+	}
+
+	/**
 	 * @return Block_Abstract[]
 	 */
 	public function get_blocks(){
