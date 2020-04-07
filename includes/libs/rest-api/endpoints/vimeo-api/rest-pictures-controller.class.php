@@ -1,7 +1,9 @@
 <?php
 
-namespace Vimeotheque\Rest_Api\Endpoints;
+namespace Vimeotheque\Rest_Api\Endpoints\Vimeo_Api;
 
+use Vimeotheque\Rest_Api\Endpoints\Rest_Controller_Abstract;
+use Vimeotheque\Rest_Api\Endpoints\Rest_Controller_Interface;
 use Vimeotheque\Video_Import;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +29,7 @@ class Rest_Pictures_Controller extends Rest_Controller_Abstract implements Rest_
 			parent::get_namespace(),
 			parent::get_rest_base(),
 			[
-				'method' => \WP_REST_Server::READABLE,
+				'methods' => \WP_REST_Server::READABLE,
 				'callback' => [ $this, 'get_response' ],
 				'permission_callback' => function(){
 					return current_user_can( 'upload_files' );
