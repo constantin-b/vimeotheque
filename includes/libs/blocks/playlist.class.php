@@ -21,7 +21,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	public function __construct( Plugin $plugin ) {
 		parent::__construct( $plugin );
 
-		$handle = parent::register_script(
+		parent::register_script(
 			'vimeotheque-playlist-block',
 			'playlist'
 		);
@@ -114,12 +114,15 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			]
 		);
 
-		add_action( 'enqueue_block_editor_assets ', [ $this, 'editor_assets' ] );
+		add_action(
+			'enqueue_block_editor_assets',
+			[
+				$this,
+				'editor_assets'
+			],
+			-999999999
+		);
 
-		//*
-
-
-		//*/
 		wp_register_style(
 			'bootstrap-grid2',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
@@ -129,6 +132,9 @@ class Playlist extends Block_Abstract implements Block_Interface {
 		$this->set_rest_meta_queries();
 	}
 
+	/**
+	 * Enqueue editor assets if needed
+	 */
 	public function editor_assets(){
 
 		if( !parent::is_active() ){
@@ -156,8 +162,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 
 		}
 
-
-		$r = wp_localize_script(
+		wp_localize_script(
 			parent::get_script_handle(),
 			'vmtq',
 			[
@@ -165,7 +170,6 @@ class Playlist extends Block_Abstract implements Block_Interface {
 				'themes' => $_themes
 			]
 		);
-
 
 		cvm_enqueue_player( parent::get_script_handle(), parent::get_editor_style_handle() );
 		wp_enqueue_script( 'jquery-masonry' );
