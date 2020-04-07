@@ -34,23 +34,22 @@ const Video = ( props ) => {
                         {`by ${props.data.uploader}`}
                     </span>
                 </div>
-                <ButtonGroup>
-                    <Button
-                        isPrimary
-                        onClick={
-                            ()=>{
-                                props.onClick( props.data )
-                            }
+                <Button
+                    isPrimary
+                    onClick={
+                        ()=>{
+                            props.onClick( props.data )
                         }
-                    >
-                        { __( 'Import video', 'cvm_video' ) }
-                    </Button>
-                    <Button
-                        onClick={props.onCancel}
-                    >
-                        { __( 'Cancel', 'cvm_video' ) }
-                    </Button>
-                </ButtonGroup>
+                    }
+                >
+                    { __( 'Import video', 'cvm_video' ) }
+                </Button>
+                <Button
+                    isSecondary
+                    onClick={props.onCancel}
+                >
+                    { __( 'Cancel', 'cvm_video' ) }
+                </Button>
             </div>
         </div>
     )
