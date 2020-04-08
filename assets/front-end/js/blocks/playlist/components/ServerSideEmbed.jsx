@@ -8,13 +8,9 @@ const /*ServerSideRender = wp.serverSideRender || wp.components.ServerSideRender
     { Placeholder, Spinner } = wp.components,
     { __ } = wp.i18n
 
-const ServerSideRenderExtended = props => {
+const ServerSideEmbed = props => {
 
     const [loading, setLoading] = useState( true )
-
-    useEffect( () => {
-
-    } )
 
     return (
         <>
@@ -71,9 +67,9 @@ const Loader = props => {
     )
 }
 
-ServerSideRenderExtended.defaultProps = {
+ServerSideEmbed.defaultProps = {
     onComplete: false,
     isSelected: false
 }
 
-export default ServerSideRenderExtended
+export default ServerSideEmbed
