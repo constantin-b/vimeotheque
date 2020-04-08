@@ -1,4 +1,4 @@
-import VimeothequeTreeSelect from "./VimeothequeTreeSelect"
+import TreeSelect from "./TreeSelect"
 import { findIndex, pull, has, concat, filter, find } from 'lodash'
 
 const { __ } = wp.i18n,
@@ -95,7 +95,7 @@ class SearchForm extends React.Component{
                     }
                 />
 
-                <VimeothequeTreeSelect
+                <TreeSelect
                     label={ __( 'Category', 'cvm_video' ) }
                     noOptionLabel={ __('Choose category', 'cvm_video') }
                     taxonomy={this.props.taxonomy}
