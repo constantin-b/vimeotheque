@@ -15,7 +15,7 @@ const {
       } = wp.components,
       { __ } = wp.i18n
 
-class VimeothequeTreeSelectBase extends React.Component{
+class TreeSelectBase extends React.Component{
     constructor(props) {
         super( props )
 
@@ -67,7 +67,7 @@ class VimeothequeTreeSelectBase extends React.Component{
     }
 }
 
-VimeothequeTreeSelectBase.defaultProps = {
+TreeSelectBase.defaultProps = {
     label: false,
     noOptionLabel: false,
     onChange: ()=>{},
@@ -76,10 +76,10 @@ VimeothequeTreeSelectBase.defaultProps = {
     selectedId: false,
 }
 
-const VimeothequeTreeSelect = termQueryApplyWithSelect( VimeothequeTreeSelectBase )
+const TreeSelect = termQueryApplyWithSelect( TreeSelectBase )
 
-VimeothequeTreeSelect.defaultProps = {
+TreeSelect.defaultProps = {
     taxonomy: 'vimeo-videos'
 }
 
-export default VimeothequeTreeSelect
+export default TreeSelect
