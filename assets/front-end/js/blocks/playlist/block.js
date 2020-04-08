@@ -1,5 +1,5 @@
 import VideoPostsList from './components/VideoPostsList'
-import VimeothequeServerSideRender from './components/VimeothequeServerSideRender'
+import ServerSideRenderExtended from './components/ServerSideRenderExtended'
 import SearchForm from "./components/SearchForm";
 import CategoryList from "./components/CategoryList";
 import ListMenu from "./components/ListMenu";
@@ -124,7 +124,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
         }
 
         return [
-            <>
+            <div key='vimeotheque-playlist-block'>
                 {
                     ( attributes.videos.length > 0 || attributes.categories.length > 0 ) &&
                     <>
@@ -146,7 +146,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 </Tooltip>
                             </div>
                         </BlockControls>
-                        <VimeothequeServerSideRender
+                        <ServerSideRenderExtended
                             block="vimeotheque/video-playlist"
                             attributes={
                                 {
@@ -163,14 +163,15 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     cat_ids: attributes.cat_ids
                                 }
                             }
-                            onUpdate = { state =>{
+                            onComplete = { () =>{
                                 setTimeout( ()=>{
                                     window.vimeotheque.themeDefault()
                                     if( undefined != window.vimeotheque.themeCarousel ) {
                                         window.vimeotheque.themeCarousel()
                                     }
-                                }, 5000 )
+                                }, 200 )
                             } }
+                            isSelected={props.isSelected}
                         />
                     </>
                 }
@@ -278,9 +279,9 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     )
                 }
 
-            </>,
+            </div>,
 
-            <InspectorControls>
+            <InspectorControls key='vimeotheque-playlist-controls'>
                 <PanelBody
                     title={ __( 'Theme', 'cvm_video' ) }
                 >
