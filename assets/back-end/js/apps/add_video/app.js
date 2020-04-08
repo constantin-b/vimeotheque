@@ -14,7 +14,7 @@ const VideoImportApp  = ( props ) => {
     const [video, setVideo] = useState( false )
 
     return (
-        <div className='vimeotheque-video-import-app'>
+        <div className='vimeotheque-video-import-app' key='vimeotheque-single-video-import-app'>
             {
                 video &&
                     <VideoImporter
