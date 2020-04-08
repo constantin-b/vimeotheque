@@ -11,7 +11,10 @@ const mode = isProduction ? 'production' : 'development';
 module.exports = {
     mode,
     entry: {
-        add_video: './add_video/app.js'
+        add_video: './add_video/app.js',
+        'block-editor/playlist': './block-editor/playlist/block.js',
+        'block-editor/video_position': './block-editor/video_position/block.js',
+        'block-editor/video': './block-editor/video/block.js'
     },
     output: {
         path: __dirname,

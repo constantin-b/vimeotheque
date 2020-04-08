@@ -77,7 +77,7 @@ class Block_Abstract {
 	protected function register_script( $handle, $block ){
 		wp_register_script(
 			$handle,
-			VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/block.build.js',
+			VIMEOTHEQUE_URL . 'assets/back-end/js/apps/block-editor/' . $block . '/app.build.js',
 			['wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n', 'wp-components']
 		);
 
@@ -98,7 +98,7 @@ class Block_Abstract {
 		$file = $editor_style ? 'editor.css' : 'style.css';
 		wp_register_style(
 			$handle,
-			VIMEOTHEQUE_URL . 'assets/front-end/js/blocks/' . $block . '/' . $file
+			VIMEOTHEQUE_URL . 'assets/back-end/js/apps/block-editor/' . $block . '/' . $file
 		);
 
 		if( $editor_style ){
