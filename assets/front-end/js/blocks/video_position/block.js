@@ -68,7 +68,7 @@ registerBlockType( 'vimeotheque/video-position', {
 				className="cvm_single_video_player cvm_simple_embed"
 				data-width = { opt.width }
 				data-aspect_ratio = { opt.aspect_ratio }
-				key="1"
+				key="vimeotheque-video-position-block"
 				style = {
 					{
 						width: `${opt.width}px`,
@@ -103,7 +103,7 @@ registerBlockType( 'vimeotheque/video-position', {
 			/*
 			 * InspectorControls
 			 */
-			<InspectorControls key="2">
+			<InspectorControls key="vimeotheque-video-position-controls">
 
 					<PanelBody
 						title = { __('Embed options', 'cvm_video') }
