@@ -163,7 +163,7 @@ class Resource_Abstract implements Resource_Interface {
 		$_params = apply_filters( 'cvm_vimeo_api_query_params', $_params );
 
 
-		return $this->action_uri . '?' . http_build_query( $_params );
+		return $this->action_uri . ( $_params['fields'] ? '?' . http_build_query( $_params ) : '' );
 	}
 
 	/**

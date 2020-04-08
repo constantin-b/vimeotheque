@@ -36,6 +36,15 @@ registerBlockType( 'vimeotheque/video-position', {
 		}
 	},
 
+	supports: {
+		align: false,
+		anchor: false,
+		html: false,
+		multiple: false,
+		reusable:false,
+		customClassName: false
+	},
+
 	example: {
 		attributes: {
 			video_id: '1084537',
@@ -64,46 +73,65 @@ registerBlockType( 'vimeotheque/video-position', {
 		}
 
 		return [
-			<div
-				className="cvm_single_video_player cvm_simple_embed"
-				data-width = { opt.width }
-				data-aspect_ratio = { opt.aspect_ratio }
-				key="1"
-				style = {
-					{
-						width: `${opt.width}px`,
-						maxWidth: '100%'
+			<>
+				<div
+					className="cvm_single_video_player cvm_simple_embed"
+					data-width = { opt.width }
+					data-aspect_ratio = { opt.aspect_ratio }
+					key="vimeotheque-video-position-block"
+					style = {
+						{
+							width: `${opt.width}px`,
+							maxWidth: '100%'
+						}
 					}
-				}
-				onLoad = {
-					event  => cvm_resize_player( event.currentTarget )
-				}
-			>
-				<iframe
-					src={
-						"https://player.vimeo.com/video/" +
-						video_id +
-						"?title=" + opt.title +
-						'&byline=' + opt.byline +
-						'&portrait=' + opt.portrait +
-						'&loop=' + opt.loop +
-						'&color=' + opt.color +
-						'&autoplay=' + opt.autoplay +
-						'&volume=' + opt.volume
+					onLoad = {
+						event  => cvm_resize_player( event.currentTarget )
 					}
-					width = "100%"
-					height = "100%"
-					frameBorder = "0"
-					webkitallowfullscreen = "true"
-					mozallowfullscreen = "true"
-					allowFullScreen = { true }
-				/>
-			</div>,
+				>
+					<iframe
+						src={
+							"https://player.vimeo.com/video/" +
+							video_id +
+							"?title=" + opt.title +
+							'&byline=' + opt.byline +
+							'&portrait=' + opt.portrait +
+							'&loop=' + opt.loop +
+							'&color=' + opt.color +
+							'&autoplay=' + opt.autoplay +
+							'&volume=' + opt.volume
+						}
+						width = "100%"
+						height = "100%"
+						frameBorder = "0"
+						webkitallowfullscreen = "true"
+						mozallowfullscreen = "true"
+						allowFullScreen = { true }
+					/>
+				</div>
+				{
+					!props.isSelected &&
+					(
+						<div
+							style={
+								{
+									position:'absolute',
+									top:0,
+									left:0,
+									width:'100%',
+									height:'100%'
+								}
+							}
+						/>
+					)
+				}
+			</>
+				,
 
 			/*
 			 * InspectorControls
 			 */
-			<InspectorControls key="2">
+			<InspectorControls key="vimeotheque-video-position-controls">
 
 					<PanelBody
 						title = { __('Embed options', 'cvm_video') }

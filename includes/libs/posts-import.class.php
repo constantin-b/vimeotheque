@@ -236,7 +236,7 @@ class Posts_Import{
 	 *
 	 * @return array
 	 */
-	private function get_duplicate_posts( $raw_feed, $post_type ){
+	public function get_duplicate_posts( $raw_feed, $post_type ){
 
 		$video_ids = [];
 		foreach( $raw_feed as $video ){
@@ -443,6 +443,12 @@ class Posts_Import{
 			$post_data['ID'] = $post_id;
 			$post_id = wp_update_post( $post_data, true );
 		}else {
+			// allow empty insert into post content
+			apply_filters(
+				'wp_insert_post_empty_content',
+				'__return_false'
+			);
+
 			$post_id = wp_insert_post( $post_data, true );
 		}
 

@@ -51,6 +51,13 @@ class Block_Abstract {
 	private $style_handle;
 
 	/**
+	 * Set block as active (true) or inactive (false)
+	 *
+	 * @var bool
+	 */
+	private $is_active = true;
+
+	/**
 	 * Block_Abstract constructor.
 	 *
 	 * @param Plugin $plugin
@@ -64,7 +71,6 @@ class Block_Abstract {
 	 *
 	 * @param $handle
 	 * @param $block
-	 * @param string $type
 	 *
 	 * @return mixed
 	 */
@@ -116,6 +122,16 @@ class Block_Abstract {
 	}
 
 	/**
+	 * Deactivate the block
+	 */
+	public function deactivate(){
+		if( $this->is_active() ) {
+			unregister_block_type( $this->wp_block_type );
+			$this->is_active = false;
+		}
+	}
+
+	/**
 	 * @return \WP_Block_Type
 	 */
 	public function get_wp_block_type(){
@@ -150,5 +166,12 @@ class Block_Abstract {
 	 */
 	public function get_style_handle() {
 		return $this->style_handle;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_active(){
+		return $this->is_active;
 	}
 }

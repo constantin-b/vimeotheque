@@ -267,7 +267,17 @@ class Admin{
 		$t = get_transient( 'vimeotheque_activation' );
 		if( $t ){
 			delete_transient( 'vimeotheque_activation' );
-			wp_redirect( str_replace( '#038;' , '&', menu_page_url( 'vimeotheque_about', false ) ) );
+			wp_redirect(
+				str_replace(
+					'#038;' ,
+					'&',
+					menu_page_url(
+						'vimeotheque_about',
+						false
+					)
+				)
+			);
+
 			die();
 		}
 	}

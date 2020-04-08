@@ -125,7 +125,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 				 */
 				do_action( 'vimeotheque\admin\after_player_settings_save', $player_settings );
 			}
-			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings', false );
+			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings' );
 			die();
 		}
 
@@ -138,7 +138,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 				$options['vimeo_access_granted'] = false;
 				$this->options_obj()->update_options( $options );
 			}
-			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings', false );
+			wp_redirect( 'edit.php?post_type=' . $this->cpt->get_post_type() . '&page=cvm_settings' );
 			die();
 		}
 

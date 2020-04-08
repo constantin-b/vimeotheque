@@ -10,6 +10,7 @@ use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
 use Vimeotheque\Playlist\Theme\Theme;
 use Vimeotheque\Playlist\Theme\Themes;
+use Vimeotheque\Rest_Api\Rest_Api;
 use Vimeotheque\Shortcode\Shortcode_Factory;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -434,6 +435,13 @@ class Plugin{
 	 */
 	public function get_block( $key ) {
 		return $this->blocks_factory->get_block( $key );
+	}
+
+	/**
+	 * @return Blocks_Factory
+	 */
+	public function get_blocks(){
+		return $this->blocks_factory;
 	}
 
 	/**

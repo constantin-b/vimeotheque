@@ -105,7 +105,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		global $post;
 		$_post = Helper::get_video_post( $post );
 		if( !$_post->is_video() ){
-			unregister_block_type( parent::get_wp_block_type()->name );
+			$this->deactivate();
 			wp_deregister_script( parent::get_script_handle() );
 			wp_deregister_style( parent::get_editor_style_handle() );
 			wp_deregister_style( parent::get_style_handle() );

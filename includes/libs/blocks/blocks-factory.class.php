@@ -32,7 +32,7 @@ class Blocks_Factory {
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
 
-		add_action( 'init', [ $this, 'register_blocks' ] );
+		add_action( 'init', [ $this, 'register_blocks' ], -999999 );
 
 	}
 
@@ -43,6 +43,29 @@ class Blocks_Factory {
 		$this->blocks['video_position'] = new Video_Position( $this->plugin );
 		$this->blocks['playlist'] = new Playlist( $this->plugin );
 		$this->blocks['video'] = new Video( $this->plugin );
+	}
+
+	/**
+	 * Unregisters a block
+	 *
+	 * @param $key
+	 *
+	 * @return bool
+	 */
+	public function unregister_block( $key ){
+		if( array_key_exists( $key, $this->blocks ) ){
+			$this->blocks[ $key ]->deactivate();
+			return true;
+		}
+	}
+
+	/**
+	 * Deactivate all blocks
+	 */
+	public function unregister_blocks(){
+		foreach( $this->blocks as $block ){
+			$block->deactivate();
+		}
 	}
 
 	/**

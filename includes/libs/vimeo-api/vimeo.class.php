@@ -51,14 +51,14 @@ abstract class Vimeo{
 		if( isset( $data['developer_message'] ) ){
 			$message = sprintf(
 				__( '%s: %s (error code: %s)', 'cvm_video' ),
-				'<strong>' . __( 'Vimeo API error encountered' ) . '</strong>',
+				__( 'Vimeo API error encountered', 'cvm_video' ) ,
 				$data['developer_message'],
 				$data['error_code']
 			);
 		}elseif ( isset( $data['error'] ) ){
 			$message = sprintf(
 				'%s: %s',
-				'<strong>' . __( 'Vimeo API error encountered' ) . '</strong>',
+				__( 'Vimeo API error encountered', 'cvm_video' ),
 				$data['error']
 			);
 		}else{
