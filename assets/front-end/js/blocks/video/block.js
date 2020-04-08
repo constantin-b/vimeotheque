@@ -1,7 +1,7 @@
 import VideoPostsList from "../playlist/components/VideoPostsList";
 import SearchForm from "../playlist/components/SearchForm";
 import ListMenu from "../playlist/components/ListMenu";
-import VimeothequeServerSideRender from "../playlist/components/VimeothequeServerSideRender";
+import ServerSideRenderExtended from "../playlist/components/ServerSideRenderExtended";
 
 const { registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -83,7 +83,7 @@ registerBlockType( 'vimeotheque/video', {
         }
 
         return [
-            <>
+            <div key='vimeotheque-video-embed-block'>
                 {
                     attributes.id ?
                         <>
@@ -105,7 +105,7 @@ registerBlockType( 'vimeotheque/video', {
                                     </Tooltip>
                                 </div>
                             </BlockControls>
-                            <VimeothequeServerSideRender
+                            <ServerSideRenderExtended
                                 block="vimeotheque/video"
                                 attributes={
                                     {
@@ -117,15 +117,16 @@ registerBlockType( 'vimeotheque/video', {
                                         autoplay: attributes.autoplay
                                     }
                                 }
-                                onUpdate = { ( state )=>{
+                                onComplete = { ()=>{
                                     setTimeout( () => {
                                         jQuery('div[class^="cvm_single_video_player"]:not(.cvm_simple_embed)')
                                             .Vimeo_VideoPlayer({
                                                 'elem_data' : true
                                             })
-                                    }, 5000 )
+                                    }, 200 )
 
                                 }}
+                                isSelected={props.isSelected}
                             />
                         </>
                         :
@@ -204,12 +205,12 @@ registerBlockType( 'vimeotheque/video', {
                         </Modal>
                     )
                 }
-            </>,
+            </div>,
 
             /*
 			 * InspectorControls
 			 */
-            <InspectorControls key="2">
+            <InspectorControls key="vimeotheque-video-embed-controls">
 
                 <PanelBody
                     title = { __('Embed options', 'cvm_video') }
