@@ -1,5 +1,5 @@
 import VideoPostsList from './components/VideoPostsList'
-import ServerSideRenderExtended from './components/ServerSideRenderExtended'
+import ServerSideEmbed from './components/ServerSideEmbed'
 import SearchForm from "./components/SearchForm";
 import CategoryList from "./components/CategoryList";
 import ListMenu from "./components/ListMenu";
@@ -146,7 +146,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 </Tooltip>
                             </div>
                         </BlockControls>
-                        <ServerSideRenderExtended
+                        <ServerSideEmbed
                             block="vimeotheque/video-playlist"
                             attributes={
                                 {

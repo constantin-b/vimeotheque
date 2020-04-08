@@ -1,7 +1,7 @@
 import VideoPostsList from "../playlist/components/VideoPostsList";
 import SearchForm from "../playlist/components/SearchForm";
 import ListMenu from "../playlist/components/ListMenu";
-import ServerSideRenderExtended from "../playlist/components/ServerSideRenderExtended";
+import ServerSideEmbed from "../playlist/components/ServerSideEmbed";
 
 const { registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -105,7 +105,7 @@ registerBlockType( 'vimeotheque/video', {
                                     </Tooltip>
                                 </div>
                             </BlockControls>
-                            <ServerSideRenderExtended
+                            <ServerSideEmbed
                                 block="vimeotheque/video"
                                 attributes={
                                     {
