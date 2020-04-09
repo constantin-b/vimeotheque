@@ -12,6 +12,7 @@ use Vimeotheque\Playlist\Theme\Theme;
 use Vimeotheque\Playlist\Theme\Themes;
 use Vimeotheque\Rest_Api\Rest_Api;
 use Vimeotheque\Shortcode\Shortcode_Factory;
+use Vimeotheque\Widgets\Widgets_Factory;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -170,6 +171,8 @@ class Plugin{
 
 		new Shortcode_Factory( $this );
 		$this->blocks_factory = new Blocks_Factory( $this );
+
+		new Widgets_Factory( $this );
 
 		$this->playlist_themes = new Themes(
 			new Theme(
