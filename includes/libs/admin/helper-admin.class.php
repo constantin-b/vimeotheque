@@ -2,6 +2,8 @@
 
 namespace Vimeotheque\Admin;
 
+use Vimeotheque\Plugin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -131,6 +133,23 @@ class Helper_Admin {
 			'id' => $id,
 			'selected' => $selected,
 			'use_keys' => true
+		]);
+	}
+
+	static public function select_playlist_theme( $name, $selected = false, $id = '', $class = '' ){
+		$themes = Plugin::$instance->get_playlist_themes()->get_themes();
+		$options = [];
+		foreach( $themes as $theme ){
+			$options[ $theme->get_folder_name() ]=  $theme->get_theme_name();
+		}
+
+		return Helper_Admin::select([
+			'options' => $options,
+			'name' => $name,
+			'id' => $id,
+			'selected' => $selected,
+			'use_keys' => true,
+			'class' => $class
 		]);
 	}
 }
