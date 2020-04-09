@@ -2,6 +2,8 @@
 
 namespace Vimeotheque;
 
+use Vimeotheque\Post\Post_Type;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }

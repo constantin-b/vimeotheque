@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use stdClass;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 
 /**
  * Meta panels callbacks

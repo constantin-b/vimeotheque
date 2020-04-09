@@ -10,7 +10,7 @@ use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Editor\Classic_Editor;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Video_Post;
 
 /**

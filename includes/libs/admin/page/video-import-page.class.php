@@ -10,7 +10,6 @@ use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Ajax_Actions;
 use Vimeotheque\Admin\Posts_Import_Meta_Panels;
 use Vimeotheque\Admin\Table\Video_Import_List_Table;
-use Vimeotheque\Post_Type;
 use WP_List_Table;
 
 /**

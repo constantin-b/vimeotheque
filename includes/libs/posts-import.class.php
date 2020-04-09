@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Vimeotheque\Post\Post_Type;
 use WP_Error;
 
 /**

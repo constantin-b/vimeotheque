@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Options\Options;
 use Vimeotheque\Plugin;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Vimeo_Api\Vimeo_Oauth;
 use WP_Error;
 
@@ -28,7 +28,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	 */
 	private $error;
 	/**
-	 * @var Post_Type
+	 * @var \Vimeotheque\Post\Post_Type
 	 */
 	private $cpt;
 

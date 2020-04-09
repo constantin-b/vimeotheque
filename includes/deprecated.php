@@ -46,7 +46,7 @@ final class CVM_Vimeo extends \Vimeotheque\Vimeo_Api\Vimeo_Oauth{
  * Class CVM_Post_Type
  * @deprecated
  */
-final class CVM_Post_Type extends Vimeotheque\Post_Type{
+final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 
 	public function __construct() {}
 

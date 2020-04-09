@@ -3,7 +3,7 @@
 namespace Vimeotheque\Rest_Api;
 
 use Vimeotheque\Helper;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Rest_Api\Endpoints\Rest_Endpoint_Factory;
 use Vimeotheque\Video_Post;
 
@@ -25,7 +25,7 @@ class Rest_Api{
 
 	/**
 	 * Custom post type class reference
-	 * @var Post_Type
+	 * @var \Vimeotheque\Post\Post_Type
 	 */
 	private $cpt;
 

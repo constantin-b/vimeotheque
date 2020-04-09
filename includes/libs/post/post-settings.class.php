@@ -1,6 +1,6 @@
 <?php
 
-namespace Vimeotheque;
+namespace Vimeotheque\Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -11,10 +11,35 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Vimeotheque
  */
 class Post_Settings{
+	/**
+	 * Video ID meta name
+	 *
+	 * @var string
+	 */
 	private $meta_video_id = '__cvm_video_id';
+	/**
+	 * Video URL meta name
+	 *
+	 * @var string
+	 */
 	private $meta_video_url = '__cvm_video_url';
+	/**
+	 * Video data meta name
+	 *
+	 * @var string
+	 */
 	private $meta_video_data = '__cvm_video_data';
+	/**
+	 * Is video meta flag
+	 *
+	 * @var string
+	 */
 	private $meta_is_video = '__cvm_is_video';
+	/**
+	 * Embed options meta name
+	 *
+	 * @var string
+	 */
 	private $meta_embed_settings = '__cvm_playback_settings';
 
 	/**

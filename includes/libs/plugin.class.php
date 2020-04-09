@@ -10,6 +10,7 @@ use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
 use Vimeotheque\Playlist\Theme\Theme;
 use Vimeotheque\Playlist\Theme\Themes;
+use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Rest_Api\Rest_Api;
 use Vimeotheque\Shortcode\Shortcode_Factory;
 use Vimeotheque\Widgets\Widgets_Factory;

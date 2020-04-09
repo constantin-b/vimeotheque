@@ -1,6 +1,9 @@
 <?php
 
-namespace Vimeotheque;
+namespace Vimeotheque\Post;
+
+use Vimeotheque\Helper;
+use Vimeotheque\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

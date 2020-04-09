@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Vimeotheque\Plugin;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 
 /**
  * Class Notice_Abstract
@@ -15,7 +15,7 @@ use Vimeotheque\Post_Type;
  */
 abstract class Notice_Abstract{
 	/**
-	 * @var Post_Type
+	 * @var \Vimeotheque\Post\Post_Type
 	 */
 	private $cpt;
 

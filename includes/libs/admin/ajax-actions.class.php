@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Vimeotheque\Helper;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Video_Import;
 
 /**
@@ -18,13 +18,13 @@ use Vimeotheque\Video_Import;
 class Ajax_Actions{
 	/**
 	 * Store Post_Type object reference
-	 * @var Post_Type
+	 * @var \Vimeotheque\Post\Post_Type
 	 */
 	private $cpt;
 	
 	/**
 	 * 
-	 * @param Post_Type $object
+	 * @param \Vimeotheque\Post\Post_Type $object
 	 */
 	public function __construct( Post_Type $object ){
 		$this->cpt = $object;

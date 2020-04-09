@@ -18,7 +18,7 @@ use Vimeotheque\Admin\Page\Post_Edit_Page;
 use Vimeotheque\Admin\Page\Settings_Page;
 use Vimeotheque\Admin\Page\Video_Import_Page;
 use Vimeotheque\Helper;
-use Vimeotheque\Post_Type;
+use Vimeotheque\Post\Post_Type;
 
 /**
  * Admin pages
@@ -48,7 +48,7 @@ class Admin{
 
 	/**
 	 *
-	 * @param Post_Type $post_type
+	 * @param \Vimeotheque\Post\Post_Type $post_type
 	 */
 	public function __construct( Post_Type $post_type ){
 		// store object reference
@@ -341,7 +341,7 @@ class Admin{
 	}
 
 	/**
-	 * @return Post_Type
+	 * @return \Vimeotheque\Post\Post_Type
 	 */
 	public function get_post_type(){
 		return $this->post_type;
