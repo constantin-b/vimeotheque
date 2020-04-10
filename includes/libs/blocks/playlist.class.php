@@ -162,12 +162,24 @@ class Playlist extends Block_Abstract implements Block_Interface {
 
 		}
 
+		$post_types = Plugin::instance()->get_registered_post_types()->get_post_types();
+		$_post_types = [];
+		foreach( $post_types as $post_type ){
+			$_post_types[ $post_type->get_post_type()->name ] = [
+				'post_type' => $post_type->get_post_type(),
+				'taxonomy' => $post_type->get_taxonomy(),
+				'post_type_endpoint' => $post_type->get_post_type_rest_endpoint(),
+				'taxonomy_endpoint' => $post_type->get_taxonomy_rest_endpoint()
+			];
+		}
+
 		wp_localize_script(
 			parent::get_script_handle(),
 			'vmtq',
 			[
 				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg',
-				'themes' => $_themes
+				'themes' => $_themes,
+				'postTypes' => $_post_types
 			]
 		);
 
