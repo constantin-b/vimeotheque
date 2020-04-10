@@ -10,6 +10,7 @@ use Vimeotheque\Options\Options;
 use Vimeotheque\Options\Options_Factory;
 use Vimeotheque\Playlist\Theme\Theme;
 use Vimeotheque\Playlist\Theme\Themes;
+use Vimeotheque\Post\Post_Registration;
 use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Rest_Api\Rest_Api;
 use Vimeotheque\Shortcode\Shortcode_Factory;
@@ -78,6 +79,10 @@ class Plugin{
 	 * @var Themes
 	 */
 	private $playlist_themes;
+	/**
+	 * @var Post_Registration
+	 */
+	private $registered_post_types;
 
 	/**
 	 * Clone.
@@ -196,6 +201,12 @@ class Plugin{
 	 */
 	private function set_post_type(){
 		$this->cpt = new Post_Type( $this );
+		add_action( 'init', function(){
+			$this->registered_post_types = new Post_Registration(
+				$this->cpt->get_wp_post_type_object(),
+				$this->cpt->get_category_taxonomy_object()
+			);
+		}, 2 );
 	}
 
 	/**
@@ -446,6 +457,13 @@ class Plugin{
 	 */
 	public function get_blocks(){
 		return $this->blocks_factory;
+	}
+
+	/**
+	 * @return Post_Registration
+	 */
+	public function get_registered_post_types(){
+		return $this->registered_post_types;
 	}
 
 	/**
