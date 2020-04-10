@@ -94,6 +94,7 @@ function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo 
 /**
  * Output video title
  *
+ * @param bool $include_duration
  * @param string $before
  * @param string $after
  * @param bool $echo
@@ -112,7 +113,7 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
 	$output = $cvm_video->get_post()->post_title;
 
 	if( $include_duration ){
-		$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $cvm_video->_duration ) . ']</span>';
+		$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $cvm_video->duration ) . ']</span>';
 	}
 
 	if( $echo ){
