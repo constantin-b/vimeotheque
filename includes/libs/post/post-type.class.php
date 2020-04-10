@@ -44,6 +44,14 @@ class Post_Type{
 	 * @var Plugin
 	 */
 	private $plugin;
+	/**
+	 * @var \WP_Error|\WP_Post_Type
+	 */
+	private $wp_post_type;
+	/**
+	 * @var \WP_Error|\WP_Taxonomy
+	 */
+	private $category_taxonomy;
 
 	/**
 	 * Constructor, initiates post type registering
@@ -121,8 +129,8 @@ class Post_Type{
 		    ],
 		];
  		
- 		register_post_type( $this->post_type, $args );
-  
+ 		$this->wp_post_type = register_post_type( $this->post_type, $args );
+
   		// Add new taxonomy, make it hierarchical (like categories)
   		$cat_labels = [
 	    	'name' 					=> _x( 'Vimeo Video categories', 'Vimeo Video categories', 'cvm_video' ),
@@ -138,7 +146,7 @@ class Post_Type{
 	    	'menu_name' 			=> __( 'Categories' ),
 	    ];
 
-		register_taxonomy($this->taxonomy, [ $this->post_type ], [
+		$this->category_taxonomy = register_taxonomy( $this->taxonomy, [ $this->post_type ], [
 			'public'			=> $is_public,
     		'show_ui' 			=> true,
 			'show_in_nav_menus' => $is_public,
@@ -259,5 +267,19 @@ class Post_Type{
 	 */
 	public function get_plugin(){
 		return $this->plugin;
+	}
+
+	/**
+	 * @return \WP_Error|\WP_Post_Type
+	 */
+	public function get_wp_post_type_object(){
+		return $this->wp_post_type;
+	}
+
+	/**
+	 * @return \WP_Error|\WP_Taxonomy
+	 */
+	public function get_category_taxonomy_object() {
+		return $this->category_taxonomy;
 	}
 }
