@@ -5,8 +5,7 @@ namespace Vimeotheque\Widgets;
 use Vimeotheque\Admin\Helper_Admin;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
-use function Vimeotheque\cvm_output_playlist;
-use function Vimeotheque\cvm_playlist_themes;
+use Vimeotheque\Shortcode\Playlist;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -30,10 +29,6 @@ class Playlist_Widget extends \WP_Widget{
 	 * Constructor
 	 */
 	public function __construct(){
-
-		$this->post_type = Plugin::instance()->get_cpt()->get_post_type();
-		$this->taxonomy = Plugin::instance()->get_cpt()->get_post_tax();
-
 		/* Widget settings. */
 		$widget_options = [
 			'classname' 	=> 'cvm-latest-videos',
@@ -48,7 +43,7 @@ class Playlist_Widget extends \WP_Widget{
 		/* Create the widget. */
 		parent::__construct(
 			'cvm-latest-videos-widget',
-			__('<em>Recent Vimeo videos</em>', 'cvm_video'),
+			__( 'Recent Vimeo videos', 'cvm_video' ),
 			$widget_options,
 			$control_options
 		);
@@ -71,19 +66,22 @@ class Playlist_Widget extends \WP_Widget{
 		extract( $args );
 		$instance = wp_parse_args( $instance , $this->get_defaults() );
 
-		$posts = absint($instance['cvm_posts_number']);
-
 		$widget_title = '';
 		if( isset( $instance['cvm_widget_title'] ) && !empty( $instance['cvm_widget_title'] ) ){
 			$widget_title = $before_title . apply_filters('widget_title', $instance['cvm_widget_title']) . $after_title;
 		}
 
-		$post_type = isset( $instance['cvm_post_type'] ) ? $instance['cvm_post_type'] : $this->post_type;
+		$posts = $this->get_posts( $instance );
+		if( !$posts ){
+			return;
+		}
 
 		// if setting to display player is set, show it
 		if( isset( $instance['cvm_show_playlist'] ) && $instance['cvm_show_playlist'] ){
 
-			$player_settings = [
+			$opt = [
+			    'theme' => $instance['theme'],
+                'layout' => isset( $instance['layout'] ) ? $instance['layout'] : false,
 				'width' 		=> $instance['width'],
 				'aspect_ratio' 	=> $instance['aspect_ratio'],
 				'volume'		=> $instance['volume'],
@@ -93,20 +91,9 @@ class Playlist_Widget extends \WP_Widget{
 				'portrait'		=> absint( $instance['portrait'] )
 			];
 
-			$extra = [ 'layout' => '' ];
-			if( isset( $instance['layout'] ) ){
-				$extra['layout'] = $instance['layout'];
-			}
-
-			$playlist_output = cvm_output_playlist(
-				'latest',
-				$posts,
-				$instance['theme'],
-				$player_settings,
-				$post_type,
-				$instance['cvm_posts_tax'],
-				$extra
-			);
+			$playlist = new Playlist( $opt, '' );
+			$playlist->set_posts( $posts );
+			$playlist_output = $playlist->get_output();
 
 			if( !$playlist_output ){
 				return;
@@ -119,44 +106,6 @@ class Playlist_Widget extends \WP_Widget{
 			return;
 		}
 
-		// display a list of video posts
-		$args = [
-			'numberposts' 		=> $posts,
-			'posts_per_page' 	=> $posts,
-			'orderby' 			=> 'post_date',
-			'order' 			=> 'DESC',
-			'post_type' 		=> $post_type,
-			'post_status' 		=> 'publish',
-			'suppress_filters' 	=> true
-		];
-		if( 'post' == $post_type ){
-			$args['meta_query'] = [
-				[
-					'key' => '__cvm_is_video',
-					'value' => true,
-					'compare' => '=='
-				]
-			];
-		}
-
-		if( isset( $instance['cvm_posts_tax'] ) && !empty( $instance['cvm_posts_tax'] ) && ((int)$instance['cvm_posts_tax']) > 0 ){
-			$taxonomy = isset( $instance['cvm_taxonomy'] ) ? $instance['cvm_taxonomy'] : $this->taxonomy;
-			$term = get_term( $instance['cvm_posts_tax'], $taxonomy, ARRAY_A );
-			if( !is_wp_error( $term ) ){
-				$args['tax_query'] = [
-					[
-						'taxonomy' => $taxonomy,
-						'field' => 'slug',
-						'terms' => $term['slug']
-					]
-				];
-			}
-		}
-
-		$posts = get_posts($args);
-		if( !$posts ){
-			return;
-		}
 
 		echo $before_widget;
 
@@ -165,10 +114,10 @@ class Playlist_Widget extends \WP_Widget{
 		}
 		?>
 		<ul class="cvm-recent-videos-widget">
-			<?php foreach($posts as $post):?>
+			<?php foreach( $posts as $post ):?>
 				<?php
 				if( $instance['cvm_vim_image'] ){
-					$thumbnail = get_the_post_thumbnail($post->ID, 'thumbnail');
+					$thumbnail = get_the_post_thumbnail( $post->ID, 'thumbnail' );
 					if( !$thumbnail ){
 						$video_data = \Vimeotheque\Helper::get_video_post( $post->ID );
 						if( isset( $video_data->thumbnails[0] ) ){
@@ -199,7 +148,7 @@ class Playlist_Widget extends \WP_Widget{
 		$instance = $old_instance;
 		$instance['cvm_widget_title'] 	= $new_instance['cvm_widget_title'];
 		$instance['cvm_post_type'] 	    = $new_instance['cvm_post_type'];
-		$instance['cvm_taxonomy']       = 'category';
+		$instance['cvm_taxonomy']       =  $this->get_taxonomy(  $new_instance['cvm_post_type'] );
 		$instance['cvm_posts_number'] 	= (int)$new_instance['cvm_posts_number'];
 		$instance['cvm_posts_tax'] 		= (int)$new_instance['cvm_posts_tax'];
 		$instance['cvm_vim_image']	  	= (bool)$new_instance['cvm_vim_image'];
@@ -216,6 +165,16 @@ class Playlist_Widget extends \WP_Widget{
 
 		return $instance;
 	}
+
+	/**
+	 * @param $taxonomy
+	 *
+	 * @return string
+	 */
+	private function get_taxonomy( $taxonomy ){
+		$post_type = Helper_Admin::get_registered_post_type( $taxonomy );
+		return $post_type ? $post_type->get_taxonomy()->name : Plugin::instance()->get_cpt()->get_category_taxonomy_object()->name;
+    }
 
 	/**
 	 * (non-PHPdoc)
@@ -238,45 +197,41 @@ class Playlist_Widget extends \WP_Widget{
 				<input type="text" name="<?php echo $this->get_field_name('cvm_posts_number');?>" id="<?php echo $this->get_field_id('cvm_posts_number');?>" value="<?php echo $options['cvm_posts_number'];?>" size="3" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'cvm_post_type' );?>"><?php _e( 'Post type', 'cvm_video' );?></label>
+				<label for="<?php echo $this->get_field_id( 'cvm_post_type' );?>"><?php _e( 'Post type', 'cvm_video' );?>: </label>
 				<?php
-				Helper_Admin::select( [
-					'name' 		=> $this->get_field_name('cvm_post_type'),
-					'id' 		=> $this->get_field_id('cvm_post_type'),
-					'options' 	=> [
-						Plugin::instance()->get_cpt()->get_post_type() => __( 'Video', 'cvm_video' ),
-						'post' => __( 'Regular post', 'cvm_video' )
-					],
-					'selected'	=> $options['cvm_post_type'],
-					'class'     => 'cvm_widget_post_type'
-				] );
+                    Helper_Admin::select_post_type(
+                        $this->get_field_name('cvm_post_type'),
+                        $options['cvm_post_type'],
+                        $this->get_field_id('cvm_post_type'),
+                        'cvm_widget_post_type'
+                     );
 				?>
 			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id('cvm_posts_tax');?>"><?php _e('Category', 'cvm_video');?>: </label>
 				<?php
-				$args = [
-					'show_option_all' 	=> false,
-					'show_option_none'	=> __('All categories', 'cvm_video'),
-					'orderby' 			=> 'NAME',
-					'order' 			=> 'ASC',
-					'show_count' 		=> true,
-					'hide_empty'		=> false,
-					'selected'			=> $options['cvm_posts_tax'],
-					'hierarchical'		=> true,
-					'name'				=> $this->get_field_name('cvm_posts_tax'),
-					'id'				=> $this->get_field_id('cvm_posts_tax'),
-					'taxonomy'			=> $options['cvm_taxonomy'],
-					'hide_if_empty'		=> true,
-					'class'             => 'cvm_widget_taxonomy'
-				];
-				$select = wp_dropdown_categories( $args );
-				if( !$select ){
-					_e('Nothing found.', 'cvm_video');
-					?>
-					<input type="hidden" name="<?php echo $this->get_field_name('cvm_posts_tax');?>" id="<?php echo $this->get_field_id('cvm_posts_tax');?>" value="" />
-					<?php
-				}
+                    $args = [
+                        'show_option_all' 	=> false,
+                        'show_option_none'	=> __('All categories', 'cvm_video'),
+                        'orderby' 			=> 'NAME',
+                        'order' 			=> 'ASC',
+                        'show_count' 		=> true,
+                        'hide_empty'		=> false,
+                        'selected'			=> $options['cvm_posts_tax'],
+                        'hierarchical'		=> true,
+                        'name'				=> $this->get_field_name('cvm_posts_tax'),
+                        'id'				=> $this->get_field_id('cvm_posts_tax'),
+                        'taxonomy'			=> $this->get_taxonomy( $options['cvm_taxonomy'] ),
+                        'hide_if_empty'		=> true,
+                        'class'             => 'cvm_widget_taxonomy'
+                    ];
+                    $select = wp_dropdown_categories( $args );
+                    if( !$select ){
+                        _e('Nothing found.', 'cvm_video');
+                        ?>
+                        <input type="hidden" name="<?php echo $this->get_field_name('cvm_posts_tax');?>" id="<?php echo $this->get_field_id('cvm_posts_tax');?>" value="" />
+                        <?php
+                    }
 				?>
 			</p>
 			<p class="cvm-widget-show-vim-thumbs"<?php if( $options['cvm_show_playlist'] ):?> style="display:none;"<?php endif;?>>
@@ -382,5 +337,51 @@ class Playlist_Widget extends \WP_Widget{
 
 	public function get_parent(){
 		return parent;
+	}
+
+	/**
+	 * @param $params
+	 *
+	 * @return \WP_Post[]
+	 */
+	private function get_posts( $params ){
+		$posts_count = absint( $params['cvm_posts_number'] );
+		$post_type = isset( $params['cvm_post_type'] ) ? $params['cvm_post_type'] : Plugin::instance()->get_cpt()->get_post_type();
+
+		$args = [
+			'numberposts' 		=> $posts_count,
+			'posts_per_page' 	=> $posts_count,
+			'orderby' 			=> 'post_date',
+			'order' 			=> 'DESC',
+			'post_type' 		=> $post_type,
+			'post_status' 		=> 'publish',
+			'suppress_filters' 	=> true
+		];
+
+		if( $post_type != Plugin::instance()->get_cpt()->get_post_type() ){
+			$args['meta_query'] = [
+				[
+					'key' => Plugin::instance()->get_cpt()->get_post_settings()->get_meta_video_data(),
+					'compare' => 'EXISTS'
+				]
+			];
+		}
+
+		$taxonomy_select = isset( $params['cvm_post_tax'] ) ? absint( $params['cvm_post_tax'] ) : false;
+		if( $taxonomy_select ){
+			$taxonomy = isset( $params['cvm_taxonomy'] ) ? $params['cvm_taxonomy'] : Plugin::instance()->get_cpt()->get_post_tax();
+			$term = get_term( $taxonomy_select, $taxonomy, ARRAY_A );
+			if( !is_wp_error( $term ) ){
+				$args['tax_query'] = [
+					[
+						'taxonomy' => $taxonomy,
+						'field' => 'slug',
+						'terms' => $term['slug']
+					]
+				];
+			}
+		}
+
+		return get_posts( $args );
 	}
 }
