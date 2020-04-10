@@ -20,6 +20,10 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	 * @var null
 	 */
 	private $options = null;
+	/**
+	 * @var \WP_Post
+	 */
+	private $posts = [];
 
 	/**
 	 * Playlist constructor.
@@ -32,10 +36,24 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	}
 
 	/**
+	 * @param \WP_Post $posts
+	 */
+	public function set_posts( $posts ){
+		foreach ( $posts as $post ) {
+			if( $post instanceof \WP_Post ){
+				$_post = Helper::get_video_post( $post );
+				if( $_post->is_video() ){
+					$this->posts[] = $_post;
+				}
+			}
+		}
+	}
+
+	/**
 	 * @return string|void
 	 */
 	public function get_output(){
-		$videos = $this->get_video_posts();
+		$videos = $this->posts ? $this->posts : $this->get_video_posts();
 		if( !$videos ){
 			return;
 		}
