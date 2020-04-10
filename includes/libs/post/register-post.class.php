@@ -45,4 +45,16 @@ class Register_Post {
 	public function get_post_type() {
 		return $this->post_type;
 	}
+
+	public function get_post_type_rest_endpoint(){
+		$rest_base = ! empty( $this->post_type->rest_base ) ? $this->post_type->rest_base : $this->post_type->name;
+		return '/wp/v2/' . $rest_base;
+	}
+
+	public function get_taxonomy_rest_endpoint(){
+		$rest_base = ! empty( $this->taxonomy->rest_base ) ? $this->taxonomy->rest_base : $this->taxonomy->name;
+		return '/wp/v2/' . $rest_base;
+	}
+
+
 }
