@@ -28,6 +28,14 @@ class Ajax_Actions{
 	 */
 	public function __construct( Post_Type $object ){
 		$this->cpt = $object;
+
+		add_action( 'wp_loaded', [ $this, 'init' ], 0 );
+	}
+
+	/**
+	 * Initialize actions
+	 */
+	public function init(){
 		// get the actions
 		$actions = $this->__actions();
 		// add wp actions
@@ -35,7 +43,7 @@ class Ajax_Actions{
 			add_action( 'wp_ajax_' . $action['action'], $action['callback'] );
 		}
 	}
-	
+
 	/**
 	 * Ajax query callback
 	 */
