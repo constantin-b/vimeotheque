@@ -1,6 +1,10 @@
 import PostTypeButton from "./PostTypeButton";
+import {map} from 'lodash'
 
 const { __ } = wp.i18n,
+    {
+        postTypes
+    } = vmtq,
     {
         ButtonGroup,
         Button
@@ -32,20 +36,20 @@ class ListMenu extends React.Component{
             <ButtonGroup
                 className="vimeotheque-post-type-filter"
             >
-                <PostTypeButton
-                    className={ this.selectedClassName( 'vimeo-video' ) }
-                    postType='vimeo-video'
-                    text={__( 'Vimeo Videos', 'cvm_video' )}
-                    onClick={ this.handlePostTypeChange }
-                    disabled={this.props.disabled}
-                />
-                <PostTypeButton
-                    className={ this.selectedClassName( 'posts' ) }
-                    postType='posts'
-                    text={__( 'Posts', 'cvm_video' )}
-                    onClick={ this.handlePostTypeChange }
-                    disabled={this.props.disabled}
-                />
+                {
+                    map( postTypes, postType => {
+                        return (
+                            <PostTypeButton
+                                key={postType.post_type.name}
+                                className={ this.selectedClassName( postType.post_type.name ) }
+                                postType={ postType.post_type.name }
+                                text={ postType.post_type.labels.name }
+                                onClick={ this.handlePostTypeChange }
+                                disabled={ this.props.disabled }
+                            />
+                        )
+                    } )
+                }
                 {
                     !this.props.hideSelected &&
                     <Button
