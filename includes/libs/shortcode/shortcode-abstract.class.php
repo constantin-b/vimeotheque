@@ -73,6 +73,10 @@ class Shortcode_Abstract implements Shortcode_Interface {
 	 * Generate the shortcode output
 	 */
 	public function get_output() {
-		// TODO: Implement get_output() method.
+		_doing_it_wrong(
+			__FUNCTION__,
+			'Vimeotheque error: Method "get_output()" must be implemented in child class.',
+			'2.0'
+		);
 	}
 }
