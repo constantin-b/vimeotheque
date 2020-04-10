@@ -3,6 +3,7 @@
 namespace Vimeotheque\Admin;
 
 use Vimeotheque\Plugin;
+use Vimeotheque\Post\Register_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -151,5 +152,56 @@ class Helper_Admin {
 			'use_keys' => true,
 			'class' => $class
 		]);
+	}
+
+	/**
+	 * @param $name
+	 * @param bool $selected
+	 * @param string $id
+	 * @param string $class
+	 *
+	 * @return string|void
+	 */
+	static public function select_post_type( $name, $selected = false, $id = '', $class = '' ){
+		/**
+		 * @var Register_Post[] $types
+		 */
+		$types = Plugin::$instance->get_registered_post_types()->get_post_types();
+
+		if( count( $types ) == 1 ){
+			$type = current( $types );
+			printf(
+				'<input type="hidden" name="%s" value="%s" id="%s" class="%s" /><label>%s</label>',
+				$name,
+				$type->get_post_type()->name,
+				$id,
+				$class,
+				$type->get_post_type()->labels->singular_name
+			);
+			return;
+		}
+
+		$options = [];
+		foreach( $types as $type ){
+			$options[ $type->get_post_type()->name ] = $type->get_post_type()->labels->singular_name;
+		}
+
+		return Helper_Admin::select([
+			'options' => $options,
+			'name' => $name,
+			'id' => $id,
+			'selected' => $selected,
+			'use_keys' => true,
+			'class' => $class
+		]);
+	}
+
+	/**
+	 * @param $post_type
+	 *
+	 * @return Register_Post|null
+	 */
+	static public function get_registered_post_type( $post_type ){
+		return Plugin::instance()->get_registered_post_types()->get_post_type( $post_type );
 	}
 }
