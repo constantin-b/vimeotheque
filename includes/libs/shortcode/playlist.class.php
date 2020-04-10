@@ -180,7 +180,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	private function get_video_posts(){
 		$posts = [];
 		$videos = $this->get_video_ids();
-		if( !is_wp_error( $videos ) ){
+		if( $videos && !is_wp_error( $videos ) ){
 			$_posts = get_posts( [
 				'post_type' => 'any',
 				'include' => $videos,
