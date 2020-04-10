@@ -9,6 +9,7 @@ const   { apiFetch } = wp,
     {
         Spinner
     } = wp.components,
+    { postTypes } = vmtq,
     {
         select,
         dispatch
@@ -46,7 +47,7 @@ class List extends React.Component{
             params[ taxonomy ] = this.props.search.category
         }
 
-        let path = `/wp/v2/${this.props.postType}?` + map( keys( params ), key => { return `${key}=${params[ key ]}` } ).join('&'),
+        let path = `${postTypes[ this.props.postType ].post_type_endpoint}?` + map( keys( params ), key => { return `${key}=${params[ key ]}` } ).join('&'),
             posts = select( 'vimeotheque-post-store' ).getPosts( path )
 
         if( posts != undefined ){
