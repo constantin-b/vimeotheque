@@ -205,7 +205,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                         onPostTypeChange={
                                             postType => {
                                                 setShowSearch( 'selected' != postType )
-                                                setTaxonomy( 'vimeo-video' == postType ? 'vimeo-videos' : 'category' )
+                                                setTaxonomy( 'selected' != postType ? vmtq.postTypes[ postType ].taxonomy.name : false )
                                                 setSearch({ query:'', category:false })
                                                 setPostType( postType )
                                             }
