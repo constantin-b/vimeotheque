@@ -33,13 +33,6 @@ class Resource_Abstract implements Resource_Interface {
 	protected $params;
 
 	/**
-	 * The action URI
-	 *
-	 * @var string
-	 */
-	protected $action_uri;
-
-	/**
 	 * Default params
 	 *
 	 * @var array
@@ -75,6 +68,11 @@ class Resource_Abstract implements Resource_Interface {
 	private $output_name = '';
 
 	/**
+	 * @var string
+	 */
+	private $name;
+
+	/**
 	 * Resource_Abstract constructor.
 	 *
 	 * @param $resource_id
@@ -88,12 +86,24 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
-	 * Set the action URI
-	 *
-	 * @param $action_uri
+	 * @param string $resource_id
 	 */
-	protected function set_action( $action_uri ){
-		$this->action_uri = $action_uri;
+	public function set_resource_id( $resource_id ) {
+		$this->resource_id = $resource_id;
+	}
+
+	/**
+	 * @param bool|string $user_id
+	 */
+	public function set_user_id( $user_id ) {
+		$this->user_id = $user_id;
+	}
+
+	/**
+	 * @param array $params
+	 */
+	public function set_params( $params ) {
+		$this->params = $params;
 	}
 
 	/**
@@ -163,7 +173,7 @@ class Resource_Abstract implements Resource_Interface {
 		$_params = apply_filters( 'cvm_vimeo_api_query_params', $_params );
 
 
-		return $this->action_uri . ( $_params['fields'] ? '?' . http_build_query( $_params ) : '' );
+		return $this->get_api_endpoint() . ( $_params['fields'] ? '?' . http_build_query( $_params ) : '' );
 	}
 
 	/**
@@ -212,10 +222,12 @@ class Resource_Abstract implements Resource_Interface {
 	/**
 	 * Set resource output name
 	 *
-	 * @param $name
+	 * @param string $name
+	 * @param string $output_name
 	 */
-	protected function set_name( $name ){
-		$this->output_name = $name;
+	protected function set_name( $name, $output_name ){
+		$this->name = $name;
+		$this->output_name = $output_name;
 	}
 
 	/**
@@ -266,6 +278,9 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * Feed can be proccessed by automatic import.
+	 * Return true in concrete implementation if it can be processed.
+	 *
 	 * Can be overridden in concrete class
 	 *
 	 * @return bool
@@ -275,6 +290,10 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * After processing the entire feed, only new videos can be imported.
+	 * Feed will be parsed once and all future queries will only check for new videos.
+	 * Return true in concrete implementation if this applies to feed.
+	 *
 	 * @return bool
 	 */
 	public function can_import_new_videos() {
@@ -291,14 +310,35 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * Return true in concrete implementation if feed requires authorization to work (ie. folders feed type).
+	 *
+	 * @return bool
+	 */
+	public function requires_authorization(){
+		return false;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function get_default_params() {
 		return $this->default_params;
 	}
 
-	public function get_name(){
+	/**
+	 * @return string
+	 */
+	public function get_output_name(){
 		return $this->output_name;
+	}
+
+	/**
+	 * Return ID name
+	 *
+	 * @return string
+	 */
+	public function get_name(){
+		return $this->name;
 	}
 
 	/**
@@ -314,4 +354,15 @@ class Resource_Abstract implements Resource_Interface {
 	public function get_filtering_options() {
 		return $this->filtering_options;
 	}
+
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		_doing_it_wrong( __FUNCTION__, 'Method must be implemented in child class' );
+	}
+
+
 }

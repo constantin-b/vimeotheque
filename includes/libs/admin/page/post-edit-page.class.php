@@ -105,7 +105,7 @@ class Post_Edit_Page{
 		}
 
 		// blocks are not needed here
-        Plugin::$instance->get_blocks()->unregister_blocks();
+        Plugin::instance()->get_blocks()->unregister_blocks();
 
 		global $post;
 		$post = get_default_post_to_edit( $this->cpt->get_post_type(), true );

@@ -466,7 +466,7 @@ class Classic_Editor{
 		</div>
 		<div id="cvm-display-videos">
 			<iframe
-				src="edit.php?post_type=<?php echo Plugin::$instance->get_cpt()->get_post_type();?>&page=cvm_videos"
+				src="edit.php?post_type=<?php echo Plugin::instance()->get_cpt()->get_post_type();?>&page=cvm_videos"
 				frameborder="0" width="100%" height="100%"></iframe>
 		</div>
 	</div>
@@ -486,7 +486,7 @@ class Classic_Editor{
 
 			// Don't load unless is post editing (includes post, page and any custom posts set)
 		$screen = get_current_screen();
-		if( !$screen || 'post' != $screen->base || Plugin::$instance->get_cpt()->get_post_type() == $screen->post_type ){
+		if( !$screen || 'post' != $screen->base || Plugin::instance()->get_cpt()->get_post_type() == $screen->post_type ){
 			return;
 		}
 

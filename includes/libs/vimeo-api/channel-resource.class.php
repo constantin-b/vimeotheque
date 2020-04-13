@@ -20,9 +20,7 @@ class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 	 */
 	public function __construct( $resource_id, $params = [] ) {
 		parent::__construct( $resource_id, false, $params );
-		parent::set_action(
-			sprintf( 'channels/%s/videos', $resource_id )
-		);
+
 		parent::set_default_params([
 			'direction' => 'desc',
 			'filter' => '',
@@ -52,8 +50,15 @@ class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 			'embeddable'
 		]);
 
-		parent::set_name( __( 'Channel', 'cvm_video' ) );
+		parent::set_name( 'channel', __( 'Channel', 'cvm_video' ) );
 
+	}
+
+	/**
+	 * @param string $resource_id
+	 */
+	public function set_resource_id( $resource_id ) {
+		parent::set_resource_id( $resource_id );
 	}
 
 	/**
@@ -64,5 +69,13 @@ class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 	public function can_import_new_videos() {
 		return true;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		return sprintf( 'channels/%s/videos', $this->resource_id );
+	}
+
 
 }

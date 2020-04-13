@@ -102,7 +102,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					'bootstrap-grid2'
 				],
 				'render_callback' => function( $attr ){
-					$theme = Plugin::$instance->get_playlist_themes()->get_theme( $attr['theme'] );
+					$theme = Plugin::instance()->get_playlist_themes()->get_theme( $attr['theme'] );
 					if( $theme ){
 						$attr['theme'] = $theme;
 					}
@@ -141,7 +141,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			return;
 		}
 
-		$themes = Plugin::$instance->get_playlist_themes()->get_themes();
+		$themes = Plugin::instance()->get_playlist_themes()->get_themes();
 		$_themes = [];
 		foreach( $themes as $key => $theme ){
 			$_themes[] = [

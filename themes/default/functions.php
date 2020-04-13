@@ -14,7 +14,7 @@ function block_editor(){
 	wp_enqueue_script(
 		'vimeotheque-theme-default-attributes',
 		plugin_dir_url( __FILE__ ) . 'assets/js/block/script.build.js',
-		[ Plugin::$instance->get_block('playlist')->get_script_handle() ],
+		[ Plugin::instance()->get_block('playlist')->get_script_handle() ],
 		'1.0.0',
 		true
 	);

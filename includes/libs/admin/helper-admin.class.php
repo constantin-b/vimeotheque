@@ -4,6 +4,7 @@ namespace Vimeotheque\Admin;
 
 use Vimeotheque\Plugin;
 use Vimeotheque\Post\Register_Post;
+use Vimeotheque\Vimeo_Api\Resource_Objects;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -111,9 +112,15 @@ class Helper_Admin {
 		}
 	}
 
+	/**
+	 * @param $name
+	 * @param bool $selected
+	 * @param string $id
+	 *
+	 * @return string
+	 */
 	static public function select_feed_source( $name, $selected = false, $id = '' ){
-		$obj = new Resource_Objects();
-		$sources = $obj->get_resources();
+		$sources = Resource_Objects::instance()->get_resources();
 
 		$options = [];
 
@@ -123,8 +130,8 @@ class Helper_Admin {
 			}
 
 			$options[ $key ] = [
-				'text' => $source->get_name(),
-				'title' => sprintf( __( 'Enter %s', 'cvm_video' ), $source->get_name() )
+				'text' => $source->get_output_name(),
+				'title' => sprintf( __( 'Enter %s', 'cvm_video' ), $source->get_output_name() )
 			];
 		}
 
@@ -138,7 +145,7 @@ class Helper_Admin {
 	}
 
 	static public function select_playlist_theme( $name, $selected = false, $id = '', $class = '' ){
-		$themes = Plugin::$instance->get_playlist_themes()->get_themes();
+		$themes = Plugin::instance()->get_playlist_themes()->get_themes();
 		$options = [];
 		foreach( $themes as $theme ){
 			$options[ $theme->get_folder_name() ]=  $theme->get_theme_name();
@@ -166,7 +173,7 @@ class Helper_Admin {
 		/**
 		 * @var Register_Post[] $types
 		 */
-		$types = Plugin::$instance->get_registered_post_types()->get_post_types();
+		$types = Plugin::instance()->get_registered_post_types()->get_post_types();
 
 		if( count( $types ) == 1 ){
 			$type = current( $types );

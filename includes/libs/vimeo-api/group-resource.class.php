@@ -20,9 +20,7 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 	 */
 	public function __construct( $resource_id, $params = [] ) {
 		parent::__construct( $resource_id, false, $params );
-		parent::set_action(
-			sprintf( 'groups/%s/videos', $resource_id )
-		);
+
 		parent::set_default_params([
 			'direction' => 'desc',
 			'filter' => '',
@@ -48,7 +46,7 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 			'embeddable'
 		]);
 
-		parent::set_name( __( 'Group', 'cvm_video' ) );
+		parent::set_name( 'group', __( 'Group', 'cvm_video' ) );
 
 	}
 
@@ -60,5 +58,10 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 	public function has_date_limit(){
 		return true;
 	}
+
+	public function get_api_endpoint() {
+		return sprintf( 'groups/%s/videos', $this->resource_id );
+	}
+
 
 }

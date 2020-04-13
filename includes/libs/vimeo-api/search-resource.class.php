@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Search_Resource
+ * https://developer.vimeo.com/api/reference/videos#search_videos
  *
  * @package Vimeotheque
  */
@@ -15,11 +16,16 @@ class Search_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Search_Resource constructor.
 	 *
+	 * @param $resource_id
 	 * @param array $params
 	 */
-	public function __construct( $params = [] ) {
+	public function __construct( $resource_id, $params = [] ) {
+
+		// search uses field "query" instead of resource id; set it
+		$params['query'] = $resource_id;
+
 		parent::__construct( false, false, $params );
-		parent::set_action( 'videos' );
+
 		parent::set_default_params([
 			'direction' => 'desc',
 			'filter' => '',
@@ -60,8 +66,21 @@ class Search_Resource extends Resource_Abstract implements Resource_Interface {
 			'upload_date'
 		]);
 
-		parent::set_name( __( 'Search', 'cvm_video' ) );
+		parent::set_name( 'search', __( 'Search', 'cvm_video' ) );
 
+	}
+
+	public function set_resource_id( $resource_id ) {
+		$this->params['query'] = $resource_id;
+		parent::set_resource_id( $resource_id );
+	}
+
+	public function set_params( $params ) {
+		if( isset( $this->params['query'] ) ){
+			$params['query'] = $this->params['query'];
+		}
+
+		parent::set_params( $params );
 	}
 
 	/**
@@ -72,5 +91,15 @@ class Search_Resource extends Resource_Abstract implements Resource_Interface {
 	public function has_automatic_import() {
 		return false;
 	}
+
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		return 'videos';
+	}
+
 
 }

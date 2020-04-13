@@ -76,7 +76,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		$theme = $this->get_theme();
 		if( !$theme ){
-			$theme = Plugin::$instance->get_playlist_themes()->get_theme('default');
+			$theme = Plugin::instance()->get_playlist_themes()->get_theme('default');
 		}
 
 		// include theme file
@@ -115,7 +115,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			return $this->options;
 		}
 
-		$this->options = Plugin::$instance->get_player_options()->get_options();
+		$this->options = Plugin::instance()->get_player_options()->get_options();
 		foreach( $this->options as $key => $value ){
 			$attr = parent::get_attr( $key );
 			if( !is_wp_error( $attr ) ){
@@ -137,7 +137,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	private function get_theme(){
 		$theme = parent::get_attr('theme');
 		if( !$theme instanceof Theme ){
-			$theme = Plugin::$instance->get_playlist_themes()->get_theme( $theme );
+			$theme = Plugin::instance()->get_playlist_themes()->get_theme( $theme );
 		}
 		return $theme;
 	}

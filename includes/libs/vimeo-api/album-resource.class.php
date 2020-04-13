@@ -32,21 +32,13 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 		];
 
 		// when sort is default, direction must be eliminated
-		if( 'default' == $params['sort'] ){
+		if( isset( $params['sort'] ) && 'default' == $params['sort'] ){
 			unset( $params['direction'] );
 		}else{
 			$default_params['direction'] = 'desc';
 		}
 
 		parent::__construct( $resource_id, $user_id, $params );
-
-		parent::set_action(
-			sprintf(
-				'users/%s/albums/%s/videos',
-				$user_id,
-				$resource_id
-			)
-		);
 
 		parent::set_default_params( $default_params );
 
@@ -68,7 +60,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 			'embeddable'
 		]);
 
-		parent::set_name( __( 'Showcase/Album', 'cvm_video' ) );
+		parent::set_name( 'album', __( 'Showcase/Album', 'cvm_video' ) );
 
 	}
 
@@ -79,6 +71,17 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	 */
 	public function can_import_new_videos() {
 		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		return sprintf(
+			'users/%s/albums/%s/videos',
+			$this->user_id,
+			$this->resource_id
+		);
 	}
 
 }

@@ -36,8 +36,7 @@ abstract class Vimeo{
 	 * @return WP_Error
 	 */
 	protected function error( $code, $message, $data = false ){
-		$error = new WP_Error( $code, $message, $data );
-		return $error;
+		return new WP_Error( $code, $message, $data );
 	}
 
 	/**

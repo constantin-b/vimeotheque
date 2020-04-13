@@ -19,14 +19,8 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	 */
 	public function __construct( $resource_id ) {
 		parent::__construct( $resource_id, false, false );
-		parent::set_action(
-			sprintf(
-				'videos/%s/pictures',
-				$resource_id
-			)
-		);
 
-		parent::set_name( __( 'Thumbnail', 'cvm_video' ) );
+		parent::set_name( 'thumbnails', __( 'Thumbnail', 'cvm_video' ) );
 	}
 
 	/**
@@ -73,5 +67,18 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	public function has_automatic_import() {
 		return false;
 	}
+
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		return sprintf(
+			'videos/%s/pictures',
+			$this->resource_id
+		);
+	}
+
 
 }

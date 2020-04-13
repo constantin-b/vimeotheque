@@ -31,7 +31,7 @@ class Plugin{
 	*
 	* @var Plugin
 	*/
-	public static $instance = null;
+	private static $instance = null;
 
 	/**
 	 * Stores plugin options

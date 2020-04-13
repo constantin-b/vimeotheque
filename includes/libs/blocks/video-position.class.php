@@ -36,7 +36,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				 */
 				remove_action(
 					'the_content',
-					[ Plugin::$instance->get_front_end(), 'embed_video' ],
+					[ Plugin::instance()->get_front_end(), 'embed_video' ],
 					Plugin::instance()->get_front_end()->get_embed_filter_priority()
 				);
 

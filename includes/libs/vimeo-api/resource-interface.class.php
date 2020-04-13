@@ -63,9 +63,24 @@ interface Resource_Interface{
 	public function has_date_limit();
 
 	/**
-	 * Returns the resource name for the page output
+	 * Returns the resource output name for the page output
+	 *
+	 * @return string
+	 */
+	public function get_output_name();
+
+	/**
+	 * Returns the resource ID name
 	 *
 	 * @return string
 	 */
 	public function get_name();
+
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
+	public function get_api_endpoint();
+
 }

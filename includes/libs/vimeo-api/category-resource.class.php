@@ -20,9 +20,7 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 	 */
 	public function __construct( $resource_id, $params = [] ) {
 		parent::__construct( $resource_id, false, $params );
-		parent::set_action(
-			sprintf( 'categories/%s/videos', $resource_id )
-		);
+
 		parent::set_default_params([
 			'direction' => 'desc',
 			'filter' => '',
@@ -51,7 +49,7 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 			'embeddable'
 		]);
 
-		parent::set_name( __( 'Category', 'cvm_video' ) );
+		parent::set_name( 'category', __( 'Category', 'cvm_video' ) );
 	}
 
 	/**
@@ -61,6 +59,13 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 	 */
 	public function has_date_limit(){
 		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		return sprintf( 'categories/%s/videos', $this->resource_id );
 	}
 
 }

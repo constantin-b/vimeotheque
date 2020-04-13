@@ -21,13 +21,6 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	 */
 	public function __construct( $resource_id, $user_id = '', $params = [] ) {
 		parent::__construct( $resource_id, $user_id, $params );
-		parent::set_action(
-			sprintf(
-				'users/%s/portfolios/%s/videos',
-				$user_id,
-				$resource_id
-			)
-		);
 
 		parent::set_default_params([
 			'filter' => '',
@@ -54,7 +47,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 			'embeddable'
 		]);
 
-		parent::set_name( __( 'Portfolio', 'cvm_video' ) );
+		parent::set_name( 'portfolio', __( 'Portfolio', 'cvm_video' ) );
 
 	}
 
@@ -66,5 +59,19 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	public function has_date_limit(){
 		return true;
 	}
+
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		sprintf(
+			'users/%s/portfolios/%s/videos',
+			$this->user_id,
+			$this->resource_id
+		);
+	}
+
 
 }

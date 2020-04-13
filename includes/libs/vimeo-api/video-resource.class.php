@@ -16,15 +16,11 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	 * Video_Resource constructor.
 	 *
 	 * @param $resource_id
-	 * @param array $params
 	 */
 	public function __construct( $resource_id ) {
 		parent::__construct( $resource_id, false, false );
-		parent::set_action(
-			sprintf( 'videos/%s', $resource_id )
-		);
 
-		parent::set_name( __( 'Video', 'cvm_video' ) );
+		parent::set_name( 'video', __( 'Video', 'cvm_video' ) );
 	}
 
 	/**
@@ -41,5 +37,14 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	 */
 	public function has_automatic_import() {
 		return false;
+	}
+
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
+	public function get_api_endpoint() {
+		return sprintf( 'videos/%s', $this->resource_id );
 	}
 }

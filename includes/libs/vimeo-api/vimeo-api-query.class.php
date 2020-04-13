@@ -142,72 +142,15 @@ class Vimeo_Api_Query extends Vimeo {
 	 * @return string|\WP_Error
 	 */
 	private function _get_endpoint(){
-		
-		switch( $this->resource_type ){
-			case 'album':
-				$this->api_resource = new Album_Resource(
-					$this->resource_id,
-					$this->api_user_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'search':
-				$params = $this->get_api_request_params();
-				// search query comes in resource ID
-				$params['query'] = $this->resource_id;
-				$this->api_resource = new Search_Resource(
-					$params
-				);
-			break;
-			case 'user':
-				$this->api_resource = new User_Resource(
-					$this->resource_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'category':
-				$this->api_resource = new Category_Resource(
-					$this->resource_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'channel':
-				$this->api_resource = new Channel_Resource(
-					$this->resource_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'portfolio':
-				$this->api_resource = new Portfolio_Resource(
-					$this->resource_id,
-					$this->api_user_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'ondemand_videos':
-				$this->api_resource = new Ondemand_Resource(
-					$this->resource_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'group':
-				$this->api_resource = new Group_Resource(
-					$this->resource_id,
-					$this->get_api_request_params()
-				);
-			break;
-			case 'video':
-				$this->api_resource = new Video_Resource(
-					$this->resource_id
-				);
-			break;
-			case 'thumbnails':
-				$this->api_resource = new Thumbnails_Resource(
-					$this->resource_id
-				);
-			break;
+
+		$this->api_resource = Resource_Objects::instance()->get_resource( $this->resource_type );
+		if( is_wp_error( $this->api_resource ) ){
+			return $this->api_resource;
 		}
 
+		$this->api_resource->set_resource_id( $this->resource_id );
+		$this->api_resource->set_user_id( $this->api_user_id );
+		$this->api_resource->set_params( $this->get_api_request_params() );
 		$endpoint = $this->api_resource->get_endpoint();
 
 		return parent::API_ENDPOINT . $endpoint;
