@@ -161,7 +161,14 @@ class Post_Type{
     		'labels' 			=> $cat_labels,    		
     		'query_var' 		=> true
 		] );
-  		
+
+		/**
+		 * Prior to WP version 5.4, function register_taxonomy always returned null.
+		 */
+		if( version_compare( get_bloginfo( 'version' ), '5.4', '<' ) ){
+			$this->category_taxonomy = get_taxonomy( $this->taxonomy );
+		}
+
   		// tags
   		$tag_labels = [
 	    	'name' 					=> _x( 'Vimeo Video tags', 'Vimeo Video tags', 'cvm_video' ),
