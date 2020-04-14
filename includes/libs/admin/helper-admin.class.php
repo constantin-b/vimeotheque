@@ -141,13 +141,37 @@ class Helper_Admin {
 			];
 		}
 
-		return Helper_Admin::select([
+		return self::select([
 			'options' => $options,
 			'name' => $name,
 			'id' => $id,
 			'selected' => $selected,
 			'use_keys' => true
 		]);
+	}
+
+	public static function select_sort_order( $name, $selected = false, $id = '', $class = '' ){
+		$sort_options = Resource_Objects::instance()->get_sort_options();
+		$options = [];
+
+		foreach( $sort_options as $key => $option ){
+			$options[ $key ] = [
+				'text' => $option['label'],
+				'data' => [
+					'resources' => implode( ',', array_keys( $option['resources'] ) )
+				]
+			];
+		}
+
+		return self::select([
+			'options' => $options,
+			'name' => $name,
+			'id' => $id,
+			'selected' => $selected,
+			'use_keys' => true,
+			'class' => $class
+		]);
+
 	}
 
 	static public function select_playlist_theme( $name, $selected = false, $id = '', $class = '' ){
