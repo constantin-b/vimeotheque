@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span class="cvm_album_user">
 			<?php endif;?>
 				
-					<label for="cvm_album_user"><?php _e('User album', 'cvm_video');?>:</label>
+					<label for="cvm_album_user"><?php _e('User ID', 'cvm_video');?>:</label>
 			<?php if( !$compact ):?>	
 				</th>
 				<td>
