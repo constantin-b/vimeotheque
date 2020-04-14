@@ -59,9 +59,13 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 		return true;
 	}
 
+	/**
+	 * Return resource relative API endpoint
+	 *
+	 * @return string
+	 */
 	public function get_api_endpoint() {
 		return sprintf( 'groups/%s/videos', $this->resource_id );
 	}
-
 
 }
