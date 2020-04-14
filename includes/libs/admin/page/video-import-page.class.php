@@ -10,6 +10,7 @@ use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Ajax_Actions;
 use Vimeotheque\Admin\Posts_Import_Meta_Panels;
 use Vimeotheque\Admin\Table\Video_Import_List_Table;
+use Vimeotheque\Helper;
 use WP_List_Table;
 
 /**
@@ -280,7 +281,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			VIMEOTHEQUE_URL . 'assets/back-end/css/video-import-grid.css'
 		);
 
-		\Vimeotheque\cvm_enqueue_player();
+		Helper::enqueue_player();
 	}
 	
 	/**
