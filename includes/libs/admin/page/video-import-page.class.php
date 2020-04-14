@@ -41,6 +41,10 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	 * @var Ajax_Actions
 	 */
 	private $ajax_obj;
+	/**
+	 * @var \Vimeotheque\Post\Post_Type
+	 */
+	private $cpt;
 
 	/**
 	 * Constructor, fires up the parent __construct() and sets up other variables
@@ -216,6 +220,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 				[ 'jquery' ],
 				'1.0'
 		);
+
 		wp_localize_script('cvm-video-search-js', 'cvm_importMessages', [
 			'loading' => __('Importing, please wait...', 'cvm_video'),
 			'wait'	=> __("Not done yet, still importing. You'll have to wait a bit longer.", 'cvm_video')
