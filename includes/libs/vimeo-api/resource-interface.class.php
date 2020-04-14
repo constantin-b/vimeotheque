@@ -83,4 +83,33 @@ interface Resource_Interface{
 	 */
 	public function get_api_endpoint();
 
+	/**
+	 * Used to retrieve whether feed needs Vimeo user ID to make queries
+	 *
+	 * @return bool
+	 */
+	public function requires_user_id();
+
+	/**
+	 * Get field label for Vimeo user ID
+	 *
+	 * @return bool|string
+	 */
+	public function label_user_id();
+
+	/**
+	 * Get placeholder for field Vimeo user ID
+	 *
+	 * @return bool|string
+	 */
+	public function placeholder_user_id();
+
+	/**
+	 * Some resources allow search within the returned results.
+	 * If it's the case, method implementation should return true
+	 *
+	 * @return bool
+	 */
+	public function can_search_results();
+
 }
