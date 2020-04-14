@@ -2,6 +2,8 @@
 
 namespace Vimeotheque\Admin\Page;
 
+use Vimeotheque\Helper;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -26,6 +28,6 @@ class Go_Pro_Page extends Page_Abstract implements Page_Interface{
 	public function on_load() {
 		remove_all_actions( 'admin_notices' );
 		wp_enqueue_style( 'cvm_gopro', VIMEOTHEQUE_URL . 'assets/back-end/css/gopro.css' );
-		\Vimeotheque\cvm_enqueue_player();
+		Helper::enqueue_player();
 	}
 }
