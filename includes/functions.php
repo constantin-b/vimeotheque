@@ -197,7 +197,7 @@ function get_video_embed_html( $post, $echo = true ){
 		'manual_embed'
 	);
 
-	$height = cvm_player_height( $settings['aspect_ratio'] , $width, $settings['size_ratio'] );
+	$height = Helper::calculate_player_height( $settings['aspect_ratio'] , $width, $settings['size_ratio'] );
 
 	/**
 	 * @deprecated - Use cvm_video_embed_css_class
@@ -221,7 +221,7 @@ function get_video_embed_html( $post, $echo = true ){
 
 	$extra_css = implode( ' ', (array) $class );
 
-	$video_data_atts = cvm_data_attributes( $settings );
+	$video_data_atts = Helper::data_attributes( $settings );
 
 	// if js embedding not allowed, embed by placing the iframe dirctly into the post content
 	$embed_html = '<!-- video container -->';
@@ -240,7 +240,7 @@ function get_video_embed_html( $post, $echo = true ){
 		$embed_html = '<iframe src="' . $embed_url . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 	}else{
 		// add player script
-		cvm_enqueue_player();
+		Helper::enqueue_player();
 	}
 
 	$video_container = sprintf(
@@ -333,20 +333,7 @@ function is_video( $post = false ){
  * @param bool $css_dependency
  */
 function cvm_enqueue_player( $js_dependency = false, $css_dependency = false ){
-	$js_dependency = $js_dependency ? ['jquery', $js_dependency] : ['jquery'];
-	wp_enqueue_script(
-		'cvm-video-player',
-		VIMEOTHEQUE_URL . 'assets/front-end/js/video-player' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js',
-		$js_dependency,
-		'1.0'
-	);
-
-	$css_dependency = $css_dependency ? [ $css_dependency ] : false;
-	wp_enqueue_style(
-		'cvm-video-player',
-		VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css',
-		$css_dependency
-	);
+	Helper::enqueue_player( true, $js_dependency, $css_dependency );
 }
 
 /**
