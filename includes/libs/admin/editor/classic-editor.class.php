@@ -585,7 +585,7 @@ class Classic_Editor{
 		// some files are needed only on custom post type edit page
 		if( $_post->is_video() ){
 			// add video player for video preview on post
-			\Vimeotheque\cvm_enqueue_player();
+			Helper::enqueue_player();
 
 			wp_enqueue_script(
 			    'cvm-video-edit',
