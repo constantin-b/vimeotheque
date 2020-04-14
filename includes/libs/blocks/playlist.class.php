@@ -2,7 +2,6 @@
 namespace Vimeotheque\Blocks;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
-use function Vimeotheque\cvm_enqueue_player;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -183,7 +182,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			]
 		);
 
-		cvm_enqueue_player( parent::get_script_handle(), parent::get_editor_style_handle() );
+		Helper::enqueue_player( true, parent::get_script_handle(), parent::get_editor_style_handle() );
 		wp_enqueue_script( 'jquery-masonry' );
 	}
 
