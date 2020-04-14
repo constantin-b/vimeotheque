@@ -112,23 +112,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</th>
 				<td>
 			<?php endif;?>	
-					<?php 
-						$args = [
-							'options' => [
-								'new' => __('Newest videos first', 'cvm_video'),
-								'old' => __('Oldest videos first', 'cvm_video'),
-								'played' => __('Most played', 'cvm_video'),
-								'likes' => __('Most liked', 'cvm_video'),
-								'comments' => __('Most commented', 'cvm_video'),
-								'relevant' => __('Relevancy', 'cvm_video')
-							],
-							'name' 		=> 'cvm_order',
-							'id'		=> 'cvm_order',
-							'selected' 	=> isset( $_GET['cvm_order'] ) ? $_GET['cvm_order'] : false
-						];
-						Helper_Admin::select( $args );
-					?>
-			
+                <?php
+                    Helper_Admin::select_sort_order(
+                        'cvm_order',
+                        ( isset( $_GET['cvm_order'] ) ? $_GET['cvm_order'] : false ),
+                        'cvm_order'
+                    );
+                ?>
 			<?php if( $compact ):?>
 			</span>
 			<?php endif;?>		
