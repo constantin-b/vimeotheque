@@ -68,4 +68,12 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 		return sprintf( 'categories/%s/videos', $this->resource_id );
 	}
 
+	/**
+	 * Searching within the returned results isn't allowed by API
+	 *
+	 * @return bool
+	 */
+	public function can_search_results() {
+		return false;
+	}
 }
