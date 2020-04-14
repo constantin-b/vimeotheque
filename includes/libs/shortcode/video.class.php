@@ -5,7 +5,6 @@ namespace Vimeotheque\Shortcode;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use Vimeotheque\Video_Post;
-use function Vimeotheque\cvm_enqueue_player;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
