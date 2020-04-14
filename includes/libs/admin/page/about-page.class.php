@@ -2,6 +2,8 @@
 
 namespace Vimeotheque\Admin\Page;
 
+use Vimeotheque\Helper;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -16,7 +18,7 @@ class About_Page extends Page_Abstract implements Page_Interface{
 	 * Page output callback
 	 */
 	public function get_html() {
-		\Vimeotheque\cvm_enqueue_player();
+		Helper::enqueue_player();
 		include VIMEOTHEQUE_PATH . 'views/about.php';
 	}
 
