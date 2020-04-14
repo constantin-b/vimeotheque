@@ -155,7 +155,7 @@ class Front_End{
 		if( ! $this->is_visible() ){
 			return;
 		}
-		cvm_enqueue_player();
+		Helper::enqueue_player();
 	}
 
 	/**
