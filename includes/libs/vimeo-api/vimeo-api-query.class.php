@@ -170,26 +170,8 @@ class Vimeo_Api_Query extends Vimeo {
 	 * @return array
 	 */
 	public function get_api_request_params(){
-		$params = $this->params;
-
-		// Older implementation had a different ordering that seems more useful than current sorting.
-		// It will be kept until enough requests from users are received to be updated.
-		$map = [
-			'alphabetical' => [ 'sort' => 'alphabetical', 'direction' => 'desc' ],
-			'duration' => [ 'sort' => 'duration', 'direction' => 'desc' ],
-
-			'new' 		=> [ 'sort' => 'date', 'direction' => 'desc' ],
-			'old' 		=> [ 'sort' => 'date', 'direction' => 'asc' ],
-			'played' 	=> [ 'sort' => 'plays', 'direction' => 'desc' ],
-			'likes' 	=> [ 'sort' => 'likes', 'direction' => 'desc' ],
-			'comments' 	=> [ 'sort' => 'comments', 'direction' => 'desc' ],
-			'relevant' 	=> [ 'sort' => 'relevant', 'direction' => 'desc' ]
-		];
-
-		if( isset( $params['order'] ) && array_key_exists( $params['order'] , $map ) ){
-			$params = array_merge( $params, $map[ $params['order'] ] );
-		}
-
-		return $params;
+		$sort = isset( $this->params['order'] ) ? $this->params['order'] : '';
+		$sort_option = Resource_Objects::instance()->get_sort_option( $sort );
+		return array_merge( $this->params, $sort_option );
 	}
 }
