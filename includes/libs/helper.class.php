@@ -99,20 +99,25 @@ class Helper{
 	 * Adds video player script to page
 	 *
 	 * @param bool $include_js
+	 * @param bool $js_dependency
+	 * @param bool $css_dependency
 	 */
-	public static function enqueue_player( $include_js = true ){
+	public static function enqueue_player( $include_js = true,  $js_dependency = false, $css_dependency = false  ){
 		if( $include_js ) {
+			$js_dependency = $js_dependency ? ['jquery', $js_dependency] : ['jquery'];
 			wp_enqueue_script(
 				'cvm-video-player',
 				VIMEOTHEQUE_URL . 'assets/front-end/js/video-player' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js',
-				[ 'jquery' ],
+				$js_dependency,
 				'1.0'
 			);
 		}
 
+		$css_dependency = $css_dependency ? [ $css_dependency ] : false;
 		wp_enqueue_style(
 			'cvm-video-player',
-			VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css'
+			VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css',
+			$css_dependency
 		);
 	}
 
