@@ -76,6 +76,4 @@ class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 	public function get_api_endpoint() {
 		return sprintf( 'channels/%s/videos', $this->resource_id );
 	}
-
-
 }
