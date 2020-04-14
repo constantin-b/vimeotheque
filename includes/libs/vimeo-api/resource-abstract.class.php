@@ -301,7 +301,10 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
-	 * Feed can have a date limit
+	 * Feed can have a date limit when processing imports.
+	 * When true, this signals that the feed can be imported
+	 * up to a certain given date in past beyond which videos
+	 * will be ignored from importing
 	 *
 	 * @return bool
 	 */
