@@ -6,7 +6,22 @@
 	$(document).ready(function(){
 		var sort_row = $('#cvm_load_feed_form').find('tr.cvm_order, span.cvm_order'),
 			user_album = $('#cvm_load_feed_form').find('tr.cvm_album_user, span.cvm_album_user'),
-			search_results = $('#cvm_load_feed_form').find('tr.cvm_search_results, span.cvm_search_results');
+			search_results = $('#cvm_load_feed_form').find('tr.cvm_search_results, span.cvm_search_results'),
+			orderFieldOptions = $('#cvm_order option');
+		
+        var orderField = function( resource ){
+            $.each( orderFieldOptions, function( i, option ){
+                var enabled = $(option).data('resources').split(',');
+                if( $.inArray( resource, enabled ) != -1 ){
+                    $(option).removeAttr( 'disabled style' );
+                }else{
+                	$(option)
+                	    .css({ 'display':'none', 'color':'#CCCCCC' })
+                	    .attr( 'disabled', 'disabled' )
+                	    .removeAttr('selected');
+                }
+            })	
+        } 
 		
 		// search criteria form functionality
 		$('#cvm_feed').change(function(){
@@ -31,10 +46,11 @@
 
 
 			$('label[for=cvm_query]').html($(this).find('option:selected').attr('title')+' :');
+			orderField( val );
 
 		}).trigger('change');
 		
-		$('#cvm_load_feed_form').submit(function(e){
+        $('#cvm_load_feed_form').submit(function(e){
 			var s = $('#cvm_query').val();
 			if( '' == s ){
 				e.preventDefault();
