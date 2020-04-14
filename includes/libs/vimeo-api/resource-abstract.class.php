@@ -364,5 +364,41 @@ class Resource_Abstract implements Resource_Interface {
 		_doing_it_wrong( __FUNCTION__, 'Method must be implemented in child class' );
 	}
 
+	/**
+	 * Used to retrieve whether feed needs Vimeo user ID to make queries
+	 *
+	 * @return bool
+	 */
+	public function requires_user_id() {
+		return false;
+	}
 
+	/**
+	 * Get field label for Vimeo user ID
+	 *
+	 * @return bool|string
+	 */
+	public function label_user_id() {
+		return false;
+	}
+
+	/**
+	 * Get placeholder for field Vimeo user ID
+	 *
+	 * @return bool|string
+	 */
+	public function placeholder_user_id() {
+		return false;
+	}
+
+	/**
+	 * Most resources allow search within the returned results.
+	 * By default, abstract class will assume this is allowed.
+	 * Override in child implementation for feeds that do not support results searching
+	 *
+	 * @return bool
+	 */
+	public function can_search_results() {
+		return true;
+	}
 }
