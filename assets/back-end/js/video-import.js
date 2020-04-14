@@ -12,56 +12,26 @@
 		$('#cvm_feed').change(function(){
 			
 			var val = $(this).val(),
-				ordVal = $('#cvm_order').val();
+				ordVal = $('#cvm_order').val(),
+				data = $(this).find('option:selected').data();
 			
+            if( data.show_user ){
+                $(user_album).show();
+                $('label[for=cvm_album_user]').html( data.field_label + ': ' );
+                $('#cvm_album_user').attr( 'placeholder', data.placeholder );
+            }else{
+            	$(user_album).hide();
+            }    
+
+            if( data.show_search ){
+                $(search_results).show();
+            }else{
+                $(search_results).hide();
+            }
+
+
 			$('label[for=cvm_query]').html($(this).find('option:selected').attr('title')+' :');
-			
-			switch( val ){
-				case 'search':
-					$(sort_row).show();
-					$(user_album).hide();
-					$(search_results).hide();
-					$('#cvm_order option[value=relevant]').removeAttr('disabled');
-				break;
-				// with query
-				case 'album':
-					$(sort_row).hide();
-					$(search_results).show();
-					$(user_album).show();
-				break;
-				// with query
-				case 'channel':
-					$(sort_row).hide();
-					$(search_results).show();
-					$(user_album).hide();
-				break;
-				// with query
-				case 'user':
-					$(sort_row).show();
-					$(search_results).show();
-					$(user_album).hide();
-					$('#cvm_order option[value=relevant]').attr({'disabled' : 'disabled'});
-				break;
-				// with query
-				case 'group':
-					$(sort_row).show();
-					$(search_results).show();
-					$(user_album).hide();
-					$('#cvm_order option[value=relevant]').attr({'disabled' : 'disabled'});
-				break;
 
-				case 'category':
-					$(sort_row).hide();
-					$(search_results).hide();
-					$(user_album).hide();
-				break;
-
-				case 'ondemand_videos':
-					$(sort_row).hide();
-					$(search_results).hide();
-					$(user_album).hide();
-				break;			
-			}			
 		}).trigger('change');
 		
 		$('#cvm_load_feed_form').submit(function(e){
