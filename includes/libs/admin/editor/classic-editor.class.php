@@ -577,8 +577,7 @@ class Classic_Editor{
 				'deleteItem' => __( 'Delete from playlist', 'cvm_video' ),
 				'insert_playlist' => __( 'Add shortcode into post', 'cvm_video' ),
 				'deleteCategory' => __( 'Remove category', 'cvm_video' ),
-				'no_categories' => __( 'Select some categories to display videos from. Categories can be added by clicking "Add category to shortcode" button above the posts table.', 'cvm_video' ),
-				'is_gutenberg' => absint( $this->screen->is_block_editor )
+				'no_categories' => __( 'Select some categories to display videos from. Categories can be added by clicking "Add category to shortcode" button above the posts table.', 'cvm_video' )
 			]
         );
 
