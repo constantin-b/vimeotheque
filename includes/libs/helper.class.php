@@ -101,8 +101,15 @@ class Helper{
 	 * @param bool $include_js
 	 * @param bool $js_dependency
 	 * @param bool $css_dependency
+	 *
+	 * @return array
 	 */
 	public static function enqueue_player( $include_js = true,  $js_dependency = false, $css_dependency = false  ){
+		$handles = [
+			'js' => false,
+			'css' => 'cvm-video-player'
+		];
+
 		if( $include_js ) {
 			$js_dependency = $js_dependency ? ['jquery', $js_dependency] : ['jquery'];
 			wp_enqueue_script(
@@ -111,6 +118,7 @@ class Helper{
 				$js_dependency,
 				'1.0'
 			);
+			$handles['js'] = 'cvm-video-player';
 		}
 
 		$css_dependency = $css_dependency ? [ $css_dependency ] : false;
@@ -119,6 +127,8 @@ class Helper{
 			VIMEOTHEQUE_URL . 'assets/front-end/css/video-player.css',
 			$css_dependency
 		);
+
+		return $handles;
 	}
 
 	/**
