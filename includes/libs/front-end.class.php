@@ -190,6 +190,10 @@ class Front_End{
 	 * Helper function to determine if video embed is visible in
 	 * post content based on a number of factors
 	 *
+	 * !!! NOTE !!!
+	 * Will always return false for pages and attachments unless display in archives
+	 * option is enabled.
+	 *
 	 * @return bool - true is visible; false if not visible
 	 */
 	private function is_visible(){
