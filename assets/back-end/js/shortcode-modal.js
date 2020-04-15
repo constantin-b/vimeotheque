@@ -59,13 +59,7 @@ var CVMVideo_DIALOG_WIN = false;
 			var iframe = $('#cvm-display-videos').find('iframe');
 			$('input[type=checkbox]', iframe.contents()).removeAttr('checked');
 			
-			// check for Gutenberg
-			if( '1' == CVM_SHORTCODE_MODAL.is_gutenberg /*typeof wp.data != 'undefined'*/ ){
-				var block = wp.blocks.createBlock('core/shortcode', {text:shortcode});
-				wp.data.dispatch( 'core/editor' ).insertBlocks( block );
-			}else{
-				send_to_editor(shortcode);
-			}			
+			send_to_editor(shortcode);
 
 			$(CVMVideo_DIALOG_WIN).dialog('close');
 		});
