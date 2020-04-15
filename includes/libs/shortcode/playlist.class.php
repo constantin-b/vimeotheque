@@ -72,7 +72,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		// include theme functions
 		include_once( VIMEOTHEQUE_PATH . '/includes/theme-functions.php' );
 
-		Helper::enqueue_player();
+		$handles = Helper::enqueue_player();
 
 		$theme = $this->get_theme();
 		if( !$theme ){
@@ -85,7 +85,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		wp_enqueue_script(
 			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_js_url(),
-			[ 'cvm-video-player' ],
+			$handles['js'],
 			'1.0'
 		);
 
