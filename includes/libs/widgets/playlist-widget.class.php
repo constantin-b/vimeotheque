@@ -91,9 +91,9 @@ class Playlist_Widget extends \WP_Widget{
 				'portrait'		=> absint( $instance['portrait'] )
 			];
 
-			$playlist = new Playlist( $opt, '' );
+			$playlist = new Playlist();
 			$playlist->set_posts( $posts );
-			$playlist_output = $playlist->get_output();
+			$playlist_output = $playlist->get_output(  $opt, ''  );
 
 			if( !$playlist_output ){
 				return;
