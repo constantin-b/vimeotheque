@@ -26,16 +26,6 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	private $posts = [];
 
 	/**
-	 * Playlist constructor.
-	 *
-	 * @param array $atts - Shortcode attributes
-	 * @param string $content - Shortcode content
-	 */
-	public function __construct( $atts, $content ) {
-		parent::__construct( $atts, $content );
-	}
-
-	/**
 	 * @param \WP_Post $posts
 	 */
 	public function set_posts( $posts ){
@@ -50,9 +40,15 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	}
 
 	/**
+	 * @param $atts
+	 * @param $content
+	 *
 	 * @return string|void
 	 */
-	public function get_output(){
+	public function get_output( $atts, $content ){
+		parent::set_atts( $atts );
+		parent::set_content( $content );
+
 		$videos = $this->posts ? $this->posts : $this->get_video_posts();
 		if( !$videos ){
 			return;
