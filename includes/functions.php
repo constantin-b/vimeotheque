@@ -2,6 +2,8 @@
 
 namespace Vimeotheque;
 
+use Vimeotheque\Player\Player;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -97,7 +99,7 @@ function cvm_data_attributes( $attributes, $echo = false ){
  */
 function cvm_output_player_size( $before = ' style="', $after='"', $echo = true ){
 	$player = get_player_settings();
-	$height = cvm_player_height($player['aspect_ratio'], $player['width']);
+	$height = Helper::calculate_player_height($player['aspect_ratio'], $player['width']);
 	$output = 'width:'.$player['width'].'px; height:'.$height.'px;';
 	if( $echo ){
 		echo $before.$output.$after;
@@ -125,24 +127,6 @@ function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
 
 
 /**
- * Outputs the HTML for embedding videos on single posts.
- *
- * @param bool $echo
- *
- * @return string
- */
-function embed_html( $echo = true ){
-	
-	global $post;
-	if( !$post ){
-		return;
-	}
-
-	$e = get_video_embed_html( $post, $echo );
-	return $e;
-}
-
-/**
  * Displayes or returns the HTML needed to embed the video player
  *
  * @param int/WP_Post $post - the post ( ID or WP_Post object ) that needs to display the player
@@ -157,106 +141,8 @@ function get_video_embed_html( $post, $echo = true ){
 		return;
 	}
 
-	/**
-	 * Allow embed settings filtering that can change the embedding options
-	 * when the post is displayed.
-	 *
-	 * @var array
-	 *
-	 * @param array $embed_settings - the post video embed settings
-	 * @param object $post - the current post being displayed
-	 * @param array $video - the video details as retrieved from Vimeo
-	 */
-	$settings = apply_filters(
-		'cvm_video_embed_settings',
-		$_post->get_embed_options( true ),
-		get_post( $post ),
-		$_post->get_video_data()
-	);
-
-	$settings['video_id'] = $_post->video_id;
-
-	/**
-	 * @deprecated - Use cvm_embed_width
-	 */
-	$width 	= apply_filters(
-		'cvm-embed-width',
-		$settings['width'],
-		$_post->get_video_data(),
-		'manual_embed'
-	);
-
-	/**
-	 * Filter that can be used to modify the width of the embed
-	 * @var int
-	 */
-	$width 	= apply_filters(
-		'cvm_embed_width',
-		$width,
-		$_post->get_video_data(),
-		'manual_embed'
-	);
-
-	$height = Helper::calculate_player_height( $settings['aspect_ratio'] , $width, $settings['size_ratio'] );
-
-	/**
-	 * @deprecated - Use cvm_video_embed_css_class
-	 */
-	$class = apply_filters( 'cvm_video_post_css_class', [], $post );
-
-	/**
-	 * Filter on video container CSS class to add extra CSS classes
-	 *
-	 * Name: cvm_video_post_css_class
-	 * Params: 	- an empty array
-	 * 			- the post object that will embed the video
-	 *
-	 * @var string
-	 */
-	$class = apply_filters(
-		'cvm_video_embed_css_class',
-		$class,
-		$post
-	);
-
-	$extra_css = implode( ' ', (array) $class );
-
-	$video_data_atts = Helper::data_attributes( $settings );
-
-	// if js embedding not allowed, embed by placing the iframe dirctly into the post content
-	$embed_html = '<!-- video container -->';
-	$js_embed = Plugin::instance()->get_player_options()->get_option( 'js_embed' );
-	if( !is_wp_error( $js_embed ) && !$js_embed ){
-		$params = [
-			'title' => $settings[ 'title' ],
-			'byline' => $settings[ 'byline' ],
-			'portrait' => $settings[ 'portrait' ],
-			'loop' => $settings[ 'loop' ],
-			'color' => $settings[ 'color' ],
-			//'fullscreen' => $settings[ 'fullscreen' ]
-		];
-		$embed_url = 'https://player.vimeo.com/video/' . $_post->video_id . '?' . http_build_query( $params, '', '&' );
-		$extra_css .= ' cvm_simple_embed';
-		$embed_html = '<iframe src="' . $embed_url . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-	}else{
-		// add player script
-		Helper::enqueue_player();
-	}
-
-	$video_container = sprintf(
-		'<!-- regular embed --><div class="cvm_single_video_player %s" %s style="width:%spx; height:%spx; max-width:100%%;">%s</div>',
-		$extra_css,
-		$video_data_atts,
-		$width,
-		$height,
-		$embed_html
-	);
-
-	if( $echo ) {
-		echo $video_container;
-	}
-
-	return $video_container;
+	$player = new Player( $_post );
+	return $player->get_output( $echo );
 }
 
 /********************************************************************************
@@ -290,7 +176,7 @@ function cvm_video_embed( $video_id ){
 		$options['portrait'],
 		$options['color'],
 		$options['width'],
-		cvm_player_height($options['aspect_ratio'], $options['width'])
+		Helper::calculate_player_height($options['aspect_ratio'], $options['width'])
 	);
 }
 
@@ -327,16 +213,6 @@ function is_video( $post = false ){
 }
 
 /**
- * Adds video player script to page
- *
- * @param bool $js_dependency
- * @param bool $css_dependency
- */
-function cvm_enqueue_player( $js_dependency = false, $css_dependency = false ){
-	Helper::enqueue_player( true, $js_dependency, $css_dependency );
-}
-
-/**
  * Returns post video data from meta
  *
  * @param int|\WP_Post $post
@@ -350,51 +226,6 @@ function cvm_get_post_video_data( $post ){
 	}
 
 	return false;
-}
-
-/**
- * Calculate player height from given aspect ratio and width
- *
- * @param string $aspect_ratio
- * @param int $width
- * @param bool $ratio - a given ratio; will override aspect ratio if set
- *
- * @return float|int
- */
-function cvm_player_height( $aspect_ratio, $width, $ratio =  false ){
-	$width = absint($width);
-	
-	if( is_numeric($ratio) && $ratio > 0 ){
-		return floor( $width / $ratio );
-	}
-	
-	$height = 0;
-	switch( $aspect_ratio ){
-		case '4x3':
-			$height = floor( ($width * 3) / 4 );
-		break;
-		case '16x9':
-		default:	
-			$height = floor( ($width * 9) / 16 );
-		break;	
-		case '2.35x1':
-			$height = floor( $width / 2.35 );
-		break;	
-	}
-	
-	return $height;
-}
-
-/**
- * Available player themes
- */
-function cvm_playlist_themes(){
-	// @todo - create a filter that allows you to add new themes in this list
-	return [
-		'default' 	=> __('Default theme', 'cvm_video'),
-		'carousel' 	=> __('Carousel navigation', 'cvm_video'),
-		'wall'		=> __('Wall', 'cvm_video')
-	];
 }
 
 /***********************************************************************************
