@@ -211,4 +211,19 @@ class Front_End{
 	public function get_embed_filter_priority(){
 		return $this->embed_filter_priority;
 	}
+
+	/**
+	 * Remove filter set on post content to embed the video;
+	 * prevents automatic video embed above or below content when called.
+	 */
+	public function prevent_embed(){
+		remove_filter(
+			'the_content',
+			[
+				$this,
+				'embed_video'
+			],
+			$this->embed_filter_priority
+		);
+	}
 }
