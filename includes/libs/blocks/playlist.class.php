@@ -107,8 +107,8 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					}
 					$attr['videos'] = implode( ',', $attr['post_ids'] );
 					$attr['categories'] = implode( ',', $attr['cat_ids'] );
-					$playlist = new \Vimeotheque\Shortcode\Playlist( $attr, '' );
-					return $playlist->get_output();
+					$playlist = new \Vimeotheque\Shortcode\Playlist();
+					return $playlist->get_output( $attr, false );
 				}
 			]
 		);
