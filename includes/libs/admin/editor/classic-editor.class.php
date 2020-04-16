@@ -143,7 +143,7 @@ class Classic_Editor{
 				<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'cvm_video');?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'width', sprintf( __( '%s X %s px' ), $plugin_options['width'], \Vimeotheque\cvm_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
+						<?php $this->option_override( 'width', sprintf( __( '%s X %s px' ), $plugin_options['width'], Helper::calculate_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
 						<?php $this->option_override( 'aspect_ratio', sprintf( __( '/ Aspect ratio: %s', 'cvm_video' ), $plugin_options['aspect_ratio'] ) );?>
 					<?php else: // is not option override?>
 						<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>
@@ -158,7 +158,7 @@ class Classic_Editor{
 						?>
 						<label for="cvm_width"><?php _e('Width', 'cvm_video');?> :</label>
 						<input type="text" name="width" id="cvm_width" class="cvm_width" value="<?php echo $settings['width'];?>" size="2" />px
-						| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height" id="cvm_calc_height"><?php echo \Vimeotheque\cvm_player_height( $settings['aspect_ratio'], $settings['width'] );?></span>px
+						| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height" id="cvm_calc_height"><?php echo Helper::calculate_player_height( $settings['aspect_ratio'], $settings['width'] );?></span>px
 					<?php endif;// end option override?>
 				</td>
 			</tr>
@@ -359,13 +359,12 @@ class Classic_Editor{
 							<th valign="top"><label for="cvm_playlist_theme"><?php _e('Theme', 'cvm_video');?>:</label></th>
 							<td>
 								<?php
-		$playlist_themes = \Vimeotheque\cvm_playlist_themes();
-		Helper_Admin::select( [
-				'name' => 'cvm_playlist_theme',
-				'id' => 'cvm_playlist_theme',
-				'options' => $playlist_themes
-		] );
-		?>
+                                    Helper_Admin::select_playlist_theme(
+                                            'cvm_playlist_theme',
+                                            false,
+                                            'cvm_playlist_theme'
+                                    );
+                                ?>
                                     <div class="cvm-theme-customize default">
                                         <?php _e( 'Playlist location', 'cvm_video' ) ;?> :
                                         <label for=""><input type="radio" name="cvm_theme_default_layout" value="" checked="checked" /> <?php _e( 'bottom', 'cvm_video' );?></label>
@@ -394,7 +393,7 @@ class Classic_Editor{
 							<td><input type="text" class="cvm_width" name="width" id="width"
 								value="<?php echo $options['width'];?>" size="2" />px
 									| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height"
-								id="cvm_calc_height"><?php echo \Vimeotheque\cvm_player_height( $options['aspect_ratio'], $options['width'] );?></span>px
+								id="cvm_calc_height"><?php echo Helper::calculate_player_height( $options['aspect_ratio'], $options['width'] );?></span>px
 							</td>
 						</tr>
 
