@@ -2,6 +2,7 @@
 
 namespace Vimeotheque;
 
+use Vimeotheque\Options\Options;
 use Vimeotheque\Post\Post_Type;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -280,9 +281,12 @@ class Video_Post{
 		if( !$this->_post ){
 			return;
 		}
-
+		/**
+		 * @var Options
+		 */
 		$options_obj = Helper::get_embed_options();
-		if( !is_wp_error( $options_obj->get_option( 'allow_override' ) ) ){
+
+		if( $options_obj->get_option( 'allow_override' ) ){
 			$options = $options_obj->get_options();
 		}else{
 			$options = $this->get_meta( $this->cpt()->get_post_settings()->get_meta_embed_settings() );
