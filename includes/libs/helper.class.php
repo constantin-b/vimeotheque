@@ -143,7 +143,10 @@ class Helper{
 	public static function calculate_player_height( $aspect_ratio, $width, $ratio =  false ){
 		$width = absint($width);
 
-		if( is_numeric( $ratio ) && $ratio > 0 ){
+		$override = Plugin::instance()->get_player_options()
+		                              ->get_option('aspect_override');
+
+		if( $override && is_numeric( $ratio ) && $ratio > 0 ){
 			return floor( $width / $ratio );
 		}
 
@@ -168,7 +171,7 @@ class Helper{
 	 * @return Options
 	 */
 	static public function get_embed_options(){
-		return \Vimeotheque\Plugin::instance()->get_player_options();
+		return Plugin::instance()->get_player_options();
 	}
 
 	/**
@@ -215,6 +218,23 @@ class Helper{
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @param $post
+	 * @param array $options
+	 * @param bool $echo
+	 *
+	 * @return string|void
+	 */
+	public static function embed_video( $post, $options = [], $echo = true ){
+		$_post = self::get_video_post( $post );
+		if( !$_post->is_video() ){
+			return;
+		}
+
+		$player = new Player\Player( $_post, $options );
+		return $player->get_output( $echo );
 	}
 
 }
