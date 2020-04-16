@@ -21,22 +21,19 @@ class Video extends Shortcode_Abstract implements Shortcode_Interface {
 	private $post = null;
 
 	/**
-	 * Video constructor.
-	 *
 	 * @param $atts
 	 * @param $content
+	 *
+	 * @return bool|string|void
 	 */
-	public function __construct( $atts, $content ) {
-		parent::__construct( $atts, $content );
+	public function get_output( $atts, $content ) {
+		parent::set_atts( $atts );
+		parent::set_content( $content );
+
 		if( parent::get_attr( 'id' ) ){
 			$this->post = Helper::get_video_post( parent::get_attr('id') );
 		}
-	}
 
-	/**
-	 * @return bool|string|void
-	 */
-	public function get_output() {
 		if( !$this->post ){
 			return;
 		}
