@@ -146,7 +146,7 @@ class Helper{
 		$override = Plugin::instance()->get_player_options()
 		                              ->get_option('aspect_override');
 
-		if( $override && is_numeric( $ratio ) && $ratio > 0 ){
+		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
 			return floor( $width / $ratio );
 		}
 
