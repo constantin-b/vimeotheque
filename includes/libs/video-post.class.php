@@ -285,8 +285,9 @@ class Video_Post{
 		 * @var Options
 		 */
 		$options_obj = Helper::get_embed_options();
+		$override = $options_obj->get_option( 'allow_override' );
 
-		if( $options_obj->get_option( 'allow_override' ) ){
+		if( !is_wp_error( $override ) && $override ){
 			$options = $options_obj->get_options();
 		}else{
 			$options = $this->get_meta( $this->cpt()->get_post_settings()->get_meta_embed_settings() );
