@@ -22,13 +22,9 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		parent::__construct( $plugin );
 
 		parent::register_script( 'vimeotheque-video-position-block', 'video_position' );
-		parent::register_style( 'vimeotheque-video-block', 'video', true );
-		parent::register_style( 'vimeotheque-front-video-block', 'video' );
 
 		parent::register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => parent::get_script_handle(),
-			'editor_style' => parent::get_editor_style_handle(),
-			'style' => parent::get_style_handle(),
 			'render_callback' => function(){
 				/**
 				 * Remove default action that embeds the video in front-end
@@ -103,8 +99,8 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		if( !$_post->is_video() ){
 			$this->deactivate();
 			wp_deregister_script( parent::get_script_handle() );
-			wp_deregister_style( parent::get_editor_style_handle() );
-			wp_deregister_style( parent::get_style_handle() );
+			//wp_deregister_style( parent::get_editor_style_handle() );
+			//wp_deregister_style( parent::get_style_handle() );
 		}
 	}
 
