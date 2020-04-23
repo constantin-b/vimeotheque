@@ -183,7 +183,6 @@ class Playlist extends Block_Abstract implements Block_Interface {
 		);
 
 		Helper::enqueue_player( true, parent::get_script_handle(), parent::get_editor_style_handle() );
-		wp_enqueue_script( 'jquery-masonry' );
 	}
 
 	/**
