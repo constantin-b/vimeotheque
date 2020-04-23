@@ -3,7 +3,7 @@ import ServerSideEmbed from './components/ServerSideEmbed'
 import SearchForm from "./components/SearchForm";
 import CategoryList from "./components/CategoryList";
 import ListMenu from "./components/ListMenu";
-import { size, keys, map, merge } from 'lodash'
+import { size, keys, map, merge, forEach } from 'lodash'
 
 const 	{ registerBlockType } = wp.blocks,
     { __ } = wp.i18n,
@@ -165,10 +165,14 @@ registerBlockType( 'vimeotheque/video-playlist', {
                             }
                             onComplete = { () =>{
                                 setTimeout( ()=>{
-                                    window.vimeotheque.themeDefault()
-                                    if( undefined != window.vimeotheque.themeCarousel ) {
-                                        window.vimeotheque.themeCarousel()
-                                    }
+                                    /**
+                                     * All themes are stored under variable vimeotheque.themes
+                                     * This simply iterates all registered functions and runs
+                                     * each one
+                                     */
+                                    forEach( window.vimeotheque.themes, func => {
+                                        func()
+                                    } )
                                 }, 200 )
                             } }
                             isSelected={props.isSelected}
