@@ -111,10 +111,18 @@ class Helper{
 		];
 
 		if( $include_js ) {
-			$js_dependency = $js_dependency ? ['jquery', $js_dependency] : ['jquery'];
+			wp_register_script(
+				'vimeo-video-player-sdk',
+				'https://player.vimeo.com/api/player.js',
+				false,
+				'2.11'
+			);
+
+			$js_dependency = $js_dependency ? ['jquery', 'vimeo-video-player-sdk', $js_dependency] : ['jquery', 'vimeo-video-player-sdk'];
+
 			wp_enqueue_script(
 				'cvm-video-player',
-				VIMEOTHEQUE_URL . 'assets/front-end/js/video-player' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js',
+				VIMEOTHEQUE_URL . 'assets/back-end/js/apps/player/app.build.js',
 				$js_dependency,
 				'1.0'
 			);
