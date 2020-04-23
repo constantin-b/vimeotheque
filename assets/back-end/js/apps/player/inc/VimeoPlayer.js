@@ -35,7 +35,7 @@ $.fn.VimeoPlayer = function( params ){
         player.loadVideo( id ).then( id => {
 
         } ).catch( error => {
-            console.log(error)
+            //console.log(error)
         } )
 
         return self
@@ -49,7 +49,7 @@ $.fn.VimeoPlayer = function( params ){
         player.pause().then( ()=>{
 
         } ).catch( error => {
-            console.log(error)
+            //console.log(error)
         } )
 
         return self
@@ -63,7 +63,7 @@ $.fn.VimeoPlayer = function( params ){
         player.play().then( ()=>{
 
         } ).catch( error => {
-            console.log(error)
+            //console.log(error)
         } )
 
         return self
@@ -83,7 +83,7 @@ $.fn.VimeoPlayer = function( params ){
         player.setVolume(volume).then( ( _volume )=>{
 
         } ).catch( error => {
-            console.log(error)
+            //console.log(error)
         } )
 
         return self
@@ -110,7 +110,7 @@ $.fn.VimeoPlayer = function( params ){
         player.setCurrentTime( seconds ).then( ( _seconds ) => {
 
         } ).catch( (error) => {
-            console.log(error)
+            //console.log(error)
         } )
 
         return self
