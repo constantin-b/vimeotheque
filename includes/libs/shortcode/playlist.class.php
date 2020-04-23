@@ -79,14 +79,17 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		include $theme->get_file();
 
 		wp_enqueue_script(
-			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
+			'vimeotheque-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_js_url(),
-			$handles['js'],
+			apply_filters(
+				'vimeotheque-theme-' . strtolower( $theme->get_folder_name() ) . '-script-dependencies',
+				$handles['js']
+			),
 			'1.0'
 		);
 
 		wp_enqueue_style(
-			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
+			'vimeotheque-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_style_url(),
 			false,
 			'1.0'
