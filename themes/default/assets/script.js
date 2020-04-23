@@ -4,6 +4,7 @@
 
 /** @namespace vimeotheque */
 window.vimeotheque = window.vimeotheque || {};
+vimeotheque.themes = vimeotheque.themes || {};
 
 ;(function( exports, $ ){	
 
@@ -47,10 +48,10 @@ window.vimeotheque = window.vimeotheque || {};
 
     exports.themeDefault = themeDefault;
     
-})( vimeotheque, jQuery );
+})( vimeotheque.themes, jQuery );
 
 ;(function($){	
 	$(document).ready(function(){	
-		vimeotheque.themeDefault();
+		vimeotheque.themes.themeDefault();
 	});	
 })( jQuery );
