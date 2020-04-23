@@ -48,10 +48,10 @@ vimeotheque.themes = vimeotheque.themes || {};
 
     exports.themeDefault = themeDefault;
     
-})( vimeotheque.themes, jQuery );
+}( vimeotheque.themes, jQuery ));
 
 ;(function($){	
 	$(document).ready(function(){	
 		vimeotheque.themes.themeDefault();
 	});	
-})( jQuery );
+}( jQuery ));
