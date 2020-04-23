@@ -213,7 +213,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		}
 
-		return $posts;
+		return array_values( $posts );
 	}
 
 	/**
