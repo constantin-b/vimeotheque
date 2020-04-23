@@ -119,10 +119,7 @@ registerBlockType( 'vimeotheque/video', {
                                 }
                                 onComplete = { ()=>{
                                     setTimeout( () => {
-                                        jQuery('div[class^="cvm_single_video_player"]:not(.cvm_simple_embed)')
-                                            .Vimeo_VideoPlayer({
-                                                'elem_data' : true
-                                            })
+                                        jQuery('div.vimeotheque-player').VimeoPlayer()
                                     }, 200 )
 
                                 }}
@@ -279,7 +276,7 @@ registerBlockType( 'vimeotheque/video', {
                                     setAttributes({
                                         width: ( !value || value < 200 ) ? 200 : value
                                     })
-                                    cvm_resize_players()
+                                    vimeotheque.resizeAll()
                                 }
                             }
                         />
@@ -299,7 +296,7 @@ registerBlockType( 'vimeotheque/video', {
                                     setAttributes({
                                         aspect_ratio: value
                                     })
-                                    setTimeout(  cvm_resize_players, 500 );
+                                    setTimeout(  vimeotheque.resizeAll, 200 );
                                 }
                             }
                         />
