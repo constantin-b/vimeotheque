@@ -190,6 +190,10 @@ class Front_End{
 	 * Helper function to determine if video embed is visible in
 	 * post content based on a number of factors
 	 *
+	 * !!! NOTE !!!
+	 * Will always return false for pages and attachments unless display in archives
+	 * option is enabled.
+	 *
 	 * @return bool - true is visible; false if not visible
 	 */
 	private function is_visible(){
@@ -206,5 +210,20 @@ class Front_End{
 	 */
 	public function get_embed_filter_priority(){
 		return $this->embed_filter_priority;
+	}
+
+	/**
+	 * Remove filter set on post content to embed the video;
+	 * prevents automatic video embed above or below content when called.
+	 */
+	public function prevent_embed(){
+		remove_filter(
+			'the_content',
+			[
+				$this,
+				'embed_video'
+			],
+			$this->embed_filter_priority
+		);
 	}
 }

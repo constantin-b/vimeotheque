@@ -14,64 +14,49 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Shortcode_Factory {
 	/**
-	 * @var Plugin
+	 * @var Shortcode_Abstract[]
 	 */
-	private $plugin;
+	private $shortcodes = [];
 
 	/**
 	 * Shortcode_Factory constructor.
+	 *
 	 */
-	public function __construct( Plugin $plugin ) {
+	public function __construct() {
+		$this->register_shortcode_objects();
+	}
 
-		$this->plugin = $plugin;
-		// legacy shortcodes
-		add_shortcode( 'cvm_video', [ $this, 'process_shortcode' ] );
-		add_shortcode( 'cvm_playlist', [ $this, 'process_shortcode' ] );
-		add_shortcode( 'cvm_video_embed', [ $this, 'process_shortcode' ] );
-		// new style shortcodes
-		add_shortcode( 'vimeotheque_video', [ $this, 'process_shortcode' ] );
-		add_shortcode( 'vimeotheque_video_position', [ $this, 'process_shortcode' ] );
-		add_shortcode( 'vimeotheque_playlist', [ $this, 'process_shortcode' ] );
+	private function register_shortcode_objects(){
+		$this->shortcodes = [
+			'vimeotheque_video_position' => new Video_Position( [ 'cvm_video_embed', 'vimeotheque_video_position' ] ),
+			'vimeotheque_video' => new Video( [ 'cvm_video', 'vimeotheque_video' ] ),
+			'vimeotheque_playlist' => new Playlist( [ 'cvm_playlist', 'vimeotheque_playlist' ] )
+		];
 	}
 
 	/**
-	 * @param $atts
-	 * @param $content
-	 * @param $shortcode_name
-	 *
-	 * @return string
+	 * @return Shortcode_Abstract[]
 	 */
-	public function process_shortcode( $atts, $content, $shortcode_name ){
-		if( 'cvm_video' == $shortcode_name ){
-			$shortcode_name = 'vimeotheque_video';
-		}
-		if( 'cvm_playlist' == $shortcode_name ){
-			$shortcode_name = 'vimeotheque_playlist';
-		}
-		if( 'cvm_video_embed' == $shortcode_name ){
-			$shortcode_name = 'vimeotheque_video_position';
-		}
-
-		switch( $shortcode_name ){
-			case 'vimeotheque_video':
-				$shortcode_obj = new Video( $atts, $content );
-			break;
-			case 'vimeotheque_playlist':
-				$shortcode_obj = new Playlist( $atts, $content );
-			break;
-			case 'vimeotheque_video_position':
-				$shortcode_obj = new Video_Position( $atts, $content );
-			break;
-			default:
-				$shortcode_obj = null;
-				trigger_error( sprintf( "Shortcode '%s' doesn't exist.", $shortcode_name ), E_USER_NOTICE );
-			break;
-		}
-
-		if( $shortcode_obj ) {
-			return $shortcode_obj->get_output();
-		}
+	public function get_shortcodes(){
+		return $this->shortcodes;
 	}
 
+	/**
+	 * @param $shortcode
+	 *
+	 * @return Shortcode_Abstract|\WP_Error
+	 */
+	public function get_shortcode( $shortcode ){
+		if( isset( $this->shortcodes[ $shortcode ] ) ){
+			return $this->shortcodes[ $shortcode ];
+		}
 
+		return new \WP_Error(
+			'vimeotheque-shortcode-not-registered',
+			sprintf(
+				__( 'Shortcode %s is not registered.', 'cvm_video' ),
+				$shortcode
+			)
+		);
+	}
 }

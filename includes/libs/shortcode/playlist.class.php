@@ -26,16 +26,6 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	private $posts = [];
 
 	/**
-	 * Playlist constructor.
-	 *
-	 * @param array $atts - Shortcode attributes
-	 * @param string $content - Shortcode content
-	 */
-	public function __construct( $atts, $content ) {
-		parent::__construct( $atts, $content );
-	}
-
-	/**
 	 * @param \WP_Post $posts
 	 */
 	public function set_posts( $posts ){
@@ -50,9 +40,15 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	}
 
 	/**
+	 * @param $atts
+	 * @param $content
+	 *
 	 * @return string|void
 	 */
-	public function get_output(){
+	public function get_output( $atts, $content ){
+		parent::set_atts( $atts );
+		parent::set_content( $content );
+
 		$videos = $this->posts ? $this->posts : $this->get_video_posts();
 		if( !$videos ){
 			return;
@@ -83,14 +79,17 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		include $theme->get_file();
 
 		wp_enqueue_script(
-			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
+			'vimeotheque-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_js_url(),
-			$handles['js'],
+			apply_filters(
+				'vimeotheque-theme-' . strtolower( $theme->get_folder_name() ) . '-script-dependencies',
+				$handles['js']
+			),
 			'1.0'
 		);
 
 		wp_enqueue_style(
-			'cvm-vim-player-' . strtolower( $theme->get_folder_name() ) ,
+			'vimeotheque-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_style_url(),
 			false,
 			'1.0'
@@ -217,7 +216,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		}
 
-		return $posts;
+		return array_values( $posts );
 	}
 
 	/**

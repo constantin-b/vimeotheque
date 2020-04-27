@@ -73,12 +73,11 @@ registerBlockType( 'vimeotheque/video-position', {
 		}
 
 		return [
-			<>
+			<div key="vimeotheque-video-position-block">
 				<div
-					className="cvm_single_video_player cvm_simple_embed"
+					className="vimeotheque-player"
 					data-width = { opt.width }
 					data-aspect_ratio = { opt.aspect_ratio }
-					key="vimeotheque-video-position-block"
 					style = {
 						{
 							width: `${opt.width}px`,
@@ -86,7 +85,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						}
 					}
 					onLoad = {
-						event  => cvm_resize_player( event.currentTarget )
+						event  => vimeotheque.resize( event.currentTarget )
 					}
 				>
 					<iframe
@@ -125,8 +124,9 @@ registerBlockType( 'vimeotheque/video-position', {
 						/>
 					)
 				}
-			</>
-				,
+			</div>
+
+			,
 
 			/*
 			 * InspectorControls
@@ -221,7 +221,7 @@ registerBlockType( 'vimeotheque/video-position', {
 											setAttributes({
 												embed_options: JSON.stringify( opt )
 											})
-											cvm_resize_players()
+											vimeotheque.resizeAll()
 										}
 									}
 								/>
@@ -242,7 +242,7 @@ registerBlockType( 'vimeotheque/video-position', {
 										setAttributes({
 											embed_options: JSON.stringify( opt )
 										})
-										setTimeout(  cvm_resize_players, 500 );
+										setTimeout(  vimeotheque.resizeAll, 100 );
 									}
 								}
 							/>

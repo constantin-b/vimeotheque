@@ -59,10 +59,13 @@ class Options{
 			return $this->options;
 		}
 		
-		$this->options = $this->_get_wp_option();
+		$this->options = [];
+		$options = $this->_get_wp_option();
 		foreach ( $this->defaults as $k => $v ){
-			if( !isset( $this->options[ $k ] ) ){
+			if( !isset( $options[ $k ] ) ){
 				$this->options[ $k ] = $v;
+			}else{
+				$this->options[ $k ] = $options[ $k ];
 			}
 		}
 		

@@ -7,6 +7,9 @@
  * as soon as possible.
  */
 
+use Vimeotheque\Helper;
+use Vimeotheque\Player\Player;
+
 /**
  * Class CVM_Options_Factory
  * @deprecated - Use Vimeotheque\Options\Options_Factory instead
@@ -265,7 +268,13 @@ function cvm_get_post_video_data( $post_id ){
  * @return string
  */
 function cvm_video_embed_html( $echo = true ){
-	return Vimeotheque\embed_html( $echo );
+	global $post;
+	if( !$post ){
+		return;
+	}
+
+	$e = cvm_get_video_embed_html( $post, $echo );
+	return $e;
 }
 
 /**
@@ -317,7 +326,14 @@ function cvm_get_settings(){
  * @return string|void
  */
 function cvm_get_video_embed_html( $post, $echo = true ){
-	return Vimeotheque\get_video_embed_html( $post, $echo );
+	$_post = Helper::get_video_post( $post );
+
+	if( !$_post->video_id ){
+		return;
+	}
+
+	$player = new Player( $_post );
+	return $player->get_output( $echo );
 }
 
 /**

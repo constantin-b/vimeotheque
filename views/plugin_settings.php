@@ -6,15 +6,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Vimeotheque\Admin\Page\Settings_Page;
-use function Vimeotheque\cvm_player_height;
+use Vimeotheque\Helper;
 
 /**
- * @var $this Settings_Page
- * @var $extra_tabs array
- * @var $options array
- * @var $player_opt array
- * @var $authorize_url string
- * @var $unauthorize_url string
+ * @var Settings_Page $this
+ * @var array $extra_tabs
+ * @var array $options
+ * @var array $player_opt
+ * @var string $authorize_url
+ * @var string $unauthorize_url
  */
 ?>
 <div class="wrap">
@@ -297,7 +297,7 @@ use function Vimeotheque\cvm_player_height;
 								?>
 								<label for="cvm_width"><?php _e('Width', 'cvm_video');?> :</label>
 								<input type="text" name="width" id="cvm_width" class="cvm_width" value="<?php echo $player_opt['width'];?>" size="2" />px
-								| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height" id="cvm_calc_height"><?php echo cvm_player_height( $player_opt['aspect_ratio'], $player_opt['width'] );?></span>px
+								| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height" id="cvm_calc_height"><?php echo Helper::calculate_player_height( $player_opt['aspect_ratio'], $player_opt['width'] );?></span>px
 							</td>
 						</tr>
 

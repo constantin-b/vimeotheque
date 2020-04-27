@@ -175,7 +175,7 @@ class Plugin{
 		// start the front-end
 		$this->load_front_end();
 
-		new Shortcode_Factory( $this );
+		new Shortcode_Factory();
 		$this->blocks_factory = new Blocks_Factory( $this );
 
 		new Widgets_Factory( $this );

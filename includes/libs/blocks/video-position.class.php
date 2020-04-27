@@ -22,26 +22,18 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		parent::__construct( $plugin );
 
 		parent::register_script( 'vimeotheque-video-position-block', 'video_position' );
-		parent::register_style( 'vimeotheque-video-block', 'video', true );
-		parent::register_style( 'vimeotheque-front-video-block', 'video' );
 
 		parent::register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => parent::get_script_handle(),
-			'editor_style' => parent::get_editor_style_handle(),
-			'style' => parent::get_style_handle(),
 			'render_callback' => function(){
 				/**
 				 * Remove default action that embeds the video in front-end
 				 * @see Front_End::embed_video()
 				 */
-				remove_action(
-					'the_content',
-					[ Plugin::instance()->get_front_end(), 'embed_video' ],
-					Plugin::instance()->get_front_end()->get_embed_filter_priority()
-				);
+				parent::get_plugin()->get_front_end()->prevent_embed();
 
 				global $post;
-				return get_video_embed_html( $post, false );
+				return Helper::embed_video( $post, [], false );
 			}
 		] );
 
@@ -107,8 +99,8 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		if( !$_post->is_video() ){
 			$this->deactivate();
 			wp_deregister_script( parent::get_script_handle() );
-			wp_deregister_style( parent::get_editor_style_handle() );
-			wp_deregister_style( parent::get_style_handle() );
+			//wp_deregister_style( parent::get_editor_style_handle() );
+			//wp_deregister_style( parent::get_style_handle() );
 		}
 	}
 

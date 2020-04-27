@@ -4,3 +4,17 @@
 	background-repeat:no-repeat;
 	background-position:center center;
 }
+
+.vimeotheque-player{
+	background-color:#000000;
+	background-image:url(../images/loading.gif);
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+    .vimeotheque-player iframe{
+    	margin:0!important;
+    	padding:0!important;
+    	width:100%!important;
+    	height:100%!important;
+    	max-width:100%!important;
+    }

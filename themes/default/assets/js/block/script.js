@@ -39,7 +39,11 @@ const addLayoutAttribute = ( settings, name ) => {
 
     return settings
 }
-
+/**
+ * @param string - hook name
+ * @param string - namespace
+ * @param string - callback
+ */
 addFilter( 'blocks.registerBlockType', 'playlist-theme-default/attribute/layout', addLayoutAttribute )
 
 /**

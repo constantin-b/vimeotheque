@@ -4,6 +4,12 @@
 	margin:20px 0px;
 }
 
+.cvm-vim-playlist .clear{
+	width:100%;
+	float:none;
+	clear:both!important;
+}
+
 .cvm-vim-playlist.default.left,
 .cvm-vim-playlist.default.right{
 	width:100%!important;
@@ -51,6 +57,7 @@
 		overflow:auto;
 		border:1px #CCC solid;
 		padding:0px 10px;
+		position: relative;
 	}
 		.cvm-vim-playlist.default .cvm-playlist .cvm-playlist-item{
 			display:block;
@@ -75,10 +82,10 @@
 				margin-right:10px;
 				border:1px #CCC solid;
 			}
-	.cvm-vim-playlist.default .cvm-player{
+	.cvm-vim-playlist.default .vimeotheque-player{
 		display:block;
 		position:relative;
-		max-width:100%;
+		/* max-width:100%; */
 		overflow:hidden;
 		background-image:url(images/loading.gif);
 		background-color:#000000;
@@ -86,15 +93,15 @@
 		background-repeat:no-repeat;
 	}
 
-	.cvm-vim-playlist.default.right .cvm-player{
+	.cvm-vim-playlist.default.right .vimeotheque-player{
 		float:left;
 	}
-	.cvm-vim-playlist.default.left .cvm-player{
+	.cvm-vim-playlist.default.left .vimeotheque-player{
 		float:right;
 	}				
 
 @media only screen and ( max-width: 900px ) {
-  	.cvm-vim-playlist.default.right .cvm-player{
+  	.cvm-vim-playlist.default.right .vimeotheque-player{
   		float:none;
   		clear:both;
   	}

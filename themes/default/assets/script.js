@@ -4,11 +4,12 @@
 
 /** @namespace vimeotheque */
 window.vimeotheque = window.vimeotheque || {};
+vimeotheque.themes = vimeotheque.themes || {};
 
 ;(function( exports, $ ){	
 
     themeDefault = function(){
-    	$('.cvm-vim-playlist.default:not(.loaded)').CVM_Player_Default();
+    	$('.cvm-vim-playlist.default:not(.loaded)').VimeoPlaylist();
 		
 		$.each( $('.cvm-vim-playlist.default:not(.loaded)'), function(i, p){
 			$(this).find('.playlist-visibility').on( 'click', function(e){
@@ -24,7 +25,7 @@ window.vimeotheque = window.vimeotheque || {};
 			
 			if( $(p).is( '.left, .right' ) ){
 				var playlist = $(p).find('.cvm-playlist-wrap'),
-					videoPlayer = $(p).find( '.cvm-player' ),
+					videoPlayer = $(p).find( '.vimeotheque-player' ),
 					c = $(p).attr('class');
 
 				var f = function(){
@@ -47,10 +48,10 @@ window.vimeotheque = window.vimeotheque || {};
 
     exports.themeDefault = themeDefault;
     
-})( vimeotheque, jQuery );
+}( vimeotheque.themes, jQuery ));
 
 ;(function($){	
 	$(document).ready(function(){	
-		vimeotheque.themeDefault();
+		vimeotheque.themes.themeDefault();
 	});	
-})( jQuery );
+}( jQuery ));

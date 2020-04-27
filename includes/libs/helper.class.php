@@ -111,10 +111,18 @@ class Helper{
 		];
 
 		if( $include_js ) {
-			$js_dependency = $js_dependency ? ['jquery', $js_dependency] : ['jquery'];
+			wp_register_script(
+				'vimeo-video-player-sdk',
+				'https://player.vimeo.com/api/player.js',
+				false,
+				'2.11'
+			);
+
+			$js_dependency = $js_dependency ? ['jquery', 'vimeo-video-player-sdk', $js_dependency] : ['jquery', 'vimeo-video-player-sdk'];
+
 			wp_enqueue_script(
 				'cvm-video-player',
-				VIMEOTHEQUE_URL . 'assets/front-end/js/video-player' . ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.dev' : '' ) . '.js',
+				VIMEOTHEQUE_URL . 'assets/back-end/js/apps/player/app.build.js',
 				$js_dependency,
 				'1.0'
 			);
@@ -143,7 +151,10 @@ class Helper{
 	public static function calculate_player_height( $aspect_ratio, $width, $ratio =  false ){
 		$width = absint($width);
 
-		if( is_numeric( $ratio ) && $ratio > 0 ){
+		$override = Plugin::instance()->get_player_options()
+		                              ->get_option('aspect_override');
+
+		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
 			return floor( $width / $ratio );
 		}
 
@@ -168,7 +179,7 @@ class Helper{
 	 * @return Options
 	 */
 	static public function get_embed_options(){
-		return \Vimeotheque\Plugin::instance()->get_player_options();
+		return Plugin::instance()->get_player_options();
 	}
 
 	/**
@@ -215,6 +226,23 @@ class Helper{
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @param $post
+	 * @param array $options
+	 * @param bool $echo
+	 *
+	 * @return string|void
+	 */
+	public static function embed_video( $post, $options = [], $echo = true ){
+		$_post = self::get_video_post( $post );
+		if( !$_post->is_video() ){
+			return;
+		}
+
+		$player = new Player\Player( $_post, $options );
+		return $player->get_output( $echo );
 	}
 
 }
