@@ -10,12 +10,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Class Helper_Admin
+ * @package Vimeotheque\Admin
+ */
 class Helper_Admin {
 
+	/**
+	 * @param $path
+	 *
+	 * @return string
+	 */
 	static public function docs_link( $path ){
 		return \Vimeotheque\cvm_link( 'documentation/' . trailingslashit( $path ), 'doc_link' );
 	}
 
+	/**
+	 * @param array $args
+	 * @param bool $echo
+	 *
+	 * @return string
+	 */
 	static public function aspect_ratio_select( $args = [], $echo = true ){
 
 		$defaults = [
@@ -41,6 +56,12 @@ class Helper_Admin {
 		}
 	}
 
+	/**
+	 * @param array $args
+	 * @param bool $echo
+	 *
+	 * @return string
+	 */
 	static public function select( $args = [], $echo = true ){
 
 		$defaults = [
@@ -100,6 +121,12 @@ class Helper_Admin {
 		return $o['before'].$output.$o['after'];
 	}
 
+	/**
+	 * @param $val
+	 * @param bool $echo
+	 *
+	 * @return string
+	 */
 	static public function check( $val, $echo = true ){
 		$checked = '';
 		if( is_bool($val) && $val ){
@@ -150,6 +177,14 @@ class Helper_Admin {
 		]);
 	}
 
+	/**
+	 * @param $name
+	 * @param bool $selected
+	 * @param string $id
+	 * @param string $class
+	 *
+	 * @return string
+	 */
 	public static function select_sort_order( $name, $selected = false, $id = '', $class = '' ){
 		$sort_options = Resource_Objects::instance()->get_sort_options();
 		$options = [];
@@ -174,6 +209,14 @@ class Helper_Admin {
 
 	}
 
+	/**
+	 * @param $name
+	 * @param bool $selected
+	 * @param string $id
+	 * @param string $class
+	 *
+	 * @return string
+	 */
 	static public function select_playlist_theme( $name, $selected = false, $id = '', $class = '' ){
 		$themes = Plugin::instance()->get_playlist_themes()->get_themes();
 		$options = [];
