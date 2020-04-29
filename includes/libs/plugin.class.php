@@ -314,6 +314,8 @@ class Plugin{
 	/**
 	 * Returns plugin options array
 	 *
+	 * @param null $defaults
+	 *
 	 * @return array
 	 */
 	public function get_options( $defaults = null ){
