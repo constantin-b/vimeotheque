@@ -30,12 +30,6 @@ class Post_Settings{
 	 */
 	private $meta_video_data = '__cvm_video_data';
 	/**
-	 * Is video meta flag
-	 *
-	 * @var string
-	 */
-	private $meta_is_video = '__cvm_is_video';
-	/**
 	 * Embed options meta name
 	 *
 	 * @var string
@@ -50,7 +44,7 @@ class Post_Settings{
 	/**
 	 * @var array
 	 */
-	private $options;
+	protected $options;
 
 	/**
 	 * Post_Settings constructor.
@@ -115,19 +109,6 @@ class Post_Settings{
 	}
 
 	/**
-	 * Check to see if option to import as post is on
-	 *
-	 * @return bool
-	 */
-	public function import_as_post(){
-		if( isset( $this->options['post_type_post'] ) && $this->options['post_type_post'] ){
-			return (bool) $this->options['post_type_post'];
-		}
-
-		return false;
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_meta_video_id(){
@@ -146,13 +127,6 @@ class Post_Settings{
 	 */
 	public function get_meta_video_data(){
 		return $this->meta_video_data;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_meta_is_video(){
-		return $this->meta_is_video;
 	}
 
 	/**
