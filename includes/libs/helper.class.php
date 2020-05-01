@@ -245,5 +245,24 @@ class Helper{
 		return $player->get_output( $echo );
 	}
 
+	/**
+	 * Determine if a potential video attached to current global post
+	 * can be displayed in page
+	 *
+	 * !!! NOTE !!!
+	 * Will always return false for pages and attachments unless display in archives
+	 * option is enabled.
+	 *
+	 * @return bool
+	 */
+	public static function video_is_visible(){
+		$options = Plugin::instance()->get_options();
+		$is_visible = $options[ 'archives' ] ? true : is_single();
+		if( is_admin() || ! $is_visible || !self::get_video_post()->is_video() ){
+			return false;
+		}
+		return true;
+	}
+
 }
 
