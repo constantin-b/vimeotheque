@@ -12,6 +12,8 @@ const VideoImportApp  = ( props ) => {
 
     const [query, setQuery] = useState( '' )
     const [video, setVideo] = useState( false )
+    const [params, setParams] = useState( {} )
+
 
     return (
         <div className='vimeotheque-video-import-app' key='vimeotheque-single-video-import-app'>
@@ -19,9 +21,11 @@ const VideoImportApp  = ( props ) => {
                 video &&
                     <VideoImporter
                         video={video}
+                        params={params}
                         onMessageClose={
                             () => {
                                 setVideo(false)
+                                setParams({})
                                 setQuery('')
                             }
                         }
@@ -32,8 +36,9 @@ const VideoImportApp  = ( props ) => {
                 <VideoQuery
                     query={query}
                     onSubmit={
-                        video => {
-                            setVideo(video)
+                        ( video, params ) => {
+                            setVideo( video )
+                            setParams( params )
                         }
                     }
                     onCancel={

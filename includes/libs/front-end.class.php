@@ -70,42 +70,13 @@ class Front_End{
 	}
 
 	/**
-	 * Callback function for filter 'get_the_categories' set up in function 'CBC_Video_Post_Type->add_to_main_feed'
-	 * When custom post type is inserted into main feed for each post the correct categories based
-	 * on post type taxonomy must be set.
-	 * This does that otherwise all custom post type categories in
-	 * feed will end up as Uncategorized.
-	 *
-	 * @param array $categories
-	 * @return array|false|\WP_Error
-	 */
-	public function set_feed_video_categories( $categories ){
-		global $post;
-
-		if( ! $post || $this->plugin->get_cpt()->get_post_type() != $post->post_type ){
-			return $categories;
-		}
-
-		$categories = get_the_terms( $post, $this->plugin->get_cpt()->get_post_tax() );
-		if( ! $categories || is_wp_error( $categories ) )
-			$categories = [];
-
-		$categories = array_values( $categories );
-		foreach( array_keys( $categories ) as $key ){
-			_make_cat_compat( $categories[ $key ] );
-		}
-
-		return $categories;
-	}
-
-	/**
 	 * Second filter on content - embeds video in post content
 	 *
 	 * @param string $content
 	 * @return string
 	 */
 	public function embed_video( $content ){
-		if( ! $this->is_visible() ){
+		if( ! Helper::video_is_visible() ){
 			return $content;
 		}
 
@@ -152,7 +123,7 @@ class Front_End{
 	 * @return void
 	 */
 	public function add_player_script(){
-		if( ! $this->is_visible() ){
+		if( ! Helper::video_is_visible() ){
 			return;
 		}
 		Helper::enqueue_player();
@@ -184,25 +155,6 @@ class Front_End{
 			}
 		}
 		return $terms;
-	}
-
-	/**
-	 * Helper function to determine if video embed is visible in
-	 * post content based on a number of factors
-	 *
-	 * !!! NOTE !!!
-	 * Will always return false for pages and attachments unless display in archives
-	 * option is enabled.
-	 *
-	 * @return bool - true is visible; false if not visible
-	 */
-	private function is_visible(){
-		$options = $this->plugin->get_options();
-		$is_visible = $options[ 'archives' ] ? true : is_single();
-		if( is_admin() || ! $is_visible || ! is_video() ){
-			return false;
-		}
-		return true;
 	}
 
 	/**

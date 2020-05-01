@@ -101,14 +101,6 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	 * @return string
 	 * @deprecated
 	 */
-	public function get_meta_key_is_video() {
-		return parent::get_post_settings()->get_meta_is_video();
-	}
-
-	/**
-	 * @return string
-	 * @deprecated
-	 */
 	public function get_meta_key_video_data() {
 		return parent::get_post_settings()->get_meta_video_data();
 	}

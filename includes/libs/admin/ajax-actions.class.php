@@ -139,13 +139,13 @@ class Ajax_Actions{
 		];
 
 		if( 'import' == $_REQUEST['action_top'] || 'import' == $_REQUEST['action2'] ){
-			$import_options = $this->get_import_options( $_POST );
+
 			foreach( $videos as $video ){
 				$result = $this->cpt->get_plugin()
 				                    ->get_posts_importer()
 				                     ->run_import(
 					                     [ \Vimeotheque\cvm_query_video( $video ) ],
-					                     $import_options
+					                     $_POST
 				                     );
 				$response['imported'] += $result['imported'];
 				$response['skipped'] += $result['skipped'];
@@ -182,7 +182,7 @@ class Ajax_Actions{
 			$import_options = \Vimeotheque\Plugin::instance()->get_options();
 		}else {
 			// get the import options
-			$import_options = $this->get_import_options( $_POST['model']['import'] );
+			$import_options = $_POST['model']['import'];
 		}
 
 		$results = $this->cpt->get_plugin()
@@ -215,45 +215,6 @@ class Ajax_Actions{
 		}
 
 		wp_send_json_error( $results );
-	}
-
-	/**
-	 * Process the import options
-	 *
-	 * @param array $source
-	 *
-	 * @return array
-	 */
-	private function get_import_options( $source = [] ){
-		$taxonomy = $this->cpt->get_post_tax();
-		$tag_tax = $this->cpt->get_tag_tax();
-		$native_tax = isset( $source['tax_input'][ $taxonomy ] ) ? (array) $source['tax_input'][ $taxonomy ] : [];
-		$native_tag = isset( $source['tax_input'][ $tag_tax ] ) ? (array) $source['tax_input'][ $tag_tax ] : [];
-
-		$import_options = [
-			//'theme_import'		=> false,
-			'native_tax'		=> $native_tax,
-			//'theme_tax'			=> false,
-			'native_tag'		=> $native_tag,
-			//'theme_tag'			=> false,
-			'import_description' => $source['import_description'],
-			'import_status' => $source['import_status'],
-			'import_title' => isset( $source['import_title'] ),
-			//'import_date' => $source['import_date'],
-			//'import_user' => (isset( $source['import_user'] )) ? $source['import_user'] : false,
-			// embed options
-			//'aspect_ratio' => $source['aspect_ratio'],
-			//'video_position' => $source['video_position'],
-			//'loop' => isset( $source['loop'] ),
-			//'autoplay' => isset( $source['autoplay'] )
-		];
-
-		/**
-		 * Filter the options
-		 *
-		 * @param array $import_options
-		 */
-		return apply_filters( 'vimeotheque\admin\import\ajax_options', $import_options, $source );
 	}
 
 	/**

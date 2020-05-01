@@ -3,9 +3,15 @@ const {
         Button,
         ButtonGroup
     } = wp.components,
+    {applyFilters} = wp.hooks,
     { __ } = wp.i18n
 
 const Video = ( props ) => {
+    /**
+     * Filter that allows extra parameters to be set.
+     * Used in conjunction with filter "vimeotheque.single-import.import-actions"
+     */
+    let params = applyFilters( 'vimeotheque.single-import.params', {} )
 
     return (
         <div className='vimeotheque-video'>
@@ -38,7 +44,7 @@ const Video = ( props ) => {
                     isPrimary
                     onClick={
                         ()=>{
-                            props.onClick( props.data )
+                            props.onClick( props.data, params )
                         }
                     }
                 >
@@ -50,6 +56,13 @@ const Video = ( props ) => {
                 >
                     { __( 'Cancel', 'cvm_video' ) }
                 </Button>
+                {
+                    /**
+                     * Filter that allow insert of additional edit elements.
+                     * IE: it is used to inject the theme import checkbox
+                     */
+                    applyFilters('vimeotheque.single-import.import-actions')
+                }
             </div>
         </div>
     )

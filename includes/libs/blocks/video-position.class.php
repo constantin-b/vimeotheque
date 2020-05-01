@@ -33,7 +33,10 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				parent::get_plugin()->get_front_end()->prevent_embed();
 
 				global $post;
-				return Helper::embed_video( $post, [], false );
+				$video_post = Helper::get_video_post( $post );
+				if( $video_post->is_video() ) {
+					return Helper::embed_video( $post, [], false );
+				}
 			}
 		] );
 

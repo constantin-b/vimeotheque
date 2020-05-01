@@ -213,7 +213,7 @@ class Plugin{
 	 * Loads the automatic importer
 	 */
 	private function load_importer(){
-		$this->posts_import = new Posts_Import( $this->get_cpt() );
+		$this->posts_import = apply_filters( 'vimeotheque\set_importer', new Posts_Import( $this->get_cpt() ) );
 	}
 
 	/**

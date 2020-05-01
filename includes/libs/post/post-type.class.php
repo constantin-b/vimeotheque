@@ -38,7 +38,7 @@ class Post_Type{
 	/**
 	 * @var Post_Settings
 	 */
-	private $post_settings;
+	protected $post_settings;
 
 	/**
 	 * @var Plugin
@@ -67,7 +67,7 @@ class Post_Type{
 		$this->plugin = $plugin;
 		$this->post_settings = new Post_Settings( $this );
 	}
-	
+
 	/**
 	 * Register video post type and taxonomies
 	 */

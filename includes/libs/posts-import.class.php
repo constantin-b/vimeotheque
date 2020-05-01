@@ -17,7 +17,7 @@ class Posts_Import{
 	/**
 	 * @var Post_Type
 	 */
-	private $post_type;
+	protected $post_type;
 
 	/**
 	 * Posts_Import constructor.
@@ -39,18 +39,15 @@ class Posts_Import{
 	 */
 	public function run_import( $raw_feed, $import_options ){
 		/**
-		 * @var bool $theme_import
 		 * @var array $native_tax
-		 * @var array $theme_tax
 		 * @var array $native_tag
-		 * @var array $theme_tag
 		 * @var bool $import_description
 		 * @var string $import_status
 		 * @var bool $import_title
 		 * @var bool $import_date
 		 * @var int $import_user
 		 */
-		extract( $import_options, EXTR_SKIP );
+		extract( $this->get_import_options( $import_options ), EXTR_SKIP );
 
 		// get import options
 		$options = \Vimeotheque\Plugin::instance()->get_options();
@@ -59,61 +56,6 @@ class Posts_Import{
 		$options['import_description'] = $import_description;
 		$options['import_status'] = $import_status;
 		$options['import_title'] = $import_title;
-		//$options['import_date'] = $import_date;
-
-		/**
-		 * Filter the import options
-		 *
-		 * @param array $import_options
-		 * @param array $source
-		 */
-		$options = apply_filters( 'vimeotheque\import\options', $options, $import_options );
-
-		/**
-		 * Post type filter
-		 * @param string $post_type
-		 */
-		$post_type = apply_filters( 'vimeotheque\import\post_type',  $this->post_type->get_post_type(), $options );
-
-		/**
-		 * Category taxonomy name filter
-		 * @param string $taxonomy
-		 */
-		$taxonomy = apply_filters( 'vimeotheque\import\post_taxonomy_name', $this->post_type->get_post_tax(), $options );
-
-		/**
-		 * Tag taxonomy name filter
-		 *
-		 * @param string $tag_taxonomy
-		 */
-		$tag_taxonomy = apply_filters( 'vimeotheque\import\tag_taxonomy_name', $this->post_type->get_tag_tax(), $options );
-
-		/**
-		 * Filter categories that are set on post
-		 *
-		 * @param array|bool $category
-		 */
-		$category = apply_filters( 'vimeotheque\import\post_taxonomies', $native_tax, $options );
-
-		/**
-		 * Filter tags that are set on post
-		 *
-		 * @param array|bool $tags
-		 */
-		$tags = apply_filters( 'vimeotheque\import\tag_taxonomies', $native_tag, $options );
-
-		/**
-		 * Filter the post format
-		 *
-		 * @param string $post_format
-		 */
-		$post_format = apply_filters( 'vimeotheque\import\post_format', 'video', $options );
-
-		// post status
-		$post_status	= $this->post_type->get_post_settings()->post_status( $import_status );
-
-		// set user
-		$user = isset( $import_user ) ? absint( $import_user ) : false;
 
 		// store results
 		$result = [
@@ -125,7 +67,7 @@ class Posts_Import{
 			'error'		=> []
 		];
 
-		$duplicates = $this->get_duplicate_posts( $raw_feed, $post_type );
+		$duplicates = $this->get_duplicate_posts( $raw_feed, $this->post_type->get_post_type() );
 
 		// parse feed
 		foreach( $raw_feed as $video ){
@@ -166,10 +108,10 @@ class Posts_Import{
 					 */
 					do_action( 'cvm_existing_video_posts_taxonomies',
 						$post,
-						$taxonomy,
-						$category,
-						$tag_taxonomy,
-						$tags
+						$this->post_type->get_post_tax(),
+						$native_tax,
+						$this->post_type->get_tag_tax(),
+						$native_tag
 					);
 				}
 
@@ -209,22 +151,20 @@ class Posts_Import{
 
 			$post_id = $this->import_video( [
 				'video' 		=> $video, // video details retrieved from Vimeo
-				'post_type' 	=> $post_type, // what post type to import as
-				'taxonomy' 		=> $taxonomy, // what taxonomy should be used
-				'category' 		=> $category, // category name (if any) - will be created if category_id is false
-				'tag_taxonomy'	=> $tag_taxonomy,
-				'tags'			=> $tags,
-				'user'			=> $user, // save as a given user if any
-				'post_format'	=> $post_format, // post format will default to video
-				'status'		=> $post_status, // post status
-				'theme_import'	=> false,
+				'category' 		=> $native_tax, // category name (if any) - will be created if category_id is false
+				'tags'			=> $native_tag,
+				'user'			=> ( isset( $import_user ) ? absint( $import_user ) : false ), // save as a given user if any
+				'post_format'	=> 'video', // post format will default to video
+				'status'		=> $this->post_type->get_post_settings()->post_status( $import_status ), // post status
 				'options'		=> $options
 			] );
 
 			if( $post_id ){
 				$result['imported'] += 1;
 				$result['ids'][] = $post_id;
-				cvm_update_video_settings( $post_id, $import_options, true );
+
+				$video = Helper::get_video_post( $post_id );
+				$video->set_embed_options( $this->get_import_options( $import_options ), true );
 			}
 		}
 
@@ -234,10 +174,11 @@ class Posts_Import{
 	/**
 	 * @param $raw_feed
 	 * @param $post_type
+	 * @param bool|WP_REST_Request $request
 	 *
 	 * @return array
 	 */
-	public function get_duplicate_posts( $raw_feed, $post_type ){
+	public function get_duplicate_posts( $raw_feed, $post_type, $request = false ){
 
 		$video_ids = [];
 		foreach( $raw_feed as $video ){
@@ -285,34 +226,30 @@ class Posts_Import{
 			'video' 			=> [], // video details retrieved from Vimeo
 			'post_id'           => false,
 			'category' 			=> false, // category name (if any) - will be created if category_id is false
-			'post_type' 		=> false, // what post type to import as
-			'taxonomy' 			=> false, // what taxonomy should be used
-			'tag_taxonomy'		=> false,
 			'tags'				=> false,
 			'user'				=> false, // save as a given user if any
 			'post_format'		=> 'video', // post format will default to video
 			'status'			=> 'draft', // post status
-			'theme_import'		=> false,
 			'options'			=> false,
 		];
 		/**
 		 * @var array $video
 		 * @var int $post_id
 		 * @var string $category
-		 * @var string $post_type
-		 * @var string $taxonomy
-		 * @var string $tag_taxonomy
 		 * @var array $tags
 		 * @var int $user
 		 * @var string $post_format
 		 * @var string $status
-		 * @var array $theme_import
 		 * @var array $options
 		 */
 		extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
+		if( !$options ){
+			$options = Plugin::instance()->get_options();
+		}
+
 		// if no video details or post type, bail out
-		if( !$video || !$post_type ){
+		if( !$video ){
 			return false;
 		}
 
@@ -328,9 +265,8 @@ class Posts_Import{
 		 *
 		 * @param $video - video details array
 		 * @param $post_type - post type that should be created from the video details
-		 * @param $theme_import - if video should be imported as theme compatible post, holds theme details array
 		 */
-		$allow_import = apply_filters('cvm_allow_video_import', true, $video, $post_type, $theme_import );
+		$allow_import = apply_filters('cvm_allow_video_import', true, $video, $this->post_type->get_post_type(), false );
 		if( !$allow_import ){
 			/**
 			 * Generate an error and pass it for debugging
@@ -377,7 +313,7 @@ class Posts_Import{
 		$post_title 	= $options['import_title'] ? $video['title'] : '';
 
 		// action on post insert that allows setting of different meta on post
-		do_action('cvm_before_post_insert', $video, $theme_import);
+		do_action('cvm_before_post_insert', $video, false);
 
 		// set post data
 		$post_data = [
@@ -388,7 +324,7 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 			 */
-			'post_title' 	=> apply_filters('cvm_video_post_title', $post_title, $video, $theme_import),
+			'post_title' 	=> apply_filters('cvm_video_post_title', $post_title, $video, false),
 			/**
 			 * Filter on post content
 			 *
@@ -396,7 +332,7 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 			 */
-			'post_content' 	=> apply_filters('cvm_video_post_content', $post_content, $video, $theme_import),
+			'post_content' 	=> apply_filters('cvm_video_post_content', $post_content, $video, false),
 			/**
 			 * Filter on post excerpt
 			 *
@@ -404,8 +340,8 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 			 */
-			'post_excerpt'	=> apply_filters('cvm_video_post_excerpt', $post_excerpt, $video, $theme_import),
-			'post_type'		=> $post_type,
+			'post_excerpt'	=> apply_filters('cvm_video_post_excerpt', $post_excerpt, $video, false),
+			'post_type'		=> $this->post_type->get_post_type(),
 			/**
 			 * Filter on post status
 			 *
@@ -413,7 +349,7 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - always false, implemented for PRO version reasons
 			 */
-			'post_status'	=> apply_filters('cvm_video_post_status', $status, $video, $theme_import )
+			'post_status'	=> apply_filters('cvm_video_post_status', $status, $video, false )
 		];
 
 		$pd = $options['import_date'] ? date('Y-m-d H:i:s', strtotime( $video['published'] )) : current_time( 'mysql' );
@@ -424,7 +360,7 @@ class Posts_Import{
 		 * @param array - the video details
 		 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 		 */
-		$post_date = apply_filters( 'cvm_video_post_date', $pd, $video, $theme_import );
+		$post_date = apply_filters( 'cvm_video_post_date', $pd, $video, false );
 
 		if( isset( $options['import_date'] ) && $options['import_date'] ){
 			$post_data['post_date_gmt'] = $post_date;
@@ -471,35 +407,24 @@ class Posts_Import{
 				set_post_format( $post_id, $post_format );
 			}
 
-			/**
-			 * Filter that can be used to manipulate the imported category taxonomy when enforcing a custom post type
-			 * @var string
-			 */
-			$taxonomy = apply_filters( 'cvm_import_category', $taxonomy );
-			/**
-			 * Filter that can be used to manipulate the imported tag taxonomy when enforcing a custom post type
-			 * @var string
-			 */
-			$tag_taxonomy = apply_filters( 'cvm_import_tag', $tag_taxonomy );
-
 			// set post category
 			if( $category ){
 				$category = is_array( $category ) ? $category : [ $category ];
-				wp_set_post_terms( $post_id, $category, $taxonomy );
+				wp_set_post_terms( $post_id, $category, $this->post_type->get_post_tax() );
 			}
 
 			if( $tags ){
-				wp_set_post_terms( $post_id, $tags, $tag_taxonomy );
+				wp_set_post_terms( $post_id, $tags, $this->post_type->get_tag_tax() );
 			}
 
 			// insert tags
-			if( ( isset( $options['import_tags'] ) && $options['import_tags'] ) && $tag_taxonomy ){
+			if( ( isset( $options['import_tags'] ) && $options['import_tags'] ) && $this->post_type->get_tag_tax() ){
 				if( isset( $video['tags'] ) && is_array( $video['tags'] ) ){
 					$tags = [];
 					$count = absint( $options['max_tags'] );
 					$tags = array_slice($video['tags'], 0, $count);
 					if( $tags ){
-						wp_set_post_terms( $post_id, $tags, $tag_taxonomy, true );
+						wp_set_post_terms( $post_id, $tags, $this->post_type->get_tag_tax(), true );
 					}
 				}
 			}
@@ -509,27 +434,9 @@ class Posts_Import{
 			 *
 			 * @param int $post_id
 			 * @param array $video
-			 * @param array|bool $theme_import
 			 * @param string $post_type
 			 */
-			do_action('cvm_post_insert', $post_id, $video, $theme_import, $post_type);
-
-			// if importing as theme post, there might be some meta fields to be set
-			if( $theme_import && isset( $theme_import['post_meta'] ) && is_array( $theme_import['post_meta'] ) ){
-				foreach( $theme_import['post_meta'] as $k => $meta_key ){
-					switch( $k ){
-						case 'url' :
-							update_post_meta( $post_id, $meta_key, $video['link'] );
-							break;
-						case 'thumbnail':
-							update_post_meta( $post_id, $meta_key, end( $video['thumbnails'] ) );
-							break;
-						case 'embed':
-							update_post_meta( $post_id, $meta_key, cvm_video_embed( $video['video_id'] ) );
-							break;
-					}
-				}
-			}
+			do_action('cvm_post_insert', $post_id, $video, false, $this->post_type->get_post_type());
 
 			// set post meta
 			$_post = Helper::get_video_post( $post_id );
@@ -544,12 +451,36 @@ class Posts_Import{
 			/**
 			 * Send a debug message
 			 */
-			_cvm_debug_message(  'Imported video ID ' . $video['video_id'] . ' into post #' . $post_id . ' having post type "' . $post_type . '".'  );
+			_cvm_debug_message(  'Imported video ID ' . $video['video_id'] . ' into post #' . $post_id . ' having post type "' . $this->post_type->get_post_type() . '".'  );
 
 			return $post_id;
 
 		}// end checking if not wp error on post insert
 
 		return false;
+	}
+
+	/**
+	 * Process the import options
+	 *
+	 * @param array $source
+	 *
+	 * @return array
+	 */
+	private function get_import_options( $source = [] ){
+		$taxonomy = $this->post_type->get_post_tax();
+		$tag_tax = $this->post_type->get_tag_tax();
+		$native_tax = isset( $source['tax_input'][ $taxonomy ] ) ? (array) $source['tax_input'][ $taxonomy ] : [];
+		$native_tag = isset( $source['tax_input'][ $tag_tax ] ) ? (array) $source['tax_input'][ $tag_tax ] : [];
+
+		$import_options = [
+			'native_tax'		=> $native_tax,
+			'native_tag'		=> $native_tag,
+			'import_description' => $source['import_description'],
+			'import_status' => $source['import_status'],
+			'import_title' => isset( $source['import_title'] )
+		];
+
+		return $import_options;
 	}
 }

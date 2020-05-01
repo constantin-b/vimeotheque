@@ -17,7 +17,7 @@ abstract class Notice_Abstract{
 	/**
 	 * @var \Vimeotheque\Post\Post_Type
 	 */
-	private $cpt;
+	protected $cpt;
 
 	/**
 	 * Notice_Abstract constructor.

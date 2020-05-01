@@ -63,7 +63,8 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 			->get_posts_importer()
 			->get_duplicate_posts(
 				[ $video ],
-				Plugin::instance()->get_cpt()->get_post_type()
+				Plugin::instance()->get_cpt()->get_post_type(),
+				$request
 			);
 
 		if( $duplicates ){
@@ -74,7 +75,7 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 			);
 		}
 
-		$post_id = $request->get_param( 'postId' );
+		$post_id = $request->get_param( 'post_id' );
 		$post = get_post( $post_id );
 		if( is_wp_error( $post ) ){
 			return $post;
@@ -88,20 +89,7 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		$import_result = Plugin::instance()
 			->get_posts_importer()
 			->import_video(
-				[
-					'video' => $request->get_param( 'video' ),
-					'post_id' => $post_id,
-					'category' => false,
-					'post_type' => Plugin::instance()->get_cpt()->get_post_type(),
-					'taxonomy' => Plugin::instance()->get_cpt()->get_post_tax(),
-					'tag_taxonomy' => Plugin::instance()->get_cpt()->get_tag_tax(),
-					'tags' => false,
-					'user' => false,
-					'post_format' => 'video',
-					'status' => 'draft',
-					'theme_import' => false,
-					'options' => false
-				]
+				$request->get_params()
 			);
 
 		if( !$import_result ){
