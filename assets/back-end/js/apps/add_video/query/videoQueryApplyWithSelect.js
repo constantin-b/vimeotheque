@@ -80,7 +80,8 @@ export const postCreateApplyWithSelect = ( Component, props ) => {
                 method: 'POST',
                 data: {
                     video: props.video,
-                    postId: wpApiSettings.postId
+                    post_id: wpApiSettings.postId,
+                    ...props.params
                 }
             }).then(
                 result => {
