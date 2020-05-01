@@ -311,6 +311,58 @@ class Video_Post{
 	}
 
 	/**
+	 * Update video playback options
+	 *
+	 * @param array $values
+	 * @param bool $_use_defaults
+	 *
+	 * @return void
+	 */
+	public function set_embed_options( $values = [], $_use_defaults = false ){
+		if( !$this->_post ){
+			return;
+		}
+
+		/**
+		 * @var Options
+		 */
+		$defaults = Helper::get_embed_options()->get_options();
+
+		foreach( $defaults as $key => $val ){
+			if( is_numeric( $val ) ){
+				if( isset( $values[ $key ] ) ){
+					$defaults[ $key ] = (int)$values[ $key ];
+				}else{
+					// if flagged to use the default values, just skip the setting and allow the default
+					if( $_use_defaults ){
+						continue;
+					}
+
+					// some defaults are numeric but can only have value 1 or 0
+					// if so, the option is a checkbox that is unchecked, set it to 0
+					if( 0 == $defaults[$key] || 1 == $defaults[$key] ){
+						$defaults[ $key ] = 0;
+					}
+				}
+				continue;
+			}
+			if( is_bool( $val ) ){
+				$defaults[ $key ] = isset( $values[ $key ] );
+				continue;
+			}
+
+			if( isset( $values[ $key ] ) ){
+				$defaults[ $key ] = $values[ $key ];
+			}
+		}
+
+		$this->update_meta(
+			$this->cpt()->get_post_settings()->get_meta_embed_settings(),
+			$defaults
+		);
+	}
+
+	/**
 	 * Unpublish the post by changing its status
 	 */
 	public function unpublish(){
@@ -371,12 +423,22 @@ class Video_Post{
 	}
 
 	/**
+	 * Flag video as being managed by the plugin
+	 */
+	public function flag_video_post(){
+		$this->update_meta(
+			$this->cpt()->get_post_settings()->get_meta_is_video(),
+			true
+		);
+	}
+
+	/**
 	 * @param $key
 	 * @param $value
 	 *
 	 * @return bool|int
 	 */
-	private function update_meta( $key, $value ){
+	protected function update_meta( $key, $value ){
 		if( $this->_post ) {
 			return update_post_meta(
 				$this->_post->ID,
@@ -393,7 +455,7 @@ class Video_Post{
 	 *
 	 * @return mixed
 	 */
-	private function get_meta( $key, $single = true, $default = [] ){
+	public function get_meta( $key, $single = true, $default = [] ){
 		if( $this->_post ){
 			$meta = get_post_meta(
 				$this->_post->ID,
