@@ -198,10 +198,54 @@ class Admin{
 			$r = get_role( $role );
 			if( is_a( $r, 'WP_Role' ) ) {
 				foreach ( $capabilities as $cap ) {
-					$r->add_cap( $cap['capability'] );
+					if( !$r->has_cap( $cap['capability'] ) ) {
+						$r->add_cap( $cap['capability'] );
+					}
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param bool $cap
+	 *
+	 * @return array|mixed
+	 * @throws Exception
+	 */
+	public function get_capability( $cap = false ){
+		$capabilities = [
+			'manual_import' => [
+				'capability' => 'cvm_manual_import',
+				'description' => __( 'Manual bulk import', 'cvm_video' )
+			],
+			'automatic_import' => [
+				'capability' => 'cvm_automatic_import',
+				'description' => __( 'Automatic import', 'cvm_video' )
+			]
+		];
+
+		if( !$cap ){
+			return $capabilities;
+		}
+
+		if( isset( $capabilities[ $cap ] ) ){
+			return $capabilities[ $cap ]['capability'];
+		}else{
+			throw new Exception( sprintf( 'Capability "%s" could not be found.', $cap ) );
+		}
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_roles(){
+		$roles = [
+			'editor' => __( 'Editor', 'cvm_video' ),
+			'author' => __( 'Author', 'cvm_video' ),
+			'contributor' => __( 'Contributor', 'cvm_video' ),
+		];
+
+		return $roles;
 	}
 
 	/**
@@ -296,48 +340,6 @@ class Admin{
 		);
 
 		wp_add_privacy_policy_content( 'Vimeotheque PRO', $policy_content );
-	}
-
-	/**
-	 * @param bool $cap
-	 *
-	 * @return array|mixed
-	 * @throws Exception
-	 */
-	public function get_capability( $cap = false ){
-		$capabilities = [
-			'manual_import' => [
-				'capability' => 'cvm_manual_import',
-				'description' => __( 'Manual bulk import', 'cvm_video' )
-			],
-			'automatic_import' => [
-				'capability' => 'cvm_automatic_import',
-				'description' => __( 'Automatic import', 'cvm_video' )
-			]
-		];
-
-		if( !$cap ){
-			return $capabilities;
-		}
-
-		if( isset( $capabilities[ $cap ] ) ){
-			return $capabilities[ $cap ]['capability'];
-		}else{
-			throw new Exception( sprintf( 'Capability "%s" could not be found.', $cap ) );
-		}
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_roles(){
-		$roles = [
-			'editor' => __( 'Editor', 'cvm_video' ),
-			'author' => __( 'Author', 'cvm_video' ),
-			'contributor' => __( 'Contributor', 'cvm_video' ),
-		];
-
-		return $roles;
 	}
 
 	/**
