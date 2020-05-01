@@ -121,12 +121,20 @@ class Post_Edit_Page{
             </p>
 			<?php
 		}else{
+		    $handle = 'vimeotheque-import-video-react-app';
             wp_enqueue_script(
-                'vimeotheque-import-video-react-app',
+                $handle,
                 VIMEOTHEQUE_URL . 'assets/back-end/js/apps/add_video/app.build.js',
                 ['wp-element', 'wp-editor'],
                 '1.0'
             );
+
+			/**
+			 * Allow enqueue of additional scripts
+             * @param string $handle - React app script handle
+			 */
+            do_action( 'vimeotheque\admin\single-video-import-enqueue-script', $handle );
+
 			wp_localize_script(
 			    'vimeotheque-import-video-react-app',
                 'wpApiSettings',
