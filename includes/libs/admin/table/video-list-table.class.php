@@ -87,11 +87,12 @@ class Video_List_Table extends \WP_List_Table{
 	 */
 	function column_post_title( $item ){
 
-		$meta = cvm_get_post_video_data( $item['ID'] );
+	    $video = Helper::get_video_post( $item['ID'] );
+		$meta = $video->get_video_data();
 		
 		$label = sprintf( '<label for="cvm-video-%1$s" id="title%1$s" class="cvm_video_label">%2$s</label>', $item['ID'], $item['post_title'] );
-		
-		$settings = \Vimeotheque\get_video_settings( $item['ID'] );
+
+		$settings = $video->get_embed_options();
 		
 		$form = '<div class="single-video-settings" id="single-video-settings-'.$item['ID'].'">';
 		$form.= '<h4>'.$item['post_title'].' (' . \Vimeotheque\Helper::human_time( $meta['duration'] ) . ')</h4>';
