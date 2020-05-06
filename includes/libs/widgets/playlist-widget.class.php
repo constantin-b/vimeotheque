@@ -313,7 +313,7 @@ class Playlist_Widget extends \WP_Widget{
 	 * Default widget values
 	 */
 	private function get_defaults(){
-		$player_defaults = Plugin::instance()->get_player_options()->get_options();
+		$player_defaults = Plugin::instance()->get_embed_options_obj()->get_options();
 
 		return [
 			'cvm_post_type' => Plugin::instance()->get_cpt()->get_post_type(),
