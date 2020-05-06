@@ -26,18 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<h2><?php _e( 'Before getting started' ); ?></h2>
 			<p class="lead-description"><?php _e( 'See how to set up Vimeotheque and start importing your Vimeo videos!', 'cvm_video' ); ?></p>
 
-			<script type='text/javascript'>
-                ;(function($){
-                    $(document).ready(function(){
-                        $('#cvm-video-preview').Vimeo_VideoPlayer({
-                            'video_id' 	: '223879840',
-                            'source'	: 'vimeo'
-                        });
-                    })
-                })(jQuery);
-			</script>
-			<div id="cvm-video-preview" data-volume="90"
-			     style="height: auto; width: 100%; max-width: 100%; overflow:hidden; background:#000000;"></div>
+			<div id="cvm-video-preview" class="vimeotheque-player" data-volume="90" style="height: auto; width: 100%; max-width: 100%; overflow:hidden; background:#000000;">
+                <?php Helper_Admin::embed_by_video_id('223879840');?>
+            </div>
 			<p style="text-align:center;"><a href="https://vimeo.com/223879840" target="_blank"><?php _e( 'Watch on Vimeo', 'cvm_video' );?></a></p>
 		</div>
 	</div>
