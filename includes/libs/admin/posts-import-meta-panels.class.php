@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use stdClass;
+use Vimeotheque\Helper;
 use Vimeotheque\Post\Post_Type;
 
 /**
@@ -37,7 +38,7 @@ class Posts_Import_Meta_Panels{
 		// plugin options
 		$options = \Vimeotheque\Plugin::instance()->get_options();
 		// embed options
-		$player_opt = \Vimeotheque\get_player_settings();
+		$player_opt = Helper::get_embed_options();
 		// merge the two together
 		$options = array_merge( $options, $player_opt );
 		/**
