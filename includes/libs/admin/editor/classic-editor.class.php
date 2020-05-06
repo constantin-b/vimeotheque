@@ -4,6 +4,7 @@ namespace Vimeotheque\Admin\Editor;
 
 use Vimeotheque\Admin\Helper_Admin;
 use Vimeotheque\Helper;
+use Vimeotheque\Player\Player;
 use Vimeotheque\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -119,9 +120,8 @@ class Classic_Editor{
 	 * @return null
 	 */
 	public function post_video_settings_meta_box(){
-		global $post;
-		$settings = \Vimeotheque\get_video_settings( $post->ID );
-		$plugin_options = \Vimeotheque\get_player_settings();
+		$settings = Helper::get_video_post()->get_embed_options();
+		$plugin_options = Helper::get_embed_options();
 		?>
 		<?php wp_nonce_field('cvm-save-video-settings', 'cvm-video-nonce');?>
 		<?php if( $this->is_option_override() ): ?>
@@ -281,24 +281,9 @@ class Classic_Editor{
 	 * Display live video meta box on post editing
 	 */
 	public function post_show_video_meta_box(){
-		global $post;
-		$video_post = Helper::get_video_post( $post );
-		$video_data = $video_post->get_video_data();
-		?>
-		<script language="javascript">
-            ;(function($){
-                $(document).ready(function(){
-                    $('#cvm-video-preview').Vimeo_VideoPlayer({
-                        'video_id' 	: '<?php echo $video_data['video_id'];?>',
-                        'source'	: 'vimeo'
-                    });
-                })
-            })(jQuery);
-		</script>
-		<div id="cvm-video-preview"
-		     style="height: 315px; width: 560px; max-width: 100%;"
-			<?php \Vimeotheque\cvm_output_player_data();?>></div>
-		<?php
+	    $_post = Helper::get_video_post();
+	    $player = new Player( $_post );
+		$player->get_output(true, 700);
 	}
 
 	/**
@@ -318,8 +303,7 @@ class Classic_Editor{
 	 * @param string $message
 	 */
 	private function option_override( $input_name, $message = '' ){
-		global $post;
-		$settings = \Vimeotheque\get_video_settings( $post->ID );
+		$settings = Helper::get_video_post()->get_embed_options();
 ?>
     <input type="hidden" name="<?php echo esc_attr( $input_name );?>" value="<?php echo esc_attr( $settings[ $input_name ] );?>" />
     <em><?php echo $message ;?></em>
@@ -330,8 +314,7 @@ class Classic_Editor{
 	 * @return mixed
 	 */
 	private function is_option_override(  ){
-		$settings = \Vimeotheque\get_player_settings();
-		return isset( $settings['allow_override'] ) ? $settings['allow_override'] : false;
+		return Plugin::instance()->get_embed_options_obj()->get_option('allow_override');
 	}
 
 	/**
@@ -345,7 +328,7 @@ class Classic_Editor{
 			return;
 		}
 
-		$options = \Vimeotheque\get_player_settings();
+		$options = Helper::get_embed_options();
 		?>
 
 <div id="CVMVideo_Modal_Window" style="display: none;">
