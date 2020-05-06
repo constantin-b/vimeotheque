@@ -48,7 +48,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				'show_in_rest' => [
 					'prepare_callback' => function( $value ){
 						if( !$value ){
-							$value = parent::get_plugin()->get_player_options()->get_options();
+							$value = parent::get_plugin()->get_embed_options_obj()->get_options();
 						}
 						return json_encode( $value );
 					}
