@@ -360,6 +360,6 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	 * @return Options
 	 */
 	private function player_options_obj(){
-		return Plugin::instance()->get_player_options();
+		return Plugin::instance()->get_embed_options_obj();
 	}
 }
