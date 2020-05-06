@@ -114,7 +114,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			return $this->options;
 		}
 
-		$this->options = Plugin::instance()->get_player_options()->get_options();
+		$this->options = Plugin::instance()->get_embed_options_obj()->get_options();
 		foreach( $this->options as $key => $value ){
 			$attr = parent::get_attr( $key );
 			if( !is_wp_error( $attr ) ){
