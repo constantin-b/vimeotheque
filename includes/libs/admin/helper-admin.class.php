@@ -284,4 +284,22 @@ class Helper_Admin {
 	static public function get_registered_post_type( $post_type ){
 		return Plugin::instance()->get_registered_post_types()->get_post_type( $post_type );
 	}
+
+	/**
+	 * Use only in administration pages to display instructional videos
+	 *
+	 * @param $video_id
+	 * @param bool $echo
+	 *
+	 * @return string
+	 */
+	static public function embed_by_video_id( $video_id, $echo = true ){
+		$embed = '<iframe src="https://player.vimeo.com/video/'. $video_id .'?title=1&byline=1&portrait=1&badge=0" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+
+		if( $echo ){
+			echo $embed;
+		}
+
+		return $embed;
+	}
 }
