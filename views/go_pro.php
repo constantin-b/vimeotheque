@@ -2,7 +2,7 @@
 
 namespace Vimeotheque;
 
-use function \Vimeotheque\cvm_link;
+use Vimeotheque\Admin\Helper_Admin;
 
 ?>
 <div class="wrap about-wrap">
@@ -33,7 +33,7 @@ use function \Vimeotheque\cvm_link;
 			<div id="cvm-video-preview" class="cvm-video-preview">%nbsp;</div>
 			<p class="gopro-btn-holder">
 				<a class="button try-pro-btn" href="https://vvp-demo.codeflavors.com/" target="_blank"><?php _e( 'Try PRO version', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
-				<a class="button gopro-btn" href="<?php echo cvm_link( '' ) ;?>" target="_blank"><?php _e( 'Get PRO version!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
+				<a class="button gopro-btn" href="<?php echo Helper_Admin::publisher_link( '' ) ;?>" target="_blank"><?php _e( 'Get PRO version!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
 			</p>
 		</div>
 	</div>
@@ -62,7 +62,7 @@ use function \Vimeotheque\cvm_link;
 
 				<p>
 					<h3><?php _e( 'Bulk import videos', 'codeflavors-vimeo-video-post-lite' ) ;?></h3>
-					<?php printf( __( 'Import Vimeo videos as WordPress posts by using the %smanual bulk import%s feature.', 'codeflavors-vimeo-video-post-lite' ), '<a href="' . cvm_link( 'documents/basic-tutorials/manual-bulk-import/' ) . '" target="_blank">', '</a>' );?>
+					<?php printf( __( 'Import Vimeo videos as WordPress posts by using the %smanual bulk import%s feature.', 'codeflavors-vimeo-video-post-lite' ), '<a href="' . Helper_Admin::publisher_link( 'documents/basic-tutorials/manual-bulk-import/' ) . '" target="_blank">', '</a>' );?>
 				</p>
 				<p>
 					<span class="yes">PRO</span>
@@ -80,7 +80,7 @@ use function \Vimeotheque\cvm_link;
 
 				<p>
 					<h3><?php _e( 'General video embedding option', 'codeflavors-vimeo-video-post-lite' ) ;?></h3>
-					<?php printf( __( 'Set global %svideo embed options%s for all your new videos from plugin settings.', 'codeflavors-vimeo-video-post-lite' ), '<a href="' . cvm_link( 'documents/plugin-options/embed-options/' ) . '" target="_blank">', '</a>' );?>
+					<?php printf( __( 'Set global %svideo embed options%s for all your new videos from plugin settings.', 'codeflavors-vimeo-video-post-lite' ), '<a href="' . Helper_Admin::publisher_link( 'documents/plugin-options/embed-options/' ) . '" target="_blank">', '</a>' );?>
 				</p>
 				<p>
 					<span class="yes">PRO</span>
@@ -206,13 +206,13 @@ use function \Vimeotheque\cvm_link;
 				</p>
 				<p class="gopro-btn-holder extra-space">
 					<a class="button try-pro-btn" href="https://vvp-demo.codeflavors.com/" target="_blank"><?php _e( 'Try PRO version', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
-					<a class="button gopro-btn" href="<?php echo cvm_link( '' ) ;?>" target="_blank"><?php _e( 'Go PRO!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
+					<a class="button gopro-btn" href="<?php echo Helper_Admin::publisher_link( '' ) ;?>" target="_blank"><?php _e( 'Go PRO!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
 				</p>
 			</div>
 		</div>
 	</div>
 	<hr />
 	<div class="return-to-dashboard">
-		<a href="<?php echo cvm_link(''); ?>">Vimeotheque PRO</a>
+		<a href="<?php echo Helper_Admin::publisher_link(''); ?>">Vimeotheque PRO</a>
 	</div>
 </div>
