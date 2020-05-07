@@ -178,22 +178,22 @@ class Helper{
 	/**
 	 * Return plugin embedding options
 	 *
+	 * @param array $_options
+	 *
 	 * @return array
 	 */
-	static public function get_embed_options(){
-		$option	= Plugin::instance()->get_embed_options();
+	static public function get_embed_options( array $_options = [] ){
+		$embed_options	= Plugin::instance()->get_embed_options();
 
-		// various player outputs may set their own player settings. Return those.
-		global $CVM_PLAYER_SETTINGS;
-		if( $CVM_PLAYER_SETTINGS ){
-			foreach( $option as $k => $v ){
-				if( isset( $CVM_PLAYER_SETTINGS[ $k ] ) ){
-					$option[ $k ] = $CVM_PLAYER_SETTINGS[ $k ];
+		if( $_options ){
+			foreach( $_options as $k => $v ){
+				if( isset( $_options[ $k ] ) ){
+					$embed_options[ $k ] = $_options[ $k ];
 				}
 			}
 		}
 
-		return $option;
+		return $embed_options;
 	}
 
 	/**
@@ -297,5 +297,18 @@ class Helper{
 		return $result;
 	}
 
+	/**
+	 * A debug function that sets an action to allow third party scripts to hook into
+	 *
+	 * @param $message
+	 * @param string $separator
+	 * @param bool $data
+	 */
+	public static function debug_message( $message, $separator = "\n", $data = false ){
+		/**
+		 * Fires a debug message action
+		 */
+		do_action( 'cvm_debug_message', $message, $separator, $data );
+	}
 }
 
