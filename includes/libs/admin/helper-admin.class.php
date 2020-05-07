@@ -22,7 +22,7 @@ class Helper_Admin {
 	 * @return string
 	 */
 	static public function docs_link( $path ){
-		return \Vimeotheque\cvm_link( 'documentation/' . trailingslashit( $path ), 'doc_link' );
+		return self::publisher_link( 'documentation/' . trailingslashit( $path ), 'doc_link' );
 	}
 
 	/**
@@ -302,4 +302,22 @@ class Helper_Admin {
 
 		return $embed;
 	}
+
+	/**
+	 * @param $path
+	 * @param string $medium
+	 *
+	 * @return string
+	 */
+	static public function publisher_link( $path, $medium = 'doc_link' ){
+		$base = 'https://vimeotheque.com/';
+		$vars = [
+			'utm_source' => 'plugin',
+			'utm_medium' => $medium,
+			'utm_campaign' => 'vimeotheque-lite'
+		];
+		$q = http_build_query( $vars );
+		return $base . trailingslashit( $path ) . '?' . $q;
+	}
+
 }
