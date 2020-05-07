@@ -1,7 +1,7 @@
 <?php
 namespace Vimeotheque\Admin;
 
-use function Vimeotheque\cvm_link;
+use function Vimeotheque\Admin\Helper_Admin\publisher_link;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<p>
 			<?php
 			/* translators: %s: Codex URL */
-			printf( __( 'For more information, see <a href="%s" target="_blank">the changelog</a>.' ), cvm_link( 'changelog/' ) );
+			printf( __( 'For more information, see <a href="%s" target="_blank">the changelog</a>.' ), Helper_Admin::publisher_link( 'changelog/' ) );
 			?>
 		</p>
 	</div>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="return-to-dashboard">
 		<a href="<?php menu_page_url( 'cvm_settings' ); ?>#cvm-settings-auth-options"><?php _e( 'Go to plugin Settings', 'cvm_video' ); ?></a> |
-		<a href="<?php echo cvm_link('documents/getting-started/')?>" target="_blank"><?php _e('Online documentation', 'cvm_video');?></a> |
-		<a href="<?php echo cvm_link( 'tickets/open-new-ticket/' );?>" target="_blank"><?php _e( 'Priority support', 'cvm_video' );?></a>
+		<a href="<?php echo Helper_Admin::publisher_link('documents/getting-started/')?>" target="_blank"><?php _e('Online documentation', 'cvm_video');?></a> |
+		<a href="<?php echo Helper_Admin::publisher_link( 'tickets/open-new-ticket/' );?>" target="_blank"><?php _e( 'Priority support', 'cvm_video' );?></a>
 	</div>
 </div>
