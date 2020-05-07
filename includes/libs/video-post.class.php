@@ -323,7 +323,7 @@ class Video_Post{
 			return;
 		}
 
-		$defaults = Plugin::instance()->get_embed_options();
+		$defaults = Helper::get_embed_options();
 
 		foreach( $defaults as $key => $val ){
 			if( is_numeric( $val ) ){
