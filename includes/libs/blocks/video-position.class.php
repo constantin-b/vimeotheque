@@ -2,7 +2,6 @@
 namespace Vimeotheque\Blocks;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
-use function Vimeotheque\get_video_embed_html;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
