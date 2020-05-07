@@ -1,5 +1,6 @@
 <?php
 
+use Vimeotheque\Helper;
 use Vimeotheque\Video_Post;
 
 /**
@@ -113,7 +114,7 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
 	$output = $cvm_video->get_post()->post_title;
 
 	if( $include_duration ){
-		$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $cvm_video->duration ) . ']</span>';
+		$output .= ' <span class="duration">[' . Helper::human_time( $cvm_video->duration ) . ']</span>';
 	}
 
 	if( $echo ){
@@ -151,7 +152,8 @@ function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 		'aspect_ratio'=> $options['aspect_ratio']
 	];
 
-	$output = \Vimeotheque\cvm_data_attributes($data);
+	$output = Helper::data_attributes( $data, false );
+
 	if( $echo ){
 		echo $before.$output.$after;
 	}
@@ -184,13 +186,41 @@ function cvm_video_post_permalink( $echo  = true ){
 }
 
 function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
-	return Vimeotheque\cvm_output_width( $before, $after, $echo );
+	$player = Helper::get_embed_options( cvm_get_player_options() );
+	if( $echo ){
+		echo $before . 'width: ' . $player['width'].'px; ' . $after;
+	}
+	return $before . 'width: ' . $player['width'].'px; ' . $after;
 }
 
 function cvm_output_player_size( $before = ' style="', $after='"', $echo = true ){
-	return Vimeotheque\cvm_output_player_size( $before, $after, $echo );
+	$player = Helper::get_embed_options( cvm_get_player_options() );
+	$height = Helper::calculate_player_height( $player['aspect_ratio'], $player['width'] );
+	$output = sprintf(
+		'width: %dpx; height: %dpx;',
+		$player['width'],
+		$height
+	);
+
+	if( $echo ){
+		echo $before . $output . $after;
+	}
+
+	return $before . $output . $after;
 }
 
 function cvm_output_player_data( $echo = true ){
-	return Vimeotheque\cvm_output_player_data( $echo );
+	$player = Helper::get_embed_options( cvm_get_player_options() );
+	$attributes = Helper::data_attributes( $player, $echo );
+
+	if( $echo ){
+		echo $attributes;
+	}
+
+	return $attributes;
+}
+
+function cvm_get_player_options(){
+	global $CVM_PLAYER_SETTINGS;
+	return $CVM_PLAYER_SETTINGS;
 }
