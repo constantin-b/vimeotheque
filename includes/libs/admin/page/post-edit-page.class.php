@@ -179,7 +179,7 @@ class Post_Edit_Page{
 	    global $post;
 	    // do not enqueue script if post isn't a video post imported by the plugin
         if( is_a( $post, 'WP_Post' ) ){
-            if( !\Vimeotheque\is_video( $post ) ){
+            if( !Helper::get_video_post()->is_video() ){
                 return;
             }
         }
