@@ -99,7 +99,7 @@ class Front_End{
 			return $content;
 		}
 
-		$video_container = get_video_embed_html( $post, false );
+		$video_container = Helper::embed_video( $post, [], false );
 
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
 		add_filter( 'the_content', [
