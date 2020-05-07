@@ -464,7 +464,6 @@ class Plugin{
 	 * @return void
 	 */
 	private function load(){
-		include_once VIMEOTHEQUE_PATH . 'includes/functions.php';
 		include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
 	}
 }
