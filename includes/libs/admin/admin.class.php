@@ -10,6 +10,7 @@ use Exception;
 use Vimeotheque\Admin\Menu\Menu_Pages;
 use Vimeotheque\Admin\Notice\Admin_Notices;
 use Vimeotheque\Admin\Notice\Plugin_Notice;
+use Vimeotheque\Admin\Notice\Vimeo_Api_Notice;
 use Vimeotheque\Admin\Page\About_Page;
 use Vimeotheque\Admin\Page\Automatic_Import_Page;
 use Vimeotheque\Admin\Page\Go_Pro_Page;
@@ -72,6 +73,11 @@ class Admin{
 				$this, 
 				'output_extra_columns'
 		], 10, 2 );
+
+		add_action( 'admin_init', [
+			$this,
+			'register_notices'
+		] );
 
 		// alert if setting to import as post type post by default is set on all plugin pages
 		add_action( 'admin_notices', [
@@ -284,6 +290,13 @@ class Admin{
 				echo \Vimeotheque\Helper::human_time( $meta[ 'duration' ] );
 			break;
 		}
+	}
+
+	/**
+	 * Register plugin notices
+	 */
+	public function register_notices(){
+		Admin_Notices::instance()->register( new Vimeo_Api_Notice() );
 	}
 
 	/**
