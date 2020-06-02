@@ -104,12 +104,15 @@
 			$('.cvm-theme-customize.' + $(this).val() ).show();
 		});
 
-		// hack for values from version < 2.0
-		$('#cvm_color').val( '#' + $('#cvm_color').val().replace( '#', '' ) );
-		$('#cvm_color').wpColorPicker({
-			change: function() {},
-			clear: function() {}
-		});
-
+		if( $('#cvm_color').length > 0 ) {
+			// hack for values from version < 2.0
+			$('#cvm_color').val('#' + $('#cvm_color').val().replace('#', ''));
+			$('#cvm_color').wpColorPicker({
+				change: function () {
+				},
+				clear: function () {
+				}
+			});
+		}
 	});
 })(jQuery);
