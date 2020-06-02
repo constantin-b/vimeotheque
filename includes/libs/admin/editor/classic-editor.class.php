@@ -314,7 +314,9 @@ class Classic_Editor{
 	 * @return mixed
 	 */
 	private function is_option_override(  ){
-		return Plugin::instance()->get_embed_options_obj()->get_option('allow_override');
+	    $option = Plugin::instance()->get_embed_options_obj()->get_option('allow_override');
+
+		return is_wp_error( $option ) ? false : $option;
 	}
 
 	/**
