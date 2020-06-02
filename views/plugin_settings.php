@@ -358,9 +358,9 @@ use Vimeotheque\Helper;
 
 
                         <tr valign="top">
-                            <th scope="row"><label for="color"><?php _e('Player color', 'cvm_video')?>:</label></th>
+                            <th scope="row"><label for="cvm_color"><?php _e('Player color', 'cvm_video')?>:</label></th>
                             <td>
-                                #<input type="text" name="color" id="color" value="<?php echo $player_opt['color'];?>" />
+                                #<input type="text" name="color" id="cvm_color" value="<?php echo $player_opt['color'];?>" />
                             </td>
                         </tr>
 
