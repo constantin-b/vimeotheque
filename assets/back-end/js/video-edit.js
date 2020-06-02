@@ -108,9 +108,7 @@
 		$('#cvm_color').val( '#' + $('#cvm_color').val().replace( '#', '' ) );
 		$('#cvm_color').wpColorPicker({
 			change: function() {},
-			clear: function() {
-				picker.val( false );
-			}
+			clear: function() {}
 		});
 
 	});
