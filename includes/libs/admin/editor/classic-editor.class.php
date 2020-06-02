@@ -100,17 +100,17 @@ class Classic_Editor{
 				'normal',
 				'high'
 			);
+		}else {
+			// Shortcode meta box
+			add_meta_box(
+				'cvm-add-video',
+				__( 'Vimeotheque shortcode', 'cvm_video' ),
+				[ $this, 'post_shortcode_meta_box' ],
+				null,
+				'side',
+				'low'
+			);
 		}
-
-		// Shortcode meta box
-		add_meta_box(
-			'cvm-add-video',
-			__( 'Vimeotheque shortcode', 'cvm_video' ),
-			[ $this, 'post_shortcode_meta_box' ],
-			null,
-			'side',
-			'low'
-		);
 	}
 
 	/**
