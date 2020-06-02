@@ -342,9 +342,10 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		wp_enqueue_script(
 			'cvm-video-edit',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
-			[ 'jquery' ],
+			[ 'jquery', 'wp-color-picker' ],
 			'1.0'
 		);
+		wp_enqueue_style('wp-color-picker');
 	}
 
 	/**
