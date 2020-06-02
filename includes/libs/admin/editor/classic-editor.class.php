@@ -243,7 +243,7 @@ class Classic_Editor{
 							<div style="width: 20px; height: 20px; background-color: #<?php echo $plugin_options['color'];?>; float: left; margin-right:10px;">&nbsp;</div>
 						<?php endif;?>
 					<?php else: // is not option override?>
-						#<input type="text" name="color" id="cvm_color" value="<?php echo $settings['color'];?>" />
+						<input type="text" name="color" id="cvm_color" value="<?php echo $settings['color'];?>" />
 					<?php endif;// end option override?>
 				</td>
 			</tr>
@@ -573,9 +573,11 @@ class Classic_Editor{
 			wp_enqueue_script(
 			    'cvm-video-edit',
 				VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
-                [ 'jquery' ],
+                [ 'jquery', 'wp-color-picker' ],
                 '1.0'
             );
+
+			wp_enqueue_style('wp-color-picker');
 
 			wp_enqueue_style(
 			    'cvm-video-thumbnail',
