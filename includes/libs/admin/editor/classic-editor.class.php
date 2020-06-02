@@ -131,7 +131,7 @@ class Classic_Editor{
 				<?php
 				printf(
 					__( 'Individual video post options are not editable; to change video options globally, go to plugin %sSettings%s, tab Embed options.', 'cvm_video' ),
-					'<a href="' . menu_page_url( 'cvm_settings', false ) . '">',
+					'<a href="' . menu_page_url( 'cvm_settings', false ) . '#cvm-settings-embed-options">',
 					'</a>'
 				);?>
 				</p>
