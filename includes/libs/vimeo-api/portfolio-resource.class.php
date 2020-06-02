@@ -66,12 +66,37 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	 * @return string
 	 */
 	public function get_api_endpoint() {
-		sprintf(
+		return sprintf(
 			'users/%s/portfolios/%s/videos',
 			$this->user_id,
 			$this->resource_id
 		);
 	}
 
+	/**
+	 * @see Resource_Interface::requires_user_id()
+	 *
+	 * @return bool
+	 */
+	public function requires_user_id() {
+		return true;
+	}
 
+	/**
+	 * @see Resource_Interface::label_user_id()
+	 *
+	 * @return bool|string|void
+	 */
+	public function label_user_id() {
+		return __( 'Portfolio user ID', 'cvm_video' );
+	}
+
+	/**
+	 * @see Resource_Interface::placeholder_user_id()
+	 *
+	 * @return bool|string|void
+	 */
+	public function placeholder_user_id() {
+		return __( 'Portfolio owner user ID' );
+	}
 }

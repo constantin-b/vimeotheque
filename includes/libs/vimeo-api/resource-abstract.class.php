@@ -172,6 +172,12 @@ class Resource_Abstract implements Resource_Interface {
 		 */
 		$_params = apply_filters( 'cvm_vimeo_api_query_params', $_params );
 
+		if( !$this->get_api_endpoint() ){
+			return new \WP_Error(
+				'vimeotheque-vimeo-api-resource-endpoint-error',
+				'Plugin error occured! Method ' . get_class( $this ) . '::get_api_endpoint() returned an empty response.'
+			);
+		}
 
 		return $this->get_api_endpoint() . ( $_params['fields'] ? '?' . http_build_query( $_params ) : '' );
 	}

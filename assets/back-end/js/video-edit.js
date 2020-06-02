@@ -103,6 +103,13 @@
 			$('.cvm-theme-customize').hide();
 			$('.cvm-theme-customize.' + $(this).val() ).show();
 		});
-		
+
+		// hack for values from version < 2.0
+		$('#cvm_color').val( '#' + $('#cvm_color').val().replace( '#', '' ) );
+		$('#cvm_color').wpColorPicker({
+			change: function() {},
+			clear: function() {}
+		});
+
 	});
 })(jQuery);

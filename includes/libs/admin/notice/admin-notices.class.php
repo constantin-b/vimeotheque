@@ -89,9 +89,6 @@ class Admin_Notices{
 	 * Show the notice
 	 */
 	public function show_notices(){
-		/**
-		 * @var Notice_Interface $notice
-		 */
 		foreach( $this->notices as $notice ){
 			$notice->get_notice();
 		}

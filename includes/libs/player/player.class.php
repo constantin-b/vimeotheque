@@ -49,15 +49,17 @@ class Player {
 	 *
 	 * @param bool $echo
 	 *
+	 * @param bool $width
+	 *
 	 * @return string|void
 	 */
-	public function get_output( $echo = true ){
+	public function get_output( $echo = true, $width = false ){
 		if( !$this->post->is_video() ){
 			return;
 		}
 
-		$width = $this->get_embed_width();
-		$height = $this->get_embed_height( $width );
+		$_width = $width ? absint( $width ) : $this->get_embed_width();
+		$height = $this->get_embed_height( $_width );
 		$css_class = $this->get_css_classes();
 		$iframe = sprintf(
 			'<iframe src="%s" width="100%%" height="100%%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
@@ -68,7 +70,7 @@ class Player {
 			'<div class="vimeotheque-player %s" %s style="width:%spx; height:%spx; max-width:100%%;">%s</div>',
 			$css_class,
 			$this->get_data_attributes(),
-			$width,
+			$_width,
 			$height,
 			$iframe
 		);
@@ -166,7 +168,7 @@ class Player {
 			'portrait' => $this->options['portrait'],
 			'loop' => $this->options['loop'],
 			'autoplay' => $this->options['autoplay'],
-			'color' => $this->options['color'],
+			'color' => str_replace( '#', '', $this->options['color'] ),
 			'transparent' => false
 		];
 

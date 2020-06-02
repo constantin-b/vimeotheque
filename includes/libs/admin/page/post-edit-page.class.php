@@ -85,7 +85,7 @@ class Post_Edit_Page{
 		// check nonce
 		check_admin_referer( 'cvm-save-video-settings', 'cvm-video-nonce' );
 		// update post
-		\Vimeotheque\cvm_update_video_settings( $post_id );
+		$_post->set_embed_options( $_POST );
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Post_Edit_Page{
 	    global $post;
 	    // do not enqueue script if post isn't a video post imported by the plugin
         if( is_a( $post, 'WP_Post' ) ){
-            if( !\Vimeotheque\is_video( $post ) ){
+            if( !Helper::get_video_post()->is_video() ){
                 return;
             }
         }

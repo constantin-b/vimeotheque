@@ -80,7 +80,7 @@ class User_Resource extends Resource_Abstract implements Resource_Interface {
 	 * @return string
 	 */
 	public function get_api_endpoint() {
-		return sprintf( 'users/%s/videos', $this->user_id );
+		return sprintf( 'users/%s/videos', $this->resource_id );
 	}
 
 

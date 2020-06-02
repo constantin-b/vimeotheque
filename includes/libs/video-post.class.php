@@ -284,7 +284,7 @@ class Video_Post{
 		/**
 		 * @var Options
 		 */
-		$options_obj = Helper::get_embed_options();
+		$options_obj = Plugin::instance()->get_embed_options_obj();
 		$override = $options_obj->get_option( 'allow_override' );
 
 		if( !is_wp_error( $override ) && $override ){
@@ -323,10 +323,7 @@ class Video_Post{
 			return;
 		}
 
-		/**
-		 * @var Options
-		 */
-		$defaults = Helper::get_embed_options()->get_options();
+		$defaults = Helper::get_embed_options();
 
 		foreach( $defaults as $key => $val ){
 			if( is_numeric( $val ) ){

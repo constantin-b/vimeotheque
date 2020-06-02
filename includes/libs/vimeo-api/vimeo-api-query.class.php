@@ -3,7 +3,6 @@
 namespace Vimeotheque\Vimeo_Api;
 
 use Vimeotheque\Helper;
-use function Vimeotheque\_cvm_debug_message;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -91,12 +90,12 @@ class Vimeo_Api_Query extends Vimeo {
 
 		if( is_wp_error( $endpoint ) ){
 			// send a debug message for any client listening to plugin messages
-			_cvm_debug_message( sprintf( __( 'Endpoint API returned an error: %s.' ), $endpoint->get_error_message() ) );
+			Helper::debug_message( sprintf( __( 'Endpoint API returned an error: %s.' ), $endpoint->get_error_message() ) );
 			return $endpoint;
 		}
 
 		// send a debug message for any client listening to plugin messages
-		_cvm_debug_message( sprintf( __( 'Making remote request to: %s.' ), $endpoint ) );
+		Helper::debug_message( sprintf( __( 'Making remote request to: %s.' ), $endpoint ) );
 		
 		$request = wp_remote_get( $endpoint, [
 		    /**
@@ -114,7 +113,7 @@ class Vimeo_Api_Query extends Vimeo {
 		$rate_limit = wp_remote_retrieve_header( $request, 'x-ratelimit-limit' );
 		if( $rate_limit ){
 			// send a debug message for any client listening to plugin messages
-			_cvm_debug_message( 
+			Helper::debug_message(
 				sprintf( 
 					__( 'Current rate limit: %s (%s remaining). Limit reset time set at %s.' ), 
 					$rate_limit, 
@@ -129,7 +128,7 @@ class Vimeo_Api_Query extends Vimeo {
 			// get request data
 			$data = json_decode( wp_remote_retrieve_body( $request ), true );
 
-			_cvm_debug_message( 'Vimeo API query returned error:' . $data['error'] );
+			Helper::debug_message( 'Vimeo API query returned error:' . $data['error'] );
 			return parent::api_error( $data );
 		}	
 		
@@ -152,6 +151,10 @@ class Vimeo_Api_Query extends Vimeo {
 		$this->api_resource->set_user_id( $this->api_user_id );
 		$this->api_resource->set_params( $this->get_api_request_params() );
 		$endpoint = $this->api_resource->get_endpoint();
+
+		if( is_wp_error( $endpoint ) ){
+			return $endpoint;
+		}
 
 		return parent::API_ENDPOINT . $endpoint;
 	}

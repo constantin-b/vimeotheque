@@ -151,7 +151,7 @@ class Helper{
 	public static function calculate_player_height( $aspect_ratio, $width, $ratio =  false ){
 		$width = absint($width);
 
-		$override = Plugin::instance()->get_player_options()
+		$override = Plugin::instance()->get_embed_options_obj()
 		                              ->get_option('aspect_override');
 
 		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
@@ -176,10 +176,24 @@ class Helper{
 	}
 
 	/**
-	 * @return Options
+	 * Return plugin embedding options
+	 *
+	 * @param array $_options
+	 *
+	 * @return array
 	 */
-	static public function get_embed_options(){
-		return Plugin::instance()->get_player_options();
+	static public function get_embed_options( array $_options = [] ){
+		$embed_options	= Plugin::instance()->get_embed_options();
+
+		if( $_options ){
+			foreach( $_options as $k => $v ){
+				if( isset( $_options[ $k ] ) ){
+					$embed_options[ $k ] = $_options[ $k ];
+				}
+			}
+		}
+
+		return $embed_options;
 	}
 
 	/**
@@ -264,5 +278,37 @@ class Helper{
 		return true;
 	}
 
+	/**
+	 * Query Vimeo for single video details
+	 *
+	 * @param string $video_id
+	 *
+	 * @return array|\WP_Error
+	 */
+	public static function query_video( $video_id ){
+		$vimeo = new Video_Import( 'video', $video_id );
+		$result = $vimeo->get_feed();
+		if( !$result ){
+			$error = $vimeo->get_errors();
+			if( is_wp_error( $error ) ){
+				return $error;
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * A debug function that sets an action to allow third party scripts to hook into
+	 *
+	 * @param $message
+	 * @param string $separator
+	 * @param bool $data
+	 */
+	public static function debug_message( $message, $separator = "\n", $data = false ){
+		/**
+		 * Fires a debug message action
+		 */
+		do_action( 'cvm_debug_message', $message, $separator, $data );
+	}
 }
 

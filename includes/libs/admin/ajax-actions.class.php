@@ -144,7 +144,7 @@ class Ajax_Actions{
 				$result = $this->cpt->get_plugin()
 				                    ->get_posts_importer()
 				                     ->run_import(
-					                     [ \Vimeotheque\cvm_query_video( $video ) ],
+					                     [ Helper::query_video( $video ) ],
 					                     $_POST
 				                     );
 				$response['imported'] += $result['imported'];

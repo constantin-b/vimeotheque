@@ -7,7 +7,6 @@
 		// tabs
 		if(typeof(Storage)!=="undefined"){
 			var data = {
-				active : sessionStorage['cvm_tab_active'],
 				activate : function(event, ui){
 					$(ui.newTab).find('i')
 						.removeClass('dashicons-arrow-right')	
@@ -23,14 +22,19 @@
 					$(ui.tab).find('i')
 						.removeClass('dashicons-arrow-right')	
 						.addClass('dashicons-arrow-down');
+						
+					sessionStorage['cvm_tab_active'] = ui.tab.index();
 				}
 			};
+
+            if( document.location.hash == '' ) {
+            	data.active = sessionStorage['cvm_tab_active'];
+            }
+
 		}else{
 			var data = {};
 		};
-		
-		
-		
+
 		$( "#cvm_tabs" ).tabs(data);
 		// end tabs
 		

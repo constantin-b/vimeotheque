@@ -342,9 +342,10 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		wp_enqueue_script(
 			'cvm-video-edit',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
-			[ 'jquery' ],
+			[ 'jquery', 'wp-color-picker' ],
 			'1.0'
 		);
+		wp_enqueue_style('wp-color-picker');
 	}
 
 	/**
@@ -360,6 +361,6 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	 * @return Options
 	 */
 	private function player_options_obj(){
-		return Plugin::instance()->get_player_options();
+		return Plugin::instance()->get_embed_options_obj();
 	}
 }

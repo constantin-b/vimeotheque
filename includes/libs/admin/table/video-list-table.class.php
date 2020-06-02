@@ -52,13 +52,13 @@ class Video_List_Table extends \WP_List_Table{
 			'screen'   => isset( $args['screen'] ) ? $args['screen'] : null,
 		] );
 		
-		$table_view = isset( $_GET['view'] ) ? $_GET['view'] : false;
+		$table_view = Helper::get_var( 'view', 'GET' );
 		switch ( $table_view ){
-			case 'posts':
+			case 'post':
 				$this->post_type = 'post';
 				$this->taxonomy = 'category';
 			break;
-			case 'cpt':
+			case Plugin::instance()->get_cpt()->get_post_type():
 			default:
 				$this->post_type = Plugin::instance()->get_cpt()->get_post_type();
 				$this->taxonomy = Plugin::instance()->get_cpt()->get_post_tax();
@@ -87,11 +87,12 @@ class Video_List_Table extends \WP_List_Table{
 	 */
 	function column_post_title( $item ){
 
-		$meta = cvm_get_post_video_data( $item['ID'] );
+	    $video = Helper::get_video_post( $item['ID'] );
+		$meta = $video->get_video_data();
 		
 		$label = sprintf( '<label for="cvm-video-%1$s" id="title%1$s" class="cvm_video_label">%2$s</label>', $item['ID'], $item['post_title'] );
-		
-		$settings = \Vimeotheque\get_video_settings( $item['ID'] );
+
+		$settings = $video->get_embed_options();
 		
 		$form = '<div class="single-video-settings" id="single-video-settings-'.$item['ID'].'">';
 		$form.= '<h4>'.$item['post_title'].' (' . \Vimeotheque\Helper::human_time( $meta['duration'] ) . ')</h4>';
@@ -181,7 +182,7 @@ class Video_List_Table extends \WP_List_Table{
 			foreach ( $terms as $t ) {
 				$url = add_query_arg(
 					[
-						'view' 		=> ( isset( $_REQUEST['view'] ) ? $_REQUEST['view'] : 'cpt' ),
+						'view' 		=> Helper::get_var('view', 'GET') ? Helper::get_var('view', 'GET') : Plugin::instance()->get_cpt()->get_post_type(),
 						'page' 		=> 'cvm_videos',
 						'cat'		=> $t->term_id
 					]
@@ -208,19 +209,6 @@ class Video_List_Table extends \WP_List_Table{
 		$output.= 'publish' == $item['post_status'] ? __('Published', 'cvm_video') : '';
 		return $output;
 		
-	}
-
-	/**
-	 * Message to be displayed when there are no items
-	 *
-	 * @since 2.0
-	 */
-	public function no_items() {
-	    if( 'posts' == Helper::get_var( 'view', 'GET' ) ) {
-		    _e( 'Sorry, this feature is available only in Vimeotheque PRO.', 'cvm-video' );
-	    }else{
-	        parent::no_items();
-        }
 	}
 
 	/**
@@ -272,15 +260,30 @@ class Video_List_Table extends \WP_List_Table{
 	 */
 	function get_views(){
 		$url = menu_page_url('cvm_videos', false).'&view=%s';
-		$lt = '<a href="'.$url.'" title="%s" class="%s">%s</a>';
-		
+		$lt = '<a href="' . $url . '" title="%s" class="%s">%s</a>';
+
+		$views = [];
+		$view = Helper::get_var( 'view', 'GET' ) ;
+
+        foreach( Plugin::instance()->get_registered_post_types()->get_post_types() as $_post_type ){
+            $views[] = sprintf(
+                $lt,
+                $_post_type->get_post_type()->name,
+                $_post_type->get_post_type()->label,
+                ( $view == $_post_type->get_post_type()->name ? 'current' : '' ),
+	            $_post_type->get_post_type()->label
+            );
+        }
+		/*
 		$views = [
     		'cpt' 	=> sprintf( $lt, 'cpt', __('Videos', 'cvm_video'), ( !isset( $_GET['view'] ) || 'cpt' == $_GET['view'] ? 'current' : '' ), __('Videos', 'cvm_video')),
     		'posts'	=> sprintf( $lt, 'posts', __('Posts', 'cvm_video'), ( isset($_GET['view']) && 'posts' == $_GET['view'] ? 'current' : '' ) , __('Posts', 'cvm_video')),
 		];
+		*/
 
-		printf( '<input type="hidden" name="cvm_post_type" id="cvm_post_type" value="%s" />',
-                isset( $_GET['view'] ) && 'posts' == $_GET['view'] ? 'post' : cvm_get_post_type()
+		printf(
+		        '<input type="hidden" name="cvm_post_type" id="cvm_post_type" value="%s" />',
+			    $view ? $view : Plugin::instance()->get_cpt()->get_post_type()
             );
 
     	return $views;		
@@ -292,11 +295,8 @@ class Video_List_Table extends \WP_List_Table{
 	 * @return string
 	 */
 	private function _get_view_post_type(){
-		$view = isset( $_GET['view'] ) ? $_GET['view'] : false;
-		if( 'posts' == $view ){
-			return 'post';
-		}
-		return Plugin::instance()->get_cpt()->get_post_type();
+		$view = Helper::get_var('view', 'GET');
+		return $view ? $view : Plugin::instance()->get_cpt()->get_post_type();
 	}
 	
 	/**

@@ -17,35 +17,6 @@ use Vimeotheque\Player\Player;
 final class CVM_Options_Factory extends \Vimeotheque\Options\Options_Factory{}
 
 /**
- * Class CVM_Vimeo
- * @deprecated - Use Vimeotheque\Vimeo_Api\Vimeo_Api_Query instead
- */
-final class CVM_Vimeo extends \Vimeotheque\Vimeo_Api\Vimeo_Oauth{
-
-	const ENDPOINT = parent::API_ENDPOINT;
-
-	/**
-	 * CVM_Vimeo constructor.
-	 */
-	public function __construct() {
-		$options  = \Vimeotheque\Plugin::instance()->get_options();
-
-		$token = $options['oauth_token'];
-		if( !empty( $options['oauth_secret'] ) ){
-			$token = $options['oauth_secret'];
-		}
-
-		parent::__construct(
-			$options['vimeo_consumer_key'],
-			$options['vimeo_secret_key'],
-			$token,
-			// you must use this instead of menu_page_url() to avoid API error
-			admin_url( 'edit.php?post_type=' . Vimeotheque\Plugin::instance()->get_cpt()->get_post_type() . '&page=cvm_settings' )
-		);
-	}
-}
-
-/**
  * Class CVM_Post_Type
  * @deprecated
  */
@@ -63,6 +34,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 
 	/**
 	 * @return array|mixed
+	 * @throws Exception
 	 * @deprecated
 	 */
 	public function get_capability(){
@@ -184,7 +156,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 final class CVM_Vimeo_Videos{}
 
 /**
- * @var $CVM_POST_TYPE CVM_Post_Type
+ * @var CVM_Post_Type $CVM_POST_TYPE
  * @deprecated
  */
 global $CVM_POST_TYPE;
@@ -276,7 +248,7 @@ function cvm_video_embed_html( $echo = true ){
  * @return bool
  */
 function cvm_is_video( $post = false ){
-	return Vimeotheque\is_video( $post );
+	return Helper::get_video_post( $post )->is_video();
 }
 
 /**
@@ -284,7 +256,7 @@ function cvm_is_video( $post = false ){
  * @return bool
  */
 function cvm_is_video_post(){
-	return cvm_is_video();
+	return Helper::get_video_post()->is_video();
 }
 
 /**

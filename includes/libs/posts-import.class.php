@@ -390,7 +390,7 @@ class Posts_Import{
 		}
 
 		if( is_wp_error( $post_id ) ){
-			_cvm_debug_message(
+			Helper::debug_message(
 				sprintf(
 					'Post insert returned error %s. MySQL error is: %s',
 					$post_id->get_error_message(),
@@ -451,7 +451,7 @@ class Posts_Import{
 			/**
 			 * Send a debug message
 			 */
-			_cvm_debug_message(  'Imported video ID ' . $video['video_id'] . ' into post #' . $post_id . ' having post type "' . $this->post_type->get_post_type() . '".'  );
+			Helper::debug_message(  'Imported video ID ' . $video['video_id'] . ' into post #' . $post_id . ' having post type "' . $this->post_type->get_post_type() . '".'  );
 
 			return $post_id;
 

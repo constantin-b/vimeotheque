@@ -3,7 +3,7 @@
 namespace Vimeotheque;
 
 use Vimeotheque\Admin\Admin;
-use Vimeotheque\Admin\WP_Customizer;
+use Vimeotheque\Admin\Customizer\Customizer;
 use Vimeotheque\Blocks\Block_Abstract;
 use Vimeotheque\Blocks\Blocks_Factory;
 use Vimeotheque\Options\Options;
@@ -32,37 +32,27 @@ class Plugin{
 	* @var Plugin
 	*/
 	private static $instance = null;
-
 	/**
 	 * Stores plugin options
 	 *
 	 * @var Options
 	 */
 	private $options;
-
 	/**
 	 * Stores player options
 	 *
 	 * @var Options
 	 */
 	private $player_options;
-
 	/**
 	 * @var Post_Type
 	 */
 	private $cpt;
-
 	/**
 	 * Store admin instance
 	 * @var Admin
 	 */
 	private $admin;
-
-	/**
-	 * @var WP_Customizer
-	 */
-	private $wp_customizer;
-
 	/**
 	 * @var Posts_Import
 	 */
@@ -83,6 +73,10 @@ class Plugin{
 	 * @var Post_Registration
 	 */
 	private $registered_post_types;
+	/**
+	 * @var Customizer
+	 */
+	private $customizer;
 
 	/**
 	 * Clone.
@@ -314,27 +308,11 @@ class Plugin{
 	/**
 	 * Returns plugin options array
 	 *
-	 * @param null $defaults
-	 *
 	 * @return array
 	 */
-	public function get_options( $defaults = null ){
-		if( !$this->options ){
-			$this->set_plugin_options();
-		}
-
-		if( $this->wp_customizer && is_customize_preview() ){
-			$defaults = null === $defaults ? $this->options->get_options() : $defaults;
-			$options = $this->wp_customizer->get_changeset_data( $defaults );
-		}else{
-			if( null === $defaults ){
-				$options = $this->options->get_options();
-			}else {
-				$options = $defaults;
-			}
-		}
-
-		return $options;
+	public function get_options(){
+		$options = $this->get_options_obj();
+		return $options->get_options( is_customize_preview() );
 	}
 
 	/**
@@ -355,12 +333,20 @@ class Plugin{
 	 *
 	 * @return Options
 	 */
-	public function get_player_options(){
+	public function get_embed_options_obj(){
 		if( !$this->player_options ){
 			$this->set_player_options();
 		}
 
 		return $this->player_options;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_embed_options(){
+		$options = $this->get_embed_options_obj();
+		return $options->get_options( is_customize_preview() );
 	}
 
 	/**
@@ -376,8 +362,8 @@ class Plugin{
 	 */
 	private function add_customizer(){
 		if( is_admin() || is_customize_preview() ) {
-			// start the WP Customizer compatibility class
-			$this->wp_customizer = new WP_Customizer( $this->get_cpt() );
+			$this->customizer = new Customizer();
+
 		}
 	}
 
@@ -443,8 +429,6 @@ class Plugin{
 	}
 
 	/**
-	 *
-	 *
 	 * @param string $key - string key for the block
 	 *
 	 * @return Block_Abstract - returns the registered block
@@ -469,11 +453,17 @@ class Plugin{
 	}
 
 	/**
+	 * @return Customizer
+	 */
+	public function get_customizer() {
+		return $this->customizer;
+	}
+
+	/**
 	 * Load dependencies
 	 * @return void
 	 */
 	private function load(){
-		include_once VIMEOTHEQUE_PATH . 'includes/functions.php';
 		include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
 	}
 }
