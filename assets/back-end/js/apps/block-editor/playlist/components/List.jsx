@@ -34,6 +34,7 @@ class List extends React.Component{
         this.props.onRequestBegin();
 
         let params = {
+            post_type: this.props.postType,
             page: this.props.page,
             search: this.props.search.query,
             per_page: this.props.perPage,

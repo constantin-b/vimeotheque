@@ -6,6 +6,7 @@ use Vimeotheque\Rest_Api\Endpoints\Vimeo_Api\Rest_Pictures_Controller;
 use Vimeotheque\Rest_Api\Endpoints\Vimeo_Api\Rest_Search_Controller;
 use Vimeotheque\Rest_Api\Endpoints\Vimeo_Api\Rest_Video_Controller;
 use Vimeotheque\Rest_Api\Endpoints\Wp\Rest_Post_Create_Controller;
+use Vimeotheque\Rest_Api\Endpoints\Wp\Rest_Posts_Controller;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -35,6 +36,7 @@ class Rest_Endpoint_Factory {
 		$this->store_endpoint( new Rest_Video_Controller() );
 		$this->store_endpoint( new Rest_Search_Controller() );
 		$this->store_endpoint( new Rest_Post_Create_Controller() );
+		$this->store_endpoint( new Rest_Posts_Controller() );
 	}
 
 	/**
