@@ -420,16 +420,6 @@ class Video_Post{
 	}
 
 	/**
-	 * Flag video as being managed by the plugin
-	 */
-	public function flag_video_post(){
-		$this->update_meta(
-			$this->cpt()->get_post_settings()->get_meta_is_video(),
-			true
-		);
-	}
-
-	/**
 	 * @param $key
 	 * @param $value
 	 *
