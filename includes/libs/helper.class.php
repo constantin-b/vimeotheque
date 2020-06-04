@@ -35,6 +35,15 @@ class Helper{
 	}
 
 	/**
+	 * Returns user agent for remote requests
+	 *
+	 * @return string
+	 */
+	static public function request_user_agent(){
+		return 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' );
+	}
+
+	/**
 	 * Get a Video_Post object
 	 *
 	 * @param bool $post
