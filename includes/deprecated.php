@@ -350,13 +350,13 @@ function cvm_get_method( $method, $args = [] ){
  * @param \Vimeotheque\Options\Options $options
  */
 function _deprecatead_settings_page_load_event( $options ){
-	/**
-	 * Action triggered on settings page load event
-	 * @deprecated
-	 */
-	do_action( 'cvm_settings_on_load', $options );
+	do_action_deprecated(
+		'cvm_settings_on_load',
+		[$options],
+		'2.0',
+		'vimeotheque\admin\page\settings_load'
+	);
 }
-
 add_action( 'vimeotheque\admin\page\settings_load', '_deprecatead_settings_page_load_event', 10, 1 );
 
 /**
@@ -367,6 +367,302 @@ add_action( 'vimeotheque\admin\page\settings_load', '_deprecatead_settings_page_
  * @return mixed|void
  */
 function _deprecated_settings_tabs( $tabs ){
-	return apply_filters( 'cvm_register_plugin_settings_tab', $tabs );
+	return apply_filters_deprecated(
+		'cvm_register_plugin_settings_tab',
+		[$tabs],
+		'2.0',
+		'vimeotheque\admin\page\settings_tabs'
+	);
 }
 add_filter( 'vimeotheque\admin\page\settings_tabs', '_deprecated_settings_tabs', 10, 1 );
+
+
+function _deprecated_embed_filter_priority( $priority ){
+	return apply_filters_deprecated(
+		'cvm_plugin_embed_content_filter_priority',
+		[$priority],
+		'2.0',
+		'vimeotheque\embed_filter_priority'
+	);
+}
+add_filter( 'vimeotheque\embed_filter_priority', '_deprecated_embed_filter_priority', 10, 1 );
+
+function _deprecated_allow_video_embed($allow){
+	return apply_filters_deprecated(
+		'cvm_automatic_video_embed',
+		[$allow],
+		'2.0',
+		'vimeotheque\post_content_embed'
+	);
+}
+add_filter( 'vimeotheque\post_content_embed', '_deprecated_allow_video_embed', 10, 1 );
+
+function _deprecated_vimeo_access_token( $token ){
+	return apply_filters_deprecated(
+		'cvm_vimeo_access_token',
+		[$token],
+		'2.0',
+		'vimeotheque\vimeo_api\access_token'
+	);
+}
+add_filter( 'vimeotheque\vimeo_api\access_token', '_deprecated_vimeo_access_token', 10, 1 );
+
+function _deprecated_debug( ...$args ){
+	do_action_deprecated(
+		'cvm_debug_message',
+		$args,
+		'2.0',
+		'vimeotheque\debug'
+	);
+}
+add_action( 'vimeotheque\debug', '_deprecated_debug', 10, 3 );
+
+function _deprecated_image_timeout( $timeout ){
+	return apply_filters_deprecated(
+		'cvm_image_request_timeout',
+		[$timeout],
+		'2.0',
+		'vimeotheque\image_request_timeout'
+	);
+}
+add_filter( 'vimeotheque\image_request_timeout', '_deprecated_image_timeout', 10, 1 );
+
+function _deprecated_image_file_raw( ...$args ){
+	do_action_deprecated(
+		'cvm_import_video_image_raw_file',
+		$args,
+		'2.0',
+		'vimeotheque\image_file_raw'
+	);
+}
+add_action( 'vimeotheque\image_file_raw', '_deprecated_image_file_raw', 10, 3 );
+
+function _deprecated_image_imported( ...$args ){
+	do_action_deprecated(
+		'cvm_import_video_thumbnail',
+		$args,
+		'2.0',
+		'vimeotheque\image_imported'
+	);
+}
+add_action( 'vimeotheque\image_imported', '_deprecated_image_imported', 10, 3 );
+
+function _deprecated_post_reimport_tax( ...$args ){
+	do_action_deprecated(
+		'cvm_existing_video_posts_taxonomies',
+		$args,
+		'2.0',
+		'vimeotheque\import_duplicate_taxonomies'
+	);
+}
+add_action( 'vimeotheque\import_duplicate_taxonomies', '_deprecated_post_reimport_tax', 10, 5 );
+
+function _deprecated_post_format( $format ){
+	return apply_filters_deprecated(
+		'cvm_import_post_format' ,
+		[$format],
+		'2.0',
+		'vimeotheque\import_post_format'
+	);
+}
+add_filter( 'vimeotheque\import_post_format', '_deprecated_post_format', 10, 1 );
+
+function _deprecated_allow_import( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_allow_video_import',
+		$args,
+		'2.0',
+		'vimeotheque\allow_import'
+	);
+}
+add_filter( 'vimeotheque\allow_import', '_deprecated_allow_import', 10, 4 );
+
+function _deprecated_import_before( ...$args ){
+	do_action_deprecated(
+		'cvm_before_post_insert',
+		$args,
+		'2.0',
+		'vimeotheque\import_before'
+	);
+}
+add_action( 'vimeotheque\import_before', '_deprecated_import_before', 10, 2 );
+
+function _deprecated_post_title_filter( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_post_title',
+		$args,
+		'2.0',
+		'vimeotheque\import_post_title'
+	);
+}
+add_filter( 'vimeotheque\import_post_title', '_deprecated_post_title_filter', 10, 3 );
+
+function _deprecated_post_content_filter( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_post_content',
+		$args,
+		'2.0',
+		'vimeotheque\import_post_content'
+	);
+}
+add_filter( 'vimeotheque\import_post_content', '_deprecated_post_content_filter', 10, 3 );
+
+function _deprecated_post_excerpt_filter( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_post_excerpt',
+		$args,
+		'2.0',
+		'vimeotheque\import_post_excerpt'
+	);
+}
+add_filter( 'vimeotheque\import_post_excerpt', '_deprecated_post_excerpt_filter', 10, 3 );
+
+function _deprecated_post_status_filter( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_post_status',
+		$args,
+		'2.0',
+		'vimeotheque\import_post_status'
+	);
+}
+add_filter( 'vimeotheque\import_post_status', '_deprecated_post_status_filter', 10, 3 );
+
+function _deprecated_post_date_filter( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_post_date',
+		$args,
+		'2.0',
+		'vimeotheque\import_post_date'
+	);
+}
+add_filter( 'vimeotheque\import_post_date', '_deprecated_post_date_filter', 10, 3 );
+
+function _deprecated_post_success( ...$args ){
+	do_action_deprecated(
+		'cvm_post_insert',
+		$args,
+		'2.0',
+		'vimeotheque\import_success'
+	);
+}
+add_action( 'vimeotheque\import_success', '_deprecated_post_success', 10, 4 );
+
+function _deprecated_api_oauth_settings(){
+	do_action_deprecated(
+		'cvm_additional_oauth_settings_display',
+		[],
+		'2.0',
+		'vimeotheque\admin\api_oauth_settings_extra'
+	);
+}
+add_action( 'vimeotheque\admin\api_oauth_settings_extra', '_deprecated_api_oauth_settings', 10 );
+
+function _deprecated_request_timeout( $timeout ){
+	return apply_filters_deprecated(
+		'cvm_feed_request_timeout' ,
+		[$timeout],
+		'2.0',
+		'vimeotheque\vimeo_api\request_timeout'
+	);
+}
+add_filter( 'vimeotheque\vimeo_api\request_timeout', '_deprecated_request_timeout', 10, 1 );
+
+function _deprecated_api_json_fields( $fields ){
+	return apply_filters_deprecated(
+		'cvm_vimeo_api_request_extra_json_fields',
+		[$fields],
+		'2.0',
+		'vimeotheque\vimeo_api\add_json_fields'
+	);
+}
+add_filter( 'vimeotheque\vimeo_api\add_json_fields', '_deprecated_api_json_fields', 10, 1 );
+
+function _deprecated_api_query_params( $params ){
+	return apply_filters_deprecated(
+		'cvm_vimeo_api_query_params',
+		[$params],
+		'2.0',
+		'vimeotheque\vimeo_api\query_params'
+	);
+}
+add_filter( 'vimeotheque\vimeo_api\query_params', '_deprecated_api_query_params', 10, 1 );
+
+function _deprecated_shortcode_playlist_max_posts( $max ){
+	return apply_filters_deprecated(
+		'cvm_shortcode_new_videos_max_posts',
+		[$max],
+		'2.0',
+		'vimeotheque\shortcode\playlist\newest_max_posts'
+	);
+}
+add_filter( 'vimeotheque\shortcode\playlist\newest_max_posts', '_deprecated_shortcode_playlist_max_posts', 10, 1 );
+
+function _deprecated_player_css( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_embed_css_class',
+		$args,
+		'2.0',
+		'vimeotheque\player\css_class'
+	);
+}
+add_filter( 'vimeotheque\player\css_class', '_deprecated_player_css', 10, 2 );
+
+function _deprecated_player_width( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_embed_width',
+		$args,
+		'2.0',
+		'vimeotheque\player\embed_width'
+	);
+}
+add_filter( 'vimeotheque\player\embed_width', '_deprecated_player_width', 10, 3 );
+
+function _deprecated_player_options( ...$args ){
+	return apply_filters_deprecated(
+		'cvm_video_embed_settings',
+		$args,
+		'2.0',
+		'vimeotheque\player\embed_options'
+	);
+}
+add_filter( 'vimeotheque\player\embed_options', '_deprecated_player_options', 10, 3 );
+
+function _deprecated_import_tag_tax( $tax ){
+	return apply_filters_deprecated(
+		'cvm_import_tag',
+		[$tax],
+		'2.0',
+		'vimeotheque\admin\import_meta_panel\tag_taxonomy'
+	);
+}
+add_filter( 'vimeotheque\admin\import_meta_panel\tag_taxonomy', '_deprecated_import_tag_tax', 10, 1 );
+
+function _deprecated_import_cat_tax( $tax ){
+	return apply_filters_deprecated(
+		'cvm_import_category',
+		[$tax],
+		'2.0',
+		'vimeotheque\admin\import_meta_panel\category_taxonomy'
+	);
+}
+add_filter( 'vimeotheque\admin\import_meta_panel\category_taxonomy', '_deprecated_import_cat_tax', 10, 1 );
+
+function _deprecated_import_button_text( $text ){
+	return apply_filters_deprecated(
+		'cvm-playlist-meta-submit-text',
+		[$text],
+		'2.0',
+		'vimeotheque\admin\import_meta_panel\button_text'
+	);
+}
+add_filter( 'vimeotheque\admin\import_meta_panel\button_text', '_deprecated_import_button_text', 10, 1 );
+
+function _deprecated_video_list_scripts(){
+	do_action_deprecated(
+		'cvm_video_list_modal_print_scripts',
+		[],
+		'2.0',
+		'vimeotheque\admin\video_list_modal_print_scripts'
+	);
+}
+add_action( 'vimeotheque\admin\video_list_modal_print_scripts', '_deprecated_video_list_scripts', 10 );
