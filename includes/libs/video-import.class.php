@@ -69,11 +69,16 @@ class Video_Import{
 		// stop on error
 		if( is_wp_error( $request ) ){
 			$this->errors = $request;
+
 			/**
-			 * Action that will pass the error to any third party code that
-			 * can log the import process.
+			 * Send error to debug function
 			 */
-			do_action( 'cvm_debug_request_error' ,  $this->errors );
+			Helper::debug_message(
+				'Import request error: ' . $request->get_error_message(),
+				"\n",
+				$request
+			);
+
 			return;
 		}
 		
