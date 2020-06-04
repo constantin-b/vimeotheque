@@ -93,10 +93,13 @@ class Posts_Import{
 				$result['error'][] = $error;
 
 				/**
-				 * Action that will pass the error to any third party code that
-				 * can log the import process.
+				 * Pass error to debug function
 				 */
-				do_action( 'cvm_debug_automatic_import' , $error );
+				Helper::debug_message(
+					'Import error: ' . $error->get_error_message(),
+					"\n",
+					$error
+				);
 
 				foreach( $duplicates[ $video['video_id'] ] as $_post_id ){
 					// retrieve the post object for backwards compatibility
@@ -139,11 +142,16 @@ class Posts_Import{
 						]
 					);
 					$result['error'][] = $error;
+
 					/**
-					 * Action that will pass the error to any third party code that
-					 * can log the import process.
+					 * Send error to debug function
 					 */
-					do_action( 'cvm_debug_automatic_import' , $error );
+					Helper::debug_message(
+						'Import error: ' . $error->get_error_message(),
+						"\n",
+						$error
+					);
+
 
 					continue;
 				}
@@ -280,11 +288,16 @@ class Posts_Import{
 				),
 				[ 'video_data' => $video ]
 			);
+
 			/**
-			 * Action that will pass the error to any third party code that
-			 * can log the import process.
+			 * Send error to debug function
 			 */
-			do_action( 'cvm_debug_bulk_import' , $error );
+			Helper::debug_message(
+				'Import error: ' . $error->get_error_message(),
+				"\n",
+				$error
+			);
+
 
 			return false;
 		}
