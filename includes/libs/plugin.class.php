@@ -207,7 +207,10 @@ class Plugin{
 	 * Loads the automatic importer
 	 */
 	private function load_importer(){
-		$this->posts_import = apply_filters( 'vimeotheque\set_importer', new Posts_Import( $this->get_cpt() ) );
+		$this->posts_import = apply_filters(
+			'vimeotheque\set_importer',
+			new Posts_Import( $this->get_cpt() )
+		);
 	}
 
 	/**
@@ -248,7 +251,10 @@ class Plugin{
 		 * Options filter
 		 * @param array $defaults
 		 */
-		$defaults = apply_filters( 'vimeotheque\options_default', $defaults );
+		$defaults = apply_filters(
+			'vimeotheque\options_default',
+			$defaults
+		);
 
 		$this->options = Options_Factory::get( '_cvm_plugin_settings', $defaults );
 	}
@@ -279,7 +285,10 @@ class Plugin{
 		 * Filter for player options
 		 * @param array $defaults
 		 */
-		$defaults = apply_filters( 'vimeotheque\player_options_default', $defaults );
+		$defaults = apply_filters(
+			'vimeotheque\player_options_default',
+			$defaults
+		);
 
 		// get Plugin option
 		$this->player_options = Options_Factory::get( '_cvm_player_settings', $defaults );

@@ -102,7 +102,7 @@ class Vimeo_Api_Query extends Vimeo {
 		     * Request timeout filter
 		     * @var int
 		     */
-		    'timeout' => apply_filters( 'cvm_feed_request_timeout' , 30 ),
+		    'timeout' => apply_filters( 'vimeotheque\vimeo_api\request_timeout' , 30 ),
 		    'sslverify' => false,
 		    'headers' => [
 		    	'user-agent' => Helper::request_user_agent(),

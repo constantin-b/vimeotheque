@@ -93,7 +93,10 @@ class Posts_Import_Meta_Panels{
 			
 		<div id="cvm-import-videos-submit-c">
 		    <?php submit_button(
-		            apply_filters('cvm-playlist-meta-submit-text', __('Import videos', 'cvm_video') ),
+		            apply_filters(
+                        'vimeotheque\admin\import_meta_panel\button_text',
+                        __('Import videos', 'cvm_video')
+                    ),
                     'primary',
                     'cvm-import-button',
                     true
@@ -117,13 +120,6 @@ class Posts_Import_Meta_Panels{
 		$post->ID = -1;
 
 		$taxonomy = $this->get_category_taxonomy();
-		/**
-         * @deprecated Use "vimeotheque\admin\import_meta_panel\category_taxonomy" instead
-         *
-		 * Filter that allows manipulation of category taxonomy to import as any publicly registered post type.
-		 * @param string - category taxonomy
-		 */
-		$taxonomy = apply_filters( 'cvm_import_category', $taxonomy );		
 		
 		post_categories_meta_box(
 			$post,
@@ -148,14 +144,7 @@ class Posts_Import_Meta_Panels{
 		$post->post_type = $this->get_post_type();
 
 		$taxonomy = $this->get_tag_taxonomy();
-		/**
-         * @deprecated Use "vimeotheque\admin\import_meta_panel\tag_taxonomy" instead
-         *
-		 * Filter that allows manipulation of tag taxonomy to import as any publicly registered post type.
-		 * @param string - tag taxonomy
-		 */
-		$taxonomy = apply_filters( 'cvm_import_tag', $taxonomy );
-		
+
 		$options = \Vimeotheque\Plugin::instance()->get_options();
 		if( isset( $options['import_tags'] ) && $options['import_tags'] ){
 			_e('Please note that any tags retrieved from Vimeo will also be imported and set as post tags.', 'cvm_video');
@@ -179,24 +168,8 @@ class Posts_Import_Meta_Panels{
 		$screen = get_current_screen();
 		$page_hook = $screen->id;
 
-		$taxonomy = $this->get_category_taxonomy();
-		/**
-         * @deprecated Use "vimeotheque\admin\import_meta_panel\category_taxonomy"
-         *
-		 * Filter that allows manipulation of category taxonomy to import as any publicly registered post type.
-		 * @param string - category taxonomy
-		 */
-		$taxonomy = apply_filters( 'cvm_import_category', $taxonomy );
-		$category = get_taxonomy( $taxonomy );
-
-		$tag_tax = $this->get_tag_taxonomy();
-		/**
-         * @deprecated Use "vimeotheque\admin\import_meta_panel\tag_taxonomy" instead
-		 * Filter that allows manipulation of tag taxonomy to import as any publicly registered post type.
-		 * @param string - tag taxonomy
-		 */
-		$tag_tax = apply_filters( 'cvm_import_tag', $tag_tax );
-		$tag = get_taxonomy( $tag_tax );
+		$category = get_taxonomy( $this->get_category_taxonomy() );
+		$tag = get_taxonomy( $this->get_tag_taxonomy() );
 
 		// meta boxes
 		add_meta_box(

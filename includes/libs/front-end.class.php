@@ -41,15 +41,19 @@ class Front_End{
 		 * be customized in order to protect the content.
 		 * @var integer
 		 */
-		$this->embed_filter_priority = intval( apply_filters( 'cvm_plugin_embed_content_filter_priority', $this->embed_filter_priority ) );
+		$this->embed_filter_priority = intval(
+			apply_filters(
+				'vimeotheque\embed_filter_priority',
+				$this->embed_filter_priority
+			)
+		);
 
 		// filter content to embed video
-		//*
 		add_filter( 'the_content', [
 			$this,
 			'embed_video'
 		], $this->embed_filter_priority, 1 );
-		//*/
+
 		// add player script
 		add_action( 'wp_print_scripts', [
 			$this,
@@ -94,7 +98,7 @@ class Front_End{
 		 *
 		 * @var bool
 		 */
-		$allow_embed = apply_filters( 'cvm_automatic_video_embed', true );
+		$allow_embed = apply_filters( 'vimeotheque\post_content_embed', true );
 		if( ! $allow_embed ){
 			return $content;
 		}

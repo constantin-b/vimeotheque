@@ -436,7 +436,7 @@ use Vimeotheque\Helper;
                             /**
                              * Action that allows display of additional OAuth settings
                              */
-                            do_action( 'cvm_additional_oauth_settings_display' );
+                            do_action( 'vimeotheque\admin\api_oauth_settings_extra' );
                             ?>
                         <?php endif;?>
 						<?php

@@ -43,7 +43,7 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 		
 		do_action('admin_print_styles');
 		do_action('admin_print_scripts');
-		do_action('cvm_video_list_modal_print_scripts');
+		do_action('vimeotheque\admin\video_list_modal_print_scripts');
 		echo '</head>';
 		echo '<body class="wp-core-ui">';
 				

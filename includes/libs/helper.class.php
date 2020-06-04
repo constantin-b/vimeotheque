@@ -31,7 +31,7 @@ class Helper{
 		 * Filter on Vimeo access token. Useful if trying to provide a default access token
 		 * @var string
 		 */
-		return apply_filters( 'cvm_vimeo_access_token', $token );
+		return apply_filters( 'vimeotheque\vimeo_api\access_token', $token );
 	}
 
 	/**
@@ -317,7 +317,7 @@ class Helper{
 		/**
 		 * Fires a debug message action
 		 */
-		do_action( 'cvm_debug_message', $message, $separator, $data );
+		do_action( 'vimeotheque\debug', $message, $separator, $data );
 	}
 }
 

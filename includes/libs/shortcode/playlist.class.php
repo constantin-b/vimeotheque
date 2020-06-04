@@ -238,7 +238,10 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		if( in_array( '0', $categories ) ){
 			$args = [
 				'post_type' => $post_type,
-				'numberposts' => apply_filters( 'cvm_shortcode_new_videos_max_posts', 10 ),
+				'numberposts' => apply_filters(
+					'vimeotheque\shortcode\playlist\newest_max_posts',
+					10
+				),
 				'order' => 'DESC',
 				'orderby' => 'post_date'
 			];

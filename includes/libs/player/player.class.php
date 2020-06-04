@@ -99,7 +99,7 @@ class Player {
 		 * @param array $video - the video details as retrieved from Vimeo
 		 */
 		$this->options = apply_filters(
-			'cvm_video_embed_settings',
+			'vimeotheque\player\embed_options',
 			wp_parse_args(
 				$this->manual_options,
 				$this->post->get_embed_options( true )
@@ -120,7 +120,7 @@ class Player {
 		 * @param int $width - width in pixels
 		 */
 		return apply_filters(
-			'cvm_embed_width',
+			'vimeotheque\player\embed_width',
 			$this->options['width'],
 			$this->post->get_video_data(),
 			$this->post->get_post()
@@ -149,7 +149,7 @@ class Player {
 	 */
 	private function get_css_classes(){
 		$classes = apply_filters(
-			'cvm_video_embed_css_class',
+			'vimeotheque\player\css_class',
 			[],
 			$this->post->get_post()
 		);

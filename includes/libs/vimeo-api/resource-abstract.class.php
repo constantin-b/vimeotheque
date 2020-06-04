@@ -170,7 +170,7 @@ class Resource_Abstract implements Resource_Interface {
 		 *
 		 * @param array $_params - request parameters
 		 */
-		$_params = apply_filters( 'cvm_vimeo_api_query_params', $_params );
+		$_params = apply_filters( 'vimeotheque\vimeo_api\query_params', $_params );
 
 		if( !$this->get_api_endpoint() ){
 			return new \WP_Error(
@@ -259,7 +259,7 @@ class Resource_Abstract implements Resource_Interface {
 		 * @see https://developer.vimeo.com/api/reference/responses/video
 		 * @param array $fields
 		 */
-		return apply_filters( 'cvm_vimeo_api_request_extra_json_fields', [] );
+		return apply_filters( 'vimeotheque\vimeo_api\add_json_fields', [] );
 	}
 
 	/**

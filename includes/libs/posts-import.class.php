@@ -109,7 +109,7 @@ class Posts_Import{
 					 * Action triggered when finding skipped posts.
 					 * Can be used to set extra taxonomies for already existing posts.
 					 */
-					do_action( 'cvm_existing_video_posts_taxonomies',
+					do_action( 'vimeotheque\import_duplicate_taxonomies',
 						$post,
 						$this->post_type->get_post_tax(),
 						$native_tax,
@@ -265,7 +265,10 @@ class Posts_Import{
 		 * Filter that allows changing of post format when importing videos
 		 * @var string - post format
 		 */
-		$post_format = apply_filters( 'cvm_import_post_format' , $post_format );
+		$post_format = apply_filters(
+			'vimeotheque\import_post_format' ,
+			$post_format
+		);
 
 		/**
 		 * Filter that allows video imports. Can be used to prevent importing of
@@ -274,7 +277,14 @@ class Posts_Import{
 		 * @param $video - video details array
 		 * @param $post_type - post type that should be created from the video details
 		 */
-		$allow_import = apply_filters('cvm_allow_video_import', true, $video, $this->post_type->get_post_type(), false );
+		$allow_import = apply_filters(
+			'vimeotheque\allow_import',
+			true,
+			$video,
+			$this->post_type->get_post_type(),
+			false
+		);
+
 		if( !$allow_import ){
 			/**
 			 * Generate an error and pass it for debugging
@@ -326,7 +336,11 @@ class Posts_Import{
 		$post_title 	= $options['import_title'] ? $video['title'] : '';
 
 		// action on post insert that allows setting of different meta on post
-		do_action('cvm_before_post_insert', $video, false);
+		do_action(
+			'vimeotheque\import_before',
+			$video,
+			false
+		);
 
 		// set post data
 		$post_data = [
@@ -337,7 +351,12 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 			 */
-			'post_title' 	=> apply_filters('cvm_video_post_title', $post_title, $video, false),
+			'post_title' 	=> apply_filters(
+				'vimeotheque\import_post_title',
+				$post_title,
+				$video,
+				false
+			),
 			/**
 			 * Filter on post content
 			 *
@@ -345,7 +364,12 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 			 */
-			'post_content' 	=> apply_filters('cvm_video_post_content', $post_content, $video, false),
+			'post_content' 	=> apply_filters(
+				'vimeotheque\import_post_content',
+				$post_content,
+				$video,
+				false
+			),
 			/**
 			 * Filter on post excerpt
 			 *
@@ -353,7 +377,12 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 			 */
-			'post_excerpt'	=> apply_filters('cvm_video_post_excerpt', $post_excerpt, $video, false),
+			'post_excerpt'	=> apply_filters(
+				'vimeotheque\import_post_excerpt',
+				$post_excerpt,
+				$video,
+				false
+			),
 			'post_type'		=> $this->post_type->get_post_type(),
 			/**
 			 * Filter on post status
@@ -362,7 +391,12 @@ class Posts_Import{
 			 * @param array - the video details
 			 * @param bool/array - always false, implemented for PRO version reasons
 			 */
-			'post_status'	=> apply_filters('cvm_video_post_status', $status, $video, false )
+			'post_status'	=> apply_filters(
+				'vimeotheque\import_post_status',
+				$status,
+				$video,
+				false
+			)
 		];
 
 		$pd = $options['import_date'] ? date('Y-m-d H:i:s', strtotime( $video['published'] )) : current_time( 'mysql' );
@@ -373,7 +407,12 @@ class Posts_Import{
 		 * @param array - the video details
 		 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
 		 */
-		$post_date = apply_filters( 'cvm_video_post_date', $pd, $video, false );
+		$post_date = apply_filters(
+			'vimeotheque\import_post_date',
+			$pd,
+			$video,
+			false
+		);
 
 		if( isset( $options['import_date'] ) && $options['import_date'] ){
 			$post_data['post_date_gmt'] = $post_date;
@@ -449,7 +488,13 @@ class Posts_Import{
 			 * @param array $video
 			 * @param string $post_type
 			 */
-			do_action('cvm_post_insert', $post_id, $video, false, $this->post_type->get_post_type());
+			do_action(
+				'vimeotheque\import_success',
+				$post_id,
+				$video,
+				false,
+				$this->post_type->get_post_type()
+			);
 
 			// set post meta
 			$_post = Helper::get_video_post( $post_id );

@@ -86,7 +86,7 @@ class Image_Import {
 				 * Request timeout filter
 				 * @var int
 				 */
-				'timeout' => apply_filters( 'cvm_image_request_timeout', 30 )
+				'timeout' => apply_filters( 'vimeotheque\image_request_timeout', 30 )
 			]
 		);
 
@@ -125,7 +125,12 @@ class Image_Import {
 		 * @param $post_id - the post ID that the image will be attached to as featured image
 		 * @param $video_id - the video ID
 		 */
-		do_action( 'cvm_import_video_image_raw_file', $filename, $this->video_post->get_post()->ID, $this->video_post->video_id );
+		do_action(
+			'vimeotheque\image_file_raw',
+			$filename,
+			$this->video_post->get_post()->ID,
+			$this->video_post->video_id
+		);
 
 		$wp_filetype = wp_check_filetype( basename( $filename ), null );
 		$attachment = [
@@ -160,7 +165,7 @@ class Image_Import {
 		 * Trigger action on plugin import
 		 */
 		do_action(
-			'cvm_import_video_thumbnail',
+			'vimeotheque\image_imported',
 			$attach_id,
 			$this->video_post->video_id,
 			$this->video_post->get_post()->ID
