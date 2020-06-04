@@ -53,7 +53,7 @@ class Categories_Widget extends \WP_Widget{
 
 		$widget_title = '';
 		if( isset( $instance['title'] ) && !empty( $instance['title'] ) ){
-			$widget_title = $before_title . apply_filters('widget_title', $instance['title']) . $after_title;
+			$widget_title = $before_title . apply_filters( 'widget_title', $instance['title'] ) . $after_title;
 		}
 
 		$args = [

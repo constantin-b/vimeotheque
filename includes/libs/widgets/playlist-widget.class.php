@@ -68,7 +68,7 @@ class Playlist_Widget extends \WP_Widget{
 
 		$widget_title = '';
 		if( isset( $instance['cvm_widget_title'] ) && !empty( $instance['cvm_widget_title'] ) ){
-			$widget_title = $before_title . apply_filters('widget_title', $instance['cvm_widget_title']) . $after_title;
+			$widget_title = $before_title . apply_filters( 'widget_title', $instance['cvm_widget_title'] ) . $after_title;
 		}
 
 		$posts = $this->get_posts( $instance );
@@ -110,7 +110,7 @@ class Playlist_Widget extends \WP_Widget{
 		echo $before_widget;
 
 		if( !empty( $instance['cvm_widget_title'] ) ){
-			echo $before_title . apply_filters('widget_title', $instance['cvm_widget_title']) . $after_title;
+			echo $before_title . apply_filters( 'widget_title', $instance['cvm_widget_title'] ) . $after_title;
 		}
 		?>
 		<ul class="cvm-recent-videos-widget">
@@ -121,14 +121,14 @@ class Playlist_Widget extends \WP_Widget{
 					if( !$thumbnail ){
 						$video_data = \Vimeotheque\Helper::get_video_post( $post->ID );
 						if( isset( $video_data->thumbnails[0] ) ){
-							$thumbnail = sprintf('<img src="%s" alt="%s" />', $video_data->thumbnails[0], apply_filters('the_title', $post->post_title));
+							$thumbnail = sprintf('<img src="%s" alt="%s" />', $video_data->thumbnails[0], esc_attr( apply_filters( 'the_title', $post->post_title ) ) );
 						}
 					}
 				}else{
 					$thumbnail = '';
 				}
 				?>
-				<li><a href="<?php echo get_permalink($post->ID);?>" title="<?php echo apply_filters('the_title', $post->post_title);?>"><?php echo $thumbnail;?><br /><?php echo apply_filters('post_title', $post->post_title);?></a></li>
+				<li><a href="<?php echo get_permalink($post->ID);?>" title="<?php esc_attr_e( apply_filters('the_title', $post->post_title ) );?>"><?php echo $thumbnail;?><br /><?php echo apply_filters('post_title', $post->post_title);?></a></li>
 			<?php endforeach;?>
 		</ul>
 		<?php
