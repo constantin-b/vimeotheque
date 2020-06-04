@@ -80,12 +80,13 @@ class Image_Import {
 		$request = wp_remote_get(
 			$image_url,
 			[
+				'user-agent' => Helper::request_user_agent(),
 				'sslverify' => false,
 				/**
 				 * Request timeout filter
 				 * @var int
 				 */
-				'timeout' => apply_filters( 'cvm_image_request_timeout', 5 )
+				'timeout' => apply_filters( 'cvm_image_request_timeout', 30 )
 			]
 		);
 
