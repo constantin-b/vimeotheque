@@ -10,6 +10,9 @@ use Exception;
 use Vimeotheque\Admin\Menu\Menu_Pages;
 use Vimeotheque\Admin\Notice\Admin_Notices;
 use Vimeotheque\Admin\Notice\Plugin_Notice;
+use Vimeotheque\Admin\Notice\Review_Notice;
+use Vimeotheque\Admin\Notice\User_Notice\Message;
+use Vimeotheque\Admin\Notice\User_Notice\User;
 use Vimeotheque\Admin\Notice\Vimeo_Api_Notice;
 use Vimeotheque\Admin\Page\About_Page;
 use Vimeotheque\Admin\Page\Automatic_Import_Page;
@@ -297,6 +300,19 @@ class Admin{
 	 */
 	public function register_notices(){
 		Admin_Notices::instance()->register( new Vimeo_Api_Notice() );
+
+		$message = new Message(
+			__( "It's great to see that you've been using <strong>Vimeotheque</strong> plugin for a while now. Hopefully you're happy with it! <br>If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!", 'cvm_video' ),
+			'https://wordpress.org/plugins/codeflavors-vimeo-video-post-lite/'
+		);
+
+		Admin_Notices::instance()->register(
+			new Review_Notice(
+				'vmtq_plugin_review_callout',
+				$message,
+				new User('vmtq_ignore_review_nag')
+			)
+		);
 	}
 
 	/**
