@@ -19,7 +19,7 @@ class Automatic_Import_Page extends Page_Abstract implements Page_Interface{
 	public function get_html(){
 ?>
 <div class="wrap">
-    <h1><?php _e( 'Automatic import', 'cvm_video' );?></h1>
+    <h1><?php _e( 'Automate your imports', 'cvm_video' );?></h1>
     <p><?php _e( 'Feature available in PRO version', 'cvm_video' );?></p>
 </div>
 <?php
