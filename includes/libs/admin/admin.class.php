@@ -179,17 +179,6 @@ class Admin{
 		);
 
 		$this->admin_menu->register_page(
-			new Automatic_Import_Page(
-				$this,
-				__( 'Automatic Vimeo video import', 'cvm_video' ),
-				__( 'Automatic import', 'cvm_video' ),
-				'vimeotheque_auto_import',
-				'edit.php?post_type=' . $this->post_type->get_post_type(),
-				'edit_posts'
-			)
-		);
-
-		$this->admin_menu->register_page(
 			new Go_Pro_Page(
 				$this,
 				__( 'Go PRO!', 'cvm_video' ),
