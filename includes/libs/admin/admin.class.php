@@ -20,6 +20,7 @@ use Vimeotheque\Admin\Page\Go_Pro_Page;
 use Vimeotheque\Admin\Page\List_Videos_Page;
 use Vimeotheque\Admin\Page\Post_Edit_Page;
 use Vimeotheque\Admin\Page\Settings_Page;
+use Vimeotheque\Admin\Page\Status_Page;
 use Vimeotheque\Admin\Page\Video_Import_Page;
 use Vimeotheque\Helper;
 use Vimeotheque\Post\Post_Type;
@@ -97,6 +98,11 @@ class Admin{
 			$this,
 			'privacy_policy'
 		] );
+
+		add_filter( 'plugin_action_links_' . plugin_basename( VIMEOTHEQUE_FILE ), [
+			$this,
+			'action_links'
+		] );
 	}
 
 	/**
@@ -129,6 +135,17 @@ class Admin{
 		);
 
 		$this->admin_menu->register_page(
+			new Status_Page(
+				$this,
+				__('Status', 'cvm_video'),
+				__('Status', 'cvm_video'),
+				'vimeotheque_status',
+				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'manage_options'
+			)
+		);
+
+		$this->admin_menu->register_page(
 			new Video_Import_Page(
 				$this,
 				__( 'Import videos', 'cvm_video' ),
@@ -137,7 +154,6 @@ class Admin{
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				$this->get_capability('manual_import')
 			)
-
 		);
 
 		$this->admin_menu->register_page(
@@ -369,6 +385,40 @@ class Admin{
 		);
 
 		wp_add_privacy_policy_content( 'Vimeotheque PRO', $policy_content );
+	}
+
+	/**
+	 * Plugin action links
+	 *
+	 * @param $links
+	 *
+	 * @return mixed
+	 */
+	public function action_links( $links ){
+		$anchor = '<a href="%s" target="%s">%s</a>';
+
+		$links[] = sprintf(
+			$anchor,
+			Helper_Admin::docs_link( 'getting-started/vimeotheque-pro-installation/' ),
+			'_blank',
+			__( 'First time installation', 'cvm_video' )
+		);
+
+		$links[] = sprintf(
+			$anchor,
+			Helper_Admin::docs_link( 'getting-started' ),
+			'_blank',
+			__( 'Documentation', 'cvm_video' )
+		);
+
+		$links[] = sprintf(
+			$anchor,
+			$this->get_admin_menu()->get_page('cvm_settings')->get_menu_page(),
+			'_self',
+			$this->get_admin_menu()->get_page( 'cvm_settings' )->get_menu_title()
+		);
+
+		return $links;
 	}
 
 	/**
