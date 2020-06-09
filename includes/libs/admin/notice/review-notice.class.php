@@ -36,6 +36,14 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 */
 	private $option_name;
 
+	/**
+	 * Review_Notice constructor.
+	 *
+	 * @param $option_name
+	 * @param Message $message
+	 * @param User $user
+	 * @param int $delay
+	 */
 	public function __construct( $option_name, Message $message, User $user, $delay = 7 ) {
 		parent::__construct();
 
