@@ -5,7 +5,7 @@ namespace Vimeotheque;
 use Vimeotheque\Admin\Helper_Admin;
 
 ?>
-<div class="wrap about-wrap">
+<div class="wrap vimeotheque about-wrap">
 	<h1>
 		<?php _e('Vimeotheque PRO', 'codeflavors-vimeo-video-post-lite')?>
 	</h1>
@@ -18,7 +18,7 @@ use Vimeotheque\Admin\Helper_Admin;
 	<script language="javascript">
         ;(function($){
             $(document).ready(function(){
-                $('#cvm-video-preview').Vimeo_VideoPlayer({
+                $('#cvm-video-preview').VimeoPlayer({
                     'video_id' 	: '223879840',
                     'source'	: 'vimeo',
                     'play'       : false,
@@ -30,7 +30,9 @@ use Vimeotheque\Admin\Helper_Admin;
 
 	<div class="class="feature-section one-col">
 		<div class="col">
-			<div id="cvm-video-preview" class="cvm-video-preview">%nbsp;</div>
+			<div id="cvm-video-preview" class="cvm-video-preview vimeotheque-player">
+                <iframe src="https://player.vimeo.com/video/223879840?title=0&byline=0&portrait=0" style="width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
 			<p class="gopro-btn-holder">
 				<a class="button try-pro-btn" href="https://vvp-demo.codeflavors.com/" target="_blank"><?php _e( 'Try PRO version', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
 				<a class="button gopro-btn" href="<?php echo Helper_Admin::publisher_link( '' ) ;?>" target="_blank"><?php _e( 'Get PRO version!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
