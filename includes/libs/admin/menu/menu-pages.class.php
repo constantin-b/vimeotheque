@@ -38,9 +38,20 @@ class Menu_Pages {
 	}
 
 	/**
+	 * @param string $slug
+	 *
+	 * @return bool|Page_Interface
+	 */
+	public function get_page( $slug ){
+		if( isset( $this->pages[ $slug ] ) ){
+			return $this->pages[ $slug ];
+		}
+
+		return false;
+	}
+
+	/**
 	 * @param Page_Interface $page
-	 * @param null|Page_Interface|string $parent
-	 * @param string $capability
 	 *
 	 * @return false|string
 	 */
