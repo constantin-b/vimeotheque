@@ -6,6 +6,9 @@
 
 namespace Vimeotheque\Admin\Page;
 
+use Vimeotheque\Helper;
+use Vimeotheque\Plugin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
@@ -19,102 +22,136 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    $wp_info = $this->get_wordpress_info();
 	    $server_info = $this->get_server_info();
 	    $theme_info = $this->get_theme_info();
+	    $options = $this->get_plugin_options();
+	    $embed_options = $this->get_embed_options();
 ?>
 		<div class="wrap">
 			<h1><?php _e( 'System status', 'codeflavors-vimeo-video-post-lite' );?></h1>
-			<h2>WordPress</h2>
-            <table class="form-table">
-				<tbody>
-				<tr>
-					<th scope="row">WP URL</th>
-					<td><?php echo get_bloginfo('wpurl');?></td>
-				</tr>
-                <tr>
-					<th scope="row">Site address</th>
-					<td><?php echo get_bloginfo('url');?></td>
-				</tr>
-                <tr>
-					<th scope="row">Vimeotheque version</th>
-					<td><?php echo VIMEOTHEQUE_VERSION;?></td>
-				</tr>
-                <tr>
-					<th scope="row">WordPress version</th>
-					<td><?php echo $wp_info['version'];?></td>
-				</tr>
-                <tr>
-					<th scope="row">WordPress memory limit</th>
-					<td><?php echo $wp_info['memory_limit'];?></td>
-				</tr>
-                <tr>
-                    <th scope="row">WordPress debug mode</th>
-                    <td><?php echo $wp_info['debug_mode'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Language</th>
-                    <td><?php echo $wp_info['locale'];?></td>
-                </tr>
-                <tr>
-					<th scope="row">WordPress multisite</th>
-					<td><?php echo $wp_info['multisite'];?></td>
-				</tr>
-				</tbody>
-			</table>
+            <div class="status-report">
+                <div class="export">
+                    <textarea id="vimeotheque-report"></textarea>
+                </div>
+                <div class="command">
+                    <button id="vimeotheque-status-copy" class="button"><?php _e( 'Create report', 'codeflavors-vimeo-video-post-lite' );?></button>
+                    <span><?php _e( 'Click to create report and paste the result into the support ticket.', 'codeflavors-vimeo-video-post-lite' );?></span>
+                </div>
+            </div>
+            <div id="status-display">
+                <h2 data-export-label="WordPress info"><?php _e('WordPress', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <tr>
+                        <th scope="row" data-export-label="WP URL"><?php _e( 'WP URL', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo get_bloginfo('wpurl');?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="Site address"><?php _e( 'Site address', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo get_bloginfo('url');?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="Vimeotheque version"><?php _e( 'Vimeotheque version', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo VIMEOTHEQUE_VERSION;?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="WordPress version"><?php _e( 'WordPress version', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $wp_info['version'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="WordPress memory limit"><?php _e( 'WordPress memory limit', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $wp_info['memory_limit'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="WordPress debug mode"><?php _e( 'WordPress debug mode', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $wp_info['debug_mode'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="Language"><?php _e( 'Language', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $wp_info['locale'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="WordPress multisite"><?php _e( 'WordPress multisite', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $wp_info['multisite'];?></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-            <h2>Server</h2>
-            <table class="form-table">
-                <tbody>
-                <tr>
-                    <th scope="row">Server info</th>
-                    <td><?php echo $server_info['software'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP version</th>
-                    <td><?php echo $server_info['php_version'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP post max size</th>
-                    <td><?php echo $server_info['php_post_max_size'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP time limit</th>
-                    <td><?php echo $server_info['php_time_limit'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP max input vars</th>
-                    <td><?php echo $server_info['php_max_input_vars'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP default timezone</th>
-                    <td><?php echo $server_info['php_default_timezone'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">PHP cURL</th>
-                    <td><?php echo $server_info['php_curl'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">cURL version</th>
-                    <td><?php echo $server_info['curl_version'];?></td>
-                </tr>
-                </tbody>
-            </table>
-            <h2>Theme</h2>
-            <table class="form-table">
-                <tbody>
-                <tr>
-                    <th scope="row">Theme</th>
-                    <td><?php echo $theme_info['name'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Version</th>
-                    <td><?php echo $theme_info['version'];?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Child theme</th>
-                    <td><?php echo $theme_info['child_theme'];?></td>
-                </tr>
-
-                </tbody>
-            </table>
+                <h2 data-export-label="Server information"><?php _e('Server', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <tr>
+                        <th scope="row" data-export-label="Server"><?php _e( 'Server info', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['software'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="PHP version"><?php _e( 'PHP version', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['php_version'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="PHP post max size"><?php _e( 'PHP post max size', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['php_post_max_size'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="PHP time limit"><?php _e( 'PHP time limit', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['php_time_limit'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="PHP max input vars"><?php _e( 'PHP max input vars', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['php_max_input_vars'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="PHP default timezone"><?php _e( 'PHP default timezone', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['php_default_timezone'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="PHP cURL"><?php _e( 'PHP cURL', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['php_curl'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="cURL version"><?php _e( 'cURL version', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $server_info['curl_version'];?></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h2 data-export-label="Active theme information"><?php _e('Theme', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <tr>
+                        <th scope="row" data-export-label="Active theme"><?php _e( 'Theme', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $theme_info['name'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="Theme version"><?php _e( 'Version', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $theme_info['version'];?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-export-label="Child theme"><?php _e( 'Child theme', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td><?php echo $theme_info['child_theme'];?></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h2 data-export-label="Plugin settings"><?php _e('Plugin settings', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <?php foreach( $options as $k => $v ):?>
+                    <tr>
+                        <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
+                        <td><?php echo $v;?></td>
+                    </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+                <h2 data-export-label="Embed settings"><?php _e('Embed settings', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <?php foreach( $embed_options as $k => $v ):?>
+                    <tr>
+                        <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
+                        <td><?php echo $v;?></td>
+                    </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+            </div>
 		</div>
 <?php
 	}
@@ -123,7 +160,16 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	 * @inheritDoc
 	 */
 	public function on_load() {
-		// TODO: Implement on_load() method.
+		wp_enqueue_style(
+		    'vimeotheque-status',
+            VIMEOTHEQUE_URL . 'assets/back-end/css/status.css'
+        );
+
+		wp_enqueue_script(
+		    'vimeotheque-status',
+            VIMEOTHEQUE_URL . 'assets/back-end/js/status-page.js',
+            ['jquery']
+        );
 	}
 
 	/**
@@ -205,4 +251,23 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 
 		return $wp_data;
 	}
+
+	private function get_plugin_options(){
+	    $options = Plugin::instance()->get_options();
+	    unset( $options['vimeo_consumer_key'] );
+	    unset( $options['vimeo_secret_key'] );
+	    unset( $options['oauth_token'] );
+
+	    foreach ( $options as $k => $v ){
+	        if( is_bool( $v ) ){
+	            $options[$k] = $v ? 'Yes' : 'No';
+            }
+        }
+
+	    return $options;
+    }
+
+    private function get_embed_options(){
+	    return Helper::get_embed_options();
+    }
 }

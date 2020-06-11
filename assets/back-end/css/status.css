@@ -1,0 +1,28 @@
+.status-report{
+    width:900px;
+    max-width: 100%;
+    background:#FFFFFF;
+    padding:.5em;
+    border:1px solid #CCCCCC;
+    margin:2em 0;
+}
+
+#vimeotheque-report{
+    width:100%;
+    height:250px;
+}
+
+.export{
+    width:900px;
+    max-width:100%;
+    display:none;
+    font-family: monospace;
+}
+
+.command span{
+    line-height:2.3em;
+    margin:0 .5em;
+    color: #656565;
+    font-style: italic;
+}
+
