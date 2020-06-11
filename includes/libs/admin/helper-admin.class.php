@@ -158,7 +158,7 @@ class Helper_Admin {
 
 			$options[ $key ] = [
 				'text' => $source->get_output_name(),
-				'title' => sprintf( __( 'Enter %s', 'cvm_video' ), $source->get_output_name() ),
+				'title' => sprintf( __( 'Enter %s', 'codeflavors-vimeo-video-post-lite' ), $source->get_output_name() ),
 				'data' => [
 					'show_user' => $source->requires_user_id(),
 					'field_label' => esc_attr( $source->label_user_id() ),

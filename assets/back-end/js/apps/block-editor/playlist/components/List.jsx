@@ -136,8 +136,8 @@ class List extends React.Component{
 
     selectText( post ){
         return this.hasPost( post ) ?
-            __( 'Remove video', 'cvm_video' ) :
-            __( 'Select video', 'cvm_video' )
+            __( 'Remove video', 'codeflavors-vimeo-video-post-lite' ) :
+            __( 'Select video', 'codeflavors-vimeo-video-post-lite' )
     }
 
     render(){
@@ -148,7 +148,7 @@ class List extends React.Component{
                     {
                         this.state.error ?
                             this.state.error.message :
-                            __( 'We couldn\'t find any video posts, sorry.', 'cvm_video' )
+                            __( 'We couldn\'t find any video posts, sorry.', 'codeflavors-vimeo-video-post-lite' )
                     }
                 </div>
                 :
@@ -183,7 +183,7 @@ class List extends React.Component{
                         this.state.loading &&
                             <div className="vimeotheque-loading">
                                 <Spinner />
-                                { __( 'Please wait, your video posts are loading...', 'cvm_video' ) }
+                                { __( 'Please wait, your video posts are loading...', 'codeflavors-vimeo-video-post-lite' ) }
                             </div>
                     }
                 </div>

@@ -54,7 +54,7 @@ class CategoryListBase extends React.Component{
                 <h4>{ this.props.title }</h4>
                 {
                     this.props.loading ?
-                        __( 'Loading, please wait...', 'cvm_video' )
+                        __( 'Loading, please wait...', 'codeflavors-vimeo-video-post-lite' )
                     :
                         <ul>
                             {
@@ -81,7 +81,7 @@ class CategoryListBase extends React.Component{
 
 CategoryListBase.defaultProps = {
     categories: [],
-    title: __( 'Categories', 'cvm_video' ),
+    title: __( 'Categories', 'codeflavors-vimeo-video-post-lite' ),
     onChange: ()=>{}
 }
 

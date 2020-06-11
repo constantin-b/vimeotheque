@@ -68,7 +68,7 @@ class Shortcode_Abstract implements Shortcode_Interface {
 		return new \WP_Error(
 			'vimeotheque-shortcode-attribute-missing',
 			sprintf(
-				__( 'Shortcode attribute %s is missing.', 'cvm_video' ),
+				__( 'Shortcode attribute %s is missing.', 'codeflavors-vimeo-video-post-lite' ),
 				$attr
 			)
 		);

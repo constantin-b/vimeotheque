@@ -48,14 +48,14 @@ class Posts_Import_Meta_Panels{
 		 */
 		$options = apply_filters( 'vimeotheque\admin\import_meta_panel\post_options', $options );
 		?>
-		<label for="import_description"><?php _e('Set description as', 'cvm_video')?>:</label>
+		<label for="import_description"><?php _e('Set description as', 'codeflavors-vimeo-video-post-lite')?>:</label>
 		<?php 
 			$args = [
 				'options' => [
-					'content' => __('content', 'cvm_video'),
-					'excerpt' => __('excerpt', 'cvm_video'),
-					'content_excerpt' => __('both', 'cvm_video'),
-					'none' => __('none', 'cvm_video')
+					'content' => __('content', 'codeflavors-vimeo-video-post-lite'),
+					'excerpt' => __('excerpt', 'codeflavors-vimeo-video-post-lite'),
+					'content_excerpt' => __('both', 'codeflavors-vimeo-video-post-lite'),
+					'none' => __('none', 'codeflavors-vimeo-video-post-lite')
 				],
 				'name' => 'import_description',
 				'selected' => $options['import_description']
@@ -63,13 +63,13 @@ class Posts_Import_Meta_Panels{
 			Helper_Admin::select( $args );
 		?><br />
 
-		<label for="import_status"><?php _e('Import status', 'cvm_video')?>:</label>
+		<label for="import_status"><?php _e('Import status', 'codeflavors-vimeo-video-post-lite')?>:</label>
 		<?php 
 			$args = [
 				'options' => [
-					'publish' => __('Published', 'cvm_video'),
-					'draft' => __('Draft', 'cvm_video'),
-					'pending' => __('Pending', 'cvm_video')
+					'publish' => __('Published', 'codeflavors-vimeo-video-post-lite'),
+					'draft' => __('Draft', 'codeflavors-vimeo-video-post-lite'),
+					'pending' => __('Pending', 'codeflavors-vimeo-video-post-lite')
 				],
 				'name' => 'import_status',
 				'selected' => $options['import_status']
@@ -77,7 +77,7 @@ class Posts_Import_Meta_Panels{
 			Helper_Admin::select( $args );
 		?><br />
 
-        <label for="import_title"><?php _e('Import titles', 'cvm_video')?> :</label>
+        <label for="import_title"><?php _e('Import titles', 'codeflavors-vimeo-video-post-lite')?> :</label>
         <input type="checkbox" value="1" id="import_title" name="import_title"<?php Helper_Admin::check( $options['import_title'] );?> /><br />
 
 
@@ -95,7 +95,7 @@ class Posts_Import_Meta_Panels{
 		    <?php submit_button(
 		            apply_filters(
                         'vimeotheque\admin\import_meta_panel\button_text',
-                        __('Import videos', 'cvm_video')
+                        __('Import videos', 'codeflavors-vimeo-video-post-lite')
                     ),
                     'primary',
                     'cvm-import-button',
@@ -124,7 +124,7 @@ class Posts_Import_Meta_Panels{
 		post_categories_meta_box(
 			$post,
 			[
-				'title' => __('Categories', 'cvm_video'),
+				'title' => __('Categories', 'codeflavors-vimeo-video-post-lite'),
 				'args' => [
 					'taxonomy' => $taxonomy
 				]
@@ -147,13 +147,13 @@ class Posts_Import_Meta_Panels{
 
 		$options = \Vimeotheque\Plugin::instance()->get_options();
 		if( isset( $options['import_tags'] ) && $options['import_tags'] ){
-			_e('Please note that any tags retrieved from Vimeo will also be imported and set as post tags.', 'cvm_video');
+			_e('Please note that any tags retrieved from Vimeo will also be imported and set as post tags.', 'codeflavors-vimeo-video-post-lite');
 		}
 		
 		post_tags_meta_box(
 			$post,
 			[
-				'title' => __('Tags', 'cvm_video'),
+				'title' => __('Tags', 'codeflavors-vimeo-video-post-lite'),
 				'args' => [
 					'taxonomy' => $taxonomy
 				]
@@ -174,7 +174,7 @@ class Posts_Import_Meta_Panels{
 		// meta boxes
 		add_meta_box(
 		    'cvm-import-feed-entries',
-            __('Import', 'cvm_video'),
+            __('Import', 'codeflavors-vimeo-video-post-lite'),
             [ $this, 'import_entries_meta' ],
             $page_hook,
             'side'

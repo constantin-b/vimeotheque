@@ -50,7 +50,7 @@ class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 			'embeddable'
 		]);
 
-		parent::set_name( 'channel', __( 'Channel', 'cvm_video' ) );
+		parent::set_name( 'channel', __( 'Channel', 'codeflavors-vimeo-video-post-lite' ) );
 
 	}
 

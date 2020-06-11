@@ -32,7 +32,7 @@ class Playlist_Widget extends \WP_Widget{
 		/* Widget settings. */
 		$widget_options = [
 			'classname' 	=> 'cvm-latest-videos',
-			'description' 	=> __('The most recent videos on your site.', 'cvm_video')
+			'description' 	=> __('The most recent videos on your site.', 'codeflavors-vimeo-video-post-lite')
 		];
 
 		/* Widget control settings. */
@@ -43,7 +43,7 @@ class Playlist_Widget extends \WP_Widget{
 		/* Create the widget. */
 		parent::__construct(
 			'cvm-latest-videos-widget',
-			__( 'Recent Vimeo videos', 'cvm_video' ),
+			__( 'Recent Vimeo videos', 'codeflavors-vimeo-video-post-lite' ),
 			$widget_options,
 			$control_options
 		);
@@ -189,15 +189,15 @@ class Playlist_Widget extends \WP_Widget{
 		?>
 		<div class="cvm-player-settings-options">
 			<p>
-				<label for="<?php echo  $this->get_field_id('cvm_widget_title');?>"><?php _e('Title', 'cvm_video');?>: </label>
+				<label for="<?php echo  $this->get_field_id('cvm_widget_title');?>"><?php _e('Title', 'codeflavors-vimeo-video-post-lite');?>: </label>
 				<input type="text" name="<?php echo  $this->get_field_name('cvm_widget_title');?>" id="<?php echo  $this->get_field_id('cvm_widget_title');?>" value="<?php echo $options['cvm_widget_title'];?>" class="widefat" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('cvm_posts_number');?>"><?php _e('Number of videos to show', 'cvm_video');?>: </label>
+				<label for="<?php echo $this->get_field_id('cvm_posts_number');?>"><?php _e('Number of videos to show', 'codeflavors-vimeo-video-post-lite');?>: </label>
 				<input type="text" name="<?php echo $this->get_field_name('cvm_posts_number');?>" id="<?php echo $this->get_field_id('cvm_posts_number');?>" value="<?php echo $options['cvm_posts_number'];?>" size="3" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'cvm_post_type' );?>"><?php _e( 'Post type', 'cvm_video' );?>: </label>
+				<label for="<?php echo $this->get_field_id( 'cvm_post_type' );?>"><?php _e( 'Post type', 'codeflavors-vimeo-video-post-lite' );?>: </label>
 				<?php
                     Helper_Admin::select_post_type(
                         $this->get_field_name('cvm_post_type'),
@@ -208,11 +208,11 @@ class Playlist_Widget extends \WP_Widget{
 				?>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('cvm_posts_tax');?>"><?php _e('Category', 'cvm_video');?>: </label>
+				<label for="<?php echo $this->get_field_id('cvm_posts_tax');?>"><?php _e('Category', 'codeflavors-vimeo-video-post-lite');?>: </label>
 				<?php
                     $args = [
                         'show_option_all' 	=> false,
-                        'show_option_none'	=> __('All categories', 'cvm_video'),
+                        'show_option_none'	=> __('All categories', 'codeflavors-vimeo-video-post-lite'),
                         'orderby' 			=> 'NAME',
                         'order' 			=> 'ASC',
                         'show_count' 		=> true,
@@ -227,7 +227,7 @@ class Playlist_Widget extends \WP_Widget{
                     ];
                     $select = wp_dropdown_categories( $args );
                     if( !$select ){
-                        _e('Nothing found.', 'cvm_video');
+                        _e('Nothing found.', 'codeflavors-vimeo-video-post-lite');
                         ?>
                         <input type="hidden" name="<?php echo $this->get_field_name('cvm_posts_tax');?>" id="<?php echo $this->get_field_id('cvm_posts_tax');?>" value="" />
                         <?php
@@ -236,15 +236,15 @@ class Playlist_Widget extends \WP_Widget{
 			</p>
 			<p class="cvm-widget-show-vim-thumbs"<?php if( $options['cvm_show_playlist'] ):?> style="display:none;"<?php endif;?>>
 				<input class="checkbox" type="checkbox" name="<?php echo $this->get_field_name('cvm_vim_image')?>" id="<?php echo $this->get_field_id('cvm_vim_image');?>"<?php Helper_Admin::check( (bool)$options['cvm_vim_image'] );?> />
-				<label for="<?php echo $this->get_field_id('cvm_vim_image');?>"><?php _e('Display Vimeo thumbnails?', 'cvm_video');?></label>
+				<label for="<?php echo $this->get_field_id('cvm_vim_image');?>"><?php _e('Display Vimeo thumbnails?', 'codeflavors-vimeo-video-post-lite');?></label>
 			</p>
 			<p>
 				<input class="checkbox cvm-show-as-playlist-widget" type="checkbox" name="<?php echo $this->get_field_name('cvm_show_playlist');?>" id="<?php echo $this->get_field_id('cvm_show_playlist')?>"<?php Helper_Admin::check((bool)$options['cvm_show_playlist']);?> />
-				<label for="<?php echo $this->get_field_id('cvm_show_playlist')?>"><?php _e('Show as video playlist', 'cvm_video');?></label>
+				<label for="<?php echo $this->get_field_id('cvm_show_playlist')?>"><?php _e('Show as video playlist', 'codeflavors-vimeo-video-post-lite');?></label>
 			</p>
 			<div class="cvm-recent-videos-playlist-options"<?php if( !$options['cvm_show_playlist'] ):?> style="display:none;"<?php endif;?>>
 				<p>
-					<label for="<?php echo $this->get_field_id('theme');?>"><?php _e('Theme', 'cvm_video');?> :</label>
+					<label for="<?php echo $this->get_field_id('theme');?>"><?php _e('Theme', 'codeflavors-vimeo-video-post-lite');?> :</label>
 					<?php
 						Helper_Admin::select_playlist_theme(
 							$this->get_field_name('theme'),
@@ -256,35 +256,35 @@ class Playlist_Widget extends \WP_Widget{
 				</p>
 
 				<div class="cvm-theme-customize default"<?php if( $options['theme'] != 'default' ):?> style="display: none;"<?php endif;?>>
-					<?php _e( 'Playlist location', 'cvm_video' ) ;?> :
-					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="" <?php echo $options['layout'] == '' ? 'checked="checked"' : '';?> /> <?php _e( 'bottom', 'cvm_video' );?></label>
-					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="right" <?php echo $options['layout'] == 'right' ? 'checked="checked"' : '';?> /> <?php _e( 'right', 'cvm_video' );?></label>
-					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="left" <?php echo $options['layout'] == 'left' ? 'checked="checked"' : '';?> /> <?php _e( 'left', 'cvm_video' );?></label>
+					<?php _e( 'Playlist location', 'codeflavors-vimeo-video-post-lite' ) ;?> :
+					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="" <?php echo $options['layout'] == '' ? 'checked="checked"' : '';?> /> <?php _e( 'bottom', 'codeflavors-vimeo-video-post-lite' );?></label>
+					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="right" <?php echo $options['layout'] == 'right' ? 'checked="checked"' : '';?> /> <?php _e( 'right', 'codeflavors-vimeo-video-post-lite' );?></label>
+					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="left" <?php echo $options['layout'] == 'left' ? 'checked="checked"' : '';?> /> <?php _e( 'left', 'codeflavors-vimeo-video-post-lite' );?></label>
 				</div>
 
 				<p>
-					<label for="<?php echo $this->get_field_id('playlist_loop');?>"><?php _e('Loop playlist', 'cvm_video');?> :</label>
+					<label for="<?php echo $this->get_field_id('playlist_loop');?>"><?php _e('Loop playlist', 'codeflavors-vimeo-video-post-lite');?> :</label>
 					<input type="checkbox" name="<?php echo $this->get_field_name('playlist_loop')?>" id="<?php echo $this->get_field_id('loop')?>" value="1"<?php Helper_Admin::check( (bool)$options['playlist_loop'] );?> />
 				</p>
 
 				<p>
-					<label for="<?php echo $this->get_field_id( 'title' )?>"><?php _e('Title', 'cvm_video');?></label>:
+					<label for="<?php echo $this->get_field_id( 'title' )?>"><?php _e('Title', 'codeflavors-vimeo-video-post-lite');?></label>:
 					<input type="checkbox" name="<?php echo $this->get_field_name('title')?>" id="<?php echo $this->get_field_id( 'title' )?>" value="1" <?php Helper_Admin::check( (bool)$options['title'] );?> />
-					<label for="<?php echo $this->get_field_id( 'title' )?>"><span class="description"><?php _e('will display title on video', 'cvm_video');?></span></label>
+					<label for="<?php echo $this->get_field_id( 'title' )?>"><span class="description"><?php _e('will display title on video', 'codeflavors-vimeo-video-post-lite');?></span></label>
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id( 'byline' )?>"><?php _e('Author', 'cvm_video');?></label>:
+					<label for="<?php echo $this->get_field_id( 'byline' )?>"><?php _e('Author', 'codeflavors-vimeo-video-post-lite');?></label>:
 					<input type="checkbox" name="<?php echo $this->get_field_name('byline')?>" id="<?php echo $this->get_field_id( 'byline' )?>" value="1" <?php Helper_Admin::check( (bool)$options['byline'] );?> />
-					<label for="<?php echo $this->get_field_id( 'byline' )?>"><span class="description"><?php _e('will display author name on video', 'cvm_video');?></span></label>
+					<label for="<?php echo $this->get_field_id( 'byline' )?>"><span class="description"><?php _e('will display author name on video', 'codeflavors-vimeo-video-post-lite');?></span></label>
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id( 'portrait' )?>"><?php _e('Image', 'cvm_video');?></label>:
+					<label for="<?php echo $this->get_field_id( 'portrait' )?>"><?php _e('Image', 'codeflavors-vimeo-video-post-lite');?></label>:
 					<input type="checkbox" name="<?php echo $this->get_field_name('portrait')?>" id="<?php echo $this->get_field_id( 'portrait' )?>" value="1" <?php Helper_Admin::check( (bool)$options['portrait'] );?> />
-					<label for="<?php echo $this->get_field_id( 'portrait' )?>"><span class="description"><?php _e('will display author image on video', 'cvm_video');?></span></label>
+					<label for="<?php echo $this->get_field_id( 'portrait' )?>"><span class="description"><?php _e('will display author image on video', 'codeflavors-vimeo-video-post-lite');?></span></label>
 				</p>
 
 				<p>
-					<label for="cvm_aspect_ratio"><?php _e('Aspect', 'cvm_video');?> :</label>
+					<label for="cvm_aspect_ratio"><?php _e('Aspect', 'codeflavors-vimeo-video-post-lite');?> :</label>
 					<?php
 					$args = [
 						'name' 		=> $this->get_field_name( 'aspect_ratio' ),
@@ -294,14 +294,14 @@ class Playlist_Widget extends \WP_Widget{
 					];
 					Helper_Admin::aspect_ratio_select( $args );
 					?><br />
-					<label for="<?php echo $this->get_field_id('width')?>"><?php _e('Width', 'cvm_video');?> :</label>
+					<label for="<?php echo $this->get_field_id('width')?>"><?php _e('Width', 'codeflavors-vimeo-video-post-lite');?> :</label>
 					<input type="text" class="cvm_width" name="<?php echo $this->get_field_name('width');?>" id="<?php echo $this->get_field_id('width')?>" value="<?php echo $options['width'];?>" size="2" />px
-					| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height" id="<?php echo $this->get_field_id('cvm_calc_height')?>"><?php echo Helper::calculate_player_height( $options['aspect_ratio'], $options['width'] );?></span>px
+					| <?php _e('Height', 'codeflavors-vimeo-video-post-lite');?> : <span class="cvm_height" id="<?php echo $this->get_field_id('cvm_calc_height')?>"><?php echo Helper::calculate_player_height( $options['aspect_ratio'], $options['width'] );?></span>px
 				</p>
 				<p>
-					<label for="<?php echo $this->get_field_id('volume');?>"><?php _e('Volume', 'cvm_video');?></label> :
+					<label for="<?php echo $this->get_field_id('volume');?>"><?php _e('Volume', 'codeflavors-vimeo-video-post-lite');?></label> :
 					<input type="text" name="<?php echo $this->get_field_name('volume');?>" id="<?php echo $this->get_field_id('volume');?>" value="<?php echo $options['volume'];?>" size="1" maxlength="3" />
-					<label for="<?php echo $this->get_field_id('volume');?>"><span class="description"><?php _e('number between 0 (mute) and 100 (max)', 'cvm_video');?></span></label>
+					<label for="<?php echo $this->get_field_id('volume');?>"><span class="description"><?php _e('number between 0 (mute) and 100 (max)', 'codeflavors-vimeo-video-post-lite');?></span></label>
 
 				</p>
 			</div>

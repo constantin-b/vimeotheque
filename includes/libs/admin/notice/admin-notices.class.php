@@ -36,7 +36,7 @@ class Admin_Notices{
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'cvm_video' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -48,7 +48,7 @@ class Admin_Notices{
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'cvm_video' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Admin_Notices{
 	 */
 	public function register( Notice_Interface $notice ){
 		if( did_action( 'admin_notices' ) ){
-			_doing_it_wrong( __METHOD__,  __('You must register the notice before "admin_notices" hook is triggered.', 'cvm_video'), '2.0' );
+			_doing_it_wrong( __METHOD__,  __('You must register the notice before "admin_notices" hook is triggered.', 'codeflavors-vimeo-video-post-lite'), '2.0' );
 		}
 
 		$this->notices[] = $notice;

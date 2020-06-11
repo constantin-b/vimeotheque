@@ -31,8 +31,8 @@ const 	{ registerBlockType } = wp.blocks,
     {themes} = vmtq;
 
 registerBlockType( 'vimeotheque/video-playlist', {
-    title: __( 'Video playlist', 'cvm_video' ),
-    description: __( 'Display a playlist of Vimeo videos', 'cvm_video' ),
+    title: __( 'Video playlist', 'codeflavors-vimeo-video-post-lite' ),
+    description: __( 'Display a playlist of Vimeo videos', 'codeflavors-vimeo-video-post-lite' ),
     icon: 'playlist-video',
     category: 'widgets',
 
@@ -133,7 +133,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 className='components-toolbar'
                             >
                                 <Tooltip
-                                    text={__('Edit playlist', 'cvm_video')}
+                                    text={__('Edit playlist', 'codeflavors-vimeo-video-post-lite')}
                                     position="top"
                                 >
                                     <Button
@@ -183,12 +183,12 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 { ( attributes.videos.length == 0 && attributes.categories.length == 0  ) &&
                     <Placeholder
                         icon="playlist-video"
-                        label={ __('Video playlist', 'cvm_video') }
+                        label={ __('Video playlist', 'codeflavors-vimeo-video-post-lite') }
                     >
                         <Button
                             isPrimary
                             onClick={ openModal }>
-                            { __(' Choose posts', 'cvm_video') }
+                            { __(' Choose posts', 'codeflavors-vimeo-video-post-lite') }
                         </Button>
                     </Placeholder>
                 }
@@ -196,7 +196,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 {
                     isOpen && (
                         <Modal
-                            title={ __( 'Choose posts', 'cvm_video' ) }
+                            title={ __( 'Choose posts', 'codeflavors-vimeo-video-post-lite' ) }
                             onRequestClose = { closeModal }
                             className = 'vimeotheque-posts-list-modal'
                         >
@@ -205,7 +205,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     <ListMenu
                                         postType={postType}
                                         disabled={isRequestLoading}
-                                        textSelected={ `${__( 'Selected', 'cvm_video' )} ${attributes.videos.length}\\${attributes.cat_ids.length}` }
+                                        textSelected={ `${__( 'Selected', 'codeflavors-vimeo-video-post-lite' )} ${attributes.videos.length}\\${attributes.cat_ids.length}` }
                                         onPostTypeChange={
                                             postType => {
                                                 setShowSearch( 'selected' != postType )
@@ -261,7 +261,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                         <>
                                             <CategoryList
                                                 taxonomy='vimeo-videos'
-                                                title={ __( 'Vimeotheque categories', 'cvm_video' ) }
+                                                title={ __( 'Vimeotheque categories', 'codeflavors-vimeo-video-post-lite' ) }
                                                 categories={attributes.categories}
                                                 onChange={
                                                     categories => updateCategories( categories )
@@ -287,11 +287,11 @@ registerBlockType( 'vimeotheque/video-playlist', {
 
             <InspectorControls key='vimeotheque-playlist-controls'>
                 <PanelBody
-                    title={ __( 'Theme', 'cvm_video' ) }
+                    title={ __( 'Theme', 'codeflavors-vimeo-video-post-lite' ) }
                 >
                     <PanelRow>
                         <SelectControl
-                            label = { __( 'Theme', 'cvm_video' ) }
+                            label = { __( 'Theme', 'codeflavors-vimeo-video-post-lite' ) }
                             value = {attributes.theme}
                             options = { themes }
                             onChange = {
@@ -305,7 +305,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </PanelRow>
                     <PanelRow>
                         <TextControl
-                            label = { __( 'Width', 'cvm_video' ) }
+                            label = { __( 'Width', 'codeflavors-vimeo-video-post-lite' ) }
                             type = "number"
                             step = "5"
                             value = { attributes.width }
@@ -321,7 +321,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </PanelRow>
                     <PanelRow>
                         <SelectControl
-                            label = { __( 'Aspect ratio', 'cvm_video' ) }
+                            label = { __( 'Aspect ratio', 'codeflavors-vimeo-video-post-lite' ) }
                             value = { attributes.aspect_ratio }
                             options = {[
                                 { label: '4x3', value: '4x3' },
@@ -340,12 +340,12 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 </PanelBody>
 
                 <PanelBody
-                    title = { __('Embed options', 'cvm_video') }
+                    title = { __('Embed options', 'codeflavors-vimeo-video-post-lite') }
                     initialOpen = {true}
                 >
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Show title', 'cvm_video' ) }
+                            label = { __( 'Show title', 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.title}
                             onChange = {
                                 () => {
@@ -358,7 +358,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Show byline', 'cvm_video' ) }
+                            label = { __( 'Show byline', 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.byline}
                             onChange = {
                                 () => {
@@ -371,7 +371,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Show portrait', 'cvm_video' ) }
+                            label = { __( 'Show portrait', 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.portrait}
                             onChange = {
                                 () => {
@@ -384,7 +384,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Loop playlist', 'cvm_video' ) }
+                            label = { __( 'Loop playlist', 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.playlist_loop}
                             onChange =  {
                                 () => {
@@ -397,8 +397,8 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     </PanelRow>
                     <PanelRow>
                         <TextControl
-                            label = { __( 'Volume', 'cvm_video' ) }
-                            help = { __( 'Will work only for JS embeds', 'cvm_video' ) }
+                            label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
+                            help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
                             type = "number"
                             step = "1"
                             value = { attributes.volume }

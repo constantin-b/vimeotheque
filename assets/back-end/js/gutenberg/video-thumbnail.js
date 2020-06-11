@@ -2,7 +2,7 @@
     $(document).ready( function(){
         var el = wp.element.createElement,
             __ = wp.i18n.__,
-            elDescription = __( 'Imports Vimeo image as post featured image. If image already exists it will be duplicated.', 'cvm_video' );
+            elDescription = __( 'Imports Vimeo image as post featured image. If image already exists it will be duplicated.', 'codeflavors-vimeo-video-post-lite' );
 
         function wrapPostFeaturedImage( OriginalComponent ) { 
             return function( props ) {                
@@ -20,7 +20,7 @@
                                     importFeaturedImage( event, props );
                                 }
                             },
-                            __( 'Import Vimeo image', 'cvm_video' )
+                            __( 'Import Vimeo image', 'codeflavors-vimeo-video-post-lite' )
                         ),
                         el( 'p', { className: 'description', 'id': 'cvm-thumb-response' },
                             elDescription
@@ -40,7 +40,7 @@
 			    html = $($this).html();
 				
 			if( $($this).hasClass('loading') ){
-				$($this).html( __('... still loading', 'cvm_video' ) );
+				$($this).html( __('... still loading', 'codeflavors-vimeo-video-post-lite' ) );
 				return;
 			}
 			
@@ -51,7 +51,7 @@
 			data.action = 	'cvm_import_video_thumbnail';
 			data.gutenberg = 1;
 			
-			$($this).addClass('loading').html( __( '... loading', 'cvm_video' ) );
+			$($this).addClass('loading').html( __( '... loading', 'codeflavors-vimeo-video-post-lite' ) );
 			
 			$.ajax({
 				type 	: 'post',
@@ -61,8 +61,8 @@
 					if( true == response.success ){					
 						// update Gutenberg featured image component 
 						wp.data.dispatch( 'core/editor' ).editPost( { featured_media: response.data.attachment_id } );	
-						$($this).removeClass('loading').html( __( 'Import Vimeo image', 'cvm_video' ) );
-						$('#cvm-thumb-response').addClass('cvm-success').html( __( 'Image imported successfully.', 'cvm_video' ) );
+						$($this).removeClass('loading').html( __( 'Import Vimeo image', 'codeflavors-vimeo-video-post-lite' ) );
+						$('#cvm-thumb-response').addClass('cvm-success').html( __( 'Image imported successfully.', 'codeflavors-vimeo-video-post-lite' ) );
 					}else{
 						$($this).html(html).removeClass('loading');
 						$('#cvm-thumb-response').addClass('cvm-error').html( response.data );

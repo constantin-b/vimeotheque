@@ -21,7 +21,7 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 	public function get_html(){
 		$screen = get_current_screen();
 		_wp_admin_html_begin();
-		printf('<title>%s</title>', __('Video list', 'cvm_video'));
+		printf('<title>%s</title>', __('Video list', 'codeflavors-vimeo-video-post-lite'));
 		wp_enqueue_style( 'colors' );
 		wp_enqueue_style( 'ie' );
 		wp_enqueue_script( 'utils' );
@@ -55,7 +55,7 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 				<?php $table->views();?>
 				<input type="hidden" name="view" value="<?php echo isset( $_REQUEST['view'] ) ? $_REQUEST['view'] : '';?>" />
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'];?>" />
-				<?php $table->search_box( __('Search', 'cvm_video'), 'video' );?>
+				<?php $table->search_box( __('Search', 'codeflavors-vimeo-video-post-lite'), 'video' );?>
 				<?php $table->display();?>
 			</form>
 			<div id="cvm-shortcode-atts"></div>

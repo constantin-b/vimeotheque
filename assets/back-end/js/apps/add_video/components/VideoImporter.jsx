@@ -17,9 +17,9 @@ const VideoImporterBase = props => {
                 props.loading ?
                     <Placeholder
                         className='loading'
-                        label={__('Saving video', 'cvm_video')}
+                        label={__('Saving video', 'codeflavors-vimeo-video-post-lite')}
                     >
-                        {__('Your video post is being created, please wait...', 'cvm_video')}
+                        {__('Your video post is being created, please wait...', 'codeflavors-vimeo-video-post-lite')}
                         <Spinner/>
                     </Placeholder>
                     :
@@ -44,13 +44,13 @@ const VideoImporterBase = props => {
                                         isPrimary
                                         href={props.response.editLink}
                                     >
-                                        { __( 'Edit post', 'cvm_video' ) }
+                                        { __( 'Edit post', 'codeflavors-vimeo-video-post-lite' ) }
                                     </Button>
                                     <Button
                                         isSecondary
                                         href={props.response.viewLink}
                                     >
-                                        { __( 'View post', 'cvm_video' ) }
+                                        { __( 'View post', 'codeflavors-vimeo-video-post-lite' ) }
                                     </Button>
                                     <Button
                                         isTertiary
@@ -60,7 +60,7 @@ const VideoImporterBase = props => {
                                             }
                                         }
                                     >
-                                        { __( 'Import another video', 'cvm_video' ) }
+                                        { __( 'Import another video', 'codeflavors-vimeo-video-post-lite' ) }
                                     </Button>
                                 </Placeholder>
                         }

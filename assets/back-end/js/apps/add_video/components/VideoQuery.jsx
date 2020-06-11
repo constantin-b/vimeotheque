@@ -29,9 +29,9 @@ const VideoQueryBase = ( props ) => {
                 props.loading ?
                     <Placeholder
                         className='loading'
-                        label={__('Making query to Vimeo', 'cvm_video')}
+                        label={__('Making query to Vimeo', 'codeflavors-vimeo-video-post-lite')}
                     >
-                        {__('Please wait...', 'cvm_video')}
+                        {__('Please wait...', 'codeflavors-vimeo-video-post-lite')}
                         <Spinner/>
                     </Placeholder>
                     :

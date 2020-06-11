@@ -20,7 +20,7 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	public function __construct( $resource_id ) {
 		parent::__construct( $resource_id, false, false );
 
-		parent::set_name( 'thumbnails', __( 'Thumbnail', 'cvm_video' ) );
+		parent::set_name( 'thumbnails', __( 'Thumbnail', 'codeflavors-vimeo-video-post-lite' ) );
 	}
 
 	/**

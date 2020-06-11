@@ -116,8 +116,8 @@ class Post_Edit_Page{
 		if( empty( $options[ 'vimeo_consumer_key' ] ) || empty( $options[ 'vimeo_secret_key' ] ) ){
 			?>
             <p>
-				<?php _e( 'Please register on <a href="https://developer.vimeo.com/apps/new">Vimeo App page</a> in order to be able to import videos.', 'cvm_video' );?><br />
-				<?php printf( __( 'A step by step tutorial on how to create an app on Vimeo can be found %shere%s.', 'cvm_video' ), '<a href="'. cvm_docs_link( 'getting-started/vimeo-oauth-new-interface/' ) .'" target="_blank">', '</a>');?>
+				<?php _e( 'Please register on <a href="https://developer.vimeo.com/apps/new">Vimeo App page</a> in order to be able to import videos.', 'codeflavors-vimeo-video-post-lite' );?><br />
+				<?php printf( __( 'A step by step tutorial on how to create an app on Vimeo can be found %shere%s.', 'codeflavors-vimeo-video-post-lite' ), '<a href="'. cvm_docs_link( 'getting-started/vimeo-oauth-new-interface/' ) .'" target="_blank">', '</a>');?>
             </p>
 			<?php
 		}else{
@@ -158,7 +158,7 @@ class Post_Edit_Page{
     <h1><?php _e( 'Import video' );?></h1>
     <div id="poststuff">
         <div class="notice error hide-if-js">
-            <p><?php _e( 'JavaScript is disabled! You must enable JavaScript in order to be able to import videos.', 'cvm_video' );?></p>
+            <p><?php _e( 'JavaScript is disabled! You must enable JavaScript in order to be able to import videos.', 'codeflavors-vimeo-video-post-lite' );?></p>
         </div>
         <div id="vimeotheque-import-video"><!-- React App root --></div>
     </div>

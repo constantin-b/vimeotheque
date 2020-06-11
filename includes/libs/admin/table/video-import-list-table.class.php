@@ -21,8 +21,8 @@ class Video_Import_List_Table extends \WP_List_Table{
 		// override parent's modes
 		/*
 		$this->modes = array(
-			'list' => __( 'List View', 'cvm_video' ),
-			'grid' => __( 'Grid View', 'cvm_video' )
+			'list' => __( 'List View', 'codeflavors-vimeo-video-post-lite' ),
+			'grid' => __( 'Grid View', 'codeflavors-vimeo-video-post-lite' )
 		);
 		*/
 		parent::__construct( [
@@ -41,7 +41,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 		if( array_key_exists($column, $item) ){
 			return $item[ $column ];
 		}else{
-			return '<span style="color:red">'.sprintf( __('Column <em>%s</em> was not found.', 'cvm_video'), $column ).'</span>';
+			return '<span style="color:red">'.sprintf( __('Column <em>%s</em> was not found.', 'codeflavors-vimeo-video-post-lite'), $column ).'</span>';
 		}
 	}
 	
@@ -73,7 +73,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 		
 		// row actions
     	$actions = [
-    		'view' 		=> sprintf( '<a href="https://vimeo.com/%1$s" target="_cvm_vimeo_open">%2$s</a>', $item['video_id'], __('View on Vimeo', 'cvm_video') ),
+    		'view' 		=> sprintf( '<a href="https://vimeo.com/%1$s" target="_cvm_vimeo_open">%2$s</a>', $item['video_id'], __('View on Vimeo', 'codeflavors-vimeo-video-post-lite') ),
 	    ];
     	
     	return sprintf('%1$s %2$s',
@@ -102,7 +102,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 			return '-';
 		}
 		
-		return sprintf( __('%d likes', 'cvm_video'), $item['stats']['likes'] );
+		return sprintf( __('%d likes', 'codeflavors-vimeo-video-post-lite'), $item['stats']['likes'] );
 	}
 	
 	/**
@@ -122,7 +122,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	 */
 	function column_published( $item ){
 		if( !$item['published'] ){
-			return __('Unknown', 'cvm_video');
+			return __('Unknown', 'codeflavors-vimeo-video-post-lite');
 		}
 		
 		
@@ -136,7 +136,7 @@ class Video_Import_List_Table extends \WP_List_Table{
      */
     function get_bulk_actions() {    	
     	$actions = [
-    		/*'import' => __('Import', 'cvm_video')*/
+    		/*'import' => __('Import', 'codeflavors-vimeo-video-post-lite')*/
 	    ];
     	
     	//global $mode;
@@ -152,13 +152,13 @@ class Video_Import_List_Table extends \WP_List_Table{
         
 		$columns = [
 			'cb'		=> '<input type="checkbox" />',
-			'title'		=> __('Title', 'cvm_video'),
-			'video_id'	=> __('Video ID', 'cvm_video'),
-			'uploader'	=> __('Uploader', 'cvm_video'),
-			'duration'	=> __('Duration', 'cvm_video'),
-			'likes'		=> __('Likes', 'cvm_video'),
-			'views'		=> __('Views', 'cvm_video'),
-			'published' => __('Published', 'cvm_video'),
+			'title'		=> __('Title', 'codeflavors-vimeo-video-post-lite'),
+			'video_id'	=> __('Video ID', 'codeflavors-vimeo-video-post-lite'),
+			'uploader'	=> __('Uploader', 'codeflavors-vimeo-video-post-lite'),
+			'duration'	=> __('Duration', 'codeflavors-vimeo-video-post-lite'),
+			'likes'		=> __('Likes', 'codeflavors-vimeo-video-post-lite'),
+			'views'		=> __('Views', 'codeflavors-vimeo-video-post-lite'),
+			'published' => __('Published', 'codeflavors-vimeo-video-post-lite'),
 		];
     	return $columns;
     }

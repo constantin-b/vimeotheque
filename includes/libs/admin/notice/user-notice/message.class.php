@@ -75,10 +75,10 @@ class Message {
 	private function note_footer( $echo = true ){
 		$template = '<a class="" href="%1$s" title="%2$s">%2$s</a>';
 		$links = array(
-			sprintf( $template, $this->url, __( "Sure, I'd love to!", 'cvm_video' ) ),
-			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'yes' ) ) ), __( 'No, thanks.', 'cvm_video' ) ),
-			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'yes' ) ) ), __( "I've already given a review.", 'cvm_video' ) ),
-			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'later' ) ) ), __( 'Ask me later.', 'cvm_video' ) )
+			sprintf( $template, $this->url, __( "Sure, I'd love to!", 'codeflavors-vimeo-video-post-lite' ) ),
+			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'yes' ) ) ), __( 'No, thanks.', 'codeflavors-vimeo-video-post-lite' ) ),
+			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'yes' ) ) ), __( "I've already given a review.", 'codeflavors-vimeo-video-post-lite' ) ),
+			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'later' ) ) ), __( 'Ask me later.', 'codeflavors-vimeo-video-post-lite' ) )
 		);
 
 		$output = implode( " &middot; ", $links );

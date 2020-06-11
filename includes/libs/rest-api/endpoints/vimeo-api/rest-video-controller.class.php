@@ -56,7 +56,7 @@ class Rest_Video_Controller extends Rest_Controller_Abstract implements Rest_Con
 		if( empty( $request->get_param( 'id' ) ) ){
 			return new \WP_Error(
 				'vimeotheque_rest_api_no_item_id',
-				__( 'Video ID not found.', 'cvm_video' )
+				__( 'Video ID not found.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}
 
@@ -88,7 +88,7 @@ class Rest_Video_Controller extends Rest_Controller_Abstract implements Rest_Con
 		if( !$id ){
 			return new \WP_Error(
 				'vimeotheque-unknown-link',
-				__( 'Something is wrong with the URL you entered. Please try again.', 'cvm_video' ),
+				__( 'Something is wrong with the URL you entered. Please try again.', 'codeflavors-vimeo-video-post-lite' ),
 				['status' => '404']
 			);
 		}

@@ -90,7 +90,7 @@ class Plugin{
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'cvm_video' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Plugin{
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'cvm_video' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -177,7 +177,7 @@ class Plugin{
 		$this->playlist_themes = new Themes(
 			new Theme(
 				VIMEOTHEQUE_PATH . 'themes/default/player.php',
-				__( 'Default', 'cvm_video' )
+				__( 'Default', 'codeflavors-vimeo-video-post-lite' )
 			)
 		);
 	}

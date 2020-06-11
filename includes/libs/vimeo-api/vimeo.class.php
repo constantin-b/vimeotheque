@@ -49,19 +49,19 @@ abstract class Vimeo{
 	protected function api_error( $data ){
 		if( isset( $data['developer_message'] ) ){
 			$message = sprintf(
-				__( '%s: %s (error code: %s)', 'cvm_video' ),
-				__( 'Vimeo API error encountered', 'cvm_video' ) ,
+				__( '%s: %s (error code: %s)', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Vimeo API error encountered', 'codeflavors-vimeo-video-post-lite' ) ,
 				$data['developer_message'],
 				$data['error_code']
 			);
 		}elseif ( isset( $data['error'] ) ){
 			$message = sprintf(
 				'%s: %s',
-				__( 'Vimeo API error encountered', 'cvm_video' ),
+				__( 'Vimeo API error encountered', 'codeflavors-vimeo-video-post-lite' ),
 				$data['error']
 			);
 		}else{
-			$message = __( 'An unknown Vimeo API error has happened. Please try again.', 'cvm_video' );
+			$message = __( 'An unknown Vimeo API error has happened. Please try again.', 'codeflavors-vimeo-video-post-lite' );
 		}
 
 		return $this->error( 'vimeo_api_error', $message, $data );

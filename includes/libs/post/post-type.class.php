@@ -73,19 +73,19 @@ class Post_Type{
 	 */
 	public function register_post(){
 		$labels = [
-			'name' 					=> _x('Vimeo Videos', 'Vimeo Videos', 'cvm_video'),
-	    	'singular_name' 		=> _x('Vimeo Video', 'Vimeo Video', 'cvm_video'),
-	    	'add_new' 				=> _x('Add new', 'video', 'cvm_video'),
-	    	'add_new_item' 			=> __('Add new video', 'cvm_video'),
-	    	'edit_item' 			=> __('Edit video', 'cvm_video'),
-	    	'new_item'				=> __('New video', 'cvm_video'),
-	    	'all_items' 			=> __('All videos', 'cvm_video'),
-	    	'view_item' 			=> __('View', 'cvm_video'),
-	    	'search_items' 			=> __('Search', 'cvm_video'),
-	    	'not_found' 			=> __('No videos found', 'cvm_video'),
-	    	'not_found_in_trash' 	=> __('No videos in trash', 'cvm_video'), 
+			'name' 					=> _x('Vimeo Videos', 'Vimeo Videos', 'codeflavors-vimeo-video-post-lite'),
+	    	'singular_name' 		=> _x('Vimeo Video', 'Vimeo Video', 'codeflavors-vimeo-video-post-lite'),
+	    	'add_new' 				=> _x('Add new', 'video', 'codeflavors-vimeo-video-post-lite'),
+	    	'add_new_item' 			=> __('Add new video', 'codeflavors-vimeo-video-post-lite'),
+	    	'edit_item' 			=> __('Edit video', 'codeflavors-vimeo-video-post-lite'),
+	    	'new_item'				=> __('New video', 'codeflavors-vimeo-video-post-lite'),
+	    	'all_items' 			=> __('All videos', 'codeflavors-vimeo-video-post-lite'),
+	    	'view_item' 			=> __('View', 'codeflavors-vimeo-video-post-lite'),
+	    	'search_items' 			=> __('Search', 'codeflavors-vimeo-video-post-lite'),
+	    	'not_found' 			=> __('No videos found', 'codeflavors-vimeo-video-post-lite'),
+	    	'not_found_in_trash' 	=> __('No videos in trash', 'codeflavors-vimeo-video-post-lite'),
 	    	'parent_item_colon' 	=> '',
-	    	'menu_name' 			=> __('Videos', 'cvm_video')
+	    	'menu_name' 			=> __('Videos', 'codeflavors-vimeo-video-post-lite')
 		];
 		
 		$options 	= \Vimeotheque\Plugin::instance()->get_options();
@@ -133,17 +133,17 @@ class Post_Type{
 
   		// Add new taxonomy, make it hierarchical (like categories)
   		$cat_labels = [
-	    	'name' 					=> _x( 'Vimeo Video categories', 'Vimeo Video categories', 'cvm_video' ),
-	    	'singular_name' 		=> _x( 'Vimeo Video category', 'Vimeo Video category', 'cvm_video' ),
-	    	'search_items' 			=>  __( 'Search video category' ),
-	    	'all_items' 			=> __( 'All video categories' ),
-	    	'parent_item' 			=> __( 'Video category parent' ),
-	    	'parent_item_colon'		=> __( 'Video category parent:' ),
-	    	'edit_item' 			=> __( 'Edit video category' ), 
-	    	'update_item' 			=> __( 'Update video category' ),
-	    	'add_new_item' 			=> __( 'Add new video category' ),
-	    	'new_item_name' 		=> __( 'Video category name' ),
-	    	'menu_name' 			=> __( 'Categories' ),
+	    	'name' 					=> _x( 'Vimeo Video categories', 'Vimeo Video categories', 'codeflavors-vimeo-video-post-lite' ),
+	    	'singular_name' 		=> _x( 'Vimeo Video category', 'Vimeo Video category', 'codeflavors-vimeo-video-post-lite' ),
+	    	'search_items' 			=>  __( 'Search video category', 'codeflavors-vimeo-video-post-lite' ),
+	    	'all_items' 			=> __( 'All video categories', 'codeflavors-vimeo-video-post-lite' ),
+	    	'parent_item' 			=> __( 'Video category parent', 'codeflavors-vimeo-video-post-lite' ),
+	    	'parent_item_colon'		=> __( 'Video category parent:', 'codeflavors-vimeo-video-post-lite' ),
+	    	'edit_item' 			=> __( 'Edit video category', 'codeflavors-vimeo-video-post-lite' ),
+	    	'update_item' 			=> __( 'Update video category', 'codeflavors-vimeo-video-post-lite' ),
+	    	'add_new_item' 			=> __( 'Add new video category', 'codeflavors-vimeo-video-post-lite' ),
+	    	'new_item_name' 		=> __( 'Video category name', 'codeflavors-vimeo-video-post-lite' ),
+	    	'menu_name' 			=> __( 'Categories', 'codeflavors-vimeo-video-post-lite' ),
 	    ];
 
 		$this->category_taxonomy = register_taxonomy( $this->taxonomy, [ $this->post_type ], [
@@ -171,17 +171,17 @@ class Post_Type{
 
   		// tags
   		$tag_labels = [
-	    	'name' 					=> _x( 'Vimeo Video tags', 'Vimeo Video tags', 'cvm_video' ),
-	    	'singular_name' 		=> _x( 'Vimeo Video tag', 'Vimeo Video tag', 'cvm_video' ),
-	    	'search_items' 			=>  __( 'Search video tag' ),
-	    	'all_items' 			=> __( 'All video tags' ),
-	    	'parent_item' 			=> __( 'Video tag parent' ),
-	    	'parent_item_colon'		=> __( 'Video tag parent:' ),
-	    	'edit_item' 			=> __( 'Edit video tag' ), 
-	    	'update_item' 			=> __( 'Update video tag' ),
-	    	'add_new_item' 			=> __( 'Add new video tag' ),
-	    	'new_item_name' 		=> __( 'Video tag name' ),
-	    	'menu_name' 			=> __( 'Tags' ),
+	    	'name' 					=> _x( 'Vimeo Video tags', 'Vimeo Video tags', 'codeflavors-vimeo-video-post-lite' ),
+	    	'singular_name' 		=> _x( 'Vimeo Video tag', 'Vimeo Video tag', 'codeflavors-vimeo-video-post-lite' ),
+	    	'search_items' 			=>  __( 'Search video tag', 'codeflavors-vimeo-video-post-lite' ),
+	    	'all_items' 			=> __( 'All video tags', 'codeflavors-vimeo-video-post-lite' ),
+	    	'parent_item' 			=> __( 'Video tag parent', 'codeflavors-vimeo-video-post-lite' ),
+	    	'parent_item_colon'		=> __( 'Video tag parent:', 'codeflavors-vimeo-video-post-lite' ),
+	    	'edit_item' 			=> __( 'Edit video tag', 'codeflavors-vimeo-video-post-lite' ),
+	    	'update_item' 			=> __( 'Update video tag', 'codeflavors-vimeo-video-post-lite' ),
+	    	'add_new_item' 			=> __( 'Add new video tag', 'codeflavors-vimeo-video-post-lite' ),
+	    	'new_item_name' 		=> __( 'Video tag name', 'codeflavors-vimeo-video-post-lite' ),
+	    	'menu_name' 			=> __( 'Tags', 'codeflavors-vimeo-video-post-lite' ),
 	    ];
 
   		register_taxonomy( $this->tag, [ $this->post_type ], [
@@ -220,22 +220,22 @@ class Post_Type{
 		
 		$messages[ $this->post_type ] = [
 			0 => '', // Unused. Messages start at index 1.
-	    	1 => sprintf( __('Video updated <a href="%s">See video</a>', 'cvm_video'), esc_url( get_permalink($post_ID) ) ),
-	    	2 => __('Custom field updated.', 'cvm_video'),
-	    	3 => __('Custom field deleted.', 'cvm_video'),
-	    	4 => __('Video updated.', 'cvm_video'),
+	    	1 => sprintf( __('Video updated <a href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( get_permalink($post_ID) ) ),
+	    	2 => __('Custom field updated.', 'codeflavors-vimeo-video-post-lite'),
+	    	3 => __('Custom field deleted.', 'codeflavors-vimeo-video-post-lite'),
+	    	4 => __('Video updated.', 'codeflavors-vimeo-video-post-lite'),
 	   		/* translators: %s: date and time of the revision */
-	    	5 => isset($_GET['revision']) ? sprintf( __('Video restored to version %s', 'cvm_video'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-	    	6 => sprintf( __('Video published. <a href="%s">See video</a>', 'cvm_video'), esc_url( get_permalink($post_ID) ) ),
-	    	7 => __('Video saved.', 'cvm_video'),
-	    	8 => sprintf( __('Video saved. <a target="_blank" href="%s">See video</a>', 'cvm_video'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-	    	9 => sprintf( __('Video will be published at: <strong>%1$s</strong>. <a target="_blank" href="%2$s">See video</a>', 'cvm_video'),
+	    	5 => isset($_GET['revision']) ? sprintf( __('Video restored to version %s', 'codeflavors-vimeo-video-post-lite'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+	    	6 => sprintf( __('Video published. <a href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( get_permalink($post_ID) ) ),
+	    	7 => __('Video saved.', 'codeflavors-vimeo-video-post-lite'),
+	    	8 => sprintf( __('Video saved. <a target="_blank" href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+	    	9 => sprintf( __('Video will be published at: <strong>%1$s</strong>. <a target="_blank" href="%2$s">See video</a>', 'codeflavors-vimeo-video-post-lite'),
 	      	// translators: Publish box date format, see http://php.net/date
 	      	date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-	    	10 => sprintf( __('Video draft saved. <a target="_blank" href="%s">See video</a>', 'cvm_video'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+	    	10 => sprintf( __('Video draft saved. <a target="_blank" href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
 	    
-	    	101 => __('Please select a source', 'cvm_video'),
-	    	102 => sprintf( __('Vimeo video with ID <strong><em>%s</em></strong> is already imported. You are now editing the existing video.', 'cvm_video'), $vid_id)
+	    	101 => __('Please select a source', 'codeflavors-vimeo-video-post-lite'),
+	    	102 => sprintf( __('Vimeo video with ID <strong><em>%s</em></strong> is already imported. You are now editing the existing video.', 'codeflavors-vimeo-video-post-lite'), $vid_id)
 		];
 	    
 		return $messages;

@@ -85,7 +85,7 @@ class Classic_Editor{
 		if( $_post->is_video() ){
 			add_meta_box(
 				'cvm-video-settings',
-				__( 'Video settings', 'cvm_video' ),
+				__( 'Video settings', 'codeflavors-vimeo-video-post-lite' ),
 				[ $this, 'post_video_settings_meta_box' ],
 				$post->post_type,
 				'normal',
@@ -94,7 +94,7 @@ class Classic_Editor{
 
 			add_meta_box(
 				'cvm-show-video',
-				__( 'Live video', 'cvm_video' ),
+				__( 'Live video', 'codeflavors-vimeo-video-post-lite' ),
 				[ $this, 'post_show_video_meta_box' ],
 				$post->post_type,
 				'normal',
@@ -104,7 +104,7 @@ class Classic_Editor{
 			// Shortcode meta box
 			add_meta_box(
 				'cvm-add-video',
-				__( 'Vimeotheque shortcode', 'cvm_video' ),
+				__( 'Vimeotheque shortcode', 'codeflavors-vimeo-video-post-lite' ),
 				[ $this, 'post_shortcode_meta_box' ],
 				null,
 				'side',
@@ -127,10 +127,10 @@ class Classic_Editor{
 		<?php if( $this->is_option_override() ): ?>
 			<div style="background-color: rgba(252,255,22,0.1); padding:.5em 1em;">
 				<p>
-				<h3><?php _e('Options override is ON', 'cvm_video');?></h3>
+				<h3><?php _e('Options override is ON', 'codeflavors-vimeo-video-post-lite');?></h3>
 				<?php
 				printf(
-					__( 'Individual video post options are not editable; to change video options globally, go to plugin %sSettings%s, tab Embed options.', 'cvm_video' ),
+					__( 'Individual video post options are not editable; to change video options globally, go to plugin %sSettings%s, tab Embed options.', 'codeflavors-vimeo-video-post-lite' ),
 					'<a href="' . menu_page_url( 'cvm_settings', false ) . '#cvm-settings-embed-options">',
 					'</a>'
 				);?>
@@ -140,11 +140,11 @@ class Classic_Editor{
 		<table class="form-table cvm-player-settings-options">
 			<tbody>
 			<tr>
-				<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'cvm_video');?>:</label></th>
+				<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
 						<?php $this->option_override( 'width', sprintf( __( '%s X %s px' ), $plugin_options['width'], Helper::calculate_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
-						<?php $this->option_override( 'aspect_ratio', sprintf( __( '/ Aspect ratio: %s', 'cvm_video' ), $plugin_options['aspect_ratio'] ) );?>
+						<?php $this->option_override( 'aspect_ratio', sprintf( __( '/ Aspect ratio: %s', 'codeflavors-vimeo-video-post-lite' ), $plugin_options['aspect_ratio'] ) );?>
 					<?php else: // is not option override?>
 						<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>
 						<?php
@@ -156,20 +156,20 @@ class Classic_Editor{
 						];
 						Helper_Admin::aspect_ratio_select( $args );
 						?>
-						<label for="cvm_width"><?php _e('Width', 'cvm_video');?> :</label>
+						<label for="cvm_width"><?php _e('Width', 'codeflavors-vimeo-video-post-lite');?> :</label>
 						<input type="text" name="width" id="cvm_width" class="cvm_width" value="<?php echo $settings['width'];?>" size="2" />px
-						| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height" id="cvm_calc_height"><?php echo Helper::calculate_player_height( $settings['aspect_ratio'], $settings['width'] );?></span>px
+						| <?php _e('Height', 'codeflavors-vimeo-video-post-lite');?> : <span class="cvm_height" id="cvm_calc_height"><?php echo Helper::calculate_player_height( $settings['aspect_ratio'], $settings['width'] );?></span>px
 					<?php endif;// end option override?>
 				</td>
 			</tr>
 
 			<tr>
-				<th><label for="cvm_video_position"><?php _e('Display video','cvm_video');?>:</label></th>
+				<th><label for="cvm_video_position"><?php _e('Display video','codeflavors-vimeo-video-post-lite');?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):
 						$video_positions = [
-							'above-content' => __( 'Above post content', 'cvm_video' ),
-							'below-content' => __( 'Below post content', 'cvm_video' )
+							'above-content' => __( 'Above post content', 'codeflavors-vimeo-video-post-lite' ),
+							'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' )
 						];
 						?>
 						<?php $this->option_override( 'video_position', $video_positions[ $plugin_options['video_position'] ] );?>
@@ -177,8 +177,8 @@ class Classic_Editor{
 						<?php
 						$args = [
 							'options' => [
-								'above-content' => __( 'Above post content', 'cvm_video' ),
-								'below-content' => __( 'Below post content', 'cvm_video' )
+								'above-content' => __( 'Above post content', 'codeflavors-vimeo-video-post-lite' ),
+								'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' )
 							],
 							'name' => 'video_position',
 							'id' => 'cvm_video_position',
@@ -190,55 +190,55 @@ class Classic_Editor{
 				</td>
 			</tr>
 			<tr>
-				<th><label for="cvm_volume"><?php _e('Volume', 'cvm_video');?></label>:</th>
+				<th><label for="cvm_volume"><?php _e('Volume', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
 						<?php $this->option_override( 'volume', $plugin_options['volume'] );?>
 					<?php else: // is not option override?>
 						<input type="text" name="volume" id="cvm_volume" value="<?php echo $settings['volume'];?>" size="1" maxlength="3" />
 					<?php endif;// end option override?>
-					<label for="cvm_volume"><span class="description">( <?php _e('number between 0 (mute) and 100 (max)', 'cvm_video');?> )</span></label>
+					<label for="cvm_volume"><span class="description">( <?php _e('number between 0 (mute) and 100 (max)', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="cvm_autoplay"><?php _e('Autoplay', 'cvm_video');?></label>:</th>
+				<th><label for="cvm_autoplay"><?php _e('Autoplay', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'autoplay', ( $plugin_options['autoplay'] ? __( 'On', 'cvm_video' ) : __( 'Off', 'cvm_video' ) ) );?>
+						<?php $this->option_override( 'autoplay', ( $plugin_options['autoplay'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
 					<?php else: // is not option override?>
 						<input name="autoplay" id="cvm_autoplay" type="checkbox" value="1" <?php Helper_Admin::check( (bool) $settings['autoplay'] );?> />
-						<label for="cvm_autoplay"><span class="description">( <?php _e('when checked, video will start playing once page is loaded', 'cvm_video');?> )</span></label>
+						<label for="cvm_autoplay"><span class="description">( <?php _e('when checked, video will start playing once page is loaded', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
 					<?php endif;// end option override?>
-					<p class="description"><?php _e( 'Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, Vimeo player will revert to standard playback requiring viewers to initiate playback.', 'cvm_video' );?></p>
+					<p class="description"><?php _e( 'Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, Vimeo player will revert to standard playback requiring viewers to initiate playback.', 'codeflavors-vimeo-video-post-lite' );?></p>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="cvm_loop"><?php _e('Loop video', 'cvm_video');?></label>:</th>
+				<th><label for="cvm_loop"><?php _e('Loop video', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'loop', ( $plugin_options['loop'] ? __( 'On', 'cvm_video' ) : __( 'Off', 'cvm_video' ) ) );?>
+						<?php $this->option_override( 'loop', ( $plugin_options['loop'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
 					<?php else: // is not option override?>
 						<input name="loop" id="cvm_loop" type="checkbox" value="1" <?php Helper_Admin::check( (bool) $settings['loop'] );?> /> <label for="cvm_loop">
-							<span class="description">( <?php _e('when checked, the video will play again when it reaches the end', 'cvm_video');?> )</span></label>
+							<span class="description">( <?php _e('when checked, the video will play again when it reaches the end', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
 					<?php endif;// end option override?>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="title"><?php _e('Show video title', 'cvm_video');?></label>:</th>
+				<th><label for="title"><?php _e('Show video title', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'title', ( $plugin_options['title'] ? __( 'On', 'cvm_video' ) : __( 'Off', 'cvm_video' ) ) );?>
+						<?php $this->option_override( 'title', ( $plugin_options['title'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
 					<?php else: // is not option override?>
 						<input name="title" id="cvm_title" class="cvm_title" type="checkbox" value="1" <?php Helper_Admin::check( (bool) $settings['title'] );?> />
-						<label for="cvm_title"><span class="description">( <?php _e('when checked, player will display video title', 'cvm_video');?> )</span></label>
+						<label for="cvm_title"><span class="description">( <?php _e('when checked, player will display video title', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
 					<?php endif;// end option override?>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="cvm_color"><?php _e('Player color', 'cvm_video');?></label>:</th>
+				<th><label for="cvm_color"><?php _e('Player color', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'color', ( empty( $plugin_options['color'] ) ? __( 'Default', 'cvm_video' ) : '#' . $plugin_options['color'] ) );?>
+						<?php $this->option_override( 'color', ( empty( $plugin_options['color'] ) ? __( 'Default', 'codeflavors-vimeo-video-post-lite' ) : '#' . $plugin_options['color'] ) );?>
 						<?php if( !empty( $plugin_options['color'] ) ):?>
 							<div style="width: 20px; height: 20px; background-color: #<?php echo $plugin_options['color'];?>; float: left; margin-right:10px;">&nbsp;</div>
 						<?php endif;?>
@@ -249,25 +249,25 @@ class Classic_Editor{
 			</tr>
 
 			<tr valign="top">
-				<th scope="row"><label for="byline"><?php _e('Show video author', 'cvm_video')?>:</label></th>
+				<th scope="row"><label for="byline"><?php _e('Show video author', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'byline', ( $plugin_options['byline'] ? __( 'On', 'cvm_video' ) : __( 'Off', 'cvm_video' ) ) );?>
+						<?php $this->option_override( 'byline', ( $plugin_options['byline'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
 					<?php else: // is not option override?>
 						<input type="checkbox" value="1" id="byline" name="byline" <?php Helper_Admin::check( (bool) $settings['byline'] );?> />
-						<span class="description"><?php _e('When checked, player will display video uploader.', 'cvm_video');?></span>
+						<span class="description"><?php _e('When checked, player will display video uploader.', 'codeflavors-vimeo-video-post-lite');?></span>
 					<?php endif;// end option override?>
 				</td>
 			</tr>
 
 			<tr valign="top">
-				<th scope="row"><label for="portrait"><?php _e('Author portrait', 'cvm_video')?>:</label></th>
+				<th scope="row"><label for="portrait"><?php _e('Author portrait', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'portrait', ( $plugin_options['portrait'] ? __( 'On', 'cvm_video' ) : __( 'Off', 'cvm_video' ) ) );?>
+						<?php $this->option_override( 'portrait', ( $plugin_options['portrait'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
 					<?php else: // is not option override?>
 						<input type="checkbox" value="1" id="portrait" name="portrait" <?php Helper_Admin::check( (bool) $settings['portrait'] );?> />
-						<span class="description"><?php _e('When checked, player will display uploader image.', 'cvm_video');?></span>
+						<span class="description"><?php _e('When checked, player will display uploader image.', 'codeflavors-vimeo-video-post-lite');?></span>
 					<?php endif;// end option override?>
 				</td>
 			</tr>
@@ -291,7 +291,7 @@ class Classic_Editor{
 	 */
 	public function post_shortcode_meta_box(){
 		?>
-		<p><?php _e('Add video/playlist into post.', 'cvm_video');?>
+		<p><?php _e('Add video/playlist into post.', 'codeflavors-vimeo-video-post-lite');?>
 		<p>
 		<a class="button" href="#" id="cvm-shortcode-2-post"
 		   title="<?php _e('Add shortcode');?>"><?php _e('Add video shortcode');?></a>
@@ -337,11 +337,11 @@ class Classic_Editor{
 	<div class="wrap">
 		<div id="cvm-playlist-items">
 			<div class="inside">
-				<h3><?php _e('Playlist settings', 'cvm_video');?></h3>
+				<h3><?php _e('Playlist settings', 'codeflavors-vimeo-video-post-lite');?></h3>
 				<div id="cvm-playlist-settings" class="cvm-player-settings-options">
 					<table>
 						<tr>
-							<th valign="top"><label for="cvm_playlist_theme"><?php _e('Theme', 'cvm_video');?>:</label></th>
+							<th valign="top"><label for="cvm_playlist_theme"><?php _e('Theme', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
 								<?php
                                     Helper_Admin::select_playlist_theme(
@@ -351,16 +351,16 @@ class Classic_Editor{
                                     );
                                 ?>
                                     <div class="cvm-theme-customize default">
-                                        <?php _e( 'Playlist location', 'cvm_video' ) ;?> :
-                                        <label for=""><input type="radio" name="cvm_theme_default_layout" value="" checked="checked" /> <?php _e( 'bottom', 'cvm_video' );?></label>
-                                        <label for=""><input type="radio" name="cvm_theme_default_layout" value="right" /> <?php _e( 'right', 'cvm_video' );?></label>
-                                        <label for=""><input type="radio" name="cvm_theme_default_layout" value="left" /> <?php _e( 'left', 'cvm_video' );?></label>
+                                        <?php _e( 'Playlist location', 'codeflavors-vimeo-video-post-lite' ) ;?> :
+                                        <label for=""><input type="radio" name="cvm_theme_default_layout" value="" checked="checked" /> <?php _e( 'bottom', 'codeflavors-vimeo-video-post-lite' );?></label>
+                                        <label for=""><input type="radio" name="cvm_theme_default_layout" value="right" /> <?php _e( 'right', 'codeflavors-vimeo-video-post-lite' );?></label>
+                                        <label for=""><input type="radio" name="cvm_theme_default_layout" value="left" /> <?php _e( 'left', 'codeflavors-vimeo-video-post-lite' );?></label>
                                     </div>
 
 								</td>
 						</tr>
 						<tr>
-							<th><label for="cvm_aspect_ratio"><?php _e('Aspect', 'cvm_video');?>:</label></th>
+							<th><label for="cvm_aspect_ratio"><?php _e('Aspect', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
 								<?php
 		$args = [
@@ -374,77 +374,77 @@ class Classic_Editor{
 						</tr>
 
 						<tr>
-							<th><label for="width"><?php _e('Width', 'cvm_video');?>:</label></th>
+							<th><label for="width"><?php _e('Width', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td><input type="text" class="cvm_width" name="width" id="width"
 								value="<?php echo $options['width'];?>" size="2" />px
-									| <?php _e('Height', 'cvm_video');?> : <span class="cvm_height"
+									| <?php _e('Height', 'codeflavors-vimeo-video-post-lite');?> : <span class="cvm_height"
 								id="cvm_calc_height"><?php echo Helper::calculate_player_height( $options['aspect_ratio'], $options['width'] );?></span>px
 							</td>
 						</tr>
 
 						<tr>
-							<th><label for="volume"><?php _e('Volume', 'cvm_video');?></label>:</th>
+							<th><label for="volume"><?php _e('Volume', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 							<td><input type="text" name="volume" id="volume"
 								value="<?php echo $options['volume'];?>" size="1" maxlength="3" />
-								<label for="volume"><span class="description"><?php _e('number between 0 (mute) and 100 (max)', 'cvm_video');?></span></label>
+								<label for="volume"><span class="description"><?php _e('number between 0 (mute) and 100 (max)', 'codeflavors-vimeo-video-post-lite');?></span></label>
 							</td>
 						</tr>
 
 						<tr>
-							<th><label for="cvm_title"><?php _e('Title', 'cvm_video');?></label>:</th>
+							<th><label for="cvm_title"><?php _e('Title', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 							<td><input type="checkbox" name="title" id="cvm_title" value="1"
 								<?php if($options['title']) echo 'checked="checked"';?> /> <label
-								for="cvm_title"><span class="description"><?php _e('will display title on video', 'cvm_video');?></span></label>
+								for="cvm_title"><span class="description"><?php _e('will display title on video', 'codeflavors-vimeo-video-post-lite');?></span></label>
 							</td>
 						</tr>
 
 						<tr>
-							<th><label for="cvm_byline"><?php _e('Author', 'cvm_video');?></label>:</th>
+							<th><label for="cvm_byline"><?php _e('Author', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 							<td><input type="checkbox" name="byline" id="cvm_byline"
 								value="1"
 								<?php if($options['byline']) echo 'checked="checked"';?> /> <label
-								for="cvm_byline"><span class="description"><?php _e('will display author name on video', 'cvm_video');?></span></label>
+								for="cvm_byline"><span class="description"><?php _e('will display author name on video', 'codeflavors-vimeo-video-post-lite');?></span></label>
 							</td>
 						</tr>
 
 						<tr>
-							<th><label for="cvm_portrait"><?php _e('Image', 'cvm_video');?></label>:</th>
+							<th><label for="cvm_portrait"><?php _e('Image', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 							<td><input type="checkbox" name="portrait" id="cvm_portrait"
 								value="1"
 								<?php if($options['portrait']) echo 'checked="checked"';?> /> <label
-								for="cvm_portrait"><span class="description"><?php _e('will display author image on video', 'cvm_video');?></span></label>
+								for="cvm_portrait"><span class="description"><?php _e('will display author image on video', 'codeflavors-vimeo-video-post-lite');?></span></label>
 							</td>
 						</tr>
 
 						<tr>
-							<th><label for="playlist_loop"><?php _e('Loop', 'cvm_video');?></label>:</th>
+							<th><label for="playlist_loop"><?php _e('Loop', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 							<td><input type="checkbox" name="playlist_loop"
 								id="playlist_loop" value="1" /> <label for="playlist_loop"><span
-									class="description"><?php _e('will automatically play next video when current playing video ends', 'cvm_video');?></span></label>
+									class="description"><?php _e('will automatically play next video when current playing video ends', 'codeflavors-vimeo-video-post-lite');?></span></label>
 							</td>
 						</tr>
 					</table>
 					<p>
 						<input type="button" id="cvm-insert-playlist-shortcode"
 							class="button primary"
-							value="<?php _e('Insert playlist', 'cvm_video');?>" />
+							value="<?php _e('Insert playlist', 'codeflavors-vimeo-video-post-lite');?>" />
 					</p>
 				</div>
 
                 <input type="hidden" name="cvm_selected_categories" value="" />
-                <h3><?php _e( 'Create from categories', 'cvm_video' );?></h3>
+                <h3><?php _e( 'Create from categories', 'codeflavors-vimeo-video-post-lite' );?></h3>
                 <div id="cvm-categories-list">
                     <em>
-                        <?php _e( 'Select some categories to display videos from.', 'cvm_video' ) ;?><br />
-                        <?php _e( 'Categories can be added by clicking "Add category to shortcode" button above the posts table.', 'cvm_video' );?>
+                        <?php _e( 'Select some categories to display videos from.', 'codeflavors-vimeo-video-post-lite' ) ;?><br />
+                        <?php _e( 'Categories can be added by clicking "Add category to shortcode" button above the posts table.', 'codeflavors-vimeo-video-post-lite' );?>
                     </em>
                 </div>
 
 				<input type="hidden" name="cvm_selected_items" value="" />
-				<h3><?php _e('Videos selected in playlist', 'cvm_video');?></h3>
+				<h3><?php _e('Videos selected in playlist', 'codeflavors-vimeo-video-post-lite');?></h3>
 
 				<div id="cvm-list-items">
-					<em><?php _e('No videos selected', 'cvm_video');?><br /><?php _e('To create a playlist check some videos from the list on the right.', 'cvm_video');?></em>
+					<em><?php _e('No videos selected', 'codeflavors-vimeo-video-post-lite');?><br /><?php _e('To create a playlist check some videos from the list on the right.', 'codeflavors-vimeo-video-post-lite');?></em>
 				</div>
 			</div>
 		</div>
@@ -556,12 +556,12 @@ class Classic_Editor{
 		    'cvm-shortcode-modal',
             'CVM_SHORTCODE_MODAL',
 			[
-				'playlist_title' => __( 'Videos in playlist', 'cvm_video' ),
-				'no_videos' => __( 'No videos selected.<br />To create a playlist check some videos from the list on the right.', 'cvm_video' ),
-				'deleteItem' => __( 'Delete from playlist', 'cvm_video' ),
-				'insert_playlist' => __( 'Add shortcode into post', 'cvm_video' ),
-				'deleteCategory' => __( 'Remove category', 'cvm_video' ),
-				'no_categories' => __( 'Select some categories to display videos from. Categories can be added by clicking "Add category to shortcode" button above the posts table.', 'cvm_video' )
+				'playlist_title' => __( 'Videos in playlist', 'codeflavors-vimeo-video-post-lite' ),
+				'no_videos' => __( 'No videos selected.<br />To create a playlist check some videos from the list on the right.', 'codeflavors-vimeo-video-post-lite' ),
+				'deleteItem' => __( 'Delete from playlist', 'codeflavors-vimeo-video-post-lite' ),
+				'insert_playlist' => __( 'Add shortcode into post', 'codeflavors-vimeo-video-post-lite' ),
+				'deleteCategory' => __( 'Remove category', 'codeflavors-vimeo-video-post-lite' ),
+				'no_categories' => __( 'Select some categories to display videos from. Categories can be added by clicking "Add category to shortcode" button above the posts table.', 'codeflavors-vimeo-video-post-lite' )
 			]
         );
 
@@ -599,7 +599,7 @@ class Classic_Editor{
 				    'cvm-video-thumbnail',
                     'cvm_thumb_message',
                     [
-					    'loading'       => __( '... importing thumbnail', 'cvm_video' ),
+					    'loading'       => __( '... importing thumbnail', 'codeflavors-vimeo-video-post-lite' ),
 					    'still_loading' => __( '... hold on, still loading' )
 				    ]
                 );
@@ -629,12 +629,12 @@ class Classic_Editor{
 
 		if( $has_thumbnail ){
 			$content .= '<hr /><br />';
-			$content .= sprintf( '<a href="#" id="cvm-import-video-thumbnail" data-refresh="1" data-post="%d"><i class="dashicons dashicons-update"></i> %s</a>', $post_id, __( 'Refresh Vimeo image', 'cvm_video' ) );
-			$content .= '<p class="description" id="cvm-thumb-response">' . __( 'Will import a fresh image from Vimeo. If already existing, it will be duplicated.', 'cvm_video' ) . '</p>';
+			$content .= sprintf( '<a href="#" id="cvm-import-video-thumbnail" data-refresh="1" data-post="%d"><i class="dashicons dashicons-update"></i> %s</a>', $post_id, __( 'Refresh Vimeo image', 'codeflavors-vimeo-video-post-lite' ) );
+			$content .= '<p class="description" id="cvm-thumb-response">' . __( 'Will import a fresh image from Vimeo. If already existing, it will be duplicated.', 'codeflavors-vimeo-video-post-lite' ) . '</p>';
 		}else{
 			$content .= '<hr /><br />';
-			$content .= sprintf( '<a href="#" id="cvm-import-video-thumbnail" data-refresh="0" data-post="%d"><i class="dashicons dashicons-download"></i >%s</a>', $post_id, __( 'Import Vimeo image', 'cvm_video' ) );
-			$content .= '<p class="description" id="cvm-thumb-response">' . __( 'Will first search the Media Gallery for an already imported image and will import if none found.', 'cvm_video' ) . '</p>';
+			$content .= sprintf( '<a href="#" id="cvm-import-video-thumbnail" data-refresh="0" data-post="%d"><i class="dashicons dashicons-download"></i >%s</a>', $post_id, __( 'Import Vimeo image', 'codeflavors-vimeo-video-post-lite' ) );
+			$content .= '<p class="description" id="cvm-thumb-response">' . __( 'Will first search the Media Gallery for an already imported image and will import if none found.', 'codeflavors-vimeo-video-post-lite' ) . '</p>';
 		}
 		return $content;
 	}

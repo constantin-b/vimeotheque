@@ -55,7 +55,7 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		if( !isset( $video['video_id'] ) || empty( $video['video_id'] ) ){
 			return new \WP_Error(
 				'vimeotheque_no_video_id',
-				__('Video ID could not be detected. Please try again.', 'cvm_video')
+				__('Video ID could not be detected. Please try again.', 'codeflavors-vimeo-video-post-lite')
 			);
 		}
 
@@ -71,7 +71,7 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 			$post_id = $duplicates[ $video['video_id'] ][0];
 			return $this->response(
 				$post_id,
-				__( 'Video post was already imported.', 'cvm_video' )
+				__( 'Video post was already imported.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}
 
@@ -82,7 +82,7 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		}elseif( !$post || 'auto-draft' != $post->post_status ){
 			return new \WP_Error(
 				'vimeotheque_post_auto_draft_not_found',
-				__( 'An unknown error has occured, please refresh the page and try again.', 'cvm_video' )
+				__( 'An unknown error has occured, please refresh the page and try again.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}
 
@@ -95,12 +95,12 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		if( !$import_result ){
 			return new \WP_Error(
 				'vimeotheque_post_not_imported',
-				__( 'Sorry, your video could not be imported, please try again.', 'cvm_video' )
+				__( 'Sorry, your video could not be imported, please try again.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}else{
 			return $this->response(
 				$post_id,
-				__( 'Video post created!', 'cvm_video' )
+				__( 'Video post created!', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}
 	}

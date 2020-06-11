@@ -62,8 +62,8 @@ class Customizer {
 			'vimeotheque-plugin',
 			[
 				'priority' => 200,
-				'title' => __( 'Vimeotheque', 'cvm_video' ),
-				'description' => __( 'Customize Vimeotheque video embeds and plugin options', 'cvm_video' )
+				'title' => __( 'Vimeotheque', 'codeflavors-vimeo-video-post-lite' ),
+				'description' => __( 'Customize Vimeotheque video embeds and plugin options', 'codeflavors-vimeo-video-post-lite' )
 			]
 		);
 	}
@@ -74,8 +74,8 @@ class Customizer {
 	private function add_sections(){
 		$section = $this->add_section(
 			'post_options',
-			__( 'Video post', 'cvm_video' ),
-			__( 'Control how video posts are used in your website', 'cvm_video' )
+			__( 'Video post', 'codeflavors-vimeo-video-post-lite' ),
+			__( 'Control how video posts are used in your website', 'codeflavors-vimeo-video-post-lite' )
 		);
 		$this->add_post_options( $section );
 	}
@@ -85,7 +85,7 @@ class Customizer {
 	 */
 	private function add_post_options( \WP_Customize_Section $section ){
 		$options = [
-			'archives' => __( 'Embed videos in archive pages', 'cvm_video' )
+			'archives' => __( 'Embed videos in archive pages', 'codeflavors-vimeo-video-post-lite' )
 		];
 
 		foreach( $options as $key => $label ){

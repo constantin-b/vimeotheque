@@ -38,7 +38,7 @@ class TreeSelectBase extends React.Component{
 
         if( this.props.loading ){
             options = [
-                { value: '', label: __('Loading categories, please wait...', 'cvm_video') }
+                { value: '', label: __('Loading categories, please wait...', 'codeflavors-vimeo-video-post-lite') }
             ]
         }else {
             options = compact([

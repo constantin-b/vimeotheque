@@ -60,7 +60,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 			'embeddable'
 		]);
 
-		parent::set_name( 'album', __( 'Showcase/Album', 'cvm_video' ) );
+		parent::set_name( 'album', __( 'Showcase/Album', 'codeflavors-vimeo-video-post-lite' ) );
 
 	}
 
@@ -99,7 +99,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	 * @return bool|string|void
 	 */
 	public function label_user_id() {
-		return __( 'Album user ID', 'cvm_video' );
+		return __( 'Album user ID', 'codeflavors-vimeo-video-post-lite' );
 	}
 
 	/**

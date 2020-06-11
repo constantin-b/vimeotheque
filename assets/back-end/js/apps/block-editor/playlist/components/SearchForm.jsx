@@ -82,8 +82,8 @@ class SearchForm extends React.Component{
         return (
             <>
                 <TextControl
-                    label={ __('Search', 'cvm_video') }
-                    placeholder={ __('Enter your search query', 'cvm_video') }
+                    label={ __('Search', 'codeflavors-vimeo-video-post-lite') }
+                    placeholder={ __('Enter your search query', 'codeflavors-vimeo-video-post-lite') }
                     value={ this.state.query }
                     onChange={
                         value =>{
@@ -96,8 +96,8 @@ class SearchForm extends React.Component{
                 />
 
                 <TreeSelect
-                    label={ __( 'Category', 'cvm_video' ) }
-                    noOptionLabel={ __('Choose category', 'cvm_video') }
+                    label={ __( 'Category', 'codeflavors-vimeo-video-post-lite' ) }
+                    noOptionLabel={ __('Choose category', 'codeflavors-vimeo-video-post-lite') }
                     taxonomy={this.props.taxonomy}
                     selectedId={this.state.category}
                     onChange={
@@ -119,7 +119,7 @@ class SearchForm extends React.Component{
                 {
                     ( this.state.category && this.state.submitted ) &&
                         <ToggleControl
-                            label={ __( 'Select all videos from this category?', 'cvm_video' ) }
+                            label={ __( 'Select all videos from this category?', 'codeflavors-vimeo-video-post-lite' ) }
                             help={ __( 'All videos belonging to this category will be used in playlist' ) }
                             checked={ this.state.optionSelected }
                             onChange={
@@ -166,7 +166,7 @@ class SearchForm extends React.Component{
                             }
                         }
                     >
-                        { __('Search', 'cvm_video') }
+                        { __('Search', 'codeflavors-vimeo-video-post-lite') }
                     </Button>
                     {
                         this.props.blocked &&

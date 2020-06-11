@@ -56,7 +56,7 @@ class Rest_Pictures_Controller extends Rest_Controller_Abstract implements Rest_
 		if( empty( $request->get_param( 'id' ) ) ){
 			return new \WP_Error(
 				'vimeotheque_rest_api_no_item_id',
-				__( 'Video ID not found.', 'cvm_video' )
+				__( 'Video ID not found.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}
 

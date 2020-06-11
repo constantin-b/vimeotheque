@@ -70,7 +70,7 @@ class Ajax_Actions{
 			if( is_wp_error( $error ) ){
 				echo $error->get_error_message();
 			}else{
-				_e('An unknown error has occured.', 'cvm_video');	
+				_e('An unknown error has occured.', 'codeflavors-vimeo-video-post-lite');
 			}			
 		}else{
 			$response = [
@@ -104,7 +104,7 @@ class Ajax_Actions{
 		$thumbnail = Helper::get_video_post( $post_id )->set_featured_image( $refresh );
 	
 		if( !$thumbnail ){
-			wp_send_json_error( __('Image could not be retrieved.', 'cvm_video') );
+			wp_send_json_error( __('Image could not be retrieved.', 'codeflavors-vimeo-video-post-lite') );
 		}
 
 		// If request is sent by Gutenberg script, it will contain a POST variable called "gutenberg"
@@ -153,7 +153,7 @@ class Ajax_Actions{
 			}
 
 			$response['success'] = sprintf(
-				__('%d videos: %d imported, %d skipped, %d private, %d error.', 'cvm_video'),
+				__('%d videos: %d imported, %d skipped, %d private, %d error.', 'codeflavors-vimeo-video-post-lite'),
 				$response['total'],
 				$response['imported'],
 				$response['skipped'],

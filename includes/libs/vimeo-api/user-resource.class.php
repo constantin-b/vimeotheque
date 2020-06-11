@@ -53,7 +53,7 @@ class User_Resource extends Resource_Abstract implements Resource_Interface {
 			'playable',
 		]);
 
-		parent::set_name( 'user', __( 'User uploads', 'cvm_video' ) );
+		parent::set_name( 'user', __( 'User uploads', 'codeflavors-vimeo-video-post-lite' ) );
 	}
 
 	/**

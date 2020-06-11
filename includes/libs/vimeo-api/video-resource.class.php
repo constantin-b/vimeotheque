@@ -20,7 +20,7 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	public function __construct( $resource_id ) {
 		parent::__construct( $resource_id, false, false );
 
-		parent::set_name( 'video', __( 'Video', 'cvm_video' ) );
+		parent::set_name( 'video', __( 'Video', 'codeflavors-vimeo-video-post-lite' ) );
 	}
 
 	/**

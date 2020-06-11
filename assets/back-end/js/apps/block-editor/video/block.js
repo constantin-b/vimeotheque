@@ -26,8 +26,8 @@ const { registerBlockType } = wp.blocks,
     { useState } = wp.element
 
 registerBlockType( 'vimeotheque/video', {
-    title: __( 'Vimeotheque video', 'cvm_video' ),
-    description: __( 'Display embed of a video post', 'cvm_video' ),
+    title: __( 'Vimeotheque video', 'codeflavors-vimeo-video-post-lite' ),
+    description: __( 'Display embed of a video post', 'codeflavors-vimeo-video-post-lite' ),
     icon: 'media-video',
     category: 'embed',
     example: {
@@ -92,7 +92,7 @@ registerBlockType( 'vimeotheque/video', {
                                     className='components-toolbar'
                                 >
                                     <Tooltip
-                                        text={__('Change video', 'cvm_video')}
+                                        text={__('Change video', 'codeflavors-vimeo-video-post-lite')}
                                         position="top"
                                     >
                                         <Button
@@ -129,13 +129,13 @@ registerBlockType( 'vimeotheque/video', {
                         :
                         <Placeholder
                             icon="media-video"
-                            label={__('Embed a video post', 'cvm_video')}
+                            label={__('Embed a video post', 'codeflavors-vimeo-video-post-lite')}
                         >
                             <Button
                                 isPrimary
                                 onClick={ openModal }
                             >
-                                {__('Choose video post', 'cvm_video')}
+                                {__('Choose video post', 'codeflavors-vimeo-video-post-lite')}
                             </Button>
                         </Placeholder>
                 }
@@ -143,7 +143,7 @@ registerBlockType( 'vimeotheque/video', {
                 {
                     isOpen && (
                         <Modal
-                            title={ __( 'Choose post', 'cvm_video' ) }
+                            title={ __( 'Choose post', 'codeflavors-vimeo-video-post-lite' ) }
                             onRequestClose = { closeModal }
                             className = 'vimeotheque-posts-list-modal'
                         >
@@ -210,12 +210,12 @@ registerBlockType( 'vimeotheque/video', {
             <InspectorControls key="vimeotheque-video-embed-controls">
 
                 <PanelBody
-                    title = { __('Embed options', 'cvm_video') }
+                    title = { __('Embed options', 'codeflavors-vimeo-video-post-lite') }
                     initialOpen = {true}
                 >
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Loop video', 'cvm_video' ) }
+                            label = { __( 'Loop video', 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.loop}
                             onChange =  {
                                 () => { () => {
@@ -228,8 +228,8 @@ registerBlockType( 'vimeotheque/video', {
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
-                            label = { __( 'Autoplay video', 'cvm_video' ) }
-                            help = { __( "This feature won't work on all browsers.", 'cvm_video' ) }
+                            label = { __( 'Autoplay video', 'codeflavors-vimeo-video-post-lite' ) }
+                            help = { __( "This feature won't work on all browsers.", 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.autoplay}
                             onChange =  {
                                 () => { ()=>{
@@ -242,8 +242,8 @@ registerBlockType( 'vimeotheque/video', {
                     </PanelRow>
                     <PanelRow>
                         <TextControl
-                            label = { __( 'Volume', 'cvm_video' ) }
-                            help = { __( 'Will work only for JS embeds', 'cvm_video' ) }
+                            label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
+                            help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
                             type = "number"
                             step = "1"
                             value = { attributes.volume }
@@ -261,12 +261,12 @@ registerBlockType( 'vimeotheque/video', {
                 </PanelBody>
 
                 <PanelBody
-                    title = { __('Embed size', 'cvm_video') }
+                    title = { __('Embed size', 'codeflavors-vimeo-video-post-lite') }
                     initialOpen = {false}
                 >
                     <PanelRow>
                         <TextControl
-                            label = { __( 'Width', 'cvm_video' ) }
+                            label = { __( 'Width', 'codeflavors-vimeo-video-post-lite' ) }
                             type = "number"
                             step = "5"
                             value = { attributes.width }
@@ -284,7 +284,7 @@ registerBlockType( 'vimeotheque/video', {
 
                     <PanelRow>
                         <SelectControl
-                            label = { __( 'Aspect ratio', 'cvm_video' ) }
+                            label = { __( 'Aspect ratio', 'codeflavors-vimeo-video-post-lite' ) }
                             value = { attributes.aspect_ratio }
                             options = {[
                                 { label: '4x3', value: '4x3' },

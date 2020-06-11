@@ -16,8 +16,8 @@ const 	{ registerBlockType } = wp.blocks,
 	{ withState } = wp.compose;
 
 registerBlockType( 'vimeotheque/video-position', {
-	title: __( 'Vimeotheque video position', 'cvm_video' ),
-	description: __( 'Video embed customization options', 'cvm_video' ),
+	title: __( 'Vimeotheque video position', 'codeflavors-vimeo-video-post-lite' ),
+	description: __( 'Video embed customization options', 'codeflavors-vimeo-video-post-lite' ),
 	icon: 'video-alt3',
 	category: 'layout',
 
@@ -134,12 +134,12 @@ registerBlockType( 'vimeotheque/video-position', {
 			<InspectorControls key="vimeotheque-video-position-controls">
 
 					<PanelBody
-						title = { __('Embed options', 'cvm_video') }
+						title = { __('Embed options', 'codeflavors-vimeo-video-post-lite') }
 						initialOpen = {true}
 					>
 						<PanelRow>
 							<ToggleControl
-								label = { __( 'Show title', 'cvm_video' ) }
+								label = { __( 'Show title', 'codeflavors-vimeo-video-post-lite' ) }
 								checked = {opt.title}
 								onChange = {
 									() => onFormToggleChange( 'title' )
@@ -148,7 +148,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						</PanelRow>
 						<PanelRow>
 							<ToggleControl
-								label = { __( 'Show byline', 'cvm_video' ) }
+								label = { __( 'Show byline', 'codeflavors-vimeo-video-post-lite' ) }
 								checked = {opt.byline}
 								onChange = {
 									() => onFormToggleChange( 'byline' )
@@ -157,7 +157,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						</PanelRow>
 						<PanelRow>
 							<ToggleControl
-								label = { __( 'Show portrait', 'cvm_video' ) }
+								label = { __( 'Show portrait', 'codeflavors-vimeo-video-post-lite' ) }
 								checked = {opt.portrait}
 								onChange = {
 									() => onFormToggleChange( 'portrait' )
@@ -166,7 +166,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						</PanelRow>
 						<PanelRow>
 							<ToggleControl
-								label = { __( 'Loop video', 'cvm_video' ) }
+								label = { __( 'Loop video', 'codeflavors-vimeo-video-post-lite' ) }
 								checked = {opt.loop}
 								onChange =  {
 									() => onFormToggleChange( 'loop' )
@@ -175,8 +175,8 @@ registerBlockType( 'vimeotheque/video-position', {
 						</PanelRow>
 						<PanelRow>
 							<ToggleControl
-								label = { __( 'Autoplay video', 'cvm_video' ) }
-								help = { __( "This feature won't work on all browsers.", 'cvm_video' ) }
+								label = { __( 'Autoplay video', 'codeflavors-vimeo-video-post-lite' ) }
+								help = { __( "This feature won't work on all browsers.", 'codeflavors-vimeo-video-post-lite' ) }
 								checked = {opt.autoplay}
 								onChange =  {
 									() => onFormToggleChange( 'autoplay' )
@@ -185,8 +185,8 @@ registerBlockType( 'vimeotheque/video-position', {
 						</PanelRow>
 						<PanelRow>
 							<TextControl
-								label = { __( 'Volume', 'cvm_video' ) }
-								help = { __( 'Will work only for JS embeds', 'cvm_video' ) }
+								label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
+								help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
 								type = "number"
 								step = "1"
 								value = { opt.volume }
@@ -205,12 +205,12 @@ registerBlockType( 'vimeotheque/video-position', {
 					</PanelBody>
 
 					<PanelBody
-						title = { __('Embed size', 'cvm_video') }
+						title = { __('Embed size', 'codeflavors-vimeo-video-post-lite') }
 						initialOpen = {false}
 					>
 						<PanelRow>
 								<TextControl
-									label = { __( 'Width', 'cvm_video' ) }
+									label = { __( 'Width', 'codeflavors-vimeo-video-post-lite' ) }
 									type = "number"
 									step = "5"
 									value = { opt.width }
@@ -229,7 +229,7 @@ registerBlockType( 'vimeotheque/video-position', {
 
 						<PanelRow>
 							<SelectControl
-								label = { __( 'Aspect ratio', 'cvm_video' ) }
+								label = { __( 'Aspect ratio', 'codeflavors-vimeo-video-post-lite' ) }
 								value = { opt.aspect_ratio }
 								options = {[
 									{ label: '4x3', value: '4x3' },
@@ -250,12 +250,12 @@ registerBlockType( 'vimeotheque/video-position', {
 					</PanelBody>
 
 					<PanelBody
-						title = { __( 'Color options', 'cvm_video' ) }
+						title = { __( 'Color options', 'codeflavors-vimeo-video-post-lite' ) }
 						initialOpen={false}
 					>
 						<PanelRow>
 							<label>
-								{ __( 'Player color', 'cvm_video' ) + sep }
+								{ __( 'Player color', 'codeflavors-vimeo-video-post-lite' ) + sep }
 								<ColorIndicator
 									colorValue = { `#${opt.color}` }
 								/>

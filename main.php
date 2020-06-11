@@ -36,7 +36,7 @@ if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
  */
 function vimeotheque_fail_php_version() {
 	/* translators: %s: PHP version */
-	$message = sprintf( esc_html__( 'Vimeotheque requires PHP version %s+, plugin is currently NOT RUNNING.', 'cvm_video' ), '5.4' );
+	$message = sprintf( esc_html__( 'Vimeotheque requires PHP version %s+, plugin is currently NOT RUNNING.', 'codeflavors-vimeo-video-post-lite' ), '5.4' );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }
@@ -47,7 +47,7 @@ function vimeotheque_fail_php_version() {
  */
 function vimeotheque_fail_wp_version() {
 	/* translators: %s: WordPress version */
-	$message = sprintf( esc_html__( 'Vimeotheque requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'cvm_video' ), VMTQ_PRO_WP_COMPAT );
+	$message = sprintf( esc_html__( 'Vimeotheque requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'codeflavors-vimeo-video-post-lite' ), VMTQ_PRO_WP_COMPAT );
 	$html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
 	echo wp_kses_post( $html_message );
 }

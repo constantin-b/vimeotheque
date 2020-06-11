@@ -66,7 +66,7 @@ class Search_Resource extends Resource_Abstract implements Resource_Interface {
 			'upload_date'
 		]);
 
-		parent::set_name( 'search', __( 'Search', 'cvm_video' ) );
+		parent::set_name( 'search', __( 'Search', 'codeflavors-vimeo-video-post-lite' ) );
 
 	}
 

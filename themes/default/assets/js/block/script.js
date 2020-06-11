@@ -11,15 +11,15 @@ const enableOnBlocks = [
 
 const layoutOptions = [
     {
-        label: __( 'Default', 'cvm_video' ),
+        label: __( 'Default', 'codeflavors-vimeo-video-post-lite' ),
         value: ''
     },
     {
-        label: __( 'Right side', 'cvm_video' ),
+        label: __( 'Right side', 'codeflavors-vimeo-video-post-lite' ),
         value: 'right'
     },
     {
-        label: __( 'Left side', 'cvm_video' ),
+        label: __( 'Left side', 'codeflavors-vimeo-video-post-lite' ),
         value: 'left'
     }
 ]
@@ -66,11 +66,11 @@ const withLayoutControl = createHigherOrderComponent( ( BlockEdit ) => {
                     'default' == props.attributes.theme &&
                     <InspectorControls>
                         <PanelBody
-                            title={ __( 'Layout', 'cvm_video' ) }
+                            title={ __( 'Layout', 'codeflavors-vimeo-video-post-lite' ) }
                             initialOpen={ true }
                         >
                             <SelectControl
-                                label={ __( 'Navigation position', 'cvm_video' ) }
+                                label={ __( 'Navigation position', 'codeflavors-vimeo-video-post-lite' ) }
                                 value={ layout }
                                 options={ layoutOptions }
                                 onChange={ ( value ) => {

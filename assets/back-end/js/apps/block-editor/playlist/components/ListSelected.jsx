@@ -13,7 +13,7 @@ class ListSelected extends React.Component{
 
         if( this.props.posts.length == 0 ){
             messages =  <div className="vimeotheque-error vimeotheque-post-list-container">
-                { __( 'No individual videos selected! Once you select some videos they will appear in this section.', 'cvm_video' ) }
+                { __( 'No individual videos selected! Once you select some videos they will appear in this section.', 'codeflavors-vimeo-video-post-lite' ) }
             </div>
         }
 
@@ -26,7 +26,7 @@ class ListSelected extends React.Component{
                                 <ListItem
                                     post={post}
                                     onSelect={ (post) => { this.props.onSelect(post) } }
-                                    selectText={ __('Remove', 'cvm_video') }
+                                    selectText={ __('Remove', 'codeflavors-vimeo-video-post-lite') }
                                     key={post.id}
                                 />
                             )

@@ -49,7 +49,7 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 			'embeddable'
 		]);
 
-		parent::set_name( 'category', __( 'Category', 'cvm_video' ) );
+		parent::set_name( 'category', __( 'Category', 'codeflavors-vimeo-video-post-lite' ) );
 	}
 
 	/**

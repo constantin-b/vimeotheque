@@ -46,7 +46,7 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 			'embeddable'
 		]);
 
-		parent::set_name( 'group', __( 'Group', 'cvm_video' ) );
+		parent::set_name( 'group', __( 'Group', 'codeflavors-vimeo-video-post-lite' ) );
 
 	}
 

@@ -71,7 +71,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	public function get_html(){
 ?>
 	<div class="wrap"<?php if( 'grid' === $this->mode ):?> id="cvm-video-import-grid"<?php endif;?>>
-		<h1><?php _e( 'Import videos', 'cvm_video' );?></h1>
+		<h1><?php _e( 'Import videos', 'codeflavors-vimeo-video-post-lite' );?></h1>
 		<?php if( 'grid' === $this->mode ):?>	
 		<div class="error hide-if-js">
 			<p><?php printf(
@@ -223,8 +223,8 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 		);
 
 		wp_localize_script('cvm-video-search-js', 'cvm_importMessages', [
-			'loading' => __('Importing, please wait...', 'cvm_video'),
-			'wait'	=> __("Not done yet, still importing. You'll have to wait a bit longer.", 'cvm_video')
+			'loading' => __('Importing, please wait...', 'codeflavors-vimeo-video-post-lite'),
+			'wait'	=> __("Not done yet, still importing. You'll have to wait a bit longer.", 'codeflavors-vimeo-video-post-lite')
 		] );
 	
 		wp_enqueue_script('post');
@@ -252,14 +252,14 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
 		$data = [
 			'strings' => [
-				'loading' 		=> __('Loading, please wait...', 'cvm_video'),
-				'waiting'		=> __('Please use the form above to perform a search for Vimeo videos.', 'cvm_video'),
-				'query_results' => __('Displaying %1$d videos out of %2$d videos.', 'cvm_video'),
-				'no_results' 	=> __('Sorry, there are no videos matching your criteria.', 'cvm_video'),
-				'finished'		=> __('All results were loaded.', 'cvm_video'),
-				'load_more'		=> __('Load more', 'cvm_video'),
-				'unknown_error'	=> __('Not imported due to unknown error.', 'cvm_video'),
-				'info_search'	=> __('Ready to accept queries, please use the form to search for videos.', 'cvm_video')
+				'loading' 		=> __('Loading, please wait...', 'codeflavors-vimeo-video-post-lite'),
+				'waiting'		=> __('Please use the form above to perform a search for Vimeo videos.', 'codeflavors-vimeo-video-post-lite'),
+				'query_results' => __('Displaying %1$d videos out of %2$d videos.', 'codeflavors-vimeo-video-post-lite'),
+				'no_results' 	=> __('Sorry, there are no videos matching your criteria.', 'codeflavors-vimeo-video-post-lite'),
+				'finished'		=> __('All results were loaded.', 'codeflavors-vimeo-video-post-lite'),
+				'load_more'		=> __('Load more', 'codeflavors-vimeo-video-post-lite'),
+				'unknown_error'	=> __('Not imported due to unknown error.', 'codeflavors-vimeo-video-post-lite'),
+				'info_search'	=> __('Ready to accept queries, please use the form to search for videos.', 'codeflavors-vimeo-video-post-lite')
 			],
 			'assets' => [
 				'no_image' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg'
@@ -293,13 +293,13 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 <script type=\"text/template\" id=\"video-template\">
 <div class=\"cvm-video status-<%= status %>\">
 	<div class=\"cvm-thumbnail\">
-		<img src=\"<%- thumbnails[2] ? thumbnails[2] : no_image %>\" alt=\"<%= _.escape('" . __( 'Video thumbnail image', 'cvm_video' ) ." ') %>\" title=\"<%= _.escape('" . __( 'Video thumbnail image', 'cvm_video' ) . "') %>\" />
+		<img src=\"<%- thumbnails[2] ? thumbnails[2] : no_image %>\" alt=\"<%= _.escape('" . __( 'Video thumbnail image', 'codeflavors-vimeo-video-post-lite' ) ." ') %>\" title=\"<%= _.escape('" . __( 'Video thumbnail image', 'codeflavors-vimeo-video-post-lite' ) . "') %>\" />
 		<span class=\"duration\"><%= _duration %></span>
 		<% if( 'private' === privacy ){ %>
-		<span class=\"private\" title=\"" . esc_attr( __( 'Due to Vimeo privacy settings this video might not be visible on your website.', 'cvm_video' ) ) . "\"></span>
+		<span class=\"private\" title=\"" . esc_attr( __( 'Due to Vimeo privacy settings this video might not be visible on your website.', 'codeflavors-vimeo-video-post-lite' ) ) . "\"></span>
 		<% } %>
 		<% if( 'private' === embed_privacy ) { %>
-		<span class=\"private embed<%- 'private' !== privacy ? ' top' : '' %>\" title=\"" . esc_attr( __('Due to Vimeo privacy settings you might not be able to embed this video on your website.', 'cvm_video') ) ."\"></span>
+		<span class=\"private embed<%- 'private' !== privacy ? ' top' : '' %>\" title=\"" . esc_attr( __('Due to Vimeo privacy settings you might not be able to embed this video on your website.', 'codeflavors-vimeo-video-post-lite') ) ."\"></span>
 		<% } %>
 	</div>
 	<div class=\"details\">
@@ -319,10 +319,10 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 				<%
 					switch( status ){
 						case 'queued':
-							print( '" . __('Clear', 'cvm_video') . "' );
+							print( '" . __('Clear', 'codeflavors-vimeo-video-post-lite') . "' );
 						break;
 						case 'none':
-							print( '" . __('Select', 'cvm_video') . "' );
+							print( '" . __('Select', 'codeflavors-vimeo-video-post-lite') . "' );
 						break;					
 					}
 				%>			
@@ -330,9 +330,9 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			<% } %>
 
 			<% if( status === 'done' ){ %>
-				<a class=\"button edit\" target=\"_blank\" href=\"<%= edit_link %>\">" . __( 'Edit Post', 'cvm_video' ) . "</a>
-				<a class=\"button view\" target=\"_blank\" href=\"<%= permalink %>\">" . __( 'View Post', 'cvm_video' ) . "</a>
-				<span class=\"success\">" . __('Post created!', 'cvm_video') . "</span>
+				<a class=\"button edit\" target=\"_blank\" href=\"<%= edit_link %>\">" . __( 'Edit Post', 'codeflavors-vimeo-video-post-lite' ) . "</a>
+				<a class=\"button view\" target=\"_blank\" href=\"<%= permalink %>\">" . __( 'View Post', 'codeflavors-vimeo-video-post-lite' ) . "</a>
+				<span class=\"success\">" . __('Post created!', 'codeflavors-vimeo-video-post-lite') . "</span>
 			<% } %>
 			
 			<% if( status === 'error' ){ %>
@@ -371,13 +371,13 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 <script type=\"text/template\" id=\"filter-view\">
 <ul class=\"subsubsub<%- hide ? ' hide-if-js' : '' %>\">
 	<li class=\"all\">
-		<a href=\"#\" class=\"<%- 'all' === current ? 'current' : '' %>\" id=\"filter-show-all\">" . __('All videos', 'cvm_video') ." <span class=\"count\">(<%= items %>)</span></a> |
+		<a href=\"#\" class=\"<%- 'all' === current ? 'current' : '' %>\" id=\"filter-show-all\">" . __('All videos', 'codeflavors-vimeo-video-post-lite') ." <span class=\"count\">(<%= items %>)</span></a> |
 	</li>
 	<li class=\"publish\">
-		<a href=\"#\" class=\"<%- 'queued' === current ? 'current' : '' %>\" id=\"filter-show-importing\">" . __('To import', 'cvm_video') . " <span class=\"count\">(<%= queued %>)</span></a> | 
+		<a href=\"#\" class=\"<%- 'queued' === current ? 'current' : '' %>\" id=\"filter-show-importing\">" . __('To import', 'codeflavors-vimeo-video-post-lite') . " <span class=\"count\">(<%= queued %>)</span></a> | 
 	</li>
 	<li class=\"imported\">
-		<a href=\"#\" class=\"<%- 'imported' === current ? 'current' : '' %>\" id=\"filter-show-imported\">" . __('Imported', 'cvm_video') . " <span class=\"count\">(<%= imported %>)</span></a>
+		<a href=\"#\" class=\"<%- 'imported' === current ? 'current' : '' %>\" id=\"filter-show-imported\">" . __('Imported', 'codeflavors-vimeo-video-post-lite') . " <span class=\"count\">(<%= imported %>)</span></a>
 	</li>
 </ul>
 </script>";
@@ -386,13 +386,13 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 <script type=\"text/template\" id=\"no-results-view\">
 <% if( 'queued' === screen ){ %>
 <p>
-	<strong>" . __( 'No videos queued for importing!', 'cvm_video' ) . "</strong>
-	" . __( 'Please select some videos first and import them by clicking the "Import videos" button on the sidebar.', 'cvm_video' ) . "
+	<strong>" . __( 'No videos queued for importing!', 'codeflavors-vimeo-video-post-lite' ) . "</strong>
+	" . __( 'Please select some videos first and import them by clicking the "Import videos" button on the sidebar.', 'codeflavors-vimeo-video-post-lite' ) . "
 </p>
 <% }else if( 'imported' === screen ){ %>
 <p>
-	<strong>" . __( "You haven't imported any videos yet!", 'cvm_video' ) . "</strong>
-	" . __( 'All successfully imported videos will be available here.', 'cvm_video' ) . "
+	<strong>" . __( "You haven't imported any videos yet!", 'codeflavors-vimeo-video-post-lite' ) . "</strong>
+	" . __( 'All successfully imported videos will be available here.', 'codeflavors-vimeo-video-post-lite' ) . "
 </p>
 <% } %>
 </script>";
@@ -460,7 +460,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	    $code = 'cvm_wp_error';
 	    $message = $error->get_error_message( $code );
 	    if( $message ){
-		    $output = __('WordPress encountered and error while trying to query Vimeo:', 'cvm_video'). '<br />' . '<strong>'.$message.'</strong></p>';
+		    $output = __('WordPress encountered and error while trying to query Vimeo:', 'codeflavors-vimeo-video-post-lite'). '<br />' . '<strong>'.$message.'</strong></p>';
 		    if( $echo ){
 			    echo $before.$output.$after;
 		    }
@@ -473,12 +473,12 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	    $data		= $error->get_error_data( $code );
 
 	    $output = '<strong>'.$message.'</strong></p>';
-	    $output.= sprintf( __('Vimeo error code: %s (<em>%s</em>) - <strong>%s</strong>', 'cvm_video'), $data['code'], $data['msg'], $data['expl'] );
+	    $output.= sprintf( __('Vimeo error code: %s (<em>%s</em>) - <strong>%s</strong>', 'codeflavors-vimeo-video-post-lite'), $data['code'], $data['msg'], $data['expl'] );
 
 	    if( 401 == $data['code'] ){
 		    $url = menu_page_url('cvm_settings', false).'#vimeo_consumer_key';
-		    $link = sprintf('<a href="%s">%s</a>', $url, __('Settings page', 'cvm_video'));
-		    $output.= '<br /><br />' . sprintf(__('Please visit %s and enter your consumer and secret keys.', 'cvm_video'), $link);
+		    $link = sprintf('<a href="%s">%s</a>', $url, __('Settings page', 'codeflavors-vimeo-video-post-lite'));
+		    $output.= '<br /><br />' . sprintf(__('Please visit %s and enter your consumer and secret keys.', 'codeflavors-vimeo-video-post-lite'), $link);
 	    }
 
 	    if( $echo ){

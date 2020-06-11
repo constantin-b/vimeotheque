@@ -38,7 +38,7 @@ class Rest_Search_Controller extends Rest_Controller_Abstract implements Rest_Co
 					'query' => [
 						'validate_callback' => function( $param ){
 							if( empty( $param ) ){
-								return new \WP_Error( 'vimeotheque-rest-empty-search', __( 'No search query detected.', 'cvm_video' ) );
+								return new \WP_Error( 'vimeotheque-rest-empty-search', __( 'No search query detected.', 'codeflavors-vimeo-video-post-lite' ) );
 							}
 
 							return true;
@@ -60,7 +60,7 @@ class Rest_Search_Controller extends Rest_Controller_Abstract implements Rest_Co
 		if( empty( $request->get_param( 'query' ) ) ){
 			return new \WP_Error(
 				'vimeotheque-rest-empty-search',
-				__( 'No search query detected.', 'cvm_video' )
+				__( 'No search query detected.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}
 

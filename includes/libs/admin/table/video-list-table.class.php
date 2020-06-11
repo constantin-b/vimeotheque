@@ -96,8 +96,8 @@ class Video_List_Table extends \WP_List_Table{
 		
 		$form = '<div class="single-video-settings" id="single-video-settings-'.$item['ID'].'">';
 		$form.= '<h4>'.$item['post_title'].' (' . \Vimeotheque\Helper::human_time( $meta['duration'] ) . ')</h4>';
-		$form.= '<label for="cvm_volume'.$item['ID'].'">'.__('Volume', 'cvm_video').'</label> <input size="3" type="text" name="volume['.$item['ID'].']" id="cvm_volume'.$item['ID'].'" value="'.$settings['volume'].'" /><br />';
-		$form.= '<label for="cvm_width'.$item['ID'].'">'.__('Width', 'cvm_video').'</label> <input size="3" type="text" name="width['.$item['ID'].']" id="cvm_width'.$item['ID'].'" value="'.$settings['width'].'" /><br />';
+		$form.= '<label for="cvm_volume'.$item['ID'].'">'.__('Volume', 'codeflavors-vimeo-video-post-lite').'</label> <input size="3" type="text" name="volume['.$item['ID'].']" id="cvm_volume'.$item['ID'].'" value="'.$settings['volume'].'" /><br />';
+		$form.= '<label for="cvm_width'.$item['ID'].'">'.__('Width', 'codeflavors-vimeo-video-post-lite').'</label> <input size="3" type="text" name="width['.$item['ID'].']" id="cvm_width'.$item['ID'].'" value="'.$settings['width'].'" /><br />';
 		
 		$aspect_select = Helper_Admin::aspect_ratio_select(
 			[
@@ -106,17 +106,17 @@ class Video_List_Table extends \WP_List_Table{
 				'selected' 	=> $settings['aspect_ratio']
 			], false
 		);
-		$form.= '<label for="cvm_aspect_ratio'.$item['ID'].'">'.__('Aspect ratio', 'cvm_video').'</label> '.$aspect_select.'<br />';
-		$form.= '<input type="checkbox" name="autoplay['.$item['ID'].']" id="cvm_autoplay'.$item['ID'].'" value="1"' . Helper_Admin::check( (bool)$settings['autoplay'], false ) . ' /> <label class="inline" for="cvm_autoplay' . $item['ID'] . '">' . __('Auto play', 'cvm_video') . '</label><br />';
-		$form.= '<input type="checkbox" name="loop['.$item['ID'].']" id="cvm_loop'.$item['ID'].'" value="1"' . Helper_Admin::check( (bool)$settings['loop'], false ) . ' /> <label class="inline" for="cvm_loop' . $item['ID'] . '">' . __('Loop video', 'cvm_video') . '</label><br />';
-		$form.= '<input type="button" id="shortcode'.$item['ID'].'" value="'.__('Insert shortcode', 'cvm_video').'" class="button cvm-insert-shortcode" />';
-		$form.= '<input type="button" id="cancel'.$item['ID'].'" value="'.__('Cancel', 'cvm_video').'" class="button cvm-cancel-shortcode" />';
+		$form.= '<label for="cvm_aspect_ratio'.$item['ID'].'">'.__('Aspect ratio', 'codeflavors-vimeo-video-post-lite').'</label> '.$aspect_select.'<br />';
+		$form.= '<input type="checkbox" name="autoplay['.$item['ID'].']" id="cvm_autoplay'.$item['ID'].'" value="1"' . Helper_Admin::check( (bool)$settings['autoplay'], false ) . ' /> <label class="inline" for="cvm_autoplay' . $item['ID'] . '">' . __('Auto play', 'codeflavors-vimeo-video-post-lite') . '</label><br />';
+		$form.= '<input type="checkbox" name="loop['.$item['ID'].']" id="cvm_loop'.$item['ID'].'" value="1"' . Helper_Admin::check( (bool)$settings['loop'], false ) . ' /> <label class="inline" for="cvm_loop' . $item['ID'] . '">' . __('Loop video', 'codeflavors-vimeo-video-post-lite') . '</label><br />';
+		$form.= '<input type="button" id="shortcode'.$item['ID'].'" value="'.__('Insert shortcode', 'codeflavors-vimeo-video-post-lite').'" class="button cvm-insert-shortcode" />';
+		$form.= '<input type="button" id="cancel'.$item['ID'].'" value="'.__('Cancel', 'codeflavors-vimeo-video-post-lite').'" class="button cvm-cancel-shortcode" />';
 		$form.= '<div style="width:100%; display:block; clear:both"></div>';
 		$form.= '</div>';
 		
 		// row actions
     	$actions = [
-    		'shortcode' => sprintf( '<a href="#" id="cvm-embed-%1$s" class="cvm-show-form">%2$s</a>'.$form, $item['ID'], __('Get video shortcode', 'cvm_video') ),
+    		'shortcode' => sprintf( '<a href="#" id="cvm-embed-%1$s" class="cvm-show-form">%2$s</a>'.$form, $item['ID'], __('Get video shortcode', 'codeflavors-vimeo-video-post-lite') ),
 	    ];
     	
     	return sprintf('%1$s %2$s',
@@ -206,7 +206,7 @@ class Video_List_Table extends \WP_List_Table{
 	function column_post_date( $item ){
 		
 		$output = sprintf( '<abbr title="%s">%s</abbr><br />', $item['post_date'], mysql2date( __( 'Y/m/d' ), $item['post_date'] ) );
-		$output.= 'publish' == $item['post_status'] ? __('Published', 'cvm_video') : '';
+		$output.= 'publish' == $item['post_status'] ? __('Published', 'codeflavors-vimeo-video-post-lite') : '';
 		return $output;
 		
 	}
@@ -227,8 +227,8 @@ class Video_List_Table extends \WP_List_Table{
 		}
 		
 		$args = [
-			//'show_option_all' => __('Most recent videos', 'cvm_video'),
-			'show_option_none' => __('Most recent videos', 'cvm_video'),
+			//'show_option_all' => __('Most recent videos', 'codeflavors-vimeo-video-post-lite'),
+			'show_option_none' => __('Most recent videos', 'codeflavors-vimeo-video-post-lite'),
 			'option_none_value' => 0,
 			'show_count' 	=> 1,
 			'taxonomy' 		=> $this->taxonomy,
@@ -249,8 +249,8 @@ class Video_List_Table extends \WP_List_Table{
 		?>
 		<label for="cvm_video_categories"><?php echo $taxonomy->labels->name;?> :</label>
 		<?php echo $categories_select;?>
-		<?php submit_button( __( 'Filter', 'cvm_video' ), 'button-secondary apply', 'filter_videos', false );?>
-        <input type="button" name="add_category" id="cvm_add_category" class="button button-primary" value="<?php _e( 'Add category to shortcode', 'cvm_video' );?>" />
+		<?php submit_button( __( 'Filter', 'codeflavors-vimeo-video-post-lite' ), 'button-secondary apply', 'filter_videos', false );?>
+        <input type="button" name="add_category" id="cvm_add_category" class="button button-primary" value="<?php _e( 'Add category to shortcode', 'codeflavors-vimeo-video-post-lite' );?>" />
 		<?php
 	}
 	
@@ -276,8 +276,8 @@ class Video_List_Table extends \WP_List_Table{
         }
 		/*
 		$views = [
-    		'cpt' 	=> sprintf( $lt, 'cpt', __('Videos', 'cvm_video'), ( !isset( $_GET['view'] ) || 'cpt' == $_GET['view'] ? 'current' : '' ), __('Videos', 'cvm_video')),
-    		'posts'	=> sprintf( $lt, 'posts', __('Posts', 'cvm_video'), ( isset($_GET['view']) && 'posts' == $_GET['view'] ? 'current' : '' ) , __('Posts', 'cvm_video')),
+    		'cpt' 	=> sprintf( $lt, 'cpt', __('Videos', 'codeflavors-vimeo-video-post-lite'), ( !isset( $_GET['view'] ) || 'cpt' == $_GET['view'] ? 'current' : '' ), __('Videos', 'codeflavors-vimeo-video-post-lite')),
+    		'posts'	=> sprintf( $lt, 'posts', __('Posts', 'codeflavors-vimeo-video-post-lite'), ( isset($_GET['view']) && 'posts' == $_GET['view'] ? 'current' : '' ) , __('Posts', 'codeflavors-vimeo-video-post-lite')),
 		];
 		*/
 
@@ -319,11 +319,11 @@ class Video_List_Table extends \WP_List_Table{
 	function get_columns(){
 		$columns = [
 			'cb'			=> '<input type="checkbox" class="cvm-video-list-select-all" />',
-			'post_title'	=> __('Title', 'cvm_video'),
-			'video_id'		=> __('Video ID', 'cvm_video'),
-			'duration'		=> __('Duration', 'cvm_video'),
-			'category'	=> __('Category', 'cvm_video'),
-			'post_date' 	=> __('Date', 'cvm_video'),
+			'post_title'	=> __('Title', 'codeflavors-vimeo-video-post-lite'),
+			'video_id'		=> __('Video ID', 'codeflavors-vimeo-video-post-lite'),
+			'duration'		=> __('Duration', 'codeflavors-vimeo-video-post-lite'),
+			'category'	=> __('Category', 'codeflavors-vimeo-video-post-lite'),
+			'post_date' 	=> __('Date', 'codeflavors-vimeo-video-post-lite'),
 		];
     	return $columns;
 	}

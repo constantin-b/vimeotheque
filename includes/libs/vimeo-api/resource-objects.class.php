@@ -42,7 +42,7 @@ class Resource_Objects{
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'cvm_video' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Resource_Objects{
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'cvm_video' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -100,49 +100,49 @@ class Resource_Objects{
 	private function set_sort_options(){
 		$this->sort_options = [
 			'alphabetical' => [
-				'label' => __( 'Alphabetical', 'cvm_video' ),
+				'label' => __( 'Alphabetical', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'alphabetical',
 				'direction' => 'asc',
 				'resources' => []
 			],
 			'duration' => [
-				'label' => __( 'Duration', 'cvm_video' ),
+				'label' => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'duration',
 				'direction' => 'desc',
 				'resources' => []
 			],
 			'new' => [
-				'label' => __( 'Newest', 'cvm_video' ),
+				'label' => __( 'Newest', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'date',
 				'direction' => 'desc',
 				'resources' => []
 			],
 			'old' => [
-				'label' => __( 'Oldest', 'cvm_video' ),
+				'label' => __( 'Oldest', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'date',
 				'direction' => 'asc',
 				'resources' => []
 			],
 			'played' => [
-				'label' => __( 'Plays', 'cvm_video' ),
+				'label' => __( 'Plays', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'plays',
 				'direction' => 'desc',
 				'resources' => []
 			],
 			'likes'	=> [
-				'label' => __( 'Likes', 'cvm_video' ),
+				'label' => __( 'Likes', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'likes',
 				'direction' => 'desc',
 				'resources' => []
 			],
 			'comments' => [
-				'label' => __( 'Comments', 'cvm_video' ),
+				'label' => __( 'Comments', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'comments',
 				'direction' => 'desc',
 				'resources' => []
 			],
 			'relevant' => [
-				'label' => __( 'Relevancy', 'cvm_video' ),
+				'label' => __( 'Relevancy', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'relevant',
 				'direction' => 'desc',
 				'resources' => []
@@ -211,7 +211,7 @@ class Resource_Objects{
 		if( !isset( $this->resources[ $name ] ) ){
 			return new \WP_Error(
 				'vimeotheque-api-query-resource-unknown',
-				sprintf( __( 'Resource %s is not registered.', 'cvm_video' ), $name )
+				sprintf( __( 'Resource %s is not registered.', 'codeflavors-vimeo-video-post-lite' ), $name )
 			);
 		}
 

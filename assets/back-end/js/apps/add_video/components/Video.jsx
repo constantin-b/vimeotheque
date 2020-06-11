@@ -48,13 +48,13 @@ const Video = ( props ) => {
                         }
                     }
                 >
-                    { __( 'Import video', 'cvm_video' ) }
+                    { __( 'Import video', 'codeflavors-vimeo-video-post-lite' ) }
                 </Button>
                 <Button
                     isSecondary
                     onClick={props.onCancel}
                 >
-                    { __( 'Cancel', 'cvm_video' ) }
+                    { __( 'Cancel', 'codeflavors-vimeo-video-post-lite' ) }
                 </Button>
                 {
                     /**

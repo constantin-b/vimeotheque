@@ -21,7 +21,7 @@ class Categories_Widget extends \WP_Widget{
 		/* Widget settings. */
 		$widget_options = [
 			'classname' 	=> 'widget_categories cvm-video-categories',
-			'description' 	=> __('A list or dropdown of video categories.', 'cvm_video')
+			'description' 	=> __('A list or dropdown of video categories.', 'codeflavors-vimeo-video-post-lite')
 		];
 
 		/* Widget control settings. */
@@ -32,7 +32,7 @@ class Categories_Widget extends \WP_Widget{
 		/* Create the widget. */
 		parent::__construct(
 			'cvm-video-categories-widget',
-			__('Vimeo video categories', 'cvm_video'),
+			__('Vimeo video categories', 'codeflavors-vimeo-video-post-lite'),
 			$widget_options,
 			$control_options
 		);
@@ -104,15 +104,15 @@ class Categories_Widget extends \WP_Widget{
 
 		?>
 		<p>
-			<label for="<?php echo  $this->get_field_id('title');?>"><?php _e('Title', 'cvm_video');?>: </label>
+			<label for="<?php echo  $this->get_field_id('title');?>"><?php _e('Title', 'codeflavors-vimeo-video-post-lite');?>: </label>
 			<input type="text" name="<?php echo  $this->get_field_name('title');?>" id="<?php echo  $this->get_field_id('title');?>" value="<?php echo $options['title'];?>" class="widefat" />
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" name="<?php echo $this->get_field_name('post_count');?>" id="<?php echo $this->get_field_id('post_count')?>"<?php Helper_Admin::check((bool)$options['post_count']);?> />
-			<label for="<?php echo $this->get_field_id('post_count')?>"><?php _e('Show videos count', 'cvm_video');?></label>
+			<label for="<?php echo $this->get_field_id('post_count')?>"><?php _e('Show videos count', 'codeflavors-vimeo-video-post-lite');?></label>
 			<br />
 			<input class="checkbox" type="checkbox" name="<?php echo $this->get_field_name('hierarchy');?>" id="<?php echo $this->get_field_id('hierarchy')?>"<?php Helper_Admin::check((bool)$options['hierarchy']);?> />
-			<label for="<?php echo $this->get_field_id('hierarchy')?>"><?php _e('Show hierarchy', 'cvm_video');?></label>
+			<label for="<?php echo $this->get_field_id('hierarchy')?>"><?php _e('Show hierarchy', 'codeflavors-vimeo-video-post-lite');?></label>
 		</p>
 		<?php
 	}

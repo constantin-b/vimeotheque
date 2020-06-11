@@ -126,8 +126,8 @@ class Admin{
 		$this->admin_menu = new Menu_Pages(
 			new Settings_Page(
 				$this,
-				__( 'Settings', 'cvm_video' ),
-				__( 'Settings', 'cvm_video' ),
+				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
 				'cvm_settings',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				'manage_options'
@@ -137,8 +137,8 @@ class Admin{
 		$this->admin_menu->register_page(
 			new Status_Page(
 				$this,
-				__('Status', 'cvm_video'),
-				__('Status', 'cvm_video'),
+				__('Status', 'codeflavors-vimeo-video-post-lite'),
+				__('Status', 'codeflavors-vimeo-video-post-lite'),
 				'vimeotheque_status',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				'manage_options'
@@ -148,8 +148,8 @@ class Admin{
 		$this->admin_menu->register_page(
 			new Video_Import_Page(
 				$this,
-				__( 'Import videos', 'cvm_video' ),
-				__( 'Import videos', 'cvm_video' ),
+				__( 'Import videos', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Import videos', 'codeflavors-vimeo-video-post-lite' ),
 				'cvm_import',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				$this->get_capability('manual_import')
@@ -159,8 +159,8 @@ class Admin{
 		$this->admin_menu->register_page(
 			new About_Page(
 				$this,
-				__( 'About', 'cvm_video' ),
-				__( 'About', 'cvm_video' ),
+				__( 'About', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'About', 'codeflavors-vimeo-video-post-lite' ),
 				'vimeotheque_about',
 				false,
 				'activate_plugins'
@@ -170,8 +170,8 @@ class Admin{
 		$this->admin_menu->register_page(
 			new List_Videos_Page(
 				$this,
-				__( 'Videos', 'cvm_video' ),
-				__( 'Videos', 'cvm_video' ),
+				__( 'Videos', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Videos', 'codeflavors-vimeo-video-post-lite' ),
 				'cvm_videos',
 				false,
 				'edit_posts'
@@ -181,8 +181,8 @@ class Admin{
 		$this->admin_menu->register_page(
 			new Go_Pro_Page(
 				$this,
-				__( 'Go PRO!', 'cvm_video' ),
-				__( 'Go PRO!', 'cvm_video' ),
+				__( 'Go PRO!', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Go PRO!', 'codeflavors-vimeo-video-post-lite' ),
 				'vimeotheque_go_pro',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				'edit_posts'
@@ -230,11 +230,11 @@ class Admin{
 		$capabilities = [
 			'manual_import' => [
 				'capability' => 'cvm_manual_import',
-				'description' => __( 'Manual bulk import', 'cvm_video' )
+				'description' => __( 'Manual bulk import', 'codeflavors-vimeo-video-post-lite' )
 			],
 			'automatic_import' => [
 				'capability' => 'cvm_automatic_import',
-				'description' => __( 'Automatic import', 'cvm_video' )
+				'description' => __( 'Automatic import', 'codeflavors-vimeo-video-post-lite' )
 			]
 		];
 
@@ -254,9 +254,9 @@ class Admin{
 	 */
 	public function get_roles(){
 		$roles = [
-			'editor' => __( 'Editor', 'cvm_video' ),
-			'author' => __( 'Author', 'cvm_video' ),
-			'contributor' => __( 'Contributor', 'cvm_video' ),
+			'editor' => __( 'Editor', 'codeflavors-vimeo-video-post-lite' ),
+			'author' => __( 'Author', 'codeflavors-vimeo-video-post-lite' ),
+			'contributor' => __( 'Contributor', 'codeflavors-vimeo-video-post-lite' ),
 		];
 
 		return $roles;
@@ -274,8 +274,8 @@ class Admin{
 		foreach( $columns as $c => $t ){
 			$cols[ $c ] = $t;
 			if( 'title' == $c ){
-				$cols[ 'video_id' ] = __( 'Video ID', 'cvm_video' );
-				$cols[ 'duration' ] = __( 'Duration', 'cvm_video' );
+				$cols[ 'video_id' ] = __( 'Video ID', 'codeflavors-vimeo-video-post-lite' );
+				$cols[ 'duration' ] = __( 'Duration', 'codeflavors-vimeo-video-post-lite' );
 			}
 		}
 		return $cols;
@@ -307,7 +307,7 @@ class Admin{
 		Admin_Notices::instance()->register( new Vimeo_Api_Notice() );
 
 		$message = new Message(
-			__( "It's great to see that you've been using <strong>Vimeotheque</strong> plugin for a while now. Hopefully you're happy with it! <br>If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!", 'cvm_video' ),
+			__( "It's great to see that you've been using <strong>Vimeotheque</strong> plugin for a while now. Hopefully you're happy with it! <br>If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!", 'codeflavors-vimeo-video-post-lite' ),
 			'https://wordpress.org/plugins/codeflavors-vimeo-video-post-lite/'
 		);
 
@@ -390,14 +390,14 @@ class Admin{
 			$anchor,
 			Helper_Admin::docs_link( 'getting-started/vimeotheque-pro-installation/' ),
 			'_blank',
-			__( 'First time installation', 'cvm_video' )
+			__( 'First time installation', 'codeflavors-vimeo-video-post-lite' )
 		);
 
 		$links[] = sprintf(
 			$anchor,
 			Helper_Admin::docs_link( 'getting-started' ),
 			'_blank',
-			__( 'Documentation', 'cvm_video' )
+			__( 'Documentation', 'codeflavors-vimeo-video-post-lite' )
 		);
 
 		$links[] = sprintf(

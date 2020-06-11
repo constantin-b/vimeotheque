@@ -47,7 +47,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 			'embeddable'
 		]);
 
-		parent::set_name( 'portfolio', __( 'Portfolio', 'cvm_video' ) );
+		parent::set_name( 'portfolio', __( 'Portfolio', 'codeflavors-vimeo-video-post-lite' ) );
 
 	}
 
@@ -88,7 +88,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	 * @return bool|string|void
 	 */
 	public function label_user_id() {
-		return __( 'Portfolio user ID', 'cvm_video' );
+		return __( 'Portfolio user ID', 'codeflavors-vimeo-video-post-lite' );
 	}
 
 	/**

@@ -298,7 +298,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	 */
 	private function clear_oauth_credentials_link( $text = '', $class='', $echo = true ){
 		if( empty( $text ) ){
-			$text = __( 'Clear OAuth credentials', 'cvm_video' );
+			$text = __( 'Clear OAuth credentials', 'codeflavors-vimeo-video-post-lite' );
 		}
 
 		$options = $this->options_obj()->get_options();

@@ -61,7 +61,7 @@ const Loader = props => {
 
     return (
         <Placeholder>
-            {__('Loading, please wait...', 'cvm_video')}
+            {__('Loading, please wait...', 'codeflavors-vimeo-video-post-lite')}
             <Spinner/>
         </Placeholder>
     )

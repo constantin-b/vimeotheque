@@ -21,7 +21,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    $theme_info = $this->get_theme_info();
 ?>
 		<div class="wrap">
-			<h1><?php _e( 'System status', 'cvm_video' );?></h1>
+			<h1><?php _e( 'System status', 'codeflavors-vimeo-video-post-lite' );?></h1>
 			<h2>WordPress</h2>
             <table class="form-table">
 				<tbody>
@@ -165,7 +165,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 			$curl_version = curl_version();
 			$curl_version = $curl_version['version'] . ', ' . $curl_version['ssl_version'];
 		} elseif ( extension_loaded( 'curl' ) ) {
-			$curl_version = __( 'cURL installed but unable to retrieve version.', 'cvm_video' );
+			$curl_version = __( 'cURL installed but unable to retrieve version.', 'codeflavors-vimeo-video-post-lite' );
 		}
 
 		$server_data['curl_version'] = $curl_version;

@@ -7,16 +7,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 	<?php if( !$compact ):?>
 	<p class="description">
-		<?php _e('Import videos from Vimeo.', 'cvm_video');?><br />
-		<?php _e('Enter your search criteria and submit. All found videos will be displayed and you can selectively import videos into WordPress.', 'cvm_video');?>
+		<?php _e('Import videos from Vimeo.', 'codeflavors-vimeo-video-post-lite');?><br />
+		<?php _e('Enter your search criteria and submit. All found videos will be displayed and you can selectively import videos into WordPress.', 'codeflavors-vimeo-video-post-lite');?>
 	</p>
 	<?php endif;?>
 	<form method="get" action="" id="cvm_load_feed_form">
 		<?php 
 			$current_mode = $this->mode;
 			$modes = [
-				'list' => __('List view', 'cvm_video'), 
-				'grid' => __('Grid view', 'cvm_video')
+				'list' => __('List view', 'codeflavors-vimeo-video-post-lite'),
+				'grid' => __('Grid view', 'codeflavors-vimeo-video-post-lite')
 			];
 		?>
 		<input type="hidden" name="mode" value="<?php echo esc_attr( $current_mode ); ?>" />	
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr class="cvm_feed">
 				<th valign="top" scope="row">
 		<?php endif;?>
-					<label for="cvm_feed"><?php _e('Feed type', 'cvm_video');?> :</label>
+					<label for="cvm_feed"><?php _e('Feed type', 'codeflavors-vimeo-video-post-lite');?> :</label>
 		<?php if( !$compact ):?>
 				</th>
 				<td>
@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         );
 					?>
 			<?php if( !$compact ):?>		
-					<span class="description"><?php _e('Select the type of feed you want to load.', 'cvm_video');?></span>									
+					<span class="description"><?php _e('Select the type of feed you want to load.', 'codeflavors-vimeo-video-post-lite');?></span>
 				</td>
 			</tr>
 			
@@ -70,12 +70,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span class="cvm_album_user">
 			<?php endif;?>
 				
-					<label for="cvm_album_user"><?php _e('User ID', 'cvm_video');?>:</label>
+					<label for="cvm_album_user"><?php _e('User ID', 'codeflavors-vimeo-video-post-lite');?>:</label>
 			<?php if( !$compact ):?>	
 				</th>
 				<td>
 			<?php endif;?>	
-					<input type="text" name="cvm_album_user" id="cvm_album_user" value="<?php echo isset( $_GET['cvm_album_user'] ) ? esc_attr( $_GET['cvm_album_user'] ) : '';?>" placeholder="<?php echo esc_attr( __('Album owner user ID','cvm_video') );?>" />
+					<input type="text" name="cvm_album_user" id="cvm_album_user" value="<?php echo isset( $_GET['cvm_album_user'] ) ? esc_attr( $_GET['cvm_album_user'] ) : '';?>" placeholder="<?php echo esc_attr( __('Album owner user ID','codeflavors-vimeo-video-post-lite') );?>" />
 			
 			<?php if( $compact ):?>
 			</span>
@@ -88,14 +88,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr class="cvm_query">
 				<th valign="top" scope="row">
 			<?php endif;?>	
-					<label for="cvm_query"><?php _e('Vimeo search query', 'cvm_video');?>:</label>
+					<label for="cvm_query"><?php _e('Vimeo search query', 'codeflavors-vimeo-video-post-lite');?>:</label>
 			<?php if( !$compact ):?>	
 				</th>
 				<td>
 			<?php endif;?>	
 					<input type="text" name="cvm_query" id="cvm_query" value="<?php echo  isset( $_GET['cvm_query'] ) ? esc_attr( $_GET['cvm_query'] ) : '';?>" />
 			<?php if( !$compact ):?>		
-					<span class="description"><?php _e('Enter search query, user ID, group ID, channel ID or album ID according to Feed Type selection.', 'cvm_video');?></span>
+					<span class="description"><?php _e('Enter search query, user ID, group ID, channel ID or album ID according to Feed Type selection.', 'codeflavors-vimeo-video-post-lite');?></span>
 				</td>
 			</tr>
 			
@@ -107,7 +107,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span class="cvm_order">
 			<?php endif;?>
 				
-					<label for="cvm_order"><?php _e('Order by', 'cvm_video');?> :</label>
+					<label for="cvm_order"><?php _e('Order by', 'codeflavors-vimeo-video-post-lite');?> :</label>
 			<?php if( !$compact ):?>		
 					</th>
 				<td>
@@ -135,14 +135,14 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <span class="cvm_search_results">
 			<?php endif;?>
 
-                    <label for="cvm_search_results"><?php _e( 'Search results','cvm_video' );?> :</label>
+                    <label for="cvm_search_results"><?php _e( 'Search results','codeflavors-vimeo-video-post-lite' );?> :</label>
 
 	        <?php if( !$compact ):?>
                 </th>
                 <td>
 		    <?php endif;?>
 
-                    <input type="text" name="cvm_search_results" id="cvm_search_results" value="<?php echo  isset( $_GET['cvm_search_results'] ) ? esc_attr( $_GET['cvm_search_results'] ) : '';?>" placeholder="<?php _e('enter optional search query', 'cvm_video');?>" size="25">
+                    <input type="text" name="cvm_search_results" id="cvm_search_results" value="<?php echo  isset( $_GET['cvm_search_results'] ) ? esc_attr( $_GET['cvm_search_results'] ) : '';?>" placeholder="<?php _e('enter optional search query', 'codeflavors-vimeo-video-post-lite');?>" size="25">
 	        <?php if( $compact ):?>
                 </span>
 	        <?php endif;?>
@@ -164,6 +164,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php wp_nonce_field('cvm-video-import', 'cvm_search_nonce', false);?>
 		<?php
 			$type = $compact ? 'secondary' : 'primary'; 
-			submit_button( __( 'Load feed', 'cvm_video' ), $type, 'submit', !isset( $compact ) );
+			submit_button( __( 'Load feed', 'codeflavors-vimeo-video-post-lite' ), $type, 'submit', !isset( $compact ) );
 		?>
 	</form>

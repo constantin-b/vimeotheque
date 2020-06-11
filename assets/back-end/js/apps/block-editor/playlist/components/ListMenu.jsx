@@ -73,7 +73,7 @@ class ListMenu extends React.Component{
 ListMenu.defaultProps = {
     postType: 'vimeo-video',
     disabled: false,
-    textSelected: __('Selected', 'cvm_video'),
+    textSelected: __('Selected', 'codeflavors-vimeo-video-post-lite'),
     hideSelected: false,
     onPostTypeChange: () => {}
 }
