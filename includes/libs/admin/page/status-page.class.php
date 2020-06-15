@@ -134,7 +134,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     <tbody>
                     <?php foreach( $options as $k => $v ):?>
                     <tr>
-                        <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
+                        <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) . " ({$k})" ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
                         <td><?php echo $v;?></td>
                     </tr>
                     <?php endforeach;?>
@@ -145,7 +145,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     <tbody>
                     <?php foreach( $embed_options as $k => $v ):?>
                     <tr>
-                        <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
+                        <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) . " ({$k})" ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
                         <td><?php echo $v;?></td>
                     </tr>
                     <?php endforeach;?>
