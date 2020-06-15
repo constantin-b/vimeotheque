@@ -268,6 +268,14 @@ class Status_Page extends Page_Abstract implements Page_Interface {
     }
 
     private function get_embed_options(){
-	    return Helper::get_embed_options();
+	    $options = Helper::get_embed_options();
+
+	    foreach ( $options as $k => $option ) {
+            if( is_bool( $option ) ){
+                $options[ $k ] = $option ? 'Yes' : 'No';
+            }
+	    }
+	    
+	    return $options;
     }
 }
