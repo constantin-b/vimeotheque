@@ -35,7 +35,11 @@
             })
 
             $('#vimeotheque-report').trigger('click');
-            $('.command').hide();
+            $('.command').html(
+                $('<span></span>', {
+                    html: $('.command').data('alt-text')
+                })
+            );
 
         })
     

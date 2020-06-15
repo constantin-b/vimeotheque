@@ -31,7 +31,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                 <div class="export">
                     <textarea id="vimeotheque-report"></textarea>
                 </div>
-                <div class="command">
+                <div class="command" data-alt-text="<?php esc_attr_e( 'Copy the report and paste it into the support ticket.', 'codeflavors-vimeo-video-post-lite' );?>">
                     <button id="vimeotheque-status-copy" class="button"><?php _e( 'Create report', 'codeflavors-vimeo-video-post-lite' );?></button>
                     <span><?php _e( 'Click to create report and paste the result into the support ticket.', 'codeflavors-vimeo-video-post-lite' );?></span>
                 </div>
