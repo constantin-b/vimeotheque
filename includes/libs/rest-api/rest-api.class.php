@@ -25,7 +25,7 @@ class Rest_Api{
 
 	/**
 	 * Custom post type class reference
-	 * @var \Vimeotheque\Post\Post_Type
+	 * @var Post_Type
 	 */
 	private $cpt;
 
@@ -33,8 +33,6 @@ class Rest_Api{
 	 * Constructor
 	 *
 	 * @param Post_Type $cpt
-	 * @param string $namespace
-	 * @param string $version
 	 */
 	public function __construct( Post_Type $cpt ){
 		// store custom post type reference
