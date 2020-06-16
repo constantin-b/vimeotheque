@@ -3,6 +3,7 @@
 namespace Vimeotheque\Rest_Api;
 
 use Vimeotheque\Helper;
+use Vimeotheque\Plugin;
 use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Rest_Api\Endpoints\Rest_Endpoint_Factory;
 use Vimeotheque\Video_Post;
@@ -54,8 +55,15 @@ class Rest_Api{
 	 * Register new Rest API fields
 	 */
 	private function register_rest_field(){
+
+		$objects = array();
+		$post_types = Plugin::instance()->get_registered_post_types()->get_post_types();
+		foreach( $post_types as $post_type ){
+			$objects[] = $post_type->get_post_type()->name;
+		}
+
 		register_rest_field(
-			[ $this->cpt->get_post_type(), 'post' ],
+			$objects,
 			'vimeo_video',
 			[
 				'get_callback' => [ $this, 'register_field' ],
