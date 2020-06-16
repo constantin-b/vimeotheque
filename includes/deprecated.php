@@ -627,26 +627,6 @@ function _deprecated_player_options( ...$args ){
 }
 add_filter( 'vimeotheque\player\embed_options', '_deprecated_player_options', 10, 3 );
 
-function _deprecated_import_tag_tax( $tax ){
-	return apply_filters_deprecated(
-		'cvm_import_tag',
-		[$tax],
-		'2.0',
-		'vimeotheque\admin\import_meta_panel\tag_taxonomy'
-	);
-}
-add_filter( 'vimeotheque\admin\import_meta_panel\tag_taxonomy', '_deprecated_import_tag_tax', 10, 1 );
-
-function _deprecated_import_cat_tax( $tax ){
-	return apply_filters_deprecated(
-		'cvm_import_category',
-		[$tax],
-		'2.0',
-		'vimeotheque\admin\import_meta_panel\category_taxonomy'
-	);
-}
-add_filter( 'vimeotheque\admin\import_meta_panel\category_taxonomy', '_deprecated_import_cat_tax', 10, 1 );
-
 function _deprecated_import_button_text( $text ){
 	return apply_filters_deprecated(
 		'cvm-playlist-meta-submit-text',
