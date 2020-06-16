@@ -50,7 +50,7 @@ class Posts_Import{
 		extract( $this->get_import_options( $import_options ), EXTR_SKIP );
 
 		// get import options
-		$options = \Vimeotheque\Plugin::instance()->get_options();
+		$options = Plugin::instance()->get_options();
 
 		// overwrite plugin import settings with import settings
 		$options['import_description'] = $import_description;
@@ -266,7 +266,7 @@ class Posts_Import{
 		 * @var string - post format
 		 */
 		$post_format = apply_filters(
-			'vimeotheque\import_post_format' ,
+			'vimeotheque\import_post_format',
 			$post_format
 		);
 
@@ -291,7 +291,7 @@ class Posts_Import{
 			 * @var WP_Error
 			 */
 			$error = new WP_Error(
-				'cvm_video_import_prevented_by_filter',
+				'vimeotheque_video_import_prevented_by_filter',
 				sprintf(
 					__( 'Video having ID %s could not be imported because filter "cvm_allow_video_import" was set to "false".', 'cvm-video' ),
 					$video['video_id']
@@ -314,7 +314,7 @@ class Posts_Import{
 
 		// plugin settings; caller can pass their own import options
 		if( !$options ){
-			$options = \Vimeotheque\Plugin::instance()->get_options();
+			$options = Plugin::instance()->get_options();
 		}
 
 		if( 'private' == $video['privacy'] && 'pending' == $options['import_privacy'] ){
