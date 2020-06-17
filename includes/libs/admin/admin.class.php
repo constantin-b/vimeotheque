@@ -402,7 +402,7 @@ class Admin{
 
 		$links[] = sprintf(
 			$anchor,
-			$this->get_admin_menu()->get_page('cvm_settings')->get_menu_page(),
+			$this->get_admin_menu()->get_page('cvm_settings')->get_menu_page( false ),
 			'_self',
 			$this->get_admin_menu()->get_page( 'cvm_settings' )->get_menu_title()
 		);
