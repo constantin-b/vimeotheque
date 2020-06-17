@@ -150,8 +150,8 @@ class Video_List_Table extends \WP_List_Table{
 	 * @return
 	 */
 	function column_video_id( $item ){
-		$meta = cvm_get_post_video_data( $item['ID'] );
-		return $meta['video_id'];
+	    $post = Helper::get_video_post( $item['ID'] );
+		return $post->video_id;
 	}
 
 	/**
