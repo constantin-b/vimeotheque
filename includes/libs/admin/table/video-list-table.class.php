@@ -91,7 +91,7 @@ class Video_List_Table extends \WP_List_Table{
 		$settings = $video->get_embed_options();
 		
 		$form = '<div class="single-video-settings" id="single-video-settings-'.$item['ID'].'">';
-		$form.= '<h4>'.$item['post_title'].' (' . \Vimeotheque\Helper::human_time( $meta['duration'] ) . ')</h4>';
+		$form.= '<h4>'.$item['post_title'].' (' . $video->_duration . ')</h4>';
 		$form.= '<label for="cvm_volume'.$item['ID'].'">'.__('Volume', 'codeflavors-vimeo-video-post-lite').'</label> <input size="3" type="text" name="volume['.$item['ID'].']" id="cvm_volume'.$item['ID'].'" value="'.$settings['volume'].'" /><br />';
 		$form.= '<label for="cvm_width'.$item['ID'].'">'.__('Width', 'codeflavors-vimeo-video-post-lite').'</label> <input size="3" type="text" name="width['.$item['ID'].']" id="cvm_width'.$item['ID'].'" value="'.$settings['width'].'" /><br />';
 		
