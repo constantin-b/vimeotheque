@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Vimeotheque
  * Plugin URI: https://vimeotheque.com
- * Description: Formerly known as "Vimeo Videos", Vimeotheque imports public Vimeo videos as WordPress posts. It is a perfect fit for membership, portfolio, online courses or any type of video collection.
+ * Description: Vimeotheque imports public Vimeo videos as WordPress posts. It is a perfect fit for membership, portfolio, online courses or any type of video collection.
  * Author: CodeFlavors
  * Version: 2.0
  * Author URI: https://codeflavors.com
