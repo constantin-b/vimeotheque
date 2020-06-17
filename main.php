@@ -20,11 +20,11 @@ define( 'VIMEOTHEQUE_VERSION', '2.0' );
  * Verifies against the current running WP version.
  * WP 5.2 required minimum version because it contains React 16.8+ which implements hooks
  */
-define( 'VMTQ_PRO_WP_COMPAT', '5.2' );
+define( 'VIMEOTHEQUE_WP_COMPAT', '5.2' );
 
 if ( ! version_compare( PHP_VERSION, '5.6', '>=' ) ) {
 	add_action( 'admin_notices', 'vimeotheque_fail_php_version' );
-} elseif ( ! version_compare( get_bloginfo( 'version' ), VMTQ_PRO_WP_COMPAT, '>=' ) ) {
+} elseif ( ! version_compare( get_bloginfo( 'version' ), VIMEOTHEQUE_WP_COMPAT, '>=' ) ) {
 	add_action( 'admin_notices', 'vimeotheque_fail_wp_version' );
 }else{
     require_once VIMEOTHEQUE_PATH . 'includes/libs/plugin.class.php';
