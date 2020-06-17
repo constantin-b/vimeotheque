@@ -48,7 +48,7 @@ interface Page_Interface{
 	 *
 	 * @return mixed
 	 */
-	public function get_menu_page( $echo = false );
+	public function get_menu_page( $echo = true );
 
 	/**
 	 * @return Plugin
