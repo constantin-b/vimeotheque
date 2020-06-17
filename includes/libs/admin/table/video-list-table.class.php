@@ -259,21 +259,20 @@ class Video_List_Table extends \WP_List_Table{
 		$lt = '<a href="' . $url . '" title="%s" class="%s">%s</a>';
 
 		$views = [];
-		$view = Helper::get_var( 'view', 'GET' ) ;
 
         foreach( Plugin::instance()->get_registered_post_types()->get_post_types() as $_post_type ){
             $views[] = sprintf(
                 $lt,
                 $_post_type->get_post_type()->name,
                 $_post_type->get_post_type()->label,
-                ( $view == $_post_type->get_post_type()->name ? 'current' : '' ),
+                ( $this->post_type == $_post_type->get_post_type()->name ? 'current' : '' ),
 	            $_post_type->get_post_type()->label
             );
         }
 
 		printf(
 		        '<input type="hidden" name="cvm_post_type" id="cvm_post_type" value="%s" />',
-			    $view ? $view : Plugin::instance()->get_cpt()->get_post_type()
+			    $this->post_type
             );
 
     	return $views;		
