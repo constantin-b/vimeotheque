@@ -29,7 +29,7 @@ class Shortcode_Factory {
 	private function register_shortcode_objects(){
 		$this->shortcodes = [
 			'vimeotheque_video_position' => new Video_Position( [ 'cvm_video_embed', 'vimeotheque_video_position' ] ),
-			'vimeotheque_video' => new Video( [ 'codeflavors-vimeo-video-post-lite', 'vimeotheque_video' ] ),
+			'vimeotheque_video' => new Video( [ 'cvm_video', 'vimeotheque_video' ] ),
 			'vimeotheque_playlist' => new Playlist( [ 'cvm_playlist', 'vimeotheque_playlist' ] )
 		];
 	}
