@@ -274,12 +274,6 @@ class Video_List_Table extends \WP_List_Table{
 	            $_post_type->get_post_type()->label
             );
         }
-		/*
-		$views = [
-    		'cpt' 	=> sprintf( $lt, 'cpt', __('Videos', 'codeflavors-vimeo-video-post-lite'), ( !isset( $_GET['view'] ) || 'cpt' == $_GET['view'] ? 'current' : '' ), __('Videos', 'codeflavors-vimeo-video-post-lite')),
-    		'posts'	=> sprintf( $lt, 'posts', __('Posts', 'codeflavors-vimeo-video-post-lite'), ( isset($_GET['view']) && 'posts' == $_GET['view'] ? 'current' : '' ) , __('Posts', 'codeflavors-vimeo-video-post-lite')),
-		];
-		*/
 
 		printf(
 		        '<input type="hidden" name="cvm_post_type" id="cvm_post_type" value="%s" />',
