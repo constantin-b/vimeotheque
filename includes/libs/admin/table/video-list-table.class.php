@@ -162,8 +162,8 @@ class Video_List_Table extends \WP_List_Table{
 	 * @return string
 	 */
 	function column_duration( $item ){
-		$meta = cvm_get_post_video_data( $item['ID'] );
-		return '<span id="duration'.$item['ID'].'">' . \Vimeotheque\Helper::human_time($meta['duration']) . '</span>';
+		$post = Helper::get_video_post( $item['ID'] );
+		return '<span id="duration'.$item['ID'].'">' . $post->_duration . '</span>';
 	}
 
 	/**
