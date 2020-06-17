@@ -51,19 +51,15 @@ class Video_List_Table extends \WP_List_Table{
 			'plural'   => 'vimeo-videos',
 			'screen'   => isset( $args['screen'] ) ? $args['screen'] : null,
 		] );
-		
-		$table_view = Helper::get_var( 'view', 'GET' );
-		switch ( $table_view ){
-			case 'post':
-				$this->post_type = 'post';
-				$this->taxonomy = 'category';
-			break;
-			case Plugin::instance()->get_cpt()->get_post_type():
-			default:
-				$this->post_type = Plugin::instance()->get_cpt()->get_post_type();
-				$this->taxonomy = Plugin::instance()->get_cpt()->get_post_tax();
-			break;	
-		}		
+
+		$post_type = Plugin::instance()->get_registered_post_types()->get_post_type( Helper::get_var( 'view', 'GET' ) );
+		if( !$post_type ){
+			$this->post_type = Plugin::instance()->get_cpt()->get_post_type();
+			$this->taxonomy = Plugin::instance()->get_cpt()->get_post_tax();
+        }else{
+		    $this->post_type = $post_type->get_post_type()->name;
+		    $this->taxonomy = $post_type->get_taxonomy()->name;
+        }
 	}
 
 	/**
