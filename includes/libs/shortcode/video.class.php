@@ -40,6 +40,9 @@ class Video extends Shortcode_Abstract implements Shortcode_Interface {
 
 		$vars = shortcode_atts( $this->post->get_embed_options(), parent::get_atts() );
 		$player = new Player( $this->post, $vars );
+
+		Helper::enqueue_player();
+
 		return $player->get_output( false );
 	}
 }
