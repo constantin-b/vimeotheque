@@ -99,21 +99,28 @@ class Resource_Objects{
 	 */
 	private function set_sort_options(){
 		$this->sort_options = [
-			'alphabetical' => [
-				'label' => __( 'Alphabetical', 'codeflavors-vimeo-video-post-lite' ),
+			'new' => [
+				'label' => __( 'Newest', 'codeflavors-vimeo-video-post-lite' ),
+				'sort' => 'date',
+				'direction' => 'desc',
+				'resources' => []
+			],
+			'alphabetical_asc' => [
+				'label' => __( 'Alphabetical &#x1F81D;', 'codeflavors-vimeo-video-post-lite' ),
 				'sort' => 'alphabetical',
 				'direction' => 'asc',
 				'resources' => []
 			],
-			'duration' => [
-				'label' => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'duration',
+			'alphabetical_desc' => [
+				'label' => __( 'Alphabetical &#x1F81F;', 'codeflavors-vimeo-video-post-lite' ),
+				'sort' => 'alphabetical',
 				'direction' => 'desc',
 				'resources' => []
 			],
-			'new' => [
-				'label' => __( 'Newest', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'date',
+
+			'duration' => [
+				'label' => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
+				'sort' => 'duration',
 				'direction' => 'desc',
 				'resources' => []
 			],
