@@ -84,8 +84,10 @@ class Post_Edit_Page{
 		}
 		// check nonce
 		check_admin_referer( 'cvm-save-video-settings', 'cvm-video-nonce' );
-		// update post
-		$_post->set_embed_options( $_POST );
+		// hack color coming from Classic editor to remove #
+        $_POST['color'] = str_replace( '#', '', $_POST['color'] );
+		// update post options
+        $_post->set_embed_options( $_POST );
 	}
 
 	/**
