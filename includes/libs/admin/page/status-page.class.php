@@ -257,6 +257,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    unset( $options['vimeo_consumer_key'] );
 	    unset( $options['vimeo_secret_key'] );
 	    unset( $options['oauth_token'] );
+	    unset( $options['oauth_secret'] );
 
 	    foreach ( $options as $k => $v ){
 	        if( is_bool( $v ) ){
