@@ -5,36 +5,7 @@ use Vimeotheque\Video_Post;
 
 
 
-/**
- * Output video title
- *
- * @param bool $include_duration
- * @param string $before
- * @param string $after
- * @param bool $echo
- *
- * @return bool|string
- */
-function cvm_output_title( $include_duration = true,  $before = '', $after = '', $echo = true  ){
-	/**
-	 * @var Video_Post
-	 */
-	global $cvm_video;
-	if( !$cvm_video ){
-		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
-		return false;
-	}
-	$output = $cvm_video->get_post()->post_title;
 
-	if( $include_duration ){
-		$output .= ' <span class="duration">[' . Helper::human_time( $cvm_video->duration ) . ']</span>';
-	}
-
-	if( $echo ){
-		echo $before.$output.$after;
-	}
-	return $before.$output.$after;
-}
 
 /**
  * Outputs video data
