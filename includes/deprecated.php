@@ -664,3 +664,7 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
 function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 	return \Vimeotheque\Themes\Helper::get_video_data_attributes( $before, $after, $echo );
 }
+
+function cvm_video_post_permalink( $echo  = true ){
+	return \Vimeotheque\Themes\Helper::get_post_permalink( $echo );
+}
