@@ -307,14 +307,16 @@ class Helper_Admin {
 	 * @param $path
 	 * @param string $medium
 	 *
+	 * @param null|string $campaign
+	 *
 	 * @return string
 	 */
-	static public function publisher_link( $path, $medium = 'doc_link' ){
+	static public function publisher_link( $path, $medium = 'doc_link', $campaign = null ){
 		$base = 'https://vimeotheque.com/';
 		$vars = [
 			'utm_source' => 'plugin',
 			'utm_medium' => $medium,
-			'utm_campaign' => 'vimeotheque-lite'
+			'utm_campaign' => null === $campaign ? 'vimeotheque-lite' : $campaign
 		];
 		$q = http_build_query( $vars );
 		return $base . trailingslashit( $path ) . '?' . $q;
