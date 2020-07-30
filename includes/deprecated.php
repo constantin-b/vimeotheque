@@ -656,3 +656,7 @@ function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo
 function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo = true ) {
 	return \Vimeotheque\Themes\Helper::image_preloader( $size, $class, $echo );
 }
+
+function cvm_output_title( $include_duration = true,  $before = '', $after = '', $echo = true  ){
+	return \Vimeotheque\Themes\Helper::get_title( $include_duration, $before, $after, $echo );
+}
