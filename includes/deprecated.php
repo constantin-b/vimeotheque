@@ -680,3 +680,7 @@ function cvm_output_player_size( $before = ' style="', $after='"', $echo = true 
 function cvm_get_player_options(){
 	return \Vimeotheque\Themes\Helper::get_player_options();
 }
+
+function cvm_output_player_data( $echo = true ){
+	return \Vimeotheque\Themes\Helper::get_player_data_attributes( $echo );
+}
