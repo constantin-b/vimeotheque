@@ -3,14 +3,6 @@
 use Vimeotheque\Helper;
 use Vimeotheque\Video_Post;
 
-function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
-	$player = Helper::get_embed_options( cvm_get_player_options() );
-	if( $echo ){
-		echo $before . 'width: ' . $player['width'].'px; ' . $after;
-	}
-	return $before . 'width: ' . $player['width'].'px; ' . $after;
-}
-
 function cvm_output_player_size( $before = ' style="', $after='"', $echo = true ){
 	$player = Helper::get_embed_options( cvm_get_player_options() );
 	$height = Helper::calculate_player_height( $player['aspect_ratio'], $player['width'] );
