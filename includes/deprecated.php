@@ -660,3 +660,7 @@ function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo 
 function cvm_output_title( $include_duration = true,  $before = '', $after = '', $echo = true  ){
 	return \Vimeotheque\Themes\Helper::get_title( $include_duration, $before, $after, $echo );
 }
+
+function cvm_output_video_data( $before = " ", $after="", $echo = true ){
+	return \Vimeotheque\Themes\Helper::get_video_data_attributes( $before, $after, $echo );
+}
