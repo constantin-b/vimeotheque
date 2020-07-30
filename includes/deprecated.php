@@ -673,3 +673,10 @@ function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
 	return \Vimeotheque\Themes\Helper::get_width( $before, $after, $echo );
 }
 
+function cvm_output_player_size( $before = ' style="', $after='"', $echo = true ){
+	return \Vimeotheque\Themes\Helper::get_player_size( $before, $after, $echo );
+}
+
+function cvm_get_player_options(){
+	return \Vimeotheque\Themes\Helper::get_player_options();
+}
