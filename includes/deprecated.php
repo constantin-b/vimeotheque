@@ -652,3 +652,7 @@ add_action( 'vimeotheque\admin\video_list_modal_print_scripts', '_deprecated_vid
 function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
 	return \Vimeotheque\Themes\Helper::get_thumbnail( $size, $before, $after, $echo );
 }
+
+function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo = true ) {
+	return \Vimeotheque\Themes\Helper::image_preloader( $size, $class, $echo );
+}
