@@ -3,51 +3,7 @@
 use Vimeotheque\Helper;
 use Vimeotheque\Video_Post;
 
-/**
- * Output video thumbnail
- *
- * @param string $before
- * @param string $after
- * @param bool $echo
- *
- * @return bool|string
- */
-function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
-	/**
-	 * @var Video_Post
-	 */
-	global $cvm_video;
-	if( !$cvm_video ){
-		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
-		return false;
-	}
-	$output = '';
 
-	$sizes = [
-		'small' => 0, // 100px width
-		'medium' => 1, // 200px width
-		'large' => 2, // 640px width
-	];
-
-	if( !array_key_exists($size, $sizes) ){
-		$size = 'small';
-	}
-
-	$thumbnails = array_values( $cvm_video->thumbnails );
-
-	if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
-		$img_url = $thumbnails[ $sizes[ $size ] ];
-		if( is_ssl() ){
-			$img_url = str_replace( 'http://' , 'https://', $img_url );
-		}
-		$output = sprintf( '<img src="%s" alt="" />', $img_url );
-	}
-	if( $echo ){
-		echo $before.$output.$after;
-	}
-
-	return $before.$output.$after;
-}
 
 /**
  * Returns video image prepared to be preloaded
