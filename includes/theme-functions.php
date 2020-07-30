@@ -6,49 +6,6 @@ use Vimeotheque\Video_Post;
 
 
 /**
- * Returns video image prepared to be preloaded
- *
- * @param string $size - small (100px width), medium (200px width) or large (640px width)
- * @param bool $echo
- *
- * @return bool|string
- */
-function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo = true ){
-	/**
-	 * @var Video_Post
-	 */
-	global $cvm_video;
-	if( !$cvm_video ){
-		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
-		return false;
-	}
-	$output = '';
-
-	$sizes = [
-		'small' 	=> 0, // 100px width
-		'medium' 	=> 1, // 200px width
-		'large' 	=> 2, // 640px width
-	];
-
-	if( !array_key_exists($size, $sizes) ){
-		$size = 'small';
-	}
-
-	$blank = VIMEOTHEQUE_URL . '/assets/front-end/images/blank.png';
-
-	$thumbnails = array_values( $cvm_video->thumbnails );
-
-	if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
-		$output = sprintf('<img data-src="%s" alt="" src="%s" class="%s" />', $thumbnails[ $sizes[ $size ] ], $blank, $class);
-	}
-	if( $echo ){
-		echo $output;
-	}
-
-	return $output;
-}
-
-/**
  * Output video title
  *
  * @param bool $include_duration
