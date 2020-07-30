@@ -65,9 +65,6 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		 */
 		global $cvm_video;
 
-		// include theme functions
-		include_once( VIMEOTHEQUE_PATH . '/includes/theme-functions.php' );
-
 		$handles = Helper::enqueue_player();
 
 		$theme = $this->get_theme();
