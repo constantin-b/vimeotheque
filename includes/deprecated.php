@@ -646,3 +646,9 @@ function _deprecated_video_list_scripts(){
 	);
 }
 add_action( 'vimeotheque\admin\video_list_modal_print_scripts', '_deprecated_video_list_scripts', 10 );
+
+// playlist theme functions
+
+function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
+	return \Vimeotheque\Themes\Helper::get_thumbnail( $size, $before, $after, $echo );
+}
