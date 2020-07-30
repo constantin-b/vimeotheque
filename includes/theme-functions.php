@@ -13,8 +13,3 @@ function cvm_output_player_data( $echo = true ){
 
 	return $attributes;
 }
-
-function cvm_get_player_options(){
-	global $CVM_PLAYER_SETTINGS;
-	return $CVM_PLAYER_SETTINGS;
-}
