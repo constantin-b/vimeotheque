@@ -668,3 +668,8 @@ function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 function cvm_video_post_permalink( $echo  = true ){
 	return \Vimeotheque\Themes\Helper::get_post_permalink( $echo );
 }
+
+function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
+	return \Vimeotheque\Themes\Helper::get_width( $before, $after, $echo );
+}
+
