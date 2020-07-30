@@ -3,30 +3,6 @@
 use Vimeotheque\Helper;
 use Vimeotheque\Video_Post;
 
-/**
- * Returns the permalink to custom post type video
- *
- * @param bool $echo
- *
- * @return bool|false|string
- */
-function cvm_video_post_permalink( $echo  = true ){
-	/**
-	 * @var Video_Post
-	 */
-	global $cvm_video;
-	if( !$cvm_video ){
-		_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
-		return false;
-	}
-
-	$pl = get_permalink( $cvm_video->get_post()->ID );
-	if( $echo ){
-		echo $pl;
-	}
-	return $pl;
-}
-
 function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
 	$player = Helper::get_embed_options( cvm_get_player_options() );
 	if( $echo ){
