@@ -26,7 +26,7 @@ class TreeSelectBase extends React.Component{
 
     shouldComponentUpdate( nextProps, nextState ){
         // finished loading
-        if( this.props.loading && !nextProps.loading ){
+        if( !nextProps.loading ){
             this.props.onLoad( nextProps.terms )
         }
 
