@@ -2,7 +2,7 @@ import {assign} from 'lodash'
 const {addFilter} = wp.hooks,
     { __ } = wp.i18n,
     { createHigherOrderComponent } = wp.compose,
-    { InspectorControls } = wp.editor,
+    { InspectorControls } = wp.blockEditor || wp.editor,
     { PanelBody, SelectControl } = wp.components
 
 const enableOnBlocks = [
