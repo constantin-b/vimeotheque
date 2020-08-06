@@ -157,7 +157,7 @@ class Post_Edit_Page{
 
 ?>
 <div class="wrap">
-    <h1><?php _e( 'Import video' );?></h1>
+    <h1><?php _e( 'Import video', 'codeflavors-vimeo-video-post-lite' );?></h1>
     <div id="poststuff">
         <div class="notice error hide-if-js">
             <p><?php _e( 'JavaScript is disabled! You must enable JavaScript in order to be able to import videos.', 'codeflavors-vimeo-video-post-lite' );?></p>
