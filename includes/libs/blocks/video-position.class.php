@@ -67,7 +67,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 					return $options;
  				},
 				'type' => 'string',
-				'default' => false,
+				'default' => '{}',
 				'auth_callback' => function() {
 					return current_user_can( 'edit_posts' );
 				}
@@ -81,7 +81,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				'single' => true,
 				'show_in_rest' => true,
 				'type' => 'string',
-				'default' => false,
+				'default' => '',
 				'auth_callback' => function() {
 					return current_user_can( 'edit_posts' );
 				}
