@@ -319,5 +319,29 @@ class Helper{
 		 */
 		do_action( 'vimeotheque\debug', $message, $separator, $data );
 	}
+
+	/**
+	 * Retrieves default metadata value for the specified meta key and object.
+	 *
+	 * By default, an empty string is returned if `$single` is true, or an empty array
+	 * if it's false.
+	 *
+	 * @since 5.5.0
+	 *
+	 * @param string $meta_type Type of object metadata is for. Accepts 'post', 'comment', 'term', 'user',
+	 *                          or any other object type with an associated meta table.
+	 * @param int    $object_id ID of the object metadata is for.
+	 * @param string $meta_key  Metadata key.
+	 * @param bool   $single    Optional. If true, return only the first value of the specified meta_key.
+	 *                          This parameter has no effect if meta_key is not specified. Default false.
+	 * @return mixed Single metadata value, or array of values.
+	 */
+	public static function get_metadata_default( $meta_type, $object_id, $meta_key, $single = true ){
+		if( function_exists( 'get_metadata_default' ) ){
+			return \get_metadata_default( $meta_type, $object_id, $meta_key, $single );
+		}else{
+			return false;
+		}
+	}
 }
 
