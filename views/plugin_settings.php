@@ -275,14 +275,6 @@ use Vimeotheque\Helper;
 						</tr>
 
 						<tr>
-							<th><label for="cvm_js_embed"><?php _e('Embed by JavaScript', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
-							<td>
-								<input type="checkbox" value="1" id="cvm_js_embed" name="js_embed"<?php Helper_Admin::check( (bool )$player_opt['js_embed'] );?> />
-								<span class="description"><?php _e('When checked, single video embedding will be handled by plugin JavaScript. <br />If unchecked, the video iframe will be placed directly into the page.', 'codeflavors-vimeo-video-post-lite');?></span>
-							</td>
-						</tr>
-
-                        <tr>
 							<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
 								<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>

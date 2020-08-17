@@ -48,7 +48,7 @@ registerBlockType( 'vimeotheque/video-position', {
 	example: {
 		attributes: {
 			video_id: '1084537',
-			embed_options: '{"title":1,"byline":1,"portrait":1,"color":"","loop":0,"autoplay":1,"aspect_ratio":"16x9","width":200,"video_position":"below-content","volume":70,"playlist_loop":0,"js_embed":false}',
+			embed_options: '{"title":1,"byline":1,"portrait":1,"color":"","loop":0,"autoplay":1,"aspect_ratio":"16x9","width":200,"video_position":"below-content","volume":70,"playlist_loop":0}',
 		}
 	},
 

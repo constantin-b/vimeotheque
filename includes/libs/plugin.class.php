@@ -277,8 +277,7 @@ class Plugin{
 			'video_position' => 'below-content', // in front-end custom post, where to display the video: above or below post content
 			'volume' => 25, // video default volume
 			// extra player settings controllable by widgets/shortcodes
-			'playlist_loop' => 0,
-			'js_embed' => true, // if true, embedding is done by JavaScript. If false, embedding is done by PHP by simply placing the iframe code into the page
+			'playlist_loop' => 0
 		];
 
 		/**
