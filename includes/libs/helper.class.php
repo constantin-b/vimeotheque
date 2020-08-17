@@ -340,7 +340,11 @@ class Helper{
 		if( function_exists( 'get_metadata_default' ) ){
 			return \get_metadata_default( $meta_type, $object_id, $meta_key, $single );
 		}else{
-			return false;
+			if( $single ) {
+				return '';
+			}else{
+				return [];
+			}
 		}
 	}
 }
