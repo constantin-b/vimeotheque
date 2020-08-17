@@ -257,15 +257,15 @@ registerBlockType( 'vimeotheque/video-position', {
 							<label>
 								{ __( 'Player color', 'codeflavors-vimeo-video-post-lite' ) + sep }
 								<ColorIndicator
-									colorValue = { `#${opt.color}` }
+									colorValue = { `#${opt.color.replace( '#', '' )}` }
 								/>
-								<span>{ opt.color && `#${opt.color}` }</span>
+								<span>{ opt.color && `#${opt.color.replace( '#', '' )}` }</span>
 							</label>
 						</PanelRow>
 
 						<PanelRow>
 							<ColorPalette
-								value = { `#${opt.color}` }
+								value = { `#${opt.color.replace( '#', '' )}` }
 								onChange = {
 									color => {
 										opt.color = color.replace( '#', '' );
