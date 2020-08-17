@@ -450,7 +450,7 @@ class Video_Post{
 				$single
 			);
 
-			return $meta ? $meta : $default;
+			return $meta === Helper::get_metadata_default( 'post', $this->_post->ID, $key, $single ) ? $default : $meta;
 		}
 
 		return $default;
