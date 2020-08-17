@@ -46,9 +46,20 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				'single' => true,
 				'show_in_rest' => [
 					'prepare_callback' => function( $value ){
-						if( !$value ){
+						global $post;
+
+						// @since WP 5.5
+						$default = Helper::get_metadata_default(
+							'post',
+							$post->ID,
+							self::get_plugin()->get_cpt()->get_post_settings()->get_meta_embed_settings(),
+							true
+						);
+
+						if( $default === $value ){
 							$value = parent::get_plugin()->get_embed_options_obj()->get_options();
 						}
+
 						return json_encode( $value );
 					}
 				],
