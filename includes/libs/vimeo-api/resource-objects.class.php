@@ -203,10 +203,24 @@ class Resource_Objects{
 	}
 
 	/**
+	 * @param string $visibility - returns resources based on their visibility
+	 * Possible values: all - default, return all resources, no matter the visibility
+	 *                  visible - return only visible reources
+	 *
 	 * @return Resource_Abstract[]
 	 */
-	public function get_resources(){
-		return $this->resources;
+	public function get_resources( $visibility = 'all' ){
+		if( 'all' == $visibility ) {
+			return $this->resources;
+		}else if( 'visible' == $visibility ){
+			$result = [];
+			foreach( $this->resources as $k => $resource ){
+				if( $resource->is_visible() ){
+					$result[ $k ] = $resource;
+				}
+			}
+			return $result;
+		}
 	}
 
 	/**
