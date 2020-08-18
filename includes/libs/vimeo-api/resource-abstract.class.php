@@ -73,13 +73,6 @@ class Resource_Abstract implements Resource_Interface {
 	private $name;
 
 	/**
-	 * Resource can be shown in user interface
-	 *
-	 * @var bool
-	 */
-	private $is_visible = true;
-
-	/**
 	 * Resource_Abstract constructor.
 	 *
 	 * @param $resource_id
@@ -136,15 +129,6 @@ class Resource_Abstract implements Resource_Interface {
 	 */
 	protected function set_filtering_options( $filtering_options ){
 		$this->filtering_options = $filtering_options;
-	}
-
-	/**
-	 * Change resource visibility in front-end
-	 *
-	 * @param $visible
-	 */
-	protected function set_visibility( $visible ){
-		$this->is_visible = (bool) $visible;
 	}
 
 	/**
@@ -291,6 +275,10 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * Registers the resource as a single entry query; single entries should not be
+	 * displayed in front-end resource query pages, like video import page or automatic
+	 * import.
+	 *
 	 * Can be overridden in concrete classes
 	 *
 	 * @return bool
@@ -425,14 +413,5 @@ class Resource_Abstract implements Resource_Interface {
 	 */
 	public function can_search_results() {
 		return true;
-	}
-
-	/**
-	 * Resource visibility in front-end
-	 *
-	 * @return bool
-	 */
-	public function is_visible(){
-		return $this->is_visible;
 	}
 }
