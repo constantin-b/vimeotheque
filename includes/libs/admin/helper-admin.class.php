@@ -147,7 +147,7 @@ class Helper_Admin {
 	 * @return string
 	 */
 	static public function select_feed_source( $name, $selected = false, $id = '' ){
-		$sources = Resource_Objects::instance()->get_resources();
+		$sources = Resource_Objects::instance()->get_resources( 'visible' );
 
 		$options = [];
 
