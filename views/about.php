@@ -1,6 +1,7 @@
 <?php
 namespace Vimeotheque\Admin;
 
+use Vimeotheque\Helper;
 use function Vimeotheque\Admin\Helper_Admin\publisher_link;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p class="lead-description"><?php _e( 'See how to set up Vimeotheque and start importing your Vimeo videos!', 'codeflavors-vimeo-video-post-lite' ); ?></p>
 
 			<div id="cvm-video-preview" class="vimeotheque-player" data-volume="90" style="height: auto; width: 100%; max-width: 100%; overflow:hidden; background:#000000;">
-                <?php Helper_Admin::embed_by_video_id('223879840');?>
+                <?php Helper::embed_by_video_id('223879840' );?>
             </div>
 			<p style="text-align:center;"><a href="https://vimeo.com/223879840" target="_blank"><?php _e( 'Watch on Vimeo', 'codeflavors-vimeo-video-post-lite' );?></a></p>
 		</div>
