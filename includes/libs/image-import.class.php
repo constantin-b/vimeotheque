@@ -35,8 +35,15 @@ class Image_Import {
 			return;
 		}
 
+		Helper::debug_message(
+			sprintf(
+				'Preparing to import featured image for post ID #%d.',
+				$this->video_post->get_post()->ID
+			)
+		);
+
 		if( $refresh ){
-			return $this->import_from_api();
+			$result = $this->import_from_api();
 		}else{
 			// check if thumbnail was already imported
 			$attachment = get_posts( [
@@ -48,14 +55,32 @@ class Image_Import {
 			if( $attachment ){
 				// set image as featured for current post
 				set_post_thumbnail( $this->video_post->get_post()->ID, $attachment[0]->ID );
-				return [
+
+				Helper::debug_message(
+					sprintf(
+						'An existing attachment having ID %d was detected and was set as featured image for post ID %d.',
+						$attachment[0]->ID,
+						$this->video_post->get_post()->ID
+					)
+				);
+
+				$result = [
 					'post_id' 		=> $this->video_post->get_post()->ID,
 					'attachment_id' => $attachment[0]->ID
 				];
 			}else{
-				return $this->import_from_api();
+				$image_url = end( $this->video_post->thumbnails );
+				$result = $this->import_to_media( $image_url );
 			}
 		}
+
+		if( !$result ){
+			Helper::debug_message(
+				'Error, the featured image was not imported.'
+			);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -76,6 +101,17 @@ class Image_Import {
 	 * @return array|bool
 	 */
 	private function import_to_media( $image_url ){
+		if( !$image_url ){
+			Helper::debug_message(
+				sprintf(
+					'Post #%d featured image not set because no image URL was detected.',
+					$this->video_post->get_post()->ID
+				)
+			);
+
+			return false;
+		}
+
 		// get the thumbnail
 		$request = wp_remote_get(
 			$image_url,
@@ -91,6 +127,20 @@ class Image_Import {
 		);
 
 		if( is_wp_error( $request ) || 200 != wp_remote_retrieve_response_code( $request ) ) {
+
+			$error_message = is_wp_error( $request ) ?
+				sprintf( 'generated error "%s"', $request->get_error_message() ) :
+				sprintf( 'returned response code "%s"', wp_remote_retrieve_response_code( $request ) );
+
+			Helper::debug_message(
+				sprintf(
+					'Remote request to URL %s for featured image setup on post ID #%d %s.',
+					$image_url,
+					$this->video_post->get_post()->ID,
+					$error_message
+				)
+			);
+
 			return false;
 		}
 
@@ -112,10 +162,18 @@ class Image_Import {
 		// Save the image bits using the new filename
 		$upload = wp_upload_bits( $new_filename, null, $image_contents );
 		if ( $upload['error'] ) {
+
+			Helper::debug_message(
+				sprintf(
+					'The following error was encountered during the file upload in WP: "%s".',
+					$upload['error']
+				)
+			);
+
 			return false;
 		}
 
-		$image_url = $upload['url'];
+		$_image_url = $upload['url'];
 		$filename = $upload['file'];
 
 		/**
@@ -138,9 +196,20 @@ class Image_Import {
 			'post_title'		=> get_the_title( $this->video_post->get_post()->ID ).' - Vimeo thumbnail',
 			'post_content'		=> '',
 			'post_status'		=> 'inherit',
-			'guid'				=> $image_url
+			'guid'				=> $_image_url
 		];
 		$attach_id = wp_insert_attachment( $attachment, $filename, $this->video_post->get_post()->ID );
+
+		if( is_wp_error( $attach_id ) ){
+			Helper::debug_message(
+				sprintf(
+					'The following error was encountered when trying to insert the new attachment into the database: "%s".',
+					$attach_id->get_error_message()
+				)
+			);
+			return;
+		}
+
 		// you must first include the image.php file
 		// for the function wp_generate_attachment_metadata() to work
 		require_once( ABSPATH . 'wp-admin/includes/image.php' );
@@ -169,6 +238,15 @@ class Image_Import {
 			$attach_id,
 			$this->video_post->video_id,
 			$this->video_post->get_post()->ID
+		);
+
+		Helper::debug_message(
+			sprintf(
+				'Image imported successfully from %s into attachment #%d and set as featured image for post #%d.',
+				$image_url,
+				$attach_id,
+				$this->video_post->get_post()->ID
+			)
 		);
 
 		return [
