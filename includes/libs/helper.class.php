@@ -370,15 +370,34 @@ class Helper{
 	}
 
 	/**
-	 * Use only in administration pages to display instructional videos
+	 * Create the embed code based on given parameters
 	 *
 	 * @param $video_id
+	 * @param array $args
 	 * @param bool $echo
 	 *
 	 * @return string
 	 */
-	static public function embed_by_video_id( $video_id, $echo = true ){
-		$embed = '<iframe src="https://player.vimeo.com/video/'. $video_id .'?title=1&byline=1&portrait=1&badge=0" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+	static public function embed_by_video_id( $video_id, $args = [], $echo = true ){
+		$default = [
+			'title' => 1,
+			'byline' => 1,
+			'portrait' => 1
+		];
+
+		$args = wp_parse_args(
+			$args,
+			$default
+		);
+
+		$embed = sprintf(
+			'<iframe src="%s" width="100%%" height="100%%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>',
+			sprintf(
+				'https://player.vimeo.com/video/%s?%s',
+				urlencode( $video_id ),
+				http_build_query( $args )
+			)
+		);
 
 		if( $echo ){
 			echo $embed;
