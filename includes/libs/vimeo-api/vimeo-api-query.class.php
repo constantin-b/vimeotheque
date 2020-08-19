@@ -90,12 +90,23 @@ class Vimeo_Api_Query extends Vimeo {
 
 		if( is_wp_error( $endpoint ) ){
 			// send a debug message for any client listening to plugin messages
-			Helper::debug_message( sprintf( __( 'Endpoint API returned an error: %s.' ), $endpoint->get_error_message() ) );
+			Helper::debug_message(
+				sprintf(
+					__( 'Endpoint API returned an error: %s.' ),
+					$endpoint->get_error_message()
+				)
+			);
+
 			return $endpoint;
 		}
 
 		// send a debug message for any client listening to plugin messages
-		Helper::debug_message( sprintf( __( 'Making remote request to: %s.' ), $endpoint ) );
+		Helper::debug_message(
+			sprintf(
+				__( 'Making remote request to: %s.' ),
+				$endpoint
+			)
+		);
 		
 		$request = wp_remote_get( $endpoint, [
 		    /**
@@ -129,7 +140,13 @@ class Vimeo_Api_Query extends Vimeo {
 			// get request data
 			$data = json_decode( wp_remote_retrieve_body( $request ), true );
 
-			Helper::debug_message( 'Vimeo API query returned error:' . $data['error'] );
+			Helper::debug_message(
+				sprintf(
+					'Vimeo API query returned error: "%s"',
+					$data['error']
+				)
+			);
+
 			return parent::api_error( $data );
 		}	
 		
