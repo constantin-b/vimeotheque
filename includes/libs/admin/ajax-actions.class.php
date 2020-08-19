@@ -75,12 +75,7 @@ class Ajax_Actions{
 		
 		if( is_wp_error( $query->get_errors() ) ){
 			header('HTTP/1.1 503 Service Unavailable');
-			$error = $query->get_errors();
-			if( is_wp_error( $error ) ){
-				echo $error->get_error_message();
-			}else{
-				_e('An unknown error has occured.', 'codeflavors-vimeo-video-post-lite');
-			}			
+			echo $query->get_errors()->get_error_message();
 		}else{
 			$response = [
 				'results' 	=> $query->get_total_items(),
