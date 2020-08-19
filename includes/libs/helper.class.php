@@ -347,5 +347,26 @@ class Helper{
 			}
 		}
 	}
+
+	/**
+	 * Determines if an object of WP_Error type is an error returned by Vimeo API
+	 *
+	 * @param $wp_error
+	 *
+	 * @return bool
+	 */
+	public static function is_vimeo_api_error( $wp_error ){
+		if( !is_wp_error( $wp_error ) ){
+			return false;
+		}
+
+		$error_data = $wp_error->get_error_data();
+		/**
+		 * Key 'vimeo_api_error' is set in \Vimeotheque\Vimeo_Api\Vimeo::api_error()
+		 * @see \Vimeotheque\Vimeo_Api\Vimeo::api_error()
+		 * @since 2.0
+		 */
+		return ( isset( $error_data['vimeo_api_error'] ) && $error_data['vimeo_api_error'] );
+	}
 }
 
