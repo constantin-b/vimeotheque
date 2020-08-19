@@ -69,16 +69,6 @@ class Video_Import{
 		// stop on error
 		if( is_wp_error( $request ) ){
 			$this->errors = $request;
-
-			/**
-			 * Send error to debug function
-			 */
-			Helper::debug_message(
-				'Import request error: ' . $request->get_error_message(),
-				"\n",
-				$request
-			);
-
 			return;
 		}
 		
