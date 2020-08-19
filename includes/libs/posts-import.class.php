@@ -171,9 +171,22 @@ class Posts_Import{
 				$result['ids'][] = $post_id;
 
 				$video = Helper::get_video_post( $post_id );
-				$video->set_embed_options( $this->get_import_options( $import_options ), true );
+				$video->set_embed_options(
+					$this->get_import_options( $import_options ),
+					true
+				);
 			}
 		}
+
+		Helper::debug_message(
+			sprintf(
+				'Processed %d entries: created %d posts, skipped %d entries, %d entries were marked private.',
+				$result['total'],
+				$result['imported'],
+				$result['skipped'],
+				$result['private']
+			)
+		);
 
 		return $result;
 	}
@@ -441,9 +454,9 @@ class Posts_Import{
 		if( is_wp_error( $post_id ) ){
 			Helper::debug_message(
 				sprintf(
-					'Post insert returned error %s. MySQL error is: %s',
-					$post_id->get_error_message(),
-					print_r( $post_id->get_error_data( 'db_insert_error' ), true )
+					'Video with ID %s generated the following database error on insert: "%s"; video post could not be created.',
+					$video['video_id'],
+					$post_id->get_error_message()
 				)
 			);
 		}
@@ -477,11 +490,18 @@ class Posts_Import{
 				}
 			}
 
+			// set post meta
+			$_post = Helper::get_video_post( $post_id );
+			$_post->set_video_data( $video );
+			$_post->set_video_id_meta();
+			$_post->set_video_url_meta();
+
 			/**
 			 * Action on post insert that allows setting of different meta on post
 			 *
 			 * @param int $post_id
 			 * @param array $video
+			 * @param false unknown
 			 * @param string $post_type
 			 */
 			do_action(
@@ -492,20 +512,42 @@ class Posts_Import{
 				$this->post_type->get_post_type()
 			);
 
-			// set post meta
-			$_post = Helper::get_video_post( $post_id );
-			$_post->set_video_data( $video );
-			$_post->set_video_id_meta();
-			$_post->set_video_url_meta();
-			// import image
-			if( $options['featured_image'] && $this->post_type->get_post_settings()->image_import( 'post_create' ) ){
-				$_post->set_featured_image();
-			}
-
 			/**
 			 * Send a debug message
 			 */
-			Helper::debug_message(  'Imported video ID ' . $video['video_id'] . ' into post #' . $post_id . ' having post type "' . $this->post_type->get_post_type() . '".'  );
+			Helper::debug_message(
+				sprintf(
+					'Imported video ID %s into post #%d having post type "%s".',
+					$video['video_id'],
+					$post_id,
+					$this->post_type->get_post_type()
+				)
+			);
+
+			// import image
+			if( $options['featured_image'] && $this->post_type->get_post_settings()->image_import( 'post_create' ) ){
+				Helper::debug_message(
+					sprintf(
+						'Preparing to import featured image for post ID #%d.',
+						$post_id
+					)
+				);
+
+				$result = $_post->set_featured_image();
+
+				if( $result ){
+					Helper::debug_message(
+						sprintf(
+							'Successfully imported the featured image into attachment ID #%d.',
+							$result['attachment_id']
+						)
+					);
+				}else{
+					Helper::debug_message(
+						'Error, the featured image was not imported.'
+					);
+				}
+			}
 
 			return $post_id;
 
