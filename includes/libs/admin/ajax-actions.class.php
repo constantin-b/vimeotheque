@@ -64,7 +64,7 @@ class Ajax_Actions{
 
 		Helper::debug_message(
 			sprintf(
-				'Initiating manual bulk import query (resource type: "%s", query string: "%s").',
+				'Initiating manual bulk import query for resource type "%s" with query string "%s".',
 				$_POST['cvm_feed'],
 				$_POST['cvm_query']
 			)
@@ -76,6 +76,14 @@ class Ajax_Actions{
 		if( is_wp_error( $query->get_errors() ) ){
 			header('HTTP/1.1 503 Service Unavailable');
 			echo $query->get_errors()->get_error_message();
+
+			Helper::debug_message(
+				sprintf(
+					'Manual bulk import Vimeo API query generated error: "%s".',
+					$query->get_errors()->get_error_message()
+				)
+			);
+
 		}else{
 			$response = [
 				'results' 	=> $query->get_total_items(),
@@ -83,6 +91,16 @@ class Ajax_Actions{
 				'end'		=> $query->has_ended(),
 				'videos' 	=> $videos
 			];
+
+			Helper::debug_message(
+				sprintf(
+					'Manual bulk import Vimeo API query success (entries per page: %d; current page: %d; total entries: %d)',
+					$args['per_page'],
+					$query->get_page(),
+					$query->get_total_items()
+				)
+			);
+
 			wp_send_json_success( $response );
 		}
 		
