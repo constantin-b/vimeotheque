@@ -526,27 +526,7 @@ class Posts_Import{
 
 			// import image
 			if( $options['featured_image'] && $this->post_type->get_post_settings()->image_import( 'post_create' ) ){
-				Helper::debug_message(
-					sprintf(
-						'Preparing to import featured image for post ID #%d.',
-						$post_id
-					)
-				);
-
-				$result = $_post->set_featured_image();
-
-				if( $result ){
-					Helper::debug_message(
-						sprintf(
-							'Successfully imported the featured image into attachment ID #%d.',
-							$result['attachment_id']
-						)
-					);
-				}else{
-					Helper::debug_message(
-						'Error, the featured image was not imported.'
-					);
-				}
+				$_post->set_featured_image();
 			}
 
 			return $post_id;
