@@ -57,10 +57,19 @@ class Ajax_Actions{
 		
 		$args = [
 			'page' => $_POST['page'],
-			'order' => $_POST['cvm_order'], // @todo implement ordering
+			'order' => $_POST['cvm_order'],
 			'query' => trim( $_POST['cvm_search_results'] ),
 			'per_page' => 50
 		];
+
+		Helper::debug_message(
+			sprintf(
+				'Initiating manual bulk import query (resource type: "%s", query string: "%s").',
+				$_POST['cvm_feed'],
+				$_POST['cvm_query']
+			)
+		);
+
 		$query = new Video_Import( $_POST['cvm_feed'], $_POST['cvm_query'], $_POST['cvm_album_user'], $args);
 		$videos = $query->get_feed();
 		
