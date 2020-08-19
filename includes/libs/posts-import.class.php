@@ -132,7 +132,7 @@ class Posts_Import{
 					 * @var WP_Error
 					 */
 					$error = new WP_Error(
-						'cvm_automatic_import_skip_private_video',
+						'cvm_import_skip_private_video',
 						sprintf(
 							__( 'Skipped private video having ID %s because of plugin settings.', 'cvm-video' ),
 							$video['video_id']
@@ -151,7 +151,6 @@ class Posts_Import{
 						"\n",
 						$error
 					);
-
 
 					continue;
 				}
@@ -182,11 +181,10 @@ class Posts_Import{
 	/**
 	 * @param $raw_feed
 	 * @param $post_type
-	 * @param bool|WP_REST_Request $request
 	 *
 	 * @return array
 	 */
-	public function get_duplicate_posts( $raw_feed, $post_type, $request = false ){
+	public function get_duplicate_posts( $raw_feed, $post_type ){
 
 		$video_ids = [];
 		foreach( $raw_feed as $video ){
@@ -256,7 +254,7 @@ class Posts_Import{
 			$options = Plugin::instance()->get_options();
 		}
 
-		// if no video details or post type, bail out
+		// if no video details, bail out
 		if( !$video ){
 			return false;
 		}
@@ -293,7 +291,7 @@ class Posts_Import{
 			$error = new WP_Error(
 				'vimeotheque_video_import_prevented_by_filter',
 				sprintf(
-					__( 'Video having ID %s could not be imported because filter "cvm_allow_video_import" was set to "false".', 'cvm-video' ),
+					__( 'Video having ID %s could not be imported because filter "vimeotheque\allow_import" was set to "false".', 'codeflavors-vimeo-video-post-lite' ),
 					$video['video_id']
 				),
 				[ 'video_data' => $video ]
@@ -307,7 +305,6 @@ class Posts_Import{
 				"\n",
 				$error
 			);
-
 
 			return false;
 		}
@@ -433,7 +430,7 @@ class Posts_Import{
 			$post_id = wp_update_post( $post_data, true );
 		}else {
 			// allow empty insert into post content
-			apply_filters(
+			add_filter(
 				'wp_insert_post_empty_content',
 				'__return_false'
 			);
@@ -472,9 +469,8 @@ class Posts_Import{
 			// insert tags
 			if( ( isset( $options['import_tags'] ) && $options['import_tags'] ) && $this->post_type->get_tag_tax() ){
 				if( isset( $video['tags'] ) && is_array( $video['tags'] ) ){
-					$tags = [];
 					$count = absint( $options['max_tags'] );
-					$tags = array_slice($video['tags'], 0, $count);
+					$tags = array_slice( $video['tags'], 0, $count );
 					if( $tags ){
 						wp_set_post_terms( $post_id, $tags, $this->post_type->get_tag_tax(), true );
 					}
