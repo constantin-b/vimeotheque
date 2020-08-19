@@ -122,7 +122,7 @@ class Ajax_Actions{
 		}
 	
 		$post_id = absint( $_POST['post'] );
-		$refresh = (bool)$_POST['refresh'];
+		$refresh = (bool) $_POST['refresh'];
 		$thumbnail = Helper::get_video_post( $post_id )->set_featured_image( $refresh );
 	
 		if( !$thumbnail ){
