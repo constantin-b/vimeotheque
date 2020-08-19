@@ -63,7 +63,8 @@ abstract class Vimeo{
 		}else{
 			$message = __( 'An unknown Vimeo API error has happened. Please try again.', 'codeflavors-vimeo-video-post-lite' );
 		}
-
+		// the error is Vimeo specific, flag it as such
+		$data['vimeo_api_error'] = true;
 		return $this->error( 'vimeo_api_error', $message, $data );
 	}
 }
