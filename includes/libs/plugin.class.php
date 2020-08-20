@@ -239,7 +239,6 @@ class Plugin{
 			'import_description' => 'post_content', // import descriptions on custom posts
 			'import_date' => false, // import video date as post date
 			'featured_image' => false, // set thumbnail as featured image; default import on video feed import (takes more time)
-			'image_on_demand' => false, // when true, thumbnails will get imported only when viewing the video post as oposed to being imported on feed importing
 			'import_status' => 'draft', // default import status of videos
 			// Vimeo oAuth
 			'vimeo_consumer_key' => '',
