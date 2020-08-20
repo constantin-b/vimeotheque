@@ -21,6 +21,7 @@ class Settings_Helper {
 		add_action( 'vimeotheque\admin\general_settings_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'pro_general_settings' ] );
 		add_action( 'vimeotheque\admin\post_type_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'pro_post_type_settings' ] );
 		add_action( 'vimeotheque\admin\content_options_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'pro_content_settings' ] );
+		add_action( 'vimeotheque\admin\image_options_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'pro_image_settings' ] );
 		add_action( 'vimeotheque\admin\import_options_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'pro_import_settings' ] );
 		add_action( 'vimeotheque\admin\embed_options_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'pro_embed_settings' ] );
 		add_action( 'vimeotheque\admin\api_oauth_section', [ 'Vimeotheque\Admin\Page\Settings_Helper', 'oauth_settings' ] );
@@ -90,6 +91,15 @@ class Settings_Helper {
 		self::row_anchor();
 	}
 
+	public static function pro_image_settings(){
+		Settings_Helper::row_checkbox(
+			__( 'Import featured image on request', 'codeflavors-vimeo-video-post-lite' ),
+			__( 'Vimeo video thumbnail will be imported only when featured images needs to be displayed (ie. a post created by the plugin is displayed).', 'codeflavors-vimeo-video-post-lite')
+		);
+
+		self::row_anchor();
+	}
+
 	public static function pro_import_settings(){
 		self::row_select(
 			__( 'Videos not public will be', 'codeflavors-vimeo-video-post-lite' ),
@@ -105,6 +115,22 @@ class Settings_Helper {
 		);
 
 		self::row_checkbox(
+			__( 'Stop automatic feed import on error', 'codeflavors-vimeo-video-post-lite' ),
+			__( 'When enabled, if Vimeo API returns an error on automatic import, the respective feed will be removed from the queue if the allowed number of fails is exceeded.', 'codeflavors-vimeo-video-post-lite' )
+		);
+
+		self::row_select(
+			__( 'Number of fails until automatic import is stopped', 'codeflavors-vimeo-video-post-lite' ),
+			3,
+			__( 'For how many times an automatic update can fail before being removed from the import queue.', 'codeflavors-vimeo-video-post-lite' )
+		);
+
+		self::row_checkbox(
+			__( 'Enable conditional automatic imports', 'codeflavors-vimeo-video-post-lite' ),
+			__( 'When enabled, automatic imports will run only when a custom URL is opened on your website.', 'codeflavors-vimeo-video-post-lite' )
+		);
+
+		self::row_checkbox(
 			__( 'Legacy automatic import', 'codeflavors-vimeo-video-post-lite' ),
 			__( 'Trigger automatic video imports on page load (will increase page load time when doing automatic imports)', 'codeflavors-vimeo-video-post-lite' )
 		);
@@ -114,17 +140,17 @@ class Settings_Helper {
 
 	public static function pro_embed_settings(){
 		self::row_checkbox(
-			__('Override individual posts options', 'codeflavors-vimeo-video-post-lite'),
-			__('When checked, individual post options for embedding videos will not be taken into account. Instead, the option set in this page will be used to embed videos on your website.', 'codeflavors-vimeo-video-post-lite')
-		);
-
-		self::row_checkbox(
 			__('Allow videos to override player size', 'codeflavors-vimeo-video-post-lite'),
 			sprintf(
 				'%s<br />%s',
 				__( 'When checked (recommended), player will have the exact aspect ratio as retrieved from Vimeo. Player size option will be ignored.', 'codeflavors-vimeo-video-post-lite' ),
 				__( 'Applies only to videos imported starting with plugin version 1.3.', 'codeflavors-vimeo-video-post-lite' )
 			)
+		);
+
+		self::row_checkbox(
+			__('Override individual posts options', 'codeflavors-vimeo-video-post-lite'),
+			__('When checked, individual post options for embedding videos will not be taken into account. Instead, the option set in this page will be used to embed videos on your website.', 'codeflavors-vimeo-video-post-lite')
 		);
 
 		self::row_anchor();
