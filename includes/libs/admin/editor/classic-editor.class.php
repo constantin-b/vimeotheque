@@ -629,12 +629,25 @@ class Classic_Editor{
 
 		if( $has_thumbnail ){
 			$content .= '<hr /><br />';
-			$content .= sprintf( '<a href="#" id="cvm-import-video-thumbnail" data-refresh="1" data-post="%d"><i class="dashicons dashicons-update"></i> %s</a>', $post_id, __( 'Refresh Vimeo image', 'codeflavors-vimeo-video-post-lite' ) );
-			$content .= '<p class="description" id="cvm-thumb-response">' . __( 'Will import a fresh image from Vimeo. If already existing, it will be duplicated.', 'codeflavors-vimeo-video-post-lite' ) . '</p>';
+			$content .= sprintf(
+			        '<a href="#" id="cvm-import-video-thumbnail" data-refresh="1" data-post="%d"><i class="dashicons dashicons-update"></i> %s</a>',
+                    $post_id,
+                    __( 'Refresh Vimeo image', 'codeflavors-vimeo-video-post-lite' )
+            );
+			$content .= sprintf(
+				'<p class="description" id="cvm-thumb-response">%s</p>',
+				__( 'Will import a fresh image from Vimeo. If already existing, it will be duplicated.', 'codeflavors-vimeo-video-post-lite' )
+            );
 		}else{
 			$content .= '<hr /><br />';
-			$content .= sprintf( '<a href="#" id="cvm-import-video-thumbnail" data-refresh="0" data-post="%d"><i class="dashicons dashicons-download"></i >%s</a>', $post_id, __( 'Import Vimeo image', 'codeflavors-vimeo-video-post-lite' ) );
-			$content .= '<p class="description" id="cvm-thumb-response">' . __( 'Will first search the Media Gallery for an already imported image and will import if none found.', 'codeflavors-vimeo-video-post-lite' ) . '</p>';
+			$content .= sprintf(
+			        '<a href="#" id="cvm-import-video-thumbnail" data-refresh="0" data-post="%d"><i class="dashicons dashicons-download"></i >%s</a>',
+                    $post_id, __( 'Import Vimeo image', 'codeflavors-vimeo-video-post-lite' )
+            );
+			$content .= sprintf(
+				'<p class="description" id="cvm-thumb-response">%s</p>',
+				__( 'Will first search the Media Gallery for an already imported image and will import if none found.', 'codeflavors-vimeo-video-post-lite' )
+			);
 		}
 		return $content;
 	}
