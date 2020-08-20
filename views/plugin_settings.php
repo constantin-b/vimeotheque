@@ -210,14 +210,13 @@ use Vimeotheque\Helper;
 								<span class="description"><?php _e("Vimeo video thumbnail will be set as post featured image.", 'codeflavors-vimeo-video-post-lite');?></span>
 							</td>
 						</tr>
-						
-						<tr valign="top">
-							<th scope="row"><label for="image_on_demand"><?php _e('Import featured image on request', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
-							<td>
-								<input type="checkbox" value="1" name="image_on_demand" id="image_on_demand"<?php Helper_Admin::check($options['image_on_demand']);?> />
-								<span class="description"><?php _e("Vimeo video thumbnail will be imported only when featured images needs to be displayed (ie. a post created by the plugin is displayed).", 'codeflavors-vimeo-video-post-lite');?></span>
-							</td>
-						</tr>					
+
+						<?php
+						/**
+						 * Action that allows other settings to be displayed in page
+						 */
+						do_action( 'vimeotheque\admin\image_options_section' );
+						?>
 					</tbody>
 				</table>
 				<?php submit_button(__('Save settings', 'codeflavors-vimeo-video-post-lite'));?>
