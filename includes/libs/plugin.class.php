@@ -471,7 +471,9 @@ class Plugin{
 	 * @return void
 	 */
 	private function load(){
-		include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
+		add_action( 'vimeotheque_pro_loaded', function(){
+			include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
+		} );
 	}
 }
 
