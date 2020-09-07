@@ -345,18 +345,28 @@ class Admin{
 		$t = get_transient( 'vimeotheque_activation' );
 		if( $t ){
 			delete_transient( 'vimeotheque_activation' );
-			wp_redirect(
-				str_replace(
-					'#038;' ,
-					'&',
-					menu_page_url(
-						'vimeotheque_about',
-						false
-					)
-				)
-			);
 
-			die();
+			/**
+			 * Filter that allows redirection to plugin about page
+			 *
+			 * $param bool $allow - allow the redirect (true) or prevent it
+			 */
+			$allow_redirect = apply_filters( 'vimeotheque\admin\activation_redirect', true );
+
+			if( $allow_redirect ) {
+				wp_redirect(
+					str_replace(
+						'#038;',
+						'&',
+						menu_page_url(
+							'vimeotheque_about',
+							false
+						)
+					)
+				);
+
+				die();
+			}
 		}
 	}
 
