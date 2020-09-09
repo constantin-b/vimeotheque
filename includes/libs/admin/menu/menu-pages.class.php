@@ -53,10 +53,21 @@ class Menu_Pages {
 	/**
 	 * @param Page_Interface $page
 	 *
+	 * @param string $before_slug - page slug to insert before
+	 *
 	 * @return false|string
 	 */
-	public function register_page( Page_Interface $page ) {
-		$this->pages[ $page->get_menu_slug() ] = $page;
+	public function register_page( Page_Interface $page, $before_slug = '' ) {
+		if( !empty( $before_slug ) && $this->get_page( $before_slug ) ){
+			$keys = array_keys( $this->pages );
+			$values = array_values( $this->pages );
+			$_key = array_search( $before_slug, $keys );
+			array_splice( $keys, $_key, 0, $page->get_menu_slug() );
+			array_splice( $values, $_key, 0, [$page] );
+			$this->pages = array_combine( $keys, $values );
+		}else {
+			$this->pages[ $page->get_menu_slug() ] = $page;
+		}
 	}
 
 	public function unregister_page( $slug ){
