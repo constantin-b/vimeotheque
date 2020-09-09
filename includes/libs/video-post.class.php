@@ -303,7 +303,7 @@ class Video_Post{
 		}
 
 		$options['size_ratio'] = false;
-		if( !is_wp_error( $options_obj->get_option('aspect_override') ) ){
+		if( $options_obj->get_option('aspect_override') ){
 			$options['size_ratio'] = isset( $this->size['ratio'] ) ? $this->size['ratio'] : false;
 		}
 
