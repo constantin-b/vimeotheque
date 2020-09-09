@@ -140,15 +140,6 @@ class Settings_Helper {
 
 	public static function pro_embed_settings(){
 		self::row_checkbox(
-			__('Allow videos to override player size', 'codeflavors-vimeo-video-post-lite'),
-			sprintf(
-				'%s<br />%s',
-				__( 'When checked (recommended), player will have the exact aspect ratio as retrieved from Vimeo. Player size option will be ignored.', 'codeflavors-vimeo-video-post-lite' ),
-				__( 'Applies only to videos imported starting with plugin version 1.3.', 'codeflavors-vimeo-video-post-lite' )
-			)
-		);
-
-		self::row_checkbox(
 			__('Override individual posts options', 'codeflavors-vimeo-video-post-lite'),
 			__('When checked, individual post options for embedding videos will not be taken into account. Instead, the option set in this page will be used to embed videos on your website.', 'codeflavors-vimeo-video-post-lite')
 		);
