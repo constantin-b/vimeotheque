@@ -14,7 +14,6 @@ use Vimeotheque\Admin\Notice\Review_Notice;
 use Vimeotheque\Admin\Notice\User_Notice\Message;
 use Vimeotheque\Admin\Notice\User_Notice\User;
 use Vimeotheque\Admin\Notice\Vimeo_Api_Notice;
-use Vimeotheque\Admin\Page\About_Page;
 use Vimeotheque\Admin\Page\Automatic_Import_Page;
 use Vimeotheque\Admin\Page\Go_Pro_Page;
 use Vimeotheque\Admin\Page\List_Videos_Page;
@@ -148,17 +147,6 @@ class Admin{
 				'cvm_import',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				$this->get_capability('manual_import')
-			)
-		);
-
-		$this->admin_menu->register_page(
-			new About_Page(
-				$this,
-				__( 'About', 'codeflavors-vimeo-video-post-lite' ),
-				__( 'About', 'codeflavors-vimeo-video-post-lite' ),
-				'vimeotheque_about',
-				false,
-				'activate_plugins'
 			)
 		);
 
