@@ -141,7 +141,7 @@ class Settings_Helper {
 	public static function pro_embed_settings(){
 		self::row_checkbox(
 			__('Override individual posts options', 'codeflavors-vimeo-video-post-lite'),
-			__('When checked, individual post options for embedding videos will not be taken into account. Instead, the option set in this page will be used to embed videos on your website.', 'codeflavors-vimeo-video-post-lite')
+			__('When checked, individual post options for embedding videos will not be taken into account. Instead, the options set on this page will be used to embed videos on your website.', 'codeflavors-vimeo-video-post-lite')
 		);
 
 		self::row_anchor();
