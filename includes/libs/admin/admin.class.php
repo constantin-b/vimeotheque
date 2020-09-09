@@ -118,13 +118,13 @@ class Admin{
 	public function register_pages(){
 
 		$this->admin_menu = new Menu_Pages(
-			new Settings_Page(
+			new Video_Import_Page(
 				$this,
-				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
-				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
-				'cvm_settings',
+				__( 'Import videos', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Import videos', 'codeflavors-vimeo-video-post-lite' ),
+				'cvm_import',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
-				'manage_options'
+				$this->get_capability('manual_import')
 			)
 		);
 
@@ -140,13 +140,13 @@ class Admin{
 		);
 
 		$this->admin_menu->register_page(
-			new Video_Import_Page(
+			new Settings_Page(
 				$this,
-				__( 'Import videos', 'codeflavors-vimeo-video-post-lite' ),
-				__( 'Import videos', 'codeflavors-vimeo-video-post-lite' ),
-				'cvm_import',
+				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
+				'cvm_settings',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
-				$this->get_capability('manual_import')
+				'manage_options'
 			)
 		);
 
