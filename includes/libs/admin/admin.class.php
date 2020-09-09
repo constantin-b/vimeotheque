@@ -342,16 +342,9 @@ class Admin{
 
 		$links[] = sprintf(
 			$anchor,
-			Helper_Admin::docs_link( 'getting-started/vimeotheque-pro-installation/' ),
+			Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ),
 			'_blank',
 			__( 'First time installation', 'codeflavors-vimeo-video-post-lite' )
-		);
-
-		$links[] = sprintf(
-			$anchor,
-			Helper_Admin::docs_link( 'getting-started' ),
-			'_blank',
-			__( 'Documentation', 'codeflavors-vimeo-video-post-lite' )
 		);
 
 		$links[] = sprintf(
@@ -359,6 +352,13 @@ class Admin{
 			$this->get_admin_menu()->get_page('cvm_settings')->get_menu_page( false ),
 			'_self',
 			$this->get_admin_menu()->get_page( 'cvm_settings' )->get_menu_title()
+		);
+
+		$links[] = sprintf(
+			$anchor,
+			$this->get_admin_menu()->get_page('vimeotheque_go_pro')->get_menu_page( false ),
+			'_self',
+			$this->get_admin_menu()->get_page( 'vimeotheque_go_pro' )->get_menu_title()
 		);
 
 		return $links;
