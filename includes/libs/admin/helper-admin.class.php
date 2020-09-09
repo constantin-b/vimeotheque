@@ -301,7 +301,7 @@ class Helper_Admin {
 			'utm_campaign' => null === $campaign ? 'vimeotheque-lite' : $campaign
 		];
 		$q = http_build_query( $vars );
-		return $base . trailingslashit( $path ) . '?' . $q;
+		return $base . ( !empty( $path ) ? trailingslashit( $path ) : '' ) . '?' . $q;
 	}
 
 }
