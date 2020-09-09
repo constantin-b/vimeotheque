@@ -306,10 +306,6 @@ class Plugin{
 		flush_rewrite_rules( false );
 
 		$this->add_admin();
-
-		if( $this->admin ){
-			$this->admin->plugin_activation();
-		}
 	}
 
 	/**
