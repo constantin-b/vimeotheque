@@ -310,6 +310,14 @@ use Vimeotheque\Helper;
                             </td>
                         </tr>
 
+                        <tr valign="top">
+                            <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player size', 'cvm_video')?>:</label></th>
+                            <td>
+                                <input type="checkbox" value="1" id="aspect_override" name="aspect_override"<?php Helper_Admin::check( (bool )$player_opt['aspect_override'] );?> />
+                                <span class="description"><?php _e('When checked (recommended), player will have the exact aspect ratio as retrieved from Vimeo. Player size option will be ignored.<br />Applies only to videos imported starting with plugin version 1.3.', 'codeflavors-vimeo-video-post-lite');?></span>
+                            </td>
+                        </tr>
+
                         <?php
                             do_action( 'vimeotheque\admin\embed_options_section' );
                         ?>
