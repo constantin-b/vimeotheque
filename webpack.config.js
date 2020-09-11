@@ -13,11 +13,12 @@ const mode = isProduction ? 'production' : 'development';
 module.exports = {
     mode,
     entry: {
-        add_video: './add_video/app.js',
-        'block-editor/playlist': './block-editor/playlist/block.js',
-        'block-editor/video_position': './block-editor/video_position/block.js',
-        'block-editor/video': './block-editor/video/block.js',
-        player: './player/app.js'
+        'assets/back-end/js/apps/add_video': './assets/back-end/js/apps/add_video/app.js',
+        'assets/back-end/js/apps/block-editor/playlist': './assets/back-end/js/apps/block-editor/playlist/block.js',
+        'assets/back-end/js/apps/block-editor/video_position': './assets/back-end/js/apps/block-editor/video_position/block.js',
+        'assets/back-end/js/apps/block-editor/video': './assets/back-end/js/apps/block-editor/video/block.js',
+        'assets/back-end/js/apps/player': './assets/back-end/js/apps/player/app.js',
+        'themes/default/assets/js/block/': './themes/default/assets/js/block/block.js'
     },
     output: {
         path: __dirname,
