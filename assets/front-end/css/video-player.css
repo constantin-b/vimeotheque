@@ -18,3 +18,10 @@
     	height:100%!important;
     	max-width:100%!important;
     }
+	/**
+	 * Remove FitVids styling from the player
+	 */
+	.vimeotheque-player .fluid-width-video-wrapper {
+		padding-top: 0px!important;
+		height: 100%!important;
+	}
