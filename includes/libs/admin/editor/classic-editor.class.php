@@ -557,7 +557,11 @@ class Classic_Editor{
             'CVM_SHORTCODE_MODAL',
 			[
 				'playlist_title' => __( 'Videos in playlist', 'codeflavors-vimeo-video-post-lite' ),
-				'no_videos' => __( 'No videos selected.<br />To create a playlist check some videos from the list on the right.', 'codeflavors-vimeo-video-post-lite' ),
+				'no_videos' => sprintf(
+				    '%s <br />%s',
+					__( 'No videos selected.', 'codeflavors-vimeo-video-post-lite' ),
+					__( 'To create a playlist check some videos from the list on the right.', 'codeflavors-vimeo-video-post-lite' ),
+                ),
 				'deleteItem' => __( 'Delete from playlist', 'codeflavors-vimeo-video-post-lite' ),
 				'insert_playlist' => __( 'Add shortcode into post', 'codeflavors-vimeo-video-post-lite' ),
 				'deleteCategory' => __( 'Remove category', 'codeflavors-vimeo-video-post-lite' ),

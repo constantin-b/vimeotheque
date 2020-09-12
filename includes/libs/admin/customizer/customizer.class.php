@@ -62,7 +62,7 @@ class Customizer {
 			'vimeotheque-plugin',
 			[
 				'priority' => 200,
-				'title' => __( 'Vimeotheque', 'codeflavors-vimeo-video-post-lite' ),
+				'title' => 'Vimeotheque',
 				'description' => __( 'Customize Vimeotheque video embeds and plugin options', 'codeflavors-vimeo-video-post-lite' )
 			]
 		);

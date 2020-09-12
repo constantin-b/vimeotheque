@@ -201,7 +201,11 @@ class Video_List_Table extends \WP_List_Table{
 	 */
 	function column_post_date( $item ){
 		
-		$output = sprintf( '<abbr title="%s">%s</abbr><br />', $item['post_date'], mysql2date( __( 'Y/m/d' ), $item['post_date'] ) );
+		$output = sprintf(
+		    '<abbr title="%s">%s</abbr><br />',
+            $item['post_date'],
+            mysql2date( 'Y/m/d', $item['post_date'] )
+        );
 		$output.= 'publish' == $item['post_status'] ? __('Published', 'codeflavors-vimeo-video-post-lite') : '';
 		return $output;
 		

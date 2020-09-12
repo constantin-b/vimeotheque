@@ -39,16 +39,22 @@ class Settings_Helper {
 		Settings_Helper::row_checkbox(
 			__('Import as regular post type (aka post)', 'codeflavors-vimeo-video-post-lite'),
 			sprintf(
-				__( 'Videos will be imported as %s instead of custom post type video. Posts having attached videos will display having the same player options as video post types.', 'codeflavors-vimeo-video-post-lite'),
-				sprintf( '<strong>%s</strong>', __( 'regular post type', 'codeflavors-vimeo-video-post-lite' ) )
+				'%s %s',
+				__('Videos will be imported as regular post type instead of plugin custom post type video.', 'codeflavors-vimeo-video-post-lite'),
+				__('Posts having attached videos will display having the same player options as video post types.', 'codeflavors-vimeo-video-post-lite')
 			)
 		);
 
 		Settings_Helper::row_checkbox(
 			__('Include microdata on video pages', 'codeflavors-vimeo-video-post-lite'),
 			sprintf(
-				__( 'When checked, all page displaying videos will also include microdata for SEO purposes ( more on %s ).', 'codeflavors-vimeo-video-post-lite'),
-				'<a href="http://schema.org" target="_blank">http://schema.org</a>'
+				'%s %s',
+				__( 'When checked, all posts having video attached will also include microdata for SEO purposes.', 'codeflavors-vimeo-video-post-lite' ),
+				sprintf(
+					'<a href="%s" target="_blank">%s</a>',
+					'https://schema.org',
+					__( 'More details on schema.org', 'codeflavors-vimeo-video-post-lite' )
+				)
 			)
 		);
 

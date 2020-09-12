@@ -314,7 +314,15 @@ use Vimeotheque\Helper;
                             <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player size', 'cvm_video')?>:</label></th>
                             <td>
                                 <input type="checkbox" value="1" id="aspect_override" name="aspect_override"<?php Helper_Admin::check( (bool )$player_opt['aspect_override'] );?> />
-                                <span class="description"><?php _e('When checked (recommended), player will have the exact aspect ratio as retrieved from Vimeo. Player size option will be ignored.<br />Applies only to videos imported starting with plugin version 1.3.', 'codeflavors-vimeo-video-post-lite');?></span>
+                                <span class="description">
+                                    <?php
+                                        printf(
+                                            '%s %s',
+	                                        __('When checked (recommended), player will have the exact aspect ratio as retrieved from Vimeo.', 'codeflavors-vimeo-video-post-lite'),
+	                                        __('Player size aspect ratio option will be ignored.', 'codeflavors-vimeo-video-post-lite')
+                                        )
+                                    ?>
+                                </span>
                             </td>
                         </tr>
 
@@ -385,15 +393,36 @@ use Vimeotheque\Helper;
 					<tbody>
 						<tr>
 							<th colspan="2">
-								<h4><i class="dashicons dashicons-admin-network"></i> <?php _e('Vimeo oAuth keys', 'codeflavors-vimeo-video-post-lite');?></h4>
-                                <p class="description">
-									<?php _e( 'In order to be able to make requests to Vimeo API, you must first have a Vimeo account and create the credentials.', 'codeflavors-vimeo-video-post-lite');?><br />
-									<?php _e( 'To register your App, please visit <a target="_blank" href="https://developer.vimeo.com/apps/new">Vimeo App registration page</a> (requires login to Vimeo).', 'codeflavors-vimeo-video-post-lite')?><br />
-									<?php printf( __( 'A step by step tutorial on how to create an app on Vimeo can be found %shere%s.', 'codeflavors-vimeo-video-post-lite' ), '<a href="' . Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ) . '" target="_blank">', '</a>');?>
-								</p>
-								<p class="description">
-									<?php printf( __( 'Make sure that you have set up the APP Callback URL to: <br /><span class="emphasize">%s</span><br /> in your APP settings on Vimeo.' , 'codeflavors-vimeo-video-post-lite' ), $this->vimeo_oauth->get_redirect_url() );?>
-								</p>
+								<h4><i class="dashicons dashicons-admin-network"></i> <?php _e('Vimeo OAuth keys', 'codeflavors-vimeo-video-post-lite');?></h4>
+                                <?php
+                                    if ( empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] ) ){
+                                        printf(
+                                            '<div class="api-instructions"><p>%s</p> <p>%s</p> <p>%s</p></div>',
+                                            __('In order to be able to import videos using Vimeotheque, you must register a new Vimeo App (requires a Vimeo account).', 'codeflavors-vimeo-video-post-lite'),
+                                            sprintf(
+                                                __( 'Make sure that you set up option %s in your APP settings on Vimeo to be: %s' , 'codeflavors-vimeo-video-post-lite' ),
+                                                'APP Callback URL',
+                                                sprintf(
+                                                    '<span class="emphasize">%s</span>',
+                                                    $this->vimeo_oauth->get_redirect_url()
+                                                )
+                                            ),
+                                            sprintf(
+                                                '%s %s',
+                                                sprintf(
+                                                    '<a href="%s" target="_blank" class="button">%s</a>',
+                                                    'https://developer.vimeo.com/apps/new',
+                                                    __( 'Create Vimeo App', 'codeflavors-vimeo-video-post-lite' )
+                                                ),
+                                                sprintf(
+                                                    '<a href="%s" target="_blank">%s</a>',
+                                                    Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ),
+                                                    __( 'See tutorial', 'codeflavors-vimeo-video-post-lite' )
+                                                )
+                                            )
+                                        );
+                                    }
+                                ?>
 							</th>
 						</tr>
                         <?php if(empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] )):?>

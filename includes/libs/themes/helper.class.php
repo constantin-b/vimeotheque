@@ -230,7 +230,7 @@ class Helper {
 		global $cvm_video;
 
 		if( !$cvm_video ){
-			_doing_it_wrong(__METHOD__, __('You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } '), '3.0');
+			_doing_it_wrong(__METHOD__, 'You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } ', '3.0');
 			return false;
 		}
 

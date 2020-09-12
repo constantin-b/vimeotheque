@@ -80,10 +80,17 @@ class Posts_Import{
 				 * @var WP_Error
 				 */
 				$error = new WP_Error(
-					'cvm_automatic_import_skip_existing_video',
+					'cvm_import_skip_existing_video',
 					sprintf(
-						__( 'Skipped video having ID %s because it already exists (post id ' . $duplicates[ $video['video_id'] ][0] . ').', 'cvm-video' ),
-						$video['video_id']
+						'%s %s',
+						sprintf(
+							__( 'Skipped video having ID %s because it already exists.', 'codeflavors-vimeo-video-post-lite' ),
+							$video['video_id']
+						),
+						sprintf(
+							__( 'Existing post has ID %s.', 'codeflavors-vimeo-video-post-lite' ),
+							$duplicates[ $video['video_id'] ][0]
+						)
 					),
 					[
 						'video_data' => $video,
@@ -304,7 +311,7 @@ class Posts_Import{
 			$error = new WP_Error(
 				'vimeotheque_video_import_prevented_by_filter',
 				sprintf(
-					__( 'Video having ID %s could not be imported because filter "vimeotheque\allow_import" was set to "false".', 'codeflavors-vimeo-video-post-lite' ),
+					__( 'Video having ID %s could not be imported because of a filter blocking all imports.', 'codeflavors-vimeo-video-post-lite' ),
 					$video['video_id']
 				),
 				[ 'video_data' => $video ]

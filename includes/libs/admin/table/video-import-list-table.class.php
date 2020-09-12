@@ -41,7 +41,16 @@ class Video_Import_List_Table extends \WP_List_Table{
 		if( array_key_exists($column, $item) ){
 			return $item[ $column ];
 		}else{
-			return '<span style="color:red">'.sprintf( __('Column <em>%s</em> was not found.', 'codeflavors-vimeo-video-post-lite'), $column ).'</span>';
+			return sprintf(
+				'<span style="color:red">%s</span>',
+				sprintf(
+					__('Column %s was not found.', 'codeflavors-vimeo-video-post-lite'),
+					sprintf(
+						'<em>%s</em>',
+						$column
+					)
+				)
+			);
 		}
 	}
 	

@@ -74,11 +74,17 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 		<h1><?php _e( 'Import videos', 'codeflavors-vimeo-video-post-lite' );?></h1>
 		<?php if( 'grid' === $this->mode ):?>	
 		<div class="error hide-if-js">
-			<p><?php printf(
-				/* translators: %s: list view URL */
-				__( 'The grid view for Vimeo videos import requires JavaScript. <a href="%s">Switch to the list view</a>.' ),
-				menu_page_url('cvm_import', false) . '&mode=list'
-			); ?></p>
+			<?php
+                printf(
+                    '<p>%s %s</p>',
+                    __( 'The grid view for Vimeo videos import requires JavaScript.', 'codeflavors-vimeo-video-post-lite' ),
+                    sprintf(
+                        '<a href="%s">%s</a>.',
+                        menu_page_url('cvm_import', false) . '&mode=list',
+                        __( 'Switch to the list view', 'codeflavors-vimeo-video-post-lite' )
+                    )
+                )
+			?>
 		</div>
 		<?php endif;?>	
 		<?php 

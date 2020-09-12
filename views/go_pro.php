@@ -37,7 +37,7 @@ use Vimeotheque\Admin\Helper_Admin;
 
 				<p>
 					<h3><?php _e( 'Import videos as regular posts', 'codeflavors-vimeo-video-post-lite' ) ;?></h3>
-					<?php _e( 'Choose to import videos as regular <strong>post</strong> type post instead of plugin’s post type <strong>vimeo-video</strong>.', 'codeflavors-vimeo-video-post-lite' ) ;?>
+					<?php _e( 'Choose to import videos as regular post type instead of plugin’s custom post type.', 'codeflavors-vimeo-video-post-lite' ) ;?>
 				</p>
 				<p>
 					<span class="yes">PRO</span>
@@ -46,7 +46,7 @@ use Vimeotheque\Admin\Helper_Admin;
 
 				<p>
 					<h3><?php _e( 'Import videos as WordPress theme posts', 'codeflavors-vimeo-video-post-lite' ) ;?></h3>
-					<?php _e( 'For video websites running <strong>video WordPress themes</strong> the plugin can import Vimeo videos as any post type needed by your theme and will automatically fill all custom fields needed by the theme to embed and display the video and its information.', 'codeflavors-vimeo-video-post-lite' ) ;?>
+					<?php _e( 'For video websites running video WordPress themes the plugin can import Vimeo videos as any post type needed by your theme and will automatically fill all custom fields needed by the theme to embed and display the video and its information.', 'codeflavors-vimeo-video-post-lite' ) ;?>
 				</p>
 				<p>
 					<span class="yes">PRO</span>
@@ -82,7 +82,7 @@ use Vimeotheque\Admin\Helper_Admin;
 
 				<p>
 					<h3><?php _e( 'Full support', 'codeflavors-vimeo-video-post-lite' ) ;?></h3>
-					<?php _e( '<strong>Priority support</strong> and debugging directly on your website from the plugin developers.', 'codeflavors-vimeo-video-post-lite' ) ;?>
+					<?php _e( 'Priority support and debugging directly on your website from the plugin developers.', 'codeflavors-vimeo-video-post-lite' ) ;?>
 				</p>
 				<p>
 					<span class="yes">PRO</span>

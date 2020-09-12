@@ -116,12 +116,22 @@ class Post_Edit_Page{
 
 		$options = \Vimeotheque\Plugin::instance()->get_options();
 		if( empty( $options[ 'vimeo_consumer_key' ] ) || empty( $options[ 'vimeo_secret_key' ] ) ){
-			?>
-            <p>
-				<?php _e( 'Please register on <a href="https://developer.vimeo.com/apps/new">Vimeo App page</a> in order to be able to import videos.', 'codeflavors-vimeo-video-post-lite' );?><br />
-				<?php printf( __( 'A step by step tutorial on how to create an app on Vimeo can be found %shere%s.', 'codeflavors-vimeo-video-post-lite' ), '<a href="'. \Vimeotheque\Admin\Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ) .'" target="_blank">', '</a>');?>
-            </p>
-			<?php
+
+		    printf(
+                '<p>%s</p><p>%s %s</p>',
+                __( 'Before being able to import videos you must register and App on Vimeo.', 'codeflavors-vimeo-video-post-lite' ),
+                sprintf(
+                    '<a href="%s" target="_blank" class="button">%s</a>',
+                    'https://developer.vimeo.com/apps/new',
+                    __( 'Create Vimeo App', 'codeflavors-vimeo-video-post-lite' )
+                ),
+                sprintf(
+                    '<a href="%s" target="_blank">%s</a>',
+                    \Vimeotheque\Admin\Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ),
+                    __( 'See tutorial', 'codeflavors-vimeo-video-post-lite' )
+                )
+            );
+
 		}else{
 		    $handle = 'vimeotheque-import-video-react-app';
             wp_enqueue_script(

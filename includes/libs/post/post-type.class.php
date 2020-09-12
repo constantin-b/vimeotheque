@@ -220,22 +220,75 @@ class Post_Type{
 		
 		$messages[ $this->post_type ] = [
 			0 => '', // Unused. Messages start at index 1.
-	    	1 => sprintf( __('Video updated <a href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( get_permalink($post_ID) ) ),
+	    	1 => sprintf(
+	    		'%s %s',
+	    		__('Video updated', 'codeflavors-vimeo-video-post-lite'),
+			    sprintf(
+			    	'<a href="%s">%s</a>',
+				    esc_url( get_permalink($post_ID) ),
+				    __( 'See video', 'codeflavors-vimeo-video-post-lite' )
+			    )
+		    ),
 	    	2 => __('Custom field updated.', 'codeflavors-vimeo-video-post-lite'),
 	    	3 => __('Custom field deleted.', 'codeflavors-vimeo-video-post-lite'),
 	    	4 => __('Video updated.', 'codeflavors-vimeo-video-post-lite'),
 	   		/* translators: %s: date and time of the revision */
 	    	5 => isset($_GET['revision']) ? sprintf( __('Video restored to version %s', 'codeflavors-vimeo-video-post-lite'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-	    	6 => sprintf( __('Video published. <a href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( get_permalink($post_ID) ) ),
+	    	6 => sprintf(
+			    '%s %s',
+			    __('Video published', 'codeflavors-vimeo-video-post-lite'),
+			    sprintf(
+				    '<a href="%s">%s</a>',
+				    esc_url( get_permalink($post_ID) ),
+				    __( 'See video', 'codeflavors-vimeo-video-post-lite' )
+			    )
+		    ),
 	    	7 => __('Video saved.', 'codeflavors-vimeo-video-post-lite'),
-	    	8 => sprintf( __('Video saved. <a target="_blank" href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-	    	9 => sprintf( __('Video will be published at: <strong>%1$s</strong>. <a target="_blank" href="%2$s">See video</a>', 'codeflavors-vimeo-video-post-lite'),
-	      	// translators: Publish box date format, see http://php.net/date
-	      	date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-	    	10 => sprintf( __('Video draft saved. <a target="_blank" href="%s">See video</a>', 'codeflavors-vimeo-video-post-lite'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-	    
+	    	8 => sprintf(
+			    '%s %s',
+			    __('Video saved', 'codeflavors-vimeo-video-post-lite'),
+			    sprintf(
+				    '<a href="%s">%s</a>',
+				    esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ),
+				    __( 'See video', 'codeflavors-vimeo-video-post-lite' )
+			    )
+		    ),
+	    	9 => sprintf(
+				'%s %s',
+				sprintf(
+					__('Video will be published at: %s.', 'codeflavors-vimeo-video-post-lite'),
+					sprintf(
+						'<strong>%s</strong>',
+						// translators: Publish box date format, see http://php.net/date
+						date_i18n(
+							__( 'M j, Y @ G:i', 'codeflavors-vimeo-video-post-lite' ),
+							strtotime( $post->post_date )
+						)
+					)
+				),
+				sprintf(
+					'<a href="%s">%s</a>',
+					esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ),
+					__( 'See video', 'codeflavors-vimeo-video-post-lite' )
+				)
+			),
+	    	10 => sprintf(
+		        '%s %s',
+		        __('Video draft saved.', 'codeflavors-vimeo-video-post-lite'),
+		        sprintf(
+			        '<a href="%s">%s</a>',
+			        esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ),
+			        __( 'See video', 'codeflavors-vimeo-video-post-lite' )
+		        )
+	        ),
 	    	101 => __('Please select a source', 'codeflavors-vimeo-video-post-lite'),
-	    	102 => sprintf( __('Vimeo video with ID <strong><em>%s</em></strong> is already imported. You are now editing the existing video.', 'codeflavors-vimeo-video-post-lite'), $vid_id)
+	    	102 => sprintf(
+	    		__( 'Vimeo video with ID %s is already imported. You are now editing the existing video.', 'codeflavors-vimeo-video-post-lite' ),
+			    sprintf(
+			    	'<strong><em>%s</em></strong>',
+				    $vid_id
+			    )
+		    )
 		];
 	    
 		return $messages;

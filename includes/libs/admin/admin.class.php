@@ -290,7 +290,14 @@ class Admin{
 		Admin_Notices::instance()->register( new Vimeo_Api_Notice() );
 
 		$message = new Message(
-			__( "It's great to see that you've been using <strong>Vimeotheque</strong> plugin for a while now. Hopefully you're happy with it! <br>If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!", 'codeflavors-vimeo-video-post-lite' ),
+			sprintf(
+				'%s <br/>%s',
+				sprintf(
+					__( "It's great to see that you've been using %s plugin for a while now. Hopefully you're happy with it!", 'codeflavors-vimeo-video-post-lite' ),
+					sprintf( '<strong>%s</strong>', 'Vimeotheque' )
+				),
+				__( 'Would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!', 'codeflavors-vimeo-video-post-lite' )
+			),
 			'https://wordpress.org/plugins/codeflavors-vimeo-video-post-lite/'
 		);
 
