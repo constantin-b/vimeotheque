@@ -4,6 +4,11 @@ namespace Vimeotheque\Admin;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+/**
+ * @var bool $compact - show compacted version or full
+ */
+
 ?>
 	<?php if( !$compact ):?>
 	<p class="description">
