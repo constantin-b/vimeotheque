@@ -325,10 +325,10 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 				<%
 					switch( status ){
 						case 'queued':
-							print( '" . __('Clear', 'codeflavors-vimeo-video-post-lite') . "' );
+							print( '" . __( 'Clear', 'codeflavors-vimeo-video-post-lite' ) . "' );
 						break;
 						case 'none':
-							print( '" . __('Select', 'codeflavors-vimeo-video-post-lite') . "' );
+							print( '" . __( 'Select', 'codeflavors-vimeo-video-post-lite' ) . "' );
 						break;					
 					}
 				%>			

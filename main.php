@@ -6,6 +6,8 @@
  * Author: CodeFlavors
  * Version: 2.0
  * Author URI: https://codeflavors.com
+ * Text Domain: codeflavors-vimeo-video-post-lite
+ * Domain Path: /languages
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

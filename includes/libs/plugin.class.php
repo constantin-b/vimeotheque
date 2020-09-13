@@ -180,6 +180,13 @@ class Plugin{
 				__( 'Default', 'codeflavors-vimeo-video-post-lite' )
 			)
 		);
+
+		// internalization
+		load_plugin_textdomain(
+			'codeflavors-vimeo-video-post-lite',
+			false,
+			basename( dirname( VIMEOTHEQUE_FILE ) ) . '/languages/'
+		);
 	}
 
 	/**

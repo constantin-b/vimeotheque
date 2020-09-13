@@ -54,23 +54,23 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     </tr>
                     <tr>
                         <th scope="row" data-export-label="WordPress version"><?php _e( 'WordPress version', 'codeflavors-vimeo-video-post-lite' );?></th>
-                        <td><?php echo $wp_info['version'];?></td>
+                        <td><?php $this->translate( $wp_info['version'] );?></td>
                     </tr>
                     <tr>
                         <th scope="row" data-export-label="WordPress memory limit"><?php _e( 'WordPress memory limit', 'codeflavors-vimeo-video-post-lite' );?></th>
-                        <td><?php echo $wp_info['memory_limit'];?></td>
+                        <td><?php $this->translate( $wp_info['memory_limit'] );?></td>
                     </tr>
                     <tr>
                         <th scope="row" data-export-label="WordPress debug mode"><?php _e( 'WordPress debug mode', 'codeflavors-vimeo-video-post-lite' );?></th>
-                        <td><?php echo $wp_info['debug_mode'];?></td>
+                        <td><?php $this->translate( $wp_info['debug_mode'] );?></td>
                     </tr>
                     <tr>
                         <th scope="row" data-export-label="Language"><?php _e( 'Language', 'codeflavors-vimeo-video-post-lite' );?></th>
-                        <td><?php echo $wp_info['locale'];?></td>
+                        <td><?php $this->translate( $wp_info['locale'] );?></td>
                     </tr>
                     <tr>
                         <th scope="row" data-export-label="WordPress multisite"><?php _e( 'WordPress multisite', 'codeflavors-vimeo-video-post-lite' );?></th>
-                        <td><?php echo $wp_info['multisite'];?></td>
+                        <td><?php $this->translate( $wp_info['multisite'] );?></td>
                     </tr>
                     </tbody>
                 </table>
@@ -125,7 +125,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     </tr>
                     <tr>
                         <th scope="row" data-export-label="Child theme"><?php _e( 'Child theme', 'codeflavors-vimeo-video-post-lite' );?></th>
-                        <td><?php echo $theme_info['child_theme'];?></td>
+                        <td><?php $this->translate( $theme_info['child_theme'] );?></td>
                     </tr>
                     </tbody>
                 </table>
@@ -135,7 +135,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     <?php foreach( $options as $k => $v ):?>
                     <tr>
                         <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) . " ({$k})" ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
-                        <td><?php echo $v;?></td>
+                        <td><?php $this->translate( $v );?></td>
                     </tr>
                     <?php endforeach;?>
                     </tbody>
@@ -146,7 +146,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     <?php foreach( $embed_options as $k => $v ):?>
                     <tr>
                         <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) . " ({$k})" ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
-                        <td><?php echo $v;?></td>
+                        <td><?php $this->translate( $v );?></td>
                     </tr>
                     <?php endforeach;?>
                     </tbody>
@@ -278,5 +278,25 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    }
 	    
 	    return $options;
+    }
+
+	/**
+	 * @param $value
+	 *
+	 * @return string|void
+	 */
+    private function translate( $value, $echo  = true ){
+	    $response = $value;
+	    if( 'Yes' == $value ){
+	        $response =  __( 'Yes', 'codeflavors-vimeo-video-post-lite' );
+	    }else if( 'No' == $value ){
+	        $response =  __( 'No', 'codeflavors-vimeo-video-post-lite' );
+        }
+
+	    if( $echo ){
+	        echo $response;
+	    }
+
+	    return $response;
     }
 }

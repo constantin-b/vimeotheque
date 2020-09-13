@@ -188,7 +188,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                         <Button
                             isPrimary
                             onClick={ openModal }>
-                            { __(' Choose posts', 'codeflavors-vimeo-video-post-lite') }
+                            { __('Choose posts', 'codeflavors-vimeo-video-post-lite') }
                         </Button>
                     </Placeholder>
                 }

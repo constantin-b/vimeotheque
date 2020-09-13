@@ -259,8 +259,8 @@ class Post_Type{
 					__('Video will be published at: %s.', 'codeflavors-vimeo-video-post-lite'),
 					sprintf(
 						'<strong>%s</strong>',
-						// translators: Publish box date format, see http://php.net/date
 						date_i18n(
+							// translators: Publish box date format, see http://php.net/date
 							__( 'M j, Y @ G:i', 'codeflavors-vimeo-video-post-lite' ),
 							strtotime( $post->post_date )
 						)
