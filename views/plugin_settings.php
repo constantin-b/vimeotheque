@@ -311,7 +311,7 @@ use Vimeotheque\Helper;
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player size', 'cvm_video')?>:</label></th>
+                            <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player aspect ratio', 'cvm_video')?>:</label></th>
                             <td>
                                 <input type="checkbox" value="1" id="aspect_override" name="aspect_override"<?php Helper_Admin::check( (bool )$player_opt['aspect_override'] );?> />
                                 <span class="description">
