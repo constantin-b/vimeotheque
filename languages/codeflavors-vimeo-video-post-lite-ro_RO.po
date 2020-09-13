@@ -1,0 +1,2305 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Vimeotheque\n"
+"POT-Creation-Date: 2020-09-13 12:28+0300\n"
+"PO-Revision-Date: 2020-09-13 12:29+0300\n"
+"Last-Translator: \n"
+"Language-Team: CodeFlavors <codeflavors@codeflavors.com>\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;"
+"translate_nooped_plural;esc_html__;esc_html_e;esc_html_x;esc_attr__;"
+"esc_attr_e;esc_attr_x\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
+"X-Poedit-SearchPathExcluded-1: .idea\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+"X-Poedit-SearchPathExcluded-3: languages\n"
+"X-Poedit-SearchPathExcluded-4: .babelrc\n"
+"X-Poedit-SearchPathExcluded-5: .browserlistrc\n"
+"X-Poedit-SearchPathExcluded-6: CHANGELOG.md\n"
+"X-Poedit-SearchPathExcluded-7: documentation.pdf\n"
+"X-Poedit-SearchPathExcluded-8: package.json\n"
+"X-Poedit-SearchPathExcluded-9: package-lock.json\n"
+"X-Poedit-SearchPathExcluded-10: webpack.config.js\n"
+"X-Poedit-SearchPathExcluded-11: .svn\n"
+"X-Poedit-SearchPathExcluded-12: .babelrc\n"
+"X-Poedit-SearchPathExcluded-13: .browserlistrc\n"
+"X-Poedit-SearchPathExcluded-14: package.json\n"
+"X-Poedit-SearchPathExcluded-15: package-lock.json\n"
+"X-Poedit-SearchPathExcluded-16: README.md\n"
+"X-Poedit-SearchPathExcluded-17: readme.txt\n"
+"X-Poedit-SearchPathExcluded-18: webpack.config.js\n"
+
+#: assets/back-end/js/apps/block-editor/playlist/block.js:34
+#: assets/back-end/js/apps/block-editor/playlist/block.js:186
+msgid "Video playlist"
+msgstr "Lista video"
+
+#: assets/back-end/js/apps/block-editor/playlist/block.js:35
+msgid "Display a playlist of Vimeo videos"
+msgstr "Afișați o listă a videoclipurilor Vimeo"
+
+#: assets/back-end/js/apps/block-editor/playlist/block.js:136
+msgid "Edit playlist"
+msgstr "Editați lista"
+
+#: assets/back-end/js/apps/block-editor/playlist/block.js:191
+#: assets/back-end/js/apps/block-editor/playlist/block.js:199
+msgid "Choose posts"
+msgstr "Alege postările"
+
+#: assets/back-end/js/apps/block-editor/playlist/block.js:208
+msgid "Selected"
+msgstr "Selectat"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:29
+msgid "Vimeotheque video"
+msgstr "Videoclip Vimeotheque"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:30
+msgid "Display embed of a video post"
+msgstr "Afișați încorporarea unei postări video"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:95
+msgid "Change video"
+msgstr "Schimbați videoclipul"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:132
+msgid "Embed a video post"
+msgstr "Încorporați o postare video"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:138
+msgid "Choose video post"
+msgstr "Alegeți postarea video"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:146
+msgid "Choose post"
+msgstr "Alegeți postarea"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:213
+#: views/plugin_settings.php:31
+msgid "Embed options"
+msgstr "Player video"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:218
+#: includes/libs/admin/editor/classic-editor.class.php:216
+#: includes/libs/admin/table/video-list-table.class.php:107
+#: views/plugin_settings.php:357
+msgid "Loop video"
+msgstr "Clip repetitiv"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:231
+msgid "Autoplay video"
+msgstr "Redare automată video"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:232
+msgid "This feature won't work on all browsers."
+msgstr "Această funcție nu va funcționa pe toate browserele."
+
+#: assets/back-end/js/apps/block-editor/video/block.js:245
+#: includes/libs/admin/editor/classic-editor.class.php:193
+#: includes/libs/admin/editor/classic-editor.class.php:386
+#: includes/libs/admin/table/video-list-table.class.php:95
+#: includes/libs/widgets/playlist-widget.class.php:302
+#: views/plugin_settings.php:341
+msgid "Volume"
+msgstr "Volum"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:246
+msgid "Will work only for JS embeds"
+msgstr "Va funcționa numai pentru încorporări JS"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:264
+msgid "Embed size"
+msgstr "Dimensiunea încorporării"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:269
+#: includes/libs/admin/editor/classic-editor.class.php:159
+#: includes/libs/admin/editor/classic-editor.class.php:377
+#: includes/libs/admin/table/video-list-table.class.php:96
+#: includes/libs/widgets/playlist-widget.class.php:297
+#: views/plugin_settings.php:289
+msgid "Width"
+msgstr "Lățime"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:287
+#: includes/libs/admin/editor/classic-editor.class.php:149
+#: includes/libs/admin/table/video-list-table.class.php:105
+#: views/plugin_settings.php:279
+msgid "Aspect ratio"
+msgstr "Aspect"
+
+#: assets/back-end/js/apps/block-editor/video_position/block.js:19
+msgid "Vimeotheque video position"
+msgstr "Poziție video Vimeotheque"
+
+#: assets/back-end/js/apps/block-editor/video_position/block.js:20
+msgid "Video embed customization options"
+msgstr "Opțiuni de personalizare a încorporării video"
+
+#: assets/back-end/js/gutenberg/video-thumbnail.js:5
+msgid ""
+"Imports Vimeo image as post featured image. If image already exists it will "
+"be duplicated."
+msgstr ""
+"Importă imaginea Vimeo ca imagine reprezentativă. Dacă imaginea există deja, "
+"aceasta va fi duplicată."
+
+#: assets/back-end/js/gutenberg/video-thumbnail.js:23
+#: assets/back-end/js/gutenberg/video-thumbnail.js:64
+#: includes/libs/admin/editor/classic-editor.class.php:649
+msgid "Import Vimeo image"
+msgstr "Importați imaginea Vimeo"
+
+#: assets/back-end/js/gutenberg/video-thumbnail.js:43
+msgid "... still loading"
+msgstr "... încă se încarcă"
+
+#: assets/back-end/js/gutenberg/video-thumbnail.js:54
+msgid "... loading"
+msgstr "... se încarcă"
+
+#: assets/back-end/js/gutenberg/video-thumbnail.js:65
+msgid "Image imported successfully."
+msgstr "Imagine importată cu succes."
+
+#: includes/libs/admin/admin.class.php:123
+#: includes/libs/admin/admin.class.php:124
+#: includes/libs/admin/page/video-import-page.class.php:74
+#: includes/libs/admin/posts-import-meta-panels.class.php:98
+msgid "Import videos"
+msgstr "Importă videoclipuri"
+
+#: includes/libs/admin/admin.class.php:134
+#: includes/libs/admin/admin.class.php:135
+msgid "Status"
+msgstr "Stare"
+
+#: includes/libs/admin/admin.class.php:145
+#: includes/libs/admin/admin.class.php:146
+msgid "Settings"
+msgstr "Opțiuni"
+
+#: includes/libs/admin/admin.class.php:156
+#: includes/libs/admin/admin.class.php:157
+#: includes/libs/post/post-type.class.php:88
+msgid "Videos"
+msgstr "Videoclipuri"
+
+#: includes/libs/admin/admin.class.php:167
+#: includes/libs/admin/admin.class.php:168 views/go_pro.php:93
+msgid "Go PRO!"
+msgstr "Devino PRO!"
+
+#: includes/libs/admin/admin.class.php:216
+msgid "Manual bulk import"
+msgstr "Import în masă manual"
+
+#: includes/libs/admin/admin.class.php:220
+#: includes/libs/admin/page/settings-helper.class.php:117
+msgid "Automatic import"
+msgstr "Import automat"
+
+#: includes/libs/admin/admin.class.php:240
+msgid "Editor"
+msgstr "Editor"
+
+#: includes/libs/admin/admin.class.php:241
+#: includes/libs/admin/editor/classic-editor.class.php:402
+#: includes/libs/widgets/playlist-widget.class.php:276
+msgid "Author"
+msgstr "Autor"
+
+#: includes/libs/admin/admin.class.php:242
+msgid "Contributor"
+msgstr "Colaborator"
+
+#: includes/libs/admin/admin.class.php:260
+#: includes/libs/admin/table/video-import-list-table.class.php:165
+#: includes/libs/admin/table/video-list-table.class.php:316
+msgid "Video ID"
+msgstr "ID video"
+
+#: includes/libs/admin/admin.class.php:261
+#: includes/libs/admin/table/video-import-list-table.class.php:167
+#: includes/libs/admin/table/video-list-table.class.php:317
+#: includes/libs/vimeo-api/resource-objects.class.php:122
+msgid "Duration"
+msgstr "Durata"
+
+#: includes/libs/admin/admin.class.php:296
+#, php-format
+msgid ""
+"It's great to see that you've been using %s plugin for a while now. "
+"Hopefully you're happy with it!"
+msgstr ""
+"Îți mulțumim că folosești pluginul %s. Sperăm că găsești utilizarea lui "
+"facilă și utilă!"
+
+#: includes/libs/admin/admin.class.php:299
+msgid ""
+"Would you consider leaving a positive review? It really helps to support the "
+"plugin and helps others to discover it too!"
+msgstr ""
+"Poți lua în considerare să ne lași o recenzie pozitivă? Recenziile sunt de "
+"mare ajutor în sprijinirea pluginului și în plus îi ajută și pe alții să îl "
+"descopere!"
+
+#: includes/libs/admin/admin.class.php:333
+#, php-format
+msgid ""
+"By using the embed feature of this plugin you will be agreeing to Vimeo's "
+"privacy policy. More details can be found here: %s"
+msgstr ""
+"Prin utilizarea funcției de embed a acestui plugin declarați că sunteți de "
+"acord cu politica de confidențialitate a Vimeo. Mai multe detalii găsiți "
+"aici: %s"
+
+#: includes/libs/admin/admin.class.php:354
+msgid "First time installation"
+msgstr "Prima instalare"
+
+#: includes/libs/admin/ajax-actions.class.php:54
+#: includes/libs/admin/ajax-actions.class.php:116
+#: includes/libs/admin/ajax-actions.class.php:149
+#: includes/libs/admin/ajax-actions.class.php:198
+msgid "You do not have the neccessary permissions."
+msgstr "Nu aveți permisiunile necesare."
+
+#: includes/libs/admin/ajax-actions.class.php:129
+msgid "Image could not be retrieved."
+msgstr "Imaginea nu a putut fi recuperată."
+
+#: includes/libs/admin/ajax-actions.class.php:178
+#, php-format
+msgid "%d videos: %d imported, %d skipped, %d private, %d error."
+msgstr "% d videoclipuri:% d importate,% d omise,% d private,% d eroare."
+
+#: includes/libs/admin/ajax-actions.class.php:298
+#, php-format
+msgid "Action %s not found. Please review!"
+msgstr "Acțiunea %s nu a fost găsită. Te rog revizuiește!"
+
+#: includes/libs/admin/ajax-actions.class.php:316
+#, php-format
+msgid "Action %s not found."
+msgstr "Acțiunea %s nu a fost găsită."
+
+#: includes/libs/admin/customizer/customizer.class.php:66
+msgid "Customize Vimeotheque video embeds and plugin options"
+msgstr "Personalizați videoclipurile Vimeotheque și opțiunile de plugin"
+
+#: includes/libs/admin/customizer/customizer.class.php:77
+msgid "Video post"
+msgstr "Postare video"
+
+#: includes/libs/admin/customizer/customizer.class.php:78
+msgid "Control how video posts are used in your website"
+msgstr ""
+"Controlați modul în care sunt utilizate postările video pe site-ul dvs. web"
+
+#: includes/libs/admin/customizer/customizer.class.php:88
+#: views/plugin_settings.php:50
+msgid "Embed videos in archive pages"
+msgstr "Încorporați videoclipuri în paginile de arhivă"
+
+#: includes/libs/admin/editor/classic-editor.class.php:88
+msgid "Video settings"
+msgstr "Setări video"
+
+#: includes/libs/admin/editor/classic-editor.class.php:97
+msgid "Live video"
+msgstr "Videoclip live"
+
+#: includes/libs/admin/editor/classic-editor.class.php:107
+msgid "Vimeotheque shortcode"
+msgstr "Cod scurt Vimeotheque"
+
+#: includes/libs/admin/editor/classic-editor.class.php:130
+msgid "Options override is ON"
+msgstr "Opțiunile vor fi suprascrise"
+
+#: includes/libs/admin/editor/classic-editor.class.php:133
+#, php-format
+msgid ""
+"Individual video post options are not editable; to change video options "
+"globally, go to plugin %sSettings%s, tab Embed options."
+msgstr ""
+"Opțiunile individuale de postare video nu sunt editabile; pentru a schimba "
+"opțiunile video la nivel global accesați pagina de %sSetări%s, secțiunea "
+"Opțiuni de embed."
+
+#: includes/libs/admin/editor/classic-editor.class.php:143
+#: views/plugin_settings.php:277
+msgid "Player size"
+msgstr "Dimensiune redare"
+
+#: includes/libs/admin/editor/classic-editor.class.php:146
+#, php-format
+msgid "%s X %s px"
+msgstr "%s X %s px"
+
+#: includes/libs/admin/editor/classic-editor.class.php:147
+#, php-format
+msgid "/ Aspect ratio: %s"
+msgstr "/ Raport de aspect: %s"
+
+#: includes/libs/admin/editor/classic-editor.class.php:161
+#: includes/libs/admin/editor/classic-editor.class.php:380
+#: includes/libs/widgets/playlist-widget.class.php:299
+#: views/plugin_settings.php:291
+msgid "Height"
+msgstr "Inălțime"
+
+#: includes/libs/admin/editor/classic-editor.class.php:167
+#: views/plugin_settings.php:296
+msgid "Display video"
+msgstr "Afișare video"
+
+#: includes/libs/admin/editor/classic-editor.class.php:171
+#: includes/libs/admin/editor/classic-editor.class.php:180
+#: views/plugin_settings.php:301
+msgid "Above post content"
+msgstr "Deasupra conținutului"
+
+#: includes/libs/admin/editor/classic-editor.class.php:172
+#: includes/libs/admin/editor/classic-editor.class.php:181
+#: views/plugin_settings.php:302
+msgid "Below post content"
+msgstr "Sub conținut"
+
+#: includes/libs/admin/editor/classic-editor.class.php:200
+#: includes/libs/admin/editor/classic-editor.class.php:389
+#: includes/libs/widgets/playlist-widget.class.php:304
+#: views/plugin_settings.php:344
+msgid "number between 0 (mute) and 100 (max)"
+msgstr "număr între 0 (fără sunet) și 100 (maxim)"
+
+#: includes/libs/admin/editor/classic-editor.class.php:204
+#: views/plugin_settings.php:349
+msgid "Autoplay"
+msgstr "Redare automată"
+
+#: includes/libs/admin/editor/classic-editor.class.php:207
+#: includes/libs/admin/editor/classic-editor.class.php:219
+#: includes/libs/admin/editor/classic-editor.class.php:230
+#: includes/libs/admin/editor/classic-editor.class.php:255
+#: includes/libs/admin/editor/classic-editor.class.php:267
+msgid "On"
+msgstr "Pornit"
+
+#: includes/libs/admin/editor/classic-editor.class.php:207
+#: includes/libs/admin/editor/classic-editor.class.php:219
+#: includes/libs/admin/editor/classic-editor.class.php:230
+#: includes/libs/admin/editor/classic-editor.class.php:255
+#: includes/libs/admin/editor/classic-editor.class.php:267
+msgid "Off"
+msgstr "Oprit"
+
+#: includes/libs/admin/editor/classic-editor.class.php:210
+msgid "when checked, video will start playing once page is loaded"
+msgstr ""
+"când este bifat, videoclipul va începe redarea după ce pagina este încărcată"
+
+#: includes/libs/admin/editor/classic-editor.class.php:212
+msgid ""
+"Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and "
+"Safari 11+. In these cases, Vimeo player will revert to standard playback "
+"requiring viewers to initiate playback."
+msgstr ""
+"Redarea automată poate fi blocată în anumite medii, cum ar fi IOS, Chrome "
+"66+ și Safari 11+. În aceste cazuri, playerul Vimeo va reveni la redarea "
+"standard, fiind necesar ca utilizatorul să inițieze redarea."
+
+#: includes/libs/admin/editor/classic-editor.class.php:222
+msgid "when checked, the video will play again when it reaches the end"
+msgstr ""
+"când este bifat, videoclipul va fi redat din nou când va ajunge la final"
+
+#: includes/libs/admin/editor/classic-editor.class.php:227
+#: views/plugin_settings.php:362
+msgid "Show video title"
+msgstr "Afișați titlul videoclipului"
+
+#: includes/libs/admin/editor/classic-editor.class.php:233
+msgid "when checked, player will display video title"
+msgstr "când este bifat, playerul va afișa titlul videoclipului"
+
+#: includes/libs/admin/editor/classic-editor.class.php:238
+#: views/plugin_settings.php:368
+msgid "Player color"
+msgstr "Culoarea playerului video"
+
+#: includes/libs/admin/editor/classic-editor.class.php:241
+#: includes/libs/plugin.class.php:180
+#: themes/default/assets/js/block/block.js:14
+msgid "Default"
+msgstr "Implicit"
+
+#: includes/libs/admin/editor/classic-editor.class.php:252
+#: views/plugin_settings.php:375
+msgid "Show video author"
+msgstr "Afișați autorul videoclipului"
+
+#: includes/libs/admin/editor/classic-editor.class.php:258
+msgid "When checked, player will display video uploader."
+msgstr ""
+"Când este bifat, playerul va afișa utilizatorul Vimeo căruia îi aparține "
+"videoclipul."
+
+#: includes/libs/admin/editor/classic-editor.class.php:264
+msgid "Author portrait"
+msgstr "Arată portretul autorului"
+
+#: includes/libs/admin/editor/classic-editor.class.php:270
+msgid "When checked, player will display uploader image."
+msgstr ""
+"Când este bifat, playerul va afișa imaginea utilizatorului căruia îi "
+"aparține videoclipul."
+
+#: includes/libs/admin/editor/classic-editor.class.php:294
+msgid "Add video/playlist into post."
+msgstr "Adăugați videoclip/listă de redare în postare."
+
+#: includes/libs/admin/editor/classic-editor.class.php:297
+msgid "Add shortcode"
+msgstr "Adaugă cod scurt"
+
+#: includes/libs/admin/editor/classic-editor.class.php:297
+msgid "Add video shortcode"
+msgstr "Adăugați codul scurt video"
+
+#: includes/libs/admin/editor/classic-editor.class.php:340
+msgid "Playlist settings"
+msgstr "Setările listei"
+
+#: includes/libs/admin/editor/classic-editor.class.php:344
+#: includes/libs/admin/page/status-page.class.php:115
+#: includes/libs/admin/page/status-page.class.php:119
+#: includes/libs/widgets/playlist-widget.class.php:247
+msgid "Theme"
+msgstr "Temă"
+
+#: includes/libs/admin/editor/classic-editor.class.php:354
+#: includes/libs/widgets/playlist-widget.class.php:259
+msgid "Playlist location"
+msgstr "Locația listei de redare"
+
+#: includes/libs/admin/editor/classic-editor.class.php:355
+#: includes/libs/widgets/playlist-widget.class.php:260
+msgid "bottom"
+msgstr "jos"
+
+#: includes/libs/admin/editor/classic-editor.class.php:356
+#: includes/libs/widgets/playlist-widget.class.php:261
+msgid "right"
+msgstr "dreapta"
+
+#: includes/libs/admin/editor/classic-editor.class.php:357
+#: includes/libs/widgets/playlist-widget.class.php:262
+msgid "left"
+msgstr "stanga"
+
+#: includes/libs/admin/editor/classic-editor.class.php:363
+#: includes/libs/widgets/playlist-widget.class.php:287
+msgid "Aspect"
+msgstr "Aspect"
+
+#: includes/libs/admin/editor/classic-editor.class.php:394
+#: includes/libs/admin/table/video-import-list-table.class.php:164
+#: includes/libs/admin/table/video-list-table.class.php:315
+#: includes/libs/widgets/categories-widget.class.php:107
+#: includes/libs/widgets/playlist-widget.class.php:192
+#: includes/libs/widgets/playlist-widget.class.php:271
+msgid "Title"
+msgstr "Titlu"
+
+#: includes/libs/admin/editor/classic-editor.class.php:397
+#: includes/libs/widgets/playlist-widget.class.php:273
+msgid "will display title on video"
+msgstr "va afișa titlul pe videoclip"
+
+#: includes/libs/admin/editor/classic-editor.class.php:406
+#: includes/libs/widgets/playlist-widget.class.php:278
+msgid "will display author name on video"
+msgstr "va afișa numele autorului pe videoclip"
+
+#: includes/libs/admin/editor/classic-editor.class.php:411
+#: includes/libs/widgets/playlist-widget.class.php:281
+msgid "Image"
+msgstr "Imagine"
+
+#: includes/libs/admin/editor/classic-editor.class.php:415
+#: includes/libs/widgets/playlist-widget.class.php:283
+msgid "will display author image on video"
+msgstr "va afișa imaginea autorului pe video"
+
+#: includes/libs/admin/editor/classic-editor.class.php:420
+msgid "Loop"
+msgstr "În buclă"
+
+#: includes/libs/admin/editor/classic-editor.class.php:423
+msgid "will automatically play next video when current playing video ends"
+msgstr "va reda automat următorul videoclip când se termină redarea curentă"
+
+#: includes/libs/admin/editor/classic-editor.class.php:430
+msgid "Insert playlist"
+msgstr "Introduceți lista de redare"
+
+#: includes/libs/admin/editor/classic-editor.class.php:435
+msgid "Create from categories"
+msgstr "Creați din categorii"
+
+#: includes/libs/admin/editor/classic-editor.class.php:438
+msgid "Select some categories to display videos from."
+msgstr "Selectați câteva categorii din care să afișați videoclipuri."
+
+#: includes/libs/admin/editor/classic-editor.class.php:439
+msgid ""
+"Categories can be added by clicking \"Add category to shortcode\" button "
+"above the posts table."
+msgstr ""
+"Categoriile pot fi adăugate făcând clic pe butonul „Adăugare categorie la "
+"shortcode” de deasupra tabelului de postări."
+
+#: includes/libs/admin/editor/classic-editor.class.php:444
+msgid "Videos selected in playlist"
+msgstr "Videoclipuri selectate în lista de redare"
+
+#: includes/libs/admin/editor/classic-editor.class.php:447
+msgid "No videos selected"
+msgstr "Niciun videoclip selectat"
+
+#: includes/libs/admin/editor/classic-editor.class.php:447
+#: includes/libs/admin/editor/classic-editor.class.php:563
+msgid "To create a playlist check some videos from the list on the right."
+msgstr ""
+"Pentru a crea lista de redare bifati clipuri video in lista din dreapta."
+
+#: includes/libs/admin/editor/classic-editor.class.php:559
+msgid "Videos in playlist"
+msgstr "Video în lista de redare"
+
+#: includes/libs/admin/editor/classic-editor.class.php:562
+msgid "No videos selected."
+msgstr "Niciun videoclip selectat."
+
+#: includes/libs/admin/editor/classic-editor.class.php:565
+msgid "Delete from playlist"
+msgstr "Ștergeți din lista de redare"
+
+#: includes/libs/admin/editor/classic-editor.class.php:566
+msgid "Add shortcode into post"
+msgstr "Adauga cod scurt în post"
+
+#: includes/libs/admin/editor/classic-editor.class.php:567
+msgid "Remove category"
+msgstr "Eliminați categoria"
+
+#: includes/libs/admin/editor/classic-editor.class.php:568
+msgid ""
+"Select some categories to display videos from. Categories can be added by "
+"clicking \"Add category to shortcode\" button above the posts table."
+msgstr ""
+"Selectați câteva categorii din care să afișați videoclipuri. Categoriile pot "
+"fi adăugate făcând clic pe butonul „Adăugare categorie la shortcode” de "
+"deasupra tabelului de postări."
+
+#: includes/libs/admin/editor/classic-editor.class.php:606
+msgid "... importing thumbnail"
+msgstr "... importare imagine"
+
+#: includes/libs/admin/editor/classic-editor.class.php:607
+msgid "... hold on, still loading"
+msgstr "... așteaptă, încă se încarcă"
+
+#: includes/libs/admin/editor/classic-editor.class.php:639
+msgid "Refresh Vimeo image"
+msgstr "Reîmprospătați imaginea Vimeo"
+
+#: includes/libs/admin/editor/classic-editor.class.php:643
+msgid ""
+"Will import a fresh image from Vimeo. If already existing, it will be "
+"duplicated."
+msgstr ""
+"Va importa o imagine nouă din Vimeo. Dacă există deja, aceasta va fi "
+"duplicată."
+
+#: includes/libs/admin/editor/classic-editor.class.php:653
+msgid ""
+"Will first search the Media Gallery for an already imported image and will "
+"import if none found."
+msgstr ""
+"Mai întâi va căuta în Galeria Media o imagine deja importată și va importa "
+"dacă nu a fost găsită niciuna disponibilă."
+
+#: includes/libs/admin/helper-admin.class.php:161
+#, php-format
+msgid "Enter %s"
+msgstr "Introduceți %s"
+
+#: includes/libs/admin/notice/admin-notices.class.php:39
+#: includes/libs/admin/notice/admin-notices.class.php:51
+#: includes/libs/plugin.class.php:93 includes/libs/plugin.class.php:105
+#: includes/libs/vimeo-api/resource-objects.class.php:45
+#: includes/libs/vimeo-api/resource-objects.class.php:57
+msgid "Something went wrong."
+msgstr "Ceva nu a funcționat."
+
+#: includes/libs/admin/notice/admin-notices.class.php:82
+msgid ""
+"You must register the notice before \"admin_notices\" hook is triggered."
+msgstr ""
+"Trebuie să înregistrați notificarea înainte ca declanșarea „admin_notices” "
+"să fie declanșată."
+
+#: includes/libs/admin/notice/user-notice/message.class.php:78
+msgid "Sure, I'd love to!"
+msgstr "Sigur mi-ar plăcea!"
+
+#: includes/libs/admin/notice/user-notice/message.class.php:79
+msgid "No, thanks."
+msgstr "Nu mulțumesc."
+
+#: includes/libs/admin/notice/user-notice/message.class.php:80
+msgid "I've already given a review."
+msgstr "Am scris deja o recenzie."
+
+#: includes/libs/admin/notice/user-notice/message.class.php:81
+msgid "Ask me later."
+msgstr "Întreabă-mă mai târziu."
+
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:31
+#, php-format
+msgid ""
+"In order to be able to import videos using Vimeotheque, you must register on "
+"%s."
+msgstr ""
+"Pentru a putea importa videoclipuri folosind Vimeotheque trebuie să vă "
+"înregistrați pe %s."
+
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:34
+msgid "Vimeo App page"
+msgstr "Pagina aplicației Vimeo"
+
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:37
+msgid ""
+"Please note that you must have a valid Vimeo account and also you must be "
+"logged into Vimeo before being able to register your app."
+msgstr ""
+"Vă rugăm să rețineți că trebuie să aveți un cont Vimeo valid și, de "
+"asemenea, trebuie să fiți autentificat pe Vimeo înainte de a vă putea "
+"înregistra aplicația."
+
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:39
+#, php-format
+msgid ""
+"After you registered your app visit %s and enter your Vimeo consumer and "
+"secret keys."
+msgstr ""
+"După ce v-ați înregistrat aplicația, vizitați %s și introduceți cheia  și "
+"codul secret Vimeo."
+
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:43
+msgid "Settings page"
+msgstr "Pagina opțiuni"
+
+#: includes/libs/admin/page/list-videos-page.class.php:24
+msgid "Video list"
+msgstr "Lista video"
+
+#: includes/libs/admin/page/list-videos-page.class.php:58
+#: includes/libs/post/post-type.class.php:84
+#: includes/libs/vimeo-api/search-resource.class.php:69
+msgid "Search"
+msgstr "Caută"
+
+#: includes/libs/admin/page/post-edit-page.class.php:122
+msgid "Before being able to import videos you must register and App on Vimeo."
+msgstr ""
+"Înainte de a putea importa videoclipuri trebuie să creați aplicația Vimeo "
+"care vă va permite să interogați Vimeo."
+
+#: includes/libs/admin/page/post-edit-page.class.php:126
+#: views/plugin_settings.php:415
+msgid "Create Vimeo App"
+msgstr "Creați aplicație Vimeo"
+
+#: includes/libs/admin/page/post-edit-page.class.php:131
+#: views/plugin_settings.php:420
+msgid "See tutorial"
+msgstr "Vedeți tutorialul"
+
+#: includes/libs/admin/page/post-edit-page.class.php:170
+msgid "Import video"
+msgstr "Importați videoclipuri"
+
+#: includes/libs/admin/page/post-edit-page.class.php:173
+msgid ""
+"JavaScript is disabled! You must enable JavaScript in order to be able to "
+"import videos."
+msgstr ""
+"JavaScript este dezactivat! Trebuie să activați JavaScript pentru a putea "
+"importa videoclipuri."
+
+#: includes/libs/admin/page/settings-helper.class.php:32
+msgid "With Vimeotheque PRO you can also query and import your private videos."
+msgstr ""
+"Cu Vimeotheque PRO puteți, de asemenea, să interogați și să importați "
+"videoclipurile dvs. private."
+
+#: includes/libs/admin/page/settings-helper.class.php:40
+msgid "Import as regular post type (aka post)"
+msgstr "Importați ca tip implicit de postare (articol obișnuit)"
+
+#: includes/libs/admin/page/settings-helper.class.php:43
+msgid ""
+"Videos will be imported as regular post type instead of plugin custom post "
+"type video."
+msgstr ""
+"Videoclipurile vor fi importate ca tip de postare obișnuită în locul "
+"postării de tip video."
+
+#: includes/libs/admin/page/settings-helper.class.php:44
+msgid ""
+"Posts having attached videos will display having the same player options as "
+"video post types."
+msgstr ""
+"Postările cu videoclipuri atașate se vor afișa cu aceleași opțiuni de player "
+"ca tipurile de postări video."
+
+#: includes/libs/admin/page/settings-helper.class.php:49
+msgid "Include microdata on video pages"
+msgstr "Includeți microdate pe paginile video"
+
+#: includes/libs/admin/page/settings-helper.class.php:52
+msgid ""
+"When checked, all posts having video attached will also include microdata "
+"for SEO purposes."
+msgstr ""
+"Când opțiunea este bifată, toate postările cu videoclip atașat vor include "
+"microdate în scopuri SEO."
+
+#: includes/libs/admin/page/settings-helper.class.php:56
+msgid "More details on schema.org"
+msgstr "Mai multe detalii pe schema.org"
+
+#: includes/libs/admin/page/settings-helper.class.php:62
+msgid "Check video status after import"
+msgstr "Verificați starea videoclipului după import"
+
+#: includes/libs/admin/page/settings-helper.class.php:63
+msgid ""
+"When checked, will verify on Vimeo every 24H if the video still exists or is "
+"embeddable and if not, it will automatically set the post status to pending. "
+"This action is triggered by your website visitors."
+msgstr ""
+"Când este bifat, va verifica pe Vimeo la fiecare 24 de ore dacă videoclipul "
+"există în continuare și este încorporabil iar în caz contrar va seta automat "
+"starea postării pe așteptare. Această acțiune este declanșată de vizitatorii "
+"site-ului dvs. web."
+
+#: includes/libs/admin/page/settings-helper.class.php:74
+msgid "Include videos post type on homepage"
+msgstr "Includeți tipul de postare video pe pagina principală"
+
+#: includes/libs/admin/page/settings-helper.class.php:75
+msgid ""
+"When checked, if your homepage displays a list of regular posts, videos will "
+"be included among them."
+msgstr ""
+"Când este bifată, dacă pagina dvs. de pornire afișează o listă de postări "
+"obișnuite, videoclipurile vor fi incluse printre ele."
+
+#: includes/libs/admin/page/settings-helper.class.php:79
+msgid "Include videos post type in main RSS feed"
+msgstr "Includeți tipul de postare a videoclipurilor în fluxul RSS principal"
+
+#: includes/libs/admin/page/settings-helper.class.php:80
+msgid "When checked, custom post type will be included in your main RSS feed."
+msgstr ""
+"Când este bifat, tipul de postare video va fi inclus în fluxul RSS principal."
+
+#: includes/libs/admin/page/settings-helper.class.php:88
+msgid "Prevent auto embed on video content"
+msgstr "Preveniți încorporarea automată a conținutului video"
+
+#: includes/libs/admin/page/settings-helper.class.php:89
+msgid ""
+"If content retrieved from Vimeo has links to other videos, checking this "
+"option will prevent auto embedding of videos in your post content."
+msgstr ""
+"Dacă conținutul recuperat de pe Vimeo are linkuri către alte videoclipuri, "
+"bifând această opțiune se va împiedica încorporarea automată a "
+"videoclipurilor în conținutul postării."
+
+#: includes/libs/admin/page/settings-helper.class.php:93
+msgid "Make URL's in video content clickable"
+msgstr "Faceți linkuri din adresele URL aflate în descrierea videoclipului"
+
+#: includes/libs/admin/page/settings-helper.class.php:94
+msgid ""
+"Automatically make all valid URL's from content retrieved from Vimeo "
+"clickable."
+msgstr ""
+"Transformă automat toate adresele URL valide din conținutul extras din Vimeo "
+"în linkuri pe care se poate face clic."
+
+#: includes/libs/admin/page/settings-helper.class.php:102
+msgid "Import featured image on request"
+msgstr "Importați imaginea la cerere"
+
+#: includes/libs/admin/page/settings-helper.class.php:103
+msgid ""
+"Vimeo video thumbnail will be imported only when featured images needs to be "
+"displayed (ie. a post created by the plugin is displayed)."
+msgstr ""
+"Imaginea videoclipului Vimeo va fi importată numai atunci când trebuie "
+"afișate imaginile prezentate (de exemplu, este afișată o postare creată de "
+"plugin)."
+
+#: includes/libs/admin/page/settings-helper.class.php:111
+msgid "Videos not public will be"
+msgstr "Videoclipurile care nu sunt publice vor fi"
+
+#: includes/libs/admin/page/settings-helper.class.php:112
+msgid "skipped from importing"
+msgstr "omise de la import"
+
+#: includes/libs/admin/page/settings-helper.class.php:113
+msgid ""
+"If a video is not set as public by its owner (password protected videos for "
+"example), it will obey this rule."
+msgstr ""
+"Dacă un videoclip nu este setat ca fiind public de proprietarul său (de "
+"exemplu, videoclipuri protejate prin parolă), acesta va respecta această "
+"regulă."
+
+#: includes/libs/admin/page/settings-helper.class.php:118
+msgid "15 minutes"
+msgstr "15 minute"
+
+#: includes/libs/admin/page/settings-helper.class.php:119
+msgid "How often should Vimeo be queried for playlist updates."
+msgstr ""
+"Cât de des ar trebui interogat Vimeo pentru actualizări ale listelor de "
+"import automat."
+
+#: includes/libs/admin/page/settings-helper.class.php:120
+msgid "Import 20 videos every"
+msgstr "Importați 20 de videoclipuri la fiecare"
+
+#: includes/libs/admin/page/settings-helper.class.php:124
+msgid "Stop automatic feed import on error"
+msgstr "Opriți importul automat în caz de eroare"
+
+#: includes/libs/admin/page/settings-helper.class.php:125
+msgid ""
+"When enabled, if Vimeo API returns an error on automatic import, the "
+"respective feed will be removed from the queue if the allowed number of "
+"fails is exceeded."
+msgstr ""
+"Când este activat, dacă Vimeo API returnează o eroare la importul automat, "
+"lista respectivă va fi eliminată din șirul de import dacă se depășește "
+"numărul permis de eșecuri."
+
+#: includes/libs/admin/page/settings-helper.class.php:129
+msgid "Number of fails until automatic import is stopped"
+msgstr "Numărul de eșecuri până când importul automat este oprit"
+
+#: includes/libs/admin/page/settings-helper.class.php:131
+msgid ""
+"For how many times an automatic update can fail before being removed from "
+"the import queue."
+msgstr ""
+"De câte ori o actualizare automată poate eșua înainte de a fi eliminată din "
+"șirul de import."
+
+#: includes/libs/admin/page/settings-helper.class.php:135
+msgid "Enable conditional automatic imports"
+msgstr "Activați importurile automate condiționate"
+
+#: includes/libs/admin/page/settings-helper.class.php:136
+msgid ""
+"When enabled, automatic imports will run only when a custom URL is opened on "
+"your website."
+msgstr ""
+"Când este activată, importurile automate vor rula numai atunci când o adresă "
+"URL personalizată este deschisă pe site-ul dvs. web."
+
+#: includes/libs/admin/page/settings-helper.class.php:140
+msgid "Legacy automatic import"
+msgstr "Import automat vechi"
+
+#: includes/libs/admin/page/settings-helper.class.php:141
+msgid ""
+"Trigger automatic video imports on page load (will increase page load time "
+"when doing automatic imports)"
+msgstr ""
+"Declanșați importurile video automate la încărcarea paginii (va crește "
+"timpul de încărcare a paginii atunci când efectuați importurile automate)"
+
+#: includes/libs/admin/page/settings-helper.class.php:149
+msgid "Override individual posts options"
+msgstr "Înlocuiți opțiunile de postări individuale"
+
+#: includes/libs/admin/page/settings-helper.class.php:150
+msgid ""
+"When checked, individual post options for embedding videos will not be taken "
+"into account. Instead, the options set on this page will be used to embed "
+"videos on your website."
+msgstr ""
+"Când este bifată, opțiunile de postare individuale pentru încorporarea "
+"videoclipurilor nu vor fi luate în considerare. În schimb, opțiunile setate "
+"pe această pagină vor fi folosite pentru a încorpora videoclipuri pe site-ul "
+"dvs. web."
+
+#: includes/libs/admin/page/settings-helper.class.php:172
+msgid "Hide PRO options"
+msgstr "Ascundeți opțiunile PRO"
+
+#: includes/libs/admin/page/settings-helper.class.php:173
+msgid "View PRO options"
+msgstr "Vizualizați opțiunile PRO"
+
+#: includes/libs/admin/page/settings-page.class.php:301
+msgid "Clear OAuth credentials"
+msgstr "Ștergeți acreditările OAuth"
+
+#: includes/libs/admin/page/status-page.class.php:29
+msgid "System status"
+msgstr "Stare sistem"
+
+#: includes/libs/admin/page/status-page.class.php:34
+msgid "Copy the report and paste it into the support ticket."
+msgstr "Copiați raportul și lipiți-l în mesajul de cerere de suport tehnic."
+
+#: includes/libs/admin/page/status-page.class.php:35
+msgid "Create report"
+msgstr "Creați un raport"
+
+#: includes/libs/admin/page/status-page.class.php:36
+msgid "Click to create report and paste the result into the support ticket."
+msgstr ""
+"Faceți clic pentru a crea un raport și lipiți rezultatul în mesajul de "
+"cerere de suport tehnic."
+
+#: includes/libs/admin/page/status-page.class.php:40
+msgid "WordPress"
+msgstr "WordPress"
+
+#: includes/libs/admin/page/status-page.class.php:44
+msgid "WP URL"
+msgstr "URL WP"
+
+#: includes/libs/admin/page/status-page.class.php:48
+msgid "Site address"
+msgstr "Adresa site-ului"
+
+#: includes/libs/admin/page/status-page.class.php:52
+msgid "Vimeotheque version"
+msgstr "Versiunea Vimeotheque"
+
+#: includes/libs/admin/page/status-page.class.php:56
+msgid "WordPress version"
+msgstr "Versiunea WordPress"
+
+#: includes/libs/admin/page/status-page.class.php:60
+msgid "WordPress memory limit"
+msgstr "Limita de memorie WordPress"
+
+#: includes/libs/admin/page/status-page.class.php:64
+msgid "WordPress debug mode"
+msgstr "Modul de depanare WordPress"
+
+#: includes/libs/admin/page/status-page.class.php:68
+msgid "Language"
+msgstr "Limba"
+
+#: includes/libs/admin/page/status-page.class.php:72
+msgid "WordPress multisite"
+msgstr "WordPress multisite"
+
+#: includes/libs/admin/page/status-page.class.php:78
+msgid "Server"
+msgstr "Server"
+
+#: includes/libs/admin/page/status-page.class.php:82
+msgid "Server info"
+msgstr "Informații despre server"
+
+#: includes/libs/admin/page/status-page.class.php:86
+msgid "PHP version"
+msgstr "Versiunea PHP"
+
+#: includes/libs/admin/page/status-page.class.php:90
+msgid "PHP post max size"
+msgstr "Mărimea maximă a postului PHP"
+
+#: includes/libs/admin/page/status-page.class.php:94
+msgid "PHP time limit"
+msgstr "Limită de timp PHP"
+
+#: includes/libs/admin/page/status-page.class.php:98
+msgid "PHP max input vars"
+msgstr "PHP vars de intrare max"
+
+#: includes/libs/admin/page/status-page.class.php:102
+msgid "PHP default timezone"
+msgstr "Fus orar implicit PHP"
+
+#: includes/libs/admin/page/status-page.class.php:106
+msgid "PHP cURL"
+msgstr "PHP CURL"
+
+#: includes/libs/admin/page/status-page.class.php:110
+msgid "cURL version"
+msgstr "versiune cURL"
+
+#: includes/libs/admin/page/status-page.class.php:123
+msgid "Version"
+msgstr "Versiune"
+
+#: includes/libs/admin/page/status-page.class.php:127
+msgid "Child theme"
+msgstr "Temă copil"
+
+#: includes/libs/admin/page/status-page.class.php:132
+msgid "Plugin settings"
+msgstr "Opțiuni plugin"
+
+#: includes/libs/admin/page/status-page.class.php:143
+#: views/plugin_settings.php:335
+msgid "Embed settings"
+msgstr "Setări de încorporare"
+
+#: includes/libs/admin/page/status-page.class.php:214
+msgid "cURL installed but unable to retrieve version."
+msgstr "cURL este instalat dar nu se poate prelua versiunea."
+
+#: includes/libs/admin/page/status-page.class.php:291
+msgid "Yes"
+msgstr "Da"
+
+#: includes/libs/admin/page/status-page.class.php:293
+msgid "No"
+msgstr "Nu"
+
+#: includes/libs/admin/page/video-import-page.class.php:80
+msgid "The grid view for Vimeo videos import requires JavaScript."
+msgstr ""
+"Vizualizarea tip grilă pentru importul videoclipurilor Vimeo necesită "
+"JavaScript."
+
+#: includes/libs/admin/page/video-import-page.class.php:84
+msgid "Switch to the list view"
+msgstr "Comutați la vizualizarea listă"
+
+#: includes/libs/admin/page/video-import-page.class.php:232
+msgid "Importing, please wait..."
+msgstr "Se importă, vă rugăm să așteptați ..."
+
+#: includes/libs/admin/page/video-import-page.class.php:233
+msgid "Not done yet, still importing. You'll have to wait a bit longer."
+msgstr ""
+"Nu s-a terminat încă, încă se importă. Va trebui să așteptați puțin mai mult."
+
+#: includes/libs/admin/page/video-import-page.class.php:261
+msgid "Loading, please wait..."
+msgstr "Încărcare, va rugam așteptați..."
+
+#: includes/libs/admin/page/video-import-page.class.php:262
+msgid "Please use the form above to perform a search for Vimeo videos."
+msgstr ""
+"Vă rugăm să utilizați formularul de mai sus pentru a efectua o căutare a "
+"videoclipurilor Vimeo."
+
+#: includes/libs/admin/page/video-import-page.class.php:263
+#, php-format
+msgid "Displaying %1$d videos out of %2$d videos."
+msgstr "Se afișează %1$d videoclipuri din %2$d videoclipuri."
+
+#: includes/libs/admin/page/video-import-page.class.php:264
+msgid "Sorry, there are no videos matching your criteria."
+msgstr ""
+"Ne pare rău, nu există videoclipuri care să corespundă criteriilor dvs."
+
+#: includes/libs/admin/page/video-import-page.class.php:265
+msgid "All results were loaded."
+msgstr "Toate rezultatele au fost încărcate."
+
+#: includes/libs/admin/page/video-import-page.class.php:266
+msgid "Load more"
+msgstr "Mai mult"
+
+#: includes/libs/admin/page/video-import-page.class.php:267
+msgid "Not imported due to unknown error."
+msgstr "Nu a fost importat din cauza unei erori necunoscute."
+
+#: includes/libs/admin/page/video-import-page.class.php:268
+msgid "Ready to accept queries, please use the form to search for videos."
+msgstr ""
+"Pregătit pentru interogări, vă rugăm să utilizați formularul pentru a căuta "
+"videoclipuri."
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:51
+msgid "Set description as"
+msgstr "Setați descrierea ca"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:55
+msgid "content"
+msgstr "conținut"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:56
+msgid "excerpt"
+msgstr "rezumat"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:57
+msgid "both"
+msgstr "ambele"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:58
+msgid "none"
+msgstr "nici una"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:66
+#: views/plugin_settings.php:237
+msgid "Import status"
+msgstr "Vizibilitate articol importat"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:70
+#: includes/libs/admin/table/video-import-list-table.class.php:170
+#: includes/libs/admin/table/video-list-table.class.php:209
+#: views/plugin_settings.php:242
+msgid "Published"
+msgstr "Publicat"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:71
+#: views/plugin_settings.php:243
+msgid "Draft"
+msgstr "Schita"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:72
+#: views/plugin_settings.php:244
+msgid "Pending"
+msgstr "În așteptare"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:80
+#: views/plugin_settings.php:141
+msgid "Import titles"
+msgstr "Importă titluri"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:127
+#: includes/libs/post/post-type.class.php:146
+msgid "Categories"
+msgstr "Categorii"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:150
+msgid ""
+"Please note that any tags retrieved from Vimeo will also be imported and set "
+"as post tags."
+msgstr ""
+"Rețineți că orice etichete preluate de pe Vimeo vor fi, de asemenea, "
+"importate și setate ca etichete de postare."
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:156
+#: includes/libs/post/post-type.class.php:184
+msgid "Tags"
+msgstr "Etichete"
+
+#: includes/libs/admin/posts-import-meta-panels.class.php:177
+msgid "Import"
+msgstr "Import"
+
+#: includes/libs/admin/table/video-import-list-table.class.php:47
+#, php-format
+msgid "Column %s was not found."
+msgstr "Coloana %s nu a fost găsită."
+
+#: includes/libs/admin/table/video-import-list-table.class.php:85
+msgid "View on Vimeo"
+msgstr "Vezi pe Vimeo"
+
+#: includes/libs/admin/table/video-import-list-table.class.php:114
+#, php-format
+msgid "%d likes"
+msgstr "%d aprecieri"
+
+#: includes/libs/admin/table/video-import-list-table.class.php:134
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: includes/libs/admin/table/video-import-list-table.class.php:166
+msgid "Uploader"
+msgstr "Autor"
+
+#: includes/libs/admin/table/video-import-list-table.class.php:168
+#: includes/libs/vimeo-api/resource-objects.class.php:140
+msgid "Likes"
+msgstr "Like-uri"
+
+#: includes/libs/admin/table/video-import-list-table.class.php:169
+msgid "Views"
+msgstr "Vizualizări"
+
+#: includes/libs/admin/table/video-list-table.class.php:106
+msgid "Auto play"
+msgstr "Redare automata"
+
+#: includes/libs/admin/table/video-list-table.class.php:108
+msgid "Insert shortcode"
+msgstr "Introduceți codul scurt"
+
+#: includes/libs/admin/table/video-list-table.class.php:109
+msgid "Cancel"
+msgstr "Anulează"
+
+#: includes/libs/admin/table/video-list-table.class.php:115
+msgid "Get video shortcode"
+msgstr "Obțineți codul scurt video"
+
+#: includes/libs/admin/table/video-list-table.class.php:231
+msgid "Most recent videos"
+msgstr "Cele mai recente videoclipuri"
+
+#: includes/libs/admin/table/video-list-table.class.php:252
+msgid "Filter"
+msgstr "Filtru"
+
+#: includes/libs/admin/table/video-list-table.class.php:253
+msgid "Add category to shortcode"
+msgstr "Adăugați o categorie la shortcode"
+
+#: includes/libs/admin/table/video-list-table.class.php:318
+#: includes/libs/vimeo-api/category-resource.class.php:52
+#: includes/libs/widgets/playlist-widget.class.php:211
+msgid "Category"
+msgstr "Categorie"
+
+#: includes/libs/admin/table/video-list-table.class.php:319
+msgid "Date"
+msgstr "Data"
+
+#: includes/libs/post/post-type.class.php:76
+msgid "Vimeo Videos"
+msgstr "Videoclipuri Vimeo"
+
+#: includes/libs/post/post-type.class.php:77
+msgid "Vimeo Video"
+msgstr "Videoclip Video"
+
+#: includes/libs/post/post-type.class.php:78
+msgid "Add new"
+msgstr "Adaugă nou"
+
+#: includes/libs/post/post-type.class.php:79
+msgid "Add new video"
+msgstr "Adăugați un videoclip nou"
+
+#: includes/libs/post/post-type.class.php:80
+msgid "Edit video"
+msgstr "Editează videoclipul"
+
+#: includes/libs/post/post-type.class.php:81
+msgid "New video"
+msgstr "Videoclip nou"
+
+#: includes/libs/post/post-type.class.php:82
+msgid "All videos"
+msgstr "Toate videoclipurile"
+
+#: includes/libs/post/post-type.class.php:83
+msgid "View"
+msgstr "Vezi"
+
+#: includes/libs/post/post-type.class.php:85
+msgid "No videos found"
+msgstr "Nu au fost găsite videoclipuri"
+
+#: includes/libs/post/post-type.class.php:86
+msgid "No videos in trash"
+msgstr "Nu există videoclipuri în coșul de gunoi"
+
+#: includes/libs/post/post-type.class.php:136
+msgid "Vimeo Video categories"
+msgstr "Categorii video"
+
+#: includes/libs/post/post-type.class.php:137
+msgid "Vimeo Video category"
+msgstr "Categoria video"
+
+#: includes/libs/post/post-type.class.php:138
+msgid "Search video category"
+msgstr "Căutați categoria video"
+
+#: includes/libs/post/post-type.class.php:139
+msgid "All video categories"
+msgstr "Toate categoriile de videoclipuri"
+
+#: includes/libs/post/post-type.class.php:140
+msgid "Video category parent"
+msgstr "Categorie video părinte"
+
+#: includes/libs/post/post-type.class.php:141
+msgid "Video category parent:"
+msgstr "Categorie video părinte:"
+
+#: includes/libs/post/post-type.class.php:142
+msgid "Edit video category"
+msgstr "Editați categoria video"
+
+#: includes/libs/post/post-type.class.php:143
+msgid "Update video category"
+msgstr "Actualizați categoria video"
+
+#: includes/libs/post/post-type.class.php:144
+msgid "Add new video category"
+msgstr "Adăugați o nouă categorie de videoclipuri"
+
+#: includes/libs/post/post-type.class.php:145
+msgid "Video category name"
+msgstr "Numele categoriei video"
+
+#: includes/libs/post/post-type.class.php:174
+msgid "Vimeo Video tags"
+msgstr "Etichete video"
+
+#: includes/libs/post/post-type.class.php:175
+msgid "Vimeo Video tag"
+msgstr "Etichetă video"
+
+#: includes/libs/post/post-type.class.php:176
+msgid "Search video tag"
+msgstr "Căutați eticheta video"
+
+#: includes/libs/post/post-type.class.php:177
+msgid "All video tags"
+msgstr "Toate etichetele video"
+
+#: includes/libs/post/post-type.class.php:178
+msgid "Video tag parent"
+msgstr "Etichetă video părinte"
+
+#: includes/libs/post/post-type.class.php:179
+msgid "Video tag parent:"
+msgstr "Etichetă video părinte:"
+
+#: includes/libs/post/post-type.class.php:180
+msgid "Edit video tag"
+msgstr "Editați eticheta video"
+
+#: includes/libs/post/post-type.class.php:181
+msgid "Update video tag"
+msgstr "Actualizați eticheta video"
+
+#: includes/libs/post/post-type.class.php:182
+msgid "Add new video tag"
+msgstr "Adăugați o nouă etichetă video"
+
+#: includes/libs/post/post-type.class.php:183
+msgid "Video tag name"
+msgstr "Numele etichetei video"
+
+#: includes/libs/post/post-type.class.php:225
+msgid "Video updated"
+msgstr "Videoclip actualizat"
+
+#: includes/libs/post/post-type.class.php:229
+#: includes/libs/post/post-type.class.php:243
+#: includes/libs/post/post-type.class.php:253
+#: includes/libs/post/post-type.class.php:272
+#: includes/libs/post/post-type.class.php:281
+msgid "See video"
+msgstr "Vezi videoclip"
+
+#: includes/libs/post/post-type.class.php:232
+msgid "Custom field updated."
+msgstr "Câmp personalizat actualizat."
+
+#: includes/libs/post/post-type.class.php:233
+msgid "Custom field deleted."
+msgstr "Câmp personalizat şters."
+
+#: includes/libs/post/post-type.class.php:234
+msgid "Video updated."
+msgstr "Videoclip actualizat."
+
+#. translators: %s: date and time of the revision
+#: includes/libs/post/post-type.class.php:236
+#, php-format
+msgid "Video restored to version %s"
+msgstr "Videoclipul a fost restabilit la versiunea %s"
+
+#: includes/libs/post/post-type.class.php:239
+msgid "Video published"
+msgstr "Videoclip publicat"
+
+#: includes/libs/post/post-type.class.php:246
+msgid "Video saved."
+msgstr "Videoclip salvat."
+
+#: includes/libs/post/post-type.class.php:249
+msgid "Video saved"
+msgstr "Videoclip salvat"
+
+#: includes/libs/post/post-type.class.php:259
+#, php-format
+msgid "Video will be published at: %s."
+msgstr "Videoclipul va fi publicat la: %s."
+
+#. translators: Publish box date format, see http://php.net/date
+#: includes/libs/post/post-type.class.php:264
+msgid "M j, Y @ G:i"
+msgstr "J M Y @ G:i"
+
+#: includes/libs/post/post-type.class.php:277
+msgid "Video draft saved."
+msgstr "Ciorna salvată."
+
+#: includes/libs/post/post-type.class.php:284
+msgid "Please select a source"
+msgstr "Vă rugăm să selectați o sursă"
+
+#: includes/libs/post/post-type.class.php:286
+#, php-format
+msgid ""
+"Vimeo video with ID %s is already imported. You are now editing the existing "
+"video."
+msgstr ""
+"Videoclipul Vimeo cu ID %s este deja importat. Acum editați videoclipul "
+"existent."
+
+#: includes/libs/posts-import.class.php:87
+#, php-format
+msgid "Skipped video having ID %s because it already exists."
+msgstr "Videoclipul cu ID %s a fost omis deoarece există deja."
+
+#: includes/libs/posts-import.class.php:91
+#, php-format
+msgid "Existing post has ID %s."
+msgstr "Postarea existentă are ID-ul %s."
+
+#: includes/libs/posts-import.class.php:144
+#, php-format
+msgid "Skipped private video having ID %s because of plugin settings."
+msgstr "Videoclipul privat cu ID %s omis datorită setărilor pluginului."
+
+#: includes/libs/posts-import.class.php:314
+#, php-format
+msgid ""
+"Video having ID %s could not be imported because of a filter blocking all "
+"imports."
+msgstr ""
+"Videoclipul cu ID %s nu a putut fi importat din cauza unui filtru care "
+"blochează toate importurile."
+
+#: includes/libs/rest-api/endpoints/vimeo-api/rest-pictures-controller.class.php:59
+#: includes/libs/rest-api/endpoints/vimeo-api/rest-video-controller.class.php:59
+msgid "Video ID not found."
+msgstr "ID-ul videoclipului nu a fost găsit."
+
+#: includes/libs/rest-api/endpoints/vimeo-api/rest-search-controller.class.php:41
+#: includes/libs/rest-api/endpoints/vimeo-api/rest-search-controller.class.php:63
+msgid "No search query detected."
+msgstr "Nu a fost detectată nicio interogare de căutare."
+
+#: includes/libs/rest-api/endpoints/vimeo-api/rest-video-controller.class.php:91
+msgid "Something is wrong with the URL you entered. Please try again."
+msgstr ""
+"Ceva nu este în regulă cu adresa URL pe care ați introdus-o. Vă rugăm să "
+"încercați din nou."
+
+#: includes/libs/rest-api/endpoints/wp/rest-post-create-controller.class.php:58
+msgid "Video ID could not be detected. Please try again."
+msgstr "ID-ul video nu a putut fi detectat. Vă rugăm să încercați din nou."
+
+#: includes/libs/rest-api/endpoints/wp/rest-post-create-controller.class.php:74
+msgid "Video post was already imported."
+msgstr "Postarea video a fost deja importată."
+
+#: includes/libs/rest-api/endpoints/wp/rest-post-create-controller.class.php:85
+msgid "An unknown error has occured, please refresh the page and try again."
+msgstr ""
+"A apărut o eroare necunoscută, reîncărcați pagina și încercați din nou."
+
+#: includes/libs/rest-api/endpoints/wp/rest-post-create-controller.class.php:98
+msgid "Sorry, your video could not be imported, please try again."
+msgstr ""
+"Ne pare rău, videoclipul dvs. nu a putut fi importat, încercați din nou."
+
+#: includes/libs/rest-api/endpoints/wp/rest-post-create-controller.class.php:103
+msgid "Video post created!"
+msgstr "Postare video creată!"
+
+#: includes/libs/shortcode/shortcode-abstract.class.php:71
+#, php-format
+msgid "Shortcode attribute %s is missing."
+msgstr "Atributul %s din shortcode lipsește."
+
+#: includes/libs/shortcode/shortcode-factory.class.php:57
+#, php-format
+msgid "Shortcode %s is not registered."
+msgstr "Shortcode-ul %s nu este înregistrat."
+
+#: includes/libs/vimeo-api/album-resource.class.php:63
+msgid "Showcase/Album"
+msgstr "Galerie/Album"
+
+#: includes/libs/vimeo-api/album-resource.class.php:102
+msgid "Album user ID"
+msgstr "ID utilizator album"
+
+#: includes/libs/vimeo-api/album-resource.class.php:111
+#: views/import_videos.php:78
+msgid "Album owner user ID"
+msgstr "ID-ul utilizatorului căruia îi aparține albumul pe Vimeo"
+
+#: includes/libs/vimeo-api/channel-resource.class.php:53
+msgid "Channel"
+msgstr "Canal"
+
+#: includes/libs/vimeo-api/group-resource.class.php:49
+msgid "Group"
+msgstr "Grup"
+
+#: includes/libs/vimeo-api/portfolio-resource.class.php:50
+msgid "Portfolio"
+msgstr "Portofoliu"
+
+#: includes/libs/vimeo-api/portfolio-resource.class.php:91
+msgid "Portfolio user ID"
+msgstr "ID utilizator de portofoliu"
+
+#: includes/libs/vimeo-api/portfolio-resource.class.php:100
+msgid "Portfolio owner user ID"
+msgstr "ID-ul utilizatorului căruia îi aparține portofoliul pe Vimeo"
+
+#: includes/libs/vimeo-api/resource-abstract.class.php:157
+#, php-format
+msgid "Sort option \"%s\" is not available in feed resource."
+msgstr "Opțiunea de sortare „%s” nu este disponibilă."
+
+#: includes/libs/vimeo-api/resource-objects.class.php:103
+msgid "Newest"
+msgstr "Cele mai noi"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:109
+msgid "Alphabetical &#x1F81D;"
+msgstr "Alfabetic 🠝"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:115
+msgid "Alphabetical &#x1F81F;"
+msgstr "Alfabetic 🠟"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:128
+msgid "Oldest"
+msgstr "Cele mai vechi"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:134
+msgid "Plays"
+msgstr "Redări"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:146
+msgid "Comments"
+msgstr "Comentarii"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:152
+msgid "Relevancy"
+msgstr "Relevanţă"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:221
+#, php-format
+msgid "Resource %s is not registered."
+msgstr "Resursa %s nu este înregistrată."
+
+#: includes/libs/vimeo-api/thumbnails-resource.class.php:23
+msgid "Thumbnail"
+msgstr "Imagine"
+
+#: includes/libs/vimeo-api/user-resource.class.php:56
+msgid "User uploads"
+msgstr "Video utilizator"
+
+#: includes/libs/vimeo-api/video-resource.class.php:23
+msgid "Video"
+msgstr "Video"
+
+#: includes/libs/vimeo-api/vimeo-api-query.class.php:95
+#, php-format
+msgid "Endpoint API returned an error: %s."
+msgstr "Endpoint API a returnat o eroare: %s."
+
+#: includes/libs/vimeo-api/vimeo-api-query.class.php:106
+#, php-format
+msgid "Making remote request to: %s."
+msgstr "S-a efectuat cere către adresa: %s."
+
+#: includes/libs/vimeo-api/vimeo-api-query.class.php:130
+#, php-format
+msgid "Current rate limit: %s (%s remaining). Limit reset time set at %s."
+msgstr ""
+"Limita actuală a ratei: %s (rămâne %s). Timpul de resetare limită setat la "
+"%s."
+
+#: includes/libs/vimeo-api/vimeo.class.php:52
+#, php-format
+msgid "%s: %s (error code: %s)"
+msgstr "%s: %s (cod de eroare: %s)"
+
+#: includes/libs/vimeo-api/vimeo.class.php:53
+#: includes/libs/vimeo-api/vimeo.class.php:60
+msgid "Vimeo API error encountered"
+msgstr "Eroare API Vimeo întâlnită"
+
+#: includes/libs/vimeo-api/vimeo.class.php:64
+msgid "An unknown Vimeo API error has happened. Please try again."
+msgstr ""
+"A apărut o eroare necunoscută Vimeo API. Vă rugăm să încercați din nou."
+
+#: includes/libs/widgets/categories-widget.class.php:24
+msgid "A list or dropdown of video categories."
+msgstr "O listă sau o selecție a categoriilor de videoclipuri."
+
+#: includes/libs/widgets/categories-widget.class.php:35
+msgid "Vimeo video categories"
+msgstr "Categorii video"
+
+#: includes/libs/widgets/categories-widget.class.php:112
+msgid "Show videos count"
+msgstr "Afișați numărul de videoclipuri"
+
+#: includes/libs/widgets/categories-widget.class.php:115
+msgid "Show hierarchy"
+msgstr "Afișează ierarhia"
+
+#: includes/libs/widgets/playlist-widget.class.php:35
+msgid "The most recent videos on your site."
+msgstr "Cele mai recente videoclipuri de pe site-ul dvs."
+
+#: includes/libs/widgets/playlist-widget.class.php:46
+msgid "Recent Vimeo videos"
+msgstr "Videoclipuri recente Vimeo"
+
+#: includes/libs/widgets/playlist-widget.class.php:196
+msgid "Number of videos to show"
+msgstr "Numărul de videoclipuri de afișat"
+
+#: includes/libs/widgets/playlist-widget.class.php:200
+msgid "Post type"
+msgstr "Tip articol"
+
+#: includes/libs/widgets/playlist-widget.class.php:215
+msgid "All categories"
+msgstr "Toate categoriile"
+
+#: includes/libs/widgets/playlist-widget.class.php:230
+msgid "Nothing found."
+msgstr "Nu am gasit nimic."
+
+#: includes/libs/widgets/playlist-widget.class.php:239
+msgid "Display Vimeo thumbnails?"
+msgstr "Afișați imaginile Vimeo?"
+
+#: includes/libs/widgets/playlist-widget.class.php:243
+msgid "Show as video playlist"
+msgstr "Afișează ca listă de redare video"
+
+#: includes/libs/widgets/playlist-widget.class.php:266
+msgid "Loop playlist"
+msgstr "Lista de redare în buclă"
+
+#: main.php:47
+#, php-format
+msgid "Vimeotheque requires PHP version %s+, plugin is currently NOT RUNNING."
+msgstr ""
+"Vimeotheque necesită versiunea PHP %s +, pluginul nu funcționează în prezent."
+
+#: main.php:64
+#, php-format
+msgid ""
+"Vimeotheque requires WordPress version %s+. Because you are using an earlier "
+"version, the plugin is currently NOT RUNNING."
+msgstr ""
+"Vimeotheque necesită versiunea WordPress %s +. Deoarece utilizați o versiune "
+"anterioară, pluginul nu funcționează în prezent."
+
+#: themes/default/assets/js/block/block.js:18
+msgid "Right side"
+msgstr "Partea dreaptă"
+
+#: themes/default/assets/js/block/block.js:22
+msgid "Left side"
+msgstr "Partea stanga"
+
+#: themes/default/assets/js/block/block.js:69
+msgid "Layout"
+msgstr "Aspect"
+
+#: themes/default/assets/js/block/block.js:73
+msgid "Navigation position"
+msgstr "Poziția de navigație"
+
+#: views/go_pro.php:10
+msgid "Vimeotheque PRO"
+msgstr "Vimeotheque PRO"
+
+#: views/go_pro.php:13
+msgid ""
+"Created having Vimeo publishers in mind, PRO version offers more tools to "
+"make your life easier and to allow you to focus on creating more high "
+"quality content."
+msgstr ""
+"Creat având în vedere producătorii de conținut pentru Vimeo, versiunea PRO "
+"oferă mai multe instrumente pentru a vă face viața mai ușoară și pentru a vă "
+"permite să vă concentrați pe crearea de videoclipuri de înaltă calitate."
+
+#: views/go_pro.php:16
+msgid "Vimeotheque PRO vs Lite"
+msgstr "Vimeotheque PRO vs Lite"
+
+#: views/go_pro.php:21
+msgid "Private videos import"
+msgstr "Import videoclipuri private"
+
+#: views/go_pro.php:22
+msgid "Allows you to create posts from your own private videos from Vimeo."
+msgstr ""
+"Vă permite să creați postări din propriile videoclipuri private de pe Vimeo."
+
+#: views/go_pro.php:30
+msgid "Automatic video import"
+msgstr "Import video automat"
+
+#: views/go_pro.php:31
+msgid ""
+"Automatically create video posts from Vimeo channels, categories, albums, "
+"uploads or groups with embedded video and full details (title, description, "
+"featured image). Once set up, the plugin will run the import process "
+"automatically."
+msgstr ""
+"Creați automat articole video WordPress de pe canale Vimeo, categorii, "
+"albume, încărcări sau grupuri cu videoclipuri încorporate și detalii "
+"complete (titlu, descriere, imagine prezentată). Odată configurat, pluginul "
+"va rula automat procesul de import."
+
+#: views/go_pro.php:39
+msgid "Import videos as regular posts"
+msgstr "Importați videoclipuri ca articole implicite (tip post)"
+
+#: views/go_pro.php:40
+msgid ""
+"Choose to import videos as regular post type instead of plugin’s custom post "
+"type."
+msgstr ""
+"Alegeți să importați videoclipuri ca tip de articol obișnuit în loc de tipul "
+"de articol video implementat de Vimeotheque."
+
+#: views/go_pro.php:48
+msgid "Import videos as WordPress theme posts"
+msgstr ""
+"Importați videoclipuri ca articole compatibile cu tema WordPress instalată"
+
+#: views/go_pro.php:49
+msgid ""
+"For video websites running video WordPress themes the plugin can import "
+"Vimeo videos as any post type needed by your theme and will automatically "
+"fill all custom fields needed by the theme to embed and display the video "
+"and its information."
+msgstr ""
+"Pentru site-urile video care rulează teme video WordPress, Vimeotheque poate "
+"importa videoclipuri Vimeo ca orice tip de articol necesar temei dvs. și va "
+"completa automat toate câmpurile personalizate necesare temei pentru a "
+"încorpora și afișa videoclipul și informațiile sale."
+
+#: views/go_pro.php:57
+msgid "Bulk import video image as post featured image"
+msgstr ""
+"Importați și atașați în masă imaginile videoclipurilor pentru articolele "
+"video importate"
+
+#: views/go_pro.php:58
+msgid ""
+"Set up Vimeo video image as post featured image when importing videos as "
+"posts in WordPress."
+msgstr ""
+"Configurați imaginea fiecărui video Vimeo ca imagine reprezentativă pentru "
+"articolele create cu Vimeotheque."
+
+#: views/go_pro.php:66
+msgid "Include video microdata in front-end"
+msgstr "Includeți microdate video în front-end"
+
+#: views/go_pro.php:67
+msgid ""
+"The plugin can optionally automatically create video microdata for SEO "
+"purposes directly in your pages."
+msgstr ""
+"Pluginul poate crea în mod automat microdate video în scopuri SEO direct în "
+"paginile dvs."
+
+#: views/go_pro.php:75
+msgid "WordPress video theme compatibility layer"
+msgstr "Compatibilitate cu teme video WordPress"
+
+#: views/go_pro.php:76
+msgid ""
+"By default, the plugin is compatible with several WordPress video themes and "
+"can also be extended to include your theme if not supported."
+msgstr ""
+"În mod implicit, pluginul este compatibil cu mai multe teme video WordPress "
+"și poate fi, de asemenea, extins pentru a include tema dvs. dacă aceasta nu "
+"este compatibilă."
+
+#: views/go_pro.php:84
+msgid "Full support"
+msgstr "Suport prioritar"
+
+#: views/go_pro.php:85
+msgid ""
+"Priority support and debugging directly on your website from the plugin "
+"developers."
+msgstr ""
+"Asistență tehnică prioritară și depanare direct pe site-ul dvs. web făcută "
+"de programatorii care lucrează și dezvoltă pluginul Vimeotheque."
+
+#: views/go_pro.php:92
+msgid "Try PRO version"
+msgstr "Încercați versiunea PRO"
+
+#: views/import_videos.php:10
+msgid "Import videos from Vimeo."
+msgstr "Importați videoclipuri din Vimeo."
+
+#: views/import_videos.php:11
+msgid ""
+"Enter your search criteria and submit. All found videos will be displayed "
+"and you can selectively import videos into WordPress."
+msgstr ""
+"Introduceți criteriile de căutare și trimiteți. Toate videoclipurile găsite "
+"vor fi afișate și puteți importa selectiv videoclipuri în WordPress."
+
+#: views/import_videos.php:18
+msgid "List view"
+msgstr "Listă"
+
+#: views/import_videos.php:19
+msgid "Grid view"
+msgstr "Coloană"
+
+#: views/import_videos.php:48
+msgid "Feed type"
+msgstr "Tipul listă"
+
+#: views/import_videos.php:61
+msgid "Select the type of feed you want to load."
+msgstr "Selectați tipul de resursă pe care doriți să o încărcați."
+
+#: views/import_videos.php:73
+msgid "User ID"
+msgstr "ID-ul utilizatorului"
+
+#: views/import_videos.php:91
+msgid "Vimeo search query"
+msgstr "Interogare de căutare Vimeo"
+
+#: views/import_videos.php:98
+msgid ""
+"Enter search query, user ID, group ID, channel ID or album ID according to "
+"Feed Type selection."
+msgstr ""
+"Introduceți interogarea de căutare, ID-ul utilizatorului, ID-ul grupului, ID-"
+"ul canalului sau ID-ul albumului în funcție de selectarea tipului de resursă."
+
+#: views/import_videos.php:110
+msgid "Order by"
+msgstr "Ordonat după"
+
+#: views/import_videos.php:138
+msgid "Search results"
+msgstr "Căutare în rezultate"
+
+#: views/import_videos.php:145
+msgid "enter optional search query"
+msgstr "introduceți interogarea de căutare opțională"
+
+#: views/import_videos.php:167
+msgid "Load feed"
+msgstr "Încărcați resursa"
+
+#: views/plugin_settings.php:22
+msgid "Videos - Plugin settings"
+msgstr "Videoclipuri - Setări pentru plugin"
+
+#: views/plugin_settings.php:27
+msgid "Post options"
+msgstr "Articole"
+
+#: views/plugin_settings.php:28
+msgid "Content options"
+msgstr "Conținut"
+
+#: views/plugin_settings.php:29
+msgid "Image options"
+msgstr "Imagini"
+
+#: views/plugin_settings.php:30
+msgid "Import options"
+msgstr "Import articole"
+
+#: views/plugin_settings.php:32
+msgid "API & License"
+msgstr "API și licență"
+
+#: views/plugin_settings.php:45
+msgid "General settings"
+msgstr "Setări generale"
+
+#: views/plugin_settings.php:54
+msgid ""
+"When checked, videos will be visible on all pages displaying lists of video "
+"posts."
+msgstr ""
+"Când este bifată, videoclipurile vor fi vizibile pe toate paginile care "
+"afișează liste de postări video."
+
+#: views/plugin_settings.php:67
+msgid "Video post type options"
+msgstr "Opțiuni pentru tipul de articol video"
+
+#: views/plugin_settings.php:69
+msgid "Video post type is public"
+msgstr "Tipul de articol video este public"
+
+#: views/plugin_settings.php:74
+msgid ""
+"Videos cannot be displayed in front-end. You can only incorporate them in "
+"playlists or display them in regular posts using shortcodes."
+msgstr ""
+"Videoclipurile nu pot fi afișate în front-end. Le puteți încorpora numai în "
+"playlisturi sau le puteți afișa în postări obișnuite folosind coduri scurte."
+
+#: views/plugin_settings.php:76
+msgid ""
+"Videos will display in front-end as post type video are and can also be "
+"incorporated in playlists or displayed in regular posts."
+msgstr ""
+"Videoclipurile vor fi afișate în site-ul web in mod normal și pot fi, de "
+"asemenea, încorporate în playlisturi sau afișate în articolele WordPress "
+"implicite."
+
+#: views/plugin_settings.php:92
+msgid "Video post type rewrite (pretty links)"
+msgstr "Legături permanente"
+
+#: views/plugin_settings.php:94
+msgid "Please make sure that you don't insert the same slug twice."
+msgstr "Vă rugăm să vă asigurați că nu introduceți același prefix de două ori."
+
+#: views/plugin_settings.php:99
+msgid "Post slug"
+msgstr "Prefix articol video"
+
+#: views/plugin_settings.php:105
+msgid "Taxonomy slug"
+msgstr "Prefix categorii articole video"
+
+#: views/plugin_settings.php:111
+msgid "Tags slug"
+msgstr "Prefix etichete articole video"
+
+#: views/plugin_settings.php:118 views/plugin_settings.php:193
+#: views/plugin_settings.php:222 views/plugin_settings.php:261
+#: views/plugin_settings.php:386 views/plugin_settings.php:478
+msgid "Save settings"
+msgstr "Salvează opțiuni"
+
+#: views/plugin_settings.php:129
+msgid "Post content settings"
+msgstr "Opțiuni conținut"
+
+#: views/plugin_settings.php:133
+msgid "Import date"
+msgstr "Importă data videoclipului"
+
+#: views/plugin_settings.php:136
+msgid "Imports will have Vimeo's publishing date."
+msgstr "Importurile vor avea data publicării din Vimeo."
+
+#: views/plugin_settings.php:144
+msgid "Automatically import video titles from feeds as post title."
+msgstr ""
+"Importați automat titlurile videoclipurilor din resursa importată ca titlu "
+"al articolului."
+
+#: views/plugin_settings.php:149
+msgid "Import tags"
+msgstr "Importați etichete"
+
+#: views/plugin_settings.php:152
+msgid "Automatically import video tags as post tags from feeds."
+msgstr ""
+"Importați automat etichetele videoclipului ca etichete ale articolului "
+"WordPress."
+
+#: views/plugin_settings.php:157
+msgid "Number of tags"
+msgstr "Numărul de etichete"
+
+#: views/plugin_settings.php:160
+msgid "Maximum number of tags that will be imported."
+msgstr "Numărul maxim de etichete care vor fi importate."
+
+#: views/plugin_settings.php:165
+msgid "Import descriptions as"
+msgstr "Importați descrierea ca și"
+
+#: views/plugin_settings.php:170
+msgid "post content"
+msgstr "conținut articol"
+
+#: views/plugin_settings.php:171
+msgid "post excerpt"
+msgstr "rezumat articol"
+
+#: views/plugin_settings.php:172
+msgid "post content and excerpt"
+msgstr "atât conținut cât și rezumat"
+
+#: views/plugin_settings.php:173
+msgid "do not import"
+msgstr "nu importa"
+
+#: views/plugin_settings.php:180
+msgid ""
+"Import video description from feeds as post description, excerpt or none."
+msgstr ""
+"Importați descrierea videoclipului din listele de import ca descriere "
+"articol, rezumat sau niciuna."
+
+#: views/plugin_settings.php:203
+msgid "Image settings"
+msgstr "Setări imagine"
+
+#: views/plugin_settings.php:207
+msgid "Import images"
+msgstr "Importați imagini"
+
+#: views/plugin_settings.php:210
+msgid "Vimeo video thumbnail will be set as post featured image."
+msgstr ""
+"Imaginea videoclipului Vimeo va fi setată ca imagine reprezentativă pentru "
+"articolele importate."
+
+#: views/plugin_settings.php:233
+msgid "Bulk Import settings"
+msgstr "Setări de importare în masă"
+
+#: views/plugin_settings.php:251
+msgid "Imported videos will have this status."
+msgstr "Videoclipurile importate vor avea acest status."
+
+#: views/plugin_settings.php:271
+msgid "Player size and position"
+msgstr "Mărimea și poziția playerului video"
+
+#: views/plugin_settings.php:272
+msgid ""
+"General player size settings. These settings will be applied to any new "
+"video by default and can be changed individually for every imported video."
+msgstr ""
+"Setări generale pentru dimensiunea playerului. Aceste setări vor fi aplicate "
+"în mod implicit oricărui videoclip nou și pot fi modificate individual "
+"pentru fiecare videoclip importat."
+
+#: views/plugin_settings.php:314
+msgid "Allow videos to override player aspect ratio"
+msgstr "Permiteți videoclipurilor să anuleze raportul de aspect al playerului"
+
+#: views/plugin_settings.php:321
+msgid ""
+"When checked (recommended), player will have the exact aspect ratio as "
+"retrieved from Vimeo."
+msgstr ""
+"Când este bifat (recomandat), playerul video va avea raportul de aspect "
+"exact așa cum a fost preluat din Vimeo."
+
+#: views/plugin_settings.php:322
+msgid "Player size aspect ratio option will be ignored."
+msgstr "Opțiunea de dimensiune a playerului va fi ignorată."
+
+#: views/plugin_settings.php:336
+msgid ""
+"General Vimeo player settings. These settings will be applied to any new "
+"video by default and can be changed individually for every imported video."
+msgstr ""
+"Setări generale ale playerului Vimeo. Aceste setări vor fi aplicate în mod "
+"implicit oricărui videoclip nou și pot fi modificate individual pentru "
+"fiecare videoclip importat."
+
+#: views/plugin_settings.php:352
+msgid ""
+"Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and "
+"Safari 11+. In these cases, Vimeo player revert to standard playback "
+"requiring viewers to initiate playback."
+msgstr ""
+"Redarea automată poate fi blocată în anumite medii, cum ar fi IOS, Chrome "
+"66+ și Safari 11+. În aceste cazuri, playerul Vimeo revine la redarea "
+"standard, fiind necesară acțiunea utilizatorului pentru a inițializa redarea."
+
+#: views/plugin_settings.php:380
+msgid "Show author portrait"
+msgstr "Arată portretul autorului"
+
+#: views/plugin_settings.php:396
+msgid "Vimeo OAuth keys"
+msgstr "Chei autorizare OAuth"
+
+#: views/plugin_settings.php:401
+msgid ""
+"In order to be able to import videos using Vimeotheque, you must register a "
+"new Vimeo App (requires a Vimeo account)."
+msgstr ""
+"Pentru a putea importa videoclipuri folosind Vimeotheque, trebuie să "
+"înregistrați o nouă aplicație Vimeo (necesită un cont Vimeo)."
+
+#: views/plugin_settings.php:403
+#, php-format
+msgid ""
+"Make sure that you set up option %s in your APP settings on Vimeo to be: %s"
+msgstr ""
+"Nu uitați să configurați opțiunea %s în setările aplicației pe Vimeo pentru "
+"a fi: %s"
+
+#: views/plugin_settings.php:430
+msgid "Enter Vimeo Client Identifier"
+msgstr "Introduceți identificatorul clientului din aplicația Vimeo"
+
+#: views/plugin_settings.php:433 views/plugin_settings.php:440
+msgid "You first need to create a Vimeo Account."
+msgstr "Mai întâi trebuie să creați un cont Vimeo."
+
+#: views/plugin_settings.php:437
+msgid "Enter Vimeo Client Secrets"
+msgstr "Introduceți cheia secretă client din aplicația Vimeo"
+
+#: views/plugin_settings.php:445
+msgid "Plugin access to Vimeo account"
+msgstr "Acces plugin pentru contul Vimeo"
+
+#: views/plugin_settings.php:448
+msgid "Your Vimeo keys are successfully installed."
+msgstr "Cheile dvs. Vimeo au fost instalate cu succes."
+
+#: views/plugin_settings.php:449
+msgid "Reset credentials"
+msgstr "Resetați acreditările"
+
+#: views/plugin_settings.php:452
+msgid ""
+"You can now query public videos on Vimeo and import them as WordPress posts."
+msgstr ""
+"Acum puteți interoga videoclipuri publice pe Vimeo și le puteți importa ca "
+"articole WordPress."
+
+#~ msgid " Choose posts"
+#~ msgstr "Alegeți postări"
+
+#~ msgid ""
+#~ "In order to be able to make requests to Vimeo API, you must first have a "
+#~ "Vimeo account and create the credentials."
+#~ msgstr ""
+#~ "Pentru a putea face cereri către Vimeo API, trebuie mai întâi să aveți un "
+#~ "cont Vimeo și să creați cheile de autorizare."
+
+#, fuzzy
+#~ msgid ""
+#~ "To register your App, please visit <a target=\"_blank\" href=\"https://"
+#~ "developer.vimeo.com/apps/new\">Vimeo App registration page</a> (requires "
+#~ "login to Vimeo)."
+#~ msgstr ""
+#~ "Pentru a vă înregistra aplicația, vă rugăm să vizitați <a target=\"_blank"
+#~ "\" href=\"https://developer.vimeo.com/apps/new\">pagina de înregistrare a "
+#~ "aplicației Vimeo</a> (necesită conectare la Vimeo)."
+
+#, fuzzy, php-format
+#~ msgid ""
+#~ "A step by step tutorial on how to create an app on Vimeo can be found "
+#~ "%shere%s."
+#~ msgstr ""
+#~ "Un tutorial pas cu pas despre cum să creați o aplicație pe Vimeo poate fi "
+#~ "găsit %shere %s."
+
+#, fuzzy
+#~ msgid ""
+#~ "Choose to import videos as regular <strong>post</strong> type post "
+#~ "instead of plugin’s post type <strong>vimeo-video</strong>."
+#~ msgstr ""
+#~ "Alegeți să importați videoclipuri ca <strong>postare</strong> obișnuită "
+#~ "de tip post în loc de tip postare <strong>vimeo-video</strong> a "
+#~ "pluginului."
+
+#~ msgid ""
+#~ "You should use this into a foreach() loop. Correct usage is: <br /"
+#~ ">foreach( $videos as $cvm_video ){ "
+#~ msgstr ""
+#~ "Ar trebui să utilizați acest lucru într-o buclă foreach (). Utilizarea "
+#~ "corectă este: <br /> foreach ($ videoclipuri ca $ cvm_video) {"
+
+#, fuzzy, php-format
+#~ msgid "Video updated <a href=\"%s\">See video</a>"
+#~ msgstr "Video actualizat <a href=\"%s\">Vezi video</a>"
+
+#, fuzzy, php-format
+#~ msgid "Video published. <a href=\"%s\">See video</a>"
+#~ msgstr "Videoclip publicat. <a href=\"%s\">Vezi video</a>"
+
+#, fuzzy, php-format
+#~ msgid "Video saved. <a target=\"_blank\" href=\"%s\">See video</a>"
+#~ msgstr "Videoclip salvat. <a target=\"_blank\" href=\"%s\">Vezi video</a>"
+
+#, fuzzy, php-format
+#~ msgid ""
+#~ "Video will be published at: <strong>%1$s</strong>. <a target=\"_blank\" "
+#~ "href=\"%2$s\">See video</a>"
+#~ msgstr ""
+#~ "Videoclipul va fi publicat la: <strong>%1$s</strong> . <a target=\"_blank"
+#~ "\" href=\"%2$s\">Vezi video</a>"
+
+#, fuzzy, php-format
+#~ msgid "Video draft saved. <a target=\"_blank\" href=\"%s\">See video</a>"
+#~ msgstr ""
+#~ "Proiectul video a fost salvat. <a target=\"_blank\" href=\"%s\">Vezi "
+#~ "video</a>"
+
+#~ msgid "Y/m/d"
+#~ msgstr "Y/m/d"
+
+#~ msgid "regular post type"
+#~ msgstr "articol implicit (post)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please register on <a href=\"https://developer.vimeo.com/apps/new\">Vimeo "
+#~ "App page</a> in order to be able to import videos."
+#~ msgstr ""
+#~ "Vă rugăm să vă înregistrați pe <a href=\"https://developer.vimeo.com/apps/"
+#~ "new\">pagina aplicației Vimeo</a> pentru a putea importa videoclipuri."
+
+#, fuzzy
+#~ msgid ""
+#~ "No videos selected.<br />To create a playlist check some videos from the "
+#~ "list on the right."
+#~ msgstr ""
+#~ "Niciun videoclip selectat. <br /> Pentru a crea o listă de redare bifati "
+#~ "clipuri video in lista din dreapta."
+
+#, fuzzy
+#~ msgid "Vimeotheque"
+#~ msgstr "Vimeotheque PRO necesită instalarea pluginului Vimeotheque."
