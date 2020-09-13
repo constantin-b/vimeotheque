@@ -207,10 +207,11 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			}
 		}
 	}
-	
+
 	/**
 	 * Outputs the search form.
-	 * @param string $compact - show a compacted form (true) or the full form (false)
+	 *
+	 * @param bool $compact - show a compacted form (true) or the full form (false)
 	 */
 	private function search_form( $compact = false ){
 		include VIMEOTHEQUE_PATH . 'views/import_videos.php';
