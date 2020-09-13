@@ -153,6 +153,17 @@ class Image_Import {
 			$image_extension = '.png';
 		}
 
+		if( !isset( $image_extension ) ){
+			Helper::debug_message(
+				sprintf(
+					'Could not determine extension for image "%s".',
+					$image_url
+				)
+			);
+
+			return false;
+		}
+
 		// Construct a file name using post slug and extension
 		$fname = urldecode( basename( get_permalink( $this->video_post->get_post()->ID ) ) ) ;
 		$new_filename = preg_replace( '/[^A-Za-z0-9\-]/', '', $fname ) .
