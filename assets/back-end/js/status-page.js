@@ -22,7 +22,7 @@
                 var labels = $(table).find( 'th' );
                 $.each( labels, function( i, label ){
                     var labelText = $(label).data('export-label'),
-                        value = $(label).next('td').html();
+                        value = $(label).next('td').data('value');
 
                     writeReport( labelText + ': ' + value + "\n" );
                 })
