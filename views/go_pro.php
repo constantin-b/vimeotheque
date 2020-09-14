@@ -90,7 +90,7 @@ use Vimeotheque\Admin\Helper_Admin;
 				</p>
 				<p class="gopro-btn-holder extra-space">
 					<a class="button try-pro-btn" href="https://vvp-demo.codeflavors.com/" target="_blank"><?php _e( 'Try PRO version', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
-					<a class="button gopro-btn" href="<?php echo Helper_Admin::publisher_link( '' ) ;?>" target="_blank"><?php _e( 'Go PRO!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
+					<a class="button gopro-btn" href="<?php echo Helper_Admin::publisher_link( 'pricing' ) ;?>" target="_blank"><?php _e( 'Go PRO!', 'codeflavors-vimeo-video-post-lite' ) ;?></a>
 				</p>
 			</div>
 		</div>
