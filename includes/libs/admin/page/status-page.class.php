@@ -283,6 +283,8 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	/**
 	 * @param $value
 	 *
+	 * @param bool $echo
+	 *
 	 * @return string|void
 	 */
     private function translate( $value, $echo  = true ){
