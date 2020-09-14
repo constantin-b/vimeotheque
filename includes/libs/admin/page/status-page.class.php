@@ -24,6 +24,11 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    $theme_info = $this->get_theme_info();
 	    $options = $this->get_plugin_options();
 	    $embed_options = $this->get_embed_options();
+		/**
+		 * Filter that allows additional options and variables
+         * @param array $options
+		 */
+	    $other_options = apply_filters( 'vimeotheque\admin\status\other_options', [] );
 ?>
 		<div class="wrap">
 			<h1><?php _e( 'System status', 'codeflavors-vimeo-video-post-lite' );?></h1>
@@ -151,6 +156,19 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     <?php endforeach;?>
                     </tbody>
                 </table>
+                <?php if( $other_options && is_array( $other_options ) ):?>
+                <h2 data-export-label="Other settings"><?php _e('Other settings', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <?php foreach( $other_options as $k => $v ):?>
+                        <tr>
+                            <th scope="row" data-export-label="<?php echo  ucfirst( str_replace( '_', ' ', $k ) ) . " ({$k})" ;?>"><?php echo  ucfirst( str_replace( '_', ' ', $k ) ) ;?></th>
+                            <td data-value="<?php echo esc_attr( $v );?>"><?php $this->translate( $v );?></td>
+                        </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+                <?php endif;?>
             </div>
 		</div>
 <?php
