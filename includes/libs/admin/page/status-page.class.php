@@ -289,7 +289,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    $response = $value;
 	    if( 'Yes' == $value ){
 	        $response =  __( 'Yes', 'codeflavors-vimeo-video-post-lite' );
-	    }else if( 'No' == $value ){
+	    }elseif( 'No' == $value ){
 	        $response =  __( 'No', 'codeflavors-vimeo-video-post-lite' );
         }
 
