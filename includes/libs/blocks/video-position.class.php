@@ -25,6 +25,10 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		parent::register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => parent::get_script_handle(),
 			'render_callback' => function(){
+				// check if filters prevent autoembedding
+				if( !Helper::is_autoembed_allowed() ){
+					return;
+				}
 				/**
 				 * Remove default action that embeds the video in front-end
 				 * @see Front_End::embed_video()
