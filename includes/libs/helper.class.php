@@ -269,6 +269,23 @@ class Helper{
 	}
 
 	/**
+	 * Used to check if autoembedding in post content is prevented by
+	 * using the available filters
+	 *
+	 * @return mixed|void
+	 */
+	public static function is_autoembed_allowed(){
+		/**
+		 * Filter that can prevent video embedding by the plugin.
+		 * Useful if user wants to implement
+		 * his own templates for video post type.
+		 *
+		 * @var bool
+		 */
+		return apply_filters( 'vimeotheque\post_content_embed', true );
+	}
+
+	/**
 	 * Determine if a potential video attached to current global post
 	 * can be displayed in page
 	 *
