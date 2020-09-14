@@ -157,7 +157,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     </tbody>
                 </table>
                 <?php if( $other_options && is_array( $other_options ) ):?>
-                <h2 data-export-label="Other settings"><?php _e('Other settings', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <h2 data-export-label="Other settings"><?php _e('Other', 'codeflavors-vimeo-video-post-lite' );?></h2>
                 <table class="form-table">
                     <tbody>
                     <?php foreach( $other_options as $k => $v ):?>
