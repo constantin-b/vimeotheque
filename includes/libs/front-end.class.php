@@ -91,15 +91,8 @@ class Front_End{
 			return $content;
 		}
 
-		/**
-		 * Filter that can prevent video embedding by the plugin.
-		 * Useful if user wants to implement
-		 * his own templates for video post type.
-		 *
-		 * @var bool
-		 */
-		$allow_embed = apply_filters( 'vimeotheque\post_content_embed', true );
-		if( ! $allow_embed ){
+		// check if filters prevent autoembedding
+		if( !Helper::is_autoembed_allowed() ){
 			return $content;
 		}
 
