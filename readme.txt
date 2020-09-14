@@ -82,6 +82,10 @@ For each video post created by the plugin you have the option in post edit scree
 
 == Changelog ==
 
+= 2.0.1 =
+* Added changelog file;
+* Solved bug that wasn't hiding the video when using the appropriate filter to prevent auto embedding in post content using the block editor.
+
 = 2.0 =
 * Plugin requires at least WordPress 5.2 and PHP 5.6;
 * Vimeotheque 2 functions as base for Vimeotheque PRO 2;
