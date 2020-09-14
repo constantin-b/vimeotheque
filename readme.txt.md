@@ -1,8 +1,9 @@
 === Vimeotheque - WordPress Vimeo videos ===
 Contributors: codeflavors, constantin.boiangiu
 Tags: embed videos, wordpress vimeo embed, vimeo embed, vimeo plugin, video post
-Requires at least: 4.0
-Tested up to: 5.4
+Requires at least: 5.2
+Tested up to: 5.5.1
+Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,7 +12,7 @@ Create WordPress posts from Vimeo videos complete with video embed, title, descr
 
 == Description ==
 
-**Vimeotheque Lite** is a WordPress video importer plugin specially developed for Vimeo that allows quick importing of Vimeo videos as WordPress posts with attached video player from channels, albums, user, groups or categories. Posts are created having all details from Vimeo (title, description, video etc).
+**Vimeotheque 2** is a WordPress video importer plugin specially developed for Vimeo that allows quick importing of Vimeo videos as WordPress posts with attached video player from channels, albums, user, groups or categories. Posts are created having all details from Vimeo (title, description, video etc).
 
 A demonstration on how easy it is to use this Vimeo WordPress plugin:
 
@@ -27,6 +28,7 @@ After importing, all videos can be embedded into posts using a visual interface 
 * Responsive design;
 * Vimeo HTML5 video player support;
 * Multiple video embeds on the same page;
+* Compatible with the WordPress Block Editor
 * Latest videos widget;
 * Single video shortcode;
 * Import as custom post;
@@ -36,15 +38,13 @@ After importing, all videos can be embedded into posts using a visual interface 
 * Playlist themes;
 * Automatic bulk import (**PRO version only**);
 * Import private videos (**PRO version only**);
-* Video playlist for latest videos widget (**PRO version only**);
-* WordPress third party theme support (**PRO version only**; currently available only for themes [deTube](http://themeforest.net/item/detube-professional-video-wordpress-theme/2664497), [Avada](http://themeforest.net/item/avada-responsive-multipurpose-theme/2833226), [SimpleMag](http://themeforest.net/item/simplemag-magazine-theme-for-creative-stuff/4923427) and [GoodWork](http://themeforest.net/item/goodwork-modern-responsive-multipurpose-wordpress-theme/4574698));
+* WordPress Theme support (**PRO version only**);
 * Import videos as regular post type (**PRO version only**);
-* Single video shortcode customization (**PRO version only**);
 * Priority support (**PRO version only**).
 
 **Important links:**
 
-* [VImeotheque PRO live demo](http://vvp-demo.codeflavors.com "Vimeotheque PRO live demo")
+* [Vimeotheque PRO live demo](http://vvp-demo.codeflavors.com "Vimeotheque PRO live demo")
 * [Vimeotheque homepage](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin")
 * [Documentation](https://vimeotheque.com/documents/getting-started/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin documentation");
 
@@ -70,10 +70,6 @@ For a detailed tutorial on how to set up Vimeo access registration, please see [
 
 If you would like to create video posts from hidden Vimeo videos you will need [Vimeotheque PRO](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin").
 
-= How do I import more than one tag per video spost? =
-
-Again, this is a PRO feature. You will need [Vimeotheque PRO](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeo WordPress plugin") to do this.
-
 = How do I import video image as post featured image? =
 
 For each video post created by the plugin you have the option in post edit screen to import the video image as post featured image. The option is available in "Featured Image" metabox, just click the button "Import Video image" and the plugin will take care of the rest.
@@ -85,6 +81,21 @@ For each video post created by the plugin you have the option in post edit scree
 3. Front-end playlist shortcode display
 
 == Changelog ==
+
+= 2.0 =
+* Plugin requires at least WordPress 5.2 and PHP 5.6;
+* Vimeotheque 2 functions as base for Vimeotheque PRO 2;
+* Introduced 3 blocks for the block editor: video position (for video posts), single video embed and playlist embed;
+* Allows import of more than 1 tag;
+* Allows setup of tags when making manual bulk imports;
+* Manual bulk import allows search within the results and ordering;
+* Allows import of featured image automatically, when the video is imported;
+* Redesigned manual bulk import into a friendlier grid interface app;
+* Redesigned single video import into a stepped process app;
+* Introduced status page that can output environment varialbles useful for debugging;
+* Made custom post type video slugs editable from plugin settings; 
+* Vimeo player script uses the new Vimeo player API.
+
 = 1.3.5 =
 * Introduced user ID parameter to queries for Vimeo showcases.
 
