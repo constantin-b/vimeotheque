@@ -18,6 +18,15 @@ class Vimeo_Api_Notice extends Notice_Abstract implements Notice_Interface {
 	 * @inheritDoc
 	 */
 	public function get_notice() {
+		/**
+		 * Filter that can prevent all plugin messages from being displayed
+		 * @var boolean
+		 */
+		$allow = apply_filters( 'vimeotheque\admin\notice\vimeo_api_notice', true );
+		if( !$allow ){
+			return;
+		}
+
 		$options = Plugin::instance()->get_options_obj();
 
 		if(
