@@ -84,6 +84,7 @@ For each video post created by the plugin you have the option in post edit scree
 
 = 2.0.1 =
 * Added changelog file;
+* Implemented filters to hide various plugin notices;
 * Solved bug that wasn't hiding the video when using the appropriate filter to prevent auto embedding in post content using the block editor.
 
 = 2.0 =
