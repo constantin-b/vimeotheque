@@ -6,6 +6,8 @@
 
 namespace Vimeotheque\Admin\Page;
 
+use Vimeotheque\Extensions\Extension_Interface;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
@@ -29,11 +31,18 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 		$classes[] = $extension->is_installed() ? 'is-installed' : 'not-installed';
 		$classes[] = $extension->is_activated() ? 'active' : 'inactive';
 		$classes[] = $extension->is_pro_addon() ? 'pro-addon' : 'free-addon';
+		$data = $extension->get_plugin_data();
 	?>
 		<div class="<?php echo implode( ' ', $classes );?>">
             <div class="inside">
                 <h2>
-                    <?php echo $extension->get_name() ?>
+                    <?php
+                        printf(
+                            '%s %s',
+                            $extension->get_name(),
+                            $data ? $data['Version'] : ''
+                        );
+                    ?>
 	                <?php if( $extension->is_pro_addon() ):?>
                         <div class="pro-emblem">PRO</div>
 	                <?php endif;?>
@@ -42,24 +51,25 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
                 <?php
                     if( !$extension->is_installed() ){
                         printf(
-                            '<a class="button" href="%s">%s</a>',
+                            '<a class="action install" href="%s">%s</a>',
                             $extension->install_url(),
                             __( 'Install', 'codeflavors-vimeo-video-post-lite' )
                         );
                     }elseif( !$extension->is_activated() ){
                         printf(
-                            '<a class="button" href="%s">%s</a>',
+                            '<a class="action activate" href="%s">%s</a>',
                             $extension->activation_url(),
                             __( 'Activate', 'codeflavors-vimeo-video-post-lite' )
                         );
                     }else{ // extensiton is active, show deactivation option
                         printf(
-	                        '<a class="button" href="%s">%s</a>',
+	                        '<a class="action deactivate" href="%s">%s</a>',
 	                        $extension->deactivation_url(),
 	                        __( 'Deactivate', 'codeflavors-vimeo-video-post-lite' )
                         );
                     }
                 ?>
+                <?php $this->show_update_message( $extension )?>
             </div>
 		</div>
 	<?php endforeach;?>
@@ -76,4 +86,33 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 	public function on_load() {
 		wp_enqueue_style( 'vimeotheque-extensions-css', VIMEOTHEQUE_URL . 'assets/back-end/css/extensions.css' );
 	}
+
+	/**
+	 * @param Extension_Interface $extension
+	 */
+	private function show_update_message( Extension_Interface $extension ){
+	    if( !$extension->is_installed() ){
+	        return;
+        }
+
+		$plugins = get_site_transient( 'update_plugins' );
+		if ( isset( $plugins->response ) && is_array( $plugins->response ) ) {
+            if( isset( $plugins->response[ $extension->get_slug() ] ) ){
+                $data = $extension->get_plugin_data();
+                $update = $plugins->response[ $extension->get_slug() ];
+                if( version_compare( $data['Version'], $update->new_version, '<' ) ){
+                    printf(
+                        '<div class="update-notice">%s <a class="update" href="%s">%s</a>.</div>',
+                        sprintf(
+                            __( '%s version %s is available.', 'codeflavors-vimeo-video-post-lite' ),
+                            $data['Name'],
+                            $update->new_version
+                        ),
+                        $extension->upgrade_url(),
+                        __( 'Update now', 'codeflavors-vimeo-video-post-lite' )
+                    );
+                }
+            }
+        }
+    }
 }
