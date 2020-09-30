@@ -44,6 +44,11 @@ class Extension_Abstract {
 	private $description;
 
 	/**
+	 * @var array|null
+	 */
+	private $plugin_data = null;
+
+	/**
 	 * Set the plugin slug
 	 *
 	 * @param string $slug
@@ -197,13 +202,17 @@ class Extension_Abstract {
 	 *
 	 * @return array|false
 	 */
-	protected function get_plugin_data(){
-		$plugin_file = trailingslashit( WP_PLUGIN_DIR ) . $this->get_slug();
-		if( file_exists( $plugin_file ) ){
-			return get_plugin_data( $plugin_file );
+	public function get_plugin_data(){
+		if( null !== $this->plugin_data ){
+			return $this->plugin_data;
 		}
 
-		return false;
+		$plugin_file = trailingslashit( WP_PLUGIN_DIR ) . $this->get_slug();
+		if( file_exists( $plugin_file ) ){
+			$this->plugin_data = get_plugin_data( $plugin_file );
+		}
+
+		return $this->plugin_data;
 	}
 
 	/**
