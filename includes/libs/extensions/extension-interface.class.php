@@ -74,6 +74,13 @@ interface Extension_Interface {
 	public function get_description();
 
 	/**
+	 * Returns plugin data from main plugin file
+	 *
+	 * @return mixed
+	 */
+	public function get_plugin_data();
+
+	/**
 	 * Returns WordPress activation URL for the extension
 	 *
 	 * @return string
