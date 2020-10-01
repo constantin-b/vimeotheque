@@ -51,4 +51,17 @@ class Extensions {
 	public function get_registered_extensions() {
 		return $this->extensions;
 	}
+
+	/**
+	 * @param $slug
+	 *
+	 * @return false|Extension_Interface
+	 */
+	public function get_extension( $slug ){
+		if( isset( $this->extensions[ $slug ] ) ){
+			return $this->extensions[ $slug ];
+		}
+
+		return false;
+	}
 }
