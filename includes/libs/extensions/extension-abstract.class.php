@@ -83,12 +83,21 @@ class Extension_Abstract {
 	}
 
 	/**
-	 * Returns the plugin slug
+	 * Returns the plugin file relative path
 	 *
 	 * @return string
 	 */
-	public function get_slug() {
+	public function get_file() {
 		return $this->dirname . '/' . $this->filename;
+	}
+
+	/**
+	 * Returns plugin slug
+	 *
+	 * @return string
+	 */
+	public function get_slug(){
+		return $this->dirname;
 	}
 
 	/**
@@ -113,13 +122,13 @@ class Extension_Abstract {
 
 	public function activation_url( $redirect_to = false ){
 		$action = 'activate';
-		$nonce_action = $action . '-plugin_' . $this->get_slug();
+		$nonce_action = $action . '-plugin_' . $this->get_file();
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->get_slug()
+					'plugin' => $this->get_file()
 				],
 				admin_url( 'plugins.php' )
 			),
@@ -129,13 +138,13 @@ class Extension_Abstract {
 
 	public function deactivation_url( $redirect_to = false ){
 		$action = 'deactivate';
-		$nonce_action = $action . '-plugin_' . $this->get_slug();
+		$nonce_action = $action . '-plugin_' . $this->get_file();
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->get_slug()
+					'plugin' => $this->get_file()
 				],
 				admin_url( 'plugins.php' )
 			),
@@ -161,13 +170,13 @@ class Extension_Abstract {
 
 	public function upgrade_url(){
 		$action = 'upgrade-plugin';
-		$nonce_action = $action . '_' . $this->get_slug();
+		$nonce_action = $action . '_' . $this->get_file();
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->get_slug()
+					'plugin' => $this->get_file()
 				],
 				admin_url( 'update.php' )
 			),
@@ -207,7 +216,7 @@ class Extension_Abstract {
 			return $this->plugin_data;
 		}
 
-		$plugin_file = trailingslashit( WP_PLUGIN_DIR ) . $this->get_slug();
+		$plugin_file = trailingslashit( WP_PLUGIN_DIR ) . $this->get_file();
 		if( file_exists( $plugin_file ) ){
 			$this->plugin_data = get_plugin_data( $plugin_file );
 		}
@@ -241,6 +250,15 @@ class Extension_Abstract {
 	 * @return bool
 	 */
 	public function is_activated(){
-		return is_plugin_active( $this->get_slug() );
+		return is_plugin_active( $this->get_file() );
+	}
+
+	/**
+	 * Override in concrete implementation if neccessary
+	 *
+	 * @return false
+	 */
+	public function get_file_id(){
+		return false;
 	}
 }
