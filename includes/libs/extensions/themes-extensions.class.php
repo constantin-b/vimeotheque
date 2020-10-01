@@ -23,4 +23,8 @@ class Themes_Extensions extends Extension_Abstract implements Extension_Interfac
 	public function is_pro_addon() {
 		return true;
 	}
+
+	public function get_file_id(){
+		return 4;
+	}
 }
