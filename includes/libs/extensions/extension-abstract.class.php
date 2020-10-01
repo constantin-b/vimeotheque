@@ -27,17 +27,12 @@ class Extension_Abstract {
 	private $filename;
 
 	/**
-	 * The download URL
-	 *
-	 * @var string
-	 */
-	private $download_link;
-	/**
 	 * The plugin name
 	 *
 	 * @var string
 	 */
 	private $name;
+
 	/**
 	 * @var string
 	 */
@@ -74,15 +69,6 @@ class Extension_Abstract {
 	}
 
 	/**
-	 * Set the URL from where the plugin archive can be downloaded
-	 *
-	 * @param string $url
-	 */
-	protected function set_download_link( $url ){
-		$this->download_link = $url;
-	}
-
-	/**
 	 * Returns the plugin file relative path
 	 *
 	 * @return string
@@ -101,25 +87,12 @@ class Extension_Abstract {
 	}
 
 	/**
-	 * Returns the download link for the plugin
+	 * Returns the activation URL
 	 *
-	 * @return false
-	 */
-	public function get_download_link() {
-		return $this->download_link;
-	}
-
-	/**
-	 * Method must be overriden for extensions that are not published on WP repository
-	 * and must return false.
+	 * @param false $redirect_to
 	 *
-	 * @return bool
+	 * @return string
 	 */
-	public function is_wp_hosted(){
-		return true;
-	}
-
-
 	public function activation_url( $redirect_to = false ){
 		$action = 'activate';
 		$nonce_action = $action . '-plugin_' . $this->get_file();
@@ -136,6 +109,13 @@ class Extension_Abstract {
 		);
 	}
 
+	/**
+	 * Returns deactivation URL
+	 *
+	 * @param false $redirect_to
+	 *
+	 * @return string
+	 */
 	public function deactivation_url( $redirect_to = false ){
 		$action = 'deactivate';
 		$nonce_action = $action . '-plugin_' . $this->get_file();
@@ -152,6 +132,11 @@ class Extension_Abstract {
 		);
 	}
 
+	/**
+	 * Returns installation URL
+	 *
+	 * @return string
+	 */
 	public function install_url(){
 		$action = 'install-plugin';
 		$nonce_action = $action . '_' . $this->dirname;
@@ -168,6 +153,11 @@ class Extension_Abstract {
 		);
 	}
 
+	/**
+	 * Returns upgrade URL
+	 *
+	 * @return string
+	 */
 	public function upgrade_url(){
 		$action = 'upgrade-plugin';
 		$nonce_action = $action . '_' . $this->get_file();

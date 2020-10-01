@@ -31,21 +31,6 @@ interface Extension_Interface {
 	public function get_file();
 
 	/**
-	 * Returns extension download link
-	 *
-	 * @return string
-	 */
-	public function get_download_link();
-
-	/**
-	 * If plugin is hosted on WP repository, the method must return true,
-	 * otherwise, it must return false.
-	 *
-	 * @return bool
-	 */
-	public function is_wp_hosted();
-
-	/**
 	 * Is add-on a PRO add-on or free
 	 *
 	 * @return bool
