@@ -24,6 +24,13 @@ interface Extension_Interface {
 	public function get_slug();
 
 	/**
+	 * Returns plugin file relative path
+	 *
+	 * @return string
+	 */
+	public function get_file();
+
+	/**
 	 * Returns extension download link
 	 *
 	 * @return string
@@ -107,4 +114,11 @@ interface Extension_Interface {
 	 * @return string
 	 */
 	public function upgrade_url();
+
+	/**
+	 * Get the file ID on repository
+	 *
+	 * @return false|int
+	 */
+	public function get_file_id();
 }
