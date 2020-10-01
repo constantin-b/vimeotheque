@@ -50,11 +50,24 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
                 <p><?php echo $extension->get_description();?></p>
                 <?php
                     if( !$extension->is_installed() ){
-                        printf(
-                            '<a class="action install" href="%s">%s</a>',
-                            $extension->install_url(),
-                            __( 'Install', 'codeflavors-vimeo-video-post-lite' )
-                        );
+                        if( !$extension->is_pro_addon() ) {
+	                        printf(
+		                        '<a class="action install" href="%s">%s</a>',
+		                        $extension->install_url(),
+		                        __( 'Install', 'codeflavors-vimeo-video-post-lite' )
+	                        );
+                        }
+
+	                    /**
+	                     * Run action for each extension installation
+                         *
+                         * @param Extension_Interface $extension The extension object.
+	                     */
+	                    do_action(
+		                    'vimeotheque\admin\page\extensions\installation',
+		                    $extension
+	                    );
+
                     }elseif( !$extension->is_activated() ){
                         printf(
                             '<a class="action activate" href="%s">%s</a>',
@@ -97,11 +110,11 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 
 		$plugins = get_site_transient( 'update_plugins' );
 		if ( isset( $plugins->response ) && is_array( $plugins->response ) ) {
-            if( isset( $plugins->response[ $extension->get_slug() ] ) ){
+            if( isset( $plugins->response[ $extension->get_file() ] ) ){
                 $data = $extension->get_plugin_data();
-                $update = $plugins->response[ $extension->get_slug() ];
+                $update = $plugins->response[ $extension->get_file() ];
                 if( version_compare( $data['Version'], $update->new_version, '<' ) ){
-                    printf(
+                    $message = sprintf(
                         '<div class="update-notice">%s <a class="update" href="%s">%s</a>.</div>',
                         sprintf(
                             __( '%s version %s is available.', 'codeflavors-vimeo-video-post-lite' ),
@@ -110,6 +123,20 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
                         ),
                         $extension->upgrade_url(),
                         __( 'Update now', 'codeflavors-vimeo-video-post-lite' )
+                    );
+
+	                /**
+	                 * Filter the update message
+                     *
+                     * @param string $message The update message
+                     * @param Extension_Interface $extension The extension being displayed
+                     * @param \stdClass $update The update object from WP
+	                 */
+                    echo apply_filters(
+                        'vimeotheque\admin\page\extensions\update_message',
+                        $message,
+                        $extension,
+                        $update
                     );
                 }
             }
