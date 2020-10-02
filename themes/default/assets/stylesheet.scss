@@ -39,94 +39,94 @@
       background-position:center center;
       background-repeat:no-repeat;
     }
-  }
 
-  &.align-center{
-    margin-left:auto;
-    margin-right:auto;
-  }
+    &.align-center{
+      margin-left:auto;
+      margin-right:auto;
+    }
 
-  &.align-right{
-    margin-left:auto;
-  }
+    &.align-right{
+      margin-left:auto;
+    }
 
-  &.align-left{
-    margin-right:auto;
-  }
+    &.align-left{
+      margin-right:auto;
+    }
 
-  &.left{
-    width:100%!important;
+    &.left{
+      width:100%!important;
 
-    .cvm-playlist-wrap{
-      height:0;
+      .cvm-playlist-wrap{
+        height:0;
 
-      .playlist-visibility{
-        left:0;
-        margin-left:0;
+        .playlist-visibility{
+          left:0;
+          margin-left:0;
+        }
+      }
+
+      .vimeotheque-player{
+        float:right;
       }
     }
 
-    .vimeotheque-player{
-      float:right;
-    }
-  }
+    &.right{
+      width:100%!important;
 
-  &.right{
-    width:100%!important;
+      .cvm-playlist-wrap{
+        height:0;
+      }
+
+      .vimeotheque-player{
+        float:left;
+      }
+    }
+
+    .clear{
+      width:100%;
+      float:none;
+      clear:both!important;
+    }
 
     .cvm-playlist-wrap{
-      height:0;
-    }
-
-    .vimeotheque-player{
-      float:left;
-    }
-  }
-
-  .clear{
-    width:100%;
-    float:none;
-    clear:both!important;
-  }
-
-  .cvm-playlist-wrap{
-    display:block;
-    width:100%;
-    height:250px;
-
-    .cvm-playlist{
       display:block;
-      height: 100%;
-      overflow:auto;
-      border:1px #CCC solid;
-      padding:0px 10px;
-      position: relative;
+      width:100%;
+      height:250px;
 
-      .cvm-playlist-item{
+      .cvm-playlist{
         display:block;
-        width:100%;
-        float:left;
-        border-bottom:1px #ccc solid;
-        padding-bottom:4px;
-        padding-top:4px;
+        height: 100%;
+        overflow:auto;
+        border:1px #CCC solid;
+        padding:0px 10px;
+        position: relative;
 
-        a{
-          color:#000;
-          text-decoration:none;
+        .cvm-playlist-item{
+          display:block;
+          width:100%;
+          float:left;
+          border-bottom:1px #ccc solid;
+          padding-bottom:4px;
+          padding-top:4px;
 
-          span.duration{
-            color:#999;
-            font-style:italic;
+          a{
+            color:#000;
+            text-decoration:none;
+
+            span.duration{
+              color:#999;
+              font-style:italic;
+            }
+
           }
 
-        }
-
-        img{
-          width:50px;
-          padding:2px;
-          float:left;
-          margin-right:10px;
-          border:1px #CCC solid;
+          img{
+            width:50px;
+            padding:2px;
+            float:left;
+            margin-right:10px;
+            border:1px #CCC solid;
+          }
         }
       }
     }
