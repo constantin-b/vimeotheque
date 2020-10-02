@@ -56,17 +56,21 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 		                        $extension->install_url(),
 		                        __( 'Install', 'codeflavors-vimeo-video-post-lite' )
 	                        );
+                        }else {
+	                        /**
+	                         * Run action for each extension installation
+	                         *
+	                         * @param Extension_Interface $extension The extension object.
+	                         */
+	                        echo apply_filters(
+		                        'vimeotheque\admin\page\extensions\pro_installation_message',
+		                        sprintf(
+		                            '<div class="requires-pro"><span class="dashicons dashicons-warning"></span> %s</div>',
+                                    __( 'Requires Vimeotheque PRO', 'codeflavors-vimeo-video-post-lite' )
+                                ),
+		                        $extension
+	                        );
                         }
-
-	                    /**
-	                     * Run action for each extension installation
-                         *
-                         * @param Extension_Interface $extension The extension object.
-	                     */
-	                    do_action(
-		                    'vimeotheque\admin\page\extensions\installation',
-		                    $extension
-	                    );
 
                     }elseif( !$extension->is_activated() ){
                         printf(
