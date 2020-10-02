@@ -15,12 +15,14 @@ use Vimeotheque\Admin\Notice\User_Notice\Message;
 use Vimeotheque\Admin\Notice\User_Notice\User;
 use Vimeotheque\Admin\Notice\Vimeo_Api_Notice;
 use Vimeotheque\Admin\Page\Automatic_Import_Page;
+use Vimeotheque\Admin\Page\Extensions_Page;
 use Vimeotheque\Admin\Page\Go_Pro_Page;
 use Vimeotheque\Admin\Page\List_Videos_Page;
 use Vimeotheque\Admin\Page\Post_Edit_Page;
 use Vimeotheque\Admin\Page\Settings_Page;
 use Vimeotheque\Admin\Page\Status_Page;
 use Vimeotheque\Admin\Page\Video_Import_Page;
+use Vimeotheque\Extensions\Extensions;
 use Vimeotheque\Helper;
 use Vimeotheque\Post\Post_Type;
 
@@ -37,18 +39,20 @@ class Admin{
 	 * @var Post_Type
 	 */
 	private $post_type;
-
 	/**
 	 * Ajax Class reference
 	 * 
 	 * @var Ajax_Actions
 	 */
 	private $ajax;
-
 	/**
 	 * @var Menu_Pages
 	 */
 	private $admin_menu;
+	/**
+	 * @var Extensions
+	 */
+	private $extensions;
 
 	/**
 	 *
@@ -57,6 +61,7 @@ class Admin{
 	public function __construct( Post_Type $post_type ){
 		// store object reference
 		$this->post_type = $post_type;
+		$this->extensions = new Extensions();
 
 		add_action( 'wp_loaded', [ $this, 'init' ], -20 );
 
@@ -125,6 +130,17 @@ class Admin{
 				'cvm_import',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
 				$this->get_capability('manual_import')
+			)
+		);
+
+		$this->admin_menu->register_page(
+			new Extensions_Page(
+				$this,
+				__( 'Add-ons', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Add-ons', 'codeflavors-vimeo-video-post-lite' ),
+				'vimeotheque_extensions',
+				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'activate_plugins'
 			)
 		);
 
@@ -379,6 +395,13 @@ class Admin{
 	 */
 	public function get_post_type(){
 		return $this->post_type;
+	}
+
+	/**
+	 * @return Extensions
+	 */
+	public function get_extensions() {
+		return $this->extensions;
 	}
 
 	/**
