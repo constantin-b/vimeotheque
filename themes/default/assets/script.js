@@ -29,7 +29,8 @@ vimeotheque.themes = vimeotheque.themes || {};
 					c = $(p).attr('class');
 
 				var f = function(){
-					if( $(playlist).find('.cvm-playlist').outerWidth() < 350 ){
+					var o = $(playlist).find('.cvm-playlist').outerWidth();
+					if( o < 350 ){
 						$(p).removeClass('left right');
 					}else{
 						var h = $(videoPlayer).outerHeight();
