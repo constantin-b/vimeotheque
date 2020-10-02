@@ -33,49 +33,49 @@
   background-position: center center;
   background-repeat: no-repeat;
 }
-.cvm-vim-playlist.align-center {
+.cvm-vim-playlist.default.align-center {
   margin-left: auto;
   margin-right: auto;
 }
-.cvm-vim-playlist.align-right {
+.cvm-vim-playlist.default.align-right {
   margin-left: auto;
 }
-.cvm-vim-playlist.align-left {
+.cvm-vim-playlist.default.align-left {
   margin-right: auto;
 }
-.cvm-vim-playlist.left {
+.cvm-vim-playlist.default.left {
   width: 100% !important;
 }
-.cvm-vim-playlist.left .cvm-playlist-wrap {
+.cvm-vim-playlist.default.left .cvm-playlist-wrap {
   height: 0;
 }
-.cvm-vim-playlist.left .cvm-playlist-wrap .playlist-visibility {
+.cvm-vim-playlist.default.left .cvm-playlist-wrap .playlist-visibility {
   left: 0;
   margin-left: 0;
 }
-.cvm-vim-playlist.left .vimeotheque-player {
+.cvm-vim-playlist.default.left .vimeotheque-player {
   float: right;
 }
-.cvm-vim-playlist.right {
+.cvm-vim-playlist.default.right {
   width: 100% !important;
 }
-.cvm-vim-playlist.right .cvm-playlist-wrap {
+.cvm-vim-playlist.default.right .cvm-playlist-wrap {
   height: 0;
 }
-.cvm-vim-playlist.right .vimeotheque-player {
+.cvm-vim-playlist.default.right .vimeotheque-player {
   float: left;
 }
-.cvm-vim-playlist .clear {
+.cvm-vim-playlist.default .clear {
   width: 100%;
   float: none;
   clear: both !important;
 }
-.cvm-vim-playlist .cvm-playlist-wrap {
+.cvm-vim-playlist.default .cvm-playlist-wrap {
   display: block;
   width: 100%;
   height: 250px;
 }
-.cvm-vim-playlist .cvm-playlist-wrap .cvm-playlist {
+.cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist {
   display: block;
   height: 100%;
   overflow: auto;
@@ -83,7 +83,7 @@
   padding: 0px 10px;
   position: relative;
 }
-.cvm-vim-playlist .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item {
+.cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item {
   display: block;
   width: 100%;
   float: left;
@@ -91,15 +91,15 @@
   padding-bottom: 4px;
   padding-top: 4px;
 }
-.cvm-vim-playlist .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item a {
+.cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item a {
   color: #000;
   text-decoration: none;
 }
-.cvm-vim-playlist .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item a span.duration {
+.cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item a span.duration {
   color: #999;
   font-style: italic;
 }
-.cvm-vim-playlist .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item img {
+.cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item img {
   width: 50px;
   padding: 2px;
   float: left;
