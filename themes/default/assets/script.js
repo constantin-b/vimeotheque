@@ -9,33 +9,36 @@ vimeotheque.themes = vimeotheque.themes || {};
 ;(function( exports, $ ){	
 
     themeDefault = function(){
-    	$('.cvm-vim-playlist.default:not(.loaded)').VimeoPlaylist();
+    	var lists = $('.cvm-vim-playlist.default:not(.loaded)').VimeoPlaylist();
 		
-		$.each( $('.cvm-vim-playlist.default:not(.loaded)'), function(i, p){
+		$.each( lists, function(i, list){
 			$(this).find('.playlist-visibility').on( 'click', function(e){
 				e.preventDefault();
 				if( $(this).hasClass('collapse') ){
 					$(this).removeClass('collapse').addClass('expand');
-					$(p).find('.cvm-playlist').slideUp();
+					$(list).find('.cvm-playlist').slideUp();
 				}else{
 					$(this).removeClass('expand').addClass('collapse');
-					$(p).find('.cvm-playlist').slideDown();
+					$(list).find('.cvm-playlist').slideDown();
 				}
 			})
-			
-			if( $(p).is( '.left, .right' ) ){
-				var playlist = $(p).find('.cvm-playlist-wrap'),
-					videoPlayer = $(p).find( '.vimeotheque-player' ),
-					c = $(p).attr('class');
+
+			if( $(list).is( '.left, .right' ) ){
+				var playlist = $(list).find('.cvm-playlist-wrap'),
+					videoPlayer = $(list).find( '.vimeotheque-player' ),
+					c = $(list).attr('class');
 
 				var f = function(){
-					var o = $(playlist).find('.cvm-playlist').outerWidth();
-					if( o < 350 ){
-						$(p).removeClass('left right');
+					var totalWidth = $(list).outerWidth(),
+						playerWidth = $(videoPlayer).outerWidth(),
+					    playlistWidth = $(playlist).find('.cvm-playlist').outerWidth();
+					    
+					if( totalWidth < playerWidth + playlistWidth || playlistWidth < 300 ){
+						$(list).removeClass('left right');
 					}else{
 						var h = $(videoPlayer).outerHeight();
 						$(playlist).css({height:h});
-						$(p).addClass(c);
+						$(list).addClass(c);
 					}
 				}
 
