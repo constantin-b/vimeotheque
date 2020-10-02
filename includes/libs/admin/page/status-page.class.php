@@ -29,6 +29,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
          * @param array $options
 		 */
 	    $other_options = apply_filters( 'vimeotheque\admin\status\other_options', [] );
+	    $extensions = parent::get_admin()->get_extensions()->get_registered_extensions();
 ?>
 		<div class="wrap">
 			<h1><?php _e( 'System status', 'codeflavors-vimeo-video-post-lite' );?></h1>
@@ -169,6 +170,31 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                     </tbody>
                 </table>
                 <?php endif;?>
+
+                <?php if( $extensions && is_array( $extensions ) ): ?>
+                <h2 data-export-label="Add-ons"><?php _e('Add-ons', 'codeflavors-vimeo-video-post-lite' );?></h2>
+                <table class="form-table">
+                    <tbody>
+                    <?php
+                    foreach( $extensions as $extension ):
+                        if( !$extension->is_installed() ) {
+	                        continue;
+                        }
+                        $message = sprintf(
+                            '%s (version %s)',
+	                        $extension->is_activated() ? 'Active' : 'Inactive',
+                            $extension->get_plugin_data()['Version']
+                        );
+                    ?>
+                        <tr>
+                            <th scope="row" data-export-label="<?php echo  $extension->get_name();?>"><?php echo  $extension->get_name() ;?></th>
+                            <td data-value="<?php echo $message;?>"><?php $extension->is_activated() ? _e( 'Active', 'codeflavors-vimeo-video-post-lite' ) : _e( 'Inactive', 'codeflavors-vimeo-video-post-lite' ) ?></td>
+                        </tr>
+                    <?php endforeach;?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+
             </div>
 		</div>
 <?php
@@ -272,6 +298,9 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 
 	private function get_plugin_options(){
 	    $options = Plugin::instance()->get_options();
+	    // set a fake option to check if api keys are set
+	    $options['vimeo_api_keys'] = !empty( $options['vimeo_consumer_key'] ) && !empty( $options['vimeo_secret_key'] );
+
 	    unset( $options['vimeo_consumer_key'] );
 	    unset( $options['vimeo_secret_key'] );
 	    unset( $options['oauth_token'] );
