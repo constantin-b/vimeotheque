@@ -15,6 +15,7 @@
   outline: 0px;
   margin-left: auto;
   border: none !important;
+  box-shadow: none !important;
 }
 .cvm-vim-playlist.default .cvm-playlist-wrap .playlist-visibility.collapse {
   background-image: url(images/collapse.png);
