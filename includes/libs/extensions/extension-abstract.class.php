@@ -44,6 +44,18 @@ class Extension_Abstract {
 	private $plugin_data = null;
 
 	/**
+	 * Is add-on a PRO add-on
+	 *
+	 * @var bool
+	 */
+	private $pro_addon = false;
+
+	/**
+	 * @var int|false
+	 */
+	private $file_id = false;
+
+	/**
 	 * Set the plugin slug
 	 *
 	 * @param string $slug
@@ -66,6 +78,20 @@ class Extension_Abstract {
 	 */
 	protected function set_description( $description ) {
 		$this->description = $description;
+	}
+
+	/**
+	 * Setter for PRO add-on
+	 */
+	public function set_pro_addon() {
+		$this->pro_addon = true;
+	}
+
+	/**
+	 * @param int $file_id
+	 */
+	public function set_file_id( $file_id ) {
+		$this->file_id = $file_id;
 	}
 
 	/**
@@ -180,7 +206,7 @@ class Extension_Abstract {
 	 * @return false
 	 */
 	public function is_pro_addon(){
-		return false;
+		return $this->pro_addon;
 	}
 
 	/**
@@ -246,9 +272,9 @@ class Extension_Abstract {
 	/**
 	 * Override in concrete implementation if neccessary
 	 *
-	 * @return false
+	 * @return false|int
 	 */
 	public function get_file_id(){
-		return false;
+		return $this->file_id;
 	}
 }
