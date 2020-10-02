@@ -6,6 +6,8 @@
 
 namespace Vimeotheque\Extensions;
 
+use Vimeotheque\Plugin;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
@@ -22,18 +24,32 @@ class Extensions {
 	 * @var Extension_Interface[]
 	 */
 	private $extensions = [];
+	/**
+	 * @var Remote_Loader
+	 */
+	private $remote_loader;
 
 	/**
 	 * Extensions constructor. Loads all available plugin extensions.
 	 */
 	public function __construct(){
 
-		$this->register_extension( new Debug_Extension() );
-		$this->register_extension( new Vimeotheque_Pro_Extension() );
-		$this->register_extension( new Themes_Extensions() );
-		$this->register_extension( new Push_Changes() );
-		$this->register_extension( new User_Permissions() );
+		$this->register_extension(
+			new Extension(
+				'vimeotheque-debug/index.php',
+				__( 'Vimeotheque Debug', 'codeflavors-vimeo-video-post-lite' ),
+				__(
+					'Creates and outputs an activity log which stores the debug messages emitted by Vimeotheque when import actions are taken.' ,
+					'codeflavors-vimeo-video-post-lite'
+				)
+			)
+		);
 
+		$this->remote_loader = new Remote_Loader(
+			'https://codeflavors.com',
+			2,
+			$this
+		);
 	}
 
 	/**
@@ -63,5 +79,12 @@ class Extensions {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @return Remote_Loader
+	 */
+	public function get_remote_loader() {
+		return $this->remote_loader;
 	}
 }
