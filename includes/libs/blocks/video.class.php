@@ -26,6 +26,10 @@ class Video extends Block_Abstract implements Block_Interface {
 						'type' => 'string',
 						'default' => '70'
 					],
+					'video_align' => [
+						'type' => 'string',
+						'default' => 'align-left'
+					],
 					'width' => [
 						'type' => 'string',
 						'default' => '900'
