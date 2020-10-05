@@ -153,8 +153,14 @@ class Resource_Objects{
 				'sort' => 'relevant',
 				'direction' => 'desc',
 				'resources' => []
+			],
+			'default' => [
+				'label' => __( 'Default order', 'codeflavors-vimeo-video-post-lite' ),
+				'sort' => 'default',
+				'direction' => false,
+				'resources' => []
 			]
-		];
+ 		];
 	}
 
 	/**
