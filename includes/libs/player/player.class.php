@@ -150,7 +150,9 @@ class Player {
 	private function get_css_classes(){
 		$classes = apply_filters(
 			'vimeotheque\player\css_class',
-			[],
+			[
+				$this->options['video_align']
+			],
 			$this->post->get_post()
 		);
 		return implode( ' ', (array) $classes );
