@@ -165,6 +165,11 @@ class Resource_Abstract implements Resource_Interface {
 			unset( $_params['query'] );
 		}
 
+		// if direction parameter is false, the sorting doesn't need the direction parameter
+		if( isset( $_params['direction'] ) && false === $_params['direction'] ){
+			unset( $_params['direction'] );
+		}
+
 		/**
 		 * Filter API query params
 		 *
