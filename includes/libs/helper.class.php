@@ -356,12 +356,10 @@ class Helper{
 	public static function get_metadata_default( $meta_type, $object_id, $meta_key, $single = true ){
 		if( function_exists( 'get_metadata_default' ) ){
 			return \get_metadata_default( $meta_type, $object_id, $meta_key, $single );
+		}elseif( $single ) {
+			return '';
 		}else{
-			if( $single ) {
-				return '';
-			}else{
-				return [];
-			}
+			return [];
 		}
 	}
 
