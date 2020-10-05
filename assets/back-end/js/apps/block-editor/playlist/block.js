@@ -153,6 +153,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     theme: attributes.theme,
                                     layout: attributes.layout,
                                     aspect_ratio: attributes.aspect_ratio,
+                                    align: attributes.align,
                                     width: attributes.width,
                                     volume: attributes.volume,
                                     title: attributes.title,
@@ -332,6 +333,24 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 value => {
                                     setAttributes({
                                         aspect_ratio: value
+                                    })
+                                }
+                            }
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <SelectControl
+                            label = { __( 'Align', 'codeflavors-vimeo-video-post-lite' ) }
+                            value = { attributes.align }
+                            options = {[
+                                { label: 'left', value: 'align-left' },
+                                { label: 'center', value: 'align-center' },
+                                { label: 'right', value: 'align-right' },
+                            ]}
+                            onChange = {
+                                value => {
+                                    setAttributes({
+                                        align: value
                                     })
                                 }
                             }

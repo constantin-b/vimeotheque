@@ -7,7 +7,7 @@
 use Vimeotheque\Themes\Helper;
 
 ?>
-<div class="cvm-vim-playlist default<?php if( !is_wp_error( parent::get_attr('layout') ) ){ echo ' ' . esc_attr( parent::get_attr('layout') ); } ;?>"<?php Helper::get_width();?>>
+<div class="cvm-vim-playlist default <?php echo parent::get_css_classes() ;?>"<?php Helper::get_width();?>>
     <?php \Vimeotheque\Helper::embed_video( $videos[0], $embed_options, true ); ?>
     <div class="cvm-playlist-wrap">
 		<div class="cvm-playlist">

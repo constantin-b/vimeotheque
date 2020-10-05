@@ -75,6 +75,27 @@ class Shortcode_Abstract implements Shortcode_Interface {
 	}
 
 	/**
+	 * Generates the CSS classes
+	 *
+	 * @return string|void
+	 */
+	public function get_css_classes(){
+		$classes = [
+			$this->get_attr('layout'),
+			$this->get_attr( 'align' )
+		];
+
+		foreach( $classes as $i => $v ){
+			if( is_wp_error( $v ) || empty( $v ) ){
+				unset( $classes[ $i ] );
+			}
+		}
+
+		$r = esc_attr( implode( ' ', $classes ) );
+		return $r;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_shortcode_name() {

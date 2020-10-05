@@ -60,8 +60,17 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 							true
 						);
 
+						$_default = parent::get_plugin()->get_embed_options_obj()->get_options();
+
 						if( $default === $value ){
-							$value = parent::get_plugin()->get_embed_options_obj()->get_options();
+							$value = $_default;
+						}
+
+						// allow new values to be added to existing meta
+						foreach ( $_default as $k => $v ){
+							if( !isset( $value[ $k ] ) ){
+								$value[ $k ] = $v;
+							}
 						}
 
 						return json_encode( $value );

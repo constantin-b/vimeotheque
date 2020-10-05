@@ -46,6 +46,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 						'type' => 'string',
 						'default' => 900
 					],
+					'align' => [
+						'type' => 'string',
+						'default' => 'align-left'
+					],
 					'volume' => [
 						'type' => 'string',
 						'default' => 70

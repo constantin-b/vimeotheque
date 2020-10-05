@@ -281,6 +281,7 @@ class Plugin{
 			'aspect_ratio' => '16x9',
 			'width'	=> 640,
 			'video_position' => 'below-content', // in front-end custom post, where to display the video: above or below post content
+			'video_align' => 'align-left', // video alignment
 			'volume' => 25, // video default volume
 			// extra player settings controllable by widgets/shortcodes
 			'playlist_loop' => 0,

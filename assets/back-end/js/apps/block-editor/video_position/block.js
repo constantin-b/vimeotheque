@@ -75,7 +75,7 @@ registerBlockType( 'vimeotheque/video-position', {
 		return [
 			<div key="vimeotheque-video-position-block">
 				<div
-					className="vimeotheque-player"
+					className ={ "vimeotheque-player " + opt.video_align }
 					data-width = { opt.width }
 					data-aspect_ratio = { opt.aspect_ratio }
 					style = {
@@ -243,6 +243,26 @@ registerBlockType( 'vimeotheque/video-position', {
 											embed_options: JSON.stringify( opt )
 										})
 										setTimeout(  vimeotheque.resizeAll, 100 );
+									}
+								}
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<SelectControl
+								label = { __( 'Align', 'codeflavors-vimeo-video-post-lite' ) }
+								value = { opt.video_align }
+								options = {[
+									{ label: 'left', value: 'align-left' },
+									{ label: 'center', value: 'align-center' },
+									{ label: 'right', value: 'align-right' },
+								]}
+								onChange = {
+									value => {
+										opt.video_align = value;
+										setAttributes({
+											embed_options: JSON.stringify( opt )
+										})
 									}
 								}
 							/>
