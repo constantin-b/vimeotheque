@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/../../../wp-github" />
+      <path value="$PROJECT_DIR$/../vimeo-video-post" />
+      <path value="C:/WebServer/Apache-2.4-win64/logs" />
+    </include_path>
+  </component>
+</project>
