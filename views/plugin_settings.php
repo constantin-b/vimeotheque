@@ -310,6 +310,25 @@ use Vimeotheque\Helper;
                             </td>
                         </tr>
 
+                        <tr>
+                            <th><label for="cvm_video_align"><?php _e('Align video','codeflavors-vimeo-video-post-lite');?>:</label></th>
+                            <td>
+								<?php
+								$args = [
+									'options' => [
+										'align-left' => __('Left', 'codeflavors-vimeo-video-post-lite'),
+										'align-center' => __('Center', 'codeflavors-vimeo-video-post-lite'),
+										'align-right' => __('Right', 'codeflavors-vimeo-video-post-lite')
+									],
+									'name' 		=> 'video_align',
+									'id'		=> 'cvm_video_align',
+									'selected' 	=> $player_opt['video_align']
+								];
+								Helper_Admin::select( $args );
+								?>
+                            </td>
+                        </tr>
+
                         <tr valign="top">
                             <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player aspect ratio', 'cvm_video')?>:</label></th>
                             <td>
