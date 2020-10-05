@@ -114,7 +114,8 @@ registerBlockType( 'vimeotheque/video', {
                                         width: attributes.width,
                                         aspect_ratio: attributes.aspect_ratio,
                                         loop: attributes.loop,
-                                        autoplay: attributes.autoplay
+                                        autoplay: attributes.autoplay,
+                                        video_align: attributes.video_align
                                     }
                                 }
                                 onComplete = { ()=>{
@@ -297,6 +298,25 @@ registerBlockType( 'vimeotheque/video', {
                                         aspect_ratio: value
                                     })
                                     setTimeout(  vimeotheque.resizeAll, 200 );
+                                }
+                            }
+                        />
+                    </PanelRow>
+
+                    <PanelRow>
+                        <SelectControl
+                            label = { __( 'Align', 'codeflavors-vimeo-video-post-lite' ) }
+                            value = { attributes.video_align }
+                            options = {[
+                                { label: 'left', value: 'align-left' },
+                                { label: 'center', value: 'align-center' },
+                                { label: 'right', value: 'align-right' },
+                            ]}
+                            onChange = {
+                                value => {
+                                    setAttributes({
+                                        video_align: value
+                                    })
                                 }
                             }
                         />
