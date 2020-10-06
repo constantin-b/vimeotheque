@@ -82,6 +82,15 @@ For each video post created by the plugin you have the option in post edit scree
 
 == Changelog ==
 
+= 2.0.2 =
+- Introduced add-ons management that allow installation of add-ons for various purposes;
+- Added option for playlist block to set alignment;
+- Optimized resizing for playlist block theme Default;
+- Added option for video position block to set alignment;
+- Added option for single video embed to set alignment;
+- Added option to display manual bulk imports by the order set on Vimeo (applies only for showcase, channel, portfolio, user uploads and folder );
+- New plugin Settings option for embed alignment.
+
 = 2.0.1 =
 * Added changelog file;
 * Implemented filters to hide various plugin notices;
