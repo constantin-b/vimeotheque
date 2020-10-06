@@ -114,7 +114,19 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 setAttributes({
                     cat_ids: _categories
                 })
-            }
+            },
+            categoriesList = map( vmtq.postTypes, postType => {
+                if( postType.taxonomy ){
+                    return <CategoryList
+                        taxonomy={postType.taxonomy.name}
+                        title={ postType.taxonomy.labels.name }
+                        categories={attributes.categories}
+                        onChange={
+                            categories => updateCategories( categories )
+                        }
+                    />
+                }
+            })
 
 
         if( !isLoaded ){
@@ -210,7 +222,13 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                         onPostTypeChange={
                                             postType => {
                                                 setShowSearch( 'selected' != postType )
-                                                setTaxonomy( 'selected' != postType ? vmtq.postTypes[ postType ].taxonomy.name : false )
+
+                                                let tax = 'selected' != postType
+                                                if( tax ){
+                                                    tax = vmtq.postTypes[ postType ].taxonomy ? vmtq.postTypes[ postType ].taxonomy.name : false
+                                                }
+                                                setTaxonomy( tax )
+
                                                 setSearch({ query:'', category:false })
                                                 setPostType( postType )
                                             }
@@ -260,22 +278,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                         :
                                         // Show categories management in sidebar
                                         <>
-                                            <CategoryList
-                                                taxonomy='vimeo-videos'
-                                                title={ __( 'Vimeotheque categories', 'codeflavors-vimeo-video-post-lite' ) }
-                                                categories={attributes.categories}
-                                                onChange={
-                                                    categories => updateCategories( categories )
-                                                }
-                                            />
-
-                                            <CategoryList
-                                                taxonomy='category'
-                                                categories={attributes.categories}
-                                                onChange={
-                                                    categories => updateCategories( categories )
-                                                }
-                                            />
+                                            {categoriesList}
                                         </>
                                     }
                                 </nav>
