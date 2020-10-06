@@ -20,17 +20,17 @@ class Post_Registration {
 	 * Post_Registration constructor.
 	 *
 	 * @param \WP_Post_Type $post_type
-	 * @param \WP_Taxonomy $taxonomy
+	 * @param \WP_Taxonomy|false $taxonomy
 	 */
-	public function __construct( \WP_Post_Type $post_type, \WP_Taxonomy $taxonomy ) {
+	public function __construct( \WP_Post_Type $post_type, $taxonomy ) {
 		$this->register( $post_type, $taxonomy );
 	}
 
 	/**
 	 * @param \WP_Post_Type $post_type
-	 * @param \WP_Taxonomy $taxonomy
+	 * @param \WP_Taxonomy|false $taxonomy
 	 */
-	public function register( \WP_Post_Type $post_type, \WP_Taxonomy $taxonomy ){
+	public function register( \WP_Post_Type $post_type, $taxonomy ){
 		if( !did_action( 'init' ) ){
 			_doing_it_wrong( __FUNCTION__, 'Post types must be registered only after "init" hook is fired.' );
 		}
