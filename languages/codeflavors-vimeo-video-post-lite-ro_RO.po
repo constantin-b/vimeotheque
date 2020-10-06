@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Vimeotheque\n"
-"POT-Creation-Date: 2020-09-13 12:41+0300\n"
-"PO-Revision-Date: 2020-09-13 12:59+0300\n"
+"POT-Creation-Date: 2020-10-06 18:07+0300\n"
+"PO-Revision-Date: 2020-10-06 18:09+0300\n"
 "Last-Translator: CodeFlavors <codeflavors@codeflavors.com>\n"
 "Language-Team: CodeFlavors <codeflavors@codeflavors.com>\n"
 "Language: ro_RO\n"
@@ -38,7 +38,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-18: webpack.config.js\n"
 
 #: assets/back-end/js/apps/block-editor/playlist/block.js:34
-#: assets/back-end/js/apps/block-editor/playlist/block.js:186
+#: assets/back-end/js/apps/block-editor/playlist/block.js:201
 msgid "Video playlist"
 msgstr "Lista video"
 
@@ -46,16 +46,16 @@ msgstr "Lista video"
 msgid "Display a playlist of Vimeo videos"
 msgstr "Afișați o listă a videoclipurilor Vimeo"
 
-#: assets/back-end/js/apps/block-editor/playlist/block.js:136
+#: assets/back-end/js/apps/block-editor/playlist/block.js:150
 msgid "Edit playlist"
 msgstr "Editați lista"
 
-#: assets/back-end/js/apps/block-editor/playlist/block.js:191
-#: assets/back-end/js/apps/block-editor/playlist/block.js:199
+#: assets/back-end/js/apps/block-editor/playlist/block.js:206
+#: assets/back-end/js/apps/block-editor/playlist/block.js:214
 msgid "Choose posts"
 msgstr "Alege postările"
 
-#: assets/back-end/js/apps/block-editor/playlist/block.js:208
+#: assets/back-end/js/apps/block-editor/playlist/block.js:223
 msgid "Selected"
 msgstr "Selectat"
 
@@ -71,56 +71,56 @@ msgstr "Afișați încorporarea unei postări video"
 msgid "Change video"
 msgstr "Schimbați videoclipul"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:132
+#: assets/back-end/js/apps/block-editor/video/block.js:133
 msgid "Embed a video post"
 msgstr "Încorporați o postare video"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:138
+#: assets/back-end/js/apps/block-editor/video/block.js:139
 msgid "Choose video post"
 msgstr "Alegeți postarea video"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:146
+#: assets/back-end/js/apps/block-editor/video/block.js:147
 msgid "Choose post"
 msgstr "Alegeți postarea"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:213
+#: assets/back-end/js/apps/block-editor/video/block.js:219
 #: views/plugin_settings.php:31
 msgid "Embed options"
 msgstr "Player video"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:218
+#: assets/back-end/js/apps/block-editor/video/block.js:224
 #: includes/libs/admin/editor/classic-editor.class.php:216
 #: includes/libs/admin/table/video-list-table.class.php:107
-#: views/plugin_settings.php:357
+#: views/plugin_settings.php:376
 msgid "Loop video"
 msgstr "Clip repetitiv"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:231
+#: assets/back-end/js/apps/block-editor/video/block.js:237
 msgid "Autoplay video"
 msgstr "Redare automată video"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:232
+#: assets/back-end/js/apps/block-editor/video/block.js:238
 msgid "This feature won't work on all browsers."
 msgstr "Această funcție nu va funcționa pe toate browserele."
 
-#: assets/back-end/js/apps/block-editor/video/block.js:245
+#: assets/back-end/js/apps/block-editor/video/block.js:251
 #: includes/libs/admin/editor/classic-editor.class.php:193
 #: includes/libs/admin/editor/classic-editor.class.php:386
 #: includes/libs/admin/table/video-list-table.class.php:95
 #: includes/libs/widgets/playlist-widget.class.php:302
-#: views/plugin_settings.php:341
+#: views/plugin_settings.php:360
 msgid "Volume"
 msgstr "Volum"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:246
+#: assets/back-end/js/apps/block-editor/video/block.js:252
 msgid "Will work only for JS embeds"
 msgstr "Va funcționa numai pentru încorporări JS"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:264
+#: assets/back-end/js/apps/block-editor/video/block.js:270
 msgid "Embed size"
 msgstr "Dimensiunea încorporării"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:269
+#: assets/back-end/js/apps/block-editor/video/block.js:275
 #: includes/libs/admin/editor/classic-editor.class.php:159
 #: includes/libs/admin/editor/classic-editor.class.php:377
 #: includes/libs/admin/table/video-list-table.class.php:96
@@ -129,12 +129,16 @@ msgstr "Dimensiunea încorporării"
 msgid "Width"
 msgstr "Lățime"
 
-#: assets/back-end/js/apps/block-editor/video/block.js:287
+#: assets/back-end/js/apps/block-editor/video/block.js:293
 #: includes/libs/admin/editor/classic-editor.class.php:149
 #: includes/libs/admin/table/video-list-table.class.php:105
 #: views/plugin_settings.php:279
 msgid "Aspect ratio"
 msgstr "Aspect"
+
+#: assets/back-end/js/apps/block-editor/video/block.js:313
+msgid "Align"
+msgstr "Aliniere"
 
 #: assets/back-end/js/apps/block-editor/video_position/block.js:19
 msgid "Vimeotheque video position"
@@ -170,71 +174,78 @@ msgstr "... se încarcă"
 msgid "Image imported successfully."
 msgstr "Imagine importată cu succes."
 
-#: includes/libs/admin/admin.class.php:123
-#: includes/libs/admin/admin.class.php:124
+#: includes/libs/admin/admin.class.php:128
+#: includes/libs/admin/admin.class.php:129
 #: includes/libs/admin/page/video-import-page.class.php:74
 #: includes/libs/admin/posts-import-meta-panels.class.php:98
 msgid "Import videos"
 msgstr "Importă videoclipuri"
 
-#: includes/libs/admin/admin.class.php:134
-#: includes/libs/admin/admin.class.php:135
+#: includes/libs/admin/admin.class.php:139
+#: includes/libs/admin/admin.class.php:140
+#: includes/libs/admin/page/extensions-page.class.php:26
+#: includes/libs/admin/page/status-page.class.php:175
+msgid "Add-ons"
+msgstr "Add-ons"
+
+#: includes/libs/admin/admin.class.php:150
+#: includes/libs/admin/admin.class.php:151
 msgid "Status"
 msgstr "Stare"
 
-#: includes/libs/admin/admin.class.php:145
-#: includes/libs/admin/admin.class.php:146
+#: includes/libs/admin/admin.class.php:161
+#: includes/libs/admin/admin.class.php:162
 msgid "Settings"
 msgstr "Opțiuni"
 
-#: includes/libs/admin/admin.class.php:156
-#: includes/libs/admin/admin.class.php:157
+#: includes/libs/admin/admin.class.php:172
+#: includes/libs/admin/admin.class.php:173
 #: includes/libs/post/post-type.class.php:88
 msgid "Videos"
 msgstr "Videoclipuri"
 
-#: includes/libs/admin/admin.class.php:167
-#: includes/libs/admin/admin.class.php:168 views/go_pro.php:93
+#: includes/libs/admin/admin.class.php:183
+#: includes/libs/admin/admin.class.php:184 views/go_pro.php:93
 msgid "Go PRO!"
 msgstr "Devino PRO!"
 
-#: includes/libs/admin/admin.class.php:216
+#: includes/libs/admin/admin.class.php:232
 msgid "Manual bulk import"
 msgstr "Import în masă manual"
 
-#: includes/libs/admin/admin.class.php:220
+#: includes/libs/admin/admin.class.php:236
 #: includes/libs/admin/page/settings-helper.class.php:117
 msgid "Automatic import"
 msgstr "Import automat"
 
-#: includes/libs/admin/admin.class.php:240
+#: includes/libs/admin/admin.class.php:256
 msgid "Editor"
 msgstr "Editor"
 
-#: includes/libs/admin/admin.class.php:241
+#: includes/libs/admin/admin.class.php:257
 #: includes/libs/admin/editor/classic-editor.class.php:402
 #: includes/libs/widgets/playlist-widget.class.php:276
 msgid "Author"
 msgstr "Autor"
 
-#: includes/libs/admin/admin.class.php:242
+#: includes/libs/admin/admin.class.php:258
 msgid "Contributor"
 msgstr "Colaborator"
 
-#: includes/libs/admin/admin.class.php:260
+#: includes/libs/admin/admin.class.php:276
 #: includes/libs/admin/table/video-import-list-table.class.php:165
 #: includes/libs/admin/table/video-list-table.class.php:316
 msgid "Video ID"
 msgstr "ID video"
 
-#: includes/libs/admin/admin.class.php:261
+#: includes/libs/admin/admin.class.php:277
 #: includes/libs/admin/table/video-import-list-table.class.php:167
 #: includes/libs/admin/table/video-list-table.class.php:317
 #: includes/libs/vimeo-api/resource-objects.class.php:122
 msgid "Duration"
 msgstr "Durata"
 
-#: includes/libs/admin/admin.class.php:296
+#: includes/libs/admin/admin.class.php:312
 #, php-format
 msgid ""
 "It's great to see that you've been using %s plugin for a while now. "
@@ -243,7 +254,7 @@ msgstr ""
 "Îți mulțumim că folosești pluginul %s. Sperăm că găsești utilizarea lui "
 "facilă și utilă!"
 
-#: includes/libs/admin/admin.class.php:299
+#: includes/libs/admin/admin.class.php:315
 msgid ""
 "Would you consider leaving a positive review? It really helps to support the "
 "plugin and helps others to discover it too!"
@@ -252,7 +263,7 @@ msgstr ""
 "mare ajutor în sprijinirea pluginului și în plus îi ajută și pe alții să îl "
 "descopere!"
 
-#: includes/libs/admin/admin.class.php:333
+#: includes/libs/admin/admin.class.php:349
 #, php-format
 msgid ""
 "By using the embed feature of this plugin you will be agreeing to Vimeo's "
@@ -262,7 +273,7 @@ msgstr ""
 "acord cu politica de confidențialitate a Vimeo. Mai multe detalii găsiți "
 "aici: %s"
 
-#: includes/libs/admin/admin.class.php:354
+#: includes/libs/admin/admin.class.php:370
 msgid "First time installation"
 msgstr "Prima instalare"
 
@@ -378,12 +389,12 @@ msgstr "Sub conținut"
 #: includes/libs/admin/editor/classic-editor.class.php:200
 #: includes/libs/admin/editor/classic-editor.class.php:389
 #: includes/libs/widgets/playlist-widget.class.php:304
-#: views/plugin_settings.php:344
+#: views/plugin_settings.php:363
 msgid "number between 0 (mute) and 100 (max)"
 msgstr "număr între 0 (fără sunet) și 100 (maxim)"
 
 #: includes/libs/admin/editor/classic-editor.class.php:204
-#: views/plugin_settings.php:349
+#: views/plugin_settings.php:368
 msgid "Autoplay"
 msgstr "Redare automată"
 
@@ -424,7 +435,7 @@ msgstr ""
 "când este bifat, videoclipul va fi redat din nou când va ajunge la final"
 
 #: includes/libs/admin/editor/classic-editor.class.php:227
-#: views/plugin_settings.php:362
+#: views/plugin_settings.php:381
 msgid "Show video title"
 msgstr "Afișați titlul videoclipului"
 
@@ -433,7 +444,7 @@ msgid "when checked, player will display video title"
 msgstr "când este bifat, playerul va afișa titlul videoclipului"
 
 #: includes/libs/admin/editor/classic-editor.class.php:238
-#: views/plugin_settings.php:368
+#: views/plugin_settings.php:387
 msgid "Player color"
 msgstr "Culoarea playerului video"
 
@@ -444,7 +455,7 @@ msgid "Default"
 msgstr "Implicit"
 
 #: includes/libs/admin/editor/classic-editor.class.php:252
-#: views/plugin_settings.php:375
+#: views/plugin_settings.php:394
 msgid "Show video author"
 msgstr "Afișați autorul videoclipului"
 
@@ -481,8 +492,8 @@ msgid "Playlist settings"
 msgstr "Setările listei"
 
 #: includes/libs/admin/editor/classic-editor.class.php:344
-#: includes/libs/admin/page/status-page.class.php:115
-#: includes/libs/admin/page/status-page.class.php:119
+#: includes/libs/admin/page/status-page.class.php:121
+#: includes/libs/admin/page/status-page.class.php:125
 #: includes/libs/widgets/playlist-widget.class.php:247
 msgid "Theme"
 msgstr "Temă"
@@ -676,7 +687,7 @@ msgstr "Am scris deja o recenzie."
 msgid "Ask me later."
 msgstr "Întreabă-mă mai târziu."
 
-#: includes/libs/admin/notice/vimeo-api-notice.class.php:31
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:40
 #, php-format
 msgid ""
 "In order to be able to import videos using Vimeotheque, you must register on "
@@ -685,11 +696,11 @@ msgstr ""
 "Pentru a putea importa videoclipuri folosind Vimeotheque trebuie să vă "
 "înregistrați pe %s."
 
-#: includes/libs/admin/notice/vimeo-api-notice.class.php:34
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:43
 msgid "Vimeo App page"
 msgstr "Pagina aplicației Vimeo"
 
-#: includes/libs/admin/notice/vimeo-api-notice.class.php:37
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:46
 msgid ""
 "Please note that you must have a valid Vimeo account and also you must be "
 "logged into Vimeo before being able to register your app."
@@ -698,7 +709,7 @@ msgstr ""
 "asemenea, trebuie să fiți autentificat pe Vimeo înainte de a vă putea "
 "înregistra aplicația."
 
-#: includes/libs/admin/notice/vimeo-api-notice.class.php:39
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:48
 #, php-format
 msgid ""
 "After you registered your app visit %s and enter your Vimeo consumer and "
@@ -707,9 +718,34 @@ msgstr ""
 "După ce v-ați înregistrat aplicația, vizitați %s și introduceți cheia  și "
 "codul secret Vimeo."
 
-#: includes/libs/admin/notice/vimeo-api-notice.class.php:43
+#: includes/libs/admin/notice/vimeo-api-notice.class.php:52
 msgid "Settings page"
 msgstr "Pagina opțiuni"
+
+#: includes/libs/admin/page/extensions-page.class.php:57
+msgid "Install"
+msgstr "Instalare"
+
+#: includes/libs/admin/page/extensions-page.class.php:69
+msgid "Requires Vimeotheque PRO"
+msgstr "Necesită Vimeotheque PRO"
+
+#: includes/libs/admin/page/extensions-page.class.php:79
+msgid "Activate"
+msgstr "Activare"
+
+#: includes/libs/admin/page/extensions-page.class.php:85
+msgid "Deactivate"
+msgstr "Dezactivare"
+
+#: includes/libs/admin/page/extensions-page.class.php:124
+#, php-format
+msgid "%s version %s is available."
+msgstr "Versiunea %s %s este disponibilă."
+
+#: includes/libs/admin/page/extensions-page.class.php:129
+msgid "Update now"
+msgstr "Actualizați acum"
 
 #: includes/libs/admin/page/list-videos-page.class.php:24
 msgid "Video list"
@@ -728,12 +764,12 @@ msgstr ""
 "care vă va permite să interogați Vimeo."
 
 #: includes/libs/admin/page/post-edit-page.class.php:126
-#: views/plugin_settings.php:415
+#: views/plugin_settings.php:434
 msgid "Create Vimeo App"
 msgstr "Creați aplicație Vimeo"
 
 #: includes/libs/admin/page/post-edit-page.class.php:131
-#: views/plugin_settings.php:420
+#: views/plugin_settings.php:439
 msgid "See tutorial"
 msgstr "Vedeți tutorialul"
 
@@ -973,122 +1009,134 @@ msgstr "Vizualizați opțiunile PRO"
 msgid "Clear OAuth credentials"
 msgstr "Ștergeți acreditările OAuth"
 
-#: includes/libs/admin/page/status-page.class.php:29
+#: includes/libs/admin/page/status-page.class.php:35
 msgid "System status"
 msgstr "Stare sistem"
 
-#: includes/libs/admin/page/status-page.class.php:34
+#: includes/libs/admin/page/status-page.class.php:40
 msgid "Copy the report and paste it into the support ticket."
 msgstr "Copiați raportul și lipiți-l în mesajul de cerere de suport tehnic."
 
-#: includes/libs/admin/page/status-page.class.php:35
+#: includes/libs/admin/page/status-page.class.php:41
 msgid "Create report"
 msgstr "Creați un raport"
 
-#: includes/libs/admin/page/status-page.class.php:36
+#: includes/libs/admin/page/status-page.class.php:42
 msgid "Click to create report and paste the result into the support ticket."
 msgstr ""
 "Faceți clic pentru a crea un raport și lipiți rezultatul în mesajul de "
 "cerere de suport tehnic."
 
-#: includes/libs/admin/page/status-page.class.php:40
+#: includes/libs/admin/page/status-page.class.php:46
 msgid "WordPress"
 msgstr "WordPress"
 
-#: includes/libs/admin/page/status-page.class.php:44
+#: includes/libs/admin/page/status-page.class.php:50
 msgid "WP URL"
 msgstr "URL WP"
 
-#: includes/libs/admin/page/status-page.class.php:48
+#: includes/libs/admin/page/status-page.class.php:54
 msgid "Site address"
 msgstr "Adresa site-ului"
 
-#: includes/libs/admin/page/status-page.class.php:52
+#: includes/libs/admin/page/status-page.class.php:58
 msgid "Vimeotheque version"
 msgstr "Versiunea Vimeotheque"
 
-#: includes/libs/admin/page/status-page.class.php:56
+#: includes/libs/admin/page/status-page.class.php:62
 msgid "WordPress version"
 msgstr "Versiunea WordPress"
 
-#: includes/libs/admin/page/status-page.class.php:60
+#: includes/libs/admin/page/status-page.class.php:66
 msgid "WordPress memory limit"
 msgstr "Limita de memorie WordPress"
 
-#: includes/libs/admin/page/status-page.class.php:64
+#: includes/libs/admin/page/status-page.class.php:70
 msgid "WordPress debug mode"
 msgstr "Modul de depanare WordPress"
 
-#: includes/libs/admin/page/status-page.class.php:68
+#: includes/libs/admin/page/status-page.class.php:74
 msgid "Language"
 msgstr "Limba"
 
-#: includes/libs/admin/page/status-page.class.php:72
+#: includes/libs/admin/page/status-page.class.php:78
 msgid "WordPress multisite"
 msgstr "WordPress multisite"
 
-#: includes/libs/admin/page/status-page.class.php:78
+#: includes/libs/admin/page/status-page.class.php:84
 msgid "Server"
 msgstr "Server"
 
-#: includes/libs/admin/page/status-page.class.php:82
+#: includes/libs/admin/page/status-page.class.php:88
 msgid "Server info"
 msgstr "Informații despre server"
 
-#: includes/libs/admin/page/status-page.class.php:86
+#: includes/libs/admin/page/status-page.class.php:92
 msgid "PHP version"
 msgstr "Versiunea PHP"
 
-#: includes/libs/admin/page/status-page.class.php:90
+#: includes/libs/admin/page/status-page.class.php:96
 msgid "PHP post max size"
 msgstr "Mărimea maximă a postului PHP"
 
-#: includes/libs/admin/page/status-page.class.php:94
+#: includes/libs/admin/page/status-page.class.php:100
 msgid "PHP time limit"
 msgstr "Limită de timp PHP"
 
-#: includes/libs/admin/page/status-page.class.php:98
+#: includes/libs/admin/page/status-page.class.php:104
 msgid "PHP max input vars"
 msgstr "PHP vars de intrare max"
 
-#: includes/libs/admin/page/status-page.class.php:102
+#: includes/libs/admin/page/status-page.class.php:108
 msgid "PHP default timezone"
 msgstr "Fus orar implicit PHP"
 
-#: includes/libs/admin/page/status-page.class.php:106
+#: includes/libs/admin/page/status-page.class.php:112
 msgid "PHP cURL"
 msgstr "PHP CURL"
 
-#: includes/libs/admin/page/status-page.class.php:110
+#: includes/libs/admin/page/status-page.class.php:116
 msgid "cURL version"
 msgstr "versiune cURL"
 
-#: includes/libs/admin/page/status-page.class.php:123
+#: includes/libs/admin/page/status-page.class.php:129
 msgid "Version"
 msgstr "Versiune"
 
-#: includes/libs/admin/page/status-page.class.php:127
+#: includes/libs/admin/page/status-page.class.php:133
 msgid "Child theme"
 msgstr "Temă copil"
 
-#: includes/libs/admin/page/status-page.class.php:132
+#: includes/libs/admin/page/status-page.class.php:138
 msgid "Plugin settings"
 msgstr "Opțiuni plugin"
 
-#: includes/libs/admin/page/status-page.class.php:143
-#: views/plugin_settings.php:335
+#: includes/libs/admin/page/status-page.class.php:149
+#: views/plugin_settings.php:354
 msgid "Embed settings"
 msgstr "Setări de încorporare"
 
-#: includes/libs/admin/page/status-page.class.php:214
+#: includes/libs/admin/page/status-page.class.php:161
+msgid "Other"
+msgstr "Altele"
+
+#: includes/libs/admin/page/status-page.class.php:191
+msgid "Active"
+msgstr "Activ"
+
+#: includes/libs/admin/page/status-page.class.php:191
+msgid "Inactive"
+msgstr "Inactiv"
+
+#: includes/libs/admin/page/status-page.class.php:258
 msgid "cURL installed but unable to retrieve version."
 msgstr "cURL este instalat dar nu se poate prelua versiunea."
 
-#: includes/libs/admin/page/status-page.class.php:291
+#: includes/libs/admin/page/status-page.class.php:340
 msgid "Yes"
 msgstr "Da"
 
-#: includes/libs/admin/page/status-page.class.php:293
+#: includes/libs/admin/page/status-page.class.php:342
 msgid "No"
 msgstr "Nu"
 
@@ -1102,48 +1150,48 @@ msgstr ""
 msgid "Switch to the list view"
 msgstr "Comutați la vizualizarea listă"
 
-#: includes/libs/admin/page/video-import-page.class.php:232
+#: includes/libs/admin/page/video-import-page.class.php:233
 msgid "Importing, please wait..."
 msgstr "Se importă, vă rugăm să așteptați ..."
 
-#: includes/libs/admin/page/video-import-page.class.php:233
+#: includes/libs/admin/page/video-import-page.class.php:234
 msgid "Not done yet, still importing. You'll have to wait a bit longer."
 msgstr ""
 "Nu s-a terminat încă, încă se importă. Va trebui să așteptați puțin mai mult."
 
-#: includes/libs/admin/page/video-import-page.class.php:261
+#: includes/libs/admin/page/video-import-page.class.php:262
 msgid "Loading, please wait..."
 msgstr "Încărcare, va rugam așteptați..."
 
-#: includes/libs/admin/page/video-import-page.class.php:262
+#: includes/libs/admin/page/video-import-page.class.php:263
 msgid "Please use the form above to perform a search for Vimeo videos."
 msgstr ""
 "Vă rugăm să utilizați formularul de mai sus pentru a efectua o căutare a "
 "videoclipurilor Vimeo."
 
-#: includes/libs/admin/page/video-import-page.class.php:263
+#: includes/libs/admin/page/video-import-page.class.php:264
 #, php-format
 msgid "Displaying %1$d videos out of %2$d videos."
 msgstr "Se afișează %1$d videoclipuri din %2$d videoclipuri."
 
-#: includes/libs/admin/page/video-import-page.class.php:264
+#: includes/libs/admin/page/video-import-page.class.php:265
 msgid "Sorry, there are no videos matching your criteria."
 msgstr ""
 "Ne pare rău, nu există videoclipuri care să corespundă criteriilor dvs."
 
-#: includes/libs/admin/page/video-import-page.class.php:265
+#: includes/libs/admin/page/video-import-page.class.php:266
 msgid "All results were loaded."
 msgstr "Toate rezultatele au fost încărcate."
 
-#: includes/libs/admin/page/video-import-page.class.php:266
+#: includes/libs/admin/page/video-import-page.class.php:267
 msgid "Load more"
 msgstr "Mai mult"
 
-#: includes/libs/admin/page/video-import-page.class.php:267
+#: includes/libs/admin/page/video-import-page.class.php:268
 msgid "Not imported due to unknown error."
 msgstr "Nu a fost importat din cauza unei erori necunoscute."
 
-#: includes/libs/admin/page/video-import-page.class.php:268
+#: includes/libs/admin/page/video-import-page.class.php:269
 msgid "Ready to accept queries, please use the form to search for videos."
 msgstr ""
 "Pregătit pentru interogări, vă rugăm să utilizați formularul pentru a căuta "
@@ -1286,6 +1334,18 @@ msgstr "Categorie"
 #: includes/libs/admin/table/video-list-table.class.php:319
 msgid "Date"
 msgstr "Data"
+
+#: includes/libs/extensions/extensions.class.php:40
+msgid "Vimeotheque Debug"
+msgstr "Depanare Vimeotheque"
+
+#: includes/libs/extensions/extensions.class.php:42
+msgid ""
+"Creates and outputs an activity log which stores the debug messages emitted "
+"by Vimeotheque when import actions are taken."
+msgstr ""
+"Creează și scoate un jurnal de activitate care stochează mesajele de "
+"depanare emise de Vimeotheque atunci când sunt efectuate acțiuni de import."
 
 #: includes/libs/post/post-type.class.php:76
 msgid "Vimeo Videos"
@@ -1557,7 +1617,7 @@ msgid "Album user ID"
 msgstr "ID utilizator album"
 
 #: includes/libs/vimeo-api/album-resource.class.php:111
-#: views/import_videos.php:78
+#: views/import_videos.php:83
 msgid "Album owner user ID"
 msgstr "ID-ul utilizatorului căruia îi aparține albumul pe Vimeo"
 
@@ -1614,7 +1674,11 @@ msgstr "Comentarii"
 msgid "Relevancy"
 msgstr "Relevanţă"
 
-#: includes/libs/vimeo-api/resource-objects.class.php:221
+#: includes/libs/vimeo-api/resource-objects.class.php:158
+msgid "Default order"
+msgstr "Ordine implicită"
+
+#: includes/libs/vimeo-api/resource-objects.class.php:227
 #, php-format
 msgid "Resource %s is not registered."
 msgstr "Resursa %s nu este înregistrată."
@@ -1873,11 +1937,11 @@ msgstr ""
 msgid "Try PRO version"
 msgstr "Încercați versiunea PRO"
 
-#: views/import_videos.php:10
+#: views/import_videos.php:15
 msgid "Import videos from Vimeo."
 msgstr "Importați videoclipuri din Vimeo."
 
-#: views/import_videos.php:11
+#: views/import_videos.php:16
 msgid ""
 "Enter your search criteria and submit. All found videos will be displayed "
 "and you can selectively import videos into WordPress."
@@ -1885,31 +1949,31 @@ msgstr ""
 "Introduceți criteriile de căutare și trimiteți. Toate videoclipurile găsite "
 "vor fi afișate și puteți importa selectiv videoclipuri în WordPress."
 
-#: views/import_videos.php:18
+#: views/import_videos.php:23
 msgid "List view"
 msgstr "Listă"
 
-#: views/import_videos.php:19
+#: views/import_videos.php:24
 msgid "Grid view"
 msgstr "Coloană"
 
-#: views/import_videos.php:48
+#: views/import_videos.php:53
 msgid "Feed type"
 msgstr "Tipul listă"
 
-#: views/import_videos.php:61
+#: views/import_videos.php:66
 msgid "Select the type of feed you want to load."
 msgstr "Selectați tipul de resursă pe care doriți să o încărcați."
 
-#: views/import_videos.php:73
+#: views/import_videos.php:78
 msgid "User ID"
 msgstr "ID-ul utilizatorului"
 
-#: views/import_videos.php:91
+#: views/import_videos.php:96
 msgid "Vimeo search query"
 msgstr "Interogare de căutare Vimeo"
 
-#: views/import_videos.php:98
+#: views/import_videos.php:103
 msgid ""
 "Enter search query, user ID, group ID, channel ID or album ID according to "
 "Feed Type selection."
@@ -1917,19 +1981,19 @@ msgstr ""
 "Introduceți interogarea de căutare, ID-ul utilizatorului, ID-ul grupului, ID-"
 "ul canalului sau ID-ul albumului în funcție de selectarea tipului de resursă."
 
-#: views/import_videos.php:110
+#: views/import_videos.php:115
 msgid "Order by"
 msgstr "Ordonat după"
 
-#: views/import_videos.php:138
+#: views/import_videos.php:143
 msgid "Search results"
 msgstr "Căutare în rezultate"
 
-#: views/import_videos.php:145
+#: views/import_videos.php:150
 msgid "enter optional search query"
 msgstr "introduceți interogarea de căutare opțională"
 
-#: views/import_videos.php:167
+#: views/import_videos.php:172
 msgid "Load feed"
 msgstr "Încărcați resursa"
 
@@ -2016,7 +2080,7 @@ msgstr "Prefix etichete articole video"
 
 #: views/plugin_settings.php:118 views/plugin_settings.php:193
 #: views/plugin_settings.php:222 views/plugin_settings.php:261
-#: views/plugin_settings.php:386 views/plugin_settings.php:478
+#: views/plugin_settings.php:405 views/plugin_settings.php:497
 msgid "Save settings"
 msgstr "Salvează opțiuni"
 
@@ -2119,10 +2183,26 @@ msgstr ""
 "pentru fiecare videoclip importat."
 
 #: views/plugin_settings.php:314
+msgid "Align video"
+msgstr "Aliniați videoclipul"
+
+#: views/plugin_settings.php:319
+msgid "Left"
+msgstr "Stânga"
+
+#: views/plugin_settings.php:320
+msgid "Center"
+msgstr "Centru"
+
+#: views/plugin_settings.php:321
+msgid "Right"
+msgstr "Dreapta"
+
+#: views/plugin_settings.php:333
 msgid "Allow videos to override player aspect ratio"
 msgstr "Permiteți videoclipurilor să anuleze raportul de aspect al playerului"
 
-#: views/plugin_settings.php:321
+#: views/plugin_settings.php:340
 msgid ""
 "When checked (recommended), player will have the exact aspect ratio as "
 "retrieved from Vimeo."
@@ -2130,11 +2210,11 @@ msgstr ""
 "Când este bifat (recomandat), playerul video va avea raportul de aspect "
 "exact așa cum a fost preluat din Vimeo."
 
-#: views/plugin_settings.php:322
+#: views/plugin_settings.php:341
 msgid "Player size aspect ratio option will be ignored."
 msgstr "Opțiunea de dimensiune a playerului va fi ignorată."
 
-#: views/plugin_settings.php:336
+#: views/plugin_settings.php:355
 msgid ""
 "General Vimeo player settings. These settings will be applied to any new "
 "video by default and can be changed individually for every imported video."
@@ -2143,7 +2223,7 @@ msgstr ""
 "implicit oricărui videoclip nou și pot fi modificate individual pentru "
 "fiecare videoclip importat."
 
-#: views/plugin_settings.php:352
+#: views/plugin_settings.php:371
 msgid ""
 "Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and "
 "Safari 11+. In these cases, Vimeo player revert to standard playback "
@@ -2153,15 +2233,15 @@ msgstr ""
 "66+ și Safari 11+. În aceste cazuri, playerul Vimeo revine la redarea "
 "standard, fiind necesară acțiunea utilizatorului pentru a inițializa redarea."
 
-#: views/plugin_settings.php:380
+#: views/plugin_settings.php:399
 msgid "Show author portrait"
 msgstr "Arată portretul autorului"
 
-#: views/plugin_settings.php:396
+#: views/plugin_settings.php:415
 msgid "Vimeo OAuth keys"
 msgstr "Chei autorizare OAuth"
 
-#: views/plugin_settings.php:401
+#: views/plugin_settings.php:420
 msgid ""
 "In order to be able to import videos using Vimeotheque, you must register a "
 "new Vimeo App (requires a Vimeo account)."
@@ -2169,7 +2249,7 @@ msgstr ""
 "Pentru a putea importa videoclipuri folosind Vimeotheque, trebuie să "
 "înregistrați o nouă aplicație Vimeo (necesită un cont Vimeo)."
 
-#: views/plugin_settings.php:403
+#: views/plugin_settings.php:422
 #, php-format
 msgid ""
 "Make sure that you set up option %s in your APP settings on Vimeo to be: %s"
@@ -2177,31 +2257,31 @@ msgstr ""
 "Nu uitați să configurați opțiunea %s în setările aplicației pe Vimeo pentru "
 "a fi: %s"
 
-#: views/plugin_settings.php:430
+#: views/plugin_settings.php:449
 msgid "Enter Vimeo Client Identifier"
 msgstr "Introduceți identificatorul clientului din aplicația Vimeo"
 
-#: views/plugin_settings.php:433 views/plugin_settings.php:440
+#: views/plugin_settings.php:452 views/plugin_settings.php:459
 msgid "You first need to create a Vimeo Account."
 msgstr "Mai întâi trebuie să creați un cont Vimeo."
 
-#: views/plugin_settings.php:437
+#: views/plugin_settings.php:456
 msgid "Enter Vimeo Client Secrets"
 msgstr "Introduceți cheia secretă client din aplicația Vimeo"
 
-#: views/plugin_settings.php:445
+#: views/plugin_settings.php:464
 msgid "Plugin access to Vimeo account"
 msgstr "Acces plugin pentru contul Vimeo"
 
-#: views/plugin_settings.php:448
+#: views/plugin_settings.php:467
 msgid "Your Vimeo keys are successfully installed."
 msgstr "Cheile dvs. Vimeo au fost instalate cu succes."
 
-#: views/plugin_settings.php:449
+#: views/plugin_settings.php:468
 msgid "Reset credentials"
 msgstr "Resetați acreditările"
 
-#: views/plugin_settings.php:452
+#: views/plugin_settings.php:471
 msgid ""
 "You can now query public videos on Vimeo and import them as WordPress posts."
 msgstr ""
@@ -2299,7 +2379,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Niciun videoclip selectat. <br /> Pentru a crea o listă de redare bifati "
 #~ "clipuri video in lista din dreapta."
-
-#, fuzzy
-#~ msgid "Vimeotheque"
-#~ msgstr "Vimeotheque PRO necesită instalarea pluginului Vimeotheque."
