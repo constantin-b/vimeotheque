@@ -46,7 +46,7 @@ class Extensions {
 		);
 
 		$this->remote_loader = new Remote_Loader(
-			'https://codeflavors.com',
+			'https://vimeotheque.com',
 			2,
 			$this
 		);
