@@ -63,18 +63,21 @@ class Remote_Loader {
 			set_transient( $transient, $addons, DAY_IN_SECONDS );
 		}
 
-		foreach( $addons as $addon ){
-			$extension = new Extension(
-				$addon->file,
-				$addon->name,
-				$addon->description
-			);
-			$extension->set_pro_addon();
-			$extension->set_file_id( $addon->id );
+		if( is_array( $addons ) ){
+			foreach( $addons as $addon ){
+				if( isset( $addon->file ) ) {
+					$extension = new Extension(
+						$addon->file,
+						$addon->name,
+						$addon->description
+					);
+					$extension->set_pro_addon();
+					$extension->set_file_id( $addon->id );
 
-			$this->extensions->register_extension( $extension );
+					$this->extensions->register_extension( $extension );
+				}
+			}
 		}
-
 	}
 
 	/**
