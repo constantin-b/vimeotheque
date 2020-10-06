@@ -158,7 +158,12 @@ registerBlockType( 'vimeotheque/video', {
                                             ( postType ) => {
                                                 setSearch({ query:'', category:false })
                                                 setPostType( postType )
-                                                setTaxonomy( 'selected' != postType ? vmtq.postTypes[ postType ].taxonomy.name : false )
+
+                                                let tax = 'selected' != postType
+                                                if( tax ){
+                                                    tax = vmtq.postTypes[ postType ].taxonomy ? vmtq.postTypes[ postType ].taxonomy.name : false
+                                                }
+                                                setTaxonomy( tax )
                                             }
                                         }
                                     />
