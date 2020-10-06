@@ -119,6 +119,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
             categoriesList = map( vmtq.postTypes, postType => {
                 if( postType.taxonomy ){
                     return <CategoryList
+                        key={postType.taxonomy.name}
                         taxonomy={postType.taxonomy.name}
                         title={ postType.taxonomy.labels.name }
                         categories={attributes.categories}
