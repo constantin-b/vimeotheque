@@ -25,9 +25,9 @@ class Register_Post {
 	 * Register_Post constructor.
 	 *
 	 * @param \WP_Post_Type $post_type
-	 * @param \WP_Taxonomy $taxonomy
+	 * @param \WP_Taxonomy|false $taxonomy
 	 */
-	public function __construct( \WP_Post_Type $post_type, \WP_Taxonomy $taxonomy ) {
+	public function __construct( \WP_Post_Type $post_type, $taxonomy ) {
 		$this->post_type = $post_type;
 		$this->taxonomy  = $taxonomy;
 	}
@@ -36,6 +36,10 @@ class Register_Post {
 	 * @return \WP_Taxonomy
 	 */
 	public function get_taxonomy() {
+		if( !$this->taxonomy instanceof \WP_Taxonomy ){
+			return false;
+		}
+
 		return $this->taxonomy;
 	}
 
@@ -51,6 +55,10 @@ class Register_Post {
 	}
 
 	public function get_taxonomy_rest_endpoint(){
+		if( !$this->taxonomy instanceof \WP_Taxonomy ){
+			return false;
+		}
+
 		$rest_base = ! empty( $this->taxonomy->rest_base ) ? $this->taxonomy->rest_base : $this->taxonomy->name;
 		return '/wp/v2/' . $rest_base;
 	}
