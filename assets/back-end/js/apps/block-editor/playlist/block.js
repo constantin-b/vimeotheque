@@ -115,6 +115,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     cat_ids: _categories
                 })
             },
+            // create categories lists for all registered post types
             categoriesList = map( vmtq.postTypes, postType => {
                 if( postType.taxonomy ){
                     return <CategoryList
