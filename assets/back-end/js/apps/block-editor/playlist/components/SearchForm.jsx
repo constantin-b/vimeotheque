@@ -95,26 +95,29 @@ class SearchForm extends React.Component{
                     }
                 />
 
-                <TreeSelect
-                    label={ __( 'Category', 'codeflavors-vimeo-video-post-lite' ) }
-                    noOptionLabel={ __('Choose category', 'codeflavors-vimeo-video-post-lite') }
-                    taxonomy={this.props.taxonomy}
-                    selectedId={this.state.category}
-                    onChange={
-                        value => {
-                            this.setState({
-                                category: this.sanitizeCategory( value ),
-                                optionSelected: this.isChecked( value ),
-                                submitted: false
-                            })
+                {
+                    this.props.taxonomy &&
+                    <TreeSelect
+                        label={__('Category', 'codeflavors-vimeo-video-post-lite')}
+                        noOptionLabel={__('Choose category', 'codeflavors-vimeo-video-post-lite')}
+                        taxonomy={this.props.taxonomy}
+                        selectedId={this.state.category}
+                        onChange={
+                            value => {
+                                this.setState({
+                                    category: this.sanitizeCategory(value),
+                                    optionSelected: this.isChecked(value),
+                                    submitted: false
+                                })
+                            }
                         }
-                    }
-                    onLoad={
-                        categories => {
-                            this.setCategories( categories )
+                        onLoad={
+                            categories => {
+                                this.setCategories(categories)
+                            }
                         }
-                    }
-                />
+                    />
+                }
 
                 {
                     ( this.state.category && this.state.submitted ) &&
