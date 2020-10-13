@@ -420,7 +420,13 @@ use Vimeotheque\Helper;
 							<th colspan="2">
 								<h4><i class="dashicons dashicons-admin-network"></i> <?php _e('Vimeo OAuth keys', 'codeflavors-vimeo-video-post-lite');?></h4>
                                 <?php
-                                    if ( empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] ) ){
+                                    $api_set = empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] );
+                                    /**
+                                     * Allow hiding or showing of OAuth setup instructions
+                                     */
+                                    $show = apply_filters( 'vimeotheque\admin\settings\show_oauth_instructions', $api_set );
+
+                                    if ( $show ){
                                         printf(
                                             '<div class="api-instructions"><p>%s</p> <p>%s</p> <p>%s</p></div>',
                                             __('In order to be able to import videos using Vimeotheque, you must register a new Vimeo App (requires a Vimeo account).', 'codeflavors-vimeo-video-post-lite'),
