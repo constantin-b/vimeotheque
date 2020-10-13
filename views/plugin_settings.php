@@ -420,6 +420,11 @@ use Vimeotheque\Helper;
 							<th colspan="2">
 								<h4><i class="dashicons dashicons-admin-network"></i> <?php _e('Vimeo OAuth keys', 'codeflavors-vimeo-video-post-lite');?></h4>
                                 <?php
+                                    /**
+                                     * Action running on OAuth instructions section
+                                     */
+                                    do_action( 'vimeotheque\admin\settings\oauth_instructions' );
+
                                     $api_set = empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] );
                                     /**
                                      * Allow hiding or showing of OAuth setup instructions
