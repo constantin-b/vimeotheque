@@ -58,7 +58,7 @@ use Vimeotheque\Helper;
 
                         <?php
                             /**
-                             * Action that allows other settings to be displayed in page
+                             * Action that allows other settings to be displayed in page into the General Settings tab
                              */
                             do_action( 'vimeotheque\admin\general_settings_section' );
                         ?>
@@ -81,7 +81,7 @@ use Vimeotheque\Helper;
 
 						<?php
 						/**
-						 * Action that allows other settings to be displayed in page
+						 * Action that allows other settings to be displayed in page into the Post Type tab
 						 */
 						do_action( 'vimeotheque\admin\post_type_section' );
 						?>
@@ -183,7 +183,7 @@ use Vimeotheque\Helper;
 
 						<?php
 						/**
-						 * Action that allows other settings to be displayed in page
+						 * Action that allows other settings to be displayed in page into the Content Options tab
 						 */
 						do_action( 'vimeotheque\admin\content_options_section' );
 						?>
@@ -213,7 +213,7 @@ use Vimeotheque\Helper;
 
 						<?php
 						/**
-						 * Action that allows other settings to be displayed in page
+						 * Action that allows other settings to be displayed in page into the Image Options tab
 						 */
 						do_action( 'vimeotheque\admin\image_options_section' );
 						?>
@@ -253,6 +253,9 @@ use Vimeotheque\Helper;
 						</tr>
 
                         <?php
+                        /**
+                         * Action that allows other settings to be displayed in page into the Import Options tab
+                         */
                             do_action( 'vimeotheque\admin\import_options_section' );
                         ?>
 
@@ -346,6 +349,9 @@ use Vimeotheque\Helper;
                         </tr>
 
                         <?php
+                            /**
+                             * Action that allows other settings to be displayed in page into the Embed Options tab
+                             */
                             do_action( 'vimeotheque\admin\embed_options_section' );
                         ?>
 

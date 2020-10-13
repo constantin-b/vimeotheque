@@ -29,7 +29,8 @@ class Helper{
 
 		/**
 		 * Filter on Vimeo access token. Useful if trying to provide a default access token
-		 * @var string
+		 *
+		 * @param string $token The Vimeo API token
 		 */
 		return apply_filters( 'vimeotheque\vimeo_api\access_token', $token );
 	}
@@ -280,7 +281,7 @@ class Helper{
 		 * Useful if user wants to implement
 		 * his own templates for video post type.
 		 *
-		 * @var bool
+		 * @param bool $allow Allow automatic embedding into the post content
 		 */
 		return apply_filters( 'vimeotheque\post_content_embed', true );
 	}
@@ -333,6 +334,10 @@ class Helper{
 	public static function debug_message( $message, $separator = "\n", $data = false ){
 		/**
 		 * Fires a debug message action
+		 *
+		 * @param string $message   The message to send to debugger
+		 * @param string $separator A separator to be used
+		 * @param mixed $data       Any type of data that can be passed
 		 */
 		do_action( 'vimeotheque\debug', $message, $separator, $data );
 	}

@@ -24,9 +24,11 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    $theme_info = $this->get_theme_info();
 	    $options = $this->get_plugin_options();
 	    $embed_options = $this->get_embed_options();
+
 		/**
 		 * Filter that allows additional options and variables
-         * @param array $options
+         *
+         * @param array $options The options to be rgistered
 		 */
 	    $other_options = apply_filters( 'vimeotheque\admin\status\other_options', [] );
 	    $extensions = parent::get_admin()->get_extensions()->get_registered_extensions();

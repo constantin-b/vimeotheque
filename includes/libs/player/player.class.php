@@ -89,14 +89,11 @@ class Player {
 	 */
 	private function set_post_embed_options(){
 		/**
-		 * Allow embed settings filtering that can change the embedding options
-		 * when the post is displayed.
+		 * Allow embed settings filtering that can change the embedding options when the post is displayed.
 		 *
-		 * @var array
-		 *
-		 * @param array $embed_settings - the post video embed settings
-		 * @param object $post - the current post being displayed
-		 * @param array $video - the video details as retrieved from Vimeo
+		 * @param array $embed_settings     The post video embed settings
+		 * @param object $post              The current post being displayed
+		 * @param array $video              The video details as retrieved from Vimeo
 		 */
 		$this->options = apply_filters(
 			'vimeotheque\player\embed_options',
@@ -115,9 +112,8 @@ class Player {
 	private function get_embed_width(){
 		/**
 		 * Filter that can be used to modify the width of the embed
-		 * @var int
 		 *
-		 * @param int $width - width in pixels
+		 * @param int $width    Width in pixels
 		 */
 		return apply_filters(
 			'vimeotheque\player\embed_width',
@@ -148,6 +144,12 @@ class Player {
 	 * @return string
 	 */
 	private function get_css_classes(){
+		/**
+		 * Generate additional CSS classes on Vimeotheque embed player container
+		 *
+		 * @param array $classes    CSS classes to be added
+		 * @param \WP_Post $post    The post object reference
+		 */
 		$classes = apply_filters(
 			'vimeotheque\player\css_class',
 			[
@@ -155,6 +157,7 @@ class Player {
 			],
 			$this->post->get_post()
 		);
+
 		return implode( ' ', (array) $classes );
 	}
 

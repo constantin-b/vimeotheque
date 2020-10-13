@@ -13,6 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Settings_Helper {
 
 	public static function init(){
+		/**
+		 * Filter that allows PRO options advertising to be shown
+		 *
+		 * @param bool $allow   Show the options (true) or hide them (false)
+		 */
 		$allow = apply_filters( 'vimeotheque\admin\page\settings_helper\show_pro_options', true );
 		if( !$allow ){
 			return;

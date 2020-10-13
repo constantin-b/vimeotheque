@@ -143,7 +143,8 @@ class Post_Edit_Page{
 
 			/**
 			 * Allow enqueue of additional scripts
-             * @param string $handle - React app script handle
+             *
+             * @param string $handle React app script handle
 			 */
             do_action( 'vimeotheque\admin\single-video-import-enqueue-script', $handle );
 

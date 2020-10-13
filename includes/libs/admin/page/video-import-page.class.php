@@ -243,6 +243,9 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			'1.0'
 		);
 
+		/**
+		 * Video import page load action used to enqueue assets
+		 */
 		do_action( 'vimeotheque\admin\video-import-assets' );
 	}
 	

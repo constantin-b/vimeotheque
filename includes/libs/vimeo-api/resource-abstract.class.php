@@ -173,7 +173,7 @@ class Resource_Abstract implements Resource_Interface {
 		/**
 		 * Filter API query params
 		 *
-		 * @param array $_params - request parameters
+		 * @param array $_params    Request parameters
 		 */
 		$_params = apply_filters( 'vimeotheque\vimeo_api\query_params', $_params );
 
@@ -262,7 +262,8 @@ class Resource_Abstract implements Resource_Interface {
 		 * Filter that allows setup of additional JSON fields in Vimeo API requests
 		 *
 		 * @see https://developer.vimeo.com/api/reference/responses/video
-		 * @param array $fields
+		 *
+		 * @param array $fields The additional JSON fields
 		 */
 		return apply_filters( 'vimeotheque\vimeo_api\add_json_fields', [] );
 	}

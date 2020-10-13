@@ -62,7 +62,8 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	public function get_notice() {
 		/**
 		 * Filter that can prevent all plugin messages from being displayed
-		 * @var boolean
+		 *
+		 * @param bool $allow   Allow notice to be displayed (true) or prevent it (false)
 		 */
 		$allow = apply_filters( 'vimeotheque\admin\notice\review_notice', true );
 		if( !$allow ){

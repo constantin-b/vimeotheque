@@ -283,6 +283,12 @@ class Ajax_Actions{
 			]
 		];
 
+		/**
+		 * Allow additional AJAX callbacks to be set
+		 *
+		 * @param array $callbacks              The additiojnal callbackes array
+		 * @param Ajax_Actions $ajax_object     The ajax \Vimeotheque\Admin\Ajax_Actions object reference
+		 */
 		$_callbacks = apply_filters( 'vimeotheque\admin\ajax_response', [], $this );
 
 		return array_merge( $_callbacks, $callbacks );

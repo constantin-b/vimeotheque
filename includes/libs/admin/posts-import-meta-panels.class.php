@@ -41,10 +41,11 @@ class Posts_Import_Meta_Panels{
 		$player_opt = Helper::get_embed_options();
 		// merge the two together
 		$options = array_merge( $options, $player_opt );
+
 		/**
 		 * Allow options override
          *
-         * @param array $options
+         * @param array $options    The options array
 		 */
 		$options = apply_filters( 'vimeotheque\admin\import_meta_panel\post_options', $options );
 		?>
@@ -84,15 +85,20 @@ class Posts_Import_Meta_Panels{
 
         <?php
 		/**
-		 * Action that allows setting up additional options
+		 * Action that allows setting up additional options in WordPress admin panels
          *
-         * @param array $options
+         * @param array $options The options displayed into the panel
 		 */
          do_action( 'vimeotheque\admin\import_meta_panel\post_options_fields', $options );
         ?>
 			
 		<div id="cvm-import-videos-submit-c">
 		    <?php submit_button(
+                    /**
+                     * Filter import button text
+                     *
+                     * @param string $text  The button text
+                     */
 		            apply_filters(
                         'vimeotheque\admin\import_meta_panel\button_text',
                         __('Import videos', 'codeflavors-vimeo-video-post-lite')
@@ -207,6 +213,11 @@ class Posts_Import_Meta_Panels{
 	 * @return string
 	 */
     private function get_post_type(){
+	    /**
+	     * Filter import meta panel post type
+         *
+         * @param string $post_type The post type
+	     */
 	    return apply_filters(
 	            'vimeotheque\admin\import_meta_panel\post_type',
                 $this->cpt->get_post_type()
@@ -219,7 +230,12 @@ class Posts_Import_Meta_Panels{
 	 * @return string
 	 */
 	private function get_tag_taxonomy(){
-		return apply_filters(
+		/**
+		 * Filter meta panel tag taxonomy
+         *
+         * @param string $taxonomy  The taxonomy
+		 */
+	    return apply_filters(
 		        'vimeotheque\admin\import_meta_panel\tag_taxonomy',
                 $this->cpt->get_tag_tax()
         );
@@ -231,6 +247,11 @@ class Posts_Import_Meta_Panels{
 	 * @return string
 	 */
 	private function get_category_taxonomy(){
+		/**
+		 * Filter meta panel category taxonomy
+		 *
+		 * @param string $taxonomy  The category taxonomy
+		 */
 		return apply_filters(
 		        'vimeotheque\admin\import_meta_panel\category_taxonomy',
                 $this->cpt->get_post_tax()

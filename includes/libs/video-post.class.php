@@ -214,6 +214,12 @@ class Video_Post{
 
 		$result = $this->cpt()->get_post_type() == $this->get_post()->post_type;
 
+		/**
+		 * Filter on checkup is the post is a Vimeotheque post
+		 *
+		 * @param bool $result              Is the post a Vimeotheque post (true) or is it a regular post (false)
+		 * @param Video_Post $video_post    Video post \Vimeotheque\Video_Post object reference
+		 */
 		return apply_filters( 'vimeotheque\video\is_video', $result, $this );
 	}
 

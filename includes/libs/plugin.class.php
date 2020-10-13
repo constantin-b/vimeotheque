@@ -120,8 +120,7 @@ class Plugin{
 			self::$instance = new self();
 
 			/**
-			 * Vimeotheque loaded.
-			 *
+			 * Triggered when Vimeotheque has loaded.
 			 * Fires when Vimeotheque was fully loaded and instantiated.
 			 *
 			 * @since 2.0
@@ -214,6 +213,11 @@ class Plugin{
 	 * Loads the automatic importer
 	 */
 	private function load_importer(){
+		/**
+		 * Posts importer filter
+		 *
+		 * @param Posts_Import $importer The Posts_Import object reference
+		 */
 		$this->posts_import = apply_filters(
 			'vimeotheque\set_importer',
 			new Posts_Import( $this->get_cpt() )
@@ -255,7 +259,8 @@ class Plugin{
 
 		/**
 		 * Options filter
-		 * @param array $defaults
+		 *
+		 * @param array $defaults Default options array
 		 */
 		$defaults = apply_filters(
 			'vimeotheque\options_default',
@@ -290,7 +295,8 @@ class Plugin{
 
 		/**
 		 * Filter for player options
-		 * @param array $defaults
+		 *
+		 * @param array $defaults Default options array
 		 */
 		$defaults = apply_filters(
 			'vimeotheque\player_options_default',

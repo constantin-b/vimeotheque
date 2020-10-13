@@ -110,8 +110,9 @@ class Vimeo_Api_Query extends Vimeo {
 		
 		$request = wp_remote_get( $endpoint, [
 		    /**
-		     * Request timeout filter
-		     * @var int
+		     * Vimeo API query request timeout filter
+		     *
+		     * @param int $timeouot     The request timeout
 		     */
 		    'timeout' => apply_filters( 'vimeotheque\vimeo_api\request_timeout' , 30 ),
 		    'sslverify' => false,

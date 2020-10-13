@@ -39,7 +39,8 @@ class Front_End{
 		 * Allow automatic embedding of videos callback to be prioritized preferentially.
 		 * This can be used in case a membership plugin is used and the priority needs to
 		 * be customized in order to protect the content.
-		 * @var integer
+		 *
+		 * @param int $priority The priority set to do the embedding into the post content
 		 */
 		$this->embed_filter_priority = intval(
 			apply_filters(

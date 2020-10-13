@@ -115,6 +115,12 @@ class Posts_Import{
 					/**
 					 * Action triggered when finding skipped posts.
 					 * Can be used to set extra taxonomies for already existing posts.
+					 *
+					 * @param \WP_Post $post             The WordPress post object that was found as duplicate
+					 * @param string $taxonomy           The taxonomy that must be imported for the post
+					 * @param string $taxonomy_value     The plugin taxonomy that must be set up
+					 * @param string $tag_taxonomy       The tag taxonomy that must be set up
+					 * @param string $tag_taxonomy_value The tag taxonomy value that must be set for the post
 					 */
 					do_action( 'vimeotheque\import_duplicate_taxonomies',
 						$post,
@@ -281,7 +287,8 @@ class Posts_Import{
 
 		/**
 		 * Filter that allows changing of post format when importing videos
-		 * @var string - post format
+		 *
+		 * @param string $post_format   The post format
 		 */
 		$post_format = apply_filters(
 			'vimeotheque\import_post_format',
@@ -292,8 +299,10 @@ class Posts_Import{
 		 * Filter that allows video imports. Can be used to prevent importing of
 		 * videos.
 		 *
-		 * @param $video - video details array
-		 * @param $post_type - post type that should be created from the video details
+		 * @param bool $allow       Allow video improts to be made (true) or prevent them (false)
+		 * @param array $video      Video details array
+		 * @param string $post_type The post type that should be created from the video details
+		 * @param false $false      An unset parameter
 		 */
 		$allow_import = apply_filters(
 			'vimeotheque\allow_import',
@@ -352,7 +361,12 @@ class Posts_Import{
 		// post title
 		$post_title 	= $options['import_title'] ? $video['title'] : '';
 
-		// action on post insert that allows setting of different meta on post
+		/**
+		 * Action ran before the post is inserted into the database
+		 *
+		 * @param array $video  The video details array retrieved from Vimeo
+		 * @param false $false  A parameter not set in Vimeotheque free version
+		 */
 		do_action(
 			'vimeotheque\import_before',
 			$video,
@@ -361,12 +375,13 @@ class Posts_Import{
 
 		// set post data
 		$post_data = [
+
 			/**
-			 * Filter on post title
+			 * Post title filter before the post is inserted into the database
 			 *
-			 * @param string - the post title
-			 * @param array - the video details
-			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
+			 * @param string $title     The post title
+			 * @param array $video      The video details
+			 * @param bool $false       Unused parameter
 			 */
 			'post_title' 	=> apply_filters(
 				'vimeotheque\import_post_title',
@@ -374,12 +389,13 @@ class Posts_Import{
 				$video,
 				false
 			),
+
 			/**
-			 * Filter on post content
+			 * Post content filter before the post is inserted into the database
 			 *
-			 * @param string - the post content
-			 * @param array - the video details
-			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
+			 * @param string $content   The post content
+			 * @param array $video      The video details
+			 * @param false $false      Unused parameter
 			 */
 			'post_content' 	=> apply_filters(
 				'vimeotheque\import_post_content',
@@ -387,12 +403,13 @@ class Posts_Import{
 				$video,
 				false
 			),
+
 			/**
-			 * Filter on post excerpt
+			 * Post excerpt filter before the post is inserted into the database
 			 *
-			 * @param string - the post excerpt
-			 * @param array - the video details
-			 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
+			 * @param string $excerpt   The post excerpt
+			 * @param array $video      The video details
+			 * @param false $false      Unused parameter
 			 */
 			'post_excerpt'	=> apply_filters(
 				'vimeotheque\import_post_excerpt',
@@ -401,12 +418,13 @@ class Posts_Import{
 				false
 			),
 			'post_type'		=> $this->post_type->get_post_type(),
+
 			/**
-			 * Filter on post status
+			 * Post status filter before the post is inserted into the database
 			 *
-			 * @param string - the post status
-			 * @param array - the video details
-			 * @param bool/array - always false, implemented for PRO version reasons
+			 * @param string $status    The post status
+			 * @param array $video      The video details
+			 * @param false $false      Unused parameter
 			 */
 			'post_status'	=> apply_filters(
 				'vimeotheque\import_post_status',
@@ -417,12 +435,13 @@ class Posts_Import{
 		];
 
 		$pd = $options['import_date'] ? date('Y-m-d H:i:s', strtotime( $video['published'] )) : current_time( 'mysql' );
+
 		/**
-		 * Filter on post date
+		 * Post date filter before the post is inserted into the database
 		 *
-		 * @param string - the post date
-		 * @param array - the video details
-		 * @param bool/array - false if not imported as theme, array if imported as theme and theme is active
+		 * @param string $date      The post date
+		 * @param array $video      The video details
+		 * @param false $false      Unused parameter
 		 */
 		$post_date = apply_filters(
 			'vimeotheque\import_post_date',
@@ -506,10 +525,10 @@ class Posts_Import{
 			/**
 			 * Action on post insert that allows setting of different meta on post
 			 *
-			 * @param int $post_id
-			 * @param array $video
-			 * @param false unknown
-			 * @param string $post_type
+			 * @param int $post_id          ID of the post newly created from the Vimeo video
+			 * @param array $video          Array of video details retrieved from Vimeo
+			 * @param false $unknown        Unused parameter
+			 * @param string $post_type     The post type that was created
 			 */
 			do_action(
 				'vimeotheque\import_success',

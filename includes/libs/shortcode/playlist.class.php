@@ -78,6 +78,11 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		wp_enqueue_script(
 			'vimeotheque-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_js_url(),
+			/**
+			 * Vimeotheque playlist theme script dependencies filter
+			 *
+			 * @param array $handles    The registered JavaScript handles
+			 */
 			apply_filters(
 				'vimeotheque-theme-' . strtolower( $theme->get_folder_name() ) . '-script-dependencies',
 				$handles['js']
@@ -235,6 +240,11 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		if( in_array( '0', $categories ) ){
 			$args = [
 				'post_type' => $post_type,
+				/**
+				 * Filter that allows changing of number of posts displayed into a playlist block or shortcode
+				 *
+				 * @param int $max_posts    Maximum number of posts to retrieve
+				 */
 				'numberposts' => apply_filters(
 					'vimeotheque\shortcode\playlist\newest_max_posts',
 					10

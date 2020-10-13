@@ -65,7 +65,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		 *      'callback' => callback function that will create the tab output (ie. array( $this, 'method_name' ))
 		 * )
 		 *
-		 * @param array $tabs
+		 * @param array $tabs   The new tabs to be registered
 		 */
 		$extra_tabs = apply_filters( 'vimeotheque\admin\page\settings_tabs', [] );
 
@@ -93,7 +93,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		/**
 		 * Action triggered on settings page load event
 		 *
-		 * @param Options $options
+		 * @param Options $options Vimeotheque\Options\Options object reference
 		 */
 		do_action( 'vimeotheque\admin\page\settings_load', $this->options_obj() );
 
@@ -108,7 +108,8 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 
 				/**
 				 * Action running after the settings are saved
-				 * @param array $updated_settings
+				 *
+				 * @param array $updated_settings The saved settings array
 				 */
 				do_action( 'vimeotheque\admin\after_settings_save', $updated_settings );
 
@@ -121,7 +122,8 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 
 				/**
 				 * Action running after the player settings are saved
-				 * @param array $player_settings
+				 *
+				 * @param array $player_settings The player settings saved in database
 				 */
 				do_action( 'vimeotheque\admin\after_player_settings_save', $player_settings );
 			}
