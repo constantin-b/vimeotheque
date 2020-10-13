@@ -132,9 +132,9 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 	                /**
 	                 * Filter the update message
                      *
-                     * @param string $message The update message
-                     * @param Extension_Interface $extension The extension being displayed
-                     * @param \stdClass $update The update object from WP
+                     * @param string $message                   The update message
+                     * @param Extension_Interface $extension    The extension being displayed
+                     * @param \stdClass $update                 The update object from WP
 	                 */
                     echo apply_filters(
                         'vimeotheque\admin\page\extensions\update_message',
