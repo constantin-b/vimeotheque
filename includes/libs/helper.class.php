@@ -18,7 +18,7 @@ class Helper{
 	 *
 	 * @return bool|string
 	 */
-	static public function get_access_token(){
+	public static function get_access_token(){
 		$options = Plugin::instance()->get_options();
 		$token = false;
 		if( !empty( $options['oauth_secret'] ) ){
@@ -40,7 +40,7 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	static public function request_user_agent(){
+	public static function request_user_agent(){
 		return 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' );
 	}
 
@@ -51,7 +51,7 @@ class Helper{
 	 *
 	 * @return bool|int|Video_Post
 	 */
-	static public function get_video_post( $post = false ){
+	public static function get_video_post( $post = false ){
 		if( $post instanceof Video_Post ){
 			return $post;
 		}
@@ -64,7 +64,7 @@ class Helper{
 	 *
 	 * @return array|bool
 	 */
-	static public function get_post_player_size( $post ){
+	public static function get_post_player_size( $post ){
 		$_post = self::get_video_post( $post );
 		if( $_post->is_video() ){
 			$options = $_post->get_embed_options();
@@ -192,7 +192,7 @@ class Helper{
 	 *
 	 * @return array
 	 */
-	static public function get_embed_options( array $_options = [] ){
+	public static function get_embed_options( array $_options = [] ){
 		$embed_options	= Plugin::instance()->get_embed_options();
 
 		if( $_options ){
@@ -233,7 +233,7 @@ class Helper{
 	 *
 	 * @return bool|mixed
 	 */
-	static public function get_var( $name, $type = false, $sanitize = false ) {
+	public static function get_var( $name, $type = false, $sanitize = false ) {
 		$result = false;
 
 		if( !$type ){
@@ -398,7 +398,7 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	static public function embed_by_video_id( $video_id, $args = [], $echo = true ){
+	public static function embed_by_video_id( $video_id, $args = [], $echo = true ){
 		$default = [
 			'title' => 1,
 			'byline' => 1,
