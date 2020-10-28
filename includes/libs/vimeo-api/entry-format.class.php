@@ -109,7 +109,7 @@ class Entry_Format{
 		$publish_date = false;
 		if( $this->get_field( 'created_time' ) ){
 			$publish_date = $this->_entry['created_time'];
-		}else if( $this->get_field( 'release_date' ) ){
+		}elseif( $this->get_field( 'release_date' ) ){
 			$publish_date = $this->_entry['release_date'];
 		}
 		return $publish_date;
