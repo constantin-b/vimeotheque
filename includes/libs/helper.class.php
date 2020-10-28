@@ -23,7 +23,7 @@ class Helper{
 		$token = false;
 		if( !empty( $options['oauth_secret'] ) ){
 			$token = $options['oauth_secret'];
-		}else if( !empty( $options['oauth_token'] ) ){
+		}elseif( !empty( $options['oauth_token'] ) ){
 			$token = $options['oauth_token'];
 		}
 
