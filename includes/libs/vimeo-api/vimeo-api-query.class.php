@@ -42,13 +42,6 @@ class Vimeo_Api_Query extends Vimeo {
 	private $api_user_id;
 
 	/**
-	 * Stores the resource object that is currently being queried
-	 *
-	 * @var Resource_Interface
-	 */
-	private $api_resource;
-
-	/**
 	 * Vimeo_Api_Query constructor.
 	 *
 	 * @param $resource_type - the type of resource that should be queried (ie. album, channel, etc)
@@ -104,26 +97,45 @@ class Vimeo_Api_Query extends Vimeo {
 		// send a debug message for any client listening to plugin messages
 		Helper::debug_message(
 			sprintf(
-				__( 'Making remote request to: %s.' ),
+				__( 'Making %s remote request to: %s.' ),
+				$api_resource->get_request_method(),
 				$endpoint
 			)
 		);
-		
-		$request = wp_remote_request( $endpoint, [
+
+		$request_args = [
 			'method' => $api_resource->get_request_method(),
-		    /**
-		     * Vimeo API query request timeout filter
-		     *
-		     * @param int $timeouot     The request timeout
-		     */
-		    'timeout' => apply_filters( 'vimeotheque\vimeo_api\request_timeout' , 30 ),
-		    'sslverify' => false,
-		    'headers' => [
-		    	'user-agent' => Helper::request_user_agent(),
+			/**
+			 * Vimeo API query request timeout filter
+			 *
+			 * @param int $timeouot     The request timeout
+			 */
+			'timeout' => apply_filters( 'vimeotheque\vimeo_api\request_timeout' , 30 ),
+			'sslverify' => false,
+			'headers' => [
+				'user-agent' => Helper::request_user_agent(),
 				'authorization' => 'bearer ' . Helper::get_access_token(),
 				'accept' => parent::VERSION_STRING
-		    ]
-		] );
+			]
+		];
+
+		if( in_array( $api_resource->get_request_method(), ['POST', 'PATCH', 'PUT', 'DELETE'] ) ){
+			// send only the variables set as defaults for the resource
+			$request_args['body'] = array_intersect_key(
+				$this->get_api_request_params(),
+				$api_resource->get_default_params()
+			);
+
+			// send a debug message for any client listening to plugin messages
+			Helper::debug_message(
+				sprintf(
+					__( 'The request is sending the following variables: %s.' ),
+					implode( ', ', array_keys( $request_args['body'] ) )
+				)
+			);
+		}
+
+		$request = wp_remote_request( $endpoint, $request_args );
 		
 		$rate_limit = wp_remote_retrieve_header( $request, 'x-ratelimit-limit' );
 		if( $rate_limit ){
@@ -163,15 +175,15 @@ class Vimeo_Api_Query extends Vimeo {
 	 */
 	private function _get_endpoint(){
 
-		$this->api_resource = Resource_Objects::instance()->get_resource( $this->resource_type );
-		if( is_wp_error( $this->api_resource ) ){
-			return $this->api_resource;
+		$api_resource = $this->get_api_resource();
+		if( is_wp_error( $api_resource ) ){
+			return $api_resource;
 		}
 
-		$this->api_resource->set_resource_id( $this->resource_id );
-		$this->api_resource->set_user_id( $this->api_user_id );
-		$this->api_resource->set_params( $this->get_api_request_params() );
-		$endpoint = $this->api_resource->get_endpoint();
+		$api_resource->set_resource_id( $this->resource_id );
+		$api_resource->set_user_id( $this->api_user_id );
+		$api_resource->set_params( $this->get_api_request_params() );
+		$endpoint = $api_resource->get_endpoint();
 
 		if( is_wp_error( $endpoint ) ){
 			return $endpoint;
@@ -185,7 +197,7 @@ class Vimeo_Api_Query extends Vimeo {
 	 * @return Resource_Interface
 	 */
 	public function get_api_resource() {
-		return $this->api_resource;
+		return Resource_Objects::instance()->get_resource( $this->resource_type );
 	}
 
 	/**
@@ -194,6 +206,10 @@ class Vimeo_Api_Query extends Vimeo {
 	 * @return array
 	 */
 	public function get_api_request_params(){
+		if( $this->get_api_resource()->is_single_entry() ){
+			return $this->params;
+		}
+
 		$sort = isset( $this->params['order'] ) ? $this->params['order'] : '';
 		$sort_option = Resource_Objects::instance()->get_sort_option( $sort );
 		return array_merge( $this->params, $sort_option );
