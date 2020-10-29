@@ -1,6 +1,7 @@
 2.0.3
 - Updated hooks documentation;
-- Introduced actions and filters to OAuth plugin settings instructions.
+- Introduced actions and filters to OAuth plugin settings instructions;
+- Introduced Vimeo API request method.
 
 2.0.2
 - Introduced add-ons management that allow installation of add-ons for various purposes;
