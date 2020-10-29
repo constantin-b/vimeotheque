@@ -47,6 +47,11 @@ class Resource_Abstract implements Resource_Interface {
 	protected $request_fields = [];
 
 	/**
+	 * @var string
+	 */
+	protected $request_method = 'GET';
+
+	/**
 	 * Set sorting options
 	 *
 	 * @var array
@@ -107,6 +112,28 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * Se the remote requets method to be used
+	 *
+	 * @param string $method    Method to be used (ie. GET, POST, PATCH, DELETE)
+	 */
+	public function set_request_method( $method ){
+		$allowed = ['GET', 'HEAD', 'POST', 'PATCH', 'PUT', 'DELETE'];
+		$_method = strtoupper( $method );
+		if( !in_array( $_method, $allowed ) ){
+			trigger_error(
+				sprintf(
+					'Request method %s is not allowed. Use one of the following: %s.',
+					$method,
+					implode( ', ', $allowed )
+				),
+				E_USER_WARNING
+			);
+		}
+
+		$this->request_method = strtoupper( $method );
+	}
+
+	/**
 	 * Set default params.
 	 *
 	 * @param $params
@@ -132,12 +159,14 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::get_endpoint()
+	 *
 	 * Return endpoint URI
 	 *
 	 * @return string|\WP_Error
 	 */
 	public function get_endpoint(){
-		$_params = $this->default_params;
+		$_params = $this->get_default_params();
 		foreach ( $_params as $k => $v ){
 			if( isset( $this->params[ $k ] ) ){
 				$_params[ $k ] = $this->params[ $k ];
@@ -253,6 +282,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::get_optional_fields()
+	 *
 	 * Optionl additional fields that can be set by third party scripts
 	 *
 	 * @return array
@@ -269,6 +300,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::get_formatted_entry()
+	 *
 	 * @param $raw_entry
 	 *
 	 * @return array
@@ -281,6 +314,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::is_single_entry()
+	 *
 	 * Registers the resource as a single entry query; single entries should not be
 	 * displayed in front-end resource query pages, like video import page or automatic
 	 * import.
@@ -294,6 +329,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::has_automatic_import()
+	 *
 	 * Feed can be proccessed by automatic import.
 	 * Return true in concrete implementation if it can be processed.
 	 *
@@ -306,6 +343,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::can_import_new_videos()
+	 *
 	 * After processing the entire feed, only new videos can be imported.
 	 * Feed will be parsed once and all future queries will only check for new videos.
 	 * Return true in concrete implementation if this applies to feed.
@@ -317,6 +356,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::has_date_limit()
+	 *
 	 * Feed can have a date limit when processing imports.
 	 * When true, this signals that the feed can be imported
 	 * up to a certain given date in past beyond which videos
@@ -345,6 +386,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::get_output_name()
+	 *
 	 * @return string
 	 */
 	public function get_output_name(){
@@ -352,6 +395,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::get_name()
+	 *
 	 * Return ID name
 	 *
 	 * @return string
@@ -375,6 +420,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::get_api_endpoint()
+	 *
 	 * Return resource relative API endpoint
 	 *
 	 * @return string
@@ -384,6 +431,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::requires_user_id()
+	 *
 	 * Used to retrieve whether feed needs Vimeo user ID to make queries
 	 *
 	 * @return bool
@@ -393,6 +442,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::label_user_id()
+	 *
 	 * Get field label for Vimeo user ID
 	 *
 	 * @return bool|string
@@ -402,6 +453,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::placeholder_user_id()
+	 *
 	 * Get placeholder for field Vimeo user ID
 	 *
 	 * @return bool|string
@@ -411,6 +464,8 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
+	 * @see Resource_Interface::can_search_results()
+	 *
 	 * Most resources allow search within the returned results.
 	 * By default, abstract class will assume this is allowed.
 	 * Override in child implementation for feeds that do not support results searching
@@ -419,5 +474,14 @@ class Resource_Abstract implements Resource_Interface {
 	 */
 	public function can_search_results() {
 		return true;
+	}
+
+	/**
+	 * @see Resource_Interface::get_request_method()
+	 *
+	 * @return string
+	 */
+	public function get_request_method() {
+		return $this->request_method;
 	}
 }
