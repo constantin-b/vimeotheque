@@ -19,6 +19,13 @@ interface Resource_Interface{
 	public function get_endpoint();
 
 	/**
+	 * The method used to retrieve data from Vimeo
+	 *
+	 * @return string The method to be used when making the request (ie. GET, POST, PATCH, etc)
+	 */
+	public function get_request_method();
+
+	/**
 	 * Returns any additional optional fields that should be set from the
 	 * raw video entry returned by Vimeo API
 	 *
