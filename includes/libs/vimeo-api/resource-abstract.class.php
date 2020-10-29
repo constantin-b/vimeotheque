@@ -166,7 +166,7 @@ class Resource_Abstract implements Resource_Interface {
 	 * @return string|\WP_Error
 	 */
 	public function get_endpoint(){
-		$_params = $this->default_params;
+		$_params = $this->get_default_params();
 		foreach ( $_params as $k => $v ){
 			if( isset( $this->params[ $k ] ) ){
 				$_params[ $k ] = $this->params[ $k ];
