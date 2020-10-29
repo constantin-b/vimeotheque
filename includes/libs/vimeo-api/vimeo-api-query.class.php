@@ -87,6 +87,7 @@ class Vimeo_Api_Query extends Vimeo {
 	public function request_feed(){
 
 		$endpoint = $this->_get_endpoint();
+		$api_resource = $this->get_api_resource();
 
 		if( is_wp_error( $endpoint ) ){
 			// send a debug message for any client listening to plugin messages
@@ -108,7 +109,8 @@ class Vimeo_Api_Query extends Vimeo {
 			)
 		);
 		
-		$request = wp_remote_get( $endpoint, [
+		$request = wp_remote_request( $endpoint, [
+			'method' => $api_resource->get_request_method(),
 		    /**
 		     * Vimeo API query request timeout filter
 		     *
