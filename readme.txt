@@ -14,11 +14,8 @@ Create WordPress posts from Vimeo videos complete with video embed, title, descr
 
 **Vimeotheque 2** is a WordPress video importer plugin specially developed for Vimeo that allows quick importing of Vimeo videos as WordPress posts with attached video player from channels, albums, user, groups or categories. Posts are created having all details from Vimeo (title, description, video etc).
 
-A demonstration on how easy it is to use this Vimeo WordPress plugin:
-
-https://vimeo.com/70033244
-
 The plugin allows video importing of single videos (needs only video ID to fill title and description and attach the video) or bulk video imports from Vimeo feeds (channels, albums, etc). Bulk importing can be done manually or automatically and importing of details is made according to your settings (ie. description can be imported as post excerpt and/or content).
+
 Please note that before being able to perform bulk imports, you need to [register the plugin](https://developer.vimeo.com/apps/new "register Vimeo app") as an app on Vimeo (requires a valid Vimeo account). 
 
 After importing, all videos can be embedded into posts using a visual interface that creates and places the shortcode into your post/page content. Available shortcodes are for single videos as well as video playlists.
@@ -75,10 +72,6 @@ If you would like to create video posts from hidden Vimeo videos you will need [
 For each video post created by the plugin you have the option in post edit screen to import the video image as post featured image. The option is available in "Featured Image" metabox, just click the button "Import Video image" and the plugin will take care of the rest.
 
 == Screenshots ==
-
-1. Manual bulk import - step 1
-2. Manual bulk import - step 2 (choose videos to import)
-3. Front-end playlist shortcode display
 
 == Changelog ==
 = 2.0.3 =
