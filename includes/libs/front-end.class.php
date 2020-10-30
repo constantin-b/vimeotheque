@@ -25,6 +25,15 @@ class Front_End{
 	private $embed_filter_priority = 999;
 
 	/**
+	 * Store a list of video post ID's to skip automatic embedding for.
+	 * Used for video posts that have the block editor video position block
+	 * or for posts that use the video position shortcode.
+	 *
+	 * @var array
+	 */
+	private $skip_autoembed = [];
+
+	/**
 	 * Front_End constructor.
 	 *
 	 * @param Plugin $plugin
@@ -97,8 +106,13 @@ class Front_End{
 			return $content;
 		}
 
-		// check if filters prevent autoembedding
+		// check if filters prevent auto embedding
 		if( !Helper::is_autoembed_allowed() ){
+			return $content;
+		}
+
+		// if video is in skipped auto embed list (has block or the video position shortcode in content), don't embed
+		if( $this->skipped_autoembed( $post ) ){
 			return $content;
 		}
 
@@ -118,6 +132,17 @@ class Front_End{
 		}else{
 			return $video_container . $content;
 		}
+	}
+
+	/**
+	 * Check if post should be skipped from autoembedding
+	 *
+	 * @param \WP_Post $post
+	 *
+	 * @return bool
+	 */
+	private function skipped_autoembed( \WP_Post $post ){
+		return in_array( $post->ID, $this->skip_autoembed );
 	}
 
 	/**
@@ -170,15 +195,18 @@ class Front_End{
 	/**
 	 * Remove filter set on post content to embed the video;
 	 * prevents automatic video embed above or below content when called.
+	 *
+	 * @param int|false $post_id    The post ID registered to skip the auto embedding for
 	 */
-	public function prevent_embed(){
-		remove_filter(
-			'the_content',
-			[
-				$this,
-				'embed_video'
-			],
-			$this->embed_filter_priority
-		);
+	public function prevent_post_autoembed( $post_id = false ){
+		if( !$post_id ){
+			/**
+			 * @var \WP_Post
+			 */
+			global $post;
+			$post_id = $post->ID;
+		}
+
+		$this->skip_autoembed[ $post_id ] = $post_id;
 	}
 }
