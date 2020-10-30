@@ -81,6 +81,12 @@ For each video post created by the plugin you have the option in post edit scree
 3. Front-end playlist shortcode display
 
 == Changelog ==
+= 2.0.3 =
+- Solved a bug in Video Position block that disregarded the option to embed videos in archive pages and always embedded them;
+- Updated Vimeotheque hooks PHPDoc comments in plugin files;
+- Introduced actions and filters to OAuth plugin settings instructions;
+- Exposed REST_Api object for new endpoints registrations;
+- Introduced Vimeo API request method.
 
 = 2.0.2 =
 - Introduced add-ons management that allow installation of add-ons for various purposes;
