@@ -33,7 +33,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				 * Remove default action that embeds the video in front-end
 				 * @see Front_End::embed_video()
 				 */
-				parent::get_plugin()->get_front_end()->prevent_embed();
+				parent::get_plugin()->get_front_end()->prevent_post_autoembed();
 
 				// check if embedding in archives is allowed
 				$options = Plugin::instance()->get_options();

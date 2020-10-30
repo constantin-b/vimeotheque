@@ -27,7 +27,7 @@ class Video_Position extends Shortcode_Abstract implements Shortcode_Interface {
 		$names =  !is_array( parent::get_shortcode_name() ) ? [ parent::get_shortcode_name() ] : parent::get_shortcode_name();
 		foreach( $names as $tag ){
 			if( has_shortcode( $content, $tag ) ){
-				Plugin::instance()->get_front_end()->prevent_embed();
+				Plugin::instance()->get_front_end()->prevent_post_autoembed();
 				break;
 			}
 		}
