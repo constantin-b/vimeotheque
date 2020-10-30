@@ -46,7 +46,7 @@ After importing, all videos can be embedded into posts using a visual interface 
 
 * [Vimeotheque PRO live demo](http://vvp-demo.codeflavors.com "Vimeotheque PRO live demo")
 * [Vimeotheque homepage](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin")
-* [Documentation](https://vimeotheque.com/documents/getting-started/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin documentation");
+* [Documentation](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque Knowledgebase and Help Center");
 
 == Installation ==
 
@@ -57,18 +57,18 @@ Once activated a new menu entry will be created called **Videos** (look for the 
 In order to be able to perform any imports, you will first need to register the plugin as an app on Vimeo website. Registration can be made [here](https://developer.vimeo.com/apps/new "register Vimeo app"). Please note that you must have a Vimeo account before you can register the app.
 After successfull registration, go to plugin page **Settings** and under **Vimeo authentication** enter your consumer and secret key provided by Vimeo. Now you can make bulk imports.
 
-For a detailed tutorial on how to set up Vimeo access registration, please see [this tutorial](https://vimeotheque.com/documentation/getting-started/vimeo-oauth-new-interface/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "How to set up Vimeo OAuth").
+For a detailed tutorial on how to set up Vimeo access registration, please see [this tutorial](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "How to set up Vimeo OAuth").
 
 == Frequently Asked Questions ==
 
 = Why can't I import Vimeo videos as WordPress posts? =
 
 Before being able to perform any imports you must first create a Vimeo App for the plugin and enter the credentials into the plugin Settings page.
-For a detailed tutorial on how to set up Vimeo access registration, please see [this tutorial](https://vimeotheque.com/documentation/getting-started/vimeo-oauth-new-interface/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "How to set up Vimeo OAuth").
+For a detailed tutorial on how to set up Vimeo access registration, please see [this tutorial](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "How to set up Vimeo OAuth").
 
 = How can I import hidden Vimeo videos as WordPress posts? =
 
-If you would like to create video posts from hidden Vimeo videos you will need [Vimeotheque PRO](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin").
+If you would like to create video posts from hidden Vimeo videos you will need [Vimeotheque PRO](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque PRO").
 
 = How do I import video image as post featured image? =
 
