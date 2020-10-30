@@ -17,6 +17,11 @@ class Front_End{
 	 */
 	private $plugin;
 
+	/**
+	 * The content embed filter priority
+	 *
+	 * @var int
+	 */
 	private $embed_filter_priority = 999;
 
 	/**
