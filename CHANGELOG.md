@@ -1,5 +1,6 @@
 2.0.3
-- Updated hooks documentation;
+- Solved a bug in Video Position block that disregarded the option to embed videos in archive pages and always embedded them;
+- Updated all Vimeotheque hooks PHPDoc comments;
 - Introduced actions and filters to OAuth plugin settings instructions;
 - Introduced Vimeo API request method.
 
