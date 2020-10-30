@@ -1,10 +1,11 @@
-2.0.3
+2.0.3 [30/Oct/2020]
 - Solved a bug in Video Position block that disregarded the option to embed videos in archive pages and always embedded them;
 - Updated all Vimeotheque hooks PHPDoc comments;
 - Introduced actions and filters to OAuth plugin settings instructions;
+- Exposed REST_Api object for new endpoints registrations;
 - Introduced Vimeo API request method.
 
-2.0.2
+2.0.2 [7/Oct/2020]
 - Introduced add-ons management that allow installation of add-ons for various purposes;
 - Added option for playlist block to set alignment;
 - Optimized resizing for playlist block theme Default;
