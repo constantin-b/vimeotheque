@@ -30,7 +30,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 					return;
 				}
 				/**
-				 * Remove default action that embeds the video in front-end
+				 * Add current post to skipped videos from auto embedding
 				 * @see Front_End::embed_video()
 				 */
 				parent::get_plugin()->get_front_end()->prevent_post_autoembed();
