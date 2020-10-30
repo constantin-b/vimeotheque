@@ -112,7 +112,7 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
-	 * Se the remote requets method to be used
+	 * Set the remote requets method to be used
 	 *
 	 * @param string $method    Method to be used (ie. GET, POST, PATCH, DELETE)
 	 */
