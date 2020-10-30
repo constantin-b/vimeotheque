@@ -79,6 +79,11 @@ class Plugin{
 	private $customizer;
 
 	/**
+	 * @var Rest_Api
+	 */
+	private $rest_api;
+
+	/**
 	 * Clone.
 	 *
 	 * Disable class cloning and throw an error on object clone.
@@ -229,7 +234,7 @@ class Plugin{
 	 */
 	private function load_front_end(){
 		// start the REST API compatibility
-		new Rest_Api( $this->get_cpt() );
+		$this->rest_api = new Rest_Api( $this->get_cpt() );
 		// start the front-end functionality
 		$this->front_end = new Front_End( $this );
 	}
@@ -475,6 +480,13 @@ class Plugin{
 	 */
 	public function get_customizer() {
 		return $this->customizer;
+	}
+
+	/**
+	 * @return Rest_Api
+	 */
+	public function get_rest_api() {
+		return $this->rest_api;
 	}
 
 	/**
