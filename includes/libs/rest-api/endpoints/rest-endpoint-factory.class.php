@@ -42,7 +42,7 @@ class Rest_Endpoint_Factory {
 	/**
 	 * @param Rest_Controller_Interface $controller
 	 */
-	private function store_endpoint( Rest_Controller_Interface $controller ){
+	public function store_endpoint( Rest_Controller_Interface $controller ){
 		$this->endpoints[ $controller->get_rest_base() ] = $controller;
 	}
 
