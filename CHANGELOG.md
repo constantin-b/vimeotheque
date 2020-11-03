@@ -1,3 +1,8 @@
+2.0.4 [3/Nov/2020]
+- Stop video player script in case of player error to avoid JavaScript errors in page;
+- Re-initialize video playlist script in case the player script returned an error;
+- Compatibility with WP plugin "Complianz – GDPR/CCPA Cookie Consent" by "Really Simple Plugins".
+
 2.0.3 [30/Oct/2020]
 - Solved a bug in Video Position block that disregarded the option to embed videos in archive pages and always embedded them;
 - Updated all Vimeotheque hooks PHPDoc comments;
