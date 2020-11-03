@@ -2,7 +2,7 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: embed videos, wordpress vimeo embed, vimeo embed, vimeo plugin, video post
 Requires at least: 5.2
-Tested up to: 5.5.1
+Tested up to: 5.5.3
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -74,6 +74,11 @@ For each video post created by the plugin you have the option in post edit scree
 == Screenshots ==
 
 == Changelog ==
+= 2.0.4 =
+- Stop video player script in case of player error to avoid JavaScript errors in page;
+- Re-initialize video playlist script in case the player script returned an error;
+- Compatibility with WP plugin "Complianz – GDPR/CCPA Cookie Consent" by "Really Simple Plugins".
+
 = 2.0.3 =
 - Solved a bug in Video Position block that disregarded the option to embed videos in archive pages and always embedded them;
 - Updated Vimeotheque hooks PHPDoc comments in plugin files;
