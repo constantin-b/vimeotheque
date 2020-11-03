@@ -23,7 +23,7 @@ $.fn.VimeoPlaylist = function( params ){
                       .VimeoPlayer({
                           // when the iframe URL is reloaded, re-initialize the playlist
                           onIframeReload: () => {
-                             self.VimeoPlaylist()
+                             self.VimeoPlaylist( options )
                           },
                           onFinish: ()=>{
                               loadNext()
