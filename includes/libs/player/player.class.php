@@ -198,6 +198,8 @@ class Player {
 			);
 		}
 
+		$result[] = sprintf( 'data-video_id="%s"', $this->post->video_id );
+
 		return implode(' ', $result);
 	}
 }
