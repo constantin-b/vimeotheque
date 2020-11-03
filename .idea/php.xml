@@ -6,6 +6,7 @@
       <path value="$PROJECT_DIR$/../vimeo-video-post" />
       <path value="C:/WebServer/Apache-2.4-win64/logs" />
       <path value="$PROJECT_DIR$/../classic-editor" />
+      <path value="$PROJECT_DIR$/../complianz-gdpr" />
     </include_path>
   </component>
 </project>
