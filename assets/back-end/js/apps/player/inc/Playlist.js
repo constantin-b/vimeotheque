@@ -21,10 +21,25 @@ $.fn.VimeoPlaylist = function( params ){
           player = $(this)
                       .find( options.player )
                       .VimeoPlayer({
+                          // when the iframe URL is reloaded, re-initialize the playlist
+                          onIframeReload: () => {
+                             self.VimeoPlaylist()
+                          },
                           onFinish: ()=>{
                               loadNext()
                           }
-                      }),
+                      });
+
+    /**
+     * If VimeoPlayer returned an error set the playlist to be loaded again after a short delay.
+     * Most likely this is caused by the Complianz plugin which doesn't allow VimeoPlayer to load
+     * the video.
+     */
+    if( player.isError ){
+        return;
+    }
+
+    const
           items = $(this).find( options.items ),
           {
               playlist_loop: playlistLoop,
