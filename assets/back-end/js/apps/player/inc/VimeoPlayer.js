@@ -1,6 +1,5 @@
 import $ from 'jQuery'
 
-
 $.fn.VimeoPlayer = function( params ){
 
     if( 0 == this.length ){
@@ -16,8 +15,48 @@ $.fn.VimeoPlayer = function( params ){
 
     const self = this,
           options = $.extend( {}, $.fn.VimeoPlayer.defaults, params ),
-          player = new Vimeo.Player( $(this).find('iframe') ),
           data = $(this).data()
+
+    /**
+     * Initialize player variable
+     */
+    let player
+
+    /**
+     * Used to check if the player issued any errors
+     * @type {boolean}
+     */
+    this.isError = false
+
+    /**
+     * Plugin Complianz (https://wordpress.org/plugins/complianz-gdpr/) will replace the iframe Vimeo URL with a custom video
+     * file that requires user consent to load the video.
+     * To avoid errors, check if the player is issuing any errors.
+     */
+    try{
+        player = new Vimeo.Player( $(this).find('iframe') )
+    }catch( e ){
+        self.isError = e;
+    }
+
+    if( this.isError ){
+        try{
+            console.log( '%cCould not load Vimeotheque player for video ' + data.video_id + ' due to Vimeo.Player error.', "color: #FF0000" );
+        }catch(e){}
+
+        /**
+         * In case of player error, set a load event on the iframe to trigger reload events
+         * on any any clients that initialized the player
+         */
+        $(this)
+            .find('iframe')
+            .on(
+                'load',
+                options.onIframeReload
+            )
+
+        return self
+    }
 
     player.on( 'loaded', options.onLoad )
     player.on( 'play', options.onPlay )
@@ -121,7 +160,7 @@ $.fn.VimeoPlayer = function( params ){
      * @returns {Vimeo.Player}
      */
     this.getPlayer = () => {
-        return player;
+        return player
     }
 
     $(this).data( 'ref', this )
@@ -129,6 +168,7 @@ $.fn.VimeoPlayer = function( params ){
 }
 
 $.fn.VimeoPlayer.defaults = {
+    onIframeReload: () => {},
     onLoad: ( data ) => {},
     onPlay: ( data ) => {},
     onPlayback: (data) => {},
