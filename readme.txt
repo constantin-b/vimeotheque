@@ -1,6 +1,6 @@
 === Vimeotheque - Vimeo video importer WordPress plugin ===
 Contributors: codeflavors, constantin.boiangiu
-Tags: vimeo, video embed, vimeo embed, vimeo plugin, video post
+Tags: vimeo, video embed, vimeo embed, vimeo plugin, video post, vimeo import, video importer
 Requires at least: 5.2
 Tested up to: 5.5.3
 Requires PHP: 5.6
