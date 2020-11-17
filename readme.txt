@@ -122,6 +122,12 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.5 =
+- Solved ocasional single video import error caused by conflicts with third party plugins;
+- Introduced player embed option to prevent tracking users, including all cookies and stats;
+- Show manually selected videos in playlist shortcode into the exact order that they were selected;
+- Preserve videos order in playlist block same as the order they were selected;
+- Hide video position block that is introduced automatically into the block editor for Vimeotheque video posts if automattic embedding is disabled by filter.
 
 = 2.0.4 =
 - Stop video player script in case of player error to avoid JavaScript errors in page;
