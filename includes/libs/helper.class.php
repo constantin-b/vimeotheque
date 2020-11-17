@@ -402,7 +402,8 @@ class Helper{
 		$default = [
 			'title' => 1,
 			'byline' => 1,
-			'portrait' => 1
+			'portrait' => 1,
+			'dnt' => 1
 		];
 
 		$args = wp_parse_args(
