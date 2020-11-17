@@ -128,7 +128,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	public function init(){
 		global $post;
 		$_post = Helper::get_video_post( $post );
-		if( !$_post->is_video() ){
+		if( !$_post->is_video() || !Helper::is_autoembed_allowed() ){
 			$this->deactivate();
 			wp_deregister_script( parent::get_script_handle() );
 			//wp_deregister_style( parent::get_editor_style_handle() );
@@ -141,7 +141,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	 * @param \WP_Query $query
 	 */
 	public function force_video_block( \WP_Post $post, \WP_Query $query ){
-		if( !is_admin() ){
+		if( !is_admin() || !Helper::is_autoembed_allowed() ){
 			return;
 		}
 
