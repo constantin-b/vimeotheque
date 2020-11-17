@@ -98,7 +98,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
             // update processed video IDs
             setPostsAttr = (vids) => {
                 let _posts = []
-                for( var i = vids.length-1; i >= 0; i--){
+                for( var i = 0; i <= vids.length-1; i++ ){
                     _posts.push( vids[i].id )
                 }
                 setAttributes({
