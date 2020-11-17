@@ -13,6 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ * Class Status_Page
+ *
+ * @package Vimeotheque\Admin\Page
+ */
 class Status_Page extends Page_Abstract implements Page_Interface {
 
 	/**
@@ -298,6 +303,9 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 		return $wp_data;
 	}
 
+	/**
+	 * @return array
+	 */
 	private function get_plugin_options(){
 	    $options = Plugin::instance()->get_options();
 	    // set a fake option to check if api keys are set
@@ -310,14 +318,19 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 
 	    foreach ( $options as $k => $v ){
 	        if( is_bool( $v ) ){
-	            $options[$k] = $v ? 'Yes' : 'No';
+	            $options[ $k ] = $v ? 'Yes' : 'No';
+            }elseif( is_array( $v ) ){
+	            $options[ $k ] = implode( ', ', $v );
             }
         }
 
 	    return $options;
     }
 
-    private function get_embed_options(){
+	/**
+	 * @return array
+	 */
+	private function get_embed_options(){
 	    $options = Helper::get_embed_options();
 
 	    foreach ( $options as $k => $option ) {
