@@ -195,9 +195,11 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 				foreach( $_posts as $post ){
 					$_post = Helper::get_video_post( $post );
 					if( $_post->is_video() ){
-						$posts[ $post->ID ] = $_post;
+						$key = array_search( $post->ID, $videos);
+						$posts[ $key ] = $_post;
 					}
 				}
+				ksort($posts);
 			}
 		}
 
