@@ -174,6 +174,7 @@ class Player {
 			'loop' => $this->options['loop'],
 			'autoplay' => $this->options['autoplay'],
 			'color' => str_replace( '#', '', $this->options['color'] ),
+			'dnt' => $this->options['dnt'],
 			'transparent' => false
 		];
 
