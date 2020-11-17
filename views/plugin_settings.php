@@ -406,6 +406,15 @@ use Vimeotheque\Helper;
 							<td><input type="checkbox" value="1" id="portrait" name="portrait"<?php Helper_Admin::check( (bool )$player_opt['portrait'] );?> /></td>
 						</tr>
 
+                        <tr valign="top">
+							<th scope="row"><label for="dnt"><?php _e('Do not track users', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
+							<td>
+                                <input type="checkbox" value="1" id="dnt" name="dnt"<?php Helper_Admin::check( (bool )$player_opt['dnt'] );?> />
+                                <span class="description"><?php _e( 'Block the player from tracking any session data, including all cookies and stats.', 'codeflavors-vimeo-video-post-lite' );?></span>
+                            </td>
+						</tr>
+
+
 					</tbody>
 				</table>
 				<?php submit_button(__('Save settings', 'codeflavors-vimeo-video-post-lite'));?>
