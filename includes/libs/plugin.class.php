@@ -287,6 +287,7 @@ class Plugin{
 			// Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, we’ll revert to standard playback requiring viewers to initiate playback.
 			'autoplay' => 0, 	// 0 - on load, player won't play video; 1 - on load player plays video automatically
 			'color'		=> '', 	// no color set by default; will use Vimeo's settings
+			'dnt' => 0, // block Vimeo player from tracking session data or cookies (1) or allow it (0);
 			// extra settings
 			'aspect_ratio' => '16x9',
 			'width'	=> 640,
