@@ -154,8 +154,18 @@ class Post_Edit_Page{
                 [
 				    'root' => esc_url_raw( rest_url() ),
 				    'nonce' => wp_create_nonce( 'wp_rest' ),
+				    // leave the post ID in to avoid errors caused by script caching in browser
+                    // @todo remove the ID in version 2.0.9+
                     'postId' => $post->ID
 			    ]
+            );
+
+			wp_localize_script(
+			    'vimeotheque-import-video-react-app',
+                'vmtqVideoSettings',
+                [
+	                'postId' => $post->ID
+                ]
             );
 
 			wp_enqueue_style(
