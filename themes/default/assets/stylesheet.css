@@ -99,6 +99,10 @@
   color: #999;
   font-style: italic;
 }
+.cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item div.description {
+  width: 100%;
+  clear: both;
+}
 .cvm-vim-playlist.default .cvm-playlist-wrap .cvm-playlist .cvm-playlist-item img {
   width: 50px;
   padding: 2px;
@@ -113,5 +117,3 @@
     clear: both;
   }
 }
-
-/*# sourceMappingURL=stylesheet.css.map */
