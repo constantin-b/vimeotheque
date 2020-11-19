@@ -38,6 +38,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 						'type' => 'string',
 						'default' => ''
 					],
+					'show_excerpts' => [
+						'type' => 'boolean',
+						'default' => false
+					],
 					'aspect_ratio' => [
 						'type' => 'string',
 						'default' => '16x9'
