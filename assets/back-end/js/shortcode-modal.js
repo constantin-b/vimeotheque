@@ -25,6 +25,7 @@ var CVMVideo_DIALOG_WIN = false;
 			
 			if( 'default' == theme ){
 				extra_theme_opts += 'layout="' + $('input[name=cvm_theme_default_layout]:checked').val() + '"';
+				extra_theme_opts += ' show_excerpts="' + ( $('input[name=cvm_theme_default_show_excerpts]').is(':checked') ? 1 : 0 ) + '"';
 			}
 
 			var videos_array = $.grep( videos.split('|'), function(val){ return '' != val }),
