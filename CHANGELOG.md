@@ -1,4 +1,9 @@
-2.0.5 
+2.0.6
+- Created new option for playlist block to display post excerpts in playlists for theme Default;
+- Created new option for playlist widget to display post excerpts in playlists when using theme Default;
+- Created new option for playlist shortcode in Classic editor to display post excerpts when using theme Default;
+
+2.0.5 [18/Nov/2020]
 - Solved occasional single video import error caused by conflicts with third party plugins;
 - Introduced player embed option to prevent tracking users, including all cookies and stats;
 - Show manually selected videos in playlist shortcode into the exact order that they were selected;
