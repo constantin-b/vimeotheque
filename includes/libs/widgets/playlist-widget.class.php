@@ -82,7 +82,8 @@ class Playlist_Widget extends \WP_Widget{
 			$opt = [
 			    'theme' => $instance['theme'],
                 'layout' => isset( $instance['layout'] ) ? $instance['layout'] : false,
-				'width' 		=> $instance['width'],
+				'show_excerpts' => isset( $instance['show_excerpts'] ) ? $instance['show_excerpts'] : false,
+                'width' 		=> $instance['width'],
 				'aspect_ratio' 	=> $instance['aspect_ratio'],
 				'volume'		=> $instance['volume'],
 				'playlist_loop'	=> $instance['playlist_loop'],
@@ -155,6 +156,7 @@ class Playlist_Widget extends \WP_Widget{
 		$instance['cvm_show_playlist'] 	= (bool)$new_instance['cvm_show_playlist'];
 		$instance['theme'] 				= $new_instance['theme'];
 		$instance['layout'] 			= $new_instance['layout'];
+		$instance['show_excerpts'] 		= $new_instance['show_excerpts'];
 		$instance['playlist_loop'] 		= $new_instance['playlist_loop'];
 		$instance['aspect_ratio'] 		= $new_instance['aspect_ratio'];
 		$instance['width'] 				= absint( $new_instance['width'] );
@@ -260,7 +262,11 @@ class Playlist_Widget extends \WP_Widget{
 					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="" <?php echo $options['layout'] == '' ? 'checked="checked"' : '';?> /> <?php _e( 'bottom', 'codeflavors-vimeo-video-post-lite' );?></label>
 					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="right" <?php echo $options['layout'] == 'right' ? 'checked="checked"' : '';?> /> <?php _e( 'right', 'codeflavors-vimeo-video-post-lite' );?></label>
 					<label for=""><input type="radio" name="<?php echo $this->get_field_name('layout')?>" value="left" <?php echo $options['layout'] == 'left' ? 'checked="checked"' : '';?> /> <?php _e( 'left', 'codeflavors-vimeo-video-post-lite' );?></label>
-				</div>
+                    <p>
+                        <label for="<?php echo $this->get_field_id('show_excerpts');?>"><?php _e('Show excerps', 'codeflavors-vimeo-video-post-lite');?> :</label>
+                        <input type="checkbox" name="<?php echo $this->get_field_name('show_excerpts')?>" id="<?php echo $this->get_field_id('show_excerpts')?>" value="1"<?php Helper_Admin::check( (bool)$options['show_excerpts'] );?> />
+                    </p>
+                </div>
 
 				<p>
 					<label for="<?php echo $this->get_field_id('playlist_loop');?>"><?php _e('Loop playlist', 'codeflavors-vimeo-video-post-lite');?> :</label>
@@ -325,6 +331,7 @@ class Playlist_Widget extends \WP_Widget{
 			'cvm_show_playlist'	=> false,
 			'theme'			=> 'default',
 			'layout'        => '',
+            'show_excerpts' => false,
 			'playlist_loop'	=> 0,
 			'aspect_ratio'	=> $player_defaults['aspect_ratio'],
 			'width'			=> $player_defaults['width'],
