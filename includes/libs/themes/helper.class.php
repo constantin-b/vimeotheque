@@ -135,6 +135,46 @@ class Helper {
 	/**
 	 * @param string $before
 	 * @param string $after
+	 * @param bool   $echo
+	 *
+	 * @return string|void
+	 */
+	public static function get_excerpt( $before = '<div>', $after = '</div>', $echo  = true ){
+		$video = self::current_video_post();
+		if( !$video ){
+			return;
+		}
+
+		$options = self::get_player_options();
+		if( !isset( $options['show_excerpts'] ) || !$options['show_excerpts']  ){
+			return;
+		}
+
+		/**
+		 * Filters the displayed post excerpt.
+		 *
+		 * @since 0.71
+		 *
+		 * @see get_the_excerpt()
+		 *
+		 * @param string $post_excerpt The post excerpt.
+		 */
+		$excerpt = apply_filters( 'the_excerpt', get_the_excerpt( $video->get_post() ) );
+
+		if( empty( $excerpt ) ){
+			return;
+		}
+
+		if( $echo ){
+			echo $before . $excerpt . $after;
+		}
+
+		return $before . $excerpt . $after;
+	}
+
+	/**
+	 * @param string $before
+	 * @param string $after
 	 * @param bool $echo
 	 *
 	 * @return string|void

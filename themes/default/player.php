@@ -17,6 +17,7 @@ use Vimeotheque\Themes\Helper;
 					<?php Helper::get_thumbnail();?>
                     <span class="cvm-title"><?php Helper::get_title();?></span>
 				</a>
+                <?php Helper::get_excerpt();?>
 			</div>
 			<?php endforeach;?>
 		</div>

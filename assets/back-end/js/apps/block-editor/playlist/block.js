@@ -168,6 +168,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     layout: attributes.layout,
                                     aspect_ratio: attributes.aspect_ratio,
                                     align: attributes.align,
+                                    show_excerpts: attributes.show_excerpts,
                                     width: attributes.width,
                                     volume: attributes.volume,
                                     title: attributes.title,
@@ -356,6 +357,19 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 value => {
                                     setAttributes({
                                         align: value
+                                    })
+                                }
+                            }
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label = { __( 'Show excerpts', 'codeflavors-vimeo-video-post-lite' ) }
+                            checked = {attributes.show_excerpts}
+                            onChange = {
+                                () => {
+                                    setAttributes({
+                                        show_excerpts: !attributes.show_excerpts
                                     })
                                 }
                             }

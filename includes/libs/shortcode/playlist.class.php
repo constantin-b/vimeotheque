@@ -58,6 +58,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		global $CVM_PLAYER_SETTINGS;
 		$embed_options = $this->get_embed_options();
+		$embed_options['show_excerpts'] = parent::get_attr( 'show_excerpts');
 		$CVM_PLAYER_SETTINGS = $embed_options;
 
 		/**
@@ -231,7 +232,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return array|void
 	 */
-	function get_category_post_ids( /*array*/ $categories, /*array*/ $post_type ){
+	protected function get_category_post_ids( /*array*/ $categories, /*array*/ $post_type ){
 		if( !is_array( $categories ) || !$categories ){
 			return;
 		}
