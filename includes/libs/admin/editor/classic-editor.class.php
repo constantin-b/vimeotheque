@@ -355,6 +355,12 @@ class Classic_Editor{
                                         <label for=""><input type="radio" name="cvm_theme_default_layout" value="" checked="checked" /> <?php _e( 'bottom', 'codeflavors-vimeo-video-post-lite' );?></label>
                                         <label for=""><input type="radio" name="cvm_theme_default_layout" value="right" /> <?php _e( 'right', 'codeflavors-vimeo-video-post-lite' );?></label>
                                         <label for=""><input type="radio" name="cvm_theme_default_layout" value="left" /> <?php _e( 'left', 'codeflavors-vimeo-video-post-lite' );?></label>
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" name="cvm_theme_default_show_excerpts" id="cvm_theme_default_show_excerpts" value="1" />
+                                                <?php _e('Show posts excerpts', 'codeflavors-vimeo-video-post-lite');?>
+                                            </label>
+                                        </p>
                                     </div>
 
 								</td>
