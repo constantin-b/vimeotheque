@@ -21,7 +21,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function docs_link( $path ){
+	public static function docs_link( $path ){
 		return self::publisher_link( 'documentation/' . trailingslashit( $path ), 'doc_link' );
 	}
 
@@ -31,7 +31,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function aspect_ratio_select( $args = [], $echo = true ){
+	public static function aspect_ratio_select( $args = [], $echo = true ){
 
 		$defaults = [
 			'name'		=> false,
@@ -62,7 +62,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function select( $args = [], $echo = true ){
+	public static function select( $args = [], $echo = true ){
 
 		$defaults = [
 			'options' 	=> [],
@@ -127,7 +127,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function check( $val, $echo = true ){
+	public static function check( $val, $echo = true ){
 		$checked = '';
 		if( is_bool($val) && $val ){
 			$checked = ' checked="checked"';
@@ -146,7 +146,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function select_feed_source( $name, $selected = false, $id = '' ){
+	public static function select_feed_source( $name, $selected = false, $id = '' ){
 		$sources = Resource_Objects::instance()->get_resources( 'visible' );
 
 		$options = [];
@@ -217,7 +217,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function select_playlist_theme( $name, $selected = false, $id = '', $class = '' ){
+	public static function select_playlist_theme( $name, $selected = false, $id = '', $class = '' ){
 		$themes = Plugin::instance()->get_playlist_themes()->get_themes();
 		$options = [];
 		foreach( $themes as $theme ){
@@ -242,7 +242,7 @@ class Helper_Admin {
 	 *
 	 * @return string|void
 	 */
-	static public function select_post_type( $name, $selected = false, $id = '', $class = '' ){
+	public static function select_post_type( $name, $selected = false, $id = '', $class = '' ){
 		/**
 		 * @var Register_Post[] $types
 		 */
@@ -281,7 +281,7 @@ class Helper_Admin {
 	 *
 	 * @return Register_Post|null
 	 */
-	static public function get_registered_post_type( $post_type ){
+	public static function get_registered_post_type( $post_type ){
 		return Plugin::instance()->get_registered_post_types()->get_post_type( $post_type );
 	}
 
@@ -293,7 +293,7 @@ class Helper_Admin {
 	 *
 	 * @return string
 	 */
-	static public function publisher_link( $path, $medium = 'doc_link', $campaign = null ){
+	public static function publisher_link( $path, $medium = 'doc_link', $campaign = null ){
 		$base = 'https://vimeotheque.com/';
 		$vars = [
 			'utm_source' => 'plugin',
