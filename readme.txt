@@ -122,6 +122,14 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.6 =
+- Created new option for playlist block to display post excerpts in playlists for theme Default;
+- Created new option for playlist block to allow various posts ordering options;
+- Created new option for playlist widget to display post excerpts in playlists when using theme Default;
+- Created new option for playlist shortcode in Classic editor to display post excerpts when using theme Default;
+- Created new option for playlist shortcode to allow various posts ordering options;
+- Introduced support for AMP plugin.
+
 = 2.0.5 =
 - Solved occasional single video import error caused by conflicts with third party plugins;
 - Introduced player embed option to prevent tracking users, including all cookies and stats;
