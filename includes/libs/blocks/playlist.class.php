@@ -38,6 +38,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 						'type' => 'string',
 						'default' => ''
 					],
+					'show_excerpts' => [
+						'type' => 'boolean',
+						'default' => false
+					],
 					'aspect_ratio' => [
 						'type' => 'string',
 						'default' => '16x9'
@@ -97,7 +101,16 @@ class Playlist extends Block_Abstract implements Block_Interface {
 						'items' => [
 							'type' => 'number'
 						]
-					]
+					],
+					/**
+					 * Posts order:
+					 *
+					 * - manual: posts displayed into the order that they were picked;
+					 * - newest: posts displayed by date, descending
+					 * - oldest: posts displayed by date, ascending
+					 * - alphabetical: posts displayed alphabetically
+					 */
+					'order' => 'manual'
 				],
 				'editor_script' => parent::get_script_handle(),
 				'editor_style' => [
@@ -176,13 +189,28 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			];
 		}
 
+		$posts_order = [
+			'manual' => __( 'Manual order', 'codeflavors-vimeo-video-post-lite' ),
+		    'newest' => __( 'Newest first', 'codeflavors-vimeo-video-post-lite' ),
+		    'oldest' => __( 'Oldest first', 'codeflavors-vimeo-video-post-lite' ),
+		    'alphabetical' => __( 'Alphabetically', 'codeflavors-vimeo-video-post-lite' )
+		];
+		$_posts_order = [];
+		foreach( $posts_order as $value => $label ){
+			$_posts_order[] = [
+				'label' => $label,
+				'value' => $value
+			];
+		}
+
 		wp_localize_script(
 			parent::get_script_handle(),
 			'vmtq',
 			[
 				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg',
 				'themes' => $_themes,
-				'postTypes' => $_post_types
+				'postTypes' => $_post_types,
+				'order' => $_posts_order
 			]
 		);
 

@@ -28,7 +28,7 @@ const 	{ registerBlockType } = wp.blocks,
     } = wp.blockEditor,
     { useState } = wp.element,
     { select } = wp.data,
-    {themes} = vmtq;
+    {themes, order} = vmtq;
 
 registerBlockType( 'vimeotheque/video-playlist', {
     title: __( 'Video playlist', 'codeflavors-vimeo-video-post-lite' ),
@@ -166,6 +166,8 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 {
                                     theme: attributes.theme,
                                     layout: attributes.layout,
+                                    show_excerpts: attributes.show_excerpts,
+                                    order: attributes.order,
                                     aspect_ratio: attributes.aspect_ratio,
                                     align: attributes.align,
                                     width: attributes.width,
@@ -356,6 +358,25 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 value => {
                                     setAttributes({
                                         align: value
+                                    })
+                                }
+                            }
+                        />
+                    </PanelRow>
+                </PanelBody>
+
+                <PanelBody
+                    title={ __( 'Video posts', 'codeflavors-vimeo-video-post-lite' ) }
+                >
+                    <PanelRow>
+                        <SelectControl
+                            label = { __( 'Posts order', 'codeflavors-vimeo-video-post-lite' ) }
+                            value = {attributes.order}
+                            options = { order }
+                            onChange = {
+                                value => {
+                                    setAttributes({
+                                        order: value
                                     })
                                 }
                             }

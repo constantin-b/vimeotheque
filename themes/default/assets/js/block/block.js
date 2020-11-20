@@ -3,7 +3,7 @@ const {addFilter} = wp.hooks,
     { __ } = wp.i18n,
     { createHigherOrderComponent } = wp.compose,
     { InspectorControls } = wp.blockEditor || wp.editor,
-    { PanelBody, SelectControl } = wp.components
+    { PanelBody, SelectControl, ToggleControl } = wp.components
 
 const enableOnBlocks = [
     'vimeotheque/video-playlist'
@@ -24,32 +24,10 @@ const layoutOptions = [
     }
 ]
 
-const addLayoutAttribute = ( settings, name ) => {
-    // Do nothing if it's another block than our defined ones.
-    if ( ! enableOnBlocks.includes( name ) ) {
-        return settings;
-    }
-
-    settings.attributes = assign( settings.attributes, {
-        layout: {
-            type: 'string',
-            default: layoutOptions[0].value
-        }
-    })
-
-    return settings
-}
-/**
- * @param string - hook name
- * @param string - namespace
- * @param string - callback
- */
-addFilter( 'blocks.registerBlockType', 'playlist-theme-default/attribute/layout', addLayoutAttribute )
-
 /**
  * Create HOC to add spacing control to inspector controls of block.
  */
-const withLayoutControl = createHigherOrderComponent( ( BlockEdit ) => {
+const withLayoutControls = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
         // Do nothing if it's another block than our defined ones.
         if ( ! enableOnBlocks.includes( props.name ) ) {
@@ -58,7 +36,7 @@ const withLayoutControl = createHigherOrderComponent( ( BlockEdit ) => {
             );
         }
 
-        const { layout } = props.attributes;
+        const { layout, show_excerpts } = props.attributes;
 
         return (
             <>
@@ -79,6 +57,18 @@ const withLayoutControl = createHigherOrderComponent( ( BlockEdit ) => {
                                     } );
                                 } }
                             />
+
+                            <ToggleControl
+                                label = { __( 'Show excerpts', 'codeflavors-vimeo-video-post-lite' ) }
+                                checked = {show_excerpts}
+                                onChange = {
+                                    () => {
+                                        props.setAttributes({
+                                            show_excerpts: !show_excerpts
+                                        })
+                                    }
+                                }
+                            />
                         </PanelBody>
                     </InspectorControls>
                 }
@@ -89,4 +79,4 @@ const withLayoutControl = createHigherOrderComponent( ( BlockEdit ) => {
     };
 }, 'withLayoutControl' );
 
-addFilter( 'editor.BlockEdit', 'playlist-theme-default/with-layout-control', withLayoutControl );
+addFilter( 'editor.BlockEdit', 'playlist-theme-default/with-layout-controls', withLayoutControls );

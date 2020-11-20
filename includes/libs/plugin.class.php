@@ -4,6 +4,7 @@ namespace Vimeotheque;
 
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Customizer\Customizer;
+use Vimeotheque\Amp\Amp;
 use Vimeotheque\Blocks\Block_Abstract;
 use Vimeotheque\Blocks\Blocks_Factory;
 use Vimeotheque\Options\Options;
@@ -163,6 +164,8 @@ class Plugin{
 			$this,
 			'admin_init'
 		], -9999999 );
+
+		new Amp();
 	}
 
 	public function init(){
