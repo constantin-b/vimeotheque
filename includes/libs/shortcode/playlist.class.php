@@ -183,14 +183,20 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		$posts = [];
 		$videos = $this->get_video_ids();
 		if( $videos && !is_wp_error( $videos ) ){
-			$_posts = get_posts( [
-				'post_type' => 'any',
-				'include' => $videos,
-				'posts_per_page' => count( $videos ),
-				'numberposts' => count( $videos ),
-				'post_status' => 'publish',
-				'suppress_filters' => true
-			] );
+
+			$atts = array_merge(
+				[
+					'post_type' => 'any',
+					'include' => $videos,
+					'posts_per_page' => count( $videos ),
+					'numberposts' => count( $videos ),
+					'post_status' => 'publish',
+					'suppress_filters' => true
+				],
+				$this->get_order_params()
+			);
+
+			$_posts = get_posts( $atts );
 
 			if( $_posts && !is_wp_error( $_posts ) ){
 				foreach( $_posts as $post ){
@@ -200,7 +206,10 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 						$posts[ $key ] = $_post;
 					}
 				}
-				ksort($posts);
+
+				if( is_wp_error( parent::get_attr( 'order' ) ) || 'manual' == parent::get_attr( 'order' ) ) {
+					ksort( $posts );
+				}
 			}
 		}
 
@@ -225,6 +234,37 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	}
 
 	/**
+	 * Get the ordering parameters for the query arguments
+	 *
+	 * @return array    The ordering parameters for the query
+	 */
+	private function get_order_params(){
+		$order = parent::get_attr( 'order' );
+		$_order = [];
+
+		if( is_wp_error( $order ) ){
+			return $_order;
+		}
+
+		switch( $order ){
+			case 'newest':
+				$_order['orderby'] = 'date';
+				$_order['order'] = 'DESC';
+			break;
+			case 'oldest':
+				$_order['orderby'] = 'date';
+				$_order['order'] = 'ASC';
+			break;
+			case 'alphabetical':
+				$_order['orderby'] = 'post_title';
+				$_order['order'] = 'ASC';
+			break;
+		}
+
+		return $_order;
+	}
+
+	/**
 	 * Returns all post ids for the given categories
 	 *
 	 * @param array $categories - array of terms IDs
@@ -232,7 +272,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return array|void
 	 */
-	function get_category_post_ids( /*array*/ $categories, /*array*/ $post_type ){
+	protected function get_category_post_ids( /*array*/ $categories, /*array*/ $post_type ){
 		if( !is_array( $categories ) || !$categories ){
 			return;
 		}
@@ -241,20 +281,24 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		// if newest videos should be returned, return them
 		if( in_array( '0', $categories ) ){
-			$args = [
-				'post_type' => $post_type,
-				/**
-				 * Filter that allows changing of number of posts displayed into a playlist block or shortcode
-				 *
-				 * @param int $max_posts    Maximum number of posts to retrieve
-				 */
-				'numberposts' => apply_filters(
-					'vimeotheque\shortcode\playlist\newest_max_posts',
-					10
-				),
-				'order' => 'DESC',
-				'orderby' => 'post_date'
-			];
+			$args = array_merge(
+				[
+					'post_type' => $post_type,
+					/**
+					 * Filter that allows changing of number of posts displayed into a playlist block or shortcode
+					 *
+					 * @param int $max_posts    Maximum number of posts to retrieve
+					 */
+					'numberposts' => apply_filters(
+						'vimeotheque\shortcode\playlist\newest_max_posts',
+						10
+					),
+					'order' => 'DESC',
+					'orderby' => 'post_date'
+				],
+				$this->get_order_params()
+			);
+
 			$p = get_posts( $args );
 			if( $p && !is_wp_error( $p ) ){
 				foreach( $p as $post ){
@@ -276,15 +320,18 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		}
 
 		if( $terms ){
-			$args = [
-				'post_type' => $this->get_post_types_by_taxonomy( array_keys( $terms ) ),
-				'numberposts' => -1,
-				'order' => 'DESC',
-				'orderby' => 'post_date',
-				'tax_query' => [
-					'relation' => 'OR',
-				]
-			];
+			$args = array_merge(
+				[
+					'post_type' => $this->get_post_types_by_taxonomy( array_keys( $terms ) ),
+					'numberposts' => -1,
+					'tax_query' => [
+						'relation' => 'OR',
+					],
+					'order' => 'DESC',
+					'orderby' => 'post_date'
+				],
+				$this->get_order_params()
+			);
 
 			foreach( $terms as $taxonomy => $term_ids ){
 				$args['tax_query'][] = [
@@ -313,7 +360,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return array
 	 */
-	function get_post_types_by_taxonomy( $taxonomies ){
+	protected function get_post_types_by_taxonomy( $taxonomies ){
 		$out = [];
 
 		foreach( $taxonomies as $tax ){
