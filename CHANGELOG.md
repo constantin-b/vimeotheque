@@ -1,4 +1,4 @@
-2.0.6
+2.0.6 [20/Nov/2020]
 - Created new option for playlist block to display post excerpts in playlists for theme Default;
 - Created new option for playlist block to allow various posts ordering options;
 - Created new option for playlist widget to display post excerpts in playlists when using theme Default;
