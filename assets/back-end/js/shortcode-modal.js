@@ -14,6 +14,7 @@ var CVMVideo_DIALOG_WIN = false;
 			}
 			
 			var theme = $('#cvm_playlist_theme').val(),
+				order = $('#cvm_playlist_posts_order').val(),
 				aspect = $('#aspect_ratio').val(),
 				width = $('#width').val(),
 				volume = $('#volume').val(),
@@ -49,7 +50,7 @@ var CVMVideo_DIALOG_WIN = false;
 				}
 			}
 
-			var	shortcode 	= '[cvm_playlist theme="' + theme + '" '+ extra_theme_opts +' aspect_ratio="' + aspect + '" width="' + width + '" volume="' + volume + '" title="'+title+'" byline="'+byline+'" portrait="'+portrait+'" playlist_loop="' + playlist_loop + '"' + s_videos + s_categories + s_post_types + ']';;
+			var	shortcode 	= '[cvm_playlist theme="' + theme + '" '+ extra_theme_opts + ' order="' + order + '"' + ' aspect_ratio="' + aspect + '" width="' + width + '" volume="' + volume + '" title="'+title+'" byline="'+byline+'" portrait="'+portrait+'" playlist_loop="' + playlist_loop + '"' + s_videos + s_categories + s_post_types + ']';;
 			
 			$('#cvm-playlist-items').find('input[name=cvm_selected_items]').val('');
 			$('#cvm-list-items').empty().html(CVM_SHORTCODE_MODAL.no_videos);
