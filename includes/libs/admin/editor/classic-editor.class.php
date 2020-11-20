@@ -365,17 +365,38 @@ class Classic_Editor{
 
 								</td>
 						</tr>
+                        <tr>
+                            <th><label for="cvm_posts_order"><?php _e( 'Posts order', 'codeflavors-vimeo-video-post-lite' );?>:</label></th>
+                            <td>
+	                            <?php
+	                            Helper_Admin::select(
+	                                [
+                                        'options' => [
+	                                        'manual' => __( 'Manual order', 'codeflavors-vimeo-video-post-lite' ),
+	                                        'newest' => __( 'Newest first', 'codeflavors-vimeo-video-post-lite' ),
+	                                        'oldest' => __( 'Oldest first', 'codeflavors-vimeo-video-post-lite' ),
+	                                        'alphabetical' => __( 'Alphabetically', 'codeflavors-vimeo-video-post-lite' )
+                                        ],
+                                        'name' => 'cvm_playlist_posts_order',
+                                        'id' => 'cvm_playlist_posts_order',
+                                        'selected' => 'manual',
+                                        'use_keys' => true
+	                                ]
+                                );
+	                            ?>
+                            </td>
+                        </tr>
 						<tr>
 							<th><label for="cvm_aspect_ratio"><?php _e('Aspect', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
 								<?php
-		$args = [
-				'name' => 'aspect_ratio',
-				'id' => 'aspect_ratio',
-				'class' => 'cvm_aspect_ratio'
-		];
-		Helper_Admin::aspect_ratio_select( $args );
-		?>
+                                $args = [
+                                        'name' => 'aspect_ratio',
+                                        'id' => 'aspect_ratio',
+                                        'class' => 'cvm_aspect_ratio'
+                                ];
+                                Helper_Admin::aspect_ratio_select( $args );
+                                ?>
 								</td>
 						</tr>
 
