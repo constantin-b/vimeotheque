@@ -224,7 +224,7 @@ class Video_Post{
 	}
 
 	/**
-	 * Get video dtaa stored on post
+	 * Get video data stored on post
 	 *
 	 * @return mixed|void
 	 */
