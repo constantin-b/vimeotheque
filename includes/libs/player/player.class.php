@@ -178,6 +178,23 @@ class Player {
 			'transparent' => false
 		];
 
+		/**
+		 * Filter to allow extra parameters to be put on the embed URL in iframe
+		 *
+		 * @param array $options            The extra options
+		 * @param \WP_Post|false|null $post The WordPress post object
+		 * @param array $video_details      The video details array attached to the post
+		 */
+		$extra = apply_filters(
+			'vimeotheque\player\embed-parameters', [],
+			$this->post->get_post(),
+			$this->post->get_video_data()
+		);
+
+		if( $extra && is_array( $extra ) ){
+			$options = array_merge( $extra, $options );
+		}
+
 		return sprintf(
 			'https://player.vimeo.com/video/%s?%s',
 			$this->post->video_id,
