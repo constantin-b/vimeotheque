@@ -1,3 +1,7 @@
+2.0.7 [17/Dec/2020]
+- Added filter "vimeotheque\player\embed-parameters" that allows extra parameters to be added to the video embed iframe URL;
+- Updated translation file for Romanian.
+
 2.0.6 [20/Nov/2020]
 - Created new option for playlist block to display post excerpts in playlists for theme Default;
 - Created new option for playlist block to allow various posts ordering options;
