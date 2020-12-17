@@ -44,10 +44,10 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				global $post;
 				$video_post = Helper::get_video_post( $post );
 
-				$manual_options = isset( $attr['extra'] ) ? $attr['extra'] : [];
+				$block_options = isset( $attr['extra'] ) ? $attr['extra'] : [];
 
 				if( $video_post->is_video() ) {
-					return Helper::embed_video( $post, $manual_options, false );
+					return Helper::embed_video( $post, $block_options, false );
 				}
 			}
 		] );
