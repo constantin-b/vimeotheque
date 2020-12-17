@@ -24,7 +24,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 		parent::register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => parent::get_script_handle(),
-			'render_callback' => function(){
+			'render_callback' => function( $attr ){
 				// check if filters or settings prevent auto embedding
 				if( !Helper::is_autoembed_allowed() ){
 					return;
@@ -43,8 +43,11 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 				global $post;
 				$video_post = Helper::get_video_post( $post );
+
+				$manual_options = isset( $attr['extra'] ) ? $attr['extra'] : [];
+
 				if( $video_post->is_video() ) {
-					return Helper::embed_video( $post, [], false );
+					return Helper::embed_video( $post, $manual_options, false );
 				}
 			}
 		] );
