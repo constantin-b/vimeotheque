@@ -33,6 +33,10 @@ registerBlockType( 'vimeotheque/video-position', {
 			source: 'meta',
 			meta: '__cvm_video_id',
 			default: false
+		},
+		extra: {
+			type: 'object',
+			default: {}
 		}
 	},
 
@@ -98,7 +102,8 @@ registerBlockType( 'vimeotheque/video-position', {
 							'&loop=' + opt.loop +
 							'&color=' + opt.color +
 							'&autoplay=' + opt.autoplay +
-							'&volume=' + opt.volume
+							'&volume=' + opt.volume +
+							'&dnt=' + opt.dnt
 						}
 						width = "100%"
 						height = "100%"
