@@ -1,1 +1,148 @@
-!function(e){var t={};function n(o){if(t[o])return t[o].exports;var i=t[o]={i:o,l:!1,exports:{}};return e[o].call(i.exports,i,i.exports,n),i.l=!0,i.exports}n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)n.d(o,i,function(t){return e[t]}.bind(null,i));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=13)}({1:function(e,t){e.exports=jQuery},13:function(e,t,n){"use strict";n.r(t);var o,i=n(1),r=n.n(i);r.a.fn.VimeoPlayer=function(e){if(0==this.length)return!1;if(this.length>1)return this.each((function(e,t){r()(t).VimeoPlayer()}));var t,n=this,o=r.a.extend({},r.a.fn.VimeoPlayer.defaults,e),i=r()(this).data();this.isError=!1;try{t=new Vimeo.Player(r()(this).find("iframe"))}catch(e){n.isError=e}if(this.isError){try{console.log("%cCould not load Vimeotheque player for video "+i.video_id+" due to Vimeo.Player error.","color: #FF0000")}catch(e){}return r()(this).find("iframe").on("load",o.onIframeReload),n}return t.on("loaded",o.onLoad),t.on("play",o.onPlay),t.on("timeupdate",o.onPlayback),t.on("pause",o.onPause),t.on("ended",o.onFinish),t.on("error",o.onError),this.loadVideo=function(e){return t.loadVideo(e).then((function(e){})).catch((function(e){})),n},this.pause=function(){return t.pause().then((function(){})).catch((function(e){})),n},this.play=function(){return t.play().then((function(){})).catch((function(e){})),n},this.setVolume=function(e){return t.setVolume(e).then((function(e){})).catch((function(e){})),n},this.getVolume=function(){return t.getVolume()},this.setPlaybackPosition=function(e){return t.setCurrentTime(e).then((function(e){})).catch((function(e){})),n},this.getPlayer=function(){return t},r()(this).data("ref",this),n},r.a.fn.VimeoPlayer.defaults={onIframeReload:function(){},onLoad:function(e){},onPlay:function(e){},onPlayback:function(e){},onPause:function(e){},onFinish:function(e){},onError:function(e){}},window.vimeotheque=window.vimeotheque||{},(o=vimeotheque).resizeAll=function(){r()("div.vimeotheque-player").each((function(e,t){vimeotheque.resize(t)}))},o.resize=function(e){var t,n=parseFloat(r()(e).attr("data-size_ratio")||0),o=r()(e).attr("data-aspect_ratio"),i=r()(e).width();if(n>0)t=Math.floor(i/n);else switch(o){case"16x9":default:t=Math.floor(9*i/16);break;case"4x3":t=Math.floor(3*i/4);break;case"2.35x1":t=Math.floor(i/2.35)}r()(e).css({height:t})},r()(document).ready(vimeotheque.resizeAll),r()(window).resize(vimeotheque.resizeAll),r.a.fn.VimeoPlaylist=function(e){if(0==this.length)return!1;if(this.length>1)return this.each((function(e,n){r()(n).VimeoPlaylist(t)}));var t=r.a.extend({},r.a.fn.VimeoPlaylist.defaults,e),n=this,o=r()(this).find(t.player).VimeoPlayer({onIframeReload:function(){n.VimeoPlaylist(t)},onFinish:function(){s()}});if(!o.isError){var i=r()(this).find(t.items),a=r()(o).data(),u=a.playlist_loop,l=a.volume,c=0,f=function(e,a){var l=arguments.length>2&&void 0!==arguments[2]&&arguments[2],f=r()(e).data(),s=f.autoplay,h=f.video_id,m=f.size_ratio,y=f.aspect_ratio;r()(i[c]).removeClass("active-video"),r()(e).addClass("active-video"),o.loadVideo(h).attr({"data-size_ratio":m,"data-aspect_ratio":y}),l&&o.setVolume(l),vimeotheque.resize(o),1!=s&&1!=u||d()||o.play(),c=a,t.loadVideo.call(n,e,a,o)},s=function(){if(1==u&&c<i.length-1){c++;var e=i[c];r()(e).trigger("click")}},d=function(){return/webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)};return vimeotheque.resize(o),o.setVolume(l/100),r.a.each(i,(function(e,t){0==e&&f(t,e),r()(t).on("click",(function(n){n.preventDefault(),o.getVolume().then((function(n){f(t,e,n)}))}))})),n}},r.a.fn.VimeoPlaylist.defaults={player:".vimeotheque-player",items:".cvm-playlist-item a",loadVideo:function(){}},window.vimeotheque=window.vimeotheque||{},r()(document).ready((function(){vimeotheque.players=r()(".vimeotheque-player").VimeoPlayer()}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./assets/back-end/js/apps/player/app.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./assets/back-end/js/apps/player/app.js":
+/*!***********************************************!*\
+  !*** ./assets/back-end/js/apps/player/app.js ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jQuery */ \"jQuery\");\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jQuery__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _inc_VimeoPlayer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inc/VimeoPlayer */ \"./assets/back-end/js/apps/player/inc/VimeoPlayer.js\");\n/* harmony import */ var _inc_helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inc/helper */ \"./assets/back-end/js/apps/player/inc/helper.js\");\n/* harmony import */ var _inc_Playlist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inc/Playlist */ \"./assets/back-end/js/apps/player/inc/Playlist.js\");\nwindow.vimeotheque = window.vimeotheque || {};\n\n\n\n\njQuery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {\n  vimeotheque.players = jQuery__WEBPACK_IMPORTED_MODULE_0___default()('.vimeotheque-player').VimeoPlayer();\n});\n\n//# sourceURL=webpack:///./assets/back-end/js/apps/player/app.js?");
+
+/***/ }),
+
+/***/ "./assets/back-end/js/apps/player/inc/Playlist.js":
+/*!********************************************************!*\
+  !*** ./assets/back-end/js/apps/player/inc/Playlist.js ***!
+  \********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jQuery */ \"jQuery\");\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jQuery__WEBPACK_IMPORTED_MODULE_0__);\n\n/**\r\n * Load playlists\r\n */\n\njQuery__WEBPACK_IMPORTED_MODULE_0___default.a.fn.VimeoPlaylist = function (params) {\n  if (0 == this.length) {\n    return false;\n  } // support multiple elements\n\n\n  if (this.length > 1) {\n    return this.each(function (index, item) {\n      jQuery__WEBPACK_IMPORTED_MODULE_0___default()(item).VimeoPlaylist(options);\n    });\n  }\n\n  var options = jQuery__WEBPACK_IMPORTED_MODULE_0___default.a.extend({}, jQuery__WEBPACK_IMPORTED_MODULE_0___default.a.fn.VimeoPlaylist.defaults, params),\n      self = this,\n      player = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(this).find(options.player).VimeoPlayer({\n    // when the iframe URL is reloaded, re-initialize the playlist\n    onIframeReload: function onIframeReload() {\n      self.VimeoPlaylist(options);\n    },\n    onFinish: function onFinish() {\n      loadNext();\n    }\n  });\n  /**\r\n   * If VimeoPlayer returned an error set the playlist to be loaded again after a short delay.\r\n   * Most likely this is caused by the Complianz plugin which doesn't allow VimeoPlayer to load\r\n   * the video.\r\n   */\n\n  if (player.isError) {\n    return;\n  }\n\n  var items = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(this).find(options.items),\n      _$$data = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(player).data(),\n      playlistLoop = _$$data.playlist_loop,\n      volume = _$$data.volume;\n\n  var currentItem = 0;\n  /**\r\n   * Start the plugin\r\n   *\r\n   * @returns {$.fn.VimeoPlaylist}\r\n   */\n\n  var initialize = function initialize() {\n    // prepare the player\n    vimeotheque.resize(player);\n    player.setVolume(volume / 100);\n    jQuery__WEBPACK_IMPORTED_MODULE_0___default.a.each(items, function (i, item) {\n      if (0 == i) {\n        loadItem(item, i);\n      }\n\n      jQuery__WEBPACK_IMPORTED_MODULE_0___default()(item).on('click', function (e) {\n        e.preventDefault();\n        player.getVolume().then(function (volume) {\n          loadItem(item, i, volume);\n        });\n      });\n    });\n    return self;\n  },\n\n  /**\r\n   * Load an item from items list\r\n   *\r\n   * @param item - HTML element\r\n   * @param int index - element index\r\n   */\n  loadItem = function loadItem(item, index) {\n    var volume = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;\n\n    var _$$data2 = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(item).data(),\n        autoplay = _$$data2.autoplay,\n        video_id = _$$data2.video_id,\n        size_ratio = _$$data2.size_ratio,\n        aspect_ratio = _$$data2.aspect_ratio;\n\n    jQuery__WEBPACK_IMPORTED_MODULE_0___default()(items[currentItem]).removeClass('active-video');\n    jQuery__WEBPACK_IMPORTED_MODULE_0___default()(item).addClass('active-video');\n    player.loadVideo(video_id).attr({\n      'data-size_ratio': size_ratio,\n      'data-aspect_ratio': aspect_ratio\n    });\n    if (volume) player.setVolume(volume);\n    vimeotheque.resize(player);\n\n    if ((1 == autoplay || 1 == playlistLoop) && !is_apple()) {\n      player.play();\n    }\n\n    currentItem = index;\n    /**\r\n     * Trigger loadVideo event\r\n     */\n\n    options.loadVideo.call(self, item, index, player);\n  },\n\n  /**\r\n   * Load next video in line. Triggered after a video ends\r\n   */\n  loadNext = function loadNext() {\n    if (1 != playlistLoop) {\n      return;\n    }\n\n    if (currentItem < items.length - 1) {\n      currentItem++;\n      var item = items[currentItem];\n      jQuery__WEBPACK_IMPORTED_MODULE_0___default()(item).trigger('click');\n    }\n  },\n\n  /**\r\n   * Check browser\r\n   *\r\n   * @returns {boolean}\r\n   */\n  is_apple = function is_apple() {\n    return /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);\n  };\n\n  return initialize();\n};\n\njQuery__WEBPACK_IMPORTED_MODULE_0___default.a.fn.VimeoPlaylist.defaults = {\n  'player': '.vimeotheque-player',\n  'items': '.cvm-playlist-item a',\n  'loadVideo': function loadVideo() {}\n};\n\n//# sourceURL=webpack:///./assets/back-end/js/apps/player/inc/Playlist.js?");
+
+/***/ }),
+
+/***/ "./assets/back-end/js/apps/player/inc/VimeoPlayer.js":
+/*!***********************************************************!*\
+  !*** ./assets/back-end/js/apps/player/inc/VimeoPlayer.js ***!
+  \***********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jQuery */ \"jQuery\");\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jQuery__WEBPACK_IMPORTED_MODULE_0__);\n\n\njQuery__WEBPACK_IMPORTED_MODULE_0___default.a.fn.VimeoPlayer = function (params) {\n  if (0 == this.length) {\n    return false;\n  } // support multiple elements\n\n\n  if (this.length > 1) {\n    return this.each(function (index, item) {\n      jQuery__WEBPACK_IMPORTED_MODULE_0___default()(item).VimeoPlayer();\n    });\n  }\n\n  var self = this,\n      options = jQuery__WEBPACK_IMPORTED_MODULE_0___default.a.extend({}, jQuery__WEBPACK_IMPORTED_MODULE_0___default.a.fn.VimeoPlayer.defaults, params),\n      data = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(this).data();\n  /**\r\n   * Initialize player variable\r\n   */\n\n  var player;\n  /**\r\n   * Used to check if the player issued any errors\r\n   * @type {boolean}\r\n   */\n\n  this.isError = false;\n  /**\r\n   * Plugin Complianz (https://wordpress.org/plugins/complianz-gdpr/) will replace the iframe Vimeo URL with a custom video\r\n   * file that requires user consent to load the video.\r\n   * To avoid errors, check if the player is issuing any errors.\r\n   */\n\n  try {\n    player = new Vimeo.Player(jQuery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('iframe'));\n  } catch (e) {\n    self.isError = e;\n  }\n\n  if (this.isError) {\n    try {\n      console.log('%cCould not load Vimeotheque player for video ' + data.video_id + ' due to Vimeo.Player error.', \"color: #FF0000\");\n    } catch (e) {}\n    /**\r\n     * In case of player error, set a load event on the iframe to trigger reload events\r\n     * on any any clients that initialized the player\r\n     */\n\n\n    jQuery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('iframe').on('load', options.onIframeReload);\n    return self;\n  }\n\n  player.on('loaded', options.onLoad);\n  player.on('play', options.onPlay);\n  player.on('timeupdate', options.onPlayback);\n  player.on('pause', options.onPause);\n  player.on('ended', options.onFinish);\n  player.on('error', options.onError);\n  /**\r\n   * Load a new video into the player\r\n   * @param id\r\n   * @return {$.fn.VimeoPlayer}\r\n   */\n\n  this.loadVideo = function (id) {\n    player.loadVideo(id).then(function (id) {})[\"catch\"](function (error) {//console.log(error)\n    });\n    return self;\n  };\n  /**\r\n   * Pause video method\r\n   * @return {$.fn.VimeoPlayer}\r\n   */\n\n\n  this.pause = function () {\n    player.pause().then(function () {})[\"catch\"](function (error) {//console.log(error)\n    });\n    return self;\n  };\n  /**\r\n   * Play video method\r\n   * @return {$.fn.VimeoPlayer}\r\n   */\n\n\n  this.play = function () {\n    player.play().then(function () {})[\"catch\"](function (error) {//console.log(error)\n    });\n    return self;\n  };\n  /**\r\n   * This method sets the volume level of the player on a scale from 0 to 1.\r\n   * When you set the volume through the API, the specified value isn't synchronized to other players or\r\n   * stored as the viewer's preference.\r\n   *\r\n   * Set volume (between 0 and 1)\r\n   *\r\n   * @param volume\r\n   * @return {$.fn.VimeoPlayer}\r\n   */\n\n\n  this.setVolume = function (volume) {\n    player.setVolume(volume).then(function (_volume) {})[\"catch\"](function (error) {//console.log(error)\n    });\n    return self;\n  };\n  /**\r\n   * Get current volume of player\r\n   *\r\n   * @return Promise\r\n   */\n\n\n  this.getVolume = function () {\n    return player.getVolume();\n  };\n  /**\r\n   * This method sets the current playback position in seconds.\r\n   * The player attempts to seek to as close to the specified time as possible.\r\n   * The exact time comes back as the fulfilled value of the promise.\r\n   *\r\n   * @param float seconds - where to start playback, in seconds.milliseconds (ie. 3.543)\r\n   * @return {$.fn.VimeoPlayer}\r\n   */\n\n\n  this.setPlaybackPosition = function (seconds) {\n    player.setCurrentTime(seconds).then(function (_seconds) {})[\"catch\"](function (error) {//console.log(error)\n    });\n    return self;\n  };\n  /**\r\n   *\r\n   * @returns {Vimeo.Player}\r\n   */\n\n\n  this.getPlayer = function () {\n    return player;\n  };\n\n  jQuery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('ref', this);\n  return self;\n};\n\njQuery__WEBPACK_IMPORTED_MODULE_0___default.a.fn.VimeoPlayer.defaults = {\n  onIframeReload: function onIframeReload() {},\n  onLoad: function onLoad(data) {},\n  onPlay: function onPlay(data) {},\n  onPlayback: function onPlayback(data) {},\n  onPause: function onPause(data) {},\n  onFinish: function onFinish(data) {},\n  onError: function onError(data) {}\n};\n\n//# sourceURL=webpack:///./assets/back-end/js/apps/player/inc/VimeoPlayer.js?");
+
+/***/ }),
+
+/***/ "./assets/back-end/js/apps/player/inc/helper.js":
+/*!******************************************************!*\
+  !*** ./assets/back-end/js/apps/player/inc/helper.js ***!
+  \******************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jQuery */ \"jQuery\");\n/* harmony import */ var jQuery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jQuery__WEBPACK_IMPORTED_MODULE_0__);\n/** @namespace vimeotheque */\nwindow.vimeotheque = window.vimeotheque || {};\n\n\n(function (exports) {\n  var\n  /**\r\n   * Resize all player in page\r\n   */\n  resizeAll = function resizeAll() {\n    jQuery__WEBPACK_IMPORTED_MODULE_0___default()('div.vimeotheque-player').each(function (i, el) {\n      vimeotheque.resize(el);\n    });\n  },\n\n  /**\r\n   * Resize given element\r\n   * @param element\r\n   */\n  resize = function resize(element) {\n    var size_ratio = parseFloat(jQuery__WEBPACK_IMPORTED_MODULE_0___default()(element).attr('data-size_ratio') || 0),\n        aspect_ratio = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(element).attr('data-aspect_ratio'),\n        width = jQuery__WEBPACK_IMPORTED_MODULE_0___default()(element).width();\n    var height;\n\n    if (size_ratio > 0) {\n      height = Math.floor(width / size_ratio);\n    } else {\n      switch (aspect_ratio) {\n        case '16x9':\n        default:\n          height = Math.floor(width * 9 / 16);\n          break;\n\n        case '4x3':\n          height = Math.floor(width * 3 / 4);\n          break;\n\n        case '2.35x1':\n          height = Math.floor(width / 2.35);\n          break;\n      }\n    }\n\n    jQuery__WEBPACK_IMPORTED_MODULE_0___default()(element).css({\n      height: height\n    });\n  };\n\n  exports.resizeAll = resizeAll;\n  exports.resize = resize;\n})(vimeotheque);\n\njQuery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(vimeotheque.resizeAll);\njQuery__WEBPACK_IMPORTED_MODULE_0___default()(window).resize(vimeotheque.resizeAll);\n\n//# sourceURL=webpack:///./assets/back-end/js/apps/player/inc/helper.js?");
+
+/***/ }),
+
+/***/ "jQuery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = jQuery;\n\n//# sourceURL=webpack:///external_%22jQuery%22?");
+
+/***/ })
+
+/******/ });
