@@ -1,19 +1,36 @@
-const 	{ registerBlockType } = wp.blocks,
-	{ __ } = wp.i18n,
+const
 	{
-		Panel,
-		PanelBody,
-		PanelRow,
-		ColorIndicator,
-		ColorPalette,
-		Dropdown,
-		TextControl,
-		SelectControl,
-		ToggleControl
-	} = wp.components,
-	{ InspectorControls } = wp.blockEditor,
-	{ useCallback } = wp.element,
-	{ withState } = wp.compose;
+		blockEditor: {
+			InspectorControls
+		},
+		blocks: {
+			registerBlockType
+		},
+		components: {
+			Panel,
+			PanelBody,
+			PanelRow,
+			ColorIndicator,
+			ColorPalette,
+			Dropdown,
+			TextControl,
+			SelectControl,
+			ToggleControl
+		},
+		compose: {
+			withState
+		},
+		element: {
+			useCallback,
+			useEffect
+		},
+		hooks: {
+			applyFilters
+		},
+		i18n: {
+			__
+		}
+	} = wp
 
 registerBlockType( 'vimeotheque/video-position', {
 	title: __( 'Vimeotheque video position', 'codeflavors-vimeo-video-post-lite' ),
@@ -57,24 +74,46 @@ registerBlockType( 'vimeotheque/video-position', {
 	},
 
 	edit: props => {
-		const {
-			attributes: {
-				embed_options,
-				video_id
+		const
+			{
+				attributes: {
+					embed_options,
+					video_id
+				},
+				setAttributes,
+				className
+			} = props,
+
+			onFormToggleChange = varName => {
+				opt[ varName ] = !opt[ varName ]
+				setAttributes({
+					embed_options: JSON.stringify( opt )
+				})
 			},
-			setAttributes,
-			className
-		} = props;
 
-		let opt = JSON.parse( embed_options );
-		const sep = ' : ';
+			getEmbedURL = () => {
+				const 	url = 'https://player.vimeo.com/video',
+						query = {
+							title: opt.title,
+							byline: opt.byline,
+							portrait: opt.portrait,
+							loop: opt.loop,
+							color: opt.color,
+							autoplay: opt.autoplay,
+							volume: opt.volume,
+							dnt: opt.dnt
+						}
 
-		const onFormToggleChange = ( varName ) => {
-			opt[ varName ] = !opt[ varName ]
-			setAttributes({
-				embed_options: JSON.stringify( opt )
-			})
-		}
+				return applyFilters(
+					'vimeotheque.video-position.embed-url',
+					`${url}/${video_id}?${jQuery.param( query )}`,
+					url,
+					video_id,
+					query
+				)
+			}
+
+		let opt = JSON.parse( embed_options )
 
 		return [
 			<div key="vimeotheque-video-position-block">
@@ -93,18 +132,7 @@ registerBlockType( 'vimeotheque/video-position', {
 					}
 				>
 					<iframe
-						src={
-							"https://player.vimeo.com/video/" +
-							video_id +
-							"?title=" + opt.title +
-							'&byline=' + opt.byline +
-							'&portrait=' + opt.portrait +
-							'&loop=' + opt.loop +
-							'&color=' + opt.color +
-							'&autoplay=' + opt.autoplay +
-							'&volume=' + opt.volume +
-							'&dnt=' + opt.dnt
-						}
+						src={ getEmbedURL() }
 						width = "100%"
 						height = "100%"
 						frameBorder = "0"
@@ -280,7 +308,7 @@ registerBlockType( 'vimeotheque/video-position', {
 					>
 						<PanelRow>
 							<label>
-								{ __( 'Player color', 'codeflavors-vimeo-video-post-lite' ) + sep }
+								{ `${__( 'Player color', 'codeflavors-vimeo-video-post-lite' )} : ` }
 								<ColorIndicator
 									colorValue = { `#${opt.color.replace( '#', '' )}` }
 								/>
