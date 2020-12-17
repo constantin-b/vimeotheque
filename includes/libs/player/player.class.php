@@ -186,9 +186,11 @@ class Player {
 		 * @param array $video_details      The video details array attached to the post
 		 */
 		$extra = apply_filters(
-			'vimeotheque\player\embed-parameters', [],
+			'vimeotheque\player\embed-parameters',
+			[],
 			$this->post->get_post(),
-			$this->post->get_video_data()
+			$this->post->get_video_data(),
+			$this->manual_options
 		);
 
 		if( $extra && is_array( $extra ) ){
