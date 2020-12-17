@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.7 =
+- Added filter "vimeotheque\player\embed-parameters" that allows extra parameters to be added to the video embed iframe URL;
+- Updated translation file for Romanian.
+
 = 2.0.6 =
 - Created new option for playlist block to display post excerpts in playlists for theme Default;
 - Created new option for playlist block to allow various posts ordering options;
