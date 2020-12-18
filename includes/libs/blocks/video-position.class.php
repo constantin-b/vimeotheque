@@ -54,7 +54,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 		register_post_meta(
 			'',
-			'__cvm_playback_settings',
+			parent::get_plugin()->get_cpt()->get_post_settings()->get_meta_embed_settings(),//'__cvm_playback_settings'
 			[
 				'single' => true,
 				'show_in_rest' => [
