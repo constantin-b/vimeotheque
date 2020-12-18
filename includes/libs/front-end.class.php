@@ -127,6 +127,16 @@ class Front_End{
 		$_post = Helper::get_video_post( $post );
 		$settings = $_post->get_embed_options();
 
+		/**
+		 * Action that runs when the video is set to be inserted into the post content
+		 *
+		 * @param Video_Post $video The video post object that is processed
+		 */
+		do_action(
+			'vimeotheque\automatic_embed_in_content',
+			$_post
+		);
+
 		if( 'below-content' == $settings[ 'video_position' ] ){
 			return $content . $video_container;
 		}else{
