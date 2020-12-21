@@ -286,6 +286,16 @@ class Classic_Editor{
 			</tbody>
 		</table>
 		<?php
+
+		/**
+		 * Run action that can be used to hook to and display additional options
+		 *
+		 * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
+		 */
+		do_action(
+			'vimeotheque\editor\classic-editor-options-output',
+			'after'
+		);
 	}
 
 	/**
