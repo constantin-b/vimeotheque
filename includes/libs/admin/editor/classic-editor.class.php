@@ -635,6 +635,13 @@ class Classic_Editor{
 				    ]
                 );
 			}
+
+			/**
+			 * Run hook when Vimeotheque loads scripts and styles
+			 *  for the Classic editor
+			 */
+			do_action( 'vimeotheque\editor\classic-editor-enqueue');
+
 		}
 	}
 
