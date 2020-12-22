@@ -1,3 +1,7 @@
+2.0.8
+- Improved video position block back-end code;
+- Introduced actions and filters that allow third party plugins to add new block editor options to video position block.
+
 2.0.7 [17/Dec/2020]
 - Added filter "vimeotheque\player\embed-parameters" that allows extra parameters to be added to the video embed iframe URL;
 - Updated translation file for Romanian.
