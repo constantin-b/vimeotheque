@@ -123,6 +123,7 @@ For each video post created by the plugin you have the option in post edit scree
 
 == Changelog ==
 = 2.0.8 =
+- Solved a bug in block "Video position" which caused the player color to be loaded incorrectly when loading the default color set in plugin Settings under Embed options;
 - Improved video position block for Block editor to allow additional parameters to be set;
 - Added new parameter to filter "vimeotheque\player\embed-parameters" which passes any manually set embed options;
 - Added new action "vimeotheque\automatic_embed_in_content" which is triggered when Vimeotheque embeds videos into the post content automatically (normally, when the Classic editor is used instead of the Block editor);
