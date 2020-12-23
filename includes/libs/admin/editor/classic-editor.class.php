@@ -139,6 +139,17 @@ class Classic_Editor{
 		<?php endif;?>
 		<table class="form-table cvm-player-settings-options">
 			<tbody>
+            <?php
+                /**
+                 * Run action that can be used to hook to and display additional options
+                 *
+                 * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
+                 */
+                do_action(
+                    'vimeotheque\editor\classic-editor-options-output',
+                    'before'
+                );
+            ?>
 			<tr>
 				<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 				<td>
@@ -275,6 +286,16 @@ class Classic_Editor{
 			</tbody>
 		</table>
 		<?php
+
+		/**
+		 * Run action that can be used to hook to and display additional options
+		 *
+		 * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
+		 */
+		do_action(
+			'vimeotheque\editor\classic-editor-options-output',
+			'after'
+		);
 	}
 
 	/**
@@ -635,6 +656,13 @@ class Classic_Editor{
 				    ]
                 );
 			}
+
+			/**
+			 * Run hook when Vimeotheque loads scripts and styles
+			 *  for the Classic editor
+			 */
+			do_action( 'vimeotheque\editor\classic-editor-enqueue');
+
 		}
 	}
 

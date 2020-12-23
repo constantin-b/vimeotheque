@@ -253,9 +253,11 @@ class Helper{
 	}
 
 	/**
-	 * @param $post
-	 * @param array $options
-	 * @param bool $echo
+	 * Embed the video attached to a video post
+	 *
+	 * @param \WP_Post $post    The WordPress post that must embed video
+	 * @param array $options    Any options passed manually or from block editor parameters
+	 * @param bool $echo        Output the result (true) or not (false)
 	 *
 	 * @return string|void
 	 */

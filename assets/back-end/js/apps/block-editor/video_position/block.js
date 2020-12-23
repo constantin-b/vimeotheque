@@ -1,19 +1,38 @@
-const 	{ registerBlockType } = wp.blocks,
-	{ __ } = wp.i18n,
+const
 	{
-		Panel,
-		PanelBody,
-		PanelRow,
-		ColorIndicator,
-		ColorPalette,
-		Dropdown,
-		TextControl,
-		SelectControl,
-		ToggleControl
-	} = wp.components,
-	{ InspectorControls } = wp.blockEditor,
-	{ useCallback } = wp.element,
-	{ withState } = wp.compose;
+		blockEditor: {
+			InspectorControls
+		},
+		blocks: {
+			registerBlockType
+		},
+		components: {
+			Panel,
+			PanelBody,
+			PanelRow,
+			ColorIndicator,
+			ColorPalette,
+			Dropdown,
+			TextControl,
+			SelectControl,
+			ToggleControl
+		},
+		compose: {
+			withState
+		},
+		element: {
+			useCallback,
+			useEffect,
+			useState
+		},
+		hooks: {
+			applyFilters,
+			doAction
+		},
+		i18n: {
+			__
+		}
+	} = wp
 
 registerBlockType( 'vimeotheque/video-position', {
 	title: __( 'Vimeotheque video position', 'codeflavors-vimeo-video-post-lite' ),
@@ -33,6 +52,14 @@ registerBlockType( 'vimeotheque/video-position', {
 			source: 'meta',
 			meta: '__cvm_video_id',
 			default: false
+		},
+		/**
+		 * Extra options that get set up by third party add-ons
+		 * and will be used to complete the "embed_options" meta value
+		 */
+		extra: {
+			type: 'object',
+			default: {}
 		}
 	},
 
@@ -53,34 +80,80 @@ registerBlockType( 'vimeotheque/video-position', {
 	},
 
 	edit: props => {
-		const {
-			attributes: {
-				embed_options,
-				video_id
+
+		const
+			{
+				attributes: {
+					embed_options,
+					extra: extraOptions,
+					video_id
+				},
+				setAttributes,
+				className
+			} = props,
+
+			[embedOptions, setEmbedOptions] = useState( JSON.parse( embed_options ) )
+
+			onFormToggleChange = varName => {
+				setOption( varName, !embedOptions[ varName ] )
+
 			},
-			setAttributes,
-			className
-		} = props;
 
-		let opt = JSON.parse( embed_options );
-		const sep = ' : ';
+			setOption = ( varName, value ) => {
+				let _opt = {}
+				_opt[ varName ] = value
+				setEmbedOptions( { ...embedOptions, ..._opt } )
+			}
 
-		const onFormToggleChange = ( varName ) => {
-			opt[ varName ] = !opt[ varName ]
-			setAttributes({
-				embed_options: JSON.stringify( opt )
-			})
-		}
+			getEmbedURL = () => {
+				const 	url = 'https://player.vimeo.com/video',
+						query = {
+							title: embedOptions.title,
+							byline: embedOptions.byline,
+							portrait: embedOptions.portrait,
+							loop: embedOptions.loop,
+							color: embedOptions.color,
+							autoplay: embedOptions.autoplay,
+							volume: embedOptions.volume,
+							dnt: embedOptions.dnt
+						}
+
+				return applyFilters(
+					'vimeotheque.video-position.embed-url',
+					`${url}/${video_id}?${jQuery.param( query )}`,
+					url,
+					video_id,
+					query
+				)
+			}
+
+		useEffect(
+			() => {
+				setEmbedOptions( JSON.parse( embed_options ) )
+			}, [embed_options]
+		)
+
+		useEffect(
+			() => {
+				/**
+				 * Combine embedOptions with extraOptions so that everything gets stored into the post meta
+				 * for compatibility with the Classic Editor
+				 */
+				setAttributes({
+					embed_options: JSON.stringify( { ...embedOptions, ...extraOptions } )
+				})
+			}, [embedOptions, extraOptions]
+		)
 
 		return [
 			<div key="vimeotheque-video-position-block">
 				<div
-					className ={ "vimeotheque-player " + opt.video_align }
-					data-width = { opt.width }
-					data-aspect_ratio = { opt.aspect_ratio }
+					className ={ "vimeotheque-player " + embedOptions.video_align }
+					data-width = { embedOptions.width }
+					data-aspect_ratio = { embedOptions.aspect_ratio }
 					style = {
 						{
-							width: `${opt.width}px`,
+							width: `${embedOptions.width}px`,
 							maxWidth: '100%'
 						}
 					}
@@ -89,17 +162,7 @@ registerBlockType( 'vimeotheque/video-position', {
 					}
 				>
 					<iframe
-						src={
-							"https://player.vimeo.com/video/" +
-							video_id +
-							"?title=" + opt.title +
-							'&byline=' + opt.byline +
-							'&portrait=' + opt.portrait +
-							'&loop=' + opt.loop +
-							'&color=' + opt.color +
-							'&autoplay=' + opt.autoplay +
-							'&volume=' + opt.volume
-						}
+						src={ getEmbedURL() }
 						width = "100%"
 						height = "100%"
 						frameBorder = "0"
@@ -140,7 +203,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<ToggleControl
 								label = { __( 'Show title', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {opt.title}
+								checked = {embedOptions.title}
 								onChange = {
 									() => onFormToggleChange( 'title' )
 								}
@@ -149,7 +212,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<ToggleControl
 								label = { __( 'Show byline', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {opt.byline}
+								checked = {embedOptions.byline}
 								onChange = {
 									() => onFormToggleChange( 'byline' )
 								}
@@ -158,7 +221,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<ToggleControl
 								label = { __( 'Show portrait', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {opt.portrait}
+								checked = {embedOptions.portrait}
 								onChange = {
 									() => onFormToggleChange( 'portrait' )
 								}
@@ -167,7 +230,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<ToggleControl
 								label = { __( 'Loop video', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {opt.loop}
+								checked = {embedOptions.loop}
 								onChange =  {
 									() => onFormToggleChange( 'loop' )
 								}
@@ -177,7 +240,7 @@ registerBlockType( 'vimeotheque/video-position', {
 							<ToggleControl
 								label = { __( 'Autoplay video', 'codeflavors-vimeo-video-post-lite' ) }
 								help = { __( "This feature won't work on all browsers.", 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {opt.autoplay}
+								checked = {embedOptions.autoplay}
 								onChange =  {
 									() => onFormToggleChange( 'autoplay' )
 								}
@@ -189,15 +252,13 @@ registerBlockType( 'vimeotheque/video-position', {
 								help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
 								type = "number"
 								step = "1"
-								value = { opt.volume }
+								value = { embedOptions.volume }
 								min = "0"
 								max = "100"
 								onChange = {
 									value => {
-										opt.volume = ( value >= 0 && value <= 100 ) ? value : opt.volume;
-										setAttributes({
-											embed_options: JSON.stringify( opt )
-										})
+										const vol = ( value >= 0 && value <= 100 ) ? value : embedOptions.volume
+										setOption( 'volume', vol )
 									}
 								}
 							/>
@@ -213,14 +274,12 @@ registerBlockType( 'vimeotheque/video-position', {
 									label = { __( 'Width', 'codeflavors-vimeo-video-post-lite' ) }
 									type = "number"
 									step = "5"
-									value = { opt.width }
+									value = { embedOptions.width }
 									min = "200"
 									onChange = {
 										value => {
-											opt.width = ( !value || value < 200 ) ? 200 : value;
-											setAttributes({
-												embed_options: JSON.stringify( opt )
-											})
+											const width = ( !value || value < 200 ) ? 200 : value
+											setOption( 'width', width )
 											vimeotheque.resizeAll()
 										}
 									}
@@ -230,7 +289,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<SelectControl
 								label = { __( 'Aspect ratio', 'codeflavors-vimeo-video-post-lite' ) }
-								value = { opt.aspect_ratio }
+								value = { embedOptions.aspect_ratio }
 								options = {[
 									{ label: '4x3', value: '4x3' },
 									{ label: '16x9', value: '16x9' },
@@ -238,10 +297,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								]}
 								onChange = {
 									value => {
-										opt.aspect_ratio = value;
-										setAttributes({
-											embed_options: JSON.stringify( opt )
-										})
+										setOption( 'aspect_ratio', value )
 										setTimeout(  vimeotheque.resizeAll, 100 );
 									}
 								}
@@ -251,7 +307,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<SelectControl
 								label = { __( 'Align', 'codeflavors-vimeo-video-post-lite' ) }
-								value = { opt.video_align }
+								value = { embedOptions.video_align }
 								options = {[
 									{ label: 'left', value: 'align-left' },
 									{ label: 'center', value: 'align-center' },
@@ -259,10 +315,7 @@ registerBlockType( 'vimeotheque/video-position', {
 								]}
 								onChange = {
 									value => {
-										opt.video_align = value;
-										setAttributes({
-											embed_options: JSON.stringify( opt )
-										})
+										setOption( 'video_align', value )
 									}
 								}
 							/>
@@ -275,23 +328,21 @@ registerBlockType( 'vimeotheque/video-position', {
 					>
 						<PanelRow>
 							<label>
-								{ __( 'Player color', 'codeflavors-vimeo-video-post-lite' ) + sep }
+								{ `${__( 'Player color', 'codeflavors-vimeo-video-post-lite' )} : ` }
 								<ColorIndicator
-									colorValue = { `#${opt.color.replace( '#', '' )}` }
+									colorValue = { `#${embedOptions.color.replace( '#', '' )}` }
 								/>
-								<span>{ opt.color && `#${opt.color.replace( '#', '' )}` }</span>
+								<span>{ embedOptions.color && `#${embedOptions.color.replace( '#', '' )}` }</span>
 							</label>
 						</PanelRow>
 
 						<PanelRow>
 							<ColorPalette
-								value = { `#${opt.color.replace( '#', '' )}` }
+								value = { `#${embedOptions.color.replace( '#', '' )}` }
 								onChange = {
 									color => {
-										opt.color = color.replace( '#', '' );
-										setAttributes({
-											embed_options: JSON.stringify( opt )
-										})
+										const col = color.replace( '#', '' )
+										setOption( 'color', col )
 									}
 								}
 							/>

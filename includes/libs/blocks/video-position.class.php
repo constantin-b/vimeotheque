@@ -24,7 +24,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 		parent::register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => parent::get_script_handle(),
-			'render_callback' => function(){
+			'render_callback' => function( $attr ){
 				// check if filters or settings prevent auto embedding
 				if( !Helper::is_autoembed_allowed() ){
 					return;
@@ -43,15 +43,18 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 				global $post;
 				$video_post = Helper::get_video_post( $post );
+
+				$block_options = isset( $attr['extra'] ) ? $attr['extra'] : [];
+
 				if( $video_post->is_video() ) {
-					return Helper::embed_video( $post, [], false );
+					return Helper::embed_video( $post, $block_options, false );
 				}
 			}
 		] );
 
 		register_post_meta(
 			'',
-			'__cvm_playback_settings',
+			parent::get_plugin()->get_cpt()->get_post_settings()->get_meta_embed_settings(),//'__cvm_playback_settings'
 			[
 				'single' => true,
 				'show_in_rest' => [
@@ -149,11 +152,50 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 		if( $_post->is_video() && !has_block( parent::get_wp_block_type()->name, $post ) ) {
 			$settings = $_post->get_embed_options();
 
+			$block = sprintf(
+				'<!-- wp:%s {"extra":%s} /-->',
+				parent::get_wp_block_type()->name,
+				json_encode( $this->get_block_extra_params( $post ) )
+			);
+
 			if( 'below-content' == $settings[ 'video_position' ] ){
-				$post->post_content .= "\n" . '<!-- wp:' . parent::get_wp_block_type()->name . ' /-->';
+				$post->post_content .= "\n" . $block;
 			}else{
-				$post->post_content = '<!-- wp:' . parent::get_wp_block_type()->name . ' /-->' . "\n" . $post->post_content ;
+				$post->post_content = $block . "\n" . $post->post_content ;
 			}
 		}
+	}
+
+	/**
+	 * @param \WP_Post $post
+	 *
+	 * @return array
+	 */
+	private function get_block_extra_params( \WP_Post $post ){
+		/**
+		 * Filter for player options. Used to get block extra parameters and put them on the block
+		 * in case video position block is not present in post content.
+		 *
+		 * @param array $defaults Default options array
+		 */
+		$defaults = apply_filters(
+			'vimeotheque\player_options_default',
+			[]
+		);
+
+		$result = [];
+
+		if( !$defaults ){
+			return $result;
+		}
+
+		$_post = Helper::get_video_post( $post );
+		$options = $_post->get_embed_options();
+
+		foreach ( $defaults as $key => $value ){
+			$result[ $key ] = isset( $options[ $key ] ) ? $options[ $key ] : $value;
+		}
+
+		return $result;
 	}
 }
