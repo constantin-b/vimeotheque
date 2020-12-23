@@ -112,7 +112,7 @@ registerBlockType( 'vimeotheque/video-position', {
 							byline: embedOptions.byline,
 							portrait: embedOptions.portrait,
 							loop: embedOptions.loop,
-							color: embedOptions.color,
+							color: embedOptions.color.replace('#', ''),
 							autoplay: embedOptions.autoplay,
 							volume: embedOptions.volume,
 							dnt: embedOptions.dnt
