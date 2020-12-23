@@ -122,6 +122,13 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.8 =
+- Improved video position block for Block editor to allow additional parameters to be set;
+- Added new parameter to filter "vimeotheque\player\embed-parameters" which passes any manually set embed options;
+- Added new action "vimeotheque\automatic_embed_in_content" which is triggered when Vimeotheque embeds videos into the post content automatically (normally, when the Classic editor is used instead of the Block editor);
+- Added new action "vimeotheque\editor\classic-editor-options-output" which is triggered when Vimeotheque displays the embedding options in post edit screen in Classic editor;
+- Introduced actions and filters that allow third party plugins to add new block editor options to video position block.
+
 = 2.0.7 =
 - Added filter "vimeotheque\player\embed-parameters" that allows extra parameters to be added to the video embed iframe URL;
 - Updated translation file for Romanian.
