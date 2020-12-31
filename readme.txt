@@ -122,6 +122,9 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.9 =
+- Solved a bug in single video embed block that was causing the options for "Loop video" and "Autoplay video" to be always on.
+
 = 2.0.8 =
 - Solved a bug in block "Video position" which caused the player color to be loaded incorrectly when loading the default color set in plugin Settings under Embed options;
 - Improved video position block for Block editor to allow additional parameters to be set;
