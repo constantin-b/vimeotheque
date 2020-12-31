@@ -224,11 +224,11 @@ registerBlockType( 'vimeotheque/video', {
                             label = { __( 'Loop video', 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.loop}
                             onChange =  {
-                                () => { () => {
+                                () => {
                                     setAttributes({
                                         loop: !attributes.loop
                                     })
-                                } }
+                                }
                             }
                         />
                     </PanelRow>
@@ -238,11 +238,11 @@ registerBlockType( 'vimeotheque/video', {
                             help = { __( "This feature won't work on all browsers.", 'codeflavors-vimeo-video-post-lite' ) }
                             checked = {attributes.autoplay}
                             onChange =  {
-                                () => { ()=>{
+                                () => {
                                     setAttributes({
                                         autoplay: !attributes.autoplay
                                     })
-                                } }
+                                }
                             }
                         />
                     </PanelRow>
