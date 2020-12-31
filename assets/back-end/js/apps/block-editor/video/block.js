@@ -256,7 +256,7 @@ registerBlockType( 'vimeotheque/video', {
                             min = "0"
                             max = "100"
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     setAttributes({
                                         volume: ( value >= 0 && value <= 100 ) ? value : attributes.volume
                                     })
@@ -278,7 +278,7 @@ registerBlockType( 'vimeotheque/video', {
                             value = { attributes.width }
                             min = "200"
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     setAttributes({
                                         width: ( !value || value < 200 ) ? 200 : value
                                     })
@@ -298,7 +298,7 @@ registerBlockType( 'vimeotheque/video', {
                                 { label: '2.35x1', value: '2.35x1' },
                             ]}
                             onChange = {
-                                ( value ) => {
+                                value => {
                                     setAttributes({
                                         aspect_ratio: value
                                     })
