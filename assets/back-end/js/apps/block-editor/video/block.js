@@ -3,9 +3,14 @@ import SearchForm from "../playlist/components/SearchForm";
 import ListMenu from "../playlist/components/ListMenu";
 import ServerSideEmbed from "../playlist/components/ServerSideEmbed";
 
-const { registerBlockType } = wp.blocks,
-    { __ } = wp.i18n,
-    {
+const {
+    blocks: {
+        registerBlockType
+    },
+    i18n: {
+        __
+    },
+    components: {
         Button,
         Placeholder,
         Modal,
@@ -18,12 +23,15 @@ const { registerBlockType } = wp.blocks,
         TextControl,
         SelectControl,
         ToggleControl
-    } = wp.components,
-    {
+    },
+    blockEditor: {
         InspectorControls,
         BlockControls
-    } = wp.blockEditor,
-    { useState } = wp.element
+    },
+    element: {
+        useState
+    }
+} = wp
 
 registerBlockType( 'vimeotheque/video', {
     title: __( 'Vimeotheque video', 'codeflavors-vimeo-video-post-lite' ),
