@@ -112,6 +112,12 @@ class Post_Edit_Page{
 		global $post;
 		$post = get_default_post_to_edit( $this->cpt->get_post_type(), true );
 
+		// unregister all blocks since the editor won't be loaded
+		$blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+		foreach( $blocks as $block => $_block ){
+			unregister_block_type( $_block );
+		}
+
 		include ABSPATH . 'wp-admin/admin-header.php';
 
 		$options = \Vimeotheque\Plugin::instance()->get_options();
