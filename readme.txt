@@ -122,6 +122,9 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.10 =
+- Solved a bug that prevented the "Add new" plugin admin page from being displayed in some cases (ie. when using WooCommerce without the Classic editor plugin).
+
 = 2.0.9 =
 - Solved a bug in single video embed block that was causing the options for "Loop video" and "Autoplay video" to be always on.
 
