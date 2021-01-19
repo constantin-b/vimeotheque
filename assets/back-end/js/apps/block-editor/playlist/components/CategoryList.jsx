@@ -56,23 +56,26 @@ class CategoryListBase extends React.Component{
                     this.props.loading ?
                         __( 'Loading, please wait...', 'codeflavors-vimeo-video-post-lite' )
                     :
-                        <ul>
-                            {
-                                options.map(
-                                    element => (
-                                        <li key = {element.value} >
-                                            <CheckboxControl
-                                                label={element.label}
-                                                checked={ this.isChecked( element ) }
-                                                onChange={ ()=>{
-                                                    this.handleChange( element )
-                                                }}
-                                            />
-                                        </li>
+                        options.length > 0 ?
+                            <ul>
+                                {
+                                    options.map(
+                                        element => (
+                                            <li key = {element.value} >
+                                                <CheckboxControl
+                                                    label={element.label}
+                                                    checked={ this.isChecked( element ) }
+                                                    onChange={ ()=>{
+                                                        this.handleChange( element )
+                                                    }}
+                                                />
+                                            </li>
+                                        )
                                     )
-                                )
-                            }
-                        </ul>
+                                }
+                            </ul>
+                            :
+                            <em>{this.props.messageEmpty}</em>
                 }
             </>
         )
@@ -81,8 +84,12 @@ class CategoryListBase extends React.Component{
 
 CategoryListBase.defaultProps = {
     categories: [],
+    loading: false,
     title: __( 'Categories', 'codeflavors-vimeo-video-post-lite' ),
-    onChange: ()=>{}
+    onChange: ()=>{},
+    terms: [],
+    taxonomy: 'category',
+    messageEmpty: ''
 }
 
 const CategoryList = termQueryApplyWithSelect( CategoryListBase )
