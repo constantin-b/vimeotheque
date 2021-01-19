@@ -1,7 +1,12 @@
 export const buildTree = ( elements, parentId = 0 )=>{
     let branch = []
 
-    elements.forEach( ( element ) => {
+    // there's a possibility that no categories are set for the custom post type. In this case, return an empty array.
+    if( !elements ){
+        return branch
+    }
+
+    elements.forEach( element => {
         if( element.parent == parentId ){
             let _element = {
                 id: element.id,
