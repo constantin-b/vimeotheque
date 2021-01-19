@@ -5,30 +5,48 @@ import CategoryList from "./components/CategoryList";
 import ListMenu from "./components/ListMenu";
 import { size, keys, map, merge, forEach } from 'lodash'
 
-const 	{ registerBlockType } = wp.blocks,
-    { __ } = wp.i18n,
+const {
+        blocks: {
+            registerBlockType
+        },
+        i18n: {
+            __
+        },
+        blockEditor: {
+            InspectorControls,
+            BlockControls
+        },
+        components: {
+            Placeholder,
+            Button,
+            ButtonGroup,
+            Modal,
+            // editor
+            Panel,
+            PanelBody,
+            PanelRow,
+            SelectControl,
+            TextControl,
+            ToggleControl,
+            Icon,
+            Tooltip
+        },
+        element: {
+            useState,
+            useEffect
+        },
+        data: {
+            select
+        },
+        hooks: {
+            applyFilters,
+            doAction
+        }
+    } = wp,
     {
-        Placeholder,
-        Button,
-        ButtonGroup,
-        Modal,
-        // editor
-        Panel,
-        PanelBody,
-        PanelRow,
-        SelectControl,
-        TextControl,
-        ToggleControl,
-        Icon,
-        Tooltip
-    } = wp.components,
-    {
-        InspectorControls,
-        BlockControls
-    } = wp.blockEditor,
-    { useState } = wp.element,
-    { select } = wp.data,
-    {themes, order} = vmtq;
+        themes,
+        order
+    } = vmtq
 
 registerBlockType( 'vimeotheque/video-playlist', {
     title: __( 'Video playlist', 'codeflavors-vimeo-video-post-lite' ),
@@ -58,25 +76,28 @@ registerBlockType( 'vimeotheque/video-playlist', {
             // modal window state
             [isOpen, setOpen] = useState( false ),
             // used to load the initial videos returned from DB
-            [isLoaded, setLoaded] = useState( false ),
             [search, setSearch] = useState( { query: '', category: false } ),
             [showSearch, setShowSearch] = useState( true ),
             [taxonomy, setTaxonomy] = useState( 'vimeo-videos' ),
             [postType, setPostType] = useState( 'vimeo-video' ),
             [isRequestLoading, setRequestLoading] = useState( false ),
+
             openModal = e => {
                 e.stopPropagation()
                 setOpen( true )
             },
+
             closeModal = () => setOpen( false ),
+
             // posts selection
-            selectPost = (post) => {
+            selectPost = post => {
                 let vids = [...attributes.videos, post ]
                 setAttributes({
                     videos: vids
                 })
                 setPostsAttr( vids )
             },
+
             unselectPost = (post) => {
                 for( var i = attributes.videos.length-1; i >= 0; i--){
                     if( attributes.videos[i].id == post.id ){
@@ -89,12 +110,14 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     }
                 }
             },
+
             updateCategories = (categories) => {
                 setAttributes({
                     categories: categories
                 })
                 setCatAttr( categories )
             },
+
             // update processed video IDs
             setPostsAttr = (vids) => {
                 let _posts = []
@@ -105,6 +128,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     post_ids: _posts
                 })
             },
+
             setCatAttr = (categories) => {
                 let _categories = []
                 categories.forEach( (item) => {
@@ -115,6 +139,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                     cat_ids: _categories
                 })
             },
+
             // create categories lists for all registered post types
             categoriesList = map( vmtq.postTypes, postType => {
                 if( postType.taxonomy ){
@@ -126,15 +151,40 @@ registerBlockType( 'vimeotheque/video-playlist', {
                         onChange={
                             categories => updateCategories( categories )
                         }
+                        messageEmpty = { __( 'None available.', 'codeflavors-vimeo-video-post-lite' ) }
                     />
                 }
             })
 
+        useEffect(
+            () => {
+                setPostsAttr( attributes.videos )
+                setCatAttr( attributes.categories )
+            }, []
+        )
 
-        if( !isLoaded ){
-            setPostsAttr( attributes.videos )
-            setCatAttr( attributes.categories )
-            setLoaded( true );
+        const serverSideEmbedAttributes = () => {
+            const attrs = {
+                theme: attributes.theme,
+                layout: attributes.layout,
+                show_excerpts: attributes.show_excerpts,
+                order: attributes.order,
+                aspect_ratio: attributes.aspect_ratio,
+                align: attributes.align,
+                width: attributes.width,
+                volume: attributes.volume,
+                title: attributes.title,
+                byline: attributes.byline,
+                portrait: attributes.portrait,
+                playlist_loop: attributes.playlist_loop,
+                post_ids: attributes.post_ids,
+                cat_ids: attributes.cat_ids
+            }
+
+            return applyFilters(
+                'vimeotheque.playlist.server-site-embed-params',
+                attrs
+            )
         }
 
         return [
@@ -162,24 +212,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                         </BlockControls>
                         <ServerSideEmbed
                             block="vimeotheque/video-playlist"
-                            attributes={
-                                {
-                                    theme: attributes.theme,
-                                    layout: attributes.layout,
-                                    show_excerpts: attributes.show_excerpts,
-                                    order: attributes.order,
-                                    aspect_ratio: attributes.aspect_ratio,
-                                    align: attributes.align,
-                                    width: attributes.width,
-                                    volume: attributes.volume,
-                                    title: attributes.title,
-                                    byline: attributes.byline,
-                                    portrait: attributes.portrait,
-                                    playlist_loop: attributes.playlist_loop,
-                                    post_ids: attributes.post_ids,
-                                    cat_ids: attributes.cat_ids
-                                }
-                            }
+                            attributes={ serverSideEmbedAttributes() }
                             onComplete = { () =>{
                                 setTimeout( ()=>{
                                     /**
@@ -190,6 +223,9 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                     forEach( window.vimeotheque.themes, func => {
                                         func()
                                     } )
+
+                                    doAction( 'vimeotheque.playlist.server-side-embed-loaded' )
+
                                 }, 200 )
                             } }
                             isSelected={props.isSelected}
