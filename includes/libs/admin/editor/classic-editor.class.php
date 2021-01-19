@@ -384,6 +384,14 @@ class Classic_Editor{
                                         </p>
                                     </div>
 
+                                    <?php
+                                        /**
+                                         *  Theme specific playlist shortcode settings
+                                         */
+                                        do_action(
+                                            'vimeotheque\admin\classic-editor\playlist-shortcode-theme-settings'
+                                        );
+                                    ?>
 								</td>
 						</tr>
                         <tr>
@@ -587,17 +595,17 @@ class Classic_Editor{
 
 		// video/playlist shortcode functionality
 		wp_enqueue_style(
-		        'cvm-shortcode-modal',
+		    'cvm-shortcode-modal',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/shortcode-modal.css',
-                [ 'wp-jquery-ui-dialog' ],
-                '1.0'
+            [ 'wp-jquery-ui-dialog' ],
+            '1.0'
         );
 
 		wp_enqueue_script(
-		        'cvm-shortcode-modal',
+		    'cvm-shortcode-modal',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/shortcode-modal.js',
-                [ 'jquery-ui-dialog' ],
-                '1.0'
+            [ 'jquery-ui-dialog' ],
+            '1.0'
         );
 
 		wp_localize_script(
