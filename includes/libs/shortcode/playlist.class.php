@@ -59,7 +59,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		global $CVM_PLAYER_SETTINGS;
 		$embed_options = $this->get_embed_options();
 		$embed_options['show_excerpts'] = is_wp_error( parent::get_attr( 'show_excerpts') ) ? false : parent::get_attr( 'show_excerpts');
-		$CVM_PLAYER_SETTINGS = $embed_options;
+		$CVM_PLAYER_SETTINGS = array_merge( $atts, $embed_options );
 
 		/**
 		 * @var Video_Post
