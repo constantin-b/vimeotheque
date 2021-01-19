@@ -122,6 +122,11 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.11 =
+- Solved a bug that caused the Video Playlist Block to crash when custom post type "vimeo-video" had no categories set up;
+- Added "empty results" message to Video Playlist Block modal window if there are no categories set up for the plugin's custom post type;
+- Improved display of options for Video Playlist Block theme "Default".
+
 = 2.0.10 =
 - Solved a bug that prevented the "Add new" plugin admin page from being displayed in some cases (ie. when using WooCommerce without the Classic editor plugin).
 
