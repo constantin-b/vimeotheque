@@ -1,15 +1,30 @@
-import {assign} from 'lodash'
-const {addFilter} = wp.hooks,
-    { __ } = wp.i18n,
-    { createHigherOrderComponent } = wp.compose,
-    { InspectorControls } = wp.blockEditor || wp.editor,
-    { PanelBody, SelectControl, ToggleControl } = wp.components
+import { assign } from 'lodash'
 
+const {
+        hooks: {
+            addFilter
+        },
+        i18n: {
+            __
+        },
+        compose: {
+            createHigherOrderComponent
+        },
+        components: {
+            PanelBody,
+            SelectControl,
+            ToggleControl
+        },
+        blockEditor: {
+            InspectorControls
+        }
+    } = wp
+
+// local
 const enableOnBlocks = [
     'vimeotheque/video-playlist'
-]
-
-const layoutOptions = [
+],
+layoutOptions = [
     {
         label: __( 'Default', 'codeflavors-vimeo-video-post-lite' ),
         value: ''
@@ -33,50 +48,51 @@ const withLayoutControls = createHigherOrderComponent( ( BlockEdit ) => {
         if ( ! enableOnBlocks.includes( props.name ) ) {
             return (
                 <BlockEdit { ...props } />
-            );
+            )
         }
 
-        const { layout, show_excerpts } = props.attributes;
+        const { layout, show_excerpts } = props.attributes
 
         return (
             <>
-                {
-                    'default' == props.attributes.theme &&
-                    <InspectorControls>
-                        <PanelBody
-                            title={ __( 'Layout', 'codeflavors-vimeo-video-post-lite' ) }
-                            initialOpen={ true }
-                        >
-                            <SelectControl
-                                label={ __( 'Navigation position', 'codeflavors-vimeo-video-post-lite' ) }
-                                value={ layout }
-                                options={ layoutOptions }
-                                onChange={ ( value ) => {
-                                    props.setAttributes( {
-                                        layout: value,
-                                    } );
-                                } }
-                            />
+                <InspectorControls>
+                    <PanelBody
+                        title={ __( 'Layout', 'codeflavors-vimeo-video-post-lite' ) }
+                        initialOpen={ true }
+                        className={'default' == props.attributes.theme ? '' : 'hide-if-js'}
+                    >
+                        <SelectControl
+                            label={ __( 'Navigation position', 'codeflavors-vimeo-video-post-lite' ) }
+                            value={ layout }
+                            options={ layoutOptions }
+                            onChange={ ( value ) => {
+                                props.setAttributes( {
+                                    layout: value,
+                                } );
+                            } }
+                        />
 
-                            <ToggleControl
-                                label = { __( 'Show excerpts', 'codeflavors-vimeo-video-post-lite' ) }
-                                checked = {show_excerpts}
-                                onChange = {
-                                    () => {
-                                        props.setAttributes({
-                                            show_excerpts: !show_excerpts
-                                        })
-                                    }
+                        <ToggleControl
+                            label = { __( 'Show excerpts', 'codeflavors-vimeo-video-post-lite' ) }
+                            checked = {show_excerpts}
+                            onChange = {
+                                () => {
+                                    props.setAttributes({
+                                        show_excerpts: !show_excerpts
+                                    })
                                 }
-                            />
-                        </PanelBody>
-                    </InspectorControls>
-                }
-
+                            }
+                        />
+                    </PanelBody>
+                </InspectorControls>
                 <BlockEdit { ...props } />
             </>
-        );
-    };
-}, 'withLayoutControl' );
+        )
+    }
+}, 'withLayoutControl' )
 
-addFilter( 'editor.BlockEdit', 'playlist-theme-default/with-layout-controls', withLayoutControls );
+addFilter(
+    'editor.BlockEdit',
+    'playlist-theme-default/with-layout-controls',
+    withLayoutControls
+)
