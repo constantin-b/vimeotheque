@@ -21,8 +21,14 @@ var CVMVideo_DIALOG_WIN = false;
 				title = $('#cvm_title[type=checkbox]').is(':checked') ? 1 : 0,
 				byline = $('#cvm_byline[type=checkbox]').is(':checked') ? 1 : 0,
 				portrait = $('#cvm_portrait[type=checkbox]').is(':checked') ? 1 : 0,
-				playlist_loop = $('#playlist_loop[type=checkbox]').is(':checked') ? 1 : 0,
-				extra_theme_opts = ' ';
+				playlist_loop = $('#playlist_loop[type=checkbox]').is(':checked') ? 1 : 0;
+
+			if( typeof wp.hooks.applyFilters !== 'undefined' ){
+				extra_theme_opts = wp.hooks.applyFilters( 'vimeotheque.classicEditor.playlistShortcode.params', '' );
+			}else{
+				extra_theme_opts = '';
+			}
+
 			
 			if( 'default' == theme ){
 				extra_theme_opts += 'layout="' + $('input[name=cvm_theme_default_layout]:checked').val() + '"';
