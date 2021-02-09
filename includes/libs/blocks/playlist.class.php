@@ -166,13 +166,13 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			];
 
 			wp_enqueue_script(
-				'vimeotheque-' . strtolower( $key ) . '-script',
+				'vimeotheque-player-' . strtolower( $key ),
 				$theme->get_js_url(),
 				[ parent::get_script_handle() ]
 			);
 
 			wp_enqueue_style(
-				'vimeotheque-' . strtolower( $key ) . '-style',
+				'vimeotheque-player-' . strtolower( $key ),
 				$theme->get_style_url()
 			);
 
