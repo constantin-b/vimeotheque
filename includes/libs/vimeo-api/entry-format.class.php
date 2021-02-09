@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Class Entry_Format
  * @package Vimeotheque
+ * @link https://developer.vimeo.com/api/reference/responses/video
  */
 class Entry_Format{
 
