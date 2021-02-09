@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Channel_Resource
  * @package Vimeotheque
+ * @link https://developer.vimeo.com/api/reference/channels
  */
 class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 
@@ -67,6 +68,15 @@ class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 	 * @return bool
 	 */
 	public function can_import_new_videos() {
+		return true;
+	}
+
+	/**
+	 * Allows import limiting by date
+	 *
+	 * @return bool
+	 */
+	public function has_date_limit() {
 		return true;
 	}
 
