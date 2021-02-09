@@ -78,7 +78,7 @@ class Helper {
 		$sizes = [
 			'small' 	=> 0, // 100px width
 			'medium' 	=> 1, // 200px width
-			'large' 	=> 2, // 640px width
+			'large' 	=> 3, // 640px width
 		];
 
 		if( !array_key_exists( $size, $sizes ) ){
