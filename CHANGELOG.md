@@ -1,3 +1,7 @@
+2.0.12 [9/Feb/2021]
+- Added date limit for showcase and channel;
+- Made image preloader in playlist themes to use the 640px wide image version for videos.
+
 2.0.11 [19/Jan/2021]
 - Solved a bug that caused the Video Playlist Block to crash when custom post type "vimeo-video" had no categories set up;
 - Added "empty results" message to Video Playlist Block modal window if there are no categories set up for the plugin's custom post type;
