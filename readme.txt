@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.12 =
+- Added date limit for showcase and channel;
+- Made image preloader in playlist themes to use the 640px wide image version for videos.
+
 = 2.0.11 =
 - Solved a bug that caused the Video Playlist Block to crash when custom post type "vimeo-video" had no categories set up;
 - Added "empty results" message to Video Playlist Block modal window if there are no categories set up for the plugin's custom post type;
