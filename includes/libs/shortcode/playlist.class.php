@@ -82,7 +82,8 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			/**
 			 * Vimeotheque playlist theme script dependencies filter
 			 *
-			 * @param array $handles    The registered JavaScript handles
+			 * @param array $handles        The registered JavaScript handles
+			 * @param string $script_handle The script handle
 			 */
 			apply_filters(
 				'vimeotheque-theme-' . strtolower( $theme->get_folder_name() ) . '-script-dependencies',
