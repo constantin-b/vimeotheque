@@ -15,9 +15,7 @@ Intuitive Vimeo video importer to help you create video posts in seconds and syn
 = Vimeo Video Importer Plugin =
 
 **Vimeotheque** helps you to create video posts in your vlog, membership, online courses or any other video collection website by automatically importing public Vimeo videos and creating complete WordPress video posts from them.
-
 https://vimeo.com/512419753
-
 The video import process is fully automated and can be controlled by plugin options which allow you to choose the details that will be imported: title, content, featured image, tags and so on. Similarly, the video embed placed into the post content can be customized using the available plugin options for embedding the video.
 
 = Vimeotheque importers =
@@ -71,9 +69,7 @@ Please note that before being able to perform any imports you need to [create a 
 * [Vimeotheque video position block](https://docs.vimeotheque.com/video-position-block/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Video position WordPress block editor block")
 * [Vimeotheque single video block](https://docs.vimeotheque.com/single-video-block/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Single video WordPress block editor block")
 * [Vimeotheque video playlist block](https://docs.vimeotheque.com/playlist-block/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Video playlist WordPress block editor block")
-
 https://vimeo.com/512419883
-
 **Importers**
 
 * [Vimeotheque single video importer](https://docs.vimeotheque.com/single-video-import/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque single Vimeo video importer")
