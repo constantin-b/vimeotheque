@@ -53,8 +53,8 @@ class Playlist_Widget extends \WP_Widget {
 	/**
 	 * (non-PHPdoc)
 	 *
-	 * @param $args
-	 * @param $instance
+	 * @param array $args       Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
+	 * @param array $instance   The settings for the particular instance of the widget.
 	 *
 	 * @see WP_Widget::widget()
 	 */
