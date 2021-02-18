@@ -32,7 +32,8 @@ class Playlist_Widget extends \WP_Widget {
 		/* Widget settings. */
 		$widget_options = [
 			'classname'   => 'cvm-latest-videos',
-			'description' => __( 'The most recent videos on your site.', 'codeflavors-vimeo-video-post-lite' )
+			'description' => __( 'The most recent videos on your site.',
+				'codeflavors-vimeo-video-post-lite' )
 		];
 
 		/* Widget control settings. */
@@ -51,6 +52,7 @@ class Playlist_Widget extends \WP_Widget {
 
 	/**
 	 * (non-PHPdoc)
+	 *
 	 * @param $args
 	 * @param $instance
 	 *
@@ -156,6 +158,7 @@ class Playlist_Widget extends \WP_Widget {
 
 	/**
 	 * (non-PHPdoc)
+	 *
 	 * @param $new_instance
 	 * @param $old_instance
 	 *
@@ -164,24 +167,27 @@ class Playlist_Widget extends \WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 
-		$instance = $old_instance;
+		$instance                     = $old_instance;
 		$instance['cvm_widget_title'] = $new_instance['cvm_widget_title'];
-		$instance['cvm_post_type'] = $new_instance['cvm_post_type'];
-		$instance['cvm_taxonomy'] = $this->get_taxonomy( $new_instance['cvm_post_type'] );
-		$instance['cvm_posts_number'] = (int) $new_instance['cvm_posts_number'];
-		$instance['cvm_posts_tax'] = (int) $new_instance['cvm_posts_tax'];
-		$instance['cvm_vim_image'] = (bool) $new_instance['cvm_vim_image'];
-		$instance['cvm_show_playlist'] = (bool) $new_instance['cvm_show_playlist'];
-		$instance['theme'] = $new_instance['theme'];
-		$instance['layout'] = $new_instance['layout'];
-		$instance['show_excerpts'] = $new_instance['show_excerpts'];
-		$instance['playlist_loop'] = $new_instance['playlist_loop'];
-		$instance['aspect_ratio'] = $new_instance['aspect_ratio'];
-		$instance['width'] = absint( $new_instance['width'] );
-		$instance['volume'] = absint( $new_instance['volume'] );
-		$instance['title'] = $new_instance['title'];
-		$instance['byline'] = $new_instance['byline'];
-		$instance['portrait'] = $new_instance['portrait'];
+		$instance['cvm_post_type']    = $new_instance['cvm_post_type'];
+		$instance['cvm_taxonomy']
+		                              = $this->get_taxonomy( $new_instance['cvm_post_type'] );
+		$instance['cvm_posts_number']
+		                              = (int) $new_instance['cvm_posts_number'];
+		$instance['cvm_posts_tax']    = (int) $new_instance['cvm_posts_tax'];
+		$instance['cvm_vim_image']    = (bool) $new_instance['cvm_vim_image'];
+		$instance['cvm_show_playlist']
+		                              = (bool) $new_instance['cvm_show_playlist'];
+		$instance['theme']            = $new_instance['theme'];
+		$instance['layout']           = $new_instance['layout'];
+		$instance['show_excerpts']    = $new_instance['show_excerpts'];
+		$instance['playlist_loop']    = $new_instance['playlist_loop'];
+		$instance['aspect_ratio']     = $new_instance['aspect_ratio'];
+		$instance['width']            = absint( $new_instance['width'] );
+		$instance['volume']           = absint( $new_instance['volume'] );
+		$instance['title']            = $new_instance['title'];
+		$instance['byline']           = $new_instance['byline'];
+		$instance['portrait']         = $new_instance['portrait'];
 
 		return $instance;
 	}
@@ -194,18 +200,20 @@ class Playlist_Widget extends \WP_Widget {
 	private function get_taxonomy( $taxonomy ) {
 		$post_type = Helper_Admin::get_registered_post_type( $taxonomy );
 
-		return $post_type ? $post_type->get_taxonomy()->name
+		return $post_type
+			? $post_type->get_taxonomy()->name
 			: Plugin::instance()->get_cpt()
 			        ->get_category_taxonomy_object()->name;
 	}
 
 	/**
 	 * (non-PHPdoc)
+	 *
 	 * @param $instance
 	 *
 	 * @see WP_Widget::form()
 	 */
-	function form( $instance ) {
+	public function form( $instance ) {
 
 		$defaults = $this->get_defaults();;
 		$options = wp_parse_args( (array) $instance, $defaults );
