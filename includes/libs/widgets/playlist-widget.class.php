@@ -53,8 +53,8 @@ class Playlist_Widget extends \WP_Widget {
 	/**
 	 * (non-PHPdoc)
 	 *
-	 * @param array $args       Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
-	 * @param array $instance   The settings for the particular instance of the widget.
+	 * @param array $args     Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
+	 * @param array $instance The settings for the particular instance of the widget.
 	 *
 	 * @see WP_Widget::widget()
 	 */
@@ -165,7 +165,7 @@ class Playlist_Widget extends \WP_Widget {
 	 * @return array
 	 * @see WP_Widget::update()
 	 */
-	function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 
 		$instance                     = $old_instance;
 		$instance['cvm_widget_title'] = $new_instance['cvm_widget_title'];
