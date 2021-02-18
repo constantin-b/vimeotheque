@@ -499,7 +499,7 @@ class Playlist_Widget extends \WP_Widget {
 			];
 		}
 
-		$taxonomy_select = isset( $params['cvm_posts_tax'] )
+		$taxonomy_select = isset( $params['cvm_posts_tax'] ) && -1 !== $params['cvm_posts_tax']
 			? absint( $params['cvm_posts_tax'] ) : false;
 		if ( $taxonomy_select ) {
 			$taxonomy = isset( $params['cvm_taxonomy'] )
