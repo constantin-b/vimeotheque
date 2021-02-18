@@ -265,7 +265,7 @@ class Playlist_Widget extends \WP_Widget {
 					'hierarchical'     => true,
 					'name'             => $this->get_field_name( 'cvm_posts_tax' ),
 					'id'               => $this->get_field_id( 'cvm_posts_tax' ),
-					'taxonomy'         => $this->get_taxonomy( $options['cvm_taxonomy'] ),
+					'taxonomy'         => $this->get_taxonomy( $options['cvm_post_type'] ),
 					'hide_if_empty'    => true,
 					'class'            => 'cvm_widget_taxonomy'
 				];
