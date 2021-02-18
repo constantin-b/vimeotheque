@@ -1,3 +1,6 @@
+2.0.13 [18/Feb/2021]
+- Solved a bug in Video Playlist Widget that caused the widget to display videos from all categories even if a category was selected from the widget options. 
+
 2.0.12 [9/Feb/2021]
 - Added date limit for showcase and channel;
 - Made image preloader in playlist themes to use the 640px wide image version for videos.
