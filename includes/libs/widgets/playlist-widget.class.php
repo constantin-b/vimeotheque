@@ -159,8 +159,8 @@ class Playlist_Widget extends \WP_Widget {
 	/**
 	 * (non-PHPdoc)
 	 *
-	 * @param $new_instance
-	 * @param $old_instance
+	 * @param array $new_instance New settings for this instance as input by the user via WP_Widget::form().
+	 * @param array $old_instance Old settings for this instance.
 	 *
 	 * @return array
 	 * @see WP_Widget::update()
