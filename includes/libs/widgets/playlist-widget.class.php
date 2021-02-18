@@ -164,27 +164,24 @@ class Playlist_Widget extends \WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 
-		$instance                     = $old_instance;
+		$instance = $old_instance;
 		$instance['cvm_widget_title'] = $new_instance['cvm_widget_title'];
-		$instance['cvm_post_type']    = $new_instance['cvm_post_type'];
-		$instance['cvm_taxonomy']
-		                              = $this->get_taxonomy( $new_instance['cvm_post_type'] );
-		$instance['cvm_posts_number']
-		                              = (int) $new_instance['cvm_posts_number'];
-		$instance['cvm_posts_tax']    = (int) $new_instance['cvm_posts_tax'];
-		$instance['cvm_vim_image']    = (bool) $new_instance['cvm_vim_image'];
-		$instance['cvm_show_playlist']
-		                              = (bool) $new_instance['cvm_show_playlist'];
-		$instance['theme']            = $new_instance['theme'];
-		$instance['layout']           = $new_instance['layout'];
-		$instance['show_excerpts']    = $new_instance['show_excerpts'];
-		$instance['playlist_loop']    = $new_instance['playlist_loop'];
-		$instance['aspect_ratio']     = $new_instance['aspect_ratio'];
-		$instance['width']            = absint( $new_instance['width'] );
-		$instance['volume']           = absint( $new_instance['volume'] );
-		$instance['title']            = $new_instance['title'];
-		$instance['byline']           = $new_instance['byline'];
-		$instance['portrait']         = $new_instance['portrait'];
+		$instance['cvm_post_type'] = $new_instance['cvm_post_type'];
+		$instance['cvm_taxonomy'] = $this->get_taxonomy( $new_instance['cvm_post_type'] );
+		$instance['cvm_posts_number'] = (int) $new_instance['cvm_posts_number'];
+		$instance['cvm_posts_tax'] = (int) $new_instance['cvm_posts_tax'];
+		$instance['cvm_vim_image'] = (bool) $new_instance['cvm_vim_image'];
+		$instance['cvm_show_playlist'] = (bool) $new_instance['cvm_show_playlist'];
+		$instance['theme'] = $new_instance['theme'];
+		$instance['layout'] = $new_instance['layout'];
+		$instance['show_excerpts'] = $new_instance['show_excerpts'];
+		$instance['playlist_loop'] = $new_instance['playlist_loop'];
+		$instance['aspect_ratio'] = $new_instance['aspect_ratio'];
+		$instance['width'] = absint( $new_instance['width'] );
+		$instance['volume'] = absint( $new_instance['volume'] );
+		$instance['title'] = $new_instance['title'];
+		$instance['byline'] = $new_instance['byline'];
+		$instance['portrait'] = $new_instance['portrait'];
 
 		return $instance;
 	}
