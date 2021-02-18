@@ -6,6 +6,8 @@ use Vimeotheque\Admin\Helper_Admin;
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use Vimeotheque\Shortcode\Playlist;
+use WP_Post;
+use WP_Widget;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -13,9 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Playlist_Widget
+ *
  * @package Vimeotheque\Widgets
  */
-class Playlist_Widget extends \WP_Widget {
+class Playlist_Widget extends WP_Widget {
 	/**
 	 * @var string
 	 */
@@ -133,7 +136,7 @@ class Playlist_Widget extends \WP_Widget {
 						'thumbnail' );
 					if ( ! $thumbnail ) {
 						$video_data
-							= \Vimeotheque\Helper::get_video_post( $post->ID );
+							= Helper::get_video_post( $post->ID );
 						if ( isset( $video_data->thumbnails[0] ) ) {
 							$thumbnail = sprintf( '<img src="%s" alt="%s" />',
 								$video_data->thumbnails[0],
@@ -154,6 +157,90 @@ class Playlist_Widget extends \WP_Widget {
         </ul>
 		<?php
 		echo $after_widget;
+	}
+
+	/**
+	 * Default widget values
+	 */
+	private function get_defaults() {
+		$player_defaults = Plugin::instance()->get_embed_options_obj()
+		                         ->get_options();
+
+		return [
+			'cvm_post_type'     => Plugin::instance()->get_cpt()
+			                             ->get_post_type(),
+			'cvm_taxonomy'      => Plugin::instance()->get_cpt()
+			                             ->get_post_tax(),
+			'cvm_widget_title'  => '',
+			'cvm_posts_number'  => 5,
+			'cvm_posts_tax'     => - 1,
+			'cvm_vim_image'     => false,
+			'cvm_show_playlist' => false,
+			'theme'             => 'default',
+			'layout'            => '',
+			'show_excerpts'     => false,
+			'playlist_loop'     => 0,
+			'aspect_ratio'      => $player_defaults['aspect_ratio'],
+			'width'             => $player_defaults['width'],
+			'volume'            => $player_defaults['volume'],
+			'title'             => $player_defaults['title'],
+			'byline'            => $player_defaults['byline'],
+			'portrait'          => $player_defaults['portrait']
+		];
+	}
+
+	/**
+	 * @param $params
+	 *
+	 * @return WP_Post[]
+	 */
+	private function get_posts( $params ) {
+		$posts_count = absint( $params['cvm_posts_number'] );
+		$post_type   = isset( $params['cvm_post_type'] )
+			? $params['cvm_post_type']
+			: Plugin::instance()->get_cpt()->get_post_type();
+
+		$args = [
+			'numberposts'      => $posts_count,
+			'posts_per_page'   => $posts_count,
+			'orderby'          => 'post_date',
+			'order'            => 'DESC',
+			'post_type'        => $post_type,
+			'post_status'      => 'publish',
+			'suppress_filters' => true
+		];
+
+		if ( $post_type != Plugin::instance()->get_cpt()->get_post_type() ) {
+			$args['meta_query'] = [
+				[
+					'key'     => Plugin::instance()->get_cpt()
+					                   ->get_post_settings()
+					                   ->get_meta_video_data(),
+					'compare' => 'EXISTS'
+				]
+			];
+		}
+
+		$taxonomy_select = isset( $params['cvm_posts_tax'] )
+		                   && - 1 !== $params['cvm_posts_tax']
+			? absint( $params['cvm_posts_tax'] ) : false;
+		if ( $taxonomy_select ) {
+			$taxonomy = isset( $params['cvm_taxonomy'] )
+				? $params['cvm_taxonomy']
+				: Plugin::instance()->get_cpt()->get_post_tax();
+			$term     = get_term( $taxonomy_select, $taxonomy, ARRAY_A );
+			if ( ! is_wp_error( $term ) ) {
+				$args['tax_query'] = [
+					[
+						'taxonomy' => $taxonomy,
+						'field'    => 'slug',
+						'terms'    => $term['slug']
+					]
+				];
+			}
+		}
+
+		return get_posts( $args );
 	}
 
 	/**
@@ -215,7 +302,7 @@ class Playlist_Widget extends \WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$defaults = $this->get_defaults();;
+		$defaults = $this->get_defaults();
 		$options = wp_parse_args( (array) $instance, $defaults );
 		?>
         <div class="cvm-player-settings-options">
@@ -431,92 +518,9 @@ class Playlist_Widget extends \WP_Widget {
 	}
 
 	/**
-	 * Default widget values
-	 */
-	private function get_defaults() {
-		$player_defaults = Plugin::instance()->get_embed_options_obj()
-		                         ->get_options();
-
-		return [
-			'cvm_post_type'     => Plugin::instance()->get_cpt()
-			                             ->get_post_type(),
-			'cvm_taxonomy'      => Plugin::instance()->get_cpt()
-			                             ->get_post_tax(),
-			'cvm_widget_title'  => '',
-			'cvm_posts_number'  => 5,
-			'cvm_posts_tax'     => - 1,
-			'cvm_vim_image'     => false,
-			'cvm_show_playlist' => false,
-			'theme'             => 'default',
-			'layout'            => '',
-			'show_excerpts'     => false,
-			'playlist_loop'     => 0,
-			'aspect_ratio'      => $player_defaults['aspect_ratio'],
-			'width'             => $player_defaults['width'],
-			'volume'            => $player_defaults['volume'],
-			'title'             => $player_defaults['title'],
-			'byline'            => $player_defaults['byline'],
-			'portrait'          => $player_defaults['portrait']
-		];
-	}
-
-	/**
 	 * @return mixed
 	 */
 	public function get_parent() {
 		return parent;
-	}
-
-	/**
-	 * @param $params
-	 *
-	 * @return \WP_Post[]
-	 */
-	private function get_posts( $params ) {
-		$posts_count = absint( $params['cvm_posts_number'] );
-		$post_type   = isset( $params['cvm_post_type'] )
-			? $params['cvm_post_type']
-			: Plugin::instance()->get_cpt()->get_post_type();
-
-		$args = [
-			'numberposts'      => $posts_count,
-			'posts_per_page'   => $posts_count,
-			'orderby'          => 'post_date',
-			'order'            => 'DESC',
-			'post_type'        => $post_type,
-			'post_status'      => 'publish',
-			'suppress_filters' => true
-		];
-
-		if ( $post_type != Plugin::instance()->get_cpt()->get_post_type() ) {
-			$args['meta_query'] = [
-				[
-					'key'     => Plugin::instance()->get_cpt()
-					                   ->get_post_settings()
-					                   ->get_meta_video_data(),
-					'compare' => 'EXISTS'
-				]
-			];
-		}
-
-		$taxonomy_select = isset( $params['cvm_posts_tax'] ) && -1 !== $params['cvm_posts_tax']
-			? absint( $params['cvm_posts_tax'] ) : false;
-		if ( $taxonomy_select ) {
-			$taxonomy = isset( $params['cvm_taxonomy'] )
-				? $params['cvm_taxonomy']
-				: Plugin::instance()->get_cpt()->get_post_tax();
-			$term     = get_term( $taxonomy_select, $taxonomy, ARRAY_A );
-			if ( ! is_wp_error( $term ) ) {
-				$args['tax_query'] = [
-					[
-						'taxonomy' => $taxonomy,
-						'field'    => 'slug',
-						'terms'    => $term['slug']
-					]
-				];
-			}
-		}
-
-		return get_posts( $args );
 	}
 }
