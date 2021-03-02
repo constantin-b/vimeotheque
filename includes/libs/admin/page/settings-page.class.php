@@ -62,7 +62,8 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		 *
 		 * $tabs['my-tab-id'] = array(
 		 *		'title' => __('My tab title'),
-		 *      'callback' => callback function that will create the tab output (ie. array( $this, 'method_name' ))
+		 *      'callback' => callback function that will create the tab output (ie. array( $this, 'method_name' )),
+		 *      'before' => false // The tab ID that the added tab should be included after ( post_options, content_options, image_options, import_options, embed_options, auth_options ). False to be added at the end of the tabs
 		 * )
 		 *
 		 * @param array $tabs   The new tabs to be registered
@@ -309,7 +310,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		}
 
 		$nonce = wp_create_nonce( 'cvm-clear-oauth-token' );
-		$url = menu_page_url( 'cvm_settings', false ) . '&clear_oauth=true&cvm_nonce=' . $nonce . '#cvm-settings-auth-options';
+		$url = menu_page_url( 'cvm_settings', false ) . '&clear_oauth=true&cvm_nonce=' . $nonce . '#auth-options';
 		$output = sprintf( '<a href="%s" class="%s">%s</a>', $url, esc_attr( $class ), $text );
 
 		if( $echo ){
