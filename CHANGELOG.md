@@ -1,3 +1,8 @@
+2.0.14 [2/March/2021]
+- Video player adds class "loaded" on the video container once the video is loaded;
+- Modified video player display to remove the black background and loader image after the video has loaded;
+- Improved processing of tabs in plugin Settings.
+
 2.0.13 [18/Feb/2021]
 - Solved a bug in Video Playlist Widget that caused the widget to display videos from all categories even if a category was selected from the widget options. 
 

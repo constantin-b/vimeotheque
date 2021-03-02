@@ -122,6 +122,11 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.14 =
+- Video player adds class "loaded" on the video container once the video is loaded;
+- Modified video player display to remove the black background and loader image after the video has loaded;
+- Improved processing of tabs in plugin Settings.
+
 = 2.0.13 =
 - Solved a bug in Video Playlist Widget that caused the widget to display videos from all categories even if a category was selected from the widget options.
 
