@@ -131,7 +131,7 @@ class Classic_Editor{
 				<?php
 				printf(
 					__( 'Individual video post options are not editable; to change video options globally, go to plugin %sSettings%s, tab Embed options.', 'codeflavors-vimeo-video-post-lite' ),
-					'<a href="' . menu_page_url( 'cvm_settings', false ) . '#cvm-settings-embed-options">',
+					'<a href="' . menu_page_url( 'cvm_settings', false ) . '#embed-options">',
 					'</a>'
 				);?>
 				</p>
@@ -415,6 +415,11 @@ class Classic_Editor{
 	                            ?>
                             </td>
                         </tr>
+
+                        <tr>
+                            <td colspan="2"><h4><?php _e( 'Video embed options', 'codeflavors-vimeo-video-post-lite' );?></h4></td>
+                        </tr>
+
 						<tr>
 							<th><label for="cvm_aspect_ratio"><?php _e('Aspect', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
