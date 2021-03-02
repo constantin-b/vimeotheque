@@ -164,9 +164,11 @@ class Player {
 	/**
 	 * Generates options
 	 *
+	 * @since 2.0.14    Modified method visibility from private to public
+	 *
 	 * @return string
 	 */
-	private function get_embed_url(){
+	public function get_embed_url(){
 		$options = [
 			'title' => $this->options['title'],
 			'byline' => $this->options['byline'],
@@ -175,7 +177,7 @@ class Player {
 			'autoplay' => $this->options['autoplay'],
 			'color' => str_replace( '#', '', $this->options['color'] ),
 			'dnt' => $this->options['dnt'],
-			'transparent' => false
+			'transparent' => true
 		];
 
 		/**
@@ -198,8 +200,8 @@ class Player {
 		}
 
 		return sprintf(
-			'https://player.vimeo.com/video/%s?%s',
-			$this->post->video_id,
+			'%s?%s',
+			$this->post->get_embed_url(),
 			http_build_query( $options, '', '&' )
 		);
 	}
