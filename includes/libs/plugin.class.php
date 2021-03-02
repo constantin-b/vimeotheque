@@ -212,7 +212,8 @@ class Plugin{
 		add_action( 'init', function(){
 			$this->registered_post_types = new Post_Registration(
 				$this->cpt->get_wp_post_type_object(),
-				$this->cpt->get_category_taxonomy_object()
+				$this->cpt->get_category_taxonomy_object(),
+				get_taxonomy( $this->cpt->get_tag_tax() )
 			);
 		}, 2 );
 	}
