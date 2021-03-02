@@ -15,6 +15,45 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Helper {
 
 	/**
+	 * Returns the thumbnail URL for the current video in loop
+	 *
+	 * @since 2.0.14
+	 *
+	 * @param string $size
+	 *
+	 * @return array|false|mixed|string|string[]|void
+	 */
+	public static function get_thumbnail_url( $size = 'small' ){
+		$video = self::current_video_post();
+		if( !$video ){
+			return;
+		}
+
+		$result = false;
+
+		$sizes = [
+			'small' => 0, // 100px width
+			'medium' => 1, // 200px width
+			'large' => 3, // 640px width
+		];
+
+		if( !array_key_exists( $size, $sizes ) ){
+			$size = 'small';
+		}
+
+		$thumbnails = array_values( $video->thumbnails );
+
+		if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
+			$result = $thumbnails[ $sizes[ $size ] ];
+			if( is_ssl() ){
+				$result = str_replace( 'http://' , 'https://', $thumbnails[ $sizes[ $size ] ] );
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Returns or outputs the thumbnail of current video in loop
 	 *
 	 * @param string $size
@@ -25,32 +64,11 @@ class Helper {
 	 * @return string|void
 	 */
 	public static function get_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
-		$video = self::current_video_post();
-		if( !$video ){
-			return;
-		}
 
-		$output = '';
+		$img_url = self::get_thumbnail_url( $size );
 
-		$sizes = [
-			'small' => 0, // 100px width
-			'medium' => 1, // 200px width
-			'large' => 2, // 640px width
-		];
+		$output = $img_url ? sprintf( '<img src="%s" alt="" />', $img_url ) : '';
 
-		if( !array_key_exists($size, $sizes) ){
-			$size = 'small';
-		}
-
-		$thumbnails = array_values( $video->thumbnails );
-
-		if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
-			$img_url = $thumbnails[ $sizes[ $size ] ];
-			if( is_ssl() ){
-				$img_url = str_replace( 'http://' , 'https://', $img_url );
-			}
-			$output = sprintf( '<img src="%s" alt="" />', $img_url );
-		}
 		if( $echo ){
 			echo $before . $output . $after;
 		}
@@ -68,34 +86,20 @@ class Helper {
 	 * @return string|void
 	 */
 	public static function image_preloader( $size = 'small', $class="cvm-preload", $echo = true ){
-		$video = self::current_video_post();
-		if( !$video ){
-			return;
-		}
 
-		$output = '';
-
-		$sizes = [
-			'small' 	=> 0, // 100px width
-			'medium' 	=> 1, // 200px width
-			'large' 	=> 3, // 640px width
-		];
-
-		if( !array_key_exists( $size, $sizes ) ){
-			$size = 'small';
-		}
+		$img_url = self::get_thumbnail_url( $size );
 
 		$blank = VIMEOTHEQUE_URL . '/assets/front-end/images/blank.png';
 
-		$thumbnails = array_values( $video->thumbnails );
-
-		if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
+		if( $img_url ){
 			$output = sprintf(
 				'<img data-src="%s" alt="" src="%s" class="%s" />',
-				$thumbnails[ $sizes[ $size ] ],
+				$img_url,
 				$blank,
 				$class
 			);
+		}else{
+			$output = '';
 		}
 
 		if( $echo ){
@@ -263,6 +267,8 @@ class Helper {
 
 	/**
 	 * Get the current video in loop
+	 *
+	 * @since 2.0.14    Method visibility made public
 	 *
 	 * @return Video_Post
 	 */
