@@ -10,6 +10,13 @@
   background-image: url(../images/loading.gif);
   background-repeat: no-repeat;
   background-position: center center;
+  /**
+   * @since 2.0.14	Remove player background once the video has loaded
+   */
+}
+.vimeotheque-player.loaded {
+  background: transparent;
+  background-image: none;
 }
 .vimeotheque-player.align-center {
   margin-left: auto;
@@ -32,5 +39,3 @@
   padding-top: 0px !important;
   height: 100% !important;
 }
-
-/*# sourceMappingURL=video-player.css.map */
