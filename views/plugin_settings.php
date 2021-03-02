@@ -24,19 +24,58 @@ use Vimeotheque\Helper;
 		<form method="post" action="">
 			<?php wp_nonce_field('cvm-save-plugin-settings', 'cvm_wp_nonce');?>
 			<ul class="cvm-tab-labels">
-				<li><a href="#cvm-settings-post-options"><i class="dashicons dashicons-arrow-right"></i> <?php _e('Post options', 'codeflavors-vimeo-video-post-lite')?></a></li>
-				<li><a href="#cvm-settings-content-options"><i class="dashicons dashicons-arrow-right"></i> <?php _e('Content options', 'codeflavors-vimeo-video-post-lite')?></a></li>
-				<li><a href="#cvm-settings-image-options"><i class="dashicons dashicons-arrow-right"></i> <?php _e('Image options', 'codeflavors-vimeo-video-post-lite')?></a></li>
-				<li><a href="#cvm-settings-import-options"><i class="dashicons dashicons-arrow-right"></i> <?php _e('Import options', 'codeflavors-vimeo-video-post-lite')?></a></li>
-				<li><a href="#cvm-settings-embed-options"><i class="dashicons dashicons-arrow-right"></i> <?php _e('Embed options', 'codeflavors-vimeo-video-post-lite')?></a></li>
-				<li><a href="#cvm-settings-auth-options"><i class="dashicons dashicons-arrow-right"></i> <?php _e('API & License', 'codeflavors-vimeo-video-post-lite')?></a></li>
-				<?php foreach( $extra_tabs as $tab_id => $hook ):?>
-                    <li><a href="#<?php esc_attr_e( $tab_id );?>"><i class="dashicons dashicons-arrow-right"></i> <?php esc_attr_e( $hook['title'] );?></a></li>
-				<?php endforeach;?>
+                <?php
+                    $tabs = [
+                        'post_options' => [
+                            'title' => __('Post options', 'codeflavors-vimeo-video-post-lite')
+                        ],
+                        'content_options' => [
+                            'title' => __('Content options', 'codeflavors-vimeo-video-post-lite')
+                        ],
+                        'image_options' => [
+	                        'title' => __('Image options', 'codeflavors-vimeo-video-post-lite')
+                        ],
+                        'import_options' => [
+	                        'title' => __('Import options', 'codeflavors-vimeo-video-post-lite')
+                        ],
+                        'embed_options' => [
+	                        'title' => __('Embed options', 'codeflavors-vimeo-video-post-lite')
+                        ],
+                        'auth_options' => [
+	                        'title' => __('API & License', 'codeflavors-vimeo-video-post-lite')
+                        ],
+                    ];
+
+                    $nav_template = '<li><a href="%s"><i class="dashicons dashicons-arrow-right"></i> %s</a></li>';
+
+                    // process the extra tabs
+                    foreach( $extra_tabs as $tab_id => $tab ){
+                        if( isset( $tab['before'] ) && array_key_exists( $tab['before'], $tabs ) ){
+                            $offset = array_search( $tab['before'], array_keys( $tabs ) );
+                            $tabs = array_merge(
+                                array_slice( $tabs, 0, $offset, true ),
+                                [ $tab_id => $tab ],
+                                array_slice( $tabs, $offset, null, true)
+                            );
+                        }else{
+                            $tabs[ $tab_id ] = $tab;
+                        }
+                    }
+
+                    // display all tabs
+                    foreach( $tabs as $tab_id => $tab ){
+                        printf(
+                            $nav_template,
+                            '#' . $tab_id,
+                            $tab['title']
+                        );
+                    }
+
+                ?>
 			</ul>
 			
 			<!-- Tab post options -->
-			<div id="cvm-settings-post-options">
+			<div id="post_options">
 				<table class="form-table">
 					<tbody>
 						<!-- Import type -->
@@ -120,7 +159,7 @@ use Vimeotheque\Helper;
 			<!-- /Tab post options -->	
 			
 			<!-- Tab content options -->
-			<div id="cvm-settings-content-options">
+			<div id="content_options">
 				<table class="form-table">
 					<tbody>
 						<!-- Content settings -->
@@ -195,7 +234,7 @@ use Vimeotheque\Helper;
 			<!-- /Tab content options -->
 			
 			<!-- Tab image options -->
-			<div id="cvm-settings-image-options">
+			<div id="image_options">
 				<table class="form-table">
 					<tbody>
 						<tr>
@@ -224,7 +263,7 @@ use Vimeotheque\Helper;
 			<!-- /Tab image options -->
 			
 			<!-- Tab import options -->
-			<div id="cvm-settings-import-options">
+			<div id="import_options">
 				<table class="form-table">
 					<tbody>
 						<!-- Manual Import settings -->
@@ -266,7 +305,7 @@ use Vimeotheque\Helper;
 			<!-- /Tab import options -->
 			
 			<!-- Tab embed options -->
-			<div id="cvm-settings-embed-options">
+			<div id="embed_options">
 				<table class="form-table cvm-player-settings-options">
 					<tbody>
 						<tr>
@@ -422,7 +461,7 @@ use Vimeotheque\Helper;
 			<!-- Tab embed options -->	
 			
 			<!-- Tab auth options -->
-			<div id="cvm-settings-auth-options">
+			<div id="auth_options">
 				<table class="form-table">
 					<tbody>
 						<tr>
