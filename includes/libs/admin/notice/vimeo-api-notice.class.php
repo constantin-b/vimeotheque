@@ -49,7 +49,7 @@ class Vimeo_Api_Notice extends Notice_Abstract implements Notice_Interface {
 			__('After you registered your app visit %s and enter your Vimeo consumer and secret keys.', 'codeflavors-vimeo-video-post-lite'),
 			sprintf(
 				'<a href="%s">%s</a>',
-				menu_page_url('cvm_settings', false) . '#cvm-settings-auth-options',
+				menu_page_url('cvm_settings', false) . '#auth-options',
 				__( 'Settings page', 'codeflavors-vimeo-video-post-lite' )
 			)
 		);
