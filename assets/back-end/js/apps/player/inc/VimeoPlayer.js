@@ -58,7 +58,13 @@ $.fn.VimeoPlayer = function( params ){
         return self
     }
 
-    player.on( 'loaded', options.onLoad )
+    player.on( 'loaded', () => {
+        /**
+         * @since 2.0.14    Add CSS class loaded on video container after the video has loaded
+         */
+        self.addClass('loaded')
+        options.onLoad
+    })
     player.on( 'play', options.onPlay )
     player.on( 'timeupdate', options.onPlayback )
     player.on( 'pause', options.onPause )
