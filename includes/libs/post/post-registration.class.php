@@ -19,25 +19,32 @@ class Post_Registration {
 	/**
 	 * Post_Registration constructor.
 	 *
-	 * @param \WP_Post_Type $post_type
+	 * @since 2.0.14    Added new argument for tag taxonomy associated with the post type passed as first argument
+	 *
+	 * @param \WP_Post_Type      $post_type
 	 * @param \WP_Taxonomy|false $taxonomy
+	 * @param \WP_Taxonomy|false $tag_taxonomy
 	 */
-	public function __construct( \WP_Post_Type $post_type, $taxonomy ) {
-		$this->register( $post_type, $taxonomy );
+	public function __construct( \WP_Post_Type $post_type, $taxonomy, $tag_taxonomy = false ) {
+		$this->register( $post_type, $taxonomy, $tag_taxonomy );
 	}
 
 	/**
-	 * @param \WP_Post_Type $post_type
+	 * @since 2.0.14    Added new parameter for tag taxonomy
+	 *
+	 * @param \WP_Post_Type      $post_type
 	 * @param \WP_Taxonomy|false $taxonomy
+	 * @param \WP_Taxonomy|false $tag_taxonomy
 	 */
-	public function register( \WP_Post_Type $post_type, $taxonomy ){
+	public function register( \WP_Post_Type $post_type, $taxonomy, $tag_taxonomy = false ){
 		if( !did_action( 'init' ) ){
 			_doing_it_wrong( __FUNCTION__, 'Post types must be registered only after "init" hook is fired.' );
 		}
 
 		$this->types[ $post_type->name ] = new Register_Post(
 			$post_type,
-			$taxonomy
+			$taxonomy,
+			$tag_taxonomy
 		);
 	}
 
