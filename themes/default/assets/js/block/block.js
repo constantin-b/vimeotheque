@@ -51,7 +51,7 @@ const withLayoutControls = createHigherOrderComponent( ( BlockEdit ) => {
             )
         }
 
-        const { layout, show_excerpts } = props.attributes
+        const { layout, show_excerpts, use_original_thumbnails } = props.attributes
 
         return (
             <>
@@ -83,6 +83,20 @@ const withLayoutControls = createHigherOrderComponent( ( BlockEdit ) => {
                                 }
                             }
                         />
+
+                        <ToggleControl
+                            label = { __( 'Use original thumbnail size ratio', 'codeflavors-vimeo-video-post-lite' ) }
+                            help={ use_original_thumbnails ? __( 'Thumbnails might have different sizes depending on the size ratio.', 'codeflavors-vimeo-video-post-lite' ) : __('Thumbnails will have the same size and might display black bars.', 'codeflavors-vimeo-video-post-lite') }
+                            checked = {use_original_thumbnails}
+                            onChange = {
+                                () => {
+                                    props.setAttributes({
+                                        use_original_thumbnails: !use_original_thumbnails
+                                    })
+                                }
+                            }
+                        />
+
                     </PanelBody>
                 </InspectorControls>
                 <BlockEdit { ...props } />
