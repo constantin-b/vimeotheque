@@ -42,9 +42,13 @@ class Helper {
 			 */
 			(array) apply_filters( 'vimeotheque\themes\thumbnail_image_sizes', [], $video ),
 			[
-				'small' => 0, // 100px width
-				'medium' => 1, // 200px width
-				'large' => 3, // 640px width
+				'small'     => 0, // 100x75 px
+				'medium'    => 1, // 200x150 px
+				'large'     => 2, // 295x166 px
+				'original'  => 3, // original image size ratio
+				'hd_small'  => 4, // 640x360 px
+				'hd_medium' => 5, // 1280x720 px
+				'hd_big'    => 6  // 1920x1080 px
 			]
 		);
 
