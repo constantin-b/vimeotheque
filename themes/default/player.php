@@ -14,7 +14,7 @@ use Vimeotheque\Themes\Helper;
 			<?php foreach( $videos as $cvm_video ): ?>
 			<div class="cvm-playlist-item">
 				<a href="<?php Helper::get_post_permalink();?>"<?php Helper::get_video_data_attributes();?>>
-					<?php Helper::get_thumbnail();?>
+					<?php Helper::get_thumbnail( 'default_small_original_size' );?>
                     <span class="cvm-title"><?php Helper::get_title();?></span>
 				</a>
 				<?php Helper::get_excerpt();?>
