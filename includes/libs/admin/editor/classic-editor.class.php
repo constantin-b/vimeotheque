@@ -382,6 +382,12 @@ class Classic_Editor{
                                                 <?php _e('Show posts excerpts', 'codeflavors-vimeo-video-post-lite');?>
                                             </label>
                                         </p>
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" name="cvm_theme_default_use_original_thumbnails" id="cvm_theme_default_show_excerpts" value="1" />
+                                                <?php _e('Original thumbnail size ratio', 'codeflavors-vimeo-video-post-lite');?>
+                                            </label>
+                                        </p>
                                     </div>
 
                                     <?php
