@@ -31,11 +31,22 @@ class Helper {
 
 		$result = false;
 
-		$sizes = [
-			'small' => 0, // 100px width
-			'medium' => 1, // 200px width
-			'large' => 3, // 640px width
-		];
+		$sizes = array_merge(
+			/**
+			 * Filter default sizes to allow additional sizes to be added.
+			 *
+			 * @since 2.0.15
+			 *
+			 * @param array         $sizes  Registered thumbnail sizes stored as size_name => thumbnail ID in video thumbnails array
+			 * @param Video_Post    $video  The current video post being processed in loop
+			 */
+			(array) apply_filters( 'vimeotheque\themes\thumbnail_image_sizes', [], $video ),
+			[
+				'small' => 0, // 100px width
+				'medium' => 1, // 200px width
+				'large' => 3, // 640px width
+			]
+		);
 
 		if( !array_key_exists( $size, $sizes ) ){
 			$size = 'small';
