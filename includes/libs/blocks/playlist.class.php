@@ -42,6 +42,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 						'type' => 'boolean',
 						'default' => false
 					],
+					'use_original_thumbnails' => [
+						'type' => 'boolean',
+						'default' => false,
+					],
 					'aspect_ratio' => [
 						'type' => 'string',
 						'default' => '16x9'
