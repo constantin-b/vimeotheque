@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.15 =
+- Created a new option in Block Editor for playlist theme "Default" to display video thumbnails using the original size ratio (thumbnails in list might have different size) or have them displayed with the same size (thumbnails in list might have black bars);
+- Created a new option in Classic Editor shortcode visual interface for theme "Default" to display video thumbnails size ratio in original size or the same size for all thumbnails.
+
 = 2.0.14 =
 - Video player adds class "loaded" on the video container once the video is loaded;
 - Modified video player display to remove the black background and loader image after the video has loaded;

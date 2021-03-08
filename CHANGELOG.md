@@ -1,3 +1,7 @@
+2.0.15 [8/March/2021]
+- Created a new option in Block Editor for playlist theme "Default" to display video thumbnails using the original size ratio (thumbnails in list might have different size) or have them displayed with the same size (thumbnails in list might have black bars);
+- Created a new option in Classic Editor shortcode visual interface for theme "Default" to display video thumbnails size ratio in original size or the same size for all thumbnails.
+
 2.0.14 [2/March/2021]
 - Video player adds class "loaded" on the video container once the video is loaded;
 - Modified video player display to remove the black background and loader image after the video has loaded;
