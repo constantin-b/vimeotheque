@@ -5,6 +5,7 @@
  */
 
 use Vimeotheque\Themes\Helper;
+use function Themes\DefaultTheme\get_image_size;
 
 ?>
 <div class="cvm-vim-playlist default <?php echo parent::get_css_classes() ;?>"<?php Helper::get_width();?>>
@@ -14,7 +15,7 @@ use Vimeotheque\Themes\Helper;
 			<?php foreach( $videos as $cvm_video ): ?>
 			<div class="cvm-playlist-item">
 				<a href="<?php Helper::get_post_permalink();?>"<?php Helper::get_video_data_attributes();?>>
-					<?php Helper::get_thumbnail( 'default_small_original_size' );?>
+					<?php Helper::get_thumbnail( get_image_size() );?>
                     <span class="cvm-title"><?php Helper::get_title();?></span>
 				</a>
 				<?php Helper::get_excerpt();?>
