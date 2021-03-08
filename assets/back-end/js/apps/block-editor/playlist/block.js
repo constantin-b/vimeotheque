@@ -168,6 +168,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                 theme: attributes.theme,
                 layout: attributes.layout,
                 show_excerpts: attributes.show_excerpts,
+                use_original_thumbnails: attributes.use_original_thumbnails,
                 order: attributes.order,
                 aspect_ratio: attributes.aspect_ratio,
                 align: attributes.align,
