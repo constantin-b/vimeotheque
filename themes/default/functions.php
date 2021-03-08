@@ -2,6 +2,7 @@
 namespace Themes\DefaultTheme;
 
 use Vimeotheque\Plugin;
+use Vimeotheque\Themes\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -23,17 +24,13 @@ function block_editor(){
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\block_editor' );
 
 /**
- * Register additional image sizes
+ * Get the image size name based on playlist option 'original_thumbnail_size' value
  *
- * @param $sizes
- * @param $video
+ * @since 2.0.15
  *
- * @return mixed
+ * @return string
  */
-function thumbnail_sizes( $sizes, $video ){
-	$sizes['default_small_unique_size'] = 1;
-	$sizes['default_small_original_size'] = 3;
-
-	return $sizes;
+function get_image_size(){
+	$options = Helper::get_player_options();
+	return isset( $options['use_original_thumbnails'] ) && $options['use_original_thumbnails'] ? 'original' : 'small';
 }
-add_filter( 'vimeotheque\themes\thumbnail_image_sizes', __NAMESPACE__ . '\thumbnail_sizes', 10, 2 );
