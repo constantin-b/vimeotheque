@@ -2,7 +2,7 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video embed, vimeo embed, vimeo plugin, video post, vimeo import, video importer
 Requires at least: 5.2
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
