@@ -205,12 +205,16 @@ class Posts_Import{
 	}
 
 	/**
-	 * @param $raw_feed
+	 * @param array $raw_feed
 	 * @param $post_type
 	 *
 	 * @return array
 	 */
 	public function get_duplicate_posts( $raw_feed, $post_type ){
+
+		if( !$raw_feed ){
+			return [];
+		}
 
 		$video_ids = [];
 		foreach( $raw_feed as $video ){
