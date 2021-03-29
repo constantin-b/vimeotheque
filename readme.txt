@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+2.0.16
+- Solved an issue with importers that were prevented from using the default sorting value;
+- Solved a rare bug that caused errors when checking for duplicates and the feed returned from the Vimeo API was empty.
+
 = 2.0.15 =
 - Created a new option in Block Editor for playlist theme "Default" to display video thumbnails using the original size ratio (thumbnails in list might have different size) or have them displayed with the same size (thumbnails in list might have black bars);
 - Created a new option in Classic Editor shortcode visual interface for theme "Default" to display video thumbnails size ratio in original size or the same size for all thumbnails.
