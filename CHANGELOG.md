@@ -1,5 +1,6 @@
 2.0.16 [29/March/2021]
-- Solved an issue with importers that were prevented from using the default sorting value.
+- Solved an issue with importers that were prevented from using the default sorting value;
+- Solved a rare bug that caused errors when checking for duplicates and the feed returned from the Vimeo API was empty.
 
 2.0.15 [8/March/2021]
 - Created a new option in Block Editor for playlist theme "Default" to display video thumbnails using the original size ratio (thumbnails in list might have different size) or have them displayed with the same size (thumbnails in list might have black bars);
