@@ -119,4 +119,10 @@ interface Resource_Interface{
 	 */
 	public function can_search_results();
 
+	/**
+	 * Returns the resource default params as specified into the implementation
+	 *
+	 * @return mixed
+	 */
+	public function get_default_params();
 }
