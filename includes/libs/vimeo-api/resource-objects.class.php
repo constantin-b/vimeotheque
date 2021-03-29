@@ -218,7 +218,7 @@ class Resource_Objects{
 	/**
 	 * @param $name
 	 *
-	 * @return Resource_Abstract|\WP_Error
+	 * @return Resource_Interface|Resource_Abstract|\WP_Error
 	 */
 	public function get_resource( $name ){
 		if( !isset( $this->resources[ $name ] ) ){
