@@ -229,7 +229,7 @@ class Admin{
 		$capabilities = [
 			'manual_import' => [
 				'capability' => 'cvm_manual_import',
-				'description' => __( 'Manual bulk import', 'codeflavors-vimeo-video-post-lite' )
+				'description' => __( 'Manual import', 'codeflavors-vimeo-video-post-lite' )
 			],
 			'automatic_import' => [
 				'capability' => 'cvm_automatic_import',
