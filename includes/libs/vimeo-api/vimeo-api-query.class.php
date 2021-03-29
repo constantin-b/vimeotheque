@@ -193,8 +193,8 @@ class Vimeo_Api_Query extends Vimeo {
 	}
 
 	/**
-	 * Returns reference of CVM_JSON_Fields
-	 * @return Resource_Interface
+	 * Returns reference for resource
+	 * @return Resource_Interface|Resource_Abstract
 	 */
 	public function get_api_resource() {
 		return Resource_Objects::instance()->get_resource( $this->resource_type );
@@ -210,8 +210,21 @@ class Vimeo_Api_Query extends Vimeo {
 			return $this->params;
 		}
 
-		$sort = isset( $this->params['order'] ) ? $this->params['order'] : '';
-		$sort_option = Resource_Objects::instance()->get_sort_option( $sort );
+		$sort_option = Resource_Objects::instance()->get_sort_option( false );
+
+		if( isset( $this->params['order'] ) ){
+			$sort_option = Resource_Objects::instance()->get_sort_option( $this->params['order'] );
+		}else{
+			$_options = $this->get_api_resource()->get_default_params();
+
+			if( isset( $_options['sort'] ) && isset( $_options['direction'] ) ){
+				$sort_option = [
+					'sort' => $_options['sort'],
+					'direction' => $_options['direction']
+				];
+			}
+		}
+
 		return array_merge( $this->params, $sort_option );
 	}
 }
