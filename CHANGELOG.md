@@ -1,3 +1,7 @@
+2.0.17-alpha.1 [6/Apr/2021]
+- Order showcases by default by "modified_time";
+- Order user uploads feed by default by "date".
+
 2.0.16 [29/March/2021]
 - Solved an issue with importers that were prevented from using the default sorting value;
 - Solved a rare bug that caused errors when checking for duplicates and the feed returned from the Vimeo API was empty.
