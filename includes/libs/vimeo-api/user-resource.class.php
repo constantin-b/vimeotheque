@@ -30,7 +30,7 @@ class User_Resource extends Resource_Abstract implements Resource_Interface {
 			'page' => 1,
 			'per_page' => 20,
 			'query' => '',
-			'sort' => 'default'
+			'sort' => 'date'
 		]);
 
 		parent::set_sort_options(
