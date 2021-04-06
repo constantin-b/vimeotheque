@@ -29,7 +29,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 			'password' => '',
 			'per_page' => 20,
 			'query' => '',
-			'sort' => 'manual' // "manual" sorts by the date the video was added to album
+			'sort' => 'modified_time' // "modified_time" sorts by the date the video was added to album
 		];
 
 		// when sort is default, direction must be eliminated
