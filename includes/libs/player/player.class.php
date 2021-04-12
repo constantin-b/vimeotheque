@@ -199,11 +199,37 @@ class Player {
 			$options = array_merge( $extra, $options );
 		}
 
+		$start_time = $this->get_start_time( $this->options['start_time'] );
+
 		return sprintf(
-			'%s?%s',
+			'%s?%s%s',
 			$this->post->get_embed_url(),
-			http_build_query( $options, '', '&' )
+			http_build_query( $options, '', '&' ),
+			( $start_time ? '#t=' . $start_time : '' )
 		);
+	}
+
+	/**
+	 * Given a number of seconds, returns a formatted MMmSSs string
+	 *
+	 * @param $seconds
+	 *
+	 * @return string
+	 */
+	private function get_start_time( $seconds ){
+		if( $seconds < 1 ){
+			return false;
+		}
+
+		$h = floor( $seconds / HOUR_IN_SECONDS );
+		$m = floor( $seconds / MINUTE_IN_SECONDS );
+		$s = $seconds % MINUTE_IN_SECONDS;
+
+		$hh = $h > 0 ? $h . 'h' : '';
+		$mm = $m > 0 ? $m . 'm' : '';
+		$ss = $s > 0 ? $s . 's' : '';
+
+		return sprintf( '%s%s%s', $hh, $mm, $ss );
 	}
 
 	/**
