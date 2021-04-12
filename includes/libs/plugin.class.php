@@ -302,6 +302,8 @@ class Plugin{
 			'playlist_loop' => 0,
 			'aspect_override' => true,
 			'start_time' => 0, // time in seconds when playback should start
+			'muted' => false, // load video muted
+			'background' => false, // load video in background mode (hides controls and mutes video)
 		];
 
 		/**
