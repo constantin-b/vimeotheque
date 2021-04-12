@@ -122,6 +122,17 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.17 =
+- Added option for muted video in Classic editor;
+- Added option for muted video in Video Position block;
+- Added option for background mode in Classic editor;
+- Added option for background mode in Video Position block;
+- Added options dependency in Classic editor which hides options that don't apply when certain options are selected (ie. background mode disables a number of options);
+- Added option for Classic editor to set the video start time when editing a video;
+- Added option for Block editor to set the video start time when editing a video;
+- Order showcases by default by "modified_time";
+- Order user uploads feed by default by "date".
+
 = 2.0.16 =
 - Solved an issue with importers that were prevented from using the default sorting value;
 - Solved a rare bug that caused errors when checking for duplicates and the feed returned from the Vimeo API was empty.
