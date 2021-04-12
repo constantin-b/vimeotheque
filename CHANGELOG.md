@@ -1,3 +1,10 @@
+2.0.17 [12/Apr/2021]
+- Added option for muted video in Classic editor;
+- Added option for muted video in Video Position block;
+- Added option for background mode in Classic editor;
+- Added option for background mode in Video Position block;
+- Added options dependency in Classic editor which hides options that don't apply when certain options are selected (ie. background mode disables a number of options).
+
 2.0.17-alpha.2 [12/Apr/2021]
 - Added option for Classic editor to set the video start time when editing a video;
 - Added option for Block editor to set the video start time when editing a video.
