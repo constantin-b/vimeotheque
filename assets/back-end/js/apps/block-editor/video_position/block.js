@@ -115,18 +115,28 @@ registerBlockType( 'vimeotheque/video-position', {
 			}
 
 			getEmbedURL = () => {
-				const 	url = 'https://player.vimeo.com/video',
-						query = {
-							title: embedOptions.title,
-							byline: embedOptions.byline,
-							portrait: embedOptions.portrait,
-							loop: embedOptions.loop,
-							color: embedOptions.color.replace('#', ''),
-							autoplay: embedOptions.autoplay,
-							volume: embedOptions.volume,
-							dnt: embedOptions.dnt,
-							start_time: embedOptions.start_time
-						}
+				const 	url = 'https://player.vimeo.com/video'
+
+				let query = {
+					dnt: embedOptions.dnt,
+					start_time: embedOptions.start_time,
+				}
+
+
+				if( embedOptions.background ){
+					query.background = embedOptions.background
+				}else{
+					query.title = embedOptions.title
+					query.byline = embedOptions.byline
+					query.portrait = embedOptions.portrait
+					query.loop = embedOptions.loop
+					query.color = embedOptions.color.replace('#', '')
+					query.autoplay = embedOptions.autoplay
+					if( !embedOptions.muted ) {
+						query.volume = embedOptions.volume
+					}
+					query.muted = embedOptions.muted
+				}
 
 				return applyFilters(
 					'vimeotheque.video-position.embed-url',
@@ -214,50 +224,77 @@ registerBlockType( 'vimeotheque/video-position', {
 					>
 						<PanelRow>
 							<ToggleControl
-								label = { __( 'Show title', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {embedOptions.title}
+								label = { __( 'Background mode', 'codeflavors-vimeo-video-post-lite' ) }
+								help = { !embedOptions.background && __( "Whether the player is in background mode, which hides the playback controls, enables autoplay, and loops the video.", 'codeflavors-vimeo-video-post-lite' ) }
+								checked = {embedOptions.background}
 								onChange = {
-									() => onFormToggleChange( 'title' )
+									() => onFormToggleChange( 'background' )
 								}
 							/>
 						</PanelRow>
-						<PanelRow>
-							<ToggleControl
-								label = { __( 'Show byline', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {embedOptions.byline}
-								onChange = {
-									() => onFormToggleChange( 'byline' )
-								}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<ToggleControl
-								label = { __( 'Show portrait', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {embedOptions.portrait}
-								onChange = {
-									() => onFormToggleChange( 'portrait' )
-								}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<ToggleControl
-								label = { __( 'Loop video', 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {embedOptions.loop}
-								onChange =  {
-									() => onFormToggleChange( 'loop' )
-								}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<ToggleControl
-								label = { __( 'Autoplay video', 'codeflavors-vimeo-video-post-lite' ) }
-								help = { __( "This feature won't work on all browsers.", 'codeflavors-vimeo-video-post-lite' ) }
-								checked = {embedOptions.autoplay}
-								onChange =  {
-									() => onFormToggleChange( 'autoplay' )
-								}
-							/>
-						</PanelRow>
+						{
+							!embedOptions.background &&
+							<>
+								<PanelRow>
+									<ToggleControl
+										label = { __( 'Show title', 'codeflavors-vimeo-video-post-lite' ) }
+										checked = {embedOptions.title}
+										onChange = {
+											() => onFormToggleChange( 'title' )
+										}
+									/>
+								</PanelRow>
+
+								<PanelRow>
+									<ToggleControl
+										label = { __( 'Show byline', 'codeflavors-vimeo-video-post-lite' ) }
+										checked = {embedOptions.byline}
+										onChange = {
+											() => onFormToggleChange( 'byline' )
+										}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<ToggleControl
+										label = { __( 'Show portrait', 'codeflavors-vimeo-video-post-lite' ) }
+										checked = {embedOptions.portrait}
+										onChange = {
+											() => onFormToggleChange( 'portrait' )
+										}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<ToggleControl
+										label = { __( 'Loop video', 'codeflavors-vimeo-video-post-lite' ) }
+										checked = {embedOptions.loop}
+										onChange =  {
+											() => onFormToggleChange( 'loop' )
+										}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<ToggleControl
+										label = { __( 'Autoplay video', 'codeflavors-vimeo-video-post-lite' ) }
+										help = { __( "This feature might not work on all devices.", 'codeflavors-vimeo-video-post-lite' ) }
+										checked = {embedOptions.autoplay}
+										onChange =  {
+											() => onFormToggleChange( 'autoplay' )
+										}
+									/>
+								</PanelRow>
+								<PanelRow>
+									<ToggleControl
+										label = { __( 'Load muted', 'codeflavors-vimeo-video-post-lite' ) }
+										help = { !embedOptions.muted && __( "Will load the video muted which is required for the autoplay behavior in some browsers.", 'codeflavors-vimeo-video-post-lite' ) }
+										checked = {embedOptions.muted}
+										onChange =  {
+											() => onFormToggleChange( 'muted' )
+										}
+									/>
+								</PanelRow>
+
+							</>
+						}
 
 						<PanelRow>
 							<TextControl
@@ -277,23 +314,26 @@ registerBlockType( 'vimeotheque/video-position', {
 							/>
 						</PanelRow>
 
-						<PanelRow>
-							<TextControl
-								label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
-								help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
-								type = "number"
-								step = "1"
-								value = { embedOptions.volume }
-								min = "0"
-								max = "100"
-								onChange = {
-									value => {
-										const vol = ( value >= 0 && value <= 100 ) ? value : embedOptions.volume
-										setOption( 'volume', vol )
-									}
-								}
-							/>
-						</PanelRow>
+						{
+							!embedOptions.background && !embedOptions.muted &&
+								<PanelRow>
+									<TextControl
+										label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
+										help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
+										type = "number"
+										step = "1"
+										value = { embedOptions.volume }
+										min = "0"
+										max = "100"
+										onChange = {
+											value => {
+												const vol = ( value >= 0 && value <= 100 ) ? value : embedOptions.volume
+												setOption( 'volume', vol )
+											}
+										}
+									/>
+								</PanelRow>
+						}
 					</PanelBody>
 
 					<PanelBody
@@ -353,33 +393,35 @@ registerBlockType( 'vimeotheque/video-position', {
 						</PanelRow>
 					</PanelBody>
 
-					<PanelBody
-						title = { __( 'Color options', 'codeflavors-vimeo-video-post-lite' ) }
-						initialOpen={false}
-					>
-						<PanelRow>
-							<label>
-								{ `${__( 'Player color', 'codeflavors-vimeo-video-post-lite' )} : ` }
-								<ColorIndicator
-									colorValue = { `#${embedOptions.color.replace( '#', '' )}` }
-								/>
-								<span>{ embedOptions.color && `#${embedOptions.color.replace( '#', '' )}` }</span>
-							</label>
-						</PanelRow>
+					{
+						!embedOptions.background &&
+							<PanelBody
+								title = { __( 'Color options', 'codeflavors-vimeo-video-post-lite' ) }
+								initialOpen={false}
+							>
+								<PanelRow>
+									<label>
+										{ `${__( 'Player color', 'codeflavors-vimeo-video-post-lite' )} : ` }
+										<ColorIndicator
+											colorValue = { `#${embedOptions.color.replace( '#', '' )}` }
+										/>
+										<span>{ embedOptions.color && `#${embedOptions.color.replace( '#', '' )}` }</span>
+									</label>
+								</PanelRow>
 
-						<PanelRow>
-							<ColorPalette
-								value = { `#${embedOptions.color.replace( '#', '' )}` }
-								onChange = {
-									color => {
-										const col = color.replace( '#', '' )
-										setOption( 'color', col )
-									}
-								}
-							/>
-						</PanelRow>
-					</PanelBody>
-
+								<PanelRow>
+									<ColorPalette
+										value = { `#${embedOptions.color.replace( '#', '' )}` }
+										onChange = {
+											color => {
+												const col = color.replace( '#', '' )
+												setOption( 'color', col )
+											}
+										}
+									/>
+								</PanelRow>
+							</PanelBody>
+					}
 			</InspectorControls>
 		];
 	},
