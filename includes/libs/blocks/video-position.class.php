@@ -109,7 +109,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 		register_post_meta(
 			'',
-			'__cvm_video_id',
+			parent::get_plugin()->get_cpt()->get_post_settings()->get_meta_video_id(),//'__cvm_video_id',
 			[
 				'single' => true,
 				'show_in_rest' => true,
@@ -191,6 +191,8 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 
 		$_post = Helper::get_video_post( $post );
 		$options = $_post->get_embed_options();
+
+		$defaults['duration'] = $_post->duration;
 
 		foreach ( $defaults as $key => $value ){
 			$result[ $key ] = isset( $options[ $key ] ) ? $options[ $key ] : $value;
