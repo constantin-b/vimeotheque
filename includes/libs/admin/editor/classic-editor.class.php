@@ -283,6 +283,20 @@ class Classic_Editor{
 				</td>
 			</tr>
 
+            <tr valign="top">
+				<th scope="row"><label for="start_time"><?php _e('Start at', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
+				<td>
+					<input name="start_time" id="start_time" type="number" value="<?php echo $settings['start_time'];?>" step="1" min="0" max="<?php echo Helper::get_video_post()->duration;?>" /> <abbr title="<?php esc_attr_e( 'Seconds', 'codeflavors-vimeo-video-post-lite' );?>"><?php _ex( 'sec.', 'Abbreviation for "seconds"', 'codeflavors-vimeo-video-post-lite' ) ;?></abbr>
+					<p class="description">
+                        <?php
+                           printf(
+                                __('Video will be embedded to start from the specified time. Value must not exceed the total video duration of %d seconds.', 'codeflavors-vimeo-video-post-lite'),
+                                Helper::get_video_post()->duration
+                           );
+                        ?>
+                    </p>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 		<?php
