@@ -300,7 +300,8 @@ class Plugin{
 			'volume' => 25, // video default volume
 			// extra player settings controllable by widgets/shortcodes
 			'playlist_loop' => 0,
-			'aspect_override' => true
+			'aspect_override' => true,
+			'start_time' => 0, // time in seconds when playback should start
 		];
 
 		/**
