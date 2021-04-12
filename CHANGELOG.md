@@ -1,3 +1,7 @@
+2.0.17-alpha.2 [12/Apr/2021]
+- Added option for Classic editor to set the video start time when editing a video;
+- Added option for Block editor to set the video start time when editing a video.
+
 2.0.17-alpha.1 [6/Apr/2021]
 - Order showcases by default by "modified_time";
 - Order user uploads feed by default by "date".
