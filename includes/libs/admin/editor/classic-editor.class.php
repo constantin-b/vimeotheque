@@ -69,6 +69,35 @@ class Classic_Editor{
 				$this,
 				'post_thumbnail_meta_panel'
 		], 10, 2 );
+
+		add_action(
+		    'admin_footer',
+            function(){
+		        ?>
+<script>
+    ( function( $ ){
+
+        $(document).ready( function(){
+
+            $('.toggler-checkbox').on(
+                'click',
+                function(){
+                    var _class = $(this).data('hide_elements');
+
+                    if( $(this).is(':checked') ){
+                        $( _class ).hide();
+                    }else{
+                        $( _class ).show();
+                    }
+                }
+            );
+        })
+
+    }(jQuery) );
+</script>
+                <?php
+            }
+        );
 	}
 
 	/**
@@ -200,7 +229,7 @@ class Classic_Editor{
 					<?php endif;// end option override?>
 				</td>
 			</tr>
-			<tr>
+			<tr class="toggled-background-mode toggled-muted-mode" style="<?php Helper_Admin::css_hide( ( $settings['background'] || $settings['muted'] ) ) ;?>">
 				<th><label for="cvm_volume"><?php _e('Volume', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
@@ -211,7 +240,23 @@ class Classic_Editor{
 					<label for="cvm_volume"><span class="description">( <?php _e('number between 0 (mute) and 100 (max)', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
 				</td>
 			</tr>
-			<tr>
+            <tr>
+                <th><label for="cvm_background"><?php _e('Background video', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
+                <td>
+                    <input name="background" id="cvm_background" type="checkbox" value="1" <?php Helper_Admin::check( (bool) $settings['background'] );?> class="toggler-checkbox" data-hide_elements=".toggled-background-mode" />
+                    <label for="cvm_background">
+                        <span class="description">( <?php _e('the video will be loaded in background mode which hides the playback controls, enables autoplay, and loops the video', 'codeflavors-vimeo-video-post-lite');?> )</span>
+                    </label>
+                </td>
+            </tr>
+            <tr class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
+				<th><label for="cvm_muted"><?php _e('Mute video', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
+				<td>
+                    <input name="muted" id="cvm_muted" type="checkbox" value="1" <?php Helper_Admin::check( (bool) $settings['muted'] );?> class="toggler-checkbox" data-hide_elements=".toggled-muted-mode" />
+					<label for="cvm_muted"><span class="description">( <?php _e('will load video muted; needs to be checked for the autoplay behavior in some browsers', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
+				</td>
+			</tr>
+			<tr class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
 				<th><label for="cvm_autoplay"><?php _e('Autoplay', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
@@ -223,7 +268,7 @@ class Classic_Editor{
 					<p class="description"><?php _e( 'Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, Vimeo player will revert to standard playback requiring viewers to initiate playback.', 'codeflavors-vimeo-video-post-lite' );?></p>
 				</td>
 			</tr>
-			<tr>
+			<tr class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
 				<th><label for="cvm_loop"><?php _e('Loop video', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
@@ -234,7 +279,7 @@ class Classic_Editor{
 					<?php endif;// end option override?>
 				</td>
 			</tr>
-			<tr>
+			<tr class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
 				<th><label for="title"><?php _e('Show video title', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
@@ -245,7 +290,7 @@ class Classic_Editor{
 					<?php endif;// end option override?>
 				</td>
 			</tr>
-			<tr>
+			<tr class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
 				<th><label for="cvm_color"><?php _e('Player color', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
@@ -259,7 +304,7 @@ class Classic_Editor{
 				</td>
 			</tr>
 
-			<tr valign="top">
+			<tr valign="top" class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
 				<th scope="row"><label for="byline"><?php _e('Show video author', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
@@ -271,7 +316,7 @@ class Classic_Editor{
 				</td>
 			</tr>
 
-			<tr valign="top">
+			<tr valign="top" class="toggled-background-mode" style="<?php Helper_Admin::css_hide( $settings['background'] ) ;?>">
 				<th scope="row"><label for="portrait"><?php _e('Author portrait', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
