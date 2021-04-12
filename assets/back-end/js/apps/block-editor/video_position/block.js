@@ -30,7 +30,8 @@ const
 			doAction
 		},
 		i18n: {
-			__
+			__,
+			sprintf
 		}
 	} = wp
 
@@ -105,6 +106,14 @@ registerBlockType( 'vimeotheque/video-position', {
 				setEmbedOptions( { ...embedOptions, ..._opt } )
 			}
 
+			getStartTime = () => {
+				const 	H = Math.floor( embedOptions.start_time / 3600 ),
+						M = Math.floor( embedOptions.start_time / 60 ),
+						S = embedOptions.start_time % 60
+
+				return `${H}h${M}m${S}s`
+			}
+
 			getEmbedURL = () => {
 				const 	url = 'https://player.vimeo.com/video',
 						query = {
@@ -115,15 +124,18 @@ registerBlockType( 'vimeotheque/video-position', {
 							color: embedOptions.color.replace('#', ''),
 							autoplay: embedOptions.autoplay,
 							volume: embedOptions.volume,
-							dnt: embedOptions.dnt
+							dnt: embedOptions.dnt,
+							start_time: embedOptions.start_time
 						}
 
 				return applyFilters(
 					'vimeotheque.video-position.embed-url',
-					`${url}/${video_id}?${jQuery.param( query )}`,
+					`${url}/${video_id}?${jQuery.param( query )}#t=${getStartTime()}`,
 					url,
 					video_id,
-					query
+					query,
+					embedOptions.start_time,
+					getStartTime()
 				)
 			}
 
@@ -246,6 +258,25 @@ registerBlockType( 'vimeotheque/video-position', {
 								}
 							/>
 						</PanelRow>
+
+						<PanelRow>
+							<TextControl
+								label = { __( 'Start time', 'codeflavors-vimeo-video-post-lite' ) }
+								help = { sprintf( __( `Video playback initial start time in seconds. Must not exceed %s seconds.`, 'codeflavors-vimeo-video-post-lite' ), extraOptions.duration ) }
+								type = "number"
+								step = "1"
+								value = { embedOptions.start_time }
+								min = "0"
+								max = { extraOptions.duration }
+								onChange = {
+									value => {
+										const sTime = ( value >= 0 && value <= extraOptions.duration ) ? value : embedOptions.start_time
+										setOption( 'start_time', sTime )
+									}
+								}
+							/>
+						</PanelRow>
+
 						<PanelRow>
 							<TextControl
 								label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
