@@ -173,12 +173,26 @@ class Player {
 			'title' => $this->options['title'],
 			'byline' => $this->options['byline'],
 			'portrait' => $this->options['portrait'],
-			'loop' => $this->options['loop'],
-			'autoplay' => $this->options['autoplay'],
 			'color' => str_replace( '#', '', $this->options['color'] ),
 			'dnt' => $this->options['dnt'],
+			'background' => $this->options['background'],
 			'transparent' => true
 		];
+
+		/**
+		 * Background mode loads video on autoplay, muted and with loop; no need to set the options as they
+		 * might interfere with the player's default functionality.
+		 */
+		if( !$this->options['background'] ){
+			$options = array_merge(
+				[
+					'autoplay' => $this->options['autoplay'],
+					'muted' => $this->options['muted'],
+					'loop' => $this->options['loop']
+				],
+				$options
+			);
+		}
 
 		/**
 		 * Filter to allow extra parameters to be put on the embed URL in iframe
