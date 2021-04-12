@@ -125,6 +125,11 @@ $.fn.VimeoPlayer = function( params ){
      * @return {$.fn.VimeoPlayer}
      */
     this.setVolume = ( volume ) => {
+
+        if( data.background ){
+            return;
+        }
+
         player.setVolume(volume).then( ( _volume )=>{
 
         } ).catch( error => {
