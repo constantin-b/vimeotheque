@@ -304,4 +304,19 @@ class Helper_Admin {
 		return $base . ( !empty( $path ) ? trailingslashit( $path ) : '' ) . '?' . $q;
 	}
 
+	/**
+	 * @param false  $hide
+	 * @param string $style
+	 *
+	 * @return string
+	 */
+	public static function css_hide( $hide = false, $style = 'display: none', $echo  = true ){
+		if( $hide ){
+			if( $echo ){
+				echo $style;
+			}
+			return $style;
+		}
+	}
+
 }
