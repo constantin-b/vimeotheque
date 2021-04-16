@@ -370,21 +370,25 @@ class Admin{
 			__( 'First time installation', 'codeflavors-vimeo-video-post-lite' )
 		);
 
-		$links[] = sprintf(
-			$anchor,
-			$this->get_admin_menu()->get_page('cvm_settings')->get_menu_page( false ),
-			'_self',
-			$this->get_admin_menu()->get_page( 'cvm_settings' )->get_menu_title()
-		);
-
-		$page = $this->get_admin_menu()->get_page('vimeotheque_go_pro');
-		if( $page ) {
+		if( $this->get_admin_menu() ) {
 			$links[] = sprintf(
 				$anchor,
-				$page->get_menu_page( false ),
+				$this->get_admin_menu()->get_page( 'cvm_settings' )
+				     ->get_menu_page( false ),
 				'_self',
-				$page->get_menu_title()
+				$this->get_admin_menu()->get_page( 'cvm_settings' )
+				     ->get_menu_title()
 			);
+
+			$page = $this->get_admin_menu()->get_page( 'vimeotheque_go_pro' );
+			if ( $page ) {
+				$links[] = sprintf(
+					$anchor,
+					$page->get_menu_page( false ),
+					'_self',
+					$page->get_menu_title()
+				);
+			}
 		}
 
 		return $links;
