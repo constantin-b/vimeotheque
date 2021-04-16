@@ -18,8 +18,7 @@ use Vimeotheque\Helper;
  */
 ?>
 <div class="wrap">
-	<div class="icon32" id="icon-options-general"><br></div>
-	<h2><?php _e('Videos - Plugin settings', 'codeflavors-vimeo-video-post-lite');?></h2>
+	<h1><?php _e('Videos - Plugin settings', 'codeflavors-vimeo-video-post-lite');?></h1>
 	<div id="cvm_tabs">
 		<form method="post" action="">
 			<?php wp_nonce_field('cvm-save-plugin-settings', 'cvm_wp_nonce');?>
