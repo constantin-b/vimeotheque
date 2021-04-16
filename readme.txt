@@ -122,6 +122,9 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.18 =
+- Solved a bug that issued error "Call to a member function get_page() on null" when Jetpack installed.
+
 = 2.0.17 =
 - Added option for muted video in Classic editor;
 - Added option for muted video in Video Position block;
