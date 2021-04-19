@@ -169,16 +169,7 @@ class Helper {
 			return;
 		}
 
-		/**
-		 * Filters the displayed post excerpt.
-		 *
-		 * @since 0.71
-		 *
-		 * @see get_the_excerpt()
-		 *
-		 * @param string $post_excerpt The post excerpt.
-		 */
-		$excerpt = apply_filters( 'the_excerpt', get_the_excerpt( $video->get_post() ) );
+		$excerpt = self::trim_excerpt();
 
 		if( empty( $excerpt ) ){
 			return;
@@ -190,6 +181,70 @@ class Helper {
 
 		return $before . $excerpt . $after;
 	}
+
+	/**
+	 * Trim the excerpt
+	 *
+	 * @return string|void
+	 */
+	private static function trim_excerpt(){
+		$video = self::current_video_post();
+		if( !$video ){
+			return;
+		}
+
+		$post = $video->get_post();
+		$text = get_the_excerpt( $post );
+
+		if( !$text ){
+
+			$text = get_the_content( '', false, $post );
+
+			$text = strip_shortcodes( $text );
+			$text = excerpt_remove_blocks( $text );
+
+			/** This filter is documented in wp-includes/post-template.php */
+			$text = apply_filters( 'the_content', $text );
+			$text = str_replace( ']]>', ']]&gt;', $text );
+		}
+
+		/* translators: Maximum number of words used in a post excerpt. */
+		$excerpt_length = (int) _x( '55', 'theme-default-excerpt-length', 'codeflavors-vimeo-video-post-lite' );
+
+		/**
+		 * Filters the maximum number of words in a post excerpt.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param int $number The maximum number of words. Default 55.
+		 */
+		$excerpt_length = (int) apply_filters( 'vimeotheque\themes\theme-default\excerpt-length', $excerpt_length );
+
+		/**
+		 * Filters the string in the "more" link displayed after a trimmed excerpt.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param string $more_string   The string shown within the more link.
+		 * @param \WP_Post $post        The WP_Post object being processed
+		 */
+
+		$excerpt_more = apply_filters(
+			'vimeotheque\themes\theme-default\excerpt-more',
+			sprintf(
+				' &hellip; %s',
+				sprintf(
+					'<a href="%s" class="vimeotheque-theme default read-more-link">%s</a>',
+					esc_url( get_permalink( $post ) ),
+					__( 'Continue reading', 'codeflavors-vimeo-video-post-lite' )
+				)
+			),
+			$post
+		);
+
+		return wp_trim_words( $text, $excerpt_length, $excerpt_more );
+	}
+
 
 	/**
 	 * @param string $before
