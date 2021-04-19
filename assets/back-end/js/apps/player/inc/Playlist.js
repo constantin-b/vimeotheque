@@ -147,6 +147,6 @@ $.fn.VimeoPlaylist = function( params ){
 
 $.fn.VimeoPlaylist.defaults = {
     'player' 	: '.vimeotheque-player',
-    'items'	 	: '.cvm-playlist-item a',
+    'items'	 	: '.cvm-playlist-item a[data-video_id]',
     'loadVideo'	: function(){}
 }
