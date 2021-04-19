@@ -1,3 +1,6 @@
+2.0.19 [19/Apr/2021]
+- Solved a bug in playlist theme "Default" that prevented clicking on the read more link when showing the excerpts into the playlist.
+
 2.0.18 [16/Apr/2021]
 - Solved a bug that issued error "Call to a member function get_page() on null" when Jetpack installed.
 
