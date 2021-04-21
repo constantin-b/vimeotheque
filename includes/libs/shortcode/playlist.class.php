@@ -187,11 +187,19 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 			$atts = array_merge(
 				[
-					'post_type' => 'any',
+					/**
+					 * Filter that allows setup of post types to be queried for videos
+					 *
+					 * @param array $post_types The post types that will be queried
+					 */
+					'post_type' => apply_filters(
+						'vimeotheque\shortcode\post_types',
+						[ Plugin::instance()->get_cpt()->get_post_type() ]
+					),
 					'include' => $videos,
 					'posts_per_page' => count( $videos ),
 					'numberposts' => count( $videos ),
-					'post_status' => 'publish',
+					'post_status' => ['publish'],
 					'suppress_filters' => true
 				],
 				$this->get_order_params()
