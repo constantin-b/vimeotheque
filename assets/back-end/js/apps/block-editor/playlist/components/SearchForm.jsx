@@ -59,6 +59,10 @@ class SearchForm extends React.Component{
 
     // store all categories returned by VimeothequeTreeSelect
     setCategories( categories ){
+        if( !categories ){
+            return;
+        }
+
         categories.forEach( element => {
             if( !has( this.categories, element.id ) ){
                 this.categories[ element.id ] = element
