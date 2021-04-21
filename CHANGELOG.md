@@ -1,3 +1,7 @@
+2.0.20 [21/Apr/2021]
+- Solved a bug in Playlist shortcode and Playlist block that prevented manually selected "vimeo-video" posts from being displayed into the playlist while option "Video post is public" was checked in plugin settings;
+- Solved a bug in Playlist block that caused the block to crash when selecting videos imported as regular posts.
+
 2.0.19 [19/Apr/2021]
 - Solved a bug in playlist theme "Default" that prevented clicking on the read more link when showing the excerpts into the playlist.
 

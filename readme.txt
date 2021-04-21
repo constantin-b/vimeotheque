@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.0.20 =
+- Solved a bug in Playlist shortcode and Playlist block that prevented manually selected "vimeo-video" posts from being displayed into the playlist while option "Video post is public" was checked in plugin settings;
+- Solved a bug in Playlist block that caused the block to crash when selecting videos imported as regular posts while having to PRO add-on active.
+
 = 2.0.19 =
 - Solved a bug in playlist theme "Default" that prevented clicking on the read more link when showing the excerpts into the playlist.
 
