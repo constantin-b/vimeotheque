@@ -15,7 +15,8 @@ const
 			Dropdown,
 			TextControl,
 			SelectControl,
-			ToggleControl
+			ToggleControl,
+			RangeControl
 		},
 		compose: {
 			withState
@@ -43,7 +44,7 @@ registerBlockType( 'vimeotheque/video-position', {
 
 	attributes: {
 		embed_options: {
-			type: 'string',
+			type: 'object',
 			source: 'meta',
 			meta: '__cvm_playback_settings',
 			default: false
@@ -76,7 +77,7 @@ registerBlockType( 'vimeotheque/video-position', {
 	example: {
 		attributes: {
 			video_id: '1084537',
-			embed_options: '{"title":1,"byline":1,"portrait":1,"color":"","loop":0,"autoplay":1,"aspect_ratio":"16x9","width":200,"video_position":"below-content","volume":70,"playlist_loop":0}',
+			embed_options: {"title":1,"byline":1,"portrait":1,"color":"","loop":0,"autoplay":1,"aspect_ratio":"16x9","width":200,"video_position":"below-content","volume":70,"playlist_loop":0},
 		}
 	},
 
@@ -93,10 +94,12 @@ registerBlockType( 'vimeotheque/video-position', {
 				className
 			} = props,
 
-			[embedOptions, setEmbedOptions] = useState( JSON.parse( embed_options ) )
+			[embedOptions, setEmbedOptions] = useState( embed_options ),
+			[embedClass, setEmbedClass] = useState( '' )
 
+		const
 			onFormToggleChange = varName => {
-				setOption( varName, !embedOptions[ varName ] )
+				setOption( varName, embedOptions[ varName ] == 1 ? 0 : 1 )
 
 			},
 
@@ -104,7 +107,7 @@ registerBlockType( 'vimeotheque/video-position', {
 				let _opt = {}
 				_opt[ varName ] = value
 				setEmbedOptions( { ...embedOptions, ..._opt } )
-			}
+			},
 
 			getStartTime = () => {
 				const 	H = Math.floor( embedOptions.start_time / 3600 ),
@@ -112,7 +115,7 @@ registerBlockType( 'vimeotheque/video-position', {
 						S = embedOptions.start_time % 60
 
 				return `${H}h${M}m${S}s`
-			}
+			},
 
 			getEmbedURL = () => {
 				const 	url = 'https://player.vimeo.com/video'
@@ -120,6 +123,7 @@ registerBlockType( 'vimeotheque/video-position', {
 				let query = {
 					dnt: embedOptions.dnt,
 					start_time: embedOptions.start_time,
+					transparent: embedOptions.transparent
 				}
 
 
@@ -149,11 +153,14 @@ registerBlockType( 'vimeotheque/video-position', {
 				)
 			}
 
+		/*
 		useEffect(
 			() => {
-				setEmbedOptions( JSON.parse( embed_options ) )
+				setEmbedOptions( embed_options )
 			}, [embed_options]
 		)
+		*/
+
 
 		useEffect(
 			() => {
@@ -162,7 +169,7 @@ registerBlockType( 'vimeotheque/video-position', {
 				 * for compatibility with the Classic Editor
 				 */
 				setAttributes({
-					embed_options: JSON.stringify( { ...embedOptions, ...extraOptions } )
+					embed_options: { ...embedOptions, ...extraOptions }
 				})
 			}, [embedOptions, extraOptions]
 		)
@@ -170,7 +177,7 @@ registerBlockType( 'vimeotheque/video-position', {
 		return [
 			<div key="vimeotheque-video-position-block">
 				<div
-					className ={ "vimeotheque-player " + embedOptions.video_align }
+					className ={ `vimeotheque-player ${embedOptions.video_align} ${embedClass}` }
 					data-width = { embedOptions.width }
 					data-aspect_ratio = { embedOptions.aspect_ratio }
 					style = {
@@ -180,7 +187,10 @@ registerBlockType( 'vimeotheque/video-position', {
 						}
 					}
 					onLoad = {
-						event  => vimeotheque.resize( event.currentTarget )
+						event  => {
+							vimeotheque.resize( event.currentTarget )
+							setEmbedClass( 'loaded' )
+						}
 					}
 				>
 					<iframe
@@ -297,19 +307,37 @@ registerBlockType( 'vimeotheque/video-position', {
 						}
 
 						<PanelRow>
-							<TextControl
+							<RangeControl
 								label = { __( 'Start time', 'codeflavors-vimeo-video-post-lite' ) }
 								help = { sprintf( __( `Video playback initial start time in seconds. Must not exceed %s seconds.`, 'codeflavors-vimeo-video-post-lite' ), extraOptions.duration ) }
-								type = "number"
-								step = "1"
+								initialPosition = { embedOptions.start_time }
 								value = { embedOptions.start_time }
-								min = "0"
+								isShiftStepEnabled = { true }
+								marks = {false}
+								min = '0'
 								max = { extraOptions.duration }
+								step = '1'
+								withInputField = {true}
 								onChange = {
 									value => {
-										const sTime = ( value >= 0 && value <= extraOptions.duration ) ? value : embedOptions.start_time
+										const
+											newValue = parseInt(value),
+											duration = parseInt( extraOptions.duration )
+
+										const sTime = ( newValue >= 0 && newValue <= duration ) ? value : embedOptions.start_time
 										setOption( 'start_time', sTime )
 									}
+								}
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<ToggleControl
+								label = { __( 'Transparent background', 'codeflavors-vimeo-video-post-lite' ) }
+								help = { !embedOptions.transparent && __( "Video will be embedded without a background.", 'codeflavors-vimeo-video-post-lite' ) }
+								checked = {embedOptions.transparent}
+								onChange =  {
+									() => onFormToggleChange( 'transparent' )
 								}
 							/>
 						</PanelRow>
@@ -317,14 +345,37 @@ registerBlockType( 'vimeotheque/video-position', {
 						{
 							!embedOptions.background && !embedOptions.muted &&
 								<PanelRow>
-									<TextControl
+									<RangeControl
 										label = { __( 'Volume', 'codeflavors-vimeo-video-post-lite' ) }
-										help = { __( 'Will work only for JS embeds', 'codeflavors-vimeo-video-post-lite' ) }
-										type = "number"
+										help = { __( 'Will be applied in front-end after the user initializes playback.', 'codeflavors-vimeo-video-post-lite' ) }
 										step = "1"
-										value = { embedOptions.volume }
+										initialPosition = { embedOptions.volume }
 										min = "0"
 										max = "100"
+										isShiftStepEnabled = { true }
+										marks = {[
+											{
+												value: 0,
+												label: '0'
+											},
+											{
+												value: 25,
+												label: '25'
+											},
+											{
+												value: 50,
+												label: '50'
+											},
+											{
+												value: 75,
+												label: '75'
+											},
+											{
+												value: 100,
+												label: '100'
+											}
+										]}
+										withInputField = {true}
 										onChange = {
 											value => {
 												const vol = ( value >= 0 && value <= 100 ) ? value : embedOptions.volume
