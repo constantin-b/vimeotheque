@@ -1,3 +1,12 @@
+2.0.21 [29/Apr/2021]
+- Solved a bug in Video Position Block that cause post saving error/notice when editing a video post managed by Vimeotheque;
+- Changed Video Position Block options "Video start time" and "Volume" to range controls;
+- Added new option in Video Position Block for video embed background transparency;
+- Added new option for videos edited using the Classic Editor to set the video embed background transparency;
+- Increased Vimeotheque minimum WordPress version requirement to  WordPress 5.3 ( for support of object meta type in the REST API );
+- Made video background transparency a global option in Vimeotheque Settings, under tab "Embed options";
+- Solved a bug in Video Player script implemented by Vimeotheque which caused the player to ignore the embed volume option.
+
 2.0.20 [21/Apr/2021]
 - Solved a bug in Playlist shortcode and Playlist block that prevented manually selected "vimeo-video" posts from being displayed into the playlist while option "Video post is public" was checked in plugin settings;
 - Solved a bug in Playlist block that caused the block to crash when selecting videos imported as regular posts.
