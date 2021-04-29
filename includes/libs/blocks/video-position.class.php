@@ -57,50 +57,12 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 			parent::get_plugin()->get_cpt()->get_post_settings()->get_meta_embed_settings(),//'__cvm_playback_settings'
 			[
 				'single' => true,
+				'type' => 'object',
 				'show_in_rest' => [
-					'prepare_callback' => function( $value ){
-						global $post;
-
-						// @since WP 5.5
-						$default = Helper::get_metadata_default(
-							'post',
-							$post->ID,
-							self::get_plugin()->get_cpt()->get_post_settings()->get_meta_embed_settings(),
-							true
-						);
-
-						$_default = parent::get_plugin()->get_embed_options_obj()->get_options();
-
-						if( $default === $value ){
-							$value = $_default;
-						}
-
-						// allow new values to be added to existing meta
-						foreach ( $_default as $k => $v ){
-							if( !isset( $value[ $k ] ) ){
-								$value[ $k ] = $v;
-							}
-						}
-
-						return json_encode( $value );
-					}
+					'schema' => [
+						'additionalProperties' => true
+					],
 				],
-				'sanitize_callback' => function( $value ){
-					if( is_array( $value ) ){
-						return $value;
-					}
-
-					$options = json_decode( $value, true );
-					foreach( $options as $key => $value ){
-						if( is_bool( $value ) ){
-							$options[ $key ] = (int) $value;
-						}
-					}
-
-					return $options;
- 				},
-				'type' => 'string',
-				'default' => '{}',
 				'auth_callback' => function() {
 					return current_user_can( 'edit_posts' );
 				}
