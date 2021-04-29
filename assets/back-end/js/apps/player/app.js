@@ -10,8 +10,8 @@ $(document).ready( () => {
         onPlay: ( data )=>{
             console.log('started playing')
             console.log(data)
-            console.log(this)
         },
+
         onPlayback: ( data )=>{
             console.log('playing')
             console.log(data)
