@@ -176,7 +176,7 @@ class Player {
 			'color' => str_replace( '#', '', $this->options['color'] ),
 			'dnt' => $this->options['dnt'],
 			'background' => $this->options['background'],
-			'transparent' => true
+			'transparent' => $this->options['transparent']
 		];
 
 		/**
