@@ -20,7 +20,8 @@ $.fn.VimeoPlayer = function( params ){
     /**
      * Initialize player variable
      */
-    let player
+    let player,
+        initialVolumeSet = false
 
     /**
      * Used to check if the player issued any errors
@@ -65,11 +66,30 @@ $.fn.VimeoPlayer = function( params ){
         self.addClass('loaded')
         options.onLoad
     })
-    player.on( 'play', options.onPlay )
-    player.on( 'timeupdate', options.onPlayback )
-    player.on( 'pause', options.onPause )
-    player.on( 'ended', options.onFinish )
-    player.on( 'error', options.onError )
+    player.on( 'play', _data => {
+        if( !initialVolumeSet ) {
+            self.setVolume( parseInt( data.volume ) / 100 )
+            initialVolumeSet = true
+        }
+        options.onPlay( _data, self )
+    })
+    player.on( 'timeupdate', data => {
+        options.onPlayback( data, self )
+    } )
+    player.on( 'pause', data => {
+        options.onPause( data, self )
+    } )
+    player.on( 'ended', data => {
+        options.onFinish( data, self )
+    } )
+    player.on( 'error', data => {
+        options.onError( data, self )
+    } )
+    // If user changes volume manually, before the playback is initiated, don't reset the volume on playback
+    player.on( 'volumechange', data => {
+        initialVolumeSet = true
+    } )
+
 
     /**
      * Load a new video into the player
@@ -124,13 +144,13 @@ $.fn.VimeoPlayer = function( params ){
      * @param volume
      * @return {$.fn.VimeoPlayer}
      */
-    this.setVolume = ( volume ) => {
+    this.setVolume = volume => {
 
-        if( data.background ){
+        if( data.background || data.muted ){
             return;
         }
 
-        player.setVolume(volume).then( ( _volume )=>{
+        player.setVolume(volume).then( _volume => {
 
         } ).catch( error => {
             //console.log(error)
