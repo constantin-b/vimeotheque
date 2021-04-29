@@ -342,6 +342,19 @@ class Classic_Editor{
                     </p>
 				</td>
 			</tr>
+
+            <tr valign="top">
+                <th scope="row"><label for="transparent"><?php _e('Transparent background', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
+                <td>
+		            <?php if( $this->is_option_override() ):?>
+			            <?php $this->option_override( 'transparent', ( $plugin_options['transparent'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
+		            <?php else: // is not option override?>
+                        <input type="checkbox" value="1" id="transparent" name="transparent" <?php Helper_Admin::check( (bool) $settings['transparent'] );?> />
+                        <span class="description"><?php _e('When checked, the video will be embedded without a background.', 'codeflavors-vimeo-video-post-lite');?></span>
+		            <?php endif;// end option override?>
+                </td>
+            </tr>
+
 			</tbody>
 		</table>
 		<?php
