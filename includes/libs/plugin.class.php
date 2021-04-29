@@ -304,6 +304,7 @@ class Plugin{
 			'start_time' => 0, // time in seconds when playback should start
 			'muted' => false, // load video muted
 			'background' => false, // load video in background mode (hides controls and mutes video)
+			'transparent' => false, // video embed should be with background (false) or without it (true)
 		];
 
 		/**
