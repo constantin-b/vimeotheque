@@ -445,6 +445,11 @@ use Vimeotheque\Helper;
 						</tr>
 
                         <tr valign="top">
+							<th scope="row"><label for="transparent"><?php _e('Transparent background', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
+							<td><input type="checkbox" value="1" id="transparent" name="transparent"<?php Helper_Admin::check( ( bool )$player_opt['transparent'] );?> /></td>
+						</tr>
+
+                        <tr valign="top">
 							<th scope="row"><label for="dnt"><?php _e('Do not track users', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
                                 <input type="checkbox" value="1" id="dnt" name="dnt"<?php Helper_Admin::check( (bool )$player_opt['dnt'] );?> />
