@@ -339,8 +339,9 @@ use Vimeotheque\Helper;
 								<?php
 								$args = [
 									'options' => [
-										'above-content' => __('Above post content', 'codeflavors-vimeo-video-post-lite'),
-										'below-content' => __('Below post content', 'codeflavors-vimeo-video-post-lite')
+										'above-content' => __( 'Above post content', 'codeflavors-vimeo-video-post-lite' ),
+										'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' ),
+                                        'replace-featured-image' => __( 'Replace featured image', 'codeflavors-vimeo-video-post-lite' )
 									],
 									'name' 		=> 'video_position',
 									'id'		=> 'cvm_video_position',
