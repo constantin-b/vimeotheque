@@ -107,7 +107,7 @@
 		if( $('#cvm_color').length > 0 ) {
 			// hack for values from version < 2.0
 			$('#cvm_color').val('#' + $('#cvm_color').val().replace('#', ''));
-			$('#cvm_color').wpColorPicker({
+			$('#cvm_color, [data-colorPicker="true"]').wpColorPicker({
 				change: function () {
 				},
 				clear: function () {
