@@ -44,6 +44,11 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				global $post;
 				$video_post = Helper::get_video_post( $post );
 
+				$options = $video_post->get_embed_options();
+				if( 'replace-featured-image' == $options['video_position'] && !is_admin() ){
+					return;
+				}
+
 				$block_options = isset( $attr['extra'] ) ? $attr['extra'] : [];
 
 				if( $video_post->is_video() ) {
