@@ -127,9 +127,7 @@ $.fn.VimeoPlaylist = function( params ){
         }
 
         if( currentItem < items.length -1 ){
-            currentItem++
-            var item = items[currentItem]
-            $(item).trigger('click')
+            $( items[currentItem+1] ).trigger('click')
         }
     },
 
