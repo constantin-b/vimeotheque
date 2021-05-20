@@ -101,8 +101,14 @@ class Front_End{
 
 		global $post;
 
+		$_post = get_post( $post );
+
+		if( !$_post ){
+			return $content;
+		}
+
 		// check if post is password protected
-		if( post_password_required( $post ) ){
+		if( post_password_required( $_post ) ){
 			return $content;
 		}
 
@@ -112,11 +118,11 @@ class Front_End{
 		}
 
 		// if video is in skipped auto embed list (has block or the video position shortcode in content), don't embed
-		if( $this->skipped_autoembed( $post ) ){
+		if( $this->skipped_autoembed( $_post ) ){
 			return $content;
 		}
 
-		$video_container = Helper::embed_video( $post, [], false );
+		$video_container = Helper::embed_video( $_post, [], false );
 
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
 		add_filter( 'the_content', [
@@ -124,17 +130,17 @@ class Front_End{
 			'autoembed'
 		], 8 );
 
-		$_post = Helper::get_video_post( $post );
-		$settings = $_post->get_embed_options();
+		$video_post = Helper::get_video_post( $_post );
+		$settings = $video_post->get_embed_options();
 
 		/**
 		 * Action that runs when the video is set to be inserted into the post content
 		 *
-		 * @param Video_Post $video The video post object that is processed
+		 * @param Video_Post $video_post The video post object that is processed
 		 */
 		do_action(
 			'vimeotheque\automatic_embed_in_content',
-			$_post
+			$video_post
 		);
 
 		if( 'below-content' == $settings[ 'video_position' ] ){
