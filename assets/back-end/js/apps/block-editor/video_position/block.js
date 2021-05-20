@@ -95,12 +95,17 @@ registerBlockType( 'vimeotheque/video-position', {
 			} = props,
 
 			[embedOptions, setEmbedOptions] = useState( embed_options ),
-			[embedClass, setEmbedClass] = useState( '' )
+			[embedClass, setEmbedClass] = useState( '' ),
+			initialVideoPosition = embed_options.video_position === 'replace-featured-image' ? 'above-content' : embed_options.video_position
 
 		const
 			onFormToggleChange = varName => {
 				setOption( varName, embedOptions[ varName ] == 1 ? 0 : 1 )
 
+			},
+
+			onVideoPositionChange = () => {
+				setOption( 'video_position', 'replace-featured-image' == embed_options.video_position ? initialVideoPosition : 'replace-featured-image' )
 			},
 
 			setOption = ( varName, value ) => {
@@ -229,7 +234,7 @@ registerBlockType( 'vimeotheque/video-position', {
 			<InspectorControls key="vimeotheque-video-position-controls">
 
 					<PanelBody
-						title = { __('Embed options', 'codeflavors-vimeo-video-post-lite') }
+						title = { __('Player options', 'codeflavors-vimeo-video-post-lite') }
 						initialOpen = {true}
 					>
 						<PanelRow>
@@ -388,9 +393,18 @@ registerBlockType( 'vimeotheque/video-position', {
 					</PanelBody>
 
 					<PanelBody
-						title = { __('Embed size', 'codeflavors-vimeo-video-post-lite') }
+						title = { __('Embedding options', 'codeflavors-vimeo-video-post-lite') }
 						initialOpen = {false}
 					>
+						<PanelRow>
+							<ToggleControl
+								label = { __( 'Replace featured image', 'codeflavors-vimeo-video-post-lite' ) }
+								help = { 'replace-featured-image' !== embedOptions.video_position && __( "Video embed will replace the featured image.", 'codeflavors-vimeo-video-post-lite' ) }
+								checked = { embedOptions.video_position == 'replace-featured-image' }
+								onChange = { onVideoPositionChange }
+							/>
+						</PanelRow>
+
 						<PanelRow>
 								<TextControl
 									label = { __( 'Width', 'codeflavors-vimeo-video-post-lite' ) }
