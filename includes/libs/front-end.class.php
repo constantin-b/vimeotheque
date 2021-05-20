@@ -166,6 +166,11 @@ class Front_End{
 	 * @return mixed|void
 	 */
 	public function filter_thumbnail_html( $html, $post_id ){
+
+		if( ! Helper::video_is_visible() ){
+			return $html;
+		}
+
 		$video = Helper::get_video_post( $post_id );
 		if( !$video->is_video() ){
 			return $html;
