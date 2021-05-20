@@ -75,6 +75,11 @@ class Front_End{
 			'add_player_script'
 		] );
 
+		add_action( 'post_thumbnail_html', [
+			$this,
+			'filter_thumbnail_html'
+		], 10, 2 );
+
 		/**
 		 * Template function the_term() works by default only for post_tag taxonomy.
 		 * This filter will add the plugin taxonomy for plugin custom post type
@@ -122,6 +127,13 @@ class Front_End{
 			return $content;
 		}
 
+		$video_post = Helper::get_video_post( $_post );
+		$settings = $video_post->get_embed_options();
+
+		if( !in_array( $settings['video_position'], [ 'above-content', 'below-content' ] ) ){
+			return $content;
+		}
+
 		$video_container = Helper::embed_video( $_post, [], false );
 
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
@@ -129,9 +141,6 @@ class Front_End{
 			$GLOBALS[ 'wp_embed' ],
 			'autoembed'
 		], 8 );
-
-		$video_post = Helper::get_video_post( $_post );
-		$settings = $video_post->get_embed_options();
 
 		/**
 		 * Action that runs when the video is set to be inserted into the post content
@@ -143,11 +152,45 @@ class Front_End{
 			$video_post
 		);
 
-		if( 'below-content' == $settings[ 'video_position' ] ){
+		if( 'below-content' === $settings[ 'video_position' ] ){
 			return $content . $video_container;
 		}else{
 			return $video_container . $content;
 		}
+	}
+
+	/**
+	 * @param $html
+	 * @param $post_id
+	 *
+	 * @return mixed|void
+	 */
+	public function filter_thumbnail_html( $html, $post_id ){
+		$video = Helper::get_video_post( $post_id );
+		if( !$video->is_video() ){
+			return $html;
+		}
+
+		$options = $video->get_embed_options();
+		if( 'replace-featured-image' !== $options['video_position'] ){
+			return $html;
+		}
+
+		$video_container = Helper::embed_video( $video, [], false );
+
+		/**
+		 * Filter the embed code
+		 *
+		 * @param string $video_container
+		 * @param Video_Post $video
+		 * @param string $html
+		 */
+		return apply_filters(
+			'vimeotheque_enhanced_embed\embed_code',
+			$video_container,
+			$video,
+			$html
+		);
 	}
 
 	/**
