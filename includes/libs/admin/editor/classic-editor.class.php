@@ -209,7 +209,8 @@ class Classic_Editor{
 					<?php if( $this->is_option_override() ):
 						$video_positions = [
 							'above-content' => __( 'Above post content', 'codeflavors-vimeo-video-post-lite' ),
-							'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' )
+							'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' ),
+							'replace-featured-image' => __( 'Replace featured image', 'codeflavors-vimeo-video-post-lite' ),
 						];
 						?>
 						<?php $this->option_override( 'video_position', $video_positions[ $plugin_options['video_position'] ] );?>
@@ -218,7 +219,8 @@ class Classic_Editor{
 						$args = [
 							'options' => [
 								'above-content' => __( 'Above post content', 'codeflavors-vimeo-video-post-lite' ),
-								'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' )
+								'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' ),
+                                'replace-featured-image' => __( 'Replace featured image', 'codeflavors-vimeo-video-post-lite' )
 							],
 							'name' => 'video_position',
 							'id' => 'cvm_video_position',
