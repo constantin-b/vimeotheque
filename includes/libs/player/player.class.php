@@ -61,10 +61,28 @@ class Player {
 		$_width = $width ? absint( $width ) : $this->get_embed_width();
 		$height = $this->get_embed_height( $_width );
 		$css_class = $this->get_css_classes();
-		$iframe = sprintf(
+
+		$embed_content = sprintf(
 			'<iframe src="%s" width="100%%" height="100%%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
 			$this->get_embed_url()
 		);
+
+		if( $this->options['lazy_load'] ){
+			$attachment_id = get_post_thumbnail_id( $this->post->get_post()->ID );
+			$img = wp_get_attachment_image_src( $attachment_id, 'full' ) ?: $this->post->thumbnails[0];
+			if( $img ){
+				$embed_content = sprintf(
+					'<a href="#" class="vimeotheque-load-video" title="%s" data-url="%s"><img src="%s" />%s</a>',
+					esc_attr( $this->post->get_post()->post_title ),
+					$this->get_embed_url(),
+					is_array( $img ) ? $img[0] : $img,
+					sprintf(
+						'<div class="icon" style="background-color:%s"></div>',
+						esc_attr( $this->options['play_icon_color'] )
+					)
+				);
+			}
+		}
 
 		$video_container = sprintf(
 			'<div class="vimeotheque-player %s" %s style="width:%spx; height:%spx; max-width:100%%;">%s</div>',
@@ -72,7 +90,7 @@ class Player {
 			$this->get_data_attributes(),
 			$_width,
 			$height,
-			$iframe
+			$embed_content
 		);
 
 		if( $echo ){
@@ -144,6 +162,15 @@ class Player {
 	 * @return string
 	 */
 	private function get_css_classes(){
+
+		$default = [
+			$this->options['video_align']
+		];
+
+		if( $this->options['lazy_load'] ){
+			$default[] = 'lazy-load';
+		}
+
 		/**
 		 * Generate additional CSS classes on Vimeotheque embed player container
 		 *
@@ -152,9 +179,7 @@ class Player {
 		 */
 		$classes = apply_filters(
 			'vimeotheque\player\css_class',
-			[
-				$this->options['video_align']
-			],
+			$default,
 			$this->post->get_post()
 		);
 
