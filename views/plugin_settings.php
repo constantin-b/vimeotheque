@@ -352,6 +352,26 @@ use Vimeotheque\Helper;
                             </td>
                         </tr>
 
+                        <tr valign="top">
+                            <th scope="row"><label for="lazy_load"><?php _e('Lazy load videos', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
+                            <td>
+                                <input type="checkbox" value="1" id="lazy_load" name="lazy_load"<?php Helper_Admin::check( ( bool ) $player_opt['lazy_load'] );?> />
+                                <span class="description">
+                                    <?php _e( 'When checked, videos will not be directly embedded into the page.', 'codeflavors-vimeo-video-post-lite' );?>
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr valign="top">
+                            <th scope="row"><label for="play_icon_color"><?php _e('Lazy loaded videos icon color', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
+                            <td>
+                                <input type="text" name="play_icon_color" id="play_icon_color" value="<?php echo $player_opt['play_icon_color'];?>" data-colorPicker="true" />
+                                <span class="description">
+                                    <?php _e( 'Choose overlay play icon color when lazy loading videos.', 'codeflavors-vimeo-video-post-lite' );?>
+                                </span>
+                            </td>
+                        </tr>
+
                         <tr>
                             <th><label for="cvm_video_align"><?php _e('Align video','codeflavors-vimeo-video-post-lite');?>:</label></th>
                             <td>
@@ -372,7 +392,7 @@ use Vimeotheque\Helper;
                         </tr>
 
                         <tr valign="top">
-                            <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player aspect ratio', 'cvm_video')?>:</label></th>
+                            <th scope="row"><label for="aspect_override"><?php _e('Allow videos to override player aspect ratio', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
                             <td>
                                 <input type="checkbox" value="1" id="aspect_override" name="aspect_override"<?php Helper_Admin::check( (bool )$player_opt['aspect_override'] );?> />
                                 <span class="description">
