@@ -1,3 +1,14 @@
+2.1 [24/May/2021]
+- Added new option in plugin settings "Embed options" for option "Display video" to embed video in video posts in place of the featured image;
+- Added new option in plugin settings "Embed options" to lazy load videos;
+- Added new option in plugin settings "Embed options" to set the play icon color for lazy loaded videos;
+- Added new individual video post option in Classic editor under "Display video" to embed video in place of the featured image;
+- Added new individual video post option in Classic editor to lazy load video;
+- Added new individual video post option in Block editor under "Embedding options" to replace the featured image with the video embed;
+- Added new individual video post option in Block editor under "Embedding options" to lazy load video;
+- Solved a rare bug that caused a "TypeError" in some cases (Vimeotheque\Front_End::skipped_autoembed() must be an instance of WP_Post, instance of stdClass given);
+- Solved a bug in playlist theme "Default" that wasn't switching the class "active-video" between items when loop option was on.
+
 2.0.21 [29/Apr/2021]
 - Solved a bug in Video Position Block that cause post saving error/notice when editing a video post managed by Vimeotheque;
 - Changed Video Position Block options "Video start time" and "Volume" to range controls;
