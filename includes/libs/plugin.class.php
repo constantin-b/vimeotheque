@@ -297,6 +297,8 @@ class Plugin{
 			'width'	=> 640,
 			'video_position' => 'below-content', // in front-end custom post, where to display the video: above or below post content
 			'video_align' => 'align-left', // video alignment
+			'lazy_load' => false, // lazy load videos
+			'play_icon_color' => '#FF0000', // lazy load play icon color
 			'volume' => 25, // video default volume
 			// extra player settings controllable by widgets/shortcodes
 			'playlist_loop' => 0,
