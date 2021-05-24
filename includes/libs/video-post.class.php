@@ -350,6 +350,10 @@ class Video_Post{
 				continue;
 			}
 			if( is_bool( $val ) ){
+				if( $_use_defaults ){
+					continue;
+				}
+
 				$defaults[ $key ] = isset( $values[ $key ] );
 				continue;
 			}
