@@ -231,6 +231,19 @@ class Classic_Editor{
 					<?php endif;// end option override?>
 				</td>
 			</tr>
+
+            <tr>
+                <th><label for="lazy_load"><?php _e('Lazy load', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
+                <td>
+		            <?php if( $this->is_option_override() ):?>
+			            <?php $this->option_override( 'lazy_load', ( $plugin_options['lazy_load'] ? __( 'On', 'codeflavors-vimeo-video-post-lite' ) : __( 'Off', 'codeflavors-vimeo-video-post-lite' ) ) );?>
+		            <?php else: // is not option override?>
+                        <input name="lazy_load" id="lazy_load" type="checkbox" value="1" <?php Helper_Admin::check( (bool) $settings['lazy_load'] );?> />
+                        <label for="lazy_load"><span class="description">( <?php _e('when checked, video will be lazy loaded', 'codeflavors-vimeo-video-post-lite');?> )</span></label>
+		            <?php endif;// end option override?>
+                </td>
+            </tr>
+
 			<tr class="toggled-background-mode toggled-muted-mode" style="<?php Helper_Admin::css_hide( ( $settings['background'] || $settings['muted'] ) ) ;?>">
 				<th><label for="cvm_volume"><?php _e('Volume', 'codeflavors-vimeo-video-post-lite');?></label>:</th>
 				<td>
