@@ -399,11 +399,21 @@ registerBlockType( 'vimeotheque/video-position', {
 						<PanelRow>
 							<ToggleControl
 								label = { __( 'Replace featured image', 'codeflavors-vimeo-video-post-lite' ) }
-								help = { 'replace-featured-image' !== embedOptions.video_position && __( "Video embed will replace the featured image.", 'codeflavors-vimeo-video-post-lite' ) }
+								help = { 'replace-featured-image' !== embedOptions.video_position && __( 'Video embed will replace the featured image.', 'codeflavors-vimeo-video-post-lite' ) }
 								checked = { embedOptions.video_position == 'replace-featured-image' }
 								onChange = { onVideoPositionChange }
 							/>
 						</PanelRow>
+
+						<ToggleControl
+							label = { __( 'Lazy load', 'codeflavors-vimeo-video-post-lite' ) }
+							help = { !embedOptions.lazy_load && __( "Video won't be embedded directly into the page.", 'codeflavors-vimeo-video-post-lite' ) }
+							checked = {embedOptions.lazy_load}
+							onChange =  {
+								() => onFormToggleChange( 'lazy_load' )
+							}
+						/>
+
 
 						<PanelRow>
 								<TextControl
