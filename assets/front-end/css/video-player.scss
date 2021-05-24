@@ -1,3 +1,37 @@
+@mixin position( $display: block, $position: relative, $top: 0, $left: 0 ){
+	display:$display;
+	position: $position;
+
+	@if $top != 0 {
+		top: $top;
+	}
+	@if $left != 0 {
+		left: $left;
+	}
+}
+
+@mixin size( $width: 100%, $height: 100%, $overflow: visible ){
+	width: $width;
+	height: $height;
+	@if $overflow {
+		overflow: $overflow;
+	}
+}
+
+@mixin background( $url: '', $color: transparent, $position: center center, $repeat: no-repeat, $size: auto ){
+	@if $url != ''{
+		background-image: url( $url );
+	}
+	background-color: $color;
+	background-position: $position;
+	background-repeat: $repeat;
+	background-size: $size;
+}
+
+/**
+ * Legacy class
+ * @deprecated
+ */
 .cvm_single_video_player{
 	background-color:#000;
 	background-image:url(../images/loading.gif);
@@ -30,6 +64,35 @@
 
 	&.align-left{
 		margin-right:auto;
+	}
+
+	&.lazy-load{
+		background:transparent!important;
+
+		// Lazy load play video link
+		.vimeotheque-load-video{
+			@include size();
+			@include position();
+
+			outline: none!important;
+			box-shadow: none!important;
+
+			.icon{
+				@include size( 20%, 20% );
+				@include position( $position: absolute, $top: 40%, $left: 40% );
+				@include background( $url: '../images/play-btn.png', $color: #FF0000, $size: cover );
+
+				max-width:200px;
+				max-height:136px;
+				min-width:30px;
+				min-height:23px;
+
+				border-radius:9px;
+			}
+		}
+		img{
+			max-width:100%;
+		}
 	}
 
 	iframe{
