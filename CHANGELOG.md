@@ -1,3 +1,10 @@
+2.1.1 [8/June/2021]
+- Solved a Block Editor error that caused the Vimeotheque Playlist Block to crash when using the playlist block with an option to change the videos order;
+- Removed deprecated jQuery functions that caused jQueryMigrate messages in console;
+- Improved detection of variables when saving options in WP Admin;
+- Solved a bug in Vimeotheque Playlist script that prevented the videos to autoplay one after the other when option to loop the playlist was on;
+- Prevented lazy-loading in Vimeotheque Playlists (not needed and counter intuitive).
+
 2.1 [24/May/2021]
 - Added new option in plugin settings "Embed options" for option "Display video" to embed video in video posts in place of the featured image;
 - Added new option in plugin settings "Embed options" to lazy load videos;
