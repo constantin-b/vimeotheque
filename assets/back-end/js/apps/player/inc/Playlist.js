@@ -16,6 +16,8 @@ $.fn.VimeoPlaylist = function( params ){
         });
     }
 
+    let hasInteraction = false
+
     const options = $.extend({}, $.fn.VimeoPlaylist.defaults, params),
           self = this,
           player = $(this)
@@ -27,6 +29,14 @@ $.fn.VimeoPlaylist = function( params ){
                           },
                           onFinish: ()=>{
                               loadNext()
+                          },
+                          onPlay: () => {
+                              hasInteraction = true
+                          },
+                          onLoad: () => {
+                              if( 1 == playlistLoop && hasInteraction ){
+                                  player.play()
+                              }
                           }
                       });
 
@@ -42,11 +52,12 @@ $.fn.VimeoPlaylist = function( params ){
     const
           items = $(this).find( options.items ),
           {
-              playlist_loop: playlistLoop,
+              playlist_loop,
               volume
           } = $(player).data()
 
-    let currentItem	= 0
+    let currentItem	= 0,
+        playlistLoop = parseInt( playlist_loop )
 
     /**
      * Start the plugin
@@ -58,7 +69,7 @@ $.fn.VimeoPlaylist = function( params ){
         vimeotheque.resize( player )
         player.setVolume( volume/100 )
 
-        $.each( items, function(i, item){
+        $.each( items, (i, item) => {
             if( 0 == i ){
                 loadItem( item, i )
             }
@@ -106,10 +117,6 @@ $.fn.VimeoPlaylist = function( params ){
 
         vimeotheque.resize(player)
 
-        if( ( 1 == autoplay || 1 == playlistLoop ) && !is_apple() ){
-            player.play()
-        }
-
         currentItem = index
 
         /**
@@ -129,15 +136,6 @@ $.fn.VimeoPlaylist = function( params ){
         if( currentItem < items.length -1 ){
             $( items[currentItem+1] ).trigger('click')
         }
-    },
-
-    /**
-     * Check browser
-     *
-     * @returns {boolean}
-     */
-    is_apple = () => {
-        return /webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)
     }
 
     return initialize()
