@@ -59,6 +59,12 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		global $CVM_PLAYER_SETTINGS;
 		$embed_options = $this->get_embed_options();
 		$embed_options['show_excerpts'] = is_wp_error( parent::get_attr( 'show_excerpts') ) ? false : parent::get_attr( 'show_excerpts');
+
+		// Do not allow lazy loading on playlists
+		$embed_options['lazy_load'] = false;
+		// Do not autoplay on first load
+		$embed_options['autoplay'] = 0;
+
 		$CVM_PLAYER_SETTINGS = array_merge( $atts, $embed_options );
 
 		/**
