@@ -52,4 +52,4 @@ import $ from 'jQuery'
 }(vimeotheque))
 
 $(document).ready( vimeotheque.resizeAll )
-$(window).resize( vimeotheque.resizeAll )
+$(window).on( 'resize', vimeotheque.resizeAll )
