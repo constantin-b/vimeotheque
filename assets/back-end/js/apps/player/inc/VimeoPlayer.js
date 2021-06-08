@@ -64,7 +64,7 @@ $.fn.VimeoPlayer = function( params ){
          * @since 2.0.14    Add CSS class loaded on video container after the video has loaded
          */
         self.addClass('loaded')
-        options.onLoad
+        options.onLoad()
     })
     player.on( 'play', _data => {
         if( !initialVolumeSet ) {
