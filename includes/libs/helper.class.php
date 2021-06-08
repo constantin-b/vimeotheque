@@ -236,13 +236,20 @@ class Helper{
 	public static function get_var( $name, $type = false, $sanitize = false ) {
 		$result = false;
 
-		if( !$type ){
-			$result = isset( $_GET[ $name ] ) || isset( $_POST[ $name ] ) ? $_REQUEST[ $name ] : false;
-		}
-
-		$isset = 'POST' == $type ? isset( $_POST[ $name ] ) : isset( $_GET[ $name ] );
-		if( $isset ){
-			$result = $_REQUEST[ $name ];
+		switch( $type ){
+			case 'POST':
+				$result = isset( $_POST[ $name ] ) ? $_POST[ $name ] : false;
+				break;
+			case 'GET':
+				$result = isset( $_GET[ $name ] ) ? $_GET[ $name ] : false;
+				break;
+			default:
+				if( isset( $_GET[ $name ] ) ){
+					$result = $_GET[ $name ];
+				}elseif ( isset( $_POST[ $name ] ) ){
+					$result = $_POST[ $name ];
+				}
+				break;
 		}
 
 		if( $sanitize ){
