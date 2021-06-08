@@ -36,7 +36,8 @@ class VideoPostsList extends React.Component {
     }
 
     componentDidMount(){
-        jQuery( '.vimeotheque-posts-list-modal' ).scroll(
+        jQuery( '.vimeotheque-posts-list-modal' ).on(
+            'scroll',
             ()=>{
                 if( 'selected' != this.props.postType ) {
                     let scrollTop = jQuery('.vimeotheque-posts-list-modal').scrollTop(),
