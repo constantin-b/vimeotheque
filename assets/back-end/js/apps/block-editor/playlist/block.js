@@ -45,7 +45,7 @@ const {
     } = wp,
     {
         themes,
-        order
+        order: videosOrder
     } = vmtq
 
 registerBlockType( 'vimeotheque/video-playlist', {
@@ -409,7 +409,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                         <SelectControl
                             label = { __( 'Posts order', 'codeflavors-vimeo-video-post-lite' ) }
                             value = {attributes.order}
-                            options = { order }
+                            options = { videosOrder }
                             onChange = {
                                 value => {
                                     setAttributes({
