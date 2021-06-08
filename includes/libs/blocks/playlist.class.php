@@ -114,7 +114,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					 * - oldest: posts displayed by date, ascending
 					 * - alphabetical: posts displayed alphabetically
 					 */
-					'order' => 'manual'
+					'order' => [
+						'type' => 'string',
+						'default' => 'manual'
+					]
 				],
 				'editor_script' => parent::get_script_handle(),
 				'editor_style' => [
