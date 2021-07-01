@@ -162,6 +162,8 @@ class Vimeo_Api_Query extends Vimeo {
 				)
 			);
 
+			$data['response'] = $request['response'];
+
 			return parent::api_error( $data );
 		}	
 		
