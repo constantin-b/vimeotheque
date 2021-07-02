@@ -122,6 +122,9 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.2 =
+- Added new filter "vimeotheque\duplicate_posts_found" which allows duplicate video posts.
+
 = 2.1.1 =
 - Solved a Block Editor error that caused the Vimeotheque Playlist Block to crash when using the playlist block with an option to change the videos order;
 - Removed deprecated jQuery functions that caused jQueryMigrate messages in console;
