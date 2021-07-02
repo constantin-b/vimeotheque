@@ -238,12 +238,28 @@ class Posts_Import{
 		);
 
 		$existing = $wpdb->get_results( $query );
-		$result = [];
+		$_result = [];
 
 		if( $existing ){
 			foreach( $existing as $r ){
-				$result[ $r->meta_value ][] = $r->post_id;
+				$_result[ $r->meta_value ][] = $r->post_id;
 			}
+		}
+
+		/**
+		 * Filter the duplicate posts found by the plugin.
+		 *
+		 * @param array $_result    The post IDs found as duplicates.
+		 */
+		$result = apply_filters( 'vimeotheque\duplicate_posts_found', $_result );
+
+		if( $_result !== $result ){
+			Helper::debug_message(
+				sprintf(
+					'Detected duplicate posts override by filter "%s".',
+					'vimeotheque\duplicate_posts_found'
+				)
+			);
 		}
 
 		return $result;
