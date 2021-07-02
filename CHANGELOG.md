@@ -1,3 +1,6 @@
+2.1.2 [2/July/2021]
+- Added new filter "vimeotheque\duplicate_posts_found" which allows duplicate video posts (functionality will be made available into a future free add-on).
+
 2.1.1 [8/June/2021]
 - Solved a Block Editor error that caused the Vimeotheque Playlist Block to crash when using the playlist block with an option to change the videos order;
 - Removed deprecated jQuery functions that caused jQueryMigrate messages in console;
