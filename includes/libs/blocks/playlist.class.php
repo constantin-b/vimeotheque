@@ -120,10 +120,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					]
 				],
 				'editor_script' => parent::get_script_handle(),
-				'editor_style' => [
-					parent::get_editor_style_handle(),
-					'bootstrap-grid2'
-				],
+				'editor_style' => parent::get_editor_style_handle(),
 				'render_callback' => function( $attr ){
 					$theme = Plugin::instance()->get_playlist_themes()->get_theme( $attr['theme'] );
 					if( $theme ){
@@ -146,7 +143,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			-999999999
 		);
 
-		wp_register_style(
+		wp_enqueue_style(
 			'bootstrap-grid2',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
 			[ parent::get_editor_style_handle() ]
