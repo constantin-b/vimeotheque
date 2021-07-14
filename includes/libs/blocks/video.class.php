@@ -55,9 +55,7 @@ class Video extends Block_Abstract implements Block_Interface {
 					],
 				],
 				'editor_script' => parent::get_script_handle(),
-				'editor_style' => [
-
-				],
+				'editor_style' => '',
 				'render_callback' => function( $attr ){
 					$video = new \Vimeotheque\Shortcode\Video();
 					return $video->get_output( $attr, '' );
