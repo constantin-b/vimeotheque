@@ -1,3 +1,7 @@
+2.1.3 [14/July/2021]
+- Added new filter "vimeotheque\classic_editor\show_shortcode_meta_box" that allows disabling of the shortcode metabox when editing posts with the "Classic editor";
+- Solved block editor error "Array to string conversion" caused by wrong parameter type in Vimeotheque playlist block.
+
 2.1.2 [2/July/2021]
 - Added new filter "vimeotheque\duplicate_posts_found" which allows duplicate video posts (functionality will be made available into a future free add-on).
 
