@@ -130,15 +130,25 @@ class Classic_Editor{
 				'high'
 			);
 		}else {
-			// Shortcode meta box
-			add_meta_box(
-				'cvm-add-video',
-				__( 'Vimeotheque shortcode', 'codeflavors-vimeo-video-post-lite' ),
-				[ $this, 'post_shortcode_meta_box' ],
-				null,
-				'side',
-				'low'
-			);
+			/**
+			 * Filter to disable the shortcode metabox
+             *
+             * @param bool $allow   Allow the shortcode meta box (true) or disable it (false)
+			 */
+		    $allowed = apply_filters( 'vimeotheque\classic_editor\show_shortcode_meta_box', true );
+
+		    if( true === $allowed && post_type_supports( $post->post_type, 'editor' ) ) {
+			    // Shortcode meta box
+			    add_meta_box(
+				    'cvm-add-video',
+				    __( 'Vimeotheque shortcode',
+					    'codeflavors-vimeo-video-post-lite' ),
+				    [ $this, 'post_shortcode_meta_box' ],
+				    null,
+				    'side',
+				    'low'
+			    );
+		    }
 		}
 	}
 
