@@ -2,7 +2,7 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video embed, vimeo embed, vimeo plugin, video post, vimeo import, video importer
 Requires at least: 5.2
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.3 =
+- Added new filter "vimeotheque\classic_editor\show_shortcode_meta_box" that allows disabling of the shortcode metabox when editing posts with the "Classic editor";
+- Solved block editor error "Array to string conversion" caused by wrong parameter type in Vimeotheque playlist block.
+
 = 2.1.2 =
 - Added new filter "vimeotheque\duplicate_posts_found" which allows duplicate video posts.
 
