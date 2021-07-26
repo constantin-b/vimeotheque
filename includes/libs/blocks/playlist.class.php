@@ -143,12 +143,6 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			-999999999
 		);
 
-		wp_enqueue_style(
-			'bootstrap-grid2',
-			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css',
-			[ parent::get_editor_style_handle() ]
-		);
-
 		$this->set_rest_meta_queries();
 	}
 
@@ -219,6 +213,12 @@ class Playlist extends Block_Abstract implements Block_Interface {
 		);
 
 		Helper::enqueue_player( true, parent::get_script_handle(), parent::get_editor_style_handle() );
+
+		wp_enqueue_style(
+			'bootstrap-grid2',
+			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.css',
+			[ parent::get_editor_style_handle() ]
+		);
 	}
 
 	/**
