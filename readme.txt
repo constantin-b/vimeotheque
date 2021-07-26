@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.4 =
+- Solved bug that prevented the "Screen Options" and "Help" admin tabs from displaying into the website admin;
+- Removed unecessary CSS rules from the bootstrap.css file used for displaying the playlist block and video importer grid columns and renamed the file from bootstrap.min.css to bootstrap.css.
+
 = 2.1.3 =
 - Added new filter "vimeotheque\classic_editor\show_shortcode_meta_box" that allows disabling of the shortcode metabox when editing posts with the "Classic editor";
 - Solved block editor error "Array to string conversion" caused by wrong parameter type in Vimeotheque playlist block.
