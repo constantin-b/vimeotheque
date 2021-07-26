@@ -283,7 +283,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
 		wp_enqueue_style(
 				'bootstrap-grid',
-			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.min.css'
+			VIMEOTHEQUE_URL . 'assets/back-end/css/vendor/bootstrap.css'
 		);
 	
 		wp_enqueue_style(
