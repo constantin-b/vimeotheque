@@ -1,3 +1,6 @@
+2.1.5 [29/July/2021]
+- Added detection for duplicate images.
+
 2.1.4 [26/July/2021]
 - Solved bug that prevented the "Screen Options" and "Help" admin tabs from displaying into the website admin;
 - Removed unecessary CSS rules from the bootstrap.css file used for displaying the playlist block and video importer grid columns and renamed the file from bootstrap.min.css to bootstrap.css. 
