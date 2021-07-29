@@ -45,12 +45,20 @@ class Image_Import {
 		if( $refresh ){
 			$result = $this->import_from_api();
 		}else{
-			// check if thumbnail was already imported
-			$attachment = get_posts( [
-				'post_type' 	=> 'attachment',
+
+			$args = [
+				'post_type' => 'attachment',
 				'meta_key'  	=> 'video_thumbnail',
 				'meta_value'	=> $this->video_post->video_id
-			] );
+			];
+
+			if( !empty( $this->video_post->image_uri ) ){
+				$args['meta_key'] = '__vimeo_image_uri';
+				$args['meta_value']  = $this->video_post->image_uri;
+			}
+
+			// check if thumbnail was already imported
+			$attachment = get_posts( $args );
 			// if thumbnail exists, return it
 			if( $attachment ){
 				// set image as featured for current post
@@ -71,6 +79,15 @@ class Image_Import {
 			}else{
 				$image_url = end( $this->video_post->thumbnails );
 				$result = $this->import_to_media( $image_url );
+
+				if( isset( $result['attachment_id'] ) && !empty( $this->video_post->image_uri ) ){
+					update_post_meta(
+						$result['attachment_id'],
+						'__vimeo_image_uri',
+						$this->video_post->image_uri
+					);
+				}
+
 			}
 		}
 
@@ -90,9 +107,75 @@ class Image_Import {
 		$q = new Video_Import( 'thumbnails', $this->video_post->video_id );
 		$thumbnails = $q->get_feed();
 		if( $thumbnails ){
-			$img = end( $thumbnails );
-			return $this->import_to_media( $img );
+
+			$exists = $this->check_duplicate( $thumbnails['uri'] );
+
+			if( $exists ){
+
+				Helper::debug_message(
+					sprintf(
+						'While importing thumbnail from Vimeo API, a duplicate image with ID #%s was found. Setting duplicate as featured image for post #%s.',
+						$exists->ID,
+						$this->video_post->get_post()->ID
+					)
+				);
+
+				set_post_thumbnail( $this->video_post->get_post()->ID, $exists->ID);
+
+				return [
+					'post_id' => $this->video_post->get_post()->ID,
+					'attachment_id' => $exists->ID
+				];
+
+			}else{
+				$img    = end( $thumbnails['images'] );
+				$result = $this->import_to_media( $img );
+
+				if ( isset( $result['attachment_id'] ) ) {
+
+					Helper::debug_message(
+						sprintf(
+							'Imported image ID #%s from Vimeo API and set it as featured image for post ID #%s.',
+							$result['attachment_id'],
+							$result['post_id']
+						)
+					);
+
+					update_post_meta(
+						$result['attachment_id'],
+						'__vimeo_image_uri',
+						$thumbnails['uri']
+					);
+				}
+
+				return $result;
+			}
 		}
+	}
+
+	/**
+	 * Check if a duplicate image exists
+	 *
+	 * @param $image_uri
+	 *
+	 * @return false|int|\WP_Post
+	 */
+	private function check_duplicate( $image_uri ){
+
+		$args = [
+			'post_type' => 'attachment',
+			'numberposts' => 1,
+			'suppress_filters' => true,
+			'meta_query' => [[
+				'key' => '__vimeo_image_uri',
+				'value' => $image_uri,
+				'compare' => 'LIKE'
+			]]
+		];
+
+		$posts = get_posts( $args );
+
+		return isset( $posts[0] ) ? $posts[0] : false;
 	}
 
 	/**
