@@ -65,6 +65,7 @@ class Entry_Format{
 			'duration'      => (int) $this->get_field( 'duration' ),
 			'_duration'     => \Vimeotheque\Helper::human_time( (int) $this->get_field( 'duration' ) ),
 			'thumbnails'    => $this->get_thumbnails(),
+			'image_uri'     => $this->get_image_uri(), // get the unique image URI
 			'stats'         => $this->get_stats(),
 			'privacy'       => $this->get_privacy(),
 			'view_privacy'  => $this->get_field( 'privacy' ) ? $this->_entry['privacy']['view'] : false,
@@ -134,18 +135,34 @@ class Entry_Format{
 	 * @return array
 	 */
 	private function get_thumbnails(){
-		$thumbnails = [];
+		$images = [];
 		$_thumbnails = $this->get_field( 'pictures' );
 
 		if( $_thumbnails ){
 			foreach( $_thumbnails['sizes'] as $thumbnail ){
-				$thumbnails[ $thumbnail['width'] ] = $thumbnail['link'];
+				$images[ $thumbnail['width'] ] = $thumbnail['link'];
 			}
-			ksort( $thumbnails, SORT_NUMERIC );
-			$thumbnails = array_values( $thumbnails );
+			ksort( $images, SORT_NUMERIC );
+			$images = array_values( $images );
 		}
 
-		return $thumbnails;
+		return $images;
+	}
+
+	/**
+	 * Returns the unique image URI
+	 *
+	 * @return mixed|string
+	 */
+	private function get_image_uri(){
+		$_thumbnails = $this->get_field( 'pictures' );
+		$result = '';
+
+		if( $_thumbnails ){
+			$result = $_thumbnails['uri'];
+		}
+
+		return $result;
 	}
 
 	/**
