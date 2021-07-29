@@ -108,6 +108,11 @@ class Settings_Helper {
 			__( 'Vimeo video thumbnail will be imported only when featured images needs to be displayed (ie. a post created by the plugin is displayed).', 'codeflavors-vimeo-video-post-lite')
 		);
 
+		Settings_Helper::row_checkbox(
+			__( 'Re-import featured image for imported posts', 'codeflavors-vimeo-video-post-lite' ),
+			__( 'When skipping a video that was already imported, allow the plugin to re-import the featured image into the WordPress Media Gallery.', 'codeflavors-vimeo-video-post-lite')
+		);
+
 		self::row_anchor();
 	}
 
@@ -171,7 +176,7 @@ class Settings_Helper {
 	/**
 	 * Anchor for showing options
 	 */
-	static public function anchor_show(){
+	public static function anchor_show(){
 		return sprintf(
 			'<a class="cvm-pro-options-trigger" href="#" data-visible="0" data-text_on="%1$s" data-text_off="%2$s" data-selector="%3$s">%2$s</a>',
 			esc_attr__( 'Hide PRO options', 'codeflavors-vimeo-video-post-lite' ),
@@ -180,7 +185,7 @@ class Settings_Helper {
 		);
 	}
 
-	static public function row_select( $label, $select_text = '', $description = '', $before_select = '' ){
+	public static function row_select( $label, $select_text = '', $description = '', $before_select = '' ){
 		self::row(
 			self::label_cell( $label ),
 			self::field_cell(
@@ -199,7 +204,7 @@ class Settings_Helper {
 	 * @param $label
 	 * @param string $description
 	 */
-	static public function row_checkbox( $label, $description = '' ){
+	public static function row_checkbox( $label, $description = '' ){
 		self::row(
 			self::label_cell( $label ),
 			self::field_cell(
@@ -215,7 +220,7 @@ class Settings_Helper {
 	 *
 	 * @return string
 	 */
-	static public function row( $label, $field ){
+	public static function row( $label, $field ){
 		printf(
 			'<tr class="cvm-pro-option hide-if-js">%s%s</tr>',
 			$label,
@@ -228,7 +233,7 @@ class Settings_Helper {
 	 *
 	 * @return string
 	 */
-	static public function label_cell( $label ){
+	public static function label_cell( $label ){
 		return sprintf(
 			'<th scope="row"><label>%s:</label></th>',
 			$label
@@ -243,7 +248,7 @@ class Settings_Helper {
 	 *
 	 * @return string
 	 */
-	static public function field_cell( $field, $description = '', $wrap = 'span' ){
+	public static function field_cell( $field, $description = '', $wrap = 'span' ){
 		$desc = empty( $description ) ? '' : sprintf( '<%1$s class="description">%2$s</%1%s>', $wrap, $description );
 		return sprintf(
 			'<td>%s %s</td>',
