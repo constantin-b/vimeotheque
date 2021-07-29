@@ -31,18 +31,29 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	 * @return array
 	 */
 	public function get_formatted_entry( $raw_entry ) {
+		$result = [];
+
 		$thumbnails = [];
-		if( !isset( $raw_entry['data'][0]['sizes'] ) ){
-			return $thumbnails;
+		foreach( $raw_entry['data'] as $image ){
+			if( $image['active'] ){
+
+				foreach ( $image['sizes'] as $_image ) {
+					$thumbnails[ $_image['width'] ] = $_image['link'];
+				}
+
+				ksort( $thumbnails, SORT_NUMERIC );
+				$thumbnails = array_values( $thumbnails );
+
+				$result = [
+					'uri' => $image['uri'],
+					'images' => $thumbnails
+				];
+
+				break;
+			}
 		}
 
-		foreach( $raw_entry['data'][0]['sizes'] as $thumbnail ){
-			$thumbnails[ $thumbnail['width'] ] = $thumbnail['link'];
-		}
-		ksort( $thumbnails, SORT_NUMERIC );
-		$thumbnails = array_values( $thumbnails );
-
-		return $thumbnails;
+		return $result;
 	}
 
 	/**
@@ -51,7 +62,7 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	 * @return array
 	 */
 	protected function get_fields() {
-		return ['uri', 'sizes'];
+		return ['active', 'uri', 'sizes'];
 	}
 
 	/**
