@@ -60,35 +60,12 @@ class Post_Settings{
 	 * Returns if condition for importing images is on post display
 	 * or post create.
 	 *
-	 * @param string $situation - "post_create" or "post_display"
-	 *
 	 * @return bool
 	 */
-	public function image_import( $situation = 'post_create' ){
+	public function image_import(){
 
-		if( !isset( $this->options['featured_image'] ) || !$this->options['featured_image'] ){
-			return false;
-		}
+		return isset( $this->options['featured_image'] ) && $this->options['featured_image'];
 
-		switch( $situation ){
-			case 'post_create':
-				return !(bool) $this->options['image_on_demand'];
-				break;
-			case 'post_display':
-				return (bool) $this->options['image_on_demand'];
-				break;
-			default:
-				trigger_error(
-					sprintf(
-						'Image import condition %s not found. Use either "post_create" or "post_display".',
-						$situation
-					) ,
-					E_USER_WARNING
-				);
-				break;
-		}
-
-		return false;
 	}
 
 	/**
