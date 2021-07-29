@@ -244,7 +244,7 @@ use Vimeotheque\Helper;
 						<tr valign="top">
 							<th scope="row"><label for="featured_image"><?php _e('Import images', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
-								<input type="checkbox" value="1" name="featured_image" id="featured_image"<?php Helper_Admin::check($options['featured_image']);?> />
+								<input type="checkbox" value="1" name="featured_image" id="featured_image"<?php Helper_Admin::check($options['featured_image']);?> class="vmtq-toggler-checkbox" data-selector=".vmtq-extra-image-options" />
 								<span class="description"><?php _e("Vimeo video thumbnail will be set as post featured image.", 'codeflavors-vimeo-video-post-lite');?></span>
 							</td>
 						</tr>
