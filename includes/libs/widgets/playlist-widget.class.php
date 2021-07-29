@@ -124,8 +124,7 @@ class Playlist_Widget extends WP_Widget {
 		echo $before_widget;
 
 		if ( ! empty( $instance['cvm_widget_title'] ) ) {
-			echo $before_title . apply_filters( 'widget_title',
-					$instance['cvm_widget_title'] ) . $after_title;
+			echo $before_title . apply_filters( 'widget_title', $instance['cvm_widget_title'] ) . $after_title;
 		}
 		?>
         <ul class="cvm-recent-videos-widget">
@@ -148,11 +147,12 @@ class Playlist_Widget extends WP_Widget {
 					$thumbnail = '';
 				}
 				?>
-                <li><a href="<?php echo get_permalink( $post->ID ); ?>"
-                       title="<?php esc_attr_e( apply_filters( 'the_title',
-					       $post->post_title ) ); ?>"><?php echo $thumbnail; ?>
-                        <br/><?php echo apply_filters( 'post_title',
-							$post->post_title ); ?></a></li>
+                <li>
+                    <a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php esc_attr_e( apply_filters( 'the_title', $post->post_title ) ); ?>">
+                        <?php echo $thumbnail; ?><br/>
+                        <?php echo apply_filters( 'post_title', $post->post_title ); ?>
+                    </a>
+                </li>
 			<?php endforeach; ?>
         </ul>
 		<?php
