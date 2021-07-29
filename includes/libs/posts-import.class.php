@@ -571,7 +571,7 @@ class Posts_Import{
 			);
 
 			// import image
-			if( $options['featured_image'] && $this->post_type->get_post_settings()->image_import( 'post_create' ) ){
+			if( $options['featured_image'] ){
 				$_post->set_featured_image();
 			}
 
