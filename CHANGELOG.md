@@ -2,6 +2,7 @@
 - Added detection for duplicate images;
 - Added options togglers in Vimeotheque Settings page for easier display of dependant options;
 - Solved a WordPress 5.8 Widgets screen error in Vimeotheque blocks.
+- Solved various (non critical) bugs.
 
 2.1.4 [26/July/2021]
 - Solved bug that prevented the "Screen Options" and "Help" admin tabs from displaying into the website admin;

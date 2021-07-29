@@ -122,6 +122,12 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.5 =
+- Added detection for duplicate images;
+- Added options togglers in Vimeotheque Settings page for easier display of dependant options;
+- Solved a WordPress 5.8 Widgets screen error in Vimeotheque blocks;
+- Solved various (non critical) bugs.
+
 = 2.1.4 =
 - Solved bug that prevented the "Screen Options" and "Help" admin tabs from displaying into the website admin;
 - Removed unecessary CSS rules from the bootstrap.css file used for displaying the playlist block and video importer grid columns and renamed the file from bootstrap.min.css to bootstrap.css.
