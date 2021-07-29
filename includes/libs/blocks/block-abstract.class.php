@@ -75,10 +75,23 @@ class Block_Abstract {
 	 * @return mixed
 	 */
 	protected function register_script( $handle, $block ){
+
+		global $pagenow;
+
+		$dependencies = [
+			'wp-blocks',
+			'wp-element',
+			'wp-i18n',
+			'wp-components'
+		];
+
+		// In WP 5.8, the dependency into the widgets page is 'wp-edit-widgets'
+		$dependencies[] = 'widgets.php' === $pagenow ? 'wp-edit-widgets' : 'wp-editor';
+
 		wp_register_script(
 			$handle,
 			VIMEOTHEQUE_URL . 'assets/back-end/js/apps/block-editor/' . $block . '/app.build.js',
-			['wp-blocks', 'wp-element', 'wp-editor', 'wp-i18n', 'wp-components']
+			$dependencies
 		);
 
 		$this->block_script_handle = $handle;
