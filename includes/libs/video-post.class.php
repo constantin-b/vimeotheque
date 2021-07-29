@@ -107,6 +107,13 @@ class Video_Post{
 	public $thumbnails = [];
 
 	/**
+	 * The unique image URI
+	 *
+	 * @var string
+	 */
+	public $image_uri = '';
+
+	/**
 	 * Video statistics (view count, comment count and like count)
 	 *
 	 * @var array
