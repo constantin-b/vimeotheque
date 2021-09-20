@@ -94,7 +94,17 @@ registerBlockType( 'vimeotheque/video-position', {
 				className
 			} = props,
 
-			[embedOptions, setEmbedOptions] = useState( embed_options ),
+			getDefaults = () => {
+				jQuery.each( vmtq_default_embed_options, (key, val) => {
+					if( !isNaN( val ) && '' !== val ){
+						vmtq_default_embed_options[ key ] = parseInt( val )
+					}
+				} )
+
+				return vmtq_default_embed_options
+			},
+
+			[embedOptions, setEmbedOptions] = useState( embed_options.length == 0 ? getDefaults() : embed_options ),
 			[embedClass, setEmbedClass] = useState( '' ),
 			initialVideoPosition = embed_options.video_position === 'replace-featured-image' ? 'above-content' : embed_options.video_position
 
@@ -157,15 +167,6 @@ registerBlockType( 'vimeotheque/video-position', {
 					getStartTime()
 				)
 			}
-
-		/*
-		useEffect(
-			() => {
-				setEmbedOptions( embed_options )
-			}, [embed_options]
-		)
-		*/
-
 
 		useEffect(
 			() => {
