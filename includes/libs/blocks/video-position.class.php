@@ -20,7 +20,13 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	public function __construct( Plugin $plugin ) {
 		parent::__construct( $plugin );
 
-		parent::register_script( 'vimeotheque-video-position-block', 'video_position' );
+		$handle = parent::register_script( 'vimeotheque-video-position-block', 'video_position' );
+
+		wp_localize_script(
+			$handle,
+			'vmtq_default_embed_options',
+			Plugin::instance()->get_embed_options()
+		);
 
 		parent::register_block_type( 'vimeotheque/video-position', [
 			'editor_script' => parent::get_script_handle(),
