@@ -1,6 +1,7 @@
 <?php
 namespace Vimeotheque\Rest_Api\Endpoints\Wp;
 
+use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use Vimeotheque\Rest_Api\Endpoints\Rest_Controller_Abstract;
 use Vimeotheque\Rest_Api\Endpoints\Rest_Controller_Interface;
@@ -86,18 +87,25 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 			);
 		}
 
-		$import_result = Plugin::instance()
+		$params = $request->get_params();
+		$params['status'] = Plugin::instance()->get_options_obj()->get_option( 'import_status' );
+
+		$import_post_id = Plugin::instance()
 			->get_posts_importer()
 			->import_video(
-				$request->get_params()
+				$params
 			);
 
-		if( !$import_result ){
+		if( !$import_post_id ){
 			return new \WP_Error(
 				'vimeotheque_post_not_imported',
 				__( 'Sorry, your video could not be imported, please try again.', 'codeflavors-vimeo-video-post-lite' )
 			);
 		}else{
+			// set the embedding options
+			$video = Helper::get_video_post( $import_post_id );
+			$video->set_embed_options([], true);
+
 			return $this->response(
 				$post_id,
 				__( 'Video post created!', 'codeflavors-vimeo-video-post-lite' )
