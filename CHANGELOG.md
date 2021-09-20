@@ -1,3 +1,7 @@
+2.1.6 [20/Sept/2021]
+- Solved a bug in single video import (the Add new page in Vimeotheque) that issued a WP Block Editor error after importing;
+- Single video import (the Add new page in Vimeotheque) will import videos having the post status set in the plugin Settings option under "Import Options" as oposed to being set up by default to "Draft".
+
 2.1.5 [29/July/2021]
 - Added detection for duplicate images;
 - Added options togglers in Vimeotheque Settings page for easier display of dependant options;
