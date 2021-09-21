@@ -1,3 +1,5 @@
+import $ from 'jQuery'
+
 const
 	{
 		blockEditor: {
@@ -157,12 +159,19 @@ registerBlockType( 'vimeotheque/video-position', {
 					query.muted = embedOptions.muted
 				}
 
+				const opt = applyFilters(
+					'vimeotheque.video-position.embed-url-extra-params',
+					{}
+				)
+
+				const query_params = $.extend( {}, query, opt )
+
 				return applyFilters(
 					'vimeotheque.video-position.embed-url',
-					`${url}/${video_id}?${jQuery.param( query )}#t=${getStartTime()}`,
+					`${url}/${video_id}?${jQuery.param( query_params )}#t=${getStartTime()}`,
 					url,
 					video_id,
-					query,
+					query_params,
 					embedOptions.start_time,
 					getStartTime()
 				)
