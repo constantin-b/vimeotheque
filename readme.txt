@@ -122,6 +122,9 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.7 =
+- Implemented a new filter in Video Position block to allow extra parameters to be set on the iframe URL.
+
 = 2.1.6 =
 - Solved a bug in single video import (the Add new page in Vimeotheque) that issued a WP Block Editor error after importing;
 - Single video import (the Add new page in Vimeotheque) will import videos having the post status set in the plugin Settings option under "Import Options" as oposed to being set up by default to "Draft".
