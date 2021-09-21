@@ -1,3 +1,6 @@
+2.1.7 [21/Sept/2021]
+- Implemented a new filter in Video Position block to allow extra parameters to be set on the iframe URL.
+
 2.1.6 [20/Sept/2021]
 - Solved a bug in single video import (the Add new page in Vimeotheque) that issued a WP Block Editor error after importing;
 - Single video import (the Add new page in Vimeotheque) will import videos having the post status set in the plugin Settings option under "Import Options" as oposed to being set up by default to "Draft".
