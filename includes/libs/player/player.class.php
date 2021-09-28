@@ -69,7 +69,7 @@ class Player {
 
 		if( $this->options['lazy_load'] ){
 			$attachment_id = get_post_thumbnail_id( $this->post->get_post()->ID );
-			$img = wp_get_attachment_image_src( $attachment_id, 'full' ) ?: $this->post->thumbnails[0];
+			$img = wp_get_attachment_image_src( $attachment_id, 'full' ) ?: end( $this->post->thumbnails );
 			if( $img ){
 				$embed_content = sprintf(
 					'<a href="#" class="vimeotheque-load-video" title="%s" data-url="%s"><img src="%s" />%s</a>',
