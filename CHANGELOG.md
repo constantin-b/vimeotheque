@@ -1,4 +1,4 @@
-2.1.8-alpha1
+2.1.8 [13/Oct/2021]
 - Added class 'no-lazy' to images to prevent W3 Total Cache from breaking the display in video playlists;
 - Solved display bug for videos in portrait mode that were lazy-loaded;
 - Solved bug that retrieved the smallest video image instead of the full-size image when the featured image wasn't set and lazy loading was on.
