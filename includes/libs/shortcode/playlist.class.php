@@ -49,7 +49,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		parent::set_atts( $atts );
 		parent::set_content( $content );
 
-		$videos = $this->posts ? $this->posts : $this->get_video_posts();
+		$videos = $this->posts ?: $this->get_video_posts();
 		if( !$videos ){
 			return;
 		}
