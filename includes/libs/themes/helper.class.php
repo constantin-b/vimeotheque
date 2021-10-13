@@ -65,6 +65,10 @@ class Helper {
 			}
 		}
 
+		if( 'original' === $size ){
+			$result = remove_query_arg( 'r', $result );
+		}
+
 		return $result;
 	}
 
