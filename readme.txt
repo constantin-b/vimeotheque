@@ -122,6 +122,11 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.8 =
+- Added class 'no-lazy' to images to prevent W3 Total Cache from breaking the display in video playlists;
+- Solved display bug for videos in portrait mode that were lazy-loaded;
+- Solved bug that retrieved the smallest video image instead of the full-size image when the featured image wasn't set and lazy loading was on.
+
 = 2.1.7 =
 - Implemented a new filter in Video Position block to allow extra parameters to be set on the iframe URL.
 
