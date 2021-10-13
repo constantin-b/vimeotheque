@@ -91,6 +91,18 @@ class Shortcode_Abstract implements Shortcode_Interface {
 			}
 		}
 
+		/**
+		 * Generate additional CSS classes on Vimeotheque embed player container
+		 *
+		 * @param array $classes    CSS classes to be added
+		 * @param \WP_Post $post    The post object reference
+		 */
+		$classes = apply_filters(
+			'vimeotheque\playlist\css_class',
+			$classes,
+			$this->get_attr( 'theme' )
+		);
+
 		$r = esc_attr( implode( ' ', $classes ) );
 		return $r;
 	}
