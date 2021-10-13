@@ -1,3 +1,8 @@
+2.1.8-alpha1
+- Added class 'no-lazy' to images to prevent W3 Total Cache from breaking the display in video playlists;
+- Solved display bug for videos in portrait mode that were lazy-loaded;
+- Solved bug that retrieved the smallest video image instead of the full-size image when the featured image wasn't set and lazy loading was on.
+
 2.1.7 [21/Sept/2021]
 - Implemented a new filter in Video Position block to allow extra parameters to be set on the iframe URL.
 
