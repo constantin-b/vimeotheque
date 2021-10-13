@@ -122,10 +122,6 @@ class Playlist extends Block_Abstract implements Block_Interface {
 				'editor_script' => parent::get_script_handle(),
 				'editor_style' => parent::get_editor_style_handle(),
 				'render_callback' => function( $attr ){
-					$theme = Plugin::instance()->get_playlist_themes()->get_theme( $attr['theme'] );
-					if( $theme ){
-						$attr['theme'] = $theme;
-					}
 					$attr['videos'] = implode( ',', $attr['post_ids'] );
 					$attr['categories'] = implode( ',', $attr['cat_ids'] );
 					$playlist = new \Vimeotheque\Shortcode\Playlist();
