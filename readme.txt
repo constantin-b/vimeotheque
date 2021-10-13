@@ -4,7 +4,7 @@ Tags: vimeo, video embed, vimeo embed, vimeo plugin, video post, vimeo import, v
 Requires at least: 5.2
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: trunk
+Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
