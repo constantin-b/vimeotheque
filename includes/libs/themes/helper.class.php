@@ -82,7 +82,29 @@ class Helper {
 
 		$img_url = self::get_thumbnail_url( $size );
 
-		$output = $img_url ? sprintf( '<img src="%s" alt="" />', $img_url ) : '';
+		/**
+		 * Filter that allows additional image CSS classes to be added to images
+		 *
+		 * @param array         $classes    Array of CSS classes
+		 * @param Video_Post    $video      The video post being processed
+		 */
+		$classes = apply_filters(
+			'vimeotheque\themes\image_class',
+			// class no-lazy is needed for W3 Total Cache to avoid lazy loading images and breaking scripts
+			['vimeotheque-playlist', 'image', 'no-lazy'],
+			self::current_video_post()
+		);
+
+		$css_class = is_array( $classes ) ? implode( ' ', $classes ) : '';
+
+		$output =
+			$img_url ?
+				sprintf(
+					'<img src="%s" alt="" class="%s" />',
+					$img_url,
+					$css_class
+				) :
+				'';
 
 		if( $echo ){
 			echo $before . $output . $after;
@@ -141,7 +163,7 @@ class Helper {
 		$output = $video->get_post()->post_title;
 
 		if( $include_duration ){
-			$output .= ' <span class="duration">[' . \Vimeotheque\Helper::human_time( $video->duration ) . ']</span>';
+			$output .= self::get_duration( '<span class="duration">[', ']</span>', false );
 		}
 
 		if( $echo ){
@@ -149,6 +171,35 @@ class Helper {
 		}
 
 		return $before.$output.$after;
+	}
+
+	/**
+	 * Get the video duration
+	 *
+	 * @param string $before
+	 * @param string $after
+	 * @param bool   $echo
+	 *
+	 * @return string|void
+	 */
+	public static function get_duration( $before = '<span class="duration">', $after = '</span>', $echo = true ){
+		$video = self::current_video_post();
+		if( !$video ){
+			return;
+		}
+
+		$output = sprintf(
+			'%s%s%s',
+			$before,
+			\Vimeotheque\Helper::human_time( $video->duration ),
+			$after
+		);
+
+		if( $echo ){
+			echo $output;
+		}
+
+		return $output;
 	}
 
 	/**
