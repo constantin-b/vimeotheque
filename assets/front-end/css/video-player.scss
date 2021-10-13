@@ -45,6 +45,10 @@
 	background-repeat:no-repeat;
 	background-position:center center;
 
+	&.portrait{
+		overflow: hidden;
+	}
+
 	/**
 	 * @since 2.0.14	Remove player background once the video has loaded
 	 */
@@ -90,9 +94,29 @@
 				border-radius:9px;
 			}
 		}
-		img{
-			max-width:100%;
+
+		&.portrait{
+			img{
+				max-width:none!important;
+				max-height: 100%!important;
+				position: absolute;
+				// @see https://stackoverflow.com/questions/14562457/center-oversized-image-in-div/41059954
+				top: -9999px;
+				bottom: -9999px;
+				left: -9999px;
+				right: -9999px;
+				margin: auto;
+
+			}
 		}
+
+		&.landscape{
+			img{
+				max-width:100%;
+			}
+		}
+
+
 	}
 
 	iframe{
