@@ -61,6 +61,49 @@ $(document).ready( () => {
         )
     //*/
 
+    $('.vimeotheque-player.lazy-load').each(
+        (i, player) => {
+            const img = $(player).find('img.video-thumbnail')
+            if( 0 == img.length ){
+                return
+            }
+
+            let width = false,
+                height = false
+
+            if( $( img[0] ).prop('complete') ){
+                width = $(img[0]).width()
+                height = $(img[0]).height()
+            }
+
+            $( img[0] ).on(
+                'load',
+                () => {
+                    width = $(img[0]).width()
+                    height = $(img[0]).height()
+                }
+            )
+
+            const interval = setInterval(
+                () => {
+                    if( width && height ){
+
+                        const
+                            playerWidth = $(player).width(),
+                            playerHeight = $(player).height()
+
+                        if( height < playerHeight ){
+                            $( img[0] ).addClass('center-horizontal')
+                        }
+
+                        clearInterval(interval)
+                    }
+
+                }, 300
+            )
+        }
+    )
+
     // Embed any not lazy-laoded players
     vimeotheque.players = $('.vimeotheque-player:not(.lazy-load)').VimeoPlayer( playersData )
 })
