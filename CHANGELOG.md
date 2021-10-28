@@ -1,3 +1,8 @@
+2.1.9-alpha1
+- Added class "video-thumbnail" on the image for lazy loaded videos;
+- Implemented JS functionality for centering the image for lazy loaded videos when the image size ratio isn't the same as the video size ratio;
+- Implemented CSS functionality for centering lazy loaded images.
+
 2.1.8 [13/Oct/2021]
 - Added class 'no-lazy' to images to prevent W3 Total Cache from breaking the display in video playlists;
 - Solved display bug for videos in portrait mode that were lazy-loaded;
