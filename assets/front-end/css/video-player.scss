@@ -80,6 +80,7 @@
 
 			outline: none!important;
 			box-shadow: none!important;
+			border:none !important;
 
 			.icon{
 				@include size( 20%, 20% );
@@ -115,8 +116,6 @@
 				max-width:100%;
 			}
 		}
-
-
 	}
 
 	iframe{
