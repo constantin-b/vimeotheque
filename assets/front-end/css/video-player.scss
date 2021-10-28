@@ -29,6 +29,19 @@
 }
 
 /**
+ * Centers an overflowing image within the container
+ */
+@mixin center-overflow(){
+	position: absolute;
+	// @see https://stackoverflow.com/questions/14562457/center-oversized-image-in-div/41059954
+	top: -9999px;
+	bottom: -9999px;
+	left: -9999px;
+	right: -9999px;
+	margin: auto;
+}
+
+/**
  * Legacy class
  * @deprecated
  */
@@ -72,6 +85,7 @@
 
 	&.lazy-load{
 		background:transparent!important;
+		overflow: hidden;
 
 		// Lazy load play video link
 		.vimeotheque-load-video{
@@ -100,13 +114,9 @@
 			img{
 				max-width:none!important;
 				max-height: 100%!important;
-				position: absolute;
-				// @see https://stackoverflow.com/questions/14562457/center-oversized-image-in-div/41059954
-				top: -9999px;
-				bottom: -9999px;
-				left: -9999px;
-				right: -9999px;
-				margin: auto;
+				height:100%!important;
+
+				@include center-overflow;
 
 			}
 		}
@@ -114,8 +124,26 @@
 		&.landscape{
 			img{
 				max-width:100%;
+				width:100%;
+
+				@include center-overflow;
 			}
 		}
+
+		/**
+		 * Managed from JavaScript, solves issues with images
+		 * having a different aspect ratio than the video
+		 */
+		img{
+			&.center-horizontal{
+				height: 100%;
+				width: auto;
+				max-width: none;
+
+				@include center-overflow;
+			}
+		}
+
 	}
 
 	iframe{
