@@ -1,7 +1,10 @@
-2.1.9-alpha1
+2.1.10 [2/Nov/2021]
 - Added class "video-thumbnail" on the image for lazy loaded videos;
 - Implemented JS functionality for centering the image for lazy loaded videos when the image size ratio isn't the same as the video size ratio;
-- Implemented CSS functionality for centering lazy loaded images.
+- Implemented CSS functionality for centering lazy loaded images;
+- Added new playlist theme called "Simple";
+- Added new playlist theme called "Listy";
+- Implemented filters in classic widget to allow playlist themes to inject additional options. 
 
 2.1.8 [13/Oct/2021]
 - Added class 'no-lazy' to images to prevent W3 Total Cache from breaking the display in video playlists;
