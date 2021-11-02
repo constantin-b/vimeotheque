@@ -5,6 +5,7 @@
 
 namespace Vimeotheque\Theme\Simple;
 
+use Vimeotheque\Themes\Helper;
 use Vimeotheque\Video_Post;
 
 /**
@@ -12,7 +13,7 @@ use Vimeotheque\Video_Post;
  */
 
 ?>
-<div class="vimeotheque-playlist simple" style="display:none;">
+<div class="vimeotheque-playlist simple" style="display:none; <?php Helper::get_width('', '') ;?>">
 	<?php
 		global $post;
 

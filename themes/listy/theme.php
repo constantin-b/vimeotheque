@@ -13,7 +13,7 @@ use Vimeotheque\Video_Post;
  */
 
 ?>
-<div class="vimeotheque-playlist listy">
+<div class="vimeotheque-playlist listy" <?php \Vimeotheque\Themes\Helper::get_width( 'style="', '"' ) ;?>>
 
 	<?php
         global $post;
