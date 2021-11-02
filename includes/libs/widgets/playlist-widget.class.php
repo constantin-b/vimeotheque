@@ -88,25 +88,9 @@ class Playlist_Widget extends WP_Widget {
 		if ( isset( $instance['cvm_show_playlist'] )
 		     && $instance['cvm_show_playlist']
 		) {
-
-			$opt = [
-				'theme'         => $instance['theme'],
-				'layout'        => isset( $instance['layout'] )
-					? $instance['layout'] : false,
-				'show_excerpts' => isset( $instance['show_excerpts'] )
-					? $instance['show_excerpts'] : false,
-				'width'         => $instance['width'],
-				'aspect_ratio'  => $instance['aspect_ratio'],
-				'volume'        => $instance['volume'],
-				'playlist_loop' => $instance['playlist_loop'],
-				'title'         => absint( $instance['title'] ),
-				'byline'        => absint( $instance['byline'] ),
-				'portrait'      => absint( $instance['portrait'] )
-			];
-
 			$playlist = new Playlist();
 			$playlist->set_posts( $posts );
-			$playlist_output = $playlist->get_output( $opt, '' );
+			$playlist_output = $playlist->get_output( $instance, '' );
 
 			if ( ! $playlist_output ) {
 				return;
@@ -166,11 +150,9 @@ class Playlist_Widget extends WP_Widget {
 		$player_defaults = Plugin::instance()->get_embed_options_obj()
 		                         ->get_options();
 
-		return [
-			'cvm_post_type'     => Plugin::instance()->get_cpt()
-			                             ->get_post_type(),
-			'cvm_taxonomy'      => Plugin::instance()->get_cpt()
-			                             ->get_post_tax(),
+		$defaults = [
+			'cvm_post_type'     => Plugin::instance()->get_cpt()->get_post_type(),
+			'cvm_taxonomy'      => Plugin::instance()->get_cpt()->get_post_tax(),
 			'cvm_widget_title'  => '',
 			'cvm_posts_number'  => 5,
 			'cvm_posts_tax'     => - 1,
@@ -187,6 +169,18 @@ class Playlist_Widget extends WP_Widget {
 			'byline'            => $player_defaults['byline'],
 			'portrait'          => $player_defaults['portrait']
 		];
+
+		/**
+		 * Allow additional option setup
+         *
+         * @param array $options
+		 */
+		$optional = apply_filters(
+            'vimeotheque\classic-widget\playlist-widget-extra_options',
+            []
+        );
+
+		return array_merge( $optional, $defaults );
 	}
 
 	/**
@@ -254,29 +248,40 @@ class Playlist_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 
-		$instance                     = $old_instance;
-		$instance['cvm_widget_title'] = $new_instance['cvm_widget_title'];
-		$instance['cvm_post_type']    = $new_instance['cvm_post_type'];
-		$instance['cvm_taxonomy']
-		                              = $this->get_taxonomy( $new_instance['cvm_post_type'] );
-		$instance['cvm_posts_number']
-		                              = (int) $new_instance['cvm_posts_number'];
-		$instance['cvm_posts_tax']    = (int) $new_instance['cvm_posts_tax'];
-		$instance['cvm_vim_image']    = (bool) $new_instance['cvm_vim_image'];
-		$instance['cvm_show_playlist']
-		                              = (bool) $new_instance['cvm_show_playlist'];
-		$instance['theme']            = $new_instance['theme'];
-		$instance['layout']           = $new_instance['layout'];
-		$instance['show_excerpts']    = $new_instance['show_excerpts'];
-		$instance['playlist_loop']    = $new_instance['playlist_loop'];
-		$instance['aspect_ratio']     = $new_instance['aspect_ratio'];
-		$instance['width']            = absint( $new_instance['width'] );
-		$instance['volume']           = absint( $new_instance['volume'] );
-		$instance['title']            = $new_instance['title'];
-		$instance['byline']           = $new_instance['byline'];
-		$instance['portrait']         = $new_instance['portrait'];
+		$instance                      = $old_instance;
 
-		return $instance;
+		$instance['cvm_widget_title']  = $new_instance['cvm_widget_title'];
+		$instance['cvm_post_type']     = $new_instance['cvm_post_type'];
+		$instance['cvm_taxonomy']      = $this->get_taxonomy( $new_instance['cvm_post_type'] );
+		$instance['cvm_posts_number']  = (int) $new_instance['cvm_posts_number'];
+		$instance['cvm_posts_tax']     = (int) $new_instance['cvm_posts_tax'];
+		$instance['cvm_vim_image']     = (bool) $new_instance['cvm_vim_image'];
+		$instance['cvm_show_playlist'] = (bool) $new_instance['cvm_show_playlist'];
+
+		$instance['theme']             = $new_instance['theme'];
+		$instance['layout']            = $new_instance['layout'];
+		$instance['show_excerpts']     = $new_instance['show_excerpts'];
+		$instance['playlist_loop']     = $new_instance['playlist_loop'];
+		$instance['aspect_ratio']      = $new_instance['aspect_ratio'];
+		$instance['width']             = absint( $new_instance['width'] );
+		$instance['volume']            = absint( $new_instance['volume'] );
+		$instance['title']             = $new_instance['title'];
+		$instance['byline']            = $new_instance['byline'];
+		$instance['portrait']          = $new_instance['portrait'];
+
+		/**
+		 * Allow additional option setup
+         *
+         * @param array $instance_options
+         * @param array $new_instance
+         * @param array $old_instance
+		 */
+		return apply_filters(
+            'vimeotheque\classic-widget\playlist-widget-extra_options_save',
+            $instance,
+            $new_instance,
+            $old_instance
+        );
 	}
 
 	/**
@@ -397,9 +402,7 @@ class Playlist_Widget extends WP_Widget {
 					?>
                 </p>
 
-                <div class="cvm-theme-customize default"<?php if ( $options['theme']
-				                                                   != 'default'
-				): ?> style="display: none;"<?php endif; ?>>
+                <div class="cvm-theme-customize default"<?php if ( $options['theme'] != 'default' ): ?> style="display: none;"<?php endif; ?>>
 					<?php _e( 'Playlist location',
 						'codeflavors-vimeo-video-post-lite' ); ?> :
                     <label for=""><input type="radio"
@@ -431,6 +434,17 @@ class Playlist_Widget extends WP_Widget {
                                value="1"<?php Helper_Admin::check( (bool) $options['show_excerpts'] ); ?> />
                     </p>
                 </div>
+
+	            <?php
+	            /**
+	             *  Theme specific playlist settings
+	             */
+	            do_action(
+		            'vimeotheque\classic-widget\playlist-widget-theme-settings',
+                    $this,
+                    $options
+	            );
+	            ?>
 
                 <p>
                     <label for="<?php echo $this->get_field_id( 'playlist_loop' ); ?>"><?php _e( 'Loop playlist',
@@ -486,7 +500,9 @@ class Playlist_Widget extends WP_Widget {
 						'selected' => $options['aspect_ratio']
 					];
 					Helper_Admin::aspect_ratio_select( $args );
-					?><br/>
+					?>
+                </p>
+                <p>
                     <label for="<?php echo $this->get_field_id( 'width' ) ?>"><?php _e( 'Width',
 							'codeflavors-vimeo-video-post-lite' ); ?> :</label>
                     <input type="text" class="cvm_width"
