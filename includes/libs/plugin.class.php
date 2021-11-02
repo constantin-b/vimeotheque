@@ -188,6 +188,20 @@ class Plugin{
 			)
 		);
 
+		$this->playlist_themes->register_theme(
+			new Theme(
+				VIMEOTHEQUE_PATH . 'themes/simple/theme.php',
+				__( 'Simple', 'codeflavors-vimeo-video-post-lite' )
+			)
+		);
+
+		$this->playlist_themes->register_theme(
+			new Theme(
+				VIMEOTHEQUE_PATH . 'themes/listy/theme.php',
+				__( 'Listy', 'codeflavors-vimeo-video-post-lite' )
+			)
+		);
+
 		// internalization
 		load_plugin_textdomain(
 			'codeflavors-vimeo-video-post-lite',
