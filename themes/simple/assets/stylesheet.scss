@@ -1,0 +1,43 @@
+.vimeotheque-playlist{
+  &.simple{
+
+    article{
+      .entry-content{
+
+        padding:0;
+        display: flex;
+        margin-bottom: 1em;
+
+        div{
+          &.featured-image{
+            margin-right: 1em;
+            width:30%;
+
+            img{
+              width:100%;
+              max-width: 100%;
+            }
+
+          }
+        }
+
+        h3{
+          &.entry-title{
+            margin:0;
+            font-size: 1.2em;
+            width:60%;
+
+            a{
+              text-decoration: none;
+
+              &:hover{
+                text-decoration: underline;
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
