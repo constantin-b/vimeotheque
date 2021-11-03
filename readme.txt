@@ -122,6 +122,14 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.10 =
+- Added class "video-thumbnail" on the image for lazy loaded videos;
+- Implemented JS functionality for centering the image for lazy loaded videos when the image size ratio isn't the same as the video size ratio;
+- Implemented CSS functionality for centering lazy loaded images;
+- Added new playlist theme called "Simple";
+- Added new playlist theme called "Listy";
+- Implemented filters in classic widget to allow playlist themes to inject additional options.
+
 = 2.1.8 =
 - Added class 'no-lazy' to images to prevent W3 Total Cache from breaking the display in video playlists;
 - Solved display bug for videos in portrait mode that were lazy-loaded;
