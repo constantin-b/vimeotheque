@@ -9,16 +9,11 @@ vimeotheque.themes = vimeotheque.themes || {};
 
         const items = $('.vimeotheque-playlist.listy .entry-content')
 
-        const isEmpty = element => {
-            return !$.trim( element.html() )
-        }
-
-        items.addClass('closed').each(
+        items.each(
             ( i, item ) => {
+                if( $(item).height() > 200 ){
+                    $(item).addClass('closed')
 
-                if( isEmpty( $(item) ) ){
-                    $(item).remove()
-                }else{
                     $('<a />', {
                         class: 'read-more',
                         href: '#',
@@ -31,6 +26,8 @@ vimeotheque.themes = vimeotheque.themes || {};
                 }
             }
         )
+
+        vimeotheque.resizeAll()
     }
 
     exports.themeListy = themeListy
