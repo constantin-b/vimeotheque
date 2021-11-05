@@ -1,3 +1,6 @@
+2.1.11.alpha1
+- Solved bug in Vimeotheque "Add new" page that generated error when trying to import another video after the previous video was successfully imported.
+
 2.1.10 [2/Nov/2021]
 - Added class "video-thumbnail" on the image for lazy loaded videos;
 - Implemented JS functionality for centering the image for lazy loaded videos when the image size ratio isn't the same as the video size ratio;
