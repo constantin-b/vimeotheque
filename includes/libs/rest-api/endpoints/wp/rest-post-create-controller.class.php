@@ -81,14 +81,14 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		if( is_wp_error( $post ) ){
 			return $post;
 		}elseif( !$post || 'auto-draft' != $post->post_status ){
-			return new \WP_Error(
-				'vimeotheque_post_auto_draft_not_found',
-				__( 'An unknown error has occured, please refresh the page and try again.', 'codeflavors-vimeo-video-post-lite' )
-			);
+			$post = false;
 		}
 
 		$params = $request->get_params();
 		$params['status'] = Plugin::instance()->get_options_obj()->get_option( 'import_status' );
+		if( !$post ){
+			unset( $params['post_id'] );
+		}
 
 		$import_post_id = Plugin::instance()
 			->get_posts_importer()
