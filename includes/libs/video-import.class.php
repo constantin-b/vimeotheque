@@ -82,8 +82,13 @@ class Video_Import{
 
 		$raw_entries = isset( $result['data'] ) ? $result['data'] : [];
 		$entries =	[];
-		foreach ( $raw_entries as $entry ){			
-			$entries[] = $this->api->get_api_resource()->get_formatted_entry( $entry );
+		foreach ( $raw_entries as $entry ){
+			$_entry = $this->api->get_api_resource()
+			                    ->get_formatted_entry( $entry );
+
+			if( !is_null( $_entry ) ) {
+				$entries[] = $_entry;
+			}
 		}		
 		
 		$this->results = $entries;
