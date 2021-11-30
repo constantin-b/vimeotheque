@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.11 =
+- Solved bug in Vimeotheque "Add new" page that generated error when trying to import another video after the previous video was successfully imported;
+- Updated Vimeo API reource implementations to flag if a resource is enabled for importers (for resources used in back-end).
+
 = 2.1.10 =
 - Added class "video-thumbnail" on the image for lazy loaded videos;
 - Implemented JS functionality for centering the image for lazy loaded videos when the image size ratio isn't the same as the video size ratio;
