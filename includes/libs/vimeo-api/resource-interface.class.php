@@ -48,6 +48,14 @@ interface Resource_Interface{
 	public function is_single_entry();
 
 	/**
+	 * If the resource is not a single entry resource and musn't be displayed in importers,
+	 * return false.
+	 *
+	 * @return bool
+	 */
+	public function enabled_for_importers();
+
+	/**
 	 * Resource can be used in automatic import
 	 *
 	 * @return bool
