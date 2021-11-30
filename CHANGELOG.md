@@ -1,5 +1,6 @@
-2.1.11.alpha1
+2.1.11
 - Solved bug in Vimeotheque "Add new" page that generated error when trying to import another video after the previous video was successfully imported.
+- Updated Vimeo API reource implementations to flag if a resource is enabled for importers.
 
 2.1.10 [2/Nov/2021]
 - Added class "video-thumbnail" on the image for lazy loaded videos;
