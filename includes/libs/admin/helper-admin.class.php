@@ -147,12 +147,12 @@ class Helper_Admin {
 	 * @return string
 	 */
 	public static function select_feed_source( $name, $selected = false, $id = '' ){
-		$sources = Resource_Objects::instance()->get_resources( 'visible' );
+		$sources = Resource_Objects::instance()->get_resources();
 
 		$options = [];
 
 		foreach( $sources as $key => $source ){
-			if( $source->is_single_entry() ){
+			if( $source->is_single_entry() || !$source->enabled_for_importers() ){
 				continue;
 			}
 
