@@ -6,10 +6,13 @@
       <path value="$PROJECT_DIR$/../vimeo-video-post" />
       <path value="C:/WebServer/Apache-2.4-win64/logs" />
       <path value="$PROJECT_DIR$/../classic-editor" />
-      <path value="$PROJECT_DIR$/../complianz-gdpr" />
       <path value="$PROJECT_DIR$/../../themes/twentyfifteen" />
       <path value="$PROJECT_DIR$/../amp" />
       <path value="$PROJECT_DIR$/../sitepress-multilingual-cms" />
+      <path value="$PROJECT_DIR$/../../mu-plugins" />
+      <path value="$PROJECT_DIR$/../js_composer" />
+      <path value="$PROJECT_DIR$/../../themes/revolution" />
+      <path value="$PROJECT_DIR$/../revolution-plugin" />
     </include_path>
   </component>
 </project>
