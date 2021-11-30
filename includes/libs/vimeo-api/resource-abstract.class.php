@@ -177,7 +177,10 @@ class Resource_Abstract implements Resource_Interface {
 			}
 		}
 
-		$_params['fields'] = implode( ',', $this->get_fields() );
+		// Concrete implementation method returns false for all fields; check that fields are specified
+		if( $this->get_fields() ) {
+			$_params['fields'] = implode( ',', $this->get_fields() );
+		}
 
 		if( isset( $_params['sort'] ) && !in_array( $_params['sort'], $this->sort_options ) ){
 			return new \WP_Error(
@@ -219,6 +222,8 @@ class Resource_Abstract implements Resource_Interface {
 	/**
 	 *
 	 * For all available fields see: https://developer.vimeo.com/api/reference/responses/video
+	 *
+	 * If concrete implementation returns false,
 	 *
 	 * @return array
 	 */
@@ -326,6 +331,17 @@ class Resource_Abstract implements Resource_Interface {
 	 */
 	public function is_single_entry(){
 		return false;
+	}
+
+	/**
+	 * If the resource is not a single entry resource and mustn't be displayed
+	 * into the importers feed types option, concrete implementation must return
+	 * false.
+	 *
+	 * @return bool
+	 */
+	public function enabled_for_importers(){
+		return true;
 	}
 
 	/**
