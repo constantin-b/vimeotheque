@@ -156,7 +156,7 @@ class Helper{
 	 * @param int $width
 	 * @param bool $ratio - a given ratio; will override aspect ratio if set
 	 *
-	 * @return float|int
+	 * @return false|float
 	 */
 	public static function calculate_player_height( $aspect_ratio, $width, $ratio =  false ){
 		$width = absint($width);
@@ -165,24 +165,58 @@ class Helper{
 		                              ->get_option('aspect_override');
 
 		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
-			return floor( $width / $ratio );
-		}
-
-		$height = 0;
-		switch( $aspect_ratio ){
-			case '4x3':
-				$height = floor( ($width * 3) / 4 );
-				break;
-			case '16x9':
-			default:
-				$height = floor( ($width * 9) / 16 );
-				break;
-			case '2.35x1':
-				$height = floor( $width / 2.35 );
-				break;
+			$height = floor( $width / $ratio );
+		}else{
+			switch( $aspect_ratio ){
+				case '4x3':
+					$height = floor( ($width * 3) / 4 );
+					break;
+				case '16x9':
+				default:
+					$height = floor( ($width * 9) / 16 );
+					break;
+				case '2.35x1':
+					$height = floor( $width / 2.35 );
+					break;
+			}
 		}
 
 		return $height;
+	}
+
+	/**
+	 * Calculates player width based on the player height
+	 *
+	 * @param       $aspect_ratio
+	 * @param       $height
+	 * @param false $ratio
+	 *
+	 * @return false|float
+	 */
+	public static function calculate_player_width( $aspect_ratio, $height, $ratio = false ){
+		$height = absint( $height );
+
+		$override = Plugin::instance()->get_embed_options_obj()
+		                  ->get_option('aspect_override');
+
+		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
+			$width = floor( $height * $ratio );
+		}else{
+			switch( $aspect_ratio ){
+				case '4x3':
+					$width = floor( ($height * 4) / 3 );
+					break;
+				case '16x9':
+				default:
+				$width = floor( ($height * 16) / 9 );
+					break;
+				case '2.35x1':
+					$width = floor( $height * 2.35 );
+					break;
+			}
+		}
+
+		return $width;
 	}
 
 	/**
