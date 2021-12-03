@@ -309,6 +309,7 @@ class Plugin{
 			// extra settings
 			'aspect_ratio' => '16x9',
 			'width'	=> 640,
+			'max_height' => 0, // allows setup of a maximum embed height; must be a value over 50px to work
 			'video_position' => 'below-content', // in front-end custom post, where to display the video: above or below post content
 			'video_align' => 'align-left', // video alignment
 			'lazy_load' => false, // lazy load videos

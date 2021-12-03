@@ -334,6 +334,24 @@ use Vimeotheque\Helper;
 						</tr>
 
                         <tr>
+                            <th><label for="cvm_max_height"><?php _e( 'Maximum embed height', 'codeflavors-vimeo-video-post-lite' );?></label>:</th>
+                            <td>
+                                <input type="text" name="max_height" id="cvm_max_height" value="<?php echo $player_opt['max_height'];?>" size="2" />px -
+                                <span class="description">
+                                    <?php _e( 'The minium value is 50 pixels, for any value below it the height will not be overriden.', 'codeflavors-vimeo-video-post-lite' );?>
+                                </span>
+                                <?php
+                                    if( $player_opt['max_height'] && $player_opt['max_height'] < 50 ){
+                                        printf(
+                                            '<p class="description" style="color:red;">%s</p>',
+                                            __( 'For this option to take effect, the value must be bigger than 50.', 'codeflavors-vimeo-video-post-lite' )
+                                        );
+                                    }
+                                ?>
+                            </td>
+                        </tr>
+
+                        <tr>
                             <th><label for="cvm_video_position"><?php _e('Display video','codeflavors-vimeo-video-post-lite');?>:</label></th>
                             <td>
 								<?php
