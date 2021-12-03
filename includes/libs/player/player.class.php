@@ -59,7 +59,8 @@ class Player {
 		}
 
 		$_width = $width ? absint( $width ) : $this->get_embed_width();
-		$height = $this->get_embed_height( $_width );
+		$height = !$width && $this->get_max_height() ? $this->get_max_height() : $this->get_embed_height( $_width );
+
 		$css_class = $this->get_css_classes();
 
 		$embed_content = sprintf(
@@ -103,7 +104,7 @@ class Player {
 	/**
 	 * Get video embedding options
 	 *
-	 * @return mixed|void
+	 * @return void
 	 */
 	private function set_post_embed_options(){
 		/**
@@ -133,12 +134,43 @@ class Player {
 		 *
 		 * @param int $width    Width in pixels
 		 */
-		return apply_filters(
+		$w = apply_filters(
 			'vimeotheque\player\embed_width',
 			$this->options['width'],
 			$this->post->get_video_data(),
 			$this->post->get_post()
 		);
+
+		$max_height = $this->get_max_height();
+
+		if( $max_height ){
+			$h = $this->get_embed_height( $w );
+			if( $h > $max_height ){
+				$w = Helper::calculate_player_width( $this->options['aspect_ratio'], $max_height, $this->options['size_ratio']);
+			}
+		}
+
+		return $w;
+	}
+
+	/**
+	 * Get the maximum height, if anu
+	 *
+	 * @return false|int
+	 */
+	private function get_max_height(){
+		/**
+		 * Filter that allows a maximum height to be set for the player
+		 *
+		 * @param int $height   The maximum height that players must have
+		 */
+		$max_height = absint( apply_filters( 'vimeotheque\player\max_height', $this->options['max_height'] ) );
+
+		if( $max_height < 50 ){
+			$max_height = false;
+		}
+
+		return $max_height;
 	}
 
 	/**
@@ -146,7 +178,7 @@ class Player {
 	 *
 	 * @param $width
 	 *
-	 * @return float|int
+	 * @return false|float
 	 */
 	private function get_embed_height( $width ){
 		return Helper::calculate_player_height(
