@@ -1,4 +1,7 @@
-2.1.11
+2.1.12 [3/Dec/2021]
+- Added new embed option in plugin settings that allows the setup of a maximum player height in the entire website (useful for social network formats, like 9x16 or 1x1).
+
+2.1.11 [30/Nov/2021]
 - Solved bug in Vimeotheque "Add new" page that generated error when trying to import another video after the previous video was successfully imported.
 - Updated Vimeo API reource implementations to flag if a resource is enabled for importers.
 
