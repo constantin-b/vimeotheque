@@ -8,10 +8,14 @@ import {
     concat
 } from 'lodash'
 
-const { __ } = wp.i18n,
-    {
+const {
+    i18n : {
+        __
+    },
+    components: {
         CheckboxControl
-    } = wp.components
+    }
+} = wp
 
 class CategoryListBase extends React.Component{
     constructor( props ) {
