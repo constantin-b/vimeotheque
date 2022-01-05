@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Menu_Pages
- * @package Fratres\Admin\Menu
  */
 class Menu_Pages {
 	/**
