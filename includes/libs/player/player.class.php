@@ -210,6 +210,10 @@ class Player {
 			$default[] = 'portrait';
 		}
 
+		if( isset( $this->manual_options['class'] ) ){
+			$default[] = esc_attr( $this->manual_options['class'] );
+		}
+
 		/**
 		 * Generate additional CSS classes on Vimeotheque embed player container
 		 *
