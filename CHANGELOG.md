@@ -1,3 +1,6 @@
+2.1.13 [11/Jan/2022]
+- Updated PHP doc for several methods, classes and hooks.
+
 2.1.12 [3/Dec/2021]
 - Added new embed option in plugin settings that allows the setup of a maximum player height in the entire website (useful for social network formats, like 9x16 or 1x1).
 
