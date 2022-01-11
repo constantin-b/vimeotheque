@@ -5,6 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ *
+ * @ignore
+ */
 final class Theme {
 	/**
 	 * Theme main file

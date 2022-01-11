@@ -37,8 +37,8 @@ class Helper {
 			 *
 			 * @since 2.0.15
 			 *
-			 * @param array         $sizes  Registered thumbnail sizes stored as size_name => thumbnail ID in video thumbnails array
-			 * @param Video_Post    $video  The current video post being processed in loop
+			 * @param array         $sizes  Registered thumbnail sizes stored as size_name => thumbnail ID in video thumbnails array.
+			 * @param Video_Post    $video  The current video post being processed in loop.
 			 */
 			(array) apply_filters( 'vimeotheque\themes\thumbnail_image_sizes', [], $video ),
 			[
@@ -80,17 +80,17 @@ class Helper {
 	 * @param string $after
 	 * @param bool $echo
 	 *
-	 * @return string|void
+	 * @return string
 	 */
 	public static function get_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
 
 		$img_url = self::get_thumbnail_url( $size );
 
 		/**
-		 * Filter that allows additional image CSS classes to be added to images
+		 * Filter that allows additional CSS classes to be added to images.
 		 *
-		 * @param array         $classes    Array of CSS classes
-		 * @param Video_Post    $video      The video post being processed
+		 * @param array         $classes    Array of CSS classes.
+		 * @param Video_Post    $video      The video post being processed.
 		 */
 		$classes = apply_filters(
 			'vimeotheque\themes\image_class',
@@ -258,7 +258,10 @@ class Helper {
 			$text = strip_shortcodes( $text );
 			$text = excerpt_remove_blocks( $text );
 
-			/** This filter is documented in wp-includes/post-template.php */
+			/**
+			 * This filter is documented in wp-includes/post-template.php
+			 * @ignore
+			 */
 			$text = apply_filters( 'the_content', $text );
 			$text = str_replace( ']]>', ']]&gt;', $text );
 		}
@@ -281,7 +284,7 @@ class Helper {
 		 * @since 2.9.0
 		 *
 		 * @param string $more_string   The string shown within the more link.
-		 * @param \WP_Post $post        The WP_Post object being processed
+		 * @param \WP_Post $post        The WP_Post object being processed.
 		 */
 
 		$excerpt_more = apply_filters(

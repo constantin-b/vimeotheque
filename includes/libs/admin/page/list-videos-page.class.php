@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Modal Videos List page 
  * @author CodeFlavors
- *
+ * @ignore
  */
 class List_Videos_Page extends Page_Abstract implements Page_Interface{
 	/**
@@ -40,11 +40,17 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 			[ 'jquery' ],
 			'1.0'
 		);
-		
+		/**
+		 * @ignore
+		 */
 		do_action('admin_print_styles');
+		/**
+		 * @ignore
+		 */
 		do_action('admin_print_scripts');
 		/**
-		 * Action triggered on loading the vide modal window
+		 * Action triggered on loading the video modal window
+         * @ignore
 		 */
 		do_action('vimeotheque\admin\video_list_modal_print_scripts');
 		echo '</head>';

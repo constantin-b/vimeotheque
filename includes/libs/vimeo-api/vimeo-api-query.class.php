@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Vimeo_Api_Query
  * @package Vimeotheque
+ * @ignore
  */
 class Vimeo_Api_Query extends Vimeo {
 
@@ -106,9 +107,9 @@ class Vimeo_Api_Query extends Vimeo {
 		$request_args = [
 			'method' => $api_resource->get_request_method(),
 			/**
-			 * Vimeo API query request timeout filter
+			 * Vimeo API query request timeout filter.
 			 *
-			 * @param int $timeouot     The request timeout
+			 * @param int $timeouot     The request timeout.
 			 */
 			'timeout' => apply_filters( 'vimeotheque\vimeo_api\request_timeout' , 30 ),
 			'sslverify' => false,

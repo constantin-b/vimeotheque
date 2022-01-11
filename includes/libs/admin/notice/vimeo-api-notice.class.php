@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ * @ignore
+ */
 class Vimeo_Api_Notice extends Notice_Abstract implements Notice_Interface {
 
 	/**
@@ -19,9 +22,9 @@ class Vimeo_Api_Notice extends Notice_Abstract implements Notice_Interface {
 	 */
 	public function get_notice() {
 		/**
-		 * Filter that can prevent all plugin messages from being displayed
+		 * Filter that can prevent Vimeo API messages as WP notice in WP admin.
 		 *
-		 * @param bool $allow   Show plugin messages (true) or hide them (false)
+		 * @param bool $allow   Show messages (true) or hide them (false).
 		 */
 		$allow = apply_filters( 'vimeotheque\admin\notice\vimeo_api_notice', true );
 		if( !$allow ){

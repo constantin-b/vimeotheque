@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Shortcode_Abstract
  * @package Vimeotheque\Shortcode
+ * @ignore
  */
 class Shortcode_Abstract implements Shortcode_Interface {
 	/**
@@ -92,10 +93,10 @@ class Shortcode_Abstract implements Shortcode_Interface {
 		}
 
 		/**
-		 * Generate additional CSS classes on Vimeotheque embed player container
+		 * Generate additional CSS classes on Vimeotheque embed player container.
 		 *
-		 * @param array $classes    CSS classes to be added
-		 * @param \WP_Post $post    The post object reference
+		 * @param array $classes    CSS classes to be added.
+		 * @param \WP_Post $post    The post object reference.
 		 */
 		$classes = apply_filters(
 			'vimeotheque\playlist\css_class',

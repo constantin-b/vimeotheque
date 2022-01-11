@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * https://developer.vimeo.com/api/reference/videos#search_videos
  *
  * @package Vimeotheque
+ * @ignore
  */
 class Search_Resource extends Resource_Abstract implements Resource_Interface {
 	/**

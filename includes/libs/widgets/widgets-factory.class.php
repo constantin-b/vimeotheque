@@ -8,7 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-
+/**
+ * @ignore
+ */
 class Widgets_Factory{
 /**
 	 * @var Plugin

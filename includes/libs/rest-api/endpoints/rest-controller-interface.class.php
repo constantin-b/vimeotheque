@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * @ignore
+ */
 interface Rest_Controller_Interface {
 	/**
 	 * Returns the Rest API base of the resource

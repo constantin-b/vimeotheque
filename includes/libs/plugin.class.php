@@ -237,9 +237,9 @@ class Plugin{
 	 */
 	private function load_importer(){
 		/**
-		 * Posts importer filter
+		 * Posts importer filter.
 		 *
-		 * @param Posts_Import $importer The Posts_Import object reference
+		 * @param Posts_Import $importer The Posts_Import object reference.
 		 */
 		$this->posts_import = apply_filters(
 			'vimeotheque\set_importer',
@@ -281,9 +281,9 @@ class Plugin{
 		];
 
 		/**
-		 * Options filter
+		 * Options filter.
 		 *
-		 * @param array $defaults Default options array
+		 * @param array $defaults Default options array.
 		 */
 		$defaults = apply_filters(
 			'vimeotheque\options_default',
@@ -325,9 +325,9 @@ class Plugin{
 		];
 
 		/**
-		 * Filter for player options
+		 * Player options filter.
 		 *
-		 * @param array $defaults Default options array
+		 * @param array $defaults Default options array.
 		 */
 		$defaults = apply_filters(
 			'vimeotheque\player_options_default',

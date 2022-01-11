@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ * @ignore
+ */
 class Message {
 	/**
 	 * Store user reference

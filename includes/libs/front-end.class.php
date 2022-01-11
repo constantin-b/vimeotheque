@@ -1,8 +1,6 @@
 <?php
 namespace Vimeotheque;
 
-use Vimeotheque\Admin\Helper_Admin;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -35,6 +33,7 @@ class Front_End{
 
 	/**
 	 * Front_End constructor.
+	 * @ignore
 	 *
 	 * @param Plugin $plugin
 	 */
@@ -45,18 +44,18 @@ class Front_End{
 	}
 
 	/**
-	 * Init action callback
-	 * Will set all filters and actions needed by the plugin to do embeds
+	 * Init action callback.
+	 * Will set all filters and actions needed by the plugin to do embeds and perform front-end
+	 * tasks. Used for internal purposes, should not be called manually.
 	 */
 	public function init(){
-		/**
-		 * Allow automatic embedding of videos callback to be prioritized preferentially.
-		 * This can be used in case a membership plugin is used and the priority needs to
-		 * be customized in order to protect the content.
-		 *
-		 * @param int $priority The priority set to do the embedding into the post content
-		 */
+
 		$this->embed_filter_priority = intval(
+			/**
+			 * Automatic video embedding in post content filter priority.
+			 *
+			 * @param int $priority The "the_content" filter priority used to automatically embed the video into the post content.
+			 */
 			apply_filters(
 				'vimeotheque\embed_filter_priority',
 				$this->embed_filter_priority
@@ -94,10 +93,12 @@ class Front_End{
 	}
 
 	/**
-	 * Second filter on content - embeds video in post content
+	 * Post content filter callback to embed the video into the post content.
+	 * The method is called on the "post_content" filter and embeds the attached video above
+	 * or below the post content, depending on the setting from the plugin Settings or the individual post options.
 	 *
-	 * @param string $content
-	 * @return string
+	 * @param string $content   The post content
+	 * @return string   The post content
 	 */
 	public function embed_video( $content ){
 		if( ! Helper::video_is_visible() ){
@@ -143,9 +144,10 @@ class Front_End{
 		], 8 );
 
 		/**
-		 * Action that runs when the video is set to be inserted into the post content
+		 * Fires before the video embed is placed into the post content.
+		 * Action that runs when the video is set to be automatically inserted into the post content.
 		 *
-		 * @param Video_Post $video_post The video post object that is processed
+		 * @param Video_Post $video_post The \Vimeotheque\Video_Post object generated for the current post in loop.
 		 */
 		do_action(
 			'vimeotheque\automatic_embed_in_content',
@@ -160,6 +162,9 @@ class Front_End{
 	}
 
 	/**
+	 * Post featured image filter callback.
+	 * Filter for the WP featured image to replace it with the video embed if option is enabled from the plugin Settings.
+	 *
 	 * @param $html
 	 * @param $post_id
 	 *
@@ -184,11 +189,12 @@ class Front_End{
 		$video_container = Helper::embed_video( $video, [], false );
 
 		/**
-		 * Filter the embed code
+		 * Filter the embed code when option to replace featured image is on.
+		 * Filter is triggered when the option to embed videos in place of the featured image is activated.
 		 *
-		 * @param string $video_container
-		 * @param Video_Post $video
-		 * @param string $html
+		 * @param string $video_container   The HTML element that will contrin the video embed.
+		 * @param Video_Post $video         The \Vimeotheque\Video_Post post object.
+		 * @param string $thumbnail_html    The featured image HTML code.
 		 */
 		return apply_filters(
 			'vimeotheque_enhanced_embed\embed_code',
@@ -199,7 +205,9 @@ class Front_End{
 	}
 
 	/**
-	 * Check if post should be skipped from autoembedding
+	 * Check if post should be skipped from autoembedding.
+	 *
+	 * @ignore
 	 *
 	 * @param \WP_Post $post
 	 *
@@ -210,7 +218,9 @@ class Front_End{
 	}
 
 	/**
-	 * Embed player script on video pages
+	 * Embed player script on video pages.
+	 *
+	 * @ignore  Internal functionality
 	 *
 	 * @return void
 	 */
@@ -226,6 +236,8 @@ class Front_End{
 	 * Useful in template pages using function the_tags() - this function works
 	 * only for the default post_tag taxonomy; the filter adds functionality
 	 * for plugin post type tag taxonomy
+	 *
+	 * @ignore  Internal functionality
 	 *
 	 * @param array $terms - the terms found
 	 * @param int $post_id - the id of the post
@@ -250,6 +262,8 @@ class Front_End{
 	}
 
 	/**
+	 * Return the filter priority for the automaticembed in post content
+	 *
 	 * @return int
 	 */
 	public function get_embed_filter_priority(){
@@ -259,6 +273,8 @@ class Front_End{
 	/**
 	 * Remove filter set on post content to embed the video;
 	 * prevents automatic video embed above or below content when called.
+	 *
+	 * @ignore  Internal functionality
 	 *
 	 * @param int|false $post_id    The post ID registered to skip the auto embedding for
 	 */

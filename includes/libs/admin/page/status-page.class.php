@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Status_Page
  *
  * @package Vimeotheque\Admin\Page
+ * @ignore
  */
 class Status_Page extends Page_Abstract implements Page_Interface {
 
@@ -31,9 +32,9 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	    $embed_options = $this->get_embed_options();
 
 		/**
-		 * Filter that allows additional options and variables
+		 * Filter that allows additional options and variables.
          *
-         * @param array $options The options to be rgistered
+         * @param array $options The options to be rgistered.
 		 */
 	    $other_options = apply_filters( 'vimeotheque\admin\status\other_options', [] );
 	    $extensions = parent::get_admin()->get_extensions()->get_registered_extensions();

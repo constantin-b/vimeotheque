@@ -12,6 +12,7 @@ use WP_Error;
  * Class Vimeo. Shared between Vimeo_Oauth and Vimeo_Query classes
  *
  * @package Vimeotheque
+ * @ignore
  */
 abstract class Vimeo{
 

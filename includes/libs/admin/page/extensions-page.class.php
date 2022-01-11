@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ * @ignore
+ */
 class Extensions_Page extends Page_Abstract implements Page_Interface{
 
 	/**
@@ -58,8 +61,9 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 	                        );
                         }else {
 	                        /**
-	                         * Run action for each extension installation
-	                         *
+	                         * Run action for each extension installation.
+	                         * @ignore
+                             *
 	                         * @param Extension_Interface $extension The extension object.
 	                         */
 	                        echo apply_filters(
@@ -130,7 +134,8 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
                     );
 
 	                /**
-	                 * Filter the update message
+	                 * Filter the update message.
+                     * @ignore
                      *
                      * @param string $message                   The update message
                      * @param Extension_Interface $extension    The extension being displayed

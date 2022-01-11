@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Video
  * @package Vimeotheque\Shortcode
+ * @ignore
  */
 class Video extends Shortcode_Abstract implements Shortcode_Interface {
 	/**

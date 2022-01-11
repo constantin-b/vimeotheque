@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Channel_Resource
  * @package Vimeotheque
  * @link https://developer.vimeo.com/api/reference/channels
+ * @ignore
  */
 class Channel_Resource extends Resource_Abstract implements Resource_Interface {
 

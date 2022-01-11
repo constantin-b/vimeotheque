@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Vimeotheque PRO autoloader.
- *
+ * @ignore
  * @since 2.0
  */
 class Autoload {

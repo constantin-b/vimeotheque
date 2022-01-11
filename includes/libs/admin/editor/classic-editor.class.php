@@ -131,9 +131,9 @@ class Classic_Editor{
 			);
 		}else {
 			/**
-			 * Filter to disable the shortcode metabox
+			 * Filter to disable the shortcode metabox in Classic Editor.
              *
-             * @param bool $allow   Allow the shortcode meta box (true) or disable it (false)
+             * @param bool $allow   Allow the shortcode meta box (true) or disable it (false).
 			 */
 		    $allowed = apply_filters( 'vimeotheque\classic_editor\show_shortcode_meta_box', true );
 
@@ -180,7 +180,8 @@ class Classic_Editor{
 			<tbody>
             <?php
                 /**
-                 * Run action that can be used to hook to and display additional options
+                 * Run action that can be used to hook to and display additional options.
+                 * @ignore
                  *
                  * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
                  */
@@ -386,7 +387,7 @@ class Classic_Editor{
 
 		/**
 		 * Run action that can be used to hook to and display additional options
-		 *
+		 * @ignore
 		 * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
 		 */
 		do_action(
@@ -489,7 +490,8 @@ class Classic_Editor{
 
                                     <?php
                                         /**
-                                         *  Theme specific playlist shortcode settings
+                                         * Theme specific playlist shortcode settings
+                                         * @ignore
                                          */
                                         do_action(
                                             'vimeotheque\admin\classic-editor\playlist-shortcode-theme-settings'
@@ -774,8 +776,8 @@ class Classic_Editor{
 			}
 
 			/**
-			 * Run hook when Vimeotheque loads scripts and styles
-			 *  for the Classic editor
+			 * Run hook when Vimeotheque loads scripts and styles for the Classic editor.
+             * @ignore
 			 */
 			do_action( 'vimeotheque\editor\classic-editor-enqueue');
 

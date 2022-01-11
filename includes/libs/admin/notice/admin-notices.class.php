@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * @ignore
+ */
 class Admin_Notices{
 	/**
 	 * Instance.

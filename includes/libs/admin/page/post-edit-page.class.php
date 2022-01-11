@@ -16,6 +16,7 @@ use Vimeotheque\Video_Post;
 /**
  * Class Post_Edit_Page
  * @package Vimeotheque\Admin
+ * @ignore
  */
 class Post_Edit_Page{
 	/**
@@ -149,7 +150,7 @@ class Post_Edit_Page{
 
 			/**
 			 * Allow enqueue of additional scripts
-             *
+             * @ignore
              * @param string $handle React app script handle
 			 */
             do_action( 'vimeotheque\admin\single-video-import-enqueue-script', $handle );

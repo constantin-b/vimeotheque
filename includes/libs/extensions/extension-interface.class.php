@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Interface Extension_Interface
  * @package Vimeotheque\Extensions
  * @since 2.1
+ * @ignore
  */
 interface Extension_Interface {
 	/**

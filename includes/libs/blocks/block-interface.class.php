@@ -7,6 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ *
+ * @ignore
+ */
 interface Block_Interface{
 	/**
 	 * Returns handle for block main script

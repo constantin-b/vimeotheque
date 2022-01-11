@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ *
+ * @ignore
+ */
 class Post_Registration {
 	/**
 	 * @var Register_Post[]

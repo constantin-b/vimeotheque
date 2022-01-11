@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Video_Resource
  * @package Vimeotheque
+ * @ignore
  */
 class Video_Resource extends Resource_Abstract implements Resource_Interface {
 

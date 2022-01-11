@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Post_Settings
  * @package Vimeotheque
+ * @ignore
  */
 class Post_Settings{
 	/**

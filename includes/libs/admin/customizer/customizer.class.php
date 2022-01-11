@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Customizer
  * @package Vimeotheque\Admin\Customizer
+ * @ignore
  */
 class Customizer {
 	/**

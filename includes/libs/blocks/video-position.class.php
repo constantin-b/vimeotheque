@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Video
  * @package Vimeotheque\Blocks
+ * @ignore
  */
 class Video_Position extends Block_Abstract implements Block_Interface {
 	/**
@@ -146,10 +147,10 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	 */
 	private function get_block_extra_params( \WP_Post $post ){
 		/**
-		 * Filter for player options. Used to get block extra parameters and put them on the block
-		 * in case video position block is not present in post content.
+		 * Filter for player options.
+		 * Used to get block extra parameters and put them on the block in case video position block is not present in post content.
 		 *
-		 * @param array $defaults Default options array
+		 * @param array $defaults Default options array.
 		 */
 		$defaults = apply_filters(
 			'vimeotheque\player_options_default',

@@ -96,7 +96,7 @@ use Vimeotheque\Helper;
 
                         <?php
                             /**
-                             * Action that allows other settings to be displayed in page into the General Settings tab
+                             * Action that allows other settings to be displayed in page into the General Settings tab.
                              */
                             do_action( 'vimeotheque\admin\general_settings_section' );
                         ?>
@@ -119,7 +119,7 @@ use Vimeotheque\Helper;
 
 						<?php
 						/**
-						 * Action that allows other settings to be displayed in page into the Post Type tab
+						 * Action that allows other settings to be displayed in page into the Post Type tab.
 						 */
 						do_action( 'vimeotheque\admin\post_type_section' );
 						?>
@@ -221,7 +221,7 @@ use Vimeotheque\Helper;
 
 						<?php
 						/**
-						 * Action that allows other settings to be displayed in page into the Content Options tab
+						 * Action that allows other settings to be displayed in page into the Content Options tab.
 						 */
 						do_action( 'vimeotheque\admin\content_options_section' );
 						?>
@@ -251,7 +251,7 @@ use Vimeotheque\Helper;
 
 						<?php
 						/**
-						 * Action that allows other settings to be displayed in page into the Image Options tab
+						 * Action that allows other settings to be displayed in page into the Image Options tab.
 						 */
 						do_action( 'vimeotheque\admin\image_options_section' );
 						?>
@@ -292,7 +292,7 @@ use Vimeotheque\Helper;
 
                         <?php
                         /**
-                         * Action that allows other settings to be displayed in page into the Import Options tab
+                         * Action that allows other settings to be displayed in page into the Import Options tab.
                          */
                             do_action( 'vimeotheque\admin\import_options_section' );
                         ?>
@@ -427,7 +427,7 @@ use Vimeotheque\Helper;
 
                         <?php
                             /**
-                             * Action that allows other settings to be displayed in page into the Embed Options tab
+                             * Action that allows other settings to be displayed in page into the Embed Options tab.
                              */
                             do_action( 'vimeotheque\admin\embed_options_section' );
                         ?>
@@ -512,13 +512,15 @@ use Vimeotheque\Helper;
 								<h4><i class="dashicons dashicons-admin-network"></i> <?php _e('Vimeo OAuth keys', 'codeflavors-vimeo-video-post-lite');?></h4>
                                 <?php
                                     /**
-                                     * Action running on OAuth instructions section
+                                     * Action running on OAuth instructions section.
                                      */
                                     do_action( 'vimeotheque\admin\settings\oauth_instructions' );
 
                                     $api_set = empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] );
                                     /**
                                      * Allow hiding or showing of OAuth setup instructions
+                                     * @ignore
+                                     * @param bool Show (true) or hide (false) the options.
                                      */
                                     $show = apply_filters( 'vimeotheque\admin\settings\show_oauth_instructions', $api_set );
 
@@ -581,7 +583,7 @@ use Vimeotheque\Helper;
                                 <hr />
 								<?php
                                     /**
-                                     * Action that allows display of additional OAuth settings
+                                     * Action that allows display of additional OAuth settings.
                                      */
                                     do_action( 'vimeotheque\admin\api_oauth_section' );
 								?>
@@ -589,14 +591,14 @@ use Vimeotheque\Helper;
 						</tr>
                             <?php
                             /**
-                             * Action that allows display of additional OAuth settings
+                             * Action that allows display of additional OAuth settings.
                              */
                             do_action( 'vimeotheque\admin\api_oauth_settings_extra' );
                             ?>
                         <?php endif;?>
 						<?php
                             /**
-                             * Action that allows display of additional OAuth settings
+                             * Action that allows display of additional OAuth settings.
                              */
                             do_action( 'vimeotheque\admin\credentials_section' );
 						?>

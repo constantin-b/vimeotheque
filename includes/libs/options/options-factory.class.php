@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Options_Factory
  * Use it to create unique instances of Options class to manipulate WP options
+ * @ignore
  */
 class Options_Factory{
 	/**

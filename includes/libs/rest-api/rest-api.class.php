@@ -111,11 +111,11 @@ class Rest_Api{
 		}
 
 		/**
-		 * Run filter on returned result to allow third party to add additional fields
+		 * Run filter on returned result to allow third party to add additional fields.
 		 *
-		 * @param null|array $response  The returned fields that wil be added to Rest API
-		 * @param array $object         The queried object
-		 * @param Video_Post $video     The video post object
+		 * @param null|array $response  The returned fields that wil be added to Rest API.
+		 * @param array $object         The queried object.
+		 * @param Video_Post $video     The video post object.
 		 */
 		return apply_filters( 'vimeotheque\rest_api\fields', $response, $object, $video );
 	}

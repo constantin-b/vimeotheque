@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Block_Abstract
  * @package Vimeotheque\Blocks
+ * @ignore
  */
 class Block_Abstract {
 

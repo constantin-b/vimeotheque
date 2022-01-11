@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Resource_Abstract
  * @package Vimeotheque\Vimeo_Api
+ * @ignore
  */
 class Resource_Abstract implements Resource_Interface {
 	/**
@@ -203,9 +204,9 @@ class Resource_Abstract implements Resource_Interface {
 		}
 
 		/**
-		 * Filter API query params
+		 * Filter API query params.
 		 *
-		 * @param array $_params    Request parameters
+		 * @param array $_params    Request parameters.
 		 */
 		$_params = apply_filters( 'vimeotheque\vimeo_api\query_params', $_params );
 
@@ -295,11 +296,11 @@ class Resource_Abstract implements Resource_Interface {
 	 */
 	public function get_optional_fields(){
 		/**
-		 * Filter that allows setup of additional JSON fields in Vimeo API requests
+		 * Filter that allows setup of additional JSON fields in Vimeo API requests.
 		 *
 		 * @see https://developer.vimeo.com/api/reference/responses/video
 		 *
-		 * @param array $fields The additional JSON fields
+		 * @param array $fields The additional JSON fields.
 		 */
 		return apply_filters( 'vimeotheque\vimeo_api\add_json_fields', [] );
 	}

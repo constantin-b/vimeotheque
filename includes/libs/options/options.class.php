@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin options management class
  * All plugin options should be retrieved by using this class
  * Implements Singleton pattern
+ * @ignore
  */
 class Options{
 	

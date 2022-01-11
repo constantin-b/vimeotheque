@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Interface Resource_Interface
  * @package Vimeotheque
+ * @ignore
  */
 interface Resource_Interface{
 	/**

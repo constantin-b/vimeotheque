@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class User_Resource
  * @package Vimeotheque
  * @link https://developer.vimeo.com/api/reference/videos#get_videos
+ * @ignore
  */
 class User_Resource extends Resource_Abstract implements Resource_Interface {
 

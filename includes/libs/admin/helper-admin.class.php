@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Helper_Admin
  * @package Vimeotheque\Admin
+ * @ignore
  */
 class Helper_Admin {
 

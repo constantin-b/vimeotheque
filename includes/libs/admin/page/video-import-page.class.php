@@ -16,7 +16,7 @@ use WP_List_Table;
 /**
  * Video import page
  * @author CodeFlavors
- *
+ * @ignore
  */
 class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
@@ -95,7 +95,8 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			$this->meta->add_metaboxes();
 
 			/**
-			 * Run action on meta boxes display
+			 * Run action on meta boxes display.
+             * @ignore
 			 */
 			do_action( 'vimeotheque\admin\import\add_metaboxes' );
 
@@ -244,7 +245,8 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 		);
 
 		/**
-		 * Video import page load action used to enqueue assets
+		 * Video import page load action used to enqueue assets.
+         * @ignore
 		 */
 		do_action( 'vimeotheque\admin\video-import-assets' );
 	}

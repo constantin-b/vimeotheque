@@ -11,6 +11,7 @@ use Vimeotheque\Video_Import;
 /**
  * Class Video_Import_List_Table
  * @package Vimeotheque\Admin
+ * @ignore
  */
 class Video_Import_List_Table extends \WP_List_Table{
 	

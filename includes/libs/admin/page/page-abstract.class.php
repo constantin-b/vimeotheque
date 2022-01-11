@@ -13,6 +13,7 @@ if( !defined('ABSPATH') ){
 
 /**
  * Admin page base class, all pages should extend from this
+ * @ignore
  */
 abstract class Page_Abstract implements Page_Interface {
 

@@ -16,28 +16,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Video_Post{
 
 	/**
-	 * Vimeo video ID
+	 * Vimeo video ID.
 	 *
 	 * @var string
 	 */
 	public $video_id = '';
 
 	/**
-	 * Vimeo uploader username
+	 * Vimeo uploader username.
 	 *
 	 * @var string
 	 */
 	public $uploader = '';
 
 	/**
-	 * Vimeo uploader URL
+	 * Vimeo uploader URL.
 	 *
 	 * @var string
 	 */
 	public $uploader_uri = '';
 
 	/**
-	 * Vimeo publishing date
+	 * Vimeo publishing date.
 	 *
 	 * @var string
 	 */
@@ -51,27 +51,29 @@ class Video_Post{
 	public $_published = '';
 
 	/**
-	 * Vimeo video update date
+	 * Vimeo video update date.
 	 *
 	 * @var string
 	 */
 	public $updated = '';
 
 	/**
-	 * Vimeo video title
+	 * Vimeo video title.
 	 *
 	 * @var string
 	 */
 	public $title = '';
 
 	/**
-	 * Vimeo video description
+	 * Vimeo video description.
 	 *
 	 * @var string
 	 */
 	public $description = '';
 
 	/**
+	 * @ignore
+	 *
 	 * @todo Determine how categories will be stored
 	 *
 	 * @var
@@ -79,104 +81,106 @@ class Video_Post{
 	public $category;
 
 	/**
-	 * Vimeo video tags
+	 * Vimeo video tags.
 	 *
 	 * @var array
 	 */
 	public $tags = [];
 
 	/**
-	 * Vimeo video duration
+	 * Vimeo video duration.
 	 *
 	 * @var string
 	 */
 	public $duration = '';
 
 	/**
-	 * Vimeo video duration as HH:MM:SS
+	 * Vimeo video duration as HH:MM:SS.
 	 *
 	 * @var string
 	 */
 	public $_duration = '';
 
 	/**
-	 * Vimeo video thumbnails
+	 * Vimeo video thumbnails.
 	 *
 	 * @var array
 	 */
 	public $thumbnails = [];
 
 	/**
-	 * The unique image URI
+	 * The unique image URI.
 	 *
 	 * @var string
 	 */
 	public $image_uri = '';
 
 	/**
-	 * Video statistics (view count, comment count and like count)
+	 * Video statistics (view count, comment count and like count).
 	 *
 	 * @var array
 	 */
 	public $stats = [];
 
 	/**
-	 * Video privacy
+	 * Video privacy.
 	 *
 	 * @var string
 	 */
 	public $privacy = '';
 
 	/**
-	 * Vimeo view privacy
+	 * Video view privacy.
 	 *
 	 * @var string
 	 */
 	public $view_privacy = '';
 
 	/**
-	 * Vimeo embed privacy
+	 * Vimeo embed privacy.
 	 *
 	 * @var string
 	 */
 	public $embed_privacy = '';
 
 	/**
-	 * Video size (width, height and size ratio)
+	 * Video size (width, height and size ratio).
 	 *
 	 * @var array
 	 */
 	public $size = [];
 
 	/**
-	 * Vimeo video type (video, live)
+	 * Vimeo video type (video, live).
 	 *
 	 * @var string
 	 */
 	public $type = '';
 
 	/**
-	 * Vimeo video URI (ie. videos/2312953)
+	 * Vimeo video URI (ie. videos/2312953).
 	 *
 	 * @var string
 	 */
 	public $uri = '';
 
 	/**
-	 * Vimeo video URL
+	 * Vimeo video URL.
 	 *
 	 * @var string
 	 */
 	public $link = '';
 
 	/**
-	 * The WP_Post object
+	 * The WP_Post object.
 	 *
 	 * @var array|\WP_Post|null
 	 */
 	private $_post = null;
 
 	/**
+	 * The video image import class reference.
+	 *
 	 * @var Image_Import
 	 */
 	private $_image;
@@ -198,6 +202,7 @@ class Video_Post{
 
 	/**
 	 * Set class properties
+	 * @ignore
 	 *
 	 * @param $data
 	 */
@@ -210,7 +215,7 @@ class Video_Post{
 	}
 
 	/**
-	 * Check if it is a video post
+	 * Check if it is a video post.
 	 *
 	 * @return bool
 	 */
@@ -222,16 +227,16 @@ class Video_Post{
 		$result = $this->cpt()->get_post_type() == $this->get_post()->post_type;
 
 		/**
-		 * Filter on checkup is the post is a Vimeotheque post
+		 * Filter on checkup if the post is a Vimeotheque post.
 		 *
-		 * @param bool $result              Is the post a Vimeotheque post (true) or is it a regular post (false)
-		 * @param Video_Post $video_post    Video post \Vimeotheque\Video_Post object reference
+		 * @param bool $result              Is the post a Vimeotheque post (true) or is not (false).
+		 * @param Video_Post $video_post    Video post \Vimeotheque\Video_Post object reference.
 		 */
 		return apply_filters( 'vimeotheque\video\is_video', $result, $this );
 	}
 
 	/**
-	 * Get video data stored on post
+	 * Get the video data stored on post.
 	 *
 	 * @return mixed|void
 	 */
@@ -253,9 +258,9 @@ class Video_Post{
 	}
 
 	/**
-	 * Set video data on post
+	 * Set video data on post.
 	 *
-	 * @param $data
+	 * @param array $data   An array of options that should be set on the post.
 	 *
 	 * @return bool|int|void
 	 */
@@ -284,7 +289,7 @@ class Video_Post{
 	}
 
 	/**
-	 * Returns embed options for the post
+	 * Returns embed options for the post.
 	 *
 	 * @param bool $output
 	 *

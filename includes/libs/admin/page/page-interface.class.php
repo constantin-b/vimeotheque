@@ -11,6 +11,7 @@ if( !defined('ABSPATH') ){
 
 /**
  * Admin page Interface
+ * @ignore
  */
 interface Page_Interface{
 	/**

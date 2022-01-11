@@ -202,8 +202,10 @@ class Image_Import {
 				'user-agent' => Helper::request_user_agent(),
 				'sslverify' => false,
 				/**
-				 * Request timeout filter
-				 * @param int $timeout Remote request timeout in seconds
+				 * Request timeout filter.
+				 * Video image import request timeout in seconds.
+				 *
+				 * @param int $timeout Remote request timeout in seconds.
 				 */
 				'timeout' => apply_filters( 'vimeotheque\image_request_timeout', 30 )
 			]
@@ -271,11 +273,11 @@ class Image_Import {
 		$filename = $upload['file'];
 
 		/**
-		 * Action that allows modification of image that will be attached to video post
+		 * Action that allows modification of image that will be attached to video post.
 		 *
-		 * @param string $filename  Complete path to original video image within WP gallery
-		 * @param int $post_id      The post ID that the image will be attached to as featured image
-		 * @param string $video_id  The video ID from Vimeo
+		 * @param string $filename  Complete path to original video image within WP gallery.
+		 * @param int $post_id      The post ID that the image will be attached to as featured image.
+		 * @param string $video_id  The video ID from Vimeo.
 		 */
 		do_action(
 			'vimeotheque\image_file_raw',
@@ -325,11 +327,11 @@ class Image_Import {
 		);
 
 		/**
-		 * Trigger action on plugin import
+		 * Trigger action on plugin import.
 		 *
-		 * @param int $attachment_id    ID of attachment create
-		 * @param string $video_id      The video ID from Vimeo being processed
-		 * @param int $post_id          The post ID that has the attachment
+		 * @param int $attachment_id    ID of attachment create.
+		 * @param string $video_id      The video ID from Vimeo being processed.
+		 * @param int $post_id          The post ID that has the attachment.
 		 */
 		do_action(
 			'vimeotheque\image_imported',

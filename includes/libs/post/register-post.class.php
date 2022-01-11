@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ *
+ * @ignore
+ */
 class Register_Post {
 
 	/**

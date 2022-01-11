@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Menu_Pages
+ * @ignore
  */
 class Menu_Pages {
 	/**

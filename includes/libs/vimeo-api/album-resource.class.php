@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Album_Resource
  * @package Vimeotheque
  * @link https://developer.vimeo.com/api/reference/showcases
+ * @ignore
  */
 class Album_Resource extends Resource_Abstract implements Resource_Interface {
 

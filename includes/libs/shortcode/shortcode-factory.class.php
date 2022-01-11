@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Shortcode_Factory
  * @package Vimeotheque
+ * @ignore
  */
 class Shortcode_Factory {
 	/**

@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ *
+ * @ignore
+ */
 class Rest_Search_Controller extends Rest_Controller_Abstract implements Rest_Controller_Interface {
 
 	/**

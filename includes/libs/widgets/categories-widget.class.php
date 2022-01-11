@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Categories_Widget
  * @package Vimeotheque\Widgets
+ * @ignore
  */
 class Categories_Widget extends \WP_Widget{
 	/**

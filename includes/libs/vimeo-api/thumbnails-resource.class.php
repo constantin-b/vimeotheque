@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Thumbnails_Resource
  * @package Vimeotheque
+ * @ignore
  */
 class Thumbnails_Resource extends Resource_Abstract implements Resource_Interface {
 

@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Video
  * @package Vimeotheque\Blocks
+ * @ignore
  */
 class Playlist extends Block_Abstract implements Block_Interface {
 	/**

@@ -25,6 +25,7 @@ if(!class_exists('WP_List_Table')){
  * in post edit screen.
  *
  * @package Vimeotheque
+ * @ignore
  */
 class Video_List_Table extends \WP_List_Table{
 	

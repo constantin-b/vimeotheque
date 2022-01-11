@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Playlist_Widget
  *
  * @package Vimeotheque\Widgets
+ * @ignore
  */
 class Playlist_Widget extends WP_Widget {
 	/**
@@ -171,9 +172,9 @@ class Playlist_Widget extends WP_Widget {
 		];
 
 		/**
-		 * Allow additional option setup
+		 * Allow additional option setup.
          *
-         * @param array $options
+         * @param array $options    Array of options.
 		 */
 		$optional = apply_filters(
             'vimeotheque\classic-widget\playlist-widget-extra_options',
@@ -270,11 +271,11 @@ class Playlist_Widget extends WP_Widget {
 		$instance['portrait']          = $new_instance['portrait'];
 
 		/**
-		 * Allow additional option setup
+		 * Allow additional option setup.
          *
-         * @param array $instance_options
-         * @param array $new_instance
-         * @param array $old_instance
+         * @param array $instance_options   Array of widget options.
+         * @param array $new_instance       Array of new widget options.
+         * @param array $old_instance       Array of old widget options.
 		 */
 		return apply_filters(
             'vimeotheque\classic-widget\playlist-widget-extra_options_save',
@@ -437,7 +438,8 @@ class Playlist_Widget extends WP_Widget {
 
 	            <?php
 	            /**
-	             *  Theme specific playlist settings
+	             * Theme specific playlist settings
+                 * @ignore
 	             */
 	            do_action(
 		            'vimeotheque\classic-widget\playlist-widget-theme-settings',

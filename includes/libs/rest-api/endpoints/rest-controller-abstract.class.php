@@ -6,7 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-
+/**
+ * @ignore
+ */
 abstract class Rest_Controller_Abstract {
 	private $namespace;
 	private $rest_base;

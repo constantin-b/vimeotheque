@@ -13,7 +13,7 @@ use Vimeotheque\Video_Import;
 /**
  * 
  * @author CodeFlavors
- *
+ * @ignore
  */
 class Ajax_Actions{
 	/**
@@ -285,6 +285,7 @@ class Ajax_Actions{
 
 		/**
 		 * Allow additional AJAX callbacks to be set
+		 * @ignore
 		 *
 		 * @param array $callbacks              The additiojnal callbackes array
 		 * @param Ajax_Actions $ajax_object     The ajax \Vimeotheque\Admin\Ajax_Actions object reference

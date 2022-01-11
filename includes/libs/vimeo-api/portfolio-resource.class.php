@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Portfolio_Resource
  * @package Vimeotheque
  * @link https://developer.vimeo.com/api/reference/portfolios
+ * @ignore
  */
 class Portfolio_Resource extends Resource_Abstract implements Resource_Interface {
 

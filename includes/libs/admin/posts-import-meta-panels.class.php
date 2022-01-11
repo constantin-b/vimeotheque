@@ -13,7 +13,7 @@ use Vimeotheque\Post\Post_Type;
 /**
  * Meta panels callbacks
  * @author CodeFlavors
- *
+ * @ignore
  */
 class Posts_Import_Meta_Panels{
 	/**
@@ -43,9 +43,10 @@ class Posts_Import_Meta_Panels{
 		$options = array_merge( $options, $player_opt );
 
 		/**
-		 * Allow options override
+		 * Allow options override.
+         * Allow additional options to be set up in the edit screen.
          *
-         * @param array $options    The options array
+         * @param array $options    The options array.
 		 */
 		$options = apply_filters( 'vimeotheque\admin\import_meta_panel\post_options', $options );
 		?>
@@ -85,9 +86,9 @@ class Posts_Import_Meta_Panels{
 
         <?php
 		/**
-		 * Action that allows setting up additional options in WordPress admin panels
+		 * Action that allows setting up additional options in WordPress admin panels.
          *
-         * @param array $options The options displayed into the panel
+         * @param array $options The options displayed into the panel.
 		 */
          do_action( 'vimeotheque\admin\import_meta_panel\post_options_fields', $options );
         ?>
@@ -95,7 +96,8 @@ class Posts_Import_Meta_Panels{
 		<div id="cvm-import-videos-submit-c">
 		    <?php submit_button(
                     /**
-                     * Filter import button text
+                     * Filter import button text.
+                     * @ignore
                      *
                      * @param string $text  The button text
                      */
@@ -215,6 +217,7 @@ class Posts_Import_Meta_Panels{
     private function get_post_type(){
 	    /**
 	     * Filter import meta panel post type
+         * @ignore
          *
          * @param string $post_type The post type
 	     */
@@ -232,6 +235,7 @@ class Posts_Import_Meta_Panels{
 	private function get_tag_taxonomy(){
 		/**
 		 * Filter meta panel tag taxonomy
+         * @ignore
          *
          * @param string $taxonomy  The taxonomy
 		 */
@@ -249,6 +253,8 @@ class Posts_Import_Meta_Panels{
 	private function get_category_taxonomy(){
 		/**
 		 * Filter meta panel category taxonomy
+         *
+         * @ignore
 		 *
 		 * @param string $taxonomy  The category taxonomy
 		 */

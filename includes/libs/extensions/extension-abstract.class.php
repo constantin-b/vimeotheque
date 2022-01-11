@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Extension_Abstract
  * @package Vimeotheque\Extensions
  * @since 2.1
+ * @ignore
  */
 class Extension_Abstract {
 	/**

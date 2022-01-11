@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Category_Resource
  * @package Vimeotheque
  * @link https://developer.vimeo.com/api/reference/categories
+ * @ignore
  */
 class Category_Resource extends Resource_Abstract implements Resource_Interface {
 

@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ * @ignore
+ */
 class User {
 	/**
 	 * Stores the minimum capability that the user must

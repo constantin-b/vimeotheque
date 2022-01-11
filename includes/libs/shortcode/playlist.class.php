@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Playlist
  * @package Vimeotheque\Shortcode
+ * @ignore
  */
 class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	/**
@@ -86,10 +87,10 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			'vimeotheque-player-' . strtolower( $theme->get_folder_name() ) ,
 			$theme->get_js_url(),
 			/**
-			 * Vimeotheque playlist theme script dependencies filter
+			 * Vimeotheque playlist theme script dependencies filter.
 			 *
-			 * @param array $handles        The registered JavaScript handles
-			 * @param string $script_handle The script handle
+			 * @param array $handles        The registered JavaScript handles.
+			 * @param string $script_handle The script handle.
 			 */
 			apply_filters(
 				'vimeotheque-theme-' . strtolower( $theme->get_folder_name() ) . '-script-dependencies',
@@ -194,9 +195,9 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 			$atts = array_merge(
 				[
 					/**
-					 * Filter that allows setup of post types to be queried for videos
+					 * Filter that allows setup of post types to be queried for videos.
 					 *
-					 * @param array $post_types The post types that will be queried
+					 * @param array $post_types The post types that will be queried.
 					 */
 					'post_type' => apply_filters(
 						'vimeotheque\shortcode\post_types',
@@ -300,9 +301,9 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 				[
 					'post_type' => $post_type,
 					/**
-					 * Filter that allows changing of number of posts displayed into a playlist block or shortcode
+					 * Filter that allows changing of number of posts displayed into a playlist block or shortcode.
 					 *
-					 * @param int $max_posts    Maximum number of posts to retrieve
+					 * @param int $max_posts    Maximum number of posts to retrieve.
 					 */
 					'numberposts' => apply_filters(
 						'vimeotheque\shortcode\playlist\newest_max_posts',

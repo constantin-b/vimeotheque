@@ -30,6 +30,7 @@ use Vimeotheque\Post\Post_Type;
  * Admin pages
  * 
  * @author CodeFlavors
+ * @ignore
  */
 class Admin{
 

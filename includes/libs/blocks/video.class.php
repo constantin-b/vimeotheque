@@ -7,6 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ *
+ * @ignore
+ */
 class Video extends Block_Abstract implements Block_Interface {
 
 	public function __construct( Plugin $plugin ) {

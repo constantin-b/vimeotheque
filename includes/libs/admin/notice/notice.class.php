@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Admin_Notices::instance()->register( new Notice( 'The message to be displayed' ) );
  *
  * @package Vimeotheque
+ * @ignore
  */
 class Notice extends Notice_Abstract implements Notice_Interface{
 	/**

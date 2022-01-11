@@ -13,6 +13,7 @@ if( ! defined( 'ABSPATH' ) ){
  * Class Amp
  *
  * @package Vimeotheque\Amp
+ * @ignore
  */
 class Amp{
 	/**

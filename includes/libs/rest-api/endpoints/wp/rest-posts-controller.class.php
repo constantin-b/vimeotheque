@@ -13,6 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
+/**
+ *
+ * @ignore
+ */
 class Rest_Posts_Controller extends Rest_Controller_Abstract implements Rest_Controller_Interface {
 
 	public function __construct() {

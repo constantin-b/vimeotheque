@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Resources_Objects
  * @package Vimeotheque\Admin
+ * @ignore
  */
 class Resource_Objects{
 	/**

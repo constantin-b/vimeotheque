@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Extension
  * @package Vimeotheque\extensions
+ * @ignore
  */
 class Extension extends Extension_Abstract implements Extension_Interface {
 

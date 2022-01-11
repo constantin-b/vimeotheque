@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * @ignore
+ */
 class Rest_Endpoint_Factory {
 	/**
 	 * @var Rest_Controller_Interface[]

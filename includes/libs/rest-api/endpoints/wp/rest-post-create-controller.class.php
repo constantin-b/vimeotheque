@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ *
+ * @ignore
+ */
 class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Rest_Controller_Interface {
 
 	public function __construct() {

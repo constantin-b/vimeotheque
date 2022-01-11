@@ -110,9 +110,9 @@ class Player {
 		/**
 		 * Allow embed settings filtering that can change the embedding options when the post is displayed.
 		 *
-		 * @param array $embed_settings     The post video embed settings
-		 * @param object $post              The current post being displayed
-		 * @param array $video              The video details as retrieved from Vimeo
+		 * @param array $embed_settings     The post video embed settings.
+		 * @param object $post              The current post being displayed.
+		 * @param array $video              The video details as retrieved from Vimeo.
 		 */
 		$this->options = apply_filters(
 			'vimeotheque\player\embed_options',
@@ -130,9 +130,11 @@ class Player {
 	 */
 	private function get_embed_width(){
 		/**
-		 * Filter that can be used to modify the width of the embed
+		 * Filter that can be used to modify the width of the embed.
 		 *
-		 * @param int $width    Width in pixels
+		 * @param int       $width  Width in pixels.
+		 * @param array     $video  Array of video details.
+		 * @param \WP_Post  $post   The WP_Post object that the video is attached to.
 		 */
 		$w = apply_filters(
 			'vimeotheque\player\embed_width',
@@ -160,9 +162,9 @@ class Player {
 	 */
 	private function get_max_height(){
 		/**
-		 * Filter that allows a maximum height to be set for the player
+		 * Filter that allows a maximum height to be set for the embeds.
 		 *
-		 * @param int $height   The maximum height that players must have
+		 * @param int $height   The maximum height that players must have.
 		 */
 		$max_height = absint( apply_filters( 'vimeotheque\player\max_height', $this->options['max_height'] ) );
 
@@ -215,10 +217,10 @@ class Player {
 		}
 
 		/**
-		 * Generate additional CSS classes on Vimeotheque embed player container
+		 * Generate additional CSS classes on Vimeotheque embed player container.
 		 *
-		 * @param array $classes    CSS classes to be added
-		 * @param \WP_Post $post    The post object reference
+		 * @param array $classes    CSS classes to be added.
+		 * @param \WP_Post $post    The post object reference.
 		 */
 		$classes = apply_filters(
 			'vimeotheque\player\css_class',
@@ -268,6 +270,7 @@ class Player {
 		 * @param array $options            The extra options
 		 * @param \WP_Post|false|null $post The WordPress post object
 		 * @param array $video_details      The video details array attached to the post
+		 * @param array $manual_options     An array of manual options that might have been apssed to the player.
 		 */
 		$extra = apply_filters(
 			'vimeotheque\player\embed-parameters',

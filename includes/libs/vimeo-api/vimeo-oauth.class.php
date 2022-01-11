@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Vimeo_Api_Oauth
+ * @ignore
  */
 class Vimeo_Oauth extends Vimeo{
 
