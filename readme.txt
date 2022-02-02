@@ -122,6 +122,9 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.13 =
+- Updated classes, methods, actions and filters PHPDoc descriptions and parameters.
+
 = 2.1.12 =
 - Added new embed option in plugin settings (tab Embed Options) that allows the setup of a maximum player height in the entire website (useful for social network formats, like 9x16 or 1x1).
 
