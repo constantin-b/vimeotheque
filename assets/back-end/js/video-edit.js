@@ -42,7 +42,7 @@
 				'class':'cvm_loading'
 			}).insertAfter( $(tax_select) );
 
-			$(tax_select).attr({'disabled':'disabled'});
+			$(tax_select).prop( 'disabled', true );
 			
 			$.ajax({
 				type 	: 'post',
@@ -51,7 +51,7 @@
 				success	: function(response){
 					if( response.success ){
 						$(tax_select).after( response.data.message ).remove();
-						$(tax_select).removeAttr('disabled');
+						$(tax_select).prop( 'disabled', false );
 						$(s).remove();
 					}
 					if( response.error ){
@@ -76,7 +76,7 @@
 				
 		
 		// hide options dependant on controls visibility
-		$('.cvm_controls').click(function(e){
+		$('.cvm_controls').on( 'click', function(e){
 			if( $(this).is(':checked') ){
 				$('.controls_dependant').show();
 			}else{
