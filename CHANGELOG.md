@@ -1,3 +1,7 @@
+2.1.14 [10/Feb/2022]
+- Updated various scripts to avoid usage of jQuery Migrate;
+- Solved PHP 8 specific errors and notices.
+
 2.1.13 [11/Jan/2022]
 - Updated PHP doc for several methods, classes and hooks.
 
