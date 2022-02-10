@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.14 =
+- Updated various scripts to avoid usage of jQuery Migrate;
+- Solved PHP 8 specific errors and notices.
+
 = 2.1.13 =
 - Updated classes, methods, actions and filters PHPDoc descriptions and parameters.
 
