@@ -13,18 +13,20 @@
             $.each( orderFieldOptions, function( i, option ){
                 var enabled = $(option).data('resources').split(',');
                 if( $.inArray( resource, enabled ) != -1 ){
-                    $(option).removeAttr( 'disabled style' );
+                    $(option)
+						.show()
+						.prop('disabled', false);
                 }else{
                 	$(option)
-                	    .css({ 'display':'none', 'color':'#CCCCCC' })
-                	    .attr( 'disabled', 'disabled' )
-                	    .removeAttr('selected');
+						.hide()
+                	    .prop( 'disabled', true )
+                	    .prop( 'selected', false );
                 }
             })	
         } 
 		
 		// search criteria form functionality
-		$('#cvm_feed').change(function(){
+		$('#cvm_feed').on( 'change', function(){
 			
 			var val = $(this).val(),
 				ordVal = $('#cvm_order').val(),
@@ -50,14 +52,14 @@
 
 		}).trigger('change');
 		
-        $('#cvm_load_feed_form').submit(function(e){
+        $('#cvm_load_feed_form').on( 'submit', function(e){
 			var s = $('#cvm_query').val();
 			if( '' == s ){
 				e.preventDefault();
 				$('#cvm_query, label[for=cvm_query]').addClass('cvm_error');
 			}
 		});
-		$('#cvm_query').keyup(function(){
+		$('#cvm_query').on( 'keyup', function(){
 			var s = $(this).val();
 			if( '' == s ){
 				$('#cvm_query, label[for=cvm_query]').addClass('cvm_error');
@@ -73,7 +75,7 @@
 		$('.ajax-submit .tablenav.top .actions select[name=action]').attr({'name' : 'action_top'});		
 		// form submit on search results
 		var submitted = false;
-		$('.ajax-submit').submit(function(e){
+		$('.ajax-submit').on( 'submit', function(e){
 			e.preventDefault();
 			if( submitted ){
 				$('.cvm-ajax-response')
