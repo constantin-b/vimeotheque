@@ -44,7 +44,7 @@ class Vimeo_Oauth extends Vimeo{
 	 * @param string $token - authorization token
 	 * @param $redirect_url
 	 */
-	public function __construct( $client_id, $client_secret, $token = null, $redirect_url ){
+	public function __construct( $client_id, $client_secret, $token = null, $redirect_url = '' ){
 		$this->client_id = $client_id;
 		$this->client_secret = $client_secret;
 		$this->token = $token;
