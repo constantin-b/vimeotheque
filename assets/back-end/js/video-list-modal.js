@@ -37,18 +37,21 @@
 						'class' : 'cvm-del-cat-item',
 						'html' 	: m.deleteCategory,
 						'href' 	: '#',
-						'click' : function(e){
-							e.preventDefault();
-							$(container).remove();
-							
-							in_list = $.grep( in_list, function(value, i){
-								return cat_id != value;
-							});							
-							if( in_list.length == 0 ){
-								$(categoriesContainer).empty().html( '<em>'+m.no_categories+'</em>' );				
-							}							
-							$(inputField).val( in_list.join('|') );
+						'on': {
+							'click': function(e){
+								e.preventDefault();
+								$(container).remove();
+
+								in_list = $.grep( in_list, function(value, i){
+									return cat_id != value;
+								});
+								if( in_list.length == 0 ){
+									$(categoriesContainer).empty().html( '<em>'+m.no_categories+'</em>' );
+								}
+								$(inputField).val( in_list.join('|') );
+							}
 						}
+
 					}).prependTo(container);
 
 					$(inputField).val( in_list.join('|') );	
@@ -63,7 +66,7 @@
 
 		// check all functionality
 		var chkbxs = $('#cb-select-all-1, #cb-select-all-2, .cvm-video-list-select-all');		
-		$(chkbxs).click(function(){
+		$(chkbxs).on( 'click', function(){
 			if( $(this).is(':checked') ){
 				$('.cvm-video-checkboxes').attr('checked', 'checked').trigger('change');
 				$(chkbxs).attr('checked', 'checked');
@@ -87,7 +90,7 @@
 			});
 		}
 		
-		window.parent.jQuery('a.cvm-del-item').click(function(e){
+		window.parent.jQuery('a.cvm-del-item').on( 'click', function(e){
 			e.preventDefault();
 			var post_id = $(this).data('post_id');
 			
@@ -105,7 +108,7 @@
 		
 		
 		// checkboxes functionality
-		$('.cvm-video-checkboxes').change( function(){
+		$('.cvm-video-checkboxes').on( 'change', function(){
 			var post_id = $(this).val();			
 			if( $(this).is(':checked') ){				
 				if( in_playlist.length == 0 ){
@@ -163,7 +166,7 @@
 			attsContainer = $('#cvm-shortcode-atts'),
 			divId = false;
 		
-		$('.cvm-show-form').click(function(e){
+		$('.cvm-show-form').on( 'click', function(e){
 			e.preventDefault();
 			var post_id = $(this).attr('id').replace('cvm-embed-', '');
 			divId = 'single-video-settings-'+post_id;
