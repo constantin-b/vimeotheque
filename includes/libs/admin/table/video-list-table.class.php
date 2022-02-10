@@ -28,7 +28,7 @@ if(!class_exists('WP_List_Table')){
  * @ignore
  */
 class Video_List_Table extends \WP_List_Table{
-	
+
 	/**
 	 * Store view post type
 	 * @var string
@@ -39,10 +39,10 @@ class Video_List_Table extends \WP_List_Table{
 	 * @var string
 	 */
 	private $taxonomy;
-		
+
 	/**
 	 * Class contructor
-	 * 
+	 *
 	 * @param array $args
 	 * @return null
 	 */
@@ -82,20 +82,19 @@ class Video_List_Table extends \WP_List_Table{
 	 *
 	 * @return string
 	 */
-	function column_post_title( $item ){
+	public function column_post_title( $item ){
 
 	    $video = Helper::get_video_post( $item['ID'] );
-		$meta = $video->get_video_data();
-		
+
 		$label = sprintf( '<label for="cvm-video-%1$s" id="title%1$s" class="cvm_video_label">%2$s</label>', $item['ID'], $item['post_title'] );
 
 		$settings = $video->get_embed_options();
-		
+
 		$form = '<div class="single-video-settings" id="single-video-settings-'.$item['ID'].'">';
 		$form.= '<h4>'.$item['post_title'].' (' . $video->_duration . ')</h4>';
 		$form.= '<label for="cvm_volume'.$item['ID'].'">'.__('Volume', 'codeflavors-vimeo-video-post-lite').'</label> <input size="3" type="text" name="volume['.$item['ID'].']" id="cvm_volume'.$item['ID'].'" value="'.$settings['volume'].'" /><br />';
 		$form.= '<label for="cvm_width'.$item['ID'].'">'.__('Width', 'codeflavors-vimeo-video-post-lite').'</label> <input size="3" type="text" name="width['.$item['ID'].']" id="cvm_width'.$item['ID'].'" value="'.$settings['width'].'" /><br />';
-		
+
 		$aspect_select = Helper_Admin::aspect_ratio_select(
 			[
 				'name' 		=> 'aspect_ratio['.$item['ID'].']',
@@ -110,17 +109,25 @@ class Video_List_Table extends \WP_List_Table{
 		$form.= '<input type="button" id="cancel'.$item['ID'].'" value="'.__('Cancel', 'codeflavors-vimeo-video-post-lite').'" class="button cvm-cancel-shortcode" />';
 		$form.= '<div style="width:100%; display:block; clear:both"></div>';
 		$form.= '</div>';
-		
+
 		// row actions
     	$actions = [
-    		'shortcode' => sprintf( '<a href="#" id="cvm-embed-%1$s" class="cvm-show-form">%2$s</a>'.$form, $item['ID'], __('Get video shortcode', 'codeflavors-vimeo-video-post-lite') ),
+    		'shortcode' => sprintf(
+    		    '%s%s',
+			    sprintf(
+				    '<a href="#" id="cvm-embed-%1$s" class="cvm-show-form">%2$s</a>',
+				    $item['ID'],
+				    __('Get video shortcode', 'codeflavors-vimeo-video-post-lite')
+			    ),
+			    $form
+            )
 	    ];
-    	
-    	return sprintf('%1$s %2$s',
+
+    	return sprintf('%s %s',
     		$label,
     		$this->row_actions( $actions )
-    	);	
-		
+    	);
+
 	}
 
 	/**
@@ -171,9 +178,9 @@ class Video_List_Table extends \WP_List_Table{
 	 * @return string
 	 */
 	function column_category( $item ){
-		
+
 		$taxonomy = $this->_get_view_taxonomy();
-		
+
 		if ( $terms = get_the_terms( $item['ID'], $taxonomy ) ) {
 			$out = [];
 			foreach ( $terms as $t ) {
@@ -184,7 +191,7 @@ class Video_List_Table extends \WP_List_Table{
 						'cat'		=> $t->term_id
 					]
 				, 'edit.php');
-				
+
 				$out[] = sprintf('<a href="%s">%s</a>', $url, $t->name);
 			}
 			return implode(', ', $out);
@@ -201,7 +208,7 @@ class Video_List_Table extends \WP_List_Table{
 	 * @return string
 	 */
 	function column_post_date( $item ){
-		
+
 		$output = sprintf(
 		    '<abbr title="%s">%s</abbr><br />',
             $item['post_date'],
@@ -209,7 +216,7 @@ class Video_List_Table extends \WP_List_Table{
         );
 		$output.= 'publish' == $item['post_status'] ? __('Published', 'codeflavors-vimeo-video-post-lite') : '';
 		return $output;
-		
+
 	}
 
 	/**
@@ -217,16 +224,16 @@ class Video_List_Table extends \WP_List_Table{
 	 * @see WP_List_Table::extra_tablenav()
 	 */
 	function extra_tablenav($which){
-		
+
 		if( 'top' !== $which ){
 			return ;
 		}
-		
+
 		$selected = false;
 		if( isset( $_GET['cat'] ) ){
 			$selected = $_GET['cat'];
 		}
-		
+
 		$args = [
 			//'show_option_all' => __('Most recent videos', 'codeflavors-vimeo-video-post-lite'),
 			'show_option_none' => __('Most recent videos', 'codeflavors-vimeo-video-post-lite'),
@@ -243,10 +250,10 @@ class Video_List_Table extends \WP_List_Table{
 		$categories_select = wp_dropdown_categories($args);
 		if( !$categories_select ){
 			return;
-		}		
-		
+		}
+
 		$taxonomy = get_taxonomy($this->taxonomy);
-		
+
 		?>
 		<label for="cvm_video_categories"><?php echo $taxonomy->labels->name;?> :</label>
 		<?php echo $categories_select;?>
@@ -254,7 +261,7 @@ class Video_List_Table extends \WP_List_Table{
         <input type="button" name="add_category" id="cvm_add_category" class="button button-primary" value="<?php _e( 'Add category to shortcode', 'codeflavors-vimeo-video-post-lite' );?>" />
 		<?php
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see WP_List_Table::get_views()
@@ -280,22 +287,22 @@ class Video_List_Table extends \WP_List_Table{
 			    $this->post_type
             );
 
-    	return $views;		
+    	return $views;
 	}
-	
+
 	/**
 	 * Returns the post type for the current view
-	 * 
+	 *
 	 * @return string
 	 */
 	private function _get_view_post_type(){
 		$view = Helper::get_var('view', 'GET');
 		return $view ? $view : Plugin::instance()->get_cpt()->get_post_type();
 	}
-	
+
 	/**
 	 * Returns the taxonomy for the current view
-	 * 
+	 *
 	 * @return string
 	 */
 	private function _get_view_taxonomy(){
@@ -305,7 +312,7 @@ class Video_List_Table extends \WP_List_Table{
 		}
 		return Plugin::instance()->get_cpt()->get_post_tax();
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 * @see WP_List_Table::get_columns()
@@ -321,22 +328,22 @@ class Video_List_Table extends \WP_List_Table{
 		];
     	return $columns;
 	}
-	
+
 	/**
      * (non-PHPdoc)
      * @see WP_List_Table::prepare_items()
-     */    
+     */
     function prepare_items() {
-    	
+
     	$columns = $this->get_columns();
         $hidden = [];
         $sortable = $this->get_sortable_columns();
-        
+
         $this->_column_headers = [ $columns, $hidden, $sortable ];
-                
+
     	$per_page 		= 20;
     	$current_page 	= $this->get_pagenum();
-        
+
     	$search_for = '';
     	if( isset($_REQUEST['s']) ){
     		$search_for = esc_attr( stripslashes( $_REQUEST['s'] ) );
@@ -346,7 +353,7 @@ class Video_List_Table extends \WP_List_Table{
     	if( isset( $_GET['cat'] ) && $_GET['cat'] ){
     		$category = $_GET['cat'];
     	}
-    	
+
         $args = [
 			'post_type'			=> $this->post_type,
 			'orderby' 			=> 'post_date',
@@ -365,38 +372,38 @@ class Video_List_Table extends \WP_List_Table{
 		        ]
 	        ];
         }
-        
+
         if( $category ){
         	$args['tax_query'] = [
         		[
-        			'taxonomy' => $this->taxonomy, 
-        			'field' => 'id', 
+        			'taxonomy' => $this->taxonomy,
+        			'field' => 'id',
         			'terms' => $category
 		        ]
 	        ];
         }
-        
+
         // remove all filters added by third party plugins or themes
         remove_all_filters( 'pre_get_posts' );
-        
+
         // run the query
 		$query = new WP_Query( $args );
-		
+
 		$data = [];
         if( $query->posts ){
         	foreach($query->posts as $k => $item){
         		$data[$k] = (array)$item;
         	}
         }
-        
+
         $total_items = $query->found_posts;
         $this->items = $data;
-        
+
         $this->set_pagination_args( [
-            'total_items' => $total_items,                  
-            'per_page'    => $per_page,                     
+            'total_items' => $total_items,
+            'per_page'    => $per_page,
             'total_pages' => ceil($total_items/$per_page)
         ] );
     }
-	
+
 }
