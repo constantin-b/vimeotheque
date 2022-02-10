@@ -73,7 +73,7 @@ var CVMVideo_DIALOG_WIN = false;
 			$(CVMVideo_DIALOG_WIN).dialog('close');
 		});
 		
-		$('#cvm-shortcode-2-post').click(function(e){
+		$('#cvm-shortcode-2-post').on( 'click', function(e){
 			e.preventDefault();
 			if( CVMVideo_DIALOG_WIN ){
 				CVMVideo_DIALOG_WIN.dialog('open');
@@ -81,7 +81,7 @@ var CVMVideo_DIALOG_WIN = false;
 		});
 
 		var titles = $('#cvm-playlist-items .inside').children('h3');
-		$(titles).click( function(){
+		$(titles).on( 'click', function(){
 			var n = $(this).next();
 			$(n).toggle();
 			if( $(n).is(':visible') ){
