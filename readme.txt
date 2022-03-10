@@ -122,8 +122,12 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.15 =
+- Updated options processing to allow exclusion of options when retrieving the plugin options;
+- Added resource "showcase" as a duplicate for "album".
+
 = 2.1.14 =
-- Updated various scripts to avoid usage of jQuery Migrate;
+- Updated various scripts to avoid use of jQuery Migrate;
 - Solved PHP 8 specific errors and notices.
 
 = 2.1.13 =
