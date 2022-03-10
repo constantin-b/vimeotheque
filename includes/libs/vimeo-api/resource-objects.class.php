@@ -85,6 +85,8 @@ class Resource_Objects{
 
 		// register resources
 		$this->register_resource( new Album_Resource( false ) );
+		// Duplicate for Album_Resources to add the "showcase" type (otherwise, implements the exact functionality of Album_Resource).
+		$this->register_resource( new Showcase_Resource( false ) );
 		$this->register_resource( new Category_Resource( false ) );
 		$this->register_resource( new Channel_Resource( false ) );
 		$this->register_resource( new Group_Resource( false ) );
