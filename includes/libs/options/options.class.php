@@ -51,26 +51,31 @@ class Options{
 	}
 
 	/**
-	 * @param bool $refresh
+	 * Get all options
+	 *
+	 * Returns an array containing all the options.
+	 *
+	 * @param bool $refresh     Get from cache (false) or retrieve from database (true).
+	 * @param array $exclude    Array containing the name of excluded options.
 	 *
 	 * @return array
 	 */
-	public function get_options( $refresh = false ){
-		if( !$refresh && $this->options ){
-			return $this->options;
-		}
-		
-		$this->options = [];
-		$options = $this->_get_wp_option();
-		foreach ( $this->defaults as $k => $v ){
-			if( !isset( $options[ $k ] ) ){
-				$this->options[ $k ] = $v;
-			}else{
-				$this->options[ $k ] = $options[ $k ];
+	public function get_options( $refresh = false, $exclude = [] ){
+		if( $refresh || !$this->options ) {
+			$this->options = [];
+			$options       = $this->_get_wp_option();
+			foreach ( $this->defaults as $k => $v ) {
+				if ( ! isset( $options[ $k ] ) ) {
+					$this->options[ $k ] = $v;
+				} else {
+					$this->options[ $k ] = $options[ $k ];
+				}
 			}
 		}
-		
-		return $this->options;
+
+		$result = $exclude ? array_diff_key( $this->options, array_flip( $exclude ) ) : $this->options;
+
+		return $result;
 	}
 
 	/**
