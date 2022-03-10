@@ -1,3 +1,7 @@
+2.1.15 [10/Mar/2022]
+- Updated options processing to allow exclusion of options when retrieving the plugin options;
+- Added resource "showcase" as a duplicate for "album".
+
 2.1.14 [10/Feb/2022]
 - Updated various scripts to avoid usage of jQuery Migrate;
 - Solved PHP 8 specific errors and notices.
