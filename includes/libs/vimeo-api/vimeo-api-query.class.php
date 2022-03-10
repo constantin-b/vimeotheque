@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Vimeo_Api_Query extends Vimeo {
 
 	/**
-	 * Store params
+	 * Store parameters.
 	 * @var array
 	 */
 	private $params;
@@ -45,10 +45,26 @@ class Vimeo_Api_Query extends Vimeo {
 	/**
 	 * Vimeo_Api_Query constructor.
 	 *
-	 * @param $resource_type - the type of resource that should be queried (ie. album, channel, etc)
-	 * @param bool $resource_id - the API resource ID (ie. channel ID, album ID, user ID, etc)
-	 * @param bool $api_user_id - the Vimeo user ID that should be used when making queries for albums or portfolios
-	 * @param array $args - request args
+	 * @param string        $resource_type  The type of resource that should be queried (ie. album, channel, etc).
+	 * @param string|bool   $resource_id    The API resource ID (ie. channel ID, album ID, user ID, etc).
+	 * @param string|bool   $api_user_id    The Vimeo user ID that should be used when making queries for albums or portfolios.
+	 * @param array $args   {
+	 *      Additional request parameters.
+	 *
+	 *      @type   int $page                   The page number to retrieve from Vimeo API.
+	 *      @type   int $per_page               Number of results per page.
+	 *      @type   string $query               The search query string or resource ID (showcase ID, folder ID, username, etc.).
+	 *      @type   string $filter              Results filtering; has specific value based on the required feed type (ie. playable,
+	 *                                          embeddable, featured, live, etc.).
+	 *                                          See Vimeo API docs for the spcific resource imported to get the available
+	 *                                          filtering options.
+	 *      @type   bool $filter_embeddable     Filter results by embeddable videos (true) or non-embeddable videos (false). Requires
+	 *                                          parameter "filter" to be set to "embeddable".
+	 *      @type   bool $filter_playable       Whether to filter the results by playable videos (true) or non-playable videos (false).
+	 *      @type   string $links               The page containing the video URI.
+	 *      @type   string $password            Password for password restricted resources (ie. showcases).
+	 * }
+	 *
 	 */
 	public function __construct( $resource_type, $resource_id = false, $api_user_id = false, $args = [] ){
 
