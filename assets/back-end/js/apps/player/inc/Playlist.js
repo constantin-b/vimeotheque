@@ -12,7 +12,7 @@ $.fn.VimeoPlaylist = function( params ){
     // support multiple elements
     if (this.length > 1){
         return this.each( ( index, item ) => {
-            $(item).VimeoPlaylist( options );
+            $(item).VimeoPlaylist( params )
         });
     }
 
