@@ -1,3 +1,6 @@
+2.1.16 [25/Mar/2022]
+- Solved JavaScript bug in video playlist script that prevented multiple playlists from running.
+
 2.1.15 [10/Mar/2022]
 - Updated options processing to allow exclusion of options when retrieving the plugin options;
 - Added resource "showcase" as a duplicate for "album".
