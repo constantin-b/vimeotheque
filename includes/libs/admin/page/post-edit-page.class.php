@@ -95,7 +95,10 @@ class Post_Edit_Page{
 	 * Add functionality for the classic editor
 	 */
 	public function current_screen(){
-		new Classic_Editor( get_current_screen() );
+        $screen = get_current_screen();
+        if( $screen ) {
+	        new Classic_Editor( get_current_screen() );
+        }
 	}
 
 	/**
