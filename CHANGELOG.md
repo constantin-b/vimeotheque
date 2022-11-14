@@ -1,3 +1,7 @@
+2.1.17 [14/Nov/2022]
+- Solved a bug that prevented the player from going full screen;
+- Solved a compatibility bug with the Classic Editor plugin.
+
 2.1.16 [25/Mar/2022]
 - Solved JavaScript bug in video playlist script that prevented multiple playlists from running.
 
