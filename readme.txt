@@ -2,7 +2,7 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video, lazy load, thumbnail, gallery
 Requires at least: 5.2
-Tested up to: 5.9
+Tested up to: 6.1
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
