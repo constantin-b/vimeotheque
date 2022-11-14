@@ -51,7 +51,10 @@ $(document).ready( () => {
                                 src: $(this).data('url'),
                                 width: '100%',
                                 height: '100%',
-                                frameborder: 0
+                                frameborder: 0,
+                                allowFullScreen: '',
+                                mozallowfullscreen: '',
+                                webkitallowfullscreen: ''
                             }
                         )
                     )
