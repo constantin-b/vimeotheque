@@ -122,6 +122,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.1.17 =
+- Solved a bug that prevented the player from going full screen;
+- Solved a compatibility bug with the Classic Editor plugin.
+
 = 2.1.16 =
 - Solved a JAvaScript bug in video playlist script that prevented multiple JavaScript playlists from running on the same page.
 
