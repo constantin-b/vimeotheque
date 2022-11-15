@@ -1,0 +1,30 @@
+footer{
+  margin: 20px 0;
+
+  &.entry-footer{
+    .post-meta{
+
+      .byline{
+        &:before{
+          content: none;
+        }
+      }
+
+      .entry-date{
+        margin-left: 10px;
+      }
+
+      .cat-links{
+        display: block;
+        margin: 10px 0;
+      }
+
+      .tags-links{
+        a{
+
+        }
+      }
+
+    }
+  }
+}
