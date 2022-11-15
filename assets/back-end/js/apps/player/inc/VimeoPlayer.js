@@ -38,6 +38,7 @@ $.fn.VimeoPlayer = function( params ){
         player = new Vimeo.Player( $(this).find('iframe') )
     }catch( e ){
         self.isError = e;
+        console.log(e)
     }
 
     if( this.isError ){
@@ -65,6 +66,16 @@ $.fn.VimeoPlayer = function( params ){
          */
         self.addClass('loaded')
         options.onLoad()
+
+        /**
+         * Custom event triggered after the player loads.
+         *
+         * @param object Element    The video container element that holds the video.
+         */
+        $(document).trigger(
+            'Vimeotheque_PlayerReady',
+            [self]
+        )
     })
     player.on( 'play', _data => {
         if( !initialVolumeSet ) {
@@ -72,15 +83,39 @@ $.fn.VimeoPlayer = function( params ){
             initialVolumeSet = true
         }
         options.onPlay( _data, self )
+
+        /**
+         * Trigger event on playing
+         */
+        self.trigger(
+            'onPlay',
+            data
+        )
     })
     player.on( 'timeupdate', data => {
         options.onPlayback( data, self )
     } )
     player.on( 'pause', data => {
         options.onPause( data, self )
+
+        /**
+         * Trigger event on playing
+         */
+        self.trigger(
+            'onPause',
+            data
+        )
     } )
     player.on( 'ended', data => {
         options.onFinish( data, self )
+
+        /**
+         * Trigger event on playing
+         */
+        self.trigger(
+            'onEnd',
+            data
+        )
     } )
     player.on( 'error', data => {
         options.onError( data, self )
