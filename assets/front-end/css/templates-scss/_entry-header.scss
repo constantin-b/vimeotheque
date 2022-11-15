@@ -1,0 +1,36 @@
+header{
+  &.entry-header{
+
+    div{
+      &.video-stats{
+        margin: 10px 0 30px;
+
+        span{
+          color: #424242;
+          font-weight: bold;
+
+          .video-{
+            &duration{
+
+            }
+
+            &views{
+
+            }
+
+            &likes{
+
+            }
+          }
+
+          &.sep{
+            font-weight: normal;
+            margin: 0 3px;
+          }
+        }
+
+      }
+    }
+
+  }
+}
