@@ -15,6 +15,7 @@ use Vimeotheque\Post\Post_Registration;
 use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Rest_Api\Rest_Api;
 use Vimeotheque\Shortcode\Shortcode_Factory;
+use Vimeotheque\Templates\Templates_Init;
 use Vimeotheque\Widgets\Widgets_Factory;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -166,6 +167,7 @@ class Plugin{
 		], -9999999 );
 
 		new Amp();
+		new Templates_Init();
 	}
 
 	public function init(){
