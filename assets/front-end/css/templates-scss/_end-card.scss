@@ -1,0 +1,59 @@
+.vimeotheque-end-card-container{
+
+  .inside-wrapper{
+    width: 400px;
+    margin: 0 auto;
+
+    .image{
+      display: block;
+      position: relative;
+
+      img{
+        max-width:100%!important;
+        width: 100%!important;
+      }
+
+      .duration{
+        color:#FFFFFF;
+        z-index: 2;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        text-align: center;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size:12px;
+      }
+    }
+
+    h2{
+      font-size: 1em;
+      color: #FFFFFF;
+      margin: 20px 0;
+    }
+
+    .controls{
+      display: flex;
+      justify-content: space-evenly;
+
+      a{
+        width: 150px;
+        color: #FFFFFF;
+        background: #707070;
+        text-align: center;
+        padding: 7px 0;
+        border-radius: 2px;
+        text-decoration: none!important;
+
+        &.cancel{
+          background-color: #424242;
+        }
+
+        &.load-now{
+
+        }
+      }
+    }
+  }
+}
