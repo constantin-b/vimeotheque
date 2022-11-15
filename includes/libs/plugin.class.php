@@ -275,7 +275,7 @@ class Plugin{
 			'import_description' => 'content', // import descriptions on custom posts
 			'import_date' => false, // import video date as post date
 			'featured_image' => true, // set thumbnail as featured image; default import on video feed import (takes more time)
-			'import_status' => 'draft', // default import status of videos
+			'import_status' => 'publish', // default import status of videos
 			// Vimeo oAuth
 			'vimeo_consumer_key' => '',
 			'vimeo_secret_key' => '',
