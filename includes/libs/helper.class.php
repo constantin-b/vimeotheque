@@ -480,5 +480,49 @@ class Helper{
 
 		return $embed;
 	}
+
+	/**
+	 * Plugin version.
+	 *
+	 * Returns the plugin version.
+	 *
+	 * @return string
+	 */
+	public static function get_plugin_version(){
+		return VIMEOTHEQUE_VERSION;
+	}
+
+	/**
+	 * Plugin path.
+	 *
+	 * Get the plugin absolute path.
+	 *
+	 * @return string
+	 */
+	public static function get_path(){
+		return VIMEOTHEQUE_PATH;
+	}
+
+	/**
+	 * Plugin URL.
+	 *
+	 * Get the plugin URL path.
+	 *
+	 * @return string
+	 */
+	public static function get_url(){
+		return VIMEOTHEQUE_URL;
+	}
+
+	/**
+	 * Check single video post.
+	 *
+	 * Check if the current page is a single video post (post type "vimeo-video").
+	 *
+	 * @return bool
+	 */
+	public static function is_video(){
+		return is_singular( Plugin::instance()->get_cpt()->get_post_type() );
+	}
 }
 
