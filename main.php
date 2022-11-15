@@ -17,6 +17,7 @@ define( 'VIMEOTHEQUE_FILE', __FILE__ );
 define( 'VIMEOTHEQUE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIMEOTHEQUE_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIMEOTHEQUE_VERSION', '2.1.17' );
+define( 'VIMEOTHEQUE_TEMPLATE_DEBUG_MODE', false );
 /**
  * Minimum WP version.
  * Verifies against the current running WP version.
