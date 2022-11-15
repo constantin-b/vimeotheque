@@ -331,13 +331,20 @@ class Helper{
 	 * @return bool Embed is allowed (true) or is prevented (false).
 	 */
 	public static function is_autoembed_allowed(){
-		/**
-		 * Filter that can prevent video embedding into the post content.
-		 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
-		 *
-		 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
-		 */
-		return apply_filters( 'vimeotheque\post_content_embed', true );
+
+		$allowed = true;
+
+		if( !is_admin() ){
+			/**
+			 * Filter that can prevent video embedding into the post content.
+			 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
+			 *
+			 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
+			 */
+			$allowed =  apply_filters( 'vimeotheque\post_content_embed', true );;
+		}
+
+		return $allowed;
 	}
 
 	/**
