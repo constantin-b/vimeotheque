@@ -273,7 +273,7 @@ class Plugin{
 			'max_tags' => 3, // how many tags to import
 			'import_title' => true, // import titles on custom posts
 			'import_description' => 'content', // import descriptions on custom posts
-			'import_date' => false, // import video date as post date
+			'import_date' => true, // import video date as post date
 			'featured_image' => true, // set thumbnail as featured image; default import on video feed import (takes more time)
 			'import_status' => 'publish', // default import status of videos
 			// Vimeo oAuth
