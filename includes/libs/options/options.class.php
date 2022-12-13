@@ -102,7 +102,7 @@ class Options{
 	 * @param array $values
 	 */
 	public function update_options( $values ){
-		$this->_update_wp_option( $values );
+		return $this->_update_wp_option( $values );
 	}
 	
 	/**
@@ -116,7 +116,7 @@ class Options{
 	/**
 	 * Wrapper for WP function that updates option
 	 * @param array $values - new values to be set up in option
-	 * @return boolean
+	 * @return bool
 	 */
 	private function _update_wp_option( $values ){
 		return update_option( $this->option_name , $values );
