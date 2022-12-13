@@ -569,7 +569,10 @@ use Vimeotheque\Helper;
 								<p class="description"><?php _e('You first need to create a Vimeo Account.', 'codeflavors-vimeo-video-post-lite');?></p>
 							</td>
 						</tr>
-						<?php else:?>
+						<?php
+                            // Vimeo API credentials set, show message.
+                            else:
+                        ?>
 						<tr valign="top">
                             <th scope="row"><label><?php _e('Plugin access to Vimeo account', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
