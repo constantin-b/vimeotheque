@@ -531,5 +531,18 @@ class Helper{
 	public static function is_video(){
 		return is_singular( Plugin::instance()->get_cpt()->get_post_type() );
 	}
+
+	/**
+	 * Check if AJAX
+	 *
+	 * Check if an AJAX or REST request has been made.
+	 *
+	 * @return bool
+	 */
+	public static function is_ajax(){
+		$ajax = defined('DOING_AJAX') && DOING_AJAX;
+		$rest = defined('REST_REQUEST') && REST_REQUEST;
+		return $ajax || $rest;
+	}
 }
 
