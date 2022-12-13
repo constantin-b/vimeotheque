@@ -20,6 +20,7 @@ use Vimeotheque\Admin\Page\Go_Pro_Page;
 use Vimeotheque\Admin\Page\List_Videos_Page;
 use Vimeotheque\Admin\Page\Post_Edit_Page;
 use Vimeotheque\Admin\Page\Settings_Page;
+use Vimeotheque\Admin\Page\Setup_Page;
 use Vimeotheque\Admin\Page\Status_Page;
 use Vimeotheque\Admin\Page\Video_Import_Page;
 use Vimeotheque\Extensions\Extensions;
@@ -163,6 +164,17 @@ class Admin{
 				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
 				'cvm_settings',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'manage_options'
+			)
+		);
+
+		$this->admin_menu->register_page(
+			new Setup_Page(
+				$this,
+				__( 'Setup', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Setup', 'codeflavors-vimeo-video-post-lite' ),
+				'setup',
+				false,
 				'manage_options'
 			)
 		);
