@@ -184,7 +184,7 @@ class Plugin{
 					 */
 					add_theme_support( 'vimeotheque-next-video-card' );
 				}
-			}
+			}, 1
 		);
 	}
 
