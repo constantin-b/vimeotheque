@@ -84,6 +84,16 @@ use Vimeotheque\Helper;
                             </th>
                         </tr>
 
+                        <tr>
+                            <th scope="row"><label for="enable_templates"><?php _e( 'Enable the Vimeotheque Post Templates', 'codeflavors-vimeo-video-post-lite' );?></label></th>
+                            <td>
+                                <input type="checkbox" name="enable_templates" value="1" id="enable_templates"<?php Helper_Admin::check( $options['enable_templates'] );?> />
+                                <span class="description">
+                                    <?php _e( 'Customizable from your WordPress theme, the Vimeotheque video templates display video posts using enhanced functionality that helps increase the user engagement time on your pages.', 'codeflavors-vimeo-video-post-lite' );?>
+                                </span>
+                            </td>
+                        </tr>
+
                         <tr valign="top">
                             <th scope="row"><label for="archives"><?php _e('Embed videos in archive pages', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
                             <td>
