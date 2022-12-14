@@ -7,7 +7,6 @@
 namespace Vimeotheque\Admin\Page;
 
 use Vimeotheque\Admin\Helper_Admin;
-use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use Vimeotheque\Vimeo_Api\Vimeo_Oauth;
 
