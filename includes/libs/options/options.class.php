@@ -75,7 +75,12 @@ class Options{
 
 		$result = $exclude ? array_diff_key( $this->options, array_flip( $exclude ) ) : $this->options;
 
-		return $result;
+		return apply_filters(
+			'vimeotheque\options\get',
+			$result,
+			$this->options,
+			$this->option_name
+		);
 	}
 
 	/**
