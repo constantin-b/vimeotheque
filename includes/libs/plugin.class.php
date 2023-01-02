@@ -419,6 +419,11 @@ class Plugin{
 		flush_rewrite_rules( false );
 
 		$this->add_admin();
+
+		$wp_option = get_option( $this->get_options_obj()->get_option_name() );
+		if( !$wp_option ){
+			set_transient( 'vimeotheque_setup_activated' , time(), 30 );
+		}
 	}
 
 	/**
