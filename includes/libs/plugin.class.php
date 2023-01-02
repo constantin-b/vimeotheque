@@ -186,6 +186,52 @@ class Plugin{
 				}
 			}, 1
 		);
+
+		add_filter(
+			'vimeotheque\options\get',
+			/**
+			 * Filter options.
+			 *
+			 * Filter the plugin options and check if templates are enabled.
+			 *
+			 * @param array $result             The requested options set.
+			 * @param array $all_options        All the plugin options.
+			 * @param string $wp_option_name    The WP option name.
+			 */
+			function( $result, $all_options, $wp_option_name ){
+
+				if( $this->get_options_obj()->get_option_name() == $wp_option_name ){
+
+					if( get_theme_support( 'vimeotheque' ) ){
+						$all_options['enable_templates'] = true;
+						if( isset( $result['enable_templates'] ) ) {
+							$result['enable_templates'] = true;
+						}
+					}
+
+					if( $all_options['enable_templates'] ) {
+						// When templates are enabled, these options will always have the same predefined value.
+						$options = [
+							'archives'           => false,
+							'public'             => true,
+							'import_title'       => true,
+							'import_description' => 'content',
+							'featured_image'      => true
+						];
+
+						// Set the options to the predefined value.
+						foreach ( $options as $index => $value ) {
+							if ( isset( $result[ $index ] ) ) {
+								$result[ $index ] = $value;
+							}
+						}
+					}
+				}
+
+				return $result;
+
+			}, -999, 3
+		);
 	}
 
 	public function init(){
