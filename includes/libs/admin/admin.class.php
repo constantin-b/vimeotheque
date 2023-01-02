@@ -104,6 +104,22 @@ class Admin{
 			$this,
 			'action_links'
 		] );
+
+		add_action(
+			'admin_init',
+			/**
+			 * Redirect to Setup.
+			 *
+			 * Redirect after plugin activation to the plugin Setup Guide page.
+			 */
+			function(){
+				if( current_user_can( 'manage_options' ) && get_transient( 'vimeotheque_setup_activated' ) ){
+					delete_transient( 'vimeotheque_setup_activated' );
+					wp_redirect( $this->get_admin_menu()->get_page( 'vimeotheque_setup' )->get_menu_page( false ) );
+					die();
+				}
+			}
+		);
 	}
 
 	/**
@@ -173,7 +189,7 @@ class Admin{
 				$this,
 				__( 'Setup', 'codeflavors-vimeo-video-post-lite' ),
 				__( 'Setup', 'codeflavors-vimeo-video-post-lite' ),
-				'setup',
+				'vimeotheque_setup',
 				false,
 				'manage_options'
 			)
