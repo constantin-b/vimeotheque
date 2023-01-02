@@ -94,7 +94,7 @@ use Vimeotheque\Helper;
                             </td>
                         </tr>
 
-                        <tr valign="top">
+                        <tr id="row-archives" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
                             <th scope="row"><label for="archives"><?php _e('Embed videos in archive pages', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
                             <td>
                                 <input type="checkbox" name="archives" value="1" id="archives"<?php Helper_Admin::check( $options['archives'] );?> />
@@ -113,7 +113,7 @@ use Vimeotheque\Helper;
 
 						<!-- Visibility -->
 						<tr><th colspan="2"><h4><i class="dashicons dashicons-video-alt3"></i> <?php _e('Video post type options', 'codeflavors-vimeo-video-post-lite');?></h4></th></tr>
-						<tr valign="top">
+						<tr id="row-public" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
 							<th scope="row"><label for="public"><?php _e('Video post type is public', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="checkbox" name="public" value="1" id="public"<?php Helper_Admin::check( $options['public'] );?> />
@@ -143,19 +143,19 @@ use Vimeotheque\Helper;
 								</p>
 							</th>
 						</tr>
-						<tr valign="top">
+						<tr>
 							<th scope="row"><label for="post_slug"><?php _e('Post slug', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="text" id="post_slug" name="post_slug" value="<?php echo $options['post_slug'];?>" />
 							</td>
 						</tr>
-						<tr valign="top">
+						<tr>
 							<th scope="row"><label for="taxonomy_slug"><?php _e('Taxonomy slug', 'codeflavors-vimeo-video-post-lite')?> :</label></th>
 							<td>
 								<input type="text" id="taxonomy_slug" name="taxonomy_slug" value="<?php echo $options['taxonomy_slug'];?>" />
 							</td>
 						</tr>
-						<tr valign="top">
+						<tr>
 							<th scope="row"><label for="tag_slug"><?php _e('Tags slug', 'codeflavors-vimeo-video-post-lite')?> :</label></th>
 							<td>
 								<input type="text" id="tag_slug" name="tag_slug" value="<?php echo $options['tag_slug'];?>" />
@@ -177,7 +177,7 @@ use Vimeotheque\Helper;
                                 <h4><i class="dashicons dashicons-admin-post"></i> <?php _e('Post content settings', 'codeflavors-vimeo-video-post-lite');?></h4>
                             </th>
                         </tr>
-						<tr valign="top">
+						<tr>
 							<th scope="row"><label for="import_date"><?php _e('Import date', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="checkbox" value="1" name="import_date" id="import_date"<?php Helper_Admin::check($options['import_date']);?> />
@@ -185,7 +185,7 @@ use Vimeotheque\Helper;
 							</td>
 						</tr>	
 						
-						<tr valign="top">
+						<tr id="row-import_title" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
 							<th scope="row"><label for="import_title"><?php _e('Import titles', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="checkbox" value="1" id="import_title" name="import_title"<?php Helper_Admin::check($options['import_title']);?> />
@@ -193,7 +193,7 @@ use Vimeotheque\Helper;
 							</td>
 						</tr>
 						
-						<tr valign="top">
+						<tr>
 							<th scope="row"><label for="import_tags"><?php _e('Import tags', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="checkbox" value="1" id="import_tags" name="import_tags"<?php Helper_Admin::check($options['import_tags']);?> />
@@ -201,7 +201,7 @@ use Vimeotheque\Helper;
 							</td>
 						</tr>
 
-						<tr valign="top">
+						<tr>
 							<th scope="row"><label for="max_tags"><?php _e('Number of tags', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="text" value="<?php echo $options['max_tags'];?>" id="max_tags" name="max_tags" size="1" />
@@ -209,7 +209,7 @@ use Vimeotheque\Helper;
 							</td>
 						</tr>
 
-						<tr valign="top">
+						<tr id="row-import_description" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
 							<th scope="row"><label for="import_description"><?php _e('Import descriptions as', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<?php 
@@ -251,7 +251,7 @@ use Vimeotheque\Helper;
                                 <h4><i class="dashicons dashicons-format-image"></i> <?php _e('Image settings', 'codeflavors-vimeo-video-post-lite');?></h4>
                             </th>
                         </tr>
-						<tr valign="top">
+						<tr id="row-featured_image" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
 							<th scope="row"><label for="featured_image"><?php _e('Import images', 'codeflavors-vimeo-video-post-lite')?>:</label></th>
 							<td>
 								<input type="checkbox" value="1" name="featured_image" id="featured_image"<?php Helper_Admin::check($options['featured_image']);?> class="vmtq-toggler-checkbox" data-selector=".vmtq-extra-image-options" />
@@ -361,7 +361,7 @@ use Vimeotheque\Helper;
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr id="row-video_position" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
                             <th><label for="cvm_video_position"><?php _e('Display video','codeflavors-vimeo-video-post-lite');?>:</label></th>
                             <td>
 								<?php
@@ -400,7 +400,7 @@ use Vimeotheque\Helper;
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr id="row-video_align" style="<?php Helper_Admin::css_hide( $options['enable_templates'] );?>">
                             <th><label for="cvm_video_align"><?php _e('Align video','codeflavors-vimeo-video-post-lite');?>:</label></th>
                             <td>
 								<?php
