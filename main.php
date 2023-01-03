@@ -42,6 +42,7 @@ if ( ! version_compare( PHP_VERSION, VIMEOTHEQUE_PHP_COMPAT, '>=' ) ) {
 /**
  * Vimeotheque admin notice for minimum PHP version.
  * @return void
+ * @ignore
  */
 function vimeotheque_fail_php_version() {
 	/* translators: %s: PHP version */
@@ -59,6 +60,7 @@ function vimeotheque_fail_php_version() {
 /**
  * Vimeotheque admin notice for minimum WordPress version.
  * @return void
+ * @ignore
  */
 function vimeotheque_fail_wp_version() {
 	/* translators: %s: WordPress version */

@@ -3,9 +3,13 @@
 namespace Vimeotheque\Theme\Listy;
 
 /**
- * @return string
+ * Display the post content.
+ *
+ * @private
+ * @return void
+ * @ignore
  */
-function the_video_content(){
+function the_video_content() {
 
 	add_filter(
 		'vimeotheque\post_content_embed',

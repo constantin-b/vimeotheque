@@ -1,4 +1,5 @@
 <?php
+
 namespace Themes\DefaultTheme;
 
 use Vimeotheque\Plugin;
@@ -9,13 +10,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Add block editor Playlist Block attributes extension
+ * @private
+ * @ignore
+ *
+ * Playlist theme Default script enqueue.
+ *
+ * Callback function for the block editor script hook that
+ * enqueues block editor Playlist Block attributes extension.
  */
-function block_editor(){
+function block_editor() {
 	wp_enqueue_script(
 		'vimeotheque-theme-default-attributes',
 		plugin_dir_url( __FILE__ ) . 'assets/js/block/app.build.js',
-		[ Plugin::instance()->get_block('playlist')->get_script_handle() ],
+		[ Plugin::instance()->get_block( 'playlist' )->get_script_handle() ],
 		'1.0.0',
 		true
 	);
@@ -24,13 +31,18 @@ function block_editor(){
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\block_editor' );
 
 /**
- * Get the image size name based on playlist option 'original_thumbnail_size' value
- *
+ * @private
+ * @return string
  * @since 2.0.15
  *
- * @return string
+ * @ignore
+ *
+ * Get the image size name based on playlist option 'original_thumbnail_size' value
+ *
  */
-function get_image_size(){
+function get_image_size() {
 	$options = Helper::get_player_options();
-	return isset( $options['use_original_thumbnails'] ) && $options['use_original_thumbnails'] ? 'original' : 'small';
+
+	return isset( $options['use_original_thumbnails'] )
+	       && $options['use_original_thumbnails'] ? 'original' : 'small';
 }
