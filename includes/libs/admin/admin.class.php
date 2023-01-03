@@ -20,6 +20,7 @@ use Vimeotheque\Admin\Page\Go_Pro_Page;
 use Vimeotheque\Admin\Page\List_Videos_Page;
 use Vimeotheque\Admin\Page\Post_Edit_Page;
 use Vimeotheque\Admin\Page\Settings_Page;
+use Vimeotheque\Admin\Page\Setup_Page;
 use Vimeotheque\Admin\Page\Status_Page;
 use Vimeotheque\Admin\Page\Video_Import_Page;
 use Vimeotheque\Extensions\Extensions;
@@ -103,6 +104,22 @@ class Admin{
 			$this,
 			'action_links'
 		] );
+
+		add_action(
+			'admin_init',
+			/**
+			 * Redirect to Setup.
+			 *
+			 * Redirect after plugin activation to the plugin Setup Guide page.
+			 */
+			function(){
+				if( current_user_can( 'manage_options' ) && get_transient( 'vimeotheque_setup_activated' ) ){
+					delete_transient( 'vimeotheque_setup_activated' );
+					wp_redirect( $this->get_admin_menu()->get_page( 'vimeotheque_setup' )->get_menu_page( false ) );
+					die();
+				}
+			}
+		);
 	}
 
 	/**
@@ -163,6 +180,17 @@ class Admin{
 				__( 'Settings', 'codeflavors-vimeo-video-post-lite' ),
 				'cvm_settings',
 				'edit.php?post_type=' . $this->post_type->get_post_type(),
+				'manage_options'
+			)
+		);
+
+		$this->admin_menu->register_page(
+			new Setup_Page(
+				$this,
+				__( 'Setup', 'codeflavors-vimeo-video-post-lite' ),
+				__( 'Setup', 'codeflavors-vimeo-video-post-lite' ),
+				'vimeotheque_setup',
+				false,
 				'manage_options'
 			)
 		);

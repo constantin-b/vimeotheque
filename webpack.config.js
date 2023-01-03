@@ -18,10 +18,13 @@ module.exports = {
         'assets/back-end/js/apps/block-editor/video_position/app.build' : './assets/back-end/js/apps/block-editor/video_position/block.js',
         'assets/back-end/js/apps/block-editor/video/app.build'          : './assets/back-end/js/apps/block-editor/video/block.js',
         'assets/back-end/js/apps/player/app.build'                      : './assets/back-end/js/apps/player/app.js',
+        'assets/back-end/js/setup'                                      : './assets/back-end/js/apps/setup/app.js',
+
+        'assets/front-end/js/load-next-video'       : './assets/front-end/js/apps/load-next-video/app.js',
 
         'themes/default/assets/js/block/app.build'  : './themes/default/assets/js/block/block.js',
         'themes/simple/assets/script'               : './themes/simple/assets/app/app.js',
-        'themes/listy/assets/script'            : './themes/listy/assets/app/app.js'
+        'themes/listy/assets/script'                : './themes/listy/assets/app/app.js'
     },
     output: {
         path: __dirname,

@@ -1,0 +1,93 @@
+.vimeotheque{
+
+  &.container-taxonomy{
+    overflow:hidden;
+    max-width: 1200px;
+    margin:0 auto;
+  }
+
+  &.video-taxonomy {
+
+    margin-right: -30px;
+
+    .page-header {
+      h1 {
+
+      }
+
+      .taxonomy-description {
+
+      }
+    }
+
+    .videos{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: normal;
+      gap: 0px;
+      row-gap: 30px;
+      margin-top: 30px;
+
+
+      &:after{
+        content: '';
+        flex: auto;
+      }
+
+      /**
+     * Archive single video
+     */
+      .vimeotheque-video{
+        &.with-image {
+          img{
+            width: 100%!important;
+            max-width: 100%;
+            height: auto!important;
+          }
+        }
+
+        flex-basis: 25%;
+        width: 25%;
+        min-width: 25%;
+        padding-right: 30px;
+
+        h3{
+          &.entry-title{
+            font-size: 1em;
+            font-weight: 500;
+            margin: 10px 0;
+          }
+        }
+
+        .video-meta{
+          a{
+            color: #707070;
+          }
+
+          font-size: 1em;
+          color: #707070;
+        }
+
+      }
+
+    }
+
+    .pagination{
+      margin-right: 30px;
+    }
+
+  }
+}
+
+@media all and( max-width: 780px ) {
+  .vimeotheque{
+    &.video-archive{
+      .videos{
+        .vimeotheque-video{
+          margin-left:auto;
+          margin-right:auto;
+        }
+      }
+    }
+  }
+}

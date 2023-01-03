@@ -331,13 +331,20 @@ class Helper{
 	 * @return bool Embed is allowed (true) or is prevented (false).
 	 */
 	public static function is_autoembed_allowed(){
-		/**
-		 * Filter that can prevent video embedding into the post content.
-		 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
-		 *
-		 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
-		 */
-		return apply_filters( 'vimeotheque\post_content_embed', true );
+
+		$allowed = true;
+
+		if( !is_admin() ){
+			/**
+			 * Filter that can prevent video embedding into the post content.
+			 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
+			 *
+			 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
+			 */
+			$allowed =  apply_filters( 'vimeotheque\post_content_embed', true );;
+		}
+
+		return $allowed;
 	}
 
 	/**
@@ -479,6 +486,63 @@ class Helper{
 		}
 
 		return $embed;
+	}
+
+	/**
+	 * Plugin version.
+	 *
+	 * Returns the plugin version.
+	 *
+	 * @return string
+	 */
+	public static function get_plugin_version(){
+		return VIMEOTHEQUE_VERSION;
+	}
+
+	/**
+	 * Plugin path.
+	 *
+	 * Get the plugin absolute path.
+	 *
+	 * @return string
+	 */
+	public static function get_path(){
+		return VIMEOTHEQUE_PATH;
+	}
+
+	/**
+	 * Plugin URL.
+	 *
+	 * Get the plugin URL path.
+	 *
+	 * @return string
+	 */
+	public static function get_url(){
+		return VIMEOTHEQUE_URL;
+	}
+
+	/**
+	 * Check single video post.
+	 *
+	 * Check if the current page is a single video post (post type "vimeo-video").
+	 *
+	 * @return bool
+	 */
+	public static function is_video(){
+		return is_singular( Plugin::instance()->get_cpt()->get_post_type() );
+	}
+
+	/**
+	 * Check if AJAX
+	 *
+	 * Check if an AJAX or REST request has been made.
+	 *
+	 * @return bool
+	 */
+	public static function is_ajax(){
+		$ajax = defined('DOING_AJAX') && DOING_AJAX;
+		$rest = defined('REST_REQUEST') && REST_REQUEST;
+		return $ajax || $rest;
 	}
 }
 

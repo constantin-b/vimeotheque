@@ -15,6 +15,7 @@ use Vimeotheque\Post\Post_Registration;
 use Vimeotheque\Post\Post_Type;
 use Vimeotheque\Rest_Api\Rest_Api;
 use Vimeotheque\Shortcode\Shortcode_Factory;
+use Vimeotheque\Templates\Templates_Init;
 use Vimeotheque\Widgets\Widgets_Factory;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -166,6 +167,71 @@ class Plugin{
 		], -9999999 );
 
 		new Amp();
+		new Templates_Init();
+
+		add_action(
+			'after_setup_theme',
+			function(){
+				$options = $this->get_options();
+				if( $options['enable_templates'] && !current_theme_supports( 'vimeotheque' ) ){
+					/**
+					 * Support for Video templates.
+					 */
+					add_theme_support( 'vimeotheque' );
+
+					/**
+					 * Support for next video card after the video finishes.
+					 */
+					add_theme_support( 'vimeotheque-next-video-card' );
+				}
+			}, 1
+		);
+
+		add_filter(
+			'vimeotheque\options\get',
+			/**
+			 * Filter options.
+			 *
+			 * Filter the plugin options and check if templates are enabled.
+			 *
+			 * @param array $result             The requested options set.
+			 * @param array $all_options        All the plugin options.
+			 * @param string $wp_option_name    The WP option name.
+			 */
+			function( $result, $all_options, $wp_option_name ){
+
+				if( $this->get_options_obj()->get_option_name() == $wp_option_name ){
+
+					if( get_theme_support( 'vimeotheque' ) ){
+						$all_options['enable_templates'] = true;
+						if( isset( $result['enable_templates'] ) ) {
+							$result['enable_templates'] = true;
+						}
+					}
+
+					if( $all_options['enable_templates'] ) {
+						// When templates are enabled, these options will always have the same predefined value.
+						$options = [
+							'archives'           => false,
+							'public'             => true,
+							'import_title'       => true,
+							'import_description' => 'content',
+							'featured_image'      => true
+						];
+
+						// Set the options to the predefined value.
+						foreach ( $options as $index => $value ) {
+							if ( isset( $result[ $index ] ) ) {
+								$result[ $index ] = $value;
+							}
+						}
+					}
+				}
+
+				return $result;
+
+			}, -999, 3
+		);
 	}
 
 	public function init(){
@@ -262,18 +328,19 @@ class Plugin{
 	 */
 	private function set_plugin_options(){
 		$defaults = [
+			'enable_templates' => false, // use the video templates for themes
 			'public' => true, // post type is public or not
 			'archives' => false, // display video embed on archive pages
 			'post_slug'	=> 'vimeo-video',
 			'taxonomy_slug' => 'vimeo-videos',
 			'tag_slug' => 'vimeo-tag',
-			'import_tags' => false, // import tags retrieved from Vimeo
+			'import_tags' => true, // import tags retrieved from Vimeo
 			'max_tags' => 3, // how many tags to import
 			'import_title' => true, // import titles on custom posts
 			'import_description' => 'content', // import descriptions on custom posts
-			'import_date' => false, // import video date as post date
-			'featured_image' => false, // set thumbnail as featured image; default import on video feed import (takes more time)
-			'import_status' => 'draft', // default import status of videos
+			'import_date' => true, // import video date as post date
+			'featured_image' => true, // set thumbnail as featured image; default import on video feed import (takes more time)
+			'import_status' => 'publish', // default import status of videos
 			// Vimeo oAuth
 			'vimeo_consumer_key' => '',
 			'vimeo_secret_key' => '',
@@ -308,13 +375,13 @@ class Plugin{
 			'dnt' => 0, // block Vimeo player from tracking session data or cookies (1) or allow it (0);
 			// extra settings
 			'aspect_ratio' => '16x9',
-			'width'	=> 640,
+			'width'	=> 900,
 			'max_height' => 0, // allows setup of a maximum embed height; must be a value over 50px to work
 			'video_position' => 'below-content', // in front-end custom post, where to display the video: above or below post content
 			'video_align' => 'align-left', // video alignment
 			'lazy_load' => false, // lazy load videos
 			'play_icon_color' => '#FF0000', // lazy load play icon color
-			'volume' => 25, // video default volume
+			'volume' => 45, // video default volume
 			// extra player settings controllable by widgets/shortcodes
 			'playlist_loop' => 0,
 			'aspect_override' => true,
@@ -352,6 +419,11 @@ class Plugin{
 		flush_rewrite_rules( false );
 
 		$this->add_admin();
+
+		$wp_option = get_option( $this->get_options_obj()->get_option_name() );
+		if( !$wp_option ){
+			set_transient( 'vimeotheque_setup_activated' , time(), 30 );
+		}
 	}
 
 	/**
@@ -420,7 +492,7 @@ class Plugin{
 	 * Adds plugin administration functionality
 	 */
 	private function add_admin(){
-		if( is_admin() ) {
+		if( is_admin() || Helper::is_ajax() ) {
 			$this->admin = new Admin( $this->get_cpt() );
 		}
 	}
@@ -457,9 +529,17 @@ class Plugin{
 	}
 
 	/**
+	 * Get the admin.
+	 *
+	 * Returns the Admin object that allows access to various admin sections like the menu
+	 * or custom post type definitions.
+	 *
 	 * @return Admin
 	 */
 	public function get_admin(){
+		if( is_null( $this->admin ) ){
+			$this->add_admin();
+		}
 		return $this->admin;
 	}
 

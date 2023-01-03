@@ -2,6 +2,7 @@
 
 namespace Vimeotheque\Rest_Api\Endpoints;
 
+use Vimeotheque\Rest_Api\Endpoints\Plugin\Rest_Store_Settings;
 use Vimeotheque\Rest_Api\Endpoints\Vimeo_Api\Rest_Pictures_Controller;
 use Vimeotheque\Rest_Api\Endpoints\Vimeo_Api\Rest_Search_Controller;
 use Vimeotheque\Rest_Api\Endpoints\Vimeo_Api\Rest_Video_Controller;
@@ -40,6 +41,7 @@ class Rest_Endpoint_Factory {
 		$this->store_endpoint( new Rest_Search_Controller() );
 		$this->store_endpoint( new Rest_Post_Create_Controller() );
 		$this->store_endpoint( new Rest_Posts_Controller() );
+		$this->store_endpoint( new Rest_Store_Settings() );
 	}
 
 	/**

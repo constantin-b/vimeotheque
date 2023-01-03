@@ -50,6 +50,12 @@ class Posts_Import_Meta_Panels{
 		 */
 		$options = apply_filters( 'vimeotheque\admin\import_meta_panel\post_options', $options );
 		?>
+
+        <?php
+            // If templates are enabled, disable option to import description since it is set to always import in post content.
+            if( !$options['enable_templates'] ):
+        ?>
+
 		<label for="import_description"><?php _e('Set description as', 'codeflavors-vimeo-video-post-lite')?>:</label>
 		<?php 
 			$args = [
@@ -65,6 +71,8 @@ class Posts_Import_Meta_Panels{
 			Helper_Admin::select( $args );
 		?><br />
 
+        <?php endif;?>
+
 		<label for="import_status"><?php _e('Import status', 'codeflavors-vimeo-video-post-lite')?>:</label>
 		<?php 
 			$args = [
@@ -79,9 +87,17 @@ class Posts_Import_Meta_Panels{
 			Helper_Admin::select( $args );
 		?><br />
 
-        <label for="import_title"><?php _e('Import titles', 'codeflavors-vimeo-video-post-lite')?> :</label>
-        <input type="checkbox" value="1" id="import_title" name="import_title"<?php Helper_Admin::check( $options['import_title'] );?> /><br />
+		<?php
+		    // If templates are enabled, disable option to import description since it is set to always import in post content.
+		    if( !$options['enable_templates'] ):
+		?>
 
+                <label for="import_title"><?php _e('Import titles', 'codeflavors-vimeo-video-post-lite')?> :</label>
+                <input type="checkbox" value="1" id="import_title" name="import_title"<?php Helper_Admin::check( $options['import_title'] );?> /><br />
+
+        <?php
+            endif;
+        ?>
 
 
         <?php
