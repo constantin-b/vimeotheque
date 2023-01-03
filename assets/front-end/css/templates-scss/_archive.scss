@@ -1,0 +1,257 @@
+.vimeotheque{
+
+  &.container-archive{
+    overflow:hidden;
+    max-width: 1200px;
+    margin:30px auto;
+  }
+
+  &.video-archive {
+
+    margin-right: -30px;
+
+    .page-header {
+      h1 {
+
+      }
+
+      .taxonomy-description {
+
+      }
+    }
+
+    .videos{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: normal;
+      gap: 0px;
+      row-gap: 30px;
+      margin-top: 30px;
+
+
+      &:after{
+        content: '';
+        flex: auto;
+      }
+
+    /**
+     * Archive single video
+     */
+      .vimeotheque-video{
+        &.with-image {
+
+          .vimeotheque-featured-image{
+            display:block;
+            position:relative;
+
+            .post-thumbnail{
+              margin:0!important;
+              padding: 0!important;
+              width: 100%!important;
+              max-width: 100%;
+              height: auto!important;
+            }
+
+            .play-btn{
+              display: block;
+              position: absolute;
+              width: 60px;
+              height: 40px;
+              background-color: #1ab7ea;
+              bottom: 20px;
+              left: 20px;
+              border-radius: 5px;
+
+              // SVG play icon
+              img{
+                width: 60%!important;
+                height: 60%!important;
+                position:absolute;
+                bottom:20%;
+                left:20%;
+                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(325deg) brightness(105%) contrast(101%);
+                z-index:2;
+              }
+            }
+
+            .duration{
+              color:#FFFFFF;
+              z-index: 2;
+              position: absolute;
+              right: 20px;
+              bottom: 20px;
+              background: rgba(0, 0, 0, 0.6);
+              text-align: center;
+              padding: 5px 10px;
+              border-radius: 5px;
+              font-size:12px;
+            }
+
+            &:hover{
+              .play-btn,
+              .duration{
+                display:block!important;
+              }
+            }
+          }
+        }
+
+        flex-basis: 33.33%;
+        width: 33.33%;
+        min-width: 33.33%;
+        padding-right: 30px;
+        margin:0!important;
+
+        h3{
+          &.entry-title{
+            font-size: 1em;
+            font-weight: 500;
+            margin: 10px 0;
+          }
+        }
+
+        .video-meta{
+          a{
+            color: #707070;
+          }
+
+          font-size: 1em;
+          color: #707070;
+        }
+
+      }
+
+    }
+
+    .pagination{
+      margin-right: 30px;
+
+      .nav-links{
+        margin-top: 30px;
+
+        & > *{
+          min-width: 44px;
+          min-height: 44px;
+          margin-top: 30px;
+          margin-left: calc(0.66 * 20px);
+          margin-right: calc(0.66 * 20px);
+        }
+
+        .nav-next,
+        .nav-previous {
+          a{
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
+        .dots {
+          text-align: center;
+        }
+
+        & > *.current{
+          text-decoration: underline;
+        }
+
+        & > *:first-child{
+          margin-left: 0;
+        }
+
+        & > *:last-child {
+          margin-right: 0;
+        }
+
+        & > *.next {
+          margin-left: auto;
+        }
+
+        & > *.prev {
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 822px) {
+  .vimeotheque{
+    &.video-archive {
+      .pagination {
+        margin: 30px 30px 30px auto;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 821px) {
+
+  .vimeotheque{
+    &.video-archive {
+      .pagination {
+        .nav-links {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .page-numbers {
+          display: none;
+
+          &.prev,
+          &.next{
+            display: inline-block;
+            flex: 0 1 auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 481px) {
+  .vimeotheque{
+    &.video-archive {
+      .pagination {
+        .nav-short {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 592px) {
+
+  .pagination {
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .nav-next,
+      .nav-previous {
+        flex: 0 1 auto;
+        margin-bottom: inherit;
+        margin-top: inherit;
+        max-width: calc(50% - 0.5 * 30px);
+      }
+
+      .nav-next {
+         text-align: right;
+      }
+    }
+  }
+}
+
+
+@media all and( max-width: 780px ) {
+  .vimeotheque{
+    &.video-archive{
+      .videos{
+        .vimeotheque-video{
+          margin-left:auto;
+          margin-right:auto;
+        }
+      }
+    }
+  }
+}

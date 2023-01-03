@@ -1,0 +1,12 @@
+.vimeotheque-timer{
+  width: 400px;
+  margin: 5px auto;
+  color: #FFFFFF;
+  font-size: .8em;
+
+  span{
+    &.timer{
+      margin: 0 5px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.vimeotheque-video-embed{
+  width:100%;
+  background: #000000;
+  margin-bottom: 30px;
+
+  .vimeotheque-player{
+    margin:0 auto;
+
+    &.show-end-card{
+      background-image: none;
+      height: auto !important;
+      padding: 75px 0;
+    }
+
+  }
+
+  @import "counter";
+  @import "end-card";
+}

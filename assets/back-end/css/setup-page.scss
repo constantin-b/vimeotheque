@@ -1,0 +1,239 @@
+html, body{
+  height: auto!important;
+}
+
+.wrap{
+  &.vimeotheque-setup{
+
+    a{
+      &:visited,
+      &:active,
+      &:focus{
+        outline: none!important;
+        box-shadow: none!important;
+      }
+    }
+
+    margin:0!important;
+
+    .navigator{
+      background-color: #FFF;
+      border-bottom:1px #CCCCCC solid;
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      counter-reset: css-counter 0;
+
+      .step{
+        counter-increment: css-counter 1;
+        padding:0 10px;
+
+        a{
+          font-size:1.2em;
+          color: #727272;
+          text-decoration: none;
+
+          &:before{
+            content: counter(css-counter);
+            background-color: #e0e0e0;
+            padding: 5px 12px;
+            border-radius: 50px;
+            color: #000000;
+            margin-right: 7px;
+          }
+
+          &:visited,
+          &:active,
+          &:focus{
+            outline: none!important;
+            box-shadow: none!important;
+          }
+
+          &.active,
+          &.complete{
+            &:before{
+              background-color: #5b9dd9;
+              color:#FFFFFF;
+            }
+          } /* .active, .complete */
+        } /* a */
+      }
+
+      .step-divider{
+        align-self: flex-start;
+        flex-grow: 1;
+        border-bottom: 1px solid #f0f0f0;
+        margin-top: 10px;
+      }
+    } /* .navigator */
+
+    .container{
+      width: 700px;
+      max-width: 95%;
+      margin: 50px auto;
+
+      .step{
+        margin: 30px 0;
+
+        .title{
+          text-align: center;
+
+          h2{
+            font-size: 1.5em;
+            margin: 0;
+          }
+
+          p{
+            font-size: 1.1em;
+          }
+        }
+
+        .content{
+          background-color: #FFFFFF;
+          border: 1px #e0e0e0 solid;
+          padding: 20px;
+          margin-top: 30px;
+        }
+
+        /**
+         * Inactive step content.
+         */
+        &.inactive{
+          display:none;
+        }
+
+        &.step-1{
+          label{
+            font-size: 1.2em;
+            line-height: 2em;
+          }
+
+          .note{
+            font-style: italic;
+            margin: 10px 0;
+            border-bottom: 1px #cccccc solid;
+
+            p{
+              font-size: 1.1em!important;
+            }
+
+
+            &:last-child{
+              border:none;
+            }
+
+          }
+        }
+      }
+
+      .controls{
+        text-align: center;
+
+        .form-controls{
+          margin-bottom: 20px;
+          .back{
+            margin-right: 10px;
+            color: #cbcbcb;
+            text-decoration: none;
+            cursor: not-allowed;
+
+            &.active{
+              color: #424242;
+              text-decoration: underline;
+              cursor: pointer;
+            }
+
+          }
+
+          .submit-button{
+            background-color: #5b9dd9;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            margin: 0 auto 20px;
+            box-shadow: 1px 1px 3px #999999;
+
+            &.loading{
+              background: #999999;
+
+              &:after{
+                content: '...';
+              }
+            }
+
+          }
+        }
+      }
+
+      .oauth-instructions{
+        text-align: center;
+
+        .toggler{
+          outline: none!important;
+        }
+
+        #oauth-instructions{
+          margin-top:20px;
+          display: none;
+          background-color: #FFFFFF;
+          text-align: left;
+          padding:10px;
+
+          p{
+            margin:10px;
+          }
+
+          .callback-url{
+            font-weight: normal;
+            background-color: #FFFFFF;
+            padding: 3px 10px;
+            border: 1px #999999 solid;
+            clear: both;
+            display: block;
+          }
+
+          .actions{
+            a{
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+
+      #vimeo-oauth-response{
+        display:none;
+
+        p{
+          font-size: 1.1em;
+          color: #000000;
+          background: rgba(255, 0, 0, 0.07);
+          border-left: 10px #FF0000 solid;
+          padding: 10px;
+        }
+      }
+
+    }/* .container */
+
+    .hide{
+      display:none;
+    }
+
+    .button{
+      &.large{
+        padding:10px;
+      }
+
+      &.single-line{
+        display: block;
+        width: fit-content;
+      }
+
+      &.center{
+        margin: 10px auto;
+      }
+    }
+
+  }
+}

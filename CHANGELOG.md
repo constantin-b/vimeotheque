@@ -1,3 +1,13 @@
+2.2 
+- Introduced template system for displaying video posts having post type "vimeo-video" that supports override from the WP theme;
+- Added first time "Installation Setup Guide" that gets displayed after the plugin is activated for the first time on the website (doesn't trigger if plugin options are already saved into the database);
+- Added plugin Settings option to enable templates. When enabled, several options will have predefined values that can't be changed (ie. the 'vimeo-video' post type visibility in front-end will always be true, descriptions will be imported as post content, the video title and featured image will always get imported);
+- Changed the defaults for several options: the tags are set by default to be imported, the video date from Vimeo is set to be imported, the featured image is set to be imported and the default post status is set to "Publish"; 
+- Changed the embedding defaults: the embed width is set by default to 900 and the video volume to 45/100;
+- Enabling templates from the plugin Settings page or by adding theme support for templates will disable some options from the Settings page and from importers;
+- Created several helper functions that can be used in theme templates to embed the video and display various information about the video;
+- Added embed end card functionality that displays a message after the current video playback ends asking if it should automatically load the next video post.
+
 2.1.17 [14/Nov/2022]
 - Solved a bug that prevented the player from going full screen;
 - Solved a compatibility bug with the Classic Editor plugin.
