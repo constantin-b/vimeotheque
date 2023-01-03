@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Stand-alone resource registration for name "showcase".
  * Implemented only for back-end usage.
- * @private
  */
 class Showcase_Resource extends Album_Resource {
 	/**
