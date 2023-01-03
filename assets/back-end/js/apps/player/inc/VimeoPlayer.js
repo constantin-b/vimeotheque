@@ -38,7 +38,6 @@ $.fn.VimeoPlayer = function( params ){
         player = new Vimeo.Player( $(this).find('iframe') )
     }catch( e ){
         self.isError = e;
-        console.log(e)
     }
 
     if( this.isError ){
