@@ -56,9 +56,9 @@ function vimeotheque_get_template_part( $slug, $name = '' ){
 }
 
 /**
- * Retrieves the next video post.
+ * Retrieve the next video post.
  *
- * Will get the next post.
+ * Used on single video pages, returns the next video post.
  *
  * @param bool         $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
  * @param int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
@@ -70,9 +70,9 @@ function vimeotheque_get_next_post(  $in_same_term = false, $excluded_terms = ''
 }
 
 /**
- * Retrieves the previous video post.
+ * Retrieve the previous video post.
  *
- * Will get the previous post.
+ * Used on single video pages, returns the previous video post.
  *
  * @param bool         $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
  * @param int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
@@ -87,7 +87,7 @@ function vimeotheque_get_previous_post(  $in_same_term = false, $excluded_terms 
 
 
 /**
- * Get the sidebar template
+ * Get the sidebar template.
  *
  * @return void
  */
