@@ -33,6 +33,14 @@ class Helper {
 	 * @return mixed|void
 	 */
 	public static function template_path(){
+		/**
+		 * Rename theme template folder.
+		 *
+		 * By default, tempaltes must be stored within the WordPress theme inside a folder named 'vimeotheque'.
+		 * This filter allows renaming of the folder.
+		 *
+		 * @param string $folder_name   The folder name.
+		 */
 		return apply_filters( 'vimeotheque_template_path', 'vimeotheque/' );
 	}
 

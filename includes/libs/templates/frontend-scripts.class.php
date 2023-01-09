@@ -56,7 +56,9 @@ class Frontend_Scripts {
 	 */
 	private function get_styles(){
 		/**
-		 * Filter that allows default styles override.
+		 * Allow style override.
+		 *
+		 * Allows overding the default template styles.
 		 *
 		 * @param array $styles - Array of styles.
 		 */

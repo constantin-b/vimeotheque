@@ -39,7 +39,15 @@ function vimeotheque_get_template_part( $slug, $name = '' ){
 		);
 	}
 
-	// Allow 3rd party plugins to filter template file from their plugin.
+	/**
+	 * Template file filter.
+	 *
+	 * Allow 3rd party plugins to filter template file from their plugin.
+	 *
+	 * @param string $template  The template file path.
+	 * @param string $slug      The template slug.
+	 * @param string $name      The template name.
+	 */
 	$template = apply_filters( 'vimeotheque_get_template_part', $template, $slug, $name );
 
 	if ( $template ) {

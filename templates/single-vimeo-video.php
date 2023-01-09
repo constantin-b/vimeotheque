@@ -51,8 +51,10 @@ get_header(); ?>
 
     <?php
         /**
-         * The sidebar
-         */
+        * Action for sidebar.
+        *
+        * Action that runs for the sidebar display.
+        */
         do_action('vimeotheque_sidebar');
     ?>
 

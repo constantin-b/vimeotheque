@@ -6,7 +6,19 @@
 <div class="post-meta">
 	<span class="byline">
 		<span class="author vcard">
-			<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'vimeotheque-author-avatar-size', 49 ) ); ?>
+			<?php
+                echo get_avatar(
+                        get_the_author_meta( 'user_email' ),
+                        /**
+                         * Author avatar size.
+                         *
+                         * Allows modification of the avatar size.
+                         *
+                         * @param int $size Size of avatar.
+                         */
+                        apply_filters( 'vimeotheque-author-avatar-size', 49 )
+                );
+            ?>
 			<span class="screen-reader-text"><?php _x( 'Author', 'Used before post author name.', 'codeflavors-vimeo-video-post-lite' );?></span>
 			<a class="url fn n" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );?>">
                 <?php the_author(); ?>
