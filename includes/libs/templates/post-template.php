@@ -92,9 +92,9 @@ function vimeotheque_the_video_likes( $before = '<span class="video-likes">', $a
  *
  * Returns the video image HTML with or without the play button and duration overlay.
  *
- * @param $size
- * @param $attr
- * @param $with_overlay
+ * @param string $size          Optional. Image size. Accepts any registered image size name, or an array of width and height values in pixels (in that order). Default 'post-thumbnail'.
+ * @param string $attr          Optional. Query string or array of attributes. Default empty.
+ * @param bool $with_overlay    Optional. Get image with orwithout the overlaying video play button.
  *
  * @return void
  */
@@ -126,7 +126,11 @@ function vimeotheque_the_post_thumbnail( $size = 'post-thumbnail', $attr = '', $
 
 if( !function_exists( 'vimeotheque_the_entry_taxonomies' ) ) {
 	/**
+	 * Print category and tags.
+	 *
 	 * Prints HTML with category and tags for current post.
+	 *
+	 * @return void
 	 */
 	function vimeotheque_the_entry_taxonomies() {
 		$post = get_post();
