@@ -1,4 +1,4 @@
-2.2 
+2.2 [16/Jan/2023]
 - Introduced template system for displaying video posts having post type "vimeo-video" that supports override from the WP theme;
 - Added first time "Installation Setup Guide" that gets displayed after the plugin is activated for the first time on the website (doesn't trigger if plugin options are already saved into the database);
 - Added plugin Settings option to enable templates. When enabled, several options will have predefined values that can't be changed (ie. the 'vimeo-video' post type visibility in front-end will always be true, descriptions will be imported as post content, the video title and featured image will always get imported);
