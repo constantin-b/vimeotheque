@@ -297,18 +297,20 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 
 		// if newest videos should be returned, return them
 		if( in_array( '0', $categories ) ){
+
+			/**
+			 * Changes number of posts.
+			 *
+			 * Filter that allows changing of number of posts displayed into a playlist block or shortcode.
+			 *
+			 * @param int $max_posts    Maximum number of posts to retrieve.
+			 */
+			$post_num = apply_filters( 'vimeotheque\shortcode\playlist\newest_max_posts', 10 );
+
 			$args = array_merge(
 				[
 					'post_type' => $post_type,
-					/**
-					 * Filter that allows changing of number of posts displayed into a playlist block or shortcode.
-					 *
-					 * @param int $max_posts    Maximum number of posts to retrieve.
-					 */
-					'numberposts' => apply_filters(
-						'vimeotheque\shortcode\playlist\newest_max_posts',
-						10
-					),
+					'numberposts' => $post_num,
 					'order' => 'DESC',
 					'orderby' => 'post_date'
 				],
