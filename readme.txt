@@ -1,6 +1,6 @@
 === Vimeotheque - Vimeo video importer WordPress plugin ===
 Contributors: codeflavors, constantin.boiangiu
-Tags: vimeo, video, lazy load, thumbnail, gallery
+Tags: vimeo, video, video gallery, featured video, video post
 Requires at least: 5.2
 Tested up to: 6.1.1
 Requires PHP: 5.6
