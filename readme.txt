@@ -60,7 +60,7 @@ Like any other plugin, it can be installed manually or directly from WordPress i
 Once activated a new menu entry will be created called **Videos** (look for the Vimeo logo).
 
 In order to be able to perform any imports, you will first need to register the plugin as an app on Vimeo website. Registration can be made [here](https://developer.vimeo.com/apps/new "register Vimeo app"). Please note that you must have a Vimeo account before you can register the app.
-After successfull registration, go to plugin page **Settings** and under **Vimeo authentication** enter your consumer and secret key provided by Vimeo. Now you can make bulk imports.
+After registration, go to plugin page **Settings** and under **Vimeo authentication** enter your consumer and secret key provided by Vimeo. Now you can make bulk imports.
 
 For a detailed tutorial on how to set up Vimeo access registration, please see [this tutorial](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "How to set up Vimeo OAuth").
 
