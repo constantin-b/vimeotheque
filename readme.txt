@@ -431,4 +431,4 @@ After upgrading to this version, single video imports won't work anymore unless 
 == Troubleshooting ==
 
 Plugin was tested with latest WordPress version and all default WordPress themes in all major browsers and also mobile devices. 
-If anything is wrong on your installation, please [contact us](https://codeflavors.com/contact/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Contact us") and tell us the theme you're using, WordPress version and browser/device used for testing.
+If anything is wrong on your installation, please submit a support request and tell us the theme you're using, WordPress version and browser/device used for testing.
