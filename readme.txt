@@ -49,26 +49,9 @@ Please note that before being able to perform any imports you need to [create a 
 * [Vimeotheque plugin homepage](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin")
 * [Vimeotheque Knowledgebase and Help Center](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque Knowledgebase and Help Center")
 
-**Vimeotheque initial setup**
-
-* [Vimeotheque initial setup to query Vimeo videos](https://docs.vimeotheque.com/category/getting-started/vimeo-oauth/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "How to create a new Vimeo App and set Vimeotheque to query videos from Vimeo")
-
-**Vimeotheque custom post type setup**
-
-* [How to change Vimeotheque's custom post type slug](https://docs.vimeotheque.com/changing-the-slug/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Change Vimeotheque's custom post type slug in WordPress")
-* [How to solve Vimeotheque custom post type 404 error](https://docs.vimeotheque.com/how-to-solve-404-errors/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "How to solve Vimeotheque custom post type 404 error")
-* [How to add Vimeotheque custom post type taxonomies to WordPress custom menus](https://docs.vimeotheque.com/how-to-add-custom-post-type-to-wordpress-menus/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "How to add Vimeotheque custom post type taxonomies to WordPress custom menus")
-
-**Vimeotheque plugin options**
-
-* [Vimeotheque imported content options](https://docs.vimeotheque.com/imported-content-options/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque imported content options")
-* [Vimeotheque video embedding options](https://docs.vimeotheque.com/embed-options/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque video embedding options")
 
 **Block editor**
 
-* [Vimeotheque video position block](https://docs.vimeotheque.com/video-position-block/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Video position WordPress block editor block")
-* [Vimeotheque single video block](https://docs.vimeotheque.com/single-video-block/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Single video WordPress block editor block")
-* [Vimeotheque video playlist block](https://docs.vimeotheque.com/playlist-block/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Video playlist WordPress block editor block")
 https://vimeo.com/512419883
 **Importers**
 
