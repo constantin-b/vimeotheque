@@ -49,19 +49,9 @@ Please note that before being able to perform any imports you need to [create a 
 * [Vimeotheque plugin homepage](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin")
 * [Vimeotheque Knowledgebase and Help Center](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque Knowledgebase and Help Center")
 
-
-**Block editor**
+**Block Editor Support**
 
 https://vimeo.com/512419883
-**Importers**
-
-* [Vimeotheque single video importer](https://docs.vimeotheque.com/single-video-import/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque single Vimeo video importer")
-* [Vimeotheque manual bulk video importer](https://docs.vimeotheque.com/manual-bulk-import/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque manual bulk Vimeo video importer")
-
-**Debugging**
-
-* [Vimeotheque importer debug add-on](https://docs.vimeotheque.com/debug-add-on/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque importer debug add-on")
-* [Vimeotheque system information](https://docs.vimeotheque.com/system-information/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque system information")
 
 == Installation ==
 
