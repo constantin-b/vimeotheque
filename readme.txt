@@ -1,4 +1,4 @@
-=== Vimeotheque - Vimeo video importer WordPress plugin ===
+=== Vimeotheque: Vimeo Video Importer WordPress Plugin ===
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video, video gallery, featured video, video post
 Requires at least: 5.2
@@ -8,19 +8,19 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Intuitive Vimeo video importer to help you create video posts in seconds and sync your Vimeo collections with your WordPress website.
+Intuitive Vimeo Video Importer WordPress Plugin to help you create video posts in seconds and sync your Vimeo collections with your WordPress website.
 
 == Description ==
 
-= Vimeo Video Importer Plugin =
+= Vimeo WordPress Plugin =
 
-**Vimeotheque** helps you to create video posts in your vlog, membership, online courses or any other video collection website by automatically importing public Vimeo videos and creating complete WordPress video posts from them.
+**Vimeotheque** is a powerful Vimeo WordPress Plugin that enables you to easily create video posts in your vlogs, memberships, online courses, or any other site with a video collection. It allows you to quickly import public Vimeo videos and create complete WordPress video posts.
 https://vimeo.com/512419753
-The video import process is fully automated and can be controlled by plugin options which allow you to choose the details that will be imported: title, content, featured image, tags and so on. Similarly, the video embed placed into the post content can be customized using the available plugin options for embedding the video.
+The video import process is completely automated and can be fine-tuned with plugin options, such as the title, content, featured image, tags and other options that are available for import. Furthermore, the video embed can be tailored according to your needs using the available plugin options.
 
 = Vimeotheque importers =
 
-With **Vimeotheque**, videos can be imported either individually, by providing the video URL on Vimeo or by searching or loading entire Vimeo channels, categories, showcases, groups, portfolios or user uploads and choosing which videos to import.
+Vimeotheque offers many ways to import Vimeo videos in WordPress - you can use a video URL from Vimeo, search or load an entire channel, category, showcase, group, portfolio, or user uploads, and select which videos you wish to add.
 
 Please note that before being able to perform any imports you need to [create a Vimeo App](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "create a new Vimeo App") and enter the credentials into **Vimeotheque's** Settings page.
 
