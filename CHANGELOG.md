@@ -1,3 +1,6 @@
+2.2.1 [13/Feb/2023]
+- Solved bugs that prevented the title and post content from being properly imported when templates are enabled.
+
 2.2 [16/Jan/2023]
 - Introduced template system for displaying video posts having post type "vimeo-video" that supports override from the WP theme;
 - Added first time "Installation Setup Guide" that gets displayed after the plugin is activated for the first time on the website (doesn't trigger if plugin options are already saved into the database);
