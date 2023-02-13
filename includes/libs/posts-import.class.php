@@ -52,10 +52,13 @@ class Posts_Import{
 		// get import options
 		$options = Plugin::instance()->get_options();
 
-		// overwrite plugin import settings with import settings
-		$options['import_description'] = $import_description;
+		if( !$options['enable_templates'] ) {
+			// overwrite plugin import settings with import settings
+			$options['import_description'] = $import_description;
+			$options['import_title']       = $import_title;
+		}
+
 		$options['import_status'] = $import_status;
-		$options['import_title'] = $import_title;
 
 		// store results
 		$result = [
