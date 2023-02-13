@@ -36,11 +36,11 @@ class Posts_Import_Meta_Panels{
 	 */
 	public function import_entries_meta(){
 		// plugin options
-		$options = \Vimeotheque\Plugin::instance()->get_options();
+		$_options = \Vimeotheque\Plugin::instance()->get_options();
 		// embed options
 		$player_opt = Helper::get_embed_options();
 		// merge the two together
-		$options = array_merge( $options, $player_opt );
+		$options = array_merge( $_options, $player_opt );
 
 		/**
 		 * Allow options override.
@@ -53,7 +53,7 @@ class Posts_Import_Meta_Panels{
 
         <?php
             // If templates are enabled, disable option to import description since it is set to always import in post content.
-            if( !$options['enable_templates'] ):
+            if( !$_options['enable_templates'] ):
         ?>
 
 		<label for="import_description"><?php _e('Set description as', 'codeflavors-vimeo-video-post-lite')?>:</label>
@@ -89,7 +89,7 @@ class Posts_Import_Meta_Panels{
 
 		<?php
 		    // If templates are enabled, disable option to import description since it is set to always import in post content.
-		    if( !$options['enable_templates'] ):
+		    if( !$_options['enable_templates'] ):
 		?>
 
                 <label for="import_title"><?php _e('Import titles', 'codeflavors-vimeo-video-post-lite')?> :</label>
