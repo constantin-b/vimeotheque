@@ -54,7 +54,7 @@ class Themes {
 	 * @return Theme
 	 */
 	public function get_theme( $theme ){
-		if( isset( $this->themes[ $theme ] ) ){
+		if( !is_wp_error( $theme ) && isset( $this->themes[ $theme ] ) ){
 			return $this->themes[ $theme ];
 		}
 	}
