@@ -62,8 +62,8 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 		<div class="wrap">
 			<form method="get" action="" id="cvm-video-list-form">
 				<?php $table->views();?>
-				<input type="hidden" name="view" value="<?php echo isset( $_REQUEST['view'] ) ? $_REQUEST['view'] : '';?>" />
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'];?>" />
+				<input type="hidden" name="view" value="<?php echo isset( $_REQUEST['view'] ) ? esc_attr( $_REQUEST['view'] ) : '';?>" />
+				<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] );?>" />
 				<?php $table->search_box( __('Search', 'codeflavors-vimeo-video-post-lite'), 'video' );?>
 				<?php $table->display();?>
 			</form>
