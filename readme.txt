@@ -95,6 +95,10 @@ For each video post created by the plugin you have the option in post edit scree
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.2.2 =
+- Solved XSS vulnerability in admin area;
+- Solved a bug that caused playlist theme to issue an error.
+
 = 2.2.1 =
 - Solved bugs that prevented the title and post content from being properly imported when templates are enabled.
 
