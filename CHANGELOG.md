@@ -1,3 +1,7 @@
+2.2.2 [14/Apr/2023]
+- Solved XSS vulnerability in admin area;
+- Solved a bug that caused playlist theme to issue an error.
+
 2.2.1 [13/Feb/2023]
 - Solved bugs that prevented the title and post content from being properly imported when templates are enabled.
 
