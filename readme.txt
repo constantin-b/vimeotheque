@@ -135,6 +135,9 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.2.3 =
+- Solved bug that caused broken documentation links to be displayed into the plugin and WP admin area.
+
 = 2.2.2 =
 - Solved XSS vulnerability in admin area;
 - Solved a bug that caused playlist theme to issue an error.
