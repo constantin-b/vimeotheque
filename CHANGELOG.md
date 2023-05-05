@@ -1,3 +1,6 @@
+2.2.3 [5/May/2023]
+- Solved bug that caused broken documentation links to be displayed into the plugin.
+
 2.2.2 [14/Apr/2023]
 - Solved XSS vulnerability in admin area;
 - Solved a bug that caused playlist theme to issue an error.
