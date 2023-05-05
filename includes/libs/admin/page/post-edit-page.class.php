@@ -137,7 +137,7 @@ class Post_Edit_Page{
                 ),
                 sprintf(
                     '<a href="%s" target="_blank">%s</a>',
-                    \Vimeotheque\Admin\Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ),
+                    \Vimeotheque\Admin\Helper_Admin::docs_link( 'how-to-create-a-new-vimeo-app/' ),
                     __( 'See tutorial', 'codeflavors-vimeo-video-post-lite' )
                 )
             );

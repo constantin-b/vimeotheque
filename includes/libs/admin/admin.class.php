@@ -394,7 +394,7 @@ class Admin{
 
 		$links[] = sprintf(
 			$anchor,
-			Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ),
+			Helper_Admin::docs_link( 'how-to-create-a-new-vimeo-app/' ),
 			'_blank',
 			__( 'First time installation', 'codeflavors-vimeo-video-post-lite' )
 		);

@@ -356,7 +356,7 @@ class Setup_Page extends Page_Abstract implements Page_Interface {
                                 ),
                                 sprintf(
                                     '<a href="%s" target="_blank">%s</a>',
-                                    Helper_Admin::docs_link( 'getting-started/vimeo-oauth-new-interface/' ),
+                                    Helper_Admin::docs_link( 'how-to-create-a-new-vimeo-app/' ),
                                     __( 'See tutorial', 'codeflavors-vimeo-video-post-lite' )
                                 )
                             )

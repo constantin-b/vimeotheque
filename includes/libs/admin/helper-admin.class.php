@@ -23,7 +23,7 @@ class Helper_Admin {
 	 * @return string
 	 */
 	public static function docs_link( $path ){
-		return self::publisher_link( 'documentation/' . trailingslashit( $path ), 'doc_link' );
+		return self::publisher_link( trailingslashit( $path ), 'doc_link' );
 	}
 
 	/**
@@ -287,15 +287,14 @@ class Helper_Admin {
 	}
 
 	/**
-	 * @param $path
+	 * @param string $path
 	 * @param string $medium
-	 *
 	 * @param null|string $campaign
 	 *
 	 * @return string
 	 */
 	public static function publisher_link( $path, $medium = 'doc_link', $campaign = null ){
-		$base = 'https://vimeotheque.com/';
+		$base = 'https://docs.vimeotheque.com/';
 		$vars = [
 			'utm_source' => 'plugin',
 			'utm_medium' => $medium,
