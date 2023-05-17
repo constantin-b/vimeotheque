@@ -286,6 +286,14 @@ class Player {
 
 		$start_time = $this->get_start_time( $this->options['start_time'] );
 		
+		/**
+		 * If player embed URL is available and third party plugins set the h parameter
+		 * for the embed, remove it because it is already incorporated into the player_embed_url parameter.
+		 */
+		if( !empty( $this->post->player_embed_url ) && isset( $options['h'] ) ){
+			unset( $options['h'] );
+		}
+		
 		return
 			add_query_arg(
 				$options,
