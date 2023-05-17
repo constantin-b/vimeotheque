@@ -238,6 +238,7 @@ class Resource_Abstract implements Resource_Interface {
 			'duration',
 			'height',
 			'link',
+			'player_embed_url',
 			'modified_time',
 			'name',
 			'pictures',
