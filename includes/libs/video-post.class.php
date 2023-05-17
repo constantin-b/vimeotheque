@@ -170,7 +170,15 @@ class Video_Post{
 	 * @var string
 	 */
 	public $link = '';
-
+	
+	/**
+	 * Vimeo video player embed URL.
+	 *
+	 * @since 2.2.4
+	 * @var string
+	 */
+	public $player_embed_url = '';
+	
 	/**
 	 * The WP_Post object.
 	 *
@@ -523,10 +531,20 @@ class Video_Post{
 	 * @return string
 	 */
 	public function get_embed_url(){
-		return sprintf(
-			'https://player.vimeo.com/video/%s',
-			$this->video_id
-		);
+		$embed_url = $this->player_embed_url;
+		
+		/**
+		 * Parameter player_embed_url was added in Vimeotheque 2.2.4.
+		 * If the video was imported by a previous plugin version the URL will be empty.
+		 */
+		if( empty( $embed_url ) ) {
+			$embed_url = sprintf(
+				'https://player.vimeo.com/video/%s',
+				$this->video_id
+			);
+		}
+		
+		return $embed_url;
 	}
 
 	/**
