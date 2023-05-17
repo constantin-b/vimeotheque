@@ -285,13 +285,12 @@ class Player {
 		}
 
 		$start_time = $this->get_start_time( $this->options['start_time'] );
-
-		return sprintf(
-			'%s?%s%s',
-			$this->post->get_embed_url(),
-			http_build_query( $options, '', '&' ),
-			( $start_time ? '#t=' . $start_time : '' )
-		);
+		
+		return
+			add_query_arg(
+				$options,
+				$this->post->get_embed_url()
+			) . ( $start_time ? '#t=' . $start_time : '' );
 	}
 
 	/**
