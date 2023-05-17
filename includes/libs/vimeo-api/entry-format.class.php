@@ -74,7 +74,8 @@ class Entry_Format{
 			'size'          => $this->get_size(),
 			'type'          => $this->get_field( 'type' ), // can be live, stock or video
 			'uri'           => $this->get_field( 'uri' ),
-			'link'          => $this->get_field( 'link' )
+			'link'          => $this->get_field( 'link' ),
+			'player_embed_url' => $this->get_field( 'player_embed_url' ),
 		];
 	}
 
