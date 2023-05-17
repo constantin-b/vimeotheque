@@ -332,8 +332,6 @@ class Helper{
 	 */
 	public static function is_autoembed_allowed(){
 
-		$allowed = true;
-
 		if( !is_admin() ){
 			/**
 			 * Filter that can prevent video embedding into the post content.
@@ -341,7 +339,15 @@ class Helper{
 			 *
 			 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
 			 */
-			$allowed =  apply_filters( 'vimeotheque\post_content_embed', true );;
+			$allowed =  apply_filters( 'vimeotheque\post_content_embed', true );
+		}else{
+			/**
+			 * Filter that can prevent video embedding into the post content for the admin area.
+			 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
+			 *
+			 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
+			 */
+			$allowed =  apply_filters( 'vimeotheque\admin_post_content_embed', true );
 		}
 
 		return $allowed;
