@@ -3,6 +3,7 @@
 use Vimeotheque\Player\Player;
 use Vimeotheque\Plugin;
 use Vimeotheque\Templates\Helper;
+use Vimeotheque\Video_Post;
 
 
 /**
@@ -10,12 +11,29 @@ use Vimeotheque\Templates\Helper;
  *
  * Outputs the embed for the current video post in the loop.
  *
- * @return void
+ * @param bool $echo	Echo the output.
+ * @return string
  */
-function vimeotheque_the_video_embed(){
+function vimeotheque_the_video_embed( $echo  = true ){
 	$post = \Vimeotheque\Helper::get_video_post();
 	$player = new Player( $post );
-	return $player->get_output( true );
+	
+	/**
+	 * Filter the player output.
+	 *
+	 * @since 2.2.4
+	 *
+	 * @param string $output	The video embed output.
+	 * @param Video_Post $post 	The video post object reference.
+	 * @param Player $player	The video player object reference.
+	 */
+	$output = apply_filters( 'vimeotheque\the_video_embed', $player->get_output( false ), $post, $player );
+	
+	if( $echo ){
+		echo $output;
+	}
+	
+	return $output;
 }
 
 /**
