@@ -1,3 +1,8 @@
+2.2.4 [19/May/2023]
+- Player embedded by using the player embed URL from the Vimeo API response;
+- Separated filter that allows embedding into the post content (vimeotheque\post_content_embed) into a front-end filter and an administration filter (vimeotheque\admin_post_content_embed) to avoid conflicts;
+- Introduced filter 'vimeotheque\the_video_embed' that allows the output of templating function vimeotheque_the_video_embed() to be modified.
+
 2.2.3 [5/May/2023]
 - Solved bug that caused broken documentation links to be displayed into the plugin.
 
