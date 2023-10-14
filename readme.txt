@@ -136,6 +136,9 @@ For each video post created by the plugin, you can import the video image as the
 
 == Changelog ==
 
+= 2.2.5 =
+- Solved a bug that caused responses from the block editor to end up with an undefined variable error.
+
 = 2.2.4 =
 - Player embedded by using the player embed URL from the Vimeo API response;
 - Separated filter that allows embedding into the post content (vimeotheque\post_content_embed) into a front-end filter and an administration filter (vimeotheque\admin_post_content_embed) to avoid conflicts;
