@@ -179,9 +179,7 @@ class Resource_Abstract implements Resource_Interface {
 		}
 
 		// Concrete implementation method returns false for all fields; check that fields are specified
-		if( $this->get_fields() ) {
-			$_params['fields'] = implode( ',', $this->get_fields() );
-		}
+        $_params['fields'] = $this->get_fields() ? implode( ',', $this->get_fields() ) : '';
 
 		if( isset( $_params['sort'] ) && !in_array( $_params['sort'], $this->sort_options ) ){
 			return new \WP_Error(
@@ -213,7 +211,7 @@ class Resource_Abstract implements Resource_Interface {
 		if( !$this->get_api_endpoint() ){
 			return new \WP_Error(
 				'vimeotheque-vimeo-api-resource-endpoint-error',
-				'Plugin error occured! Method ' . get_class( $this ) . '::get_api_endpoint() returned an empty response.'
+				'Plugin error occurred! Method ' . get_class( $this ) . '::get_api_endpoint() returned an empty response.'
 			);
 		}
 
