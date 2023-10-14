@@ -69,7 +69,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 		$CVM_PLAYER_SETTINGS = array_merge( $atts, $embed_options );
 
 		/**
-		 * @var Video_Post
+		 * @var Video_Post $cvm_video
 		 */
 		global $cvm_video;
 
