@@ -1,5 +1,9 @@
 *** Vimeotheque Lite Changelog ***
 
+2023-10-19 - Version 2.2.6
+* Solved a bug when importing videos that generated a warning when the Vimeo API query ended with an error that was not issued by the Vimeo API;
+* Introduced compatibility for playlists shortcode and block to sort the videos using the menu order; this allows compatibility with Post Types Order plugin to manually order the videos displayed in playlists.  
+
 2023-10-14 - Version 2.2.5
 * Solved a bug that caused responses from the block editor to end up with an undefined variable error.
 
