@@ -175,7 +175,7 @@ class Vimeo_Api_Query extends Vimeo {
 			Helper::debug_message(
 				sprintf(
 					'Vimeo API query returned error: "%s"',
-					$data['error']
+					isset( $data['error'] ) ? $data['error'] : 'unknown error'
 				)
 			);
 
