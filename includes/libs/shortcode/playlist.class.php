@@ -275,6 +275,10 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 				$_order['orderby'] = 'post_title';
 				$_order['order'] = 'ASC';
 			break;
+            case 'manual':
+                $_order['orderby'] = 'menu_order';
+                $_order['order'] = 'ASC';
+            break;
 		}
 
 		return $_order;
