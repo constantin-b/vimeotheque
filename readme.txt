@@ -135,6 +135,8 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.2.7 =
+- Solved a bug in WP 6.4+ that prevented the Block Editor from loading the Vimeotheque blocks.
 
 = 2.2.6 =
 - Solved a bug when importing videos that generated a warning when the Vimeo API query ended with an error that was not issued by the Vimeo API;
