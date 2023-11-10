@@ -83,7 +83,8 @@ class Block_Abstract {
 			'wp-blocks',
 			'wp-element',
 			'wp-i18n',
-			'wp-components'
+			'wp-components',
+            'lodash'
 		];
 
 		// In WP 5.8, the dependency into the widgets page is 'wp-edit-widgets'
