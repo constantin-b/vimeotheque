@@ -40,60 +40,6 @@
       .vimeotheque-video{
         &.with-image {
 
-          .vimeotheque-featured-image{
-            display:block;
-            position:relative;
-
-            .post-thumbnail{
-              margin:0!important;
-              padding: 0!important;
-              width: 100%!important;
-              max-width: 100%;
-              height: auto!important;
-            }
-
-            .play-btn{
-              display: block;
-              position: absolute;
-              width: 60px;
-              height: 40px;
-              background-color: #1ab7ea;
-              bottom: 20px;
-              left: 20px;
-              border-radius: 5px;
-
-              // SVG play icon
-              img{
-                width: 60%!important;
-                height: 60%!important;
-                position:absolute;
-                bottom:20%;
-                left:20%;
-                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(325deg) brightness(105%) contrast(101%);
-                z-index:2;
-              }
-            }
-
-            .duration{
-              color:#FFFFFF;
-              z-index: 2;
-              position: absolute;
-              right: 20px;
-              bottom: 20px;
-              background: rgba(0, 0, 0, 0.6);
-              text-align: center;
-              padding: 5px 10px;
-              border-radius: 5px;
-              font-size:12px;
-            }
-
-            &:hover{
-              .play-btn,
-              .duration{
-                display:block!important;
-              }
-            }
-          }
         }
 
         flex-basis: 33.33%;
@@ -242,6 +188,60 @@
   }
 }
 
+.vimeotheque-featured-image{
+  display:block;
+  position:relative;
+
+  .post-thumbnail{
+    margin:0!important;
+    padding: 0!important;
+    width: 100%!important;
+    max-width: 100%;
+    height: auto!important;
+  }
+
+  .play-btn{
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background-color: #1ab7ea;
+    bottom: 20px;
+    left: 20px;
+    border-radius: 5px;
+
+    // SVG play icon
+    img{
+      width: 60%!important;
+      height: 60%!important;
+      position:absolute;
+      bottom:20%;
+      left:20%;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(325deg) brightness(105%) contrast(101%);
+      z-index:2;
+    }
+  }
+
+  .duration{
+    color:#FFFFFF;
+    z-index: 2;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size:12px;
+  }
+
+  &:hover{
+    .play-btn,
+    .duration{
+      display:block!important;
+    }
+  }
+}
 
 @media all and( max-width: 780px ) {
   .vimeotheque{
