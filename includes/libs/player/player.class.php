@@ -73,9 +73,10 @@ class Player {
 			$img = wp_get_attachment_image_src( $attachment_id, 'full' ) ?: end( $this->post->thumbnails );
 			if( $img ){
 				$embed_content = sprintf(
-					'<a href="#" class="vimeotheque-load-video" title="%s" data-url="%s"><img src="%s" class="video-thumbnail" />%s</a>',
+					'<a href="#" class="vimeotheque-load-video" title="%s" data-url="%s" data-post_id="%d"><img src="%s" class="video-thumbnail" />%s</a>',
 					esc_attr( $this->post->get_post()->post_title ),
 					$this->get_embed_url(),
+                    $this->post->get_post()->ID,
 					is_array( $img ) ? $img[0] : $img,
 					sprintf(
 						'<div class="icon" style="background-color:%s"></div>',
