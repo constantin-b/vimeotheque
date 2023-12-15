@@ -135,6 +135,10 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.2.8 =
+- Modified Vimeotheque template styling to be less restrictive;
+- Added post ID as element data (data-video_id="the post ID") to video embed container.
+
 = 2.2.7 =
 - Solved a bug in WP 6.4+ that prevented the Block Editor from loading the Vimeotheque blocks.
 
