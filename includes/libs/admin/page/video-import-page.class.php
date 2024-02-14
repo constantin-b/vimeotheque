@@ -21,14 +21,14 @@ use WP_List_Table;
 class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
 	/**
-	 * Strores reference to WP  List Table object to display videos
+	 * Stores reference to WP  List Table object to display videos
 	 * @var WP_List_Table
 	 */
 	private $table;
 	
 	/**
 	 * Stores the view type
-	 * @param string
+	 * @var string
 	 */
 	private $mode = 'grid';
 	
