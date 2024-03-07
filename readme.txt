@@ -2,7 +2,7 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video embed, video gallery, featured video, video post
 Requires at least: 5.2
-Tested up to: 6.3
+Tested up to: 6.4.3
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
