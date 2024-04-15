@@ -64,7 +64,7 @@ $.fn.VimeoPlayer = function( params ){
          * @since 2.0.14    Add CSS class loaded on video container after the video has loaded
          */
         self.addClass('loaded')
-        options.onLoad()
+        options.onLoad( self )
 
         /**
          * Custom event triggered after the player loads.
@@ -181,7 +181,7 @@ $.fn.VimeoPlayer = function( params ){
     this.setVolume = volume => {
 
         if( data.background || data.muted ){
-            return;
+            return self
         }
 
         player.setVolume(volume).then( _volume => {
@@ -234,10 +234,34 @@ $.fn.VimeoPlayer = function( params ){
 
 $.fn.VimeoPlayer.defaults = {
     onIframeReload: () => {},
+    /**
+     * Action triggered after the video has loaded into the iframe player.
+     * @param data
+     */
     onLoad: ( data ) => {},
+    /**
+     * Action triggered when the user is played.
+     * @param data
+     */
     onPlay: ( data ) => {},
+    /**
+     * Action triggered on video playback.
+     * @param data
+     */
     onPlayback: (data) => {},
+    /**
+     * Action triggered when the video is paused.
+     * @param data
+     */
     onPause: ( data ) => {},
+    /**
+     * Action triggered when the video finishes' playback.
+     * @param data
+     */
     onFinish: ( data ) => {},
+    /**
+     * Action triggered on player error.
+     * @param data
+     */
     onError: ( data ) => {},
 }
