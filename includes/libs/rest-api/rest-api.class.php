@@ -106,7 +106,8 @@ class Rest_Api{
 				// Vimeo on Demand
 				'type' 	=> $video->type,
 				'uri'	=> $video->uri,
-				'link'	=> $video->link
+				'link'	=> $video->link,
+                'embed_url' => $video->get_embed_url(),
 			];
 		}
 
