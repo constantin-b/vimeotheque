@@ -72,6 +72,7 @@ $.fn.VimeoPlaylist = function( params ){
         $.each( items, (i, item) => {
             if( 0 == i ){
                 loadItem( item, i )
+                $(item).addClass('active-video')
             }
 
             $(item).on( 'click', e => {
@@ -94,6 +95,10 @@ $.fn.VimeoPlaylist = function( params ){
      * @param int index - element index
      */
     loadItem = (item, index, volume = false ) => {
+        // Prevent reloads if the current item is clicked again
+        if( index === currentItem ){
+            return
+        }
 
         let {
                 autoplay,
