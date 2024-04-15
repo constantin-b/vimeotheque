@@ -696,6 +696,12 @@ class Classic_Editor{
 			return;
 		}
 
+        $allow = apply_filters( 'vimeotheque-lite/enable-classic-editor-files', true );
+
+        if( !$allow ){
+            return;
+        }
+
 		global $post;
 		if( ! $post ){
 			return;
