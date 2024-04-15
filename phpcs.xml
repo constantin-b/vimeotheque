@@ -25,9 +25,15 @@
 		<exclude name="WordPress.Files" />
 	</rule>
 
+
 	<rule ref="Generic.Commenting">
 		<exclude name="Generic.Commenting" />
+
+		<exclude-pattern>deprecated.php</exclude-pattern>
+
+		<exclude name="Generic.Commenting.DocComment.MissingShort" />
 	</rule>
+
 
 	<rule ref="Squiz.Commenting">
 		<exclude name="Squiz.Commenting" />
