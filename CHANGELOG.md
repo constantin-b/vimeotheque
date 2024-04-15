@@ -1,5 +1,10 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-04-03 - Version 2.2.9
+- Added "embed_url" to video Rest API fields;
+- Introduced Query Monitor support;
+- Introduced filter "vimeotheque-lite/enable-classic-editor-files" that can be used to prevent the plugin from loading the Classic Editor compatibility scripts.
+
 2023-12-15 - Version 2.2.8
 * Modified Vimeotheque template styling to be less restrictive;
 * Added post ID as element data (data-video_id="the post ID") to video embed container.
