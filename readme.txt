@@ -2,9 +2,9 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video embed, video gallery, featured video, video post
 Requires at least: 5.2
-Tested up to: 6.4.3
-Requires PHP: 5.6
-Stable tag: trunk
+Tested up to: 6.5.2
+Requires PHP: 7.4
+Stable tag: 2.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,11 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.2.9 =
+- Added "embed_url" to video Rest API fields;
+- Introduced Query Monitor support;
+- Introduced filter "vimeotheque-lite/enable-classic-editor-files" that can be used to prevent the plugin from loading the Classic Editor compatibility scripts.
+
 = 2.2.8 =
 - Modified Vimeotheque template styling to be less restrictive;
 - Added post ID as element data (data-video_id="the post ID") to video embed container.
