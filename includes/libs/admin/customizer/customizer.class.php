@@ -32,6 +32,10 @@ class Customizer {
 	 */
 	private $sections;
 
+    private $settings = [];
+
+    private $controls = [];
+
 	/**
 	 * Customizer constructor.
 	 */
