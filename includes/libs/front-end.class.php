@@ -34,9 +34,7 @@ class Front_End{
 
 	/**
 	 * Front_End constructor.
-  *
-	 * @ignore
-	 *
+     *
 	 * @param Plugin $plugin
 	 */
 	public function __construct( Plugin $plugin ) {
@@ -99,7 +97,8 @@ class Front_End{
 	 * The method is called on the "post_content" filter and embeds the attached video above
 	 * or below the post content, depending on the setting from the plugin Settings or the individual post options.
 	 *
-	 * @param  string $content The post content
+	 * @param string $content The post content
+     *
 	 * @return string   The post content
 	 */
 	public function embed_video( $content ){
@@ -209,8 +208,6 @@ class Front_End{
 	/**
 	 * Check if post should be skipped from autoembedding.
 	 *
-	 * @ignore
-	 *
 	 * @param \WP_Post $post
 	 *
 	 * @return boolean
@@ -233,19 +230,19 @@ class Front_End{
 		Helper::enqueue_player();
 	}
 
-	/**
-	 * Filter the tags for the custom post type implemented by this plugin.
-	 * Useful in template pages using function the_tags() - this function works
-	 * only for the default post_tag taxonomy; the filter adds functionality
-	 * for plugin post type tag taxonomy
-	 *
-	 * @ignore Internal functionality
-	 *
-	 * @param  array   $terms    - the terms found
-	 * @param  integer $post_id  - the id of the post
-	 * @param  string  $taxonomy - the taxonomy searched for
-	 * @return
-	 */
+    /**
+     * Filter the tags for the custom post type implemented by this plugin.
+     * Useful in template pages using function the_tags() - this function works
+     * only for the default post_tag taxonomy; the filter adds functionality
+     * for plugin post type tag taxonomy
+     *
+     * @param array $terms  The terms found.
+     * @param integer $post_id The id of the post.
+     * @param string $taxonomy The taxonomy searched for.
+     *
+     * @return array|false|\WP_Error|\WP_Term[]
+     * @ignore Internal functionality
+     */
 	public function filter_video_terms( $terms, $post_id, $taxonomy ){
 		// get the current post
 		$post = get_post( $post_id );
@@ -263,7 +260,7 @@ class Front_End{
 	}
 
 	/**
-	 * Return the filter priority for the automaticembed in post content
+	 * Return the filter priority for the automatic embed in post content
 	 *
 	 * @return integer
 	 */
@@ -275,9 +272,9 @@ class Front_End{
 	 * Remove filter set on post content to embed the video;
 	 * prevents automatic video embed above or below content when called.
 	 *
-	 * @ignore Internal functionality
-	 *
-	 * @param integer|false $post_id The post ID registered to skip the auto embedding for
+	 * @param  integer|false $post_id The post ID registered to skip the auto embedding for.
+     *
+     * @ignore Internal functionality
 	 */
 	public function prevent_post_autoembed( $post_id = false ){
 		if( !$post_id ){
