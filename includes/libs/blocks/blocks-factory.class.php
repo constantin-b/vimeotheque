@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Blocks_Factory
+ *
  * @package Vimeotheque\Blocks
  * @ignore
  */
@@ -51,7 +52,7 @@ class Blocks_Factory {
 	 *
 	 * @param $key
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function unregister_block( $key ){
 		if( array_key_exists( $key, $this->blocks ) ){
@@ -78,7 +79,7 @@ class Blocks_Factory {
 
 	/**
 	 * @param string $key - block key
-	 * @see Blocks_Factory::register_blocks() for details
+	 * @see   Blocks_Factory::register_blocks() for details
 	 *
 	 * @return Block_Abstract
 	 */

@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Block_Abstract
+ *
  * @package Vimeotheque\Blocks
  * @ignore
  */
@@ -105,7 +106,7 @@ class Block_Abstract {
 	/**
 	 * @param $handle
 	 * @param $block
-	 * @param bool $editor_style
+	 * @param boolean $editor_style
 	 *
 	 * @return mixed
 	 */
@@ -131,7 +132,7 @@ class Block_Abstract {
 	 *
 	 * @return mixed|\WP_Block_Type
 	 */
-	protected function register_block_type(  $name, $args = array() ){
+	protected function register_block_type(  $name, $args = [] ){
 		$this->wp_block_type = register_block_type( $name, $args );
 		return $this->wp_block_type;
 	}
@@ -184,7 +185,7 @@ class Block_Abstract {
 	}
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_active(){
 		return $this->is_active;

@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Video_Position
+ *
  * @package Vimeotheque\Shortcode
  * @ignore
  */

@@ -15,6 +15,7 @@ use WP_List_Table;
 
 /**
  * Video import page
+ *
  * @author CodeFlavors
  * @ignore
  */
@@ -22,23 +23,27 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
 	/**
 	 * Stores reference to WP  List Table object to display videos
+  *
 	 * @var WP_List_Table
 	 */
 	private $table;
 	
 	/**
 	 * Stores the view type
+  *
 	 * @var string
 	 */
 	private $mode = 'grid';
 	
 	/**
 	 * Store reference to Posts_Import_Meta_Panels object
+  *
 	 * @var Posts_Import_Meta_Panels
 	 */
 	private $meta;
 	/**
 	 * Ajax Class reference
+  *
 	 * @var Ajax_Actions
 	 */
 	private $ajax_obj;
@@ -50,7 +55,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * Constructor, fires up the parent __construct() and sets up other variables
 	 *
-	 * @param Admin $admin
+	 * @param Admin      $admin
 	 * @param $page_title
 	 * @param $menu_title
 	 * @param $slug
@@ -66,6 +71,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see Page_Interface::get_html()
 	 */
 	public function get_html(){
@@ -96,6 +102,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 
 			/**
 			 * Run action on meta boxes display.
+    *
              * @ignore
 			 */
 			do_action( 'vimeotheque\admin\import\add_metaboxes' );
@@ -175,6 +182,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see Page_Interface::on_load()
 	 */
 	public function on_load(){
@@ -212,7 +220,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * Outputs the search form.
 	 *
-	 * @param bool $compact - show a compacted form (true) or the full form (false)
+	 * @param boolean $compact - show a compacted form (true) or the full form (false)
 	 */
 	private function search_form( $compact = false ){
 		include VIMEOTHEQUE_PATH . 'views/import_videos.php';
@@ -246,6 +254,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 
 		/**
 		 * Video import page load action used to enqueue assets.
+   *
          * @ignore
 		 */
 		do_action( 'vimeotheque\admin\video-import-assets' );
@@ -417,10 +426,10 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
      *
 	 * @param $name
 	 * @param $value
-	 * @param string $type
-	 * @param string $class
-	 * @param string $id
-	 * @param bool $echo
+	 * @param string  $type
+	 * @param string  $class
+	 * @param string  $id
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -444,8 +453,8 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
      *
 	 * @param $name
 	 * @param $value
-	 * @param string $type
-	 * @param bool $echo
+	 * @param string  $type
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -457,9 +466,9 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * @param \WP_Error $error
-	 * @param bool $echo
-	 * @param string $before
-	 * @param string $after
+	 * @param boolean   $echo
+	 * @param string    $before
+	 * @param string    $after
 	 *
 	 * @return string|void
 	 */
@@ -485,7 +494,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	    $data		= $error->get_error_data( $code );
 
 	    $output = '<strong>'.$message.'</strong></p>';
-	    $output.= sprintf( __('Vimeo error code: %s (<em>%s</em>) - <strong>%s</strong>', 'codeflavors-vimeo-video-post-lite'), $data['code'], $data['msg'], $data['expl'] );
+	    $output.= sprintf( __('Vimeo error code: %1$s (<em>%2$s</em>) - <strong>%3$s</strong>', 'codeflavors-vimeo-video-post-lite'), $data['code'], $data['msg'], $data['expl'] );
 
 	    if( 401 == $data['code'] ){
 		    $url = menu_page_url('cvm_settings', false).'#vimeo_consumer_key';

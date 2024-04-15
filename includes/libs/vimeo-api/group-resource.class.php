@@ -8,8 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Group_Resource
+ *
  * @package Vimeotheque
- * @link https://developer.vimeo.com/api/reference/groups
+ * @link    https://developer.vimeo.com/api/reference/groups
  * @ignore
  */
 class Group_Resource extends Resource_Abstract implements Resource_Interface {
@@ -18,7 +19,7 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 	 * Group_Resource constructor.
 	 *
 	 * @param $resource_id
-	 * @param array $params
+	 * @param array       $params
 	 */
 	public function __construct( $resource_id, $params = [] ) {
 		parent::__construct( $resource_id, false, $params );
@@ -55,7 +56,7 @@ class Group_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Feed can use date limit
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_date_limit(){
 		return true;

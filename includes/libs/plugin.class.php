@@ -24,6 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Plugin
+ *
  * @package Vimeotheque
  */
 class Plugin{
@@ -52,6 +53,7 @@ class Plugin{
 	private $cpt;
 	/**
 	 * Store admin instance
+  *
 	 * @var Admin
 	 */
 	private $admin;
@@ -498,7 +500,7 @@ class Plugin{
 	}
 
 	/**
-	 * @param bool $cap
+	 * @param boolean $cap
 	 *
 	 * @return array|mixed
 	 * @throws \Exception
@@ -561,7 +563,7 @@ class Plugin{
 	 * @param string $key - string key for the block
 	 *
 	 * @return Block_Abstract - returns the registered block
-	 * @see Blocks_Factory::register_blocks() for all keys
+	 * @see    Blocks_Factory::register_blocks() for all keys
 	 */
 	public function get_block( $key ) {
 		return $this->blocks_factory->get_block( $key );
@@ -597,6 +599,7 @@ class Plugin{
 
 	/**
 	 * Load dependencies
+  *
 	 * @return void
 	 */
 	private function load(){

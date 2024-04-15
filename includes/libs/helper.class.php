@@ -8,13 +8,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Helper
+ *
  * @package Vimeotheque
  */
 class Helper{
 	/**
 	 * Return the access token for the Vimeo API.
 	 *
-	 * @return bool|string  The access token or bool false if no token is set
+	 * @return boolean|string  The access token or bool false if no token is set
 	 */
 	public static function get_access_token(){
 		$options = Plugin::instance()->get_options();
@@ -48,7 +49,7 @@ class Helper{
 	 * Get the \Vimeotheque\Video_Post object of a post.
 	 * Returns the video post object \Vimeotheque\Video_Post for the current post in the loop or the post passed to the function.
 	 *
-	 * @param bool|int|\WP_Post $post   The WordPress post that will be processed into a Video_Post object.
+	 * @param boolean|integer|\WP_Post $post The WordPress post that will be processed into a Video_Post object.
 	 *
 	 * @return Video_Post
 	 */
@@ -64,9 +65,9 @@ class Helper{
 	 * Get the video embed size for the current post.
 	 * Returns an array with keys "height" and "width" for the current video post.
 	 *
-	 * @param bool|int|\WP_Post $post   The WordPress post that should be processed.
+	 * @param boolean|integer|\WP_Post $post The WordPress post that should be processed.
 	 *
-	 * @return array|bool   An array with structure ['width' => (int), 'height' => (int)] or false if the post was not imported by Vimeotheque.
+	 * @return array|boolean   An array with structure ['width' => (int), 'height' => (int)] or false if the post was not imported by Vimeotheque.
 	 */
 	public static function get_post_player_size( $post ){
 		$_post = self::get_video_post( $post );
@@ -87,8 +88,8 @@ class Helper{
 	 * Returns a string of data attributes that can be used on HTML elements to output the embedding options that will
 	 * be used by the embedding script to display the video.
 	 *
-	 * @param array $attributes     The attributes array.
-	 * @param bool $echo            Output the result (true).
+	 * @param array   $attributes The attributes array.
+	 * @param boolean $echo       Output the result (true).
 	 *
 	 * @return string   The resulting attributes string.
 	 */
@@ -115,9 +116,9 @@ class Helper{
 	 * Add video player script to page.
 	 * Enqueue the Vimeotheque player script and styling into the page.
 	 *
-	 * @param bool $include_js              Enqueue the player JavaScript (true) or skip it (false).
-	 * @param bool|string $js_dependency    Add additional JavaScript handle that depends on the player script.
-	 * @param bool|string $css_dependency   Add additional styles handle that depend on the player style.
+	 * @param boolean        $include_js     Enqueue the player JavaScript (true) or skip it (false).
+	 * @param boolean|string $js_dependency  Add additional JavaScript handle that depends on the player script.
+	 * @param boolean|string $css_dependency Add additional styles handle that depend on the player style.
 	 *
 	 * @return array
 	 */
@@ -159,9 +160,9 @@ class Helper{
 	/**
 	 * Calculate player height from given aspect ratio and width.
 	 *
-	 * @param string $aspect_ratio  The aspect ratio used for the calculations.
-	 * @param int $width            The video embed width.
-	 * @param bool|float $ratio     A given ratio that will override aspect ratio if set.
+	 * @param string        $aspect_ratio The aspect ratio used for the calculations.
+	 * @param integer       $width        The video embed width.
+	 * @param boolean|float $ratio        A given ratio that will override aspect ratio if set.
 	 *
 	 * @return float    The player height.
 	 */
@@ -169,7 +170,7 @@ class Helper{
 		$width = absint($width);
 
 		$override = Plugin::instance()->get_embed_options_obj()
-		                              ->get_option('aspect_override');
+      ->get_option('aspect_override');
 
 		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
 			$height = floor( $width / $ratio );
@@ -194,9 +195,9 @@ class Helper{
 	/**
 	 * Calculates player width based on the player height.
 	 *
-	 * @param string     $aspect_ratio  The aspect ratio used for the calculations.
-	 * @param int        $height        The player height.
-	 * @param bool|float $ratio         A given ratio that will override aspect ratio if set.
+	 * @param string        $aspect_ratio The aspect ratio used for the calculations.
+	 * @param integer       $height       The player height.
+	 * @param boolean|float $ratio        A given ratio that will override aspect ratio if set.
 	 *
 	 * @return float    The player width.
 	 */
@@ -204,7 +205,7 @@ class Helper{
 		$height = absint( $height );
 
 		$override = Plugin::instance()->get_embed_options_obj()
-		                  ->get_option('aspect_override');
+      ->get_option('aspect_override');
 
 		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
 			$width = floor( $height * $ratio );
@@ -230,7 +231,7 @@ class Helper{
 	 * Get the global embedding options.
 	 * Will return the options set in Vimeotheque Settings page.
 	 *
-	 * @param array $_options   Array of options that will override the options set by the user.
+	 * @param array $_options Array of options that will override the options set by the user.
 	 *
 	 * @return array    The array of options.
 	 */
@@ -252,7 +253,7 @@ class Helper{
 	 * Create a HH:MM:SS from a timestamp.
 	 * Given a number of seconds, the function returns a readable duration formatted as HH:MM:SS
 	 *
-	 * @param int $seconds  Number of seconds.
+	 * @param  integer $seconds Number of seconds.
 	 * @return string       The formatted time.
 	 */
 	public static function human_time( $seconds ){
@@ -273,11 +274,11 @@ class Helper{
 	/**
 	 * Get a variable from POST or GET.
 	 *
-	 * @param string $name              The variable name.
-	 * @param bool|string $type         The variable type (POST, GET).
-	 * @param bool|string $sanitize     A function name that will be sued for sanitization.
+	 * @param string         $name     The variable name.
+	 * @param boolean|string $type     The variable type (POST, GET).
+	 * @param boolean|string $sanitize A function name that will be sued for sanitization.
 	 *
-	 * @return bool|mixed   The variable value.
+	 * @return boolean|mixed   The variable value.
 	 */
 	public static function get_var( $name, $type = false, $sanitize = false ) {
 		$result = false;
@@ -309,8 +310,8 @@ class Helper{
 	 * Embed the video attached to a video post.
 	 *
 	 * @param \WP_Post $post    The WordPress post that has the video attached to it.
-	 * @param array $options    Any options passed manually or from block editor parameters.
-	 * @param bool $echo        Output the result (true) or not (false).
+	 * @param array    $options Any options passed manually or from block editor parameters.
+	 * @param boolean  $echo    Output the result (true) or not (false).
 	 *
 	 * @return string|void  The HTML for the embed.
 	 */
@@ -328,7 +329,7 @@ class Helper{
 	 * Check if embedding is allowed.
 	 * Used to check if autoembedding in post content is prevented by using the available filters.
 	 *
-	 * @return bool Embed is allowed (true) or is prevented (false).
+	 * @return boolean Embed is allowed (true) or is prevented (false).
 	 */
 	public static function is_autoembed_allowed(){
 
@@ -358,7 +359,7 @@ class Helper{
 	 * Determines if a video attached to current global post can be displayed into the page.
 	 * Will always return false for pages and attachments unless "display in archives" option is enabled.
 	 *
-	 * @return bool Video is visible (true) or is hidden (false);
+	 * @return boolean Video is visible (true) or is hidden (false);
 	 */
 	public static function video_is_visible(){
 		$options = Plugin::instance()->get_options();
@@ -373,7 +374,7 @@ class Helper{
 	 * Query Vimeo for a single video.
 	 * Given a video ID from Vimeo, will return the video details from the Vimeo API.
 	 *
-	 * @param string $video_id  The Vimeo video ID.
+	 * @param string $video_id The Vimeo video ID.
 	 *
 	 * @return array|\WP_Error  The video details.
 	 */
@@ -392,9 +393,9 @@ class Helper{
 	/**
 	 * Debug method that sets an action to allow third party scripts to hook to it.
 	 *
-	 * @param string $message       The debug message.
-	 * @param string $separator     The separator that should be used after the message.
-	 * @param mixed $data           Additional data that will be passed on.
+	 * @param string $message   The debug message.
+	 * @param string $separator The separator that should be used after the message.
+	 * @param mixed  $data      Additional data that will be passed on.
 	 *
 	 * @return void
 	 */
@@ -414,14 +415,13 @@ class Helper{
 	 *
 	 * By default, an empty string is returned if `$single` is true, or an empty array
 	 * if it's false.
-	 *
-	 *
-	 * @param string $meta_type Type of object metadata is for. Accepts 'post', 'comment', 'term', 'user',
-	 *                          or any other object type with an associated meta table.
-	 * @param int    $object_id ID of the object metadata is for.
-	 * @param string $meta_key  Metadata key.
-	 * @param bool   $single    Optional. If true, return only the first value of the specified meta_key.
-	 *                          This parameter has no effect if meta_key is not specified. Default false.
+  *
+	 * @param  string  $meta_type Type of object metadata is for. Accepts 'post', 'comment', 'term', 'user',
+	 *                           or any other object type with an associated meta table.
+	 * @param  integer $object_id ID of the object metadata is for.
+	 * @param  string  $meta_key  Metadata key.
+	 * @param  boolean $single    Optional. If true, return only the first value of the specified meta_key.
+	 *                           This parameter has no effect if meta_key is not specified. Default false.
 	 * @return mixed Single metadata value, or array of values.
 	 */
 	public static function get_metadata_default( $meta_type, $object_id, $meta_key, $single = true ){
@@ -438,9 +438,9 @@ class Helper{
 	 * Check if a WP_Error object is a Vimeo API error.
 	 * Determines if an object of WP_Error type is an error returned by a Vimeo API query.
 	 *
-	 * @param \WP_Error $wp_error  The error object.
+	 * @param \WP_Error $wp_error The error object.
 	 *
-	 * @return bool     True is the error was returned by the Vimeo API or false if it's a generic WP error.
+	 * @return boolean     True is the error was returned by the Vimeo API or false if it's a generic WP error.
 	 */
 	public static function is_vimeo_api_error( $wp_error ){
 		if( !is_wp_error( $wp_error ) ){
@@ -450,7 +450,8 @@ class Helper{
 		$error_data = $wp_error->get_error_data();
 		/**
 		 * Key 'vimeo_api_error' is set in \Vimeotheque\Vimeo_Api\Vimeo::api_error()
-		 * @see \Vimeotheque\Vimeo_Api\Vimeo::api_error()
+   *
+		 * @see   \Vimeotheque\Vimeo_Api\Vimeo::api_error()
 		 * @since 2.0
 		 */
 		return ( isset( $error_data['vimeo_api_error'] ) && $error_data['vimeo_api_error'] );
@@ -459,9 +460,9 @@ class Helper{
 	/**
 	 * Create the embed code based on given parameters
 	 *
-	 * @param string    $video_id   The Vimeo video ID.
-	 * @param array     $args       An array of arguments used when embedding.
-	 * @param bool      $echo       Output the embed code (true) or not (false).
+	 * @param string  $video_id The Vimeo video ID.
+	 * @param array   $args     An array of arguments used when embedding.
+	 * @param boolean $echo     Output the embed code (true) or not (false).
 	 *
 	 * @return string
 	 */
@@ -532,7 +533,7 @@ class Helper{
 	 *
 	 * Check if the current page is a single video post (post type "vimeo-video").
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public static function is_video(){
 		return is_singular( Plugin::instance()->get_cpt()->get_post_type() );
@@ -543,7 +544,7 @@ class Helper{
 	 *
 	 * Check if an AJAX or REST request has been made.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public static function is_ajax(){
 		$ajax = defined('DOING_AJAX') && DOING_AJAX;

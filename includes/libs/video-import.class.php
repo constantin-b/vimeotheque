@@ -11,6 +11,7 @@ use WP_Error;
 
 /**
  * Class Video_Import
+ *
  * @package Vimeotheque
  */
 class Video_Import{
@@ -57,24 +58,24 @@ class Video_Import{
 	/**
 	 * Video_Import constructor.
 	 *
-	 * @param string        $resource_type  The type of resource being queried (album, channel, search, etc.).
-	 * @param bool|string   $resource_id    The resource ID that should be retrieved from Vimeo API.
-	 * @param bool|string   $user_id        The user ID (if required) that owns the resource or false in case the parameter is not needed.
-	 * @param array $args   {
-	 *      Additional request parameters.
+	 * @param string         $resource_type The type of resource being queried (album, channel, search, etc.).
+	 * @param boolean|string $resource_id   The resource ID that should be retrieved from Vimeo API.
+	 * @param boolean|string $user_id       The user ID (if required) that owns the resource or false in case the parameter is not needed.
+	 * @param array          $args          {
+	 *                      Additional request parameters.
 	 *
-	 *      @type   int     $page                   The page number to retrieve from Vimeo API.
-	 *      @type   int     $per_page               Number of results per page.
-	 *      @type   string  $query                  A search query to search within the set of results for further filtering.
-	 *      @type   string  $filter                 Results filtering; has specific value based on the required feed type (ie. playable,
+	 *      @type int     $page                   The page number to retrieve from Vimeo API.
+	 *      @type int     $per_page               Number of results per page.
+	 *      @type string  $query                  A search query to search within the set of results for further filtering.
+	 *      @type string  $filter                 Results filtering; has specific value based on the required feed type (ie. playable,
 	 *                                              embeddable, featured, live, etc.).
 	 *                                              See Vimeo API docs for the spcific resource imported to get the available
 	 *                                              filtering options.
-	 *      @type   bool    $filter_embeddable      Filter results by embeddable videos (true) or non-embeddable videos (false). Requires
+	 *      @type bool    $filter_embeddable      Filter results by embeddable videos (true) or non-embeddable videos (false). Requires
 	 *                                              parameter "filter" to be set to "embeddable".
-	 *      @type   bool    $filter_playable        Whether to filter the results by playable videos (true) or non-playable videos (false).
-	 *      @type   string  $links                  The page containing the video URI.
-	 *      @type   string  $password               Password for password restricted resources (ie. showcases).
+	 *      @type bool    $filter_playable        Whether to filter the results by playable videos (true) or non-playable videos (false).
+	 *      @type string  $links                  The page containing the video URI.
+	 *      @type string  $password               Password for password restricted resources (ie. showcases).
 	 * }
 	 */
 	public function __construct( $resource_type, $resource_id = false, $user_id = false, $args = [] ){
@@ -99,7 +100,7 @@ class Video_Import{
 		$entries =	[];
 		foreach ( $raw_entries as $entry ){
 			$_entry = $this->api->get_api_resource()
-			                    ->get_formatted_entry( $entry );
+       ->get_formatted_entry( $entry );
 
 			if( !is_null( $_entry ) ) {
 				$entries[] = $_entry;
@@ -120,21 +121,21 @@ class Video_Import{
 	}
 
 	/**
-	 * @return int
+	 * @return integer
 	 */
 	public function get_total_items(){
 		return $this->total_items;
 	}
 
 	/**
-	 * @return int
+	 * @return integer
 	 */
 	public function get_page(){
 		return $this->page;
 	}
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_ended(){
 		return $this->end;

@@ -15,6 +15,7 @@ use WP_Error;
 
 /**
  * Class Settings_Page
+ *
  * @package Vimeotheque\Admin
  */
 class Settings_Page extends Page_Abstract implements Page_Interface{
@@ -35,7 +36,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * Settings_Page constructor.
 	 *
-	 * @param Admin $admin
+	 * @param Admin      $admin
 	 * @param $page_title
 	 * @param $menu_title
 	 * @param $slug
@@ -295,8 +296,8 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * Outputs a link that allows users to clear OAuth credentials
 	 *
-	 * @param string $text
-	 * @param string $echo
+	 * @param  string $text
+	 * @param  string $echo
 	 * @return void|string
 	 */
 	private function clear_oauth_credentials_link( $text = '', $class='', $echo = true ){
@@ -353,6 +354,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * Get plugin options object
+  *
 	 * @return Options
 	 */
 	private function options_obj(){
@@ -361,6 +363,7 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 
 	/**
 	 * Get player options object
+  *
 	 * @return Options
 	 */
 	private function player_options_obj(){

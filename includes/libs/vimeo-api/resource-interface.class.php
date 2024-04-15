@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Interface Resource_Interface
+ *
  * @package Vimeotheque
  * @ignore
  */
@@ -44,7 +45,7 @@ interface Resource_Interface{
 	/**
 	 * When used for a single video or other type of single entry, should return true
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_single_entry();
 
@@ -52,21 +53,21 @@ interface Resource_Interface{
 	 * If the resource is not a single entry resource and musn't be displayed in importers,
 	 * return false.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function enabled_for_importers();
 
 	/**
 	 * Resource can be used in automatic import
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_automatic_import();
 
 	/**
 	 * Resource can skip reiteration of feed and import only newly added videos
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_import_new_videos();
 
@@ -102,21 +103,21 @@ interface Resource_Interface{
 	/**
 	 * Used to retrieve whether feed needs Vimeo user ID to make queries
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function requires_user_id();
 
 	/**
 	 * Get field label for Vimeo user ID
 	 *
-	 * @return bool|string
+	 * @return boolean|string
 	 */
 	public function label_user_id();
 
 	/**
 	 * Get placeholder for field Vimeo user ID
 	 *
-	 * @return bool|string
+	 * @return boolean|string
 	 */
 	public function placeholder_user_id();
 
@@ -124,7 +125,7 @@ interface Resource_Interface{
 	 * Some resources allow search within the returned results.
 	 * If it's the case, method implementation should return true
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_search_results();
 

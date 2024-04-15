@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -346,7 +346,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 	/**
 	 * @param $value
 	 *
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
 	 * @return string|void
 	 */

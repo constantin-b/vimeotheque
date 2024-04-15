@@ -33,6 +33,7 @@ class Notice extends Notice_Abstract implements Notice_Interface{
 
 	/**
 	 * Returns notice content
+  *
 	 * @return mixed
 	 */
 	public function get_notice() {

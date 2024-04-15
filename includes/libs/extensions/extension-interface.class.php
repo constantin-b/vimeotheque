@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project codeflavors-vimeo-video-post-lite
  */
 
@@ -12,8 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Interface Extension_Interface
+ *
  * @package Vimeotheque\Extensions
- * @since 2.1
+ * @since   2.1
  * @ignore
  */
 interface Extension_Interface {
@@ -34,21 +35,21 @@ interface Extension_Interface {
 	/**
 	 * Is add-on a PRO add-on or free
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_pro_addon();
 
 	/**
 	 * Checks whether the plugin is currently installed or not
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_installed();
 
 	/**
 	 * Checks whether the plugin is currently activated or not
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_activated();
 
@@ -104,7 +105,7 @@ interface Extension_Interface {
 	/**
 	 * Get the file ID on repository
 	 *
-	 * @return false|int
+	 * @return false|integer
 	 */
 	public function get_file_id();
 }

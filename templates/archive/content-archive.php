@@ -38,12 +38,12 @@
                     <?php
                     // Previous/next page navigation.
                     the_posts_pagination(
-                        array(
+                        [
                             'class'              => 'pagination',
                             'prev_text'          => __( 'Previous page', 'codeflavors-vimeo-video-post-lite' ),
                             'next_text'          => __( 'Next page', 'codeflavors-vimeo-video-post-lite' ),
                             'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'codeflavors-vimeo-video-post-lite' ) . ' </span>',
-                        )
+                        ]
                     );
 
                 // If no content, include the "No posts found" template.

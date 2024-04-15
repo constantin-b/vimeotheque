@@ -9,17 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Options_Factory
  * Use it to create unique instances of Options class to manipulate WP options
+ *
  * @ignore
  */
 class Options_Factory{
 	/**
 	 * Stores references to all instantiated Options classes
 	 * Used internally
+  *
 	 * @var array Options
 	 */
 	private static $storage = [];
 	/**
 	 * Store class reference
+  *
 	 * @var Options_Factory
 	 */
 	private static $instance;
@@ -48,6 +51,7 @@ class Options_Factory{
 	/**
 	 * Gets the Options object for the key passed.
 	 * If already existing, returns existing instance, otherwise will create it
+  *
 	 * @param $option_name
 	 * @param $defaults
 	 *
@@ -62,6 +66,7 @@ class Options_Factory{
 
 	/**
 	 * Add new Options instance to storage
+  *
 	 * @param $option_name
 	 * @param $defaults
 	 */

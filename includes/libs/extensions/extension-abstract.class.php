@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project codeflavors-vimeo-video-post-lite
  */
 
@@ -12,8 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Extension_Abstract
+ *
  * @package Vimeotheque\Extensions
- * @since 2.1
+ * @since   2.1
  * @ignore
  */
 class Extension_Abstract {
@@ -89,7 +90,7 @@ class Extension_Abstract {
 	}
 
 	/**
-	 * @param int $file_id
+	 * @param integer $file_id
 	 */
 	public function set_file_id( $file_id ) {
 		$this->file_id = $file_id;
@@ -244,7 +245,7 @@ class Extension_Abstract {
 	/**
 	 * Returns the plugin data if the plugin is installed or false if not installed
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_installed(){
 		return $this->get_plugin_data() ? true : false;
@@ -264,7 +265,7 @@ class Extension_Abstract {
 	 *
 	 * @uses is_plugin_active()
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_activated(){
 		return is_plugin_active( $this->get_file() );
@@ -273,7 +274,7 @@ class Extension_Abstract {
 	/**
 	 * Override in concrete implementation if neccessary
 	 *
-	 * @return false|int
+	 * @return false|integer
 	 */
 	public function get_file_id(){
 		return $this->file_id;

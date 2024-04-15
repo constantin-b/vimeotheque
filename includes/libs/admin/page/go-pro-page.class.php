@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Go_Pro_Page
+ *
  * @package Vimeotheque\Admin
  * @ignore
  */

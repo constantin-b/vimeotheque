@@ -543,6 +543,7 @@ class Setup_Page extends Page_Abstract implements Page_Interface {
 		do_action('admin_print_scripts');
 		/**
 		 * Action triggered on loading the video modal window
+   *
 		 * @ignore
 		 */
 		do_action('vimeotheque\admin\setup_wizard_print_scripts');

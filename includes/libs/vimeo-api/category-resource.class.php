@@ -8,8 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Category_Resource
+ *
  * @package Vimeotheque
- * @link https://developer.vimeo.com/api/reference/categories
+ * @link    https://developer.vimeo.com/api/reference/categories
  * @ignore
  */
 class Category_Resource extends Resource_Abstract implements Resource_Interface {
@@ -18,7 +19,7 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 	 * Category_Resource constructor.
 	 *
 	 * @param $resource_id
-	 * @param array $params
+	 * @param array       $params
 	 */
 	public function __construct( $resource_id, $params = [] ) {
 		parent::__construct( $resource_id, false, $params );
@@ -57,7 +58,7 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 	/**
 	 * Feed can use date limit
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_date_limit(){
 		return true;
@@ -73,7 +74,7 @@ class Category_Resource extends Resource_Abstract implements Resource_Interface 
 	/**
 	 * Searching within the returned results isn't allowed by API
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_search_results() {
 		return false;

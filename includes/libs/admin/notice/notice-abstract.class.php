@@ -11,6 +11,7 @@ use Vimeotheque\Post\Post_Type;
 
 /**
  * Class Notice_Abstract
+ *
  * @package Vimeotheque
  * @ignore
  */

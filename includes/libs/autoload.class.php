@@ -7,8 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Vimeotheque PRO autoloader.
+ *
  * @ignore
- * @since 2.0
+ * @since  2.0
  */
 class Autoload {
 
@@ -17,7 +18,7 @@ class Autoload {
 	 *
 	 * Maps Vimeotheque classes to file names.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
 	 * @static
 	 *
@@ -30,7 +31,7 @@ class Autoload {
 	 *
 	 * Register a function as `__autoload()` implementation.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access public
 	 * @static
 	 */
@@ -146,7 +147,7 @@ class Autoload {
 	 *
 	 * For a given class name, require the class file.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
 	 * @static
 	 *
@@ -172,7 +173,7 @@ class Autoload {
 	 *
 	 * For a given class, check if it exist and load it.
 	 *
-	 * @since 1.6.0
+	 * @since  1.6.0
 	 * @access private
 	 * @static
 	 *

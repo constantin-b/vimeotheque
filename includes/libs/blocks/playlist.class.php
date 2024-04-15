@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Video
+ *
  * @package Vimeotheque\Blocks
  * @ignore
  */
@@ -221,6 +222,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	/**
 	 * By default, REST api doesn't allow queries from React to be made for meta keys.
 	 * Register meta query queries for post types.
+  *
 	 * @see \WP_REST_Posts_Controller::get_items() line 269
 	 */
 	private function set_rest_meta_queries(){
@@ -239,7 +241,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	/**
 	 * @see Playlist::set_rest_meta_queries()
 	 *
-	 * @param array $args
+	 * @param array            $args
 	 * @param \WP_REST_Request $request
 	 *
 	 * @return mixed

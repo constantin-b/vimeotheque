@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -43,9 +43,9 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 * Review_Notice constructor.
 	 *
 	 * @param $option_name
-	 * @param Message $message
-	 * @param User $user
-	 * @param int $delay
+	 * @param Message     $message
+	 * @param User        $user
+	 * @param integer     $delay
 	 */
 	public function __construct( $option_name, Message $message, User $user, $delay = 7 ) {
 		parent::__construct();
@@ -105,9 +105,9 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 * @return array - the option
 	 */
 	private function _set_option(){
-		$option = array(
+		$option = [
 			'timestamp' => time()
-		);
+		];
 
 		update_option( $this->option_name, $option );
 		return $option;
@@ -125,7 +125,7 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	/**
 	 * Check if DB timer is expired
 	 *
-	 * @param boolean $extended - when true, $this->delay will be doubled
+	 * @param  boolean $extended - when true, $this->delay will be doubled
 	 * @return boolean - timer is expired (true) or not (false)
 	 */
 	private function timer_expired( $extended = false ){

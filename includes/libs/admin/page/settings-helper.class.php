@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Settings_Helper
+ *
  * @package Vimeotheque\Admin\Page
  * @ignore
  */
@@ -16,6 +17,7 @@ class Settings_Helper {
 	public static function init(){
 		/**
 		 * Filter that allows PRO options advertising to be shown.
+   *
 		 * @ignore
 		 *
 		 * @param bool $allow   Show the options (true) or hide them (false)

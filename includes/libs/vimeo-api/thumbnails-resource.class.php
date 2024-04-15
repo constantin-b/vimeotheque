@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Thumbnails_Resource
+ *
  * @package Vimeotheque
  * @ignore
  */
@@ -67,14 +68,14 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	}
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_single_entry(){
 		return true;
 	}
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_automatic_import() {
 		return false;
@@ -95,7 +96,7 @@ class Thumbnails_Resource extends Resource_Abstract implements Resource_Interfac
 	/**
 	 * Searching within the returned results isn't allowed by API
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_search_results() {
 		return false;

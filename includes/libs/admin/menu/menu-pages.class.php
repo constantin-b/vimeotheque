@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Menu_Pages
+ *
  * @ignore
  */
 class Menu_Pages {
@@ -20,9 +21,9 @@ class Menu_Pages {
 	/**
 	 * Menu_Pages constructor.
 	 *
-	 * @param Page_Interface $page
+	 * @param Page_Interface             $page
 	 * @param null|Page_Interface|string $parent
-	 * @param string $capability
+	 * @param string                     $capability
 	 */
 	public function __construct(  Page_Interface $page, /*Page_Interface*/ $parent = NULL, $capability = 'activate_plugins'  ) {
 		$this->register_page( $page, $parent, $capability );
@@ -40,7 +41,7 @@ class Menu_Pages {
 	/**
 	 * @param string $slug
 	 *
-	 * @return bool|Page_Interface
+	 * @return boolean|Page
 	 */
 	public function get_page( $slug ){
 		if( isset( $this->pages[ $slug ] ) ){
@@ -53,7 +54,7 @@ class Menu_Pages {
 	/**
 	 * @param Page_Interface $page
 	 *
-	 * @param string $before_slug - page slug to insert before
+	 * @param string         $before_slug - page slug to insert before
 	 *
 	 * @return false|string
 	 */

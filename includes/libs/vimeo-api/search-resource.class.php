@@ -18,7 +18,7 @@ class Search_Resource extends Resource_Abstract implements Resource_Interface {
 	 * Search_Resource constructor.
 	 *
 	 * @param $resource_id
-	 * @param array $params
+	 * @param array       $params
 	 */
 	public function __construct( $resource_id, $params = [] ) {
 
@@ -105,7 +105,7 @@ class Search_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Searching within the returned results isn't allowed by API
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_search_results() {
 		return false;

@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Resource_Abstract
+ *
  * @package Vimeotheque\Vimeo_Api
  * @ignore
  */
@@ -82,8 +83,8 @@ class Resource_Abstract implements Resource_Interface {
 	 * Resource_Abstract constructor.
 	 *
 	 * @param $resource_id
-	 * @param bool $user_id
-	 * @param array $params
+	 * @param boolean     $user_id
+	 * @param array       $params
 	 */
 	public function __construct( $resource_id, $user_id = false, $params = [] ) {
 		$this->resource_id = $resource_id;
@@ -99,7 +100,7 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
-	 * @param bool|string $user_id
+	 * @param boolean|string $user_id
 	 */
 	public function set_user_id( $user_id ) {
 		$this->user_id = $user_id;
@@ -115,7 +116,7 @@ class Resource_Abstract implements Resource_Interface {
 	/**
 	 * Set the remote requets method to be used
 	 *
-	 * @param string $method    Method to be used (ie. GET, POST, PATCH, DELETE)
+	 * @param string $method Method to be used (ie. GET, POST, PATCH, DELETE)
 	 */
 	public function set_request_method( $method ){
 		$allowed = ['GET', 'HEAD', 'POST', 'PATCH', 'PUT', 'DELETE'];
@@ -219,7 +220,6 @@ class Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
-	 *
 	 * For all available fields see: https://developer.vimeo.com/api/reference/responses/video
 	 *
 	 * If concrete implementation returns false,
@@ -327,7 +327,7 @@ class Resource_Abstract implements Resource_Interface {
 	 *
 	 * Can be overridden in concrete classes
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_single_entry(){
 		return false;
@@ -338,7 +338,7 @@ class Resource_Abstract implements Resource_Interface {
 	 * into the importers feed types option, concrete implementation must return
 	 * false.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function enabled_for_importers(){
 		return true;
@@ -352,7 +352,7 @@ class Resource_Abstract implements Resource_Interface {
 	 *
 	 * Can be overridden in concrete class
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_automatic_import() {
 		return true;
@@ -365,7 +365,7 @@ class Resource_Abstract implements Resource_Interface {
 	 * Feed will be parsed once and all future queries will only check for new videos.
 	 * Return true in concrete implementation if this applies to feed.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_import_new_videos() {
 		return false;
@@ -379,7 +379,7 @@ class Resource_Abstract implements Resource_Interface {
 	 * up to a certain given date in past beyond which videos
 	 * will be ignored from importing
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_date_limit(){
 		return false;
@@ -388,7 +388,7 @@ class Resource_Abstract implements Resource_Interface {
 	/**
 	 * Return true in concrete implementation if feed requires authorization to work (ie. folders feed type).
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function requires_authorization(){
 		return false;
@@ -451,7 +451,7 @@ class Resource_Abstract implements Resource_Interface {
 	 *
 	 * Used to retrieve whether feed needs Vimeo user ID to make queries
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function requires_user_id() {
 		return false;
@@ -462,7 +462,7 @@ class Resource_Abstract implements Resource_Interface {
 	 *
 	 * Get field label for Vimeo user ID
 	 *
-	 * @return bool|string
+	 * @return boolean|string
 	 */
 	public function label_user_id() {
 		return false;
@@ -473,7 +473,7 @@ class Resource_Abstract implements Resource_Interface {
 	 *
 	 * Get placeholder for field Vimeo user ID
 	 *
-	 * @return bool|string
+	 * @return boolean|string
 	 */
 	public function placeholder_user_id() {
 		return false;
@@ -486,7 +486,7 @@ class Resource_Abstract implements Resource_Interface {
 	 * By default, abstract class will assume this is allowed.
 	 * Override in child implementation for feeds that do not support results searching
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_search_results() {
 		return true;

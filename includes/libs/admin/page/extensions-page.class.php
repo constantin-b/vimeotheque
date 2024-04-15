@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project codeflavors-vimeo-video-post-lite
  */
 
@@ -62,6 +62,7 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
                         }else {
 	                        /**
 	                         * Run action for each extension installation.
+                          *
 	                         * @ignore
                              *
 	                         * @param Extension_Interface $extension The extension object.
@@ -125,7 +126,7 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
                     $message = sprintf(
                         '<div class="update-notice">%s <a class="update" href="%s">%s</a>.</div>',
                         sprintf(
-                            __( '%s version %s is available.', 'codeflavors-vimeo-video-post-lite' ),
+                            __( '%1$s version %2$s is available.', 'codeflavors-vimeo-video-post-lite' ),
                             $data['Name'],
                             $update->new_version
                         ),
@@ -135,6 +136,7 @@ class Extensions_Page extends Page_Abstract implements Page_Interface{
 
 	                /**
 	                 * Filter the update message.
+                  *
                      * @ignore
                      *
                      * @param string $message                   The update message

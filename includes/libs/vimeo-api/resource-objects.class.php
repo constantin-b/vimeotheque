@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Resources_Objects
+ *
  * @package Vimeotheque\Admin
  * @ignore
  */
@@ -66,7 +67,7 @@ class Resource_Objects{
 	 * @access public
 	 * @static
 	 *
-	 * @return Resource_Objects
+	 * @return resource
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -212,7 +213,7 @@ class Resource_Objects{
 	}
 
 	/**
-	 * @return Resource_Abstract[]
+	 * @return resource
 	 */
 	public function get_resources(){
 		return $this->resources;
@@ -221,7 +222,7 @@ class Resource_Objects{
 	/**
 	 * @param $name
 	 *
-	 * @return Resource_Interface|Resource_Abstract|\WP_Error
+	 * @return resource
 	 */
 	public function get_resource( $name ){
 		if( !isset( $this->resources[ $name ] ) ){

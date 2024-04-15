@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -75,7 +75,7 @@ class Post_Registration {
 	/**
 	 * @param $post_type
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_registered_post_type( $post_type ){
 		return isset( $this->types[ $post_type ] );

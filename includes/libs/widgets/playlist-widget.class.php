@@ -149,7 +149,7 @@ class Playlist_Widget extends WP_Widget {
 	 */
 	private function get_defaults() {
 		$player_defaults = Plugin::instance()->get_embed_options_obj()
-		                         ->get_options();
+      ->get_options();
 
 		$defaults = [
 			'cvm_post_type'     => Plugin::instance()->get_cpt()->get_post_type(),
@@ -209,8 +209,8 @@ class Playlist_Widget extends WP_Widget {
 			$args['meta_query'] = [
 				[
 					'key'     => Plugin::instance()->get_cpt()
-					                   ->get_post_settings()
-					                   ->get_meta_video_data(),
+         ->get_post_settings()
+         ->get_meta_video_data(),
 					'compare' => 'EXISTS'
 				]
 			];
@@ -245,7 +245,7 @@ class Playlist_Widget extends WP_Widget {
 	 * @param array $old_instance Old settings for this instance.
 	 *
 	 * @return array
-	 * @see WP_Widget::update()
+	 * @see    WP_Widget::update()
 	 */
 	public function update( $new_instance, $old_instance ) {
 
@@ -296,7 +296,7 @@ class Playlist_Widget extends WP_Widget {
 		return $post_type
 			? $post_type->get_taxonomy()->name
 			: Plugin::instance()->get_cpt()
-			        ->get_category_taxonomy_object()->name;
+      ->get_category_taxonomy_object()->name;
 	}
 
 	/**
@@ -439,6 +439,7 @@ class Playlist_Widget extends WP_Widget {
 	            <?php
 	            /**
 	             * Theme specific playlist settings
+              *
                  * @ignore
 	             */
 	            do_action(

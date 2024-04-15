@@ -24,6 +24,7 @@ define( 'VIMEOTHEQUE_TEMPLATE_DEBUG_MODE', false );
  * WP 5.2 required minimum version because it contains React 16.8+ which implements hooks
  *
  * WP 5.3 required for support of Object Meta Type in the REST API
+ *
  * @see https://make.wordpress.org/core/2019/10/03/wp-5-3-supports-object-and-array-meta-types-in-the-rest-api/
  */
 define( 'VIMEOTHEQUE_WP_COMPAT', '5.3' );
@@ -49,6 +50,7 @@ if ( ! version_compare( PHP_VERSION, VIMEOTHEQUE_PHP_COMPAT, '>=' ) ) {
 
 /**
  * Vimeotheque admin notice for minimum PHP version.
+ *
  * @return void
  * @ignore
  */
@@ -67,6 +69,7 @@ function vimeotheque_fail_php_version() {
 
 /**
  * Vimeotheque admin notice for minimum WordPress version.
+ *
  * @return void
  * @ignore
  */

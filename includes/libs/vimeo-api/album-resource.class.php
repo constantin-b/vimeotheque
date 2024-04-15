@@ -8,8 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Album_Resource
+ *
  * @package Vimeotheque
- * @link https://developer.vimeo.com/api/reference/showcases
+ * @link    https://developer.vimeo.com/api/reference/showcases
  * @ignore
  */
 class Album_Resource extends Resource_Abstract implements Resource_Interface {
@@ -18,8 +19,8 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	 * Album_Resource constructor.
 	 *
 	 * @param $resource_id
-	 * @param bool $user_id
-	 * @param array $params
+	 * @param boolean     $user_id
+	 * @param array       $params
 	 */
 	public function __construct( $resource_id, $user_id = false, $params = [] ) {
 		// built without direction
@@ -69,7 +70,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Can import newly added videos after importing the entire feed
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_import_new_videos() {
 		return true;
@@ -78,7 +79,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Allows import limiting by date
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_date_limit() {
 		return true;
@@ -98,7 +99,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * @see Resource_Interface::requires_user_id()
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function requires_user_id() {
 		return true;
@@ -107,7 +108,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * @see Resource_Interface::label_user_id()
 	 *
-	 * @return bool|string|void
+	 * @return boolean|string|void
 	 */
 	public function label_user_id() {
 		return __( 'Album user ID', 'codeflavors-vimeo-video-post-lite' );
@@ -116,7 +117,7 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * @see Resource_Interface::placeholder_user_id()
 	 *
-	 * @return bool|string|void
+	 * @return boolean|string|void
 	 */
 	public function placeholder_user_id() {
 		return __( 'Album owner user ID' );

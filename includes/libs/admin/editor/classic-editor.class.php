@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Classic_Editor
+ *
  * @package Vimeotheque\Admin\Editor
  *
  * Implements the functioanlity needed by the Classic editor.
@@ -169,7 +170,7 @@ class Classic_Editor{
 				<h3><?php _e('Options override is ON', 'codeflavors-vimeo-video-post-lite');?></h3>
 				<?php
 				printf(
-					__( 'Individual video post options are not editable; to change video options globally, go to plugin %sSettings%s, tab Embed options.', 'codeflavors-vimeo-video-post-lite' ),
+					__( 'Individual video post options are not editable; to change video options globally, go to plugin %1$sSettings%2$s, tab Embed options.', 'codeflavors-vimeo-video-post-lite' ),
 					'<a href="' . menu_page_url( 'cvm_settings', false ) . '#embed-options">',
 					'</a>'
 				);?>
@@ -181,6 +182,7 @@ class Classic_Editor{
             <?php
                 /**
                  * Run action that can be used to hook to and display additional options.
+                 *
                  * @ignore
                  *
                  * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
@@ -194,7 +196,7 @@ class Classic_Editor{
 				<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'width', sprintf( __( '%s X %s px' ), $plugin_options['width'], Helper::calculate_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
+						<?php $this->option_override( 'width', sprintf( __( '%1$s X %2$s px' ), $plugin_options['width'], Helper::calculate_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
 						<?php $this->option_override( 'aspect_ratio', sprintf( __( '/ Aspect ratio: %s', 'codeflavors-vimeo-video-post-lite' ), $plugin_options['aspect_ratio'] ) );?>
 					<?php else: // is not option override?>
 						<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>
@@ -387,8 +389,9 @@ class Classic_Editor{
 
 		/**
 		 * Run action that can be used to hook to and display additional options
+   *
 		 * @ignore
-		 * @param string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
+		 * @param  string $where The position that is currently running (ie. before, after, etc). Must be used to check which position is displayed to avoid showing options twice
 		 */
 		do_action(
 			'vimeotheque\editor\classic-editor-options-output',
@@ -419,7 +422,7 @@ class Classic_Editor{
 
 	/**
 	 * @param $input_name
-	 * @param string $message
+	 * @param string     $message
 	 */
 	private function option_override( $input_name, $message = '' ){
 		$settings = Helper::get_video_post()->get_embed_options();
@@ -491,6 +494,7 @@ class Classic_Editor{
                                     <?php
                                         /**
                                          * Theme specific playlist shortcode settings
+                                         *
                                          * @ignore
                                          */
                                         do_action(
@@ -783,6 +787,7 @@ class Classic_Editor{
 
 			/**
 			 * Run hook when Vimeotheque loads scripts and styles for the Classic editor.
+    *
              * @ignore
 			 */
 			do_action( 'vimeotheque\editor\classic-editor-enqueue');

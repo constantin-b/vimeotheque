@@ -1,7 +1,6 @@
 <?php
 /**
  * Template for video post media; displays the attached video embed.
- *
  */
 ?>
 

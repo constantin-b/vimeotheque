@@ -1,6 +1,6 @@
 <?php
 /**
- * @author  CodeFlavors
+ * @author CodeFlavors
  */
 
 namespace Vimeotheque\Templates;
@@ -21,7 +21,7 @@ class Helper {
 	 *
 	 * Returns true is viewing a video taxonomy page.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public static function is_video_taxonomy(){
 		return is_tax( get_object_taxonomies( Plugin::instance()->get_cpt()->get_post_type() ) );
@@ -48,12 +48,11 @@ class Helper {
 	 * Retrieves the adjacent post.
 	 *
 	 * Can either be next or previous post.
-	 *
-	 *
-	 * @param bool         $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
-	 * @param int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
-	 * @param bool         $previous       Optional. Whether to retrieve previous post. Default true
-	 * @param string       $taxonomy       Optional. Taxonomy, if $in_same_term is true. Default 'category'.
+  *
+	 * @param  boolean      $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
+	 * @param  int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
+	 * @param  boolean      $previous       Optional. Whether to retrieve previous post. Default true
+	 * @param  string       $taxonomy       Optional. Taxonomy, if $in_same_term is true. Default 'category'.
 	 * @return WP_Post|null|string Post object if successful. Null if global $post is not set. Empty string if no
 	 *                             corresponding post exists.
 	 */

@@ -15,6 +15,7 @@ use Vimeotheque\Video_Post;
 
 /**
  * Class Post_Edit_Page
+ *
  * @package Vimeotheque\Admin
  * @ignore
  */
@@ -66,7 +67,7 @@ class Post_Edit_Page{
 	 * Save post data from meta boxes.
 	 * Hooked to save_post
 	 *
-	 * @param int $post_id
+	 * @param integer $post_id
 	 * @param WP_Post $post
 	 */
 	public function save_post( $post_id, $post ){
@@ -153,8 +154,9 @@ class Post_Edit_Page{
 
 			/**
 			 * Allow enqueue of additional scripts
+    *
              * @ignore
-             * @param string $handle React app script handle
+             * @param  string $handle React app script handle
 			 */
             do_action( 'vimeotheque\admin\single-video-import-enqueue-script', $handle );
 

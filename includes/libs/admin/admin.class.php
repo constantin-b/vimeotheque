@@ -249,7 +249,7 @@ class Admin{
 	}
 
 	/**
-	 * @param bool $cap
+	 * @param boolean $cap
 	 *
 	 * @return array|mixed
 	 * @throws Exception
@@ -312,8 +312,8 @@ class Admin{
 	/**
 	 * Extra columns in list table output
 	 * 
-	 * @param string $column_name
-	 * @param int $post_id
+	 * @param string  $column_name
+	 * @param integer $post_id
 	 */
 	public function output_extra_columns( $column_name, $post_id ){
 		$_post = Helper::get_video_post( $post_id );
@@ -403,10 +403,10 @@ class Admin{
 			$links[] = sprintf(
 				$anchor,
 				$this->get_admin_menu()->get_page( 'cvm_settings' )
-				     ->get_menu_page( false ),
+        ->get_menu_page( false ),
 				'_self',
 				$this->get_admin_menu()->get_page( 'cvm_settings' )
-				     ->get_menu_title()
+        ->get_menu_title()
 			);
 
 			$page = $this->get_admin_menu()->get_page( 'vimeotheque_go_pro' );

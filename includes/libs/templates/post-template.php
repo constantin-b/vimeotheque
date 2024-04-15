@@ -11,7 +11,7 @@ use Vimeotheque\Video_Post;
  *
  * Outputs the embed for the current video post in the loop.
  *
- * @param bool $echo	Echo the output.
+ * @param  boolean $echo Echo the output.
  * @return string
  */
 function vimeotheque_the_video_embed( $echo  = true ){
@@ -41,8 +41,8 @@ function vimeotheque_the_video_embed( $echo  = true ){
  *
  * Templating function that will display the video duration for the current video in the loop.
  *
- * @param string $before    Text to display before the duration.
- * @param string $after     Text to display after the duration.
+ * @param string $before Text to display before the duration.
+ * @param string $after  Text to display after the duration.
  *
  * @return void
  */
@@ -70,8 +70,8 @@ function vimeotheque_get_the_video_duration(){
  *
  * Templating function that will display the total views for the current video in the loop.
  *
- * @param string $before    Text to display before the views number.
- * @param string $after     Text to display after the views number.
+ * @param string $before Text to display before the views number.
+ * @param string $after  Text to display after the views number.
  *
  * @return string
  */
@@ -90,8 +90,8 @@ function vimeotheque_the_video_views( $before = '<span class="video-views">', $a
  *
  * Templating function that will display the total likes for the current video in the loop.
  *
- * @param string $before    Text to display before the likes number.
- * @param string $after     Text to display after the likes number.
+ * @param string $before Text to display before the likes number.
+ * @param string $after  Text to display after the likes number.
  *
  * @return string
  */
@@ -110,9 +110,9 @@ function vimeotheque_the_video_likes( $before = '<span class="video-likes">', $a
  *
  * Returns the video image HTML with or without the play button and duration overlay.
  *
- * @param string $size          Optional. Image size. Accepts any registered image size name, or an array of width and height values in pixels (in that order). Default 'post-thumbnail'.
- * @param string $attr          Optional. Query string or array of attributes. Default empty.
- * @param bool $with_overlay    Optional. Get image with orwithout the overlaying video play button.
+ * @param string  $size         Optional. Image size. Accepts any registered image size name, or an array of width and height values in pixels (in that order). Default 'post-thumbnail'.
+ * @param string  $attr         Optional. Query string or array of attributes. Default empty.
+ * @param boolean $with_overlay Optional. Get image with orwithout the overlaying video play button.
  *
  * @return void
  */

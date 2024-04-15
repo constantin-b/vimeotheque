@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Custom post type class. Manages post registering, taxonomies, data saving
+ *
  * @ignore
  */
 class Post_Type{

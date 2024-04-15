@@ -8,12 +8,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Interface Notice_Interface
+ *
  * @package Vimeotheque
  * @ignore
  */
 interface Notice_Interface{
 	/**
 	 * Returns notice content
+  *
 	 * @return mixed
 	 */
 	public function get_notice();

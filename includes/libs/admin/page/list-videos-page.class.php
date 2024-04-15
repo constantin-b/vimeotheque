@@ -10,12 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Modal Videos List page 
+ *
  * @author CodeFlavors
  * @ignore
  */
 class List_Videos_Page extends Page_Abstract implements Page_Interface{
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see Page_Interface::get_html()
 	 */
 	public function get_html(){
@@ -50,6 +52,7 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 		do_action('admin_print_scripts');
 		/**
 		 * Action triggered on loading the video modal window
+   *
          * @ignore
 		 */
 		do_action('vimeotheque\admin\video_list_modal_print_scripts');
@@ -78,6 +81,7 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface{
 	
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see Page_Interface::on_load()
 	 */
 	public function on_load(){

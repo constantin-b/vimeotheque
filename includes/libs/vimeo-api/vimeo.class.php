@@ -23,6 +23,7 @@ abstract class Vimeo{
 
 	/**
 	 * API version to be requested
+  *
 	 * @see https://developer.vimeo.com/api/changelog
 	 */
 	const VERSION_STRING 	= 'application/vnd.vimeo.*+json; version=3.4';
@@ -32,7 +33,7 @@ abstract class Vimeo{
 	 *
 	 * @param $code
 	 * @param $message
-	 * @param bool $data
+	 * @param boolean $data
 	 *
 	 * @return WP_Error
 	 */
@@ -50,7 +51,7 @@ abstract class Vimeo{
 	protected function api_error( $data ){
 		if( isset( $data['developer_message'] ) ){
 			$message = sprintf(
-				__( '%s: %s (error code: %s)', 'codeflavors-vimeo-video-post-lite' ),
+				__( '%1$s: %2$s (error code: %3$s)', 'codeflavors-vimeo-video-post-lite' ),
 				__( 'Vimeo API error encountered', 'codeflavors-vimeo-video-post-lite' ) ,
 				$data['developer_message'],
 				$data['error_code']

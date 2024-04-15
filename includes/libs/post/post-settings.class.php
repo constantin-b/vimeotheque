@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Post_Settings
+ *
  * @package Vimeotheque
  * @ignore
  */
@@ -61,7 +62,7 @@ class Post_Settings{
 	 * Returns if condition for importing images is on post display
 	 * or post create.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function image_import(){
 
@@ -72,9 +73,9 @@ class Post_Settings{
 	/**
 	 * Get import post status from plugin options
 	 *
-	 * @param bool $status
+	 * @param boolean $status
 	 *
-	 * @return bool|string
+	 * @return boolean|string
 	 */
 	public function post_status( $status = false ){
 		if( !$status ){

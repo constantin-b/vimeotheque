@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Video
+ *
  * @package Vimeotheque\Blocks
  * @ignore
  */
@@ -38,6 +39,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 				}
 				/**
 				 * Add current post to skipped videos from auto embedding
+     *
 				 * @see Front_End::embed_video()
 				 */
 				parent::get_plugin()->get_front_end()->prevent_post_autoembed();
@@ -114,7 +116,7 @@ class Video_Position extends Block_Abstract implements Block_Interface {
 	}
 
 	/**
-	 * @param \WP_Post $post
+	 * @param \WP_Post  $post
 	 * @param \WP_Query $query
 	 */
 	public function force_video_block( \WP_Post $post, \WP_Query $query ){

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project codeflavors-vimeo-video-post-lite
  */
 
@@ -31,8 +31,8 @@ class Remote_Loader {
 	/**
 	 * Loader constructor.
 	 *
-	 * @param string $api_url
-	 * @param int $file_id
+	 * @param string     $api_url
+	 * @param integer    $file_id
 	 * @param Extensions $extensions
 	 */
 	public function __construct( $api_url, $file_id, Extensions $extensions ){

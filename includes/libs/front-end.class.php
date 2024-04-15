@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Front_End
+ *
  * @package Vimeotheque
  */
 class Front_End{
@@ -33,6 +34,7 @@ class Front_End{
 
 	/**
 	 * Front_End constructor.
+  *
 	 * @ignore
 	 *
 	 * @param Plugin $plugin
@@ -97,7 +99,7 @@ class Front_End{
 	 * The method is called on the "post_content" filter and embeds the attached video above
 	 * or below the post content, depending on the setting from the plugin Settings or the individual post options.
 	 *
-	 * @param string $content   The post content
+	 * @param  string $content The post content
 	 * @return string   The post content
 	 */
 	public function embed_video( $content ){
@@ -211,7 +213,7 @@ class Front_End{
 	 *
 	 * @param \WP_Post $post
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	private function skipped_autoembed( \WP_Post $post ){
 		return in_array( $post->ID, $this->skip_autoembed );
@@ -220,7 +222,7 @@ class Front_End{
 	/**
 	 * Embed player script on video pages.
 	 *
-	 * @ignore  Internal functionality
+	 * @ignore Internal functionality
 	 *
 	 * @return void
 	 */
@@ -237,13 +239,12 @@ class Front_End{
 	 * only for the default post_tag taxonomy; the filter adds functionality
 	 * for plugin post type tag taxonomy
 	 *
-	 * @ignore  Internal functionality
+	 * @ignore Internal functionality
 	 *
-	 * @param array $terms - the terms found
-	 * @param int $post_id - the id of the post
-	 * @param string $taxonomy - the taxonomy searched for
+	 * @param  array   $terms    - the terms found
+	 * @param  integer $post_id  - the id of the post
+	 * @param  string  $taxonomy - the taxonomy searched for
 	 * @return
-	 *
 	 */
 	public function filter_video_terms( $terms, $post_id, $taxonomy ){
 		// get the current post
@@ -264,7 +265,7 @@ class Front_End{
 	/**
 	 * Return the filter priority for the automaticembed in post content
 	 *
-	 * @return int
+	 * @return integer
 	 */
 	public function get_embed_filter_priority(){
 		return $this->embed_filter_priority;
@@ -274,9 +275,9 @@ class Front_End{
 	 * Remove filter set on post content to embed the video;
 	 * prevents automatic video embed above or below content when called.
 	 *
-	 * @ignore  Internal functionality
+	 * @ignore Internal functionality
 	 *
-	 * @param int|false $post_id    The post ID registered to skip the auto embedding for
+	 * @param integer|false $post_id The post ID registered to skip the auto embedding for
 	 */
 	public function prevent_post_autoembed( $post_id = false ){
 		if( !$post_id ){

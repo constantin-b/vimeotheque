@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Video_Resource
+ *
  * @package Vimeotheque
  * @ignore
  */
@@ -25,7 +26,7 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	}
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_single_entry(){
 		return true;
@@ -34,7 +35,7 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * No automatic import
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_automatic_import() {
 		return false;
@@ -52,7 +53,7 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Searching within the returned results isn't allowed by API
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_search_results() {
 		return false;

@@ -18,6 +18,7 @@ use Vimeotheque\Video_Import;
 class Ajax_Actions{
 	/**
 	 * Store Post_Type object reference
+  *
 	 * @var \Vimeotheque\Post\Post_Type
 	 */
 	private $cpt;
@@ -164,8 +165,8 @@ class Ajax_Actions{
 
 			foreach( $videos as $video ){
 				$result = $this->cpt->get_plugin()
-				                    ->get_posts_importer()
-				                     ->run_import(
+        ->get_posts_importer()
+        ->run_import(
 					                     [ Helper::query_video( $video ) ],
 					                     $_POST
 				                     );
@@ -175,7 +176,7 @@ class Ajax_Actions{
 			}
 
 			$response['success'] = sprintf(
-				__('%d videos: %d imported, %d skipped, %d private, %d error.', 'codeflavors-vimeo-video-post-lite'),
+				__('%1$d videos: %2$d imported, %3$d skipped, %4$d private, %5$d error.', 'codeflavors-vimeo-video-post-lite'),
 				$response['total'],
 				$response['imported'],
 				$response['skipped'],
@@ -208,8 +209,8 @@ class Ajax_Actions{
 		}
 
 		$results = $this->cpt->get_plugin()
-		                     ->get_posts_importer()
-		                     ->run_import(
+      ->get_posts_importer()
+      ->run_import(
 		                     	[ $_POST['model'] ],
 		                        $import_options
 		                     );
@@ -285,6 +286,7 @@ class Ajax_Actions{
 
 		/**
 		 * Allow additional AJAX callbacks to be set
+   *
 		 * @ignore
 		 *
 		 * @param array $callbacks              The additiojnal callbackes array
@@ -297,6 +299,7 @@ class Ajax_Actions{
 	
 	/**
 	 * For a given action key it will perform nonce checking and admin referer verification.
+  *
 	 * @param string $key
 	 */
 	public function __check_referer( $key ){

@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Post
+ *
  * @package Vimeotheque
  */
 class Video_Post{
@@ -175,7 +176,7 @@ class Video_Post{
 	 * Vimeo video player embed URL.
 	 *
 	 * @since 2.2.4
-	 * @var string
+	 * @var   string
 	 */
 	public $player_embed_url = '';
 	
@@ -196,7 +197,7 @@ class Video_Post{
 	/**
 	 * Post constructor.
 	 *
-	 * @param \WP_Post|int $post
+	 * @param \WP_Post|integer $post
 	 */
 	public function __construct( $post ) {
 		$this->_post  = get_post( $post, OBJECT, 'raw' );
@@ -210,6 +211,7 @@ class Video_Post{
 
 	/**
 	 * Set class properties
+  *
 	 * @ignore
 	 *
 	 * @param $data
@@ -225,7 +227,7 @@ class Video_Post{
 	/**
 	 * Check if it is a video post.
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function is_video(){
 		if( !$this->get_post() ){
@@ -268,9 +270,9 @@ class Video_Post{
 	/**
 	 * Set video data on post.
 	 *
-	 * @param array $data   An array of options that should be set on the post.
+	 * @param array $data An array of options that should be set on the post.
 	 *
-	 * @return bool|int|void
+	 * @return boolean|integer|void
 	 */
 	public function set_video_data( $data ){
 		if( !$this->_post ){
@@ -299,7 +301,7 @@ class Video_Post{
 	/**
 	 * Returns embed options for the post.
 	 *
-	 * @param bool $output
+	 * @param boolean $output
 	 *
 	 * @return array|mixed|void
 	 */
@@ -339,8 +341,8 @@ class Video_Post{
 	/**
 	 * Update video playback options
 	 *
-	 * @param array $values
-	 * @param bool $_use_defaults
+	 * @param array   $values
+	 * @param boolean $_use_defaults
 	 *
 	 * @return void
 	 */
@@ -399,7 +401,7 @@ class Video_Post{
 	/**
 	 * @param string $post_status
 	 *
-	 * @return int|void|\WP_Error
+	 * @return integer|void|\WP
 	 */
 	private function set_post_status( $post_status = 'publish' ){
 		if( !$this->_post ){
@@ -453,7 +455,7 @@ class Video_Post{
 	 * @param $key
 	 * @param $value
 	 *
-	 * @return bool|int
+	 * @return boolean|integer
 	 */
 	protected function update_meta( $key, $value ){
 		if( $this->_post ) {
@@ -467,8 +469,8 @@ class Video_Post{
 
 	/**
 	 * @param $key
-	 * @param bool $single
-	 * @param array $default - a default value that should be returned in case the meta isn't found
+	 * @param boolean $single
+	 * @param array   $default - a default value that should be returned in case the meta isn't found
 	 *
 	 * @return mixed
 	 */
@@ -489,9 +491,9 @@ class Video_Post{
 	/**
 	 * Set featured image on post
 	 *
-	 * @param bool $refresh
+	 * @param boolean $refresh
 	 *
-	 * @return array|bool|void
+	 * @return array|boolean|void
 	 */
 	public function set_featured_image( $refresh = false ){
 		return $this->_image->set_featured_image( $refresh );

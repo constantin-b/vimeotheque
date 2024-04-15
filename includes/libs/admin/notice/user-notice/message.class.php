@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -71,18 +71,18 @@ class Message {
 	/**
 	 * Generates the note footer containing links for various actions
 	 *
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
 	private function note_footer( $echo = true ){
 		$template = '<a class="" href="%1$s" title="%2$s">%2$s</a>';
-		$links = array(
+		$links = [
 			sprintf( $template, $this->url, __( "Sure, I'd love to!", 'codeflavors-vimeo-video-post-lite' ) ),
 			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'yes' ) ) ), __( 'No, thanks.', 'codeflavors-vimeo-video-post-lite' ) ),
 			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'yes' ) ) ), __( "I've already given a review.", 'codeflavors-vimeo-video-post-lite' ) ),
 			sprintf( $template, esc_url( add_query_arg( $this->user->get_query_arg( 'later' ) ) ), __( 'Ask me later.', 'codeflavors-vimeo-video-post-lite' ) )
-		);
+		];
 
 		$output = implode( " &middot; ", $links );
 

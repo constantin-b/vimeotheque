@@ -12,16 +12,18 @@ use Vimeotheque\Player\Player;
 
 /**
  * Class CVM_Options_Factory
+ *
  * @deprecated - Use Vimeotheque\Options\Options_Factory instead
- * @see \Vimeotheque\Options\Options_Factory
+ * @see        \Vimeotheque\Options\Options_Factory
  * @ignore
  */
 final class CVM_Options_Factory extends \Vimeotheque\Options\Options_Factory{}
 
 /**
  * Class CVM_Post_Type
+ *
  * @deprecated
- * @see \Vimeotheque\Post\Post_Type
+ * @see        \Vimeotheque\Post\Post_Type
  * @ignore
  */
 final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
@@ -29,7 +31,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	public function __construct() {}
 
 	/**
-	 * @return array
+	 * @return     array
 	 * @deprecated
 	 */
 	public function get_roles(){
@@ -37,8 +39,8 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return array|mixed
-	 * @throws Exception
+	 * @return     array|mixed
+	 * @throws     Exception
 	 * @deprecated
 	 */
 	public function get_capability(){
@@ -48,7 +50,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	/**
 	 * @param $post
 	 *
-	 * @return mixed|void
+	 * @return     mixed|void
 	 * @deprecated
 	 */
 	public function get_video_data( $post ){
@@ -56,7 +58,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return bool
+	 * @return     boolean
 	 * @deprecated
 	 */
 	public function is_video(){
@@ -64,9 +66,9 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @param int|WP_Post $post
+	 * @param integer|WP_Post $post
 	 *
-	 * @return bool|mixed|void
+	 * @return     boolean|mixed|void
 	 * @deprecated
 	 */
 	public function get_video_id( $post ) {
@@ -74,7 +76,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return string
+	 * @return     string
 	 * @deprecated
 	 */
 	public function get_meta_key_video_data() {
@@ -82,7 +84,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return string
+	 * @return     string
 	 * @deprecated
 	 */
 	public function get_meta_key_video_url() {
@@ -90,7 +92,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return string
+	 * @return     string
 	 * @deprecated
 	 */
 	public function get_meta_key_video_id() {
@@ -100,7 +102,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	/**
 	 * @param string $situation
 	 *
-	 * @return bool
+	 * @return     boolean
 	 * @deprecated
 	 */
 	public function import_image_on( $situation = 'post_create' ) {
@@ -108,9 +110,9 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @param bool $status
+	 * @param boolean $status
 	 *
-	 * @return bool|string
+	 * @return     boolean|string
 	 * @deprecated
 	 */
 	public function post_status( $status = false ) {
@@ -118,7 +120,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return string
+	 * @return     string
 	 * @deprecated
 	 */
 	public function get_post_type() {
@@ -126,7 +128,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return string
+	 * @return     string
 	 * @deprecated
 	 */
 	public function get_post_tax() {
@@ -134,7 +136,7 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 	}
 
 	/**
-	 * @return string
+	 * @return     string
 	 * @deprecated
 	 */
 	public function get_tag_tax() {
@@ -143,9 +145,9 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 
 	/**
 	 * @param $post_id
-	 * @param array $fields
+	 * @param array   $fields
 	 *
-	 * @return bool|int
+	 * @return     boolean|integer
 	 * @deprecated
 	 */
 	public function update_video_data( $post_id, $fields = [] ) {
@@ -155,13 +157,14 @@ final class CVM_Post_Type extends \Vimeotheque\Post\Post_Type{
 
 /**
  * Class CVM_Vimeo_Videos
+ *
  * @deprecated
  * @ignore
  */
 final class CVM_Vimeo_Videos{}
 
 /**
- * @var \Vimeotheque\Post\Post_Type $CVM_POST_TYPE
+ * @var        \Vimeotheque\Post\Post_Type $CVM_POST_TYPE
  * @deprecated
  * @ignore
  */
@@ -170,10 +173,10 @@ $CVM_POST_TYPE = new CVM_Post_Type();
 
 /**
  * @deprecated
- * @see \Vimeotheque\Admin\Helper_Admin::check()
+ * @see        \Vimeotheque\Admin\Helper_Admin::check()
  *
  * @param $val
- * @param bool $echo
+ * @param boolean $echo
  *
  * @return string
  * @ignore
@@ -184,10 +187,10 @@ function cvm_check( $val, $echo = true ){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Admin\Helper_Admin::select()
+ * @see        \Vimeotheque\Admin\Helper_Admin::select()
  *
- * @param array $args
- * @param bool $echo
+ * @param array   $args
+ * @param boolean $echo
  *
  * @return string
  * @ignore
@@ -198,7 +201,7 @@ function cvm_select( $args = [], $echo = true ){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Helper::human_time()
+ * @see        \Vimeotheque\Helper::human_time()
  *
  * @param $seconds
  *
@@ -213,7 +216,7 @@ function cvm_human_time( $seconds ){
  * @deprecated
  *
  * @param $method
- * @param array $args
+ * @param array  $args
  *
  * @return mixed
  * @ignore
@@ -232,7 +235,7 @@ function cvm_class_method( $method, $args = [] ){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Plugin::instance()::get_cpt()::get_post_type()
+ * @see        \Vimeotheque\Plugin::instance()::get_cpt()::get_post_type()
  *
  * @return string
  * @ignore
@@ -243,11 +246,11 @@ function cvm_get_post_type(){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Helper::get_video_post()::get_video_data()
+ * @see        \Vimeotheque\Helper::get_video_post()::get_video_data()
  *
  * @param $post_id
  *
- * @return bool|mixed|void
+ * @return boolean|mixed|void
  * @ignore
  */
 function cvm_get_post_video_data( $post_id ){
@@ -258,8 +261,7 @@ function cvm_get_post_video_data( $post_id ){
 /**
  * @deprecated
  *
- *
- * @param bool $echo
+ * @param boolean $echo
  *
  * @return string
  * @ignore
@@ -276,11 +278,11 @@ function cvm_video_embed_html( $echo = true ){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Helper::get_video_post()::is_video()
+ * @see        \Vimeotheque\Helper::get_video_post()::is_video()
  *
- * @param bool $post
+ * @param boolean $post
  *
- * @return bool
+ * @return boolean
  * @ignore
  */
 function cvm_is_video( $post = false ){
@@ -289,9 +291,9 @@ function cvm_is_video( $post = false ){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Helper::get_video_post()::is_video()
+ * @see        \Vimeotheque\Helper::get_video_post()::is_video()
  *
- * @return bool
+ * @return boolean
  * @ignore
  */
 function cvm_is_video_post(){
@@ -300,8 +302,8 @@ function cvm_is_video_post(){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Plugin::instance()::get_cpt()::get_post_tax()
- * @return string
+ * @see        \Vimeotheque\Plugin::instance()::get_cpt()::get_post_tax()
+ * @return     string
  * @ignore
  */
 function cvm_get_category(){
@@ -309,8 +311,8 @@ function cvm_get_category(){
 }
 /**
  * @deprecated
- * @see \Vimeotheque\Plugin::instance()::get_cpt()::get_tag_tax()
- * @return string
+ * @see        \Vimeotheque\Plugin::instance()::get_cpt()::get_tag_tax()
+ * @return     string
  * @ignore
  */
 function cvm_get_tag(){
@@ -319,8 +321,8 @@ function cvm_get_tag(){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Plugin::instance()::get_options()
- * @return array
+ * @see        \Vimeotheque\Plugin::instance()::get_options()
+ * @return     array
  * @ignore
  */
 function cvm_get_settings(){
@@ -329,10 +331,10 @@ function cvm_get_settings(){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Player\Player
+ * @see        \Vimeotheque\Player\Player
  *
  * @param $post
- * @param bool $echo
+ * @param boolean $echo
  *
  * @return string|void
  * @ignore
@@ -350,15 +352,15 @@ function cvm_get_video_embed_html( $post, $echo = true ){
 
 /**
  * @deprecated
- * @see \Vimeotheque\Helper::get_video_post()::set_featured_image()
- * @since 1.3
+ * @see        \Vimeotheque\Helper::get_video_post()::set_featured_image()
+ * @since      1.3
  *
  * Import featured image from Vimeo
  *
- * @param int $post_id
- * @param string $post_type
- * @param bool $refresh
- * @return array|bool|void
+ * @param  integer $post_id
+ * @param  string  $post_type
+ * @param  boolean $refresh
+ * @return array|boolean|void
  * @ignore
  */
 function cvm_set_featured_image($post_id, $post_type, $refresh = false){
@@ -368,9 +370,9 @@ function cvm_set_featured_image($post_id, $post_type, $refresh = false){
 /**
  * Returns the meta key name where video details are stored on post
  *
- * @return string
+ * @return     string
  * @deprecated
- * @see \Vimeotheque\Plugin::instance()::get_cpt()::get_post_settings()::get_meta_video_data()
+ * @see        \Vimeotheque\Plugin::instance()::get_cpt()::get_post_settings()::get_meta_video_data()
  * @ignore
  */
 function cvm_get_video_data_meta_name(){
@@ -383,7 +385,7 @@ function cvm_get_video_data_meta_name(){
  * General method to access public methods of post type class
  *
  * @param string $method - method name
- * @param array $args
+ * @param array  $args
  *
  * @return string - result returned by class method
  * @ignore
@@ -404,7 +406,7 @@ function cvm_get_method( $method, $args = [] ){
  *
  * Deprecated hook
  *
- * @param \Vimeotheque\Options\Options $options
+ * @param  \Vimeotheque\Options\Options $options
  * @ignore
  */
 function _deprecatead_settings_page_load_event( $options ){
@@ -510,7 +512,7 @@ add_filter( 'vimeotheque\vimeo_api\access_token', '_deprecated_vimeo_access_toke
 /**
  * @deprecated
  *
- * @param mixed ...$args
+ * @param  mixed ...$args
  * @ignore
  */
 function _deprecated_debug( ...$args ){
@@ -550,7 +552,7 @@ add_filter( 'vimeotheque\image_request_timeout', '_deprecated_image_timeout', 10
 /**
  * @deprecated
  *
- * @param mixed ...$args
+ * @param  mixed ...$args
  * @ignore
  */
 function _deprecated_image_file_raw( ...$args ){
@@ -569,7 +571,7 @@ add_action( 'vimeotheque\image_file_raw', '_deprecated_image_file_raw', 10, 3 );
 /**
  * @deprecated
  *
- * @param mixed ...$args
+ * @param  mixed ...$args
  * @ignore
  */
 function _deprecated_image_imported( ...$args ){
@@ -588,7 +590,7 @@ add_action( 'vimeotheque\image_imported', '_deprecated_image_imported', 10, 3 );
 /**
  * @deprecated
  *
- * @param mixed ...$args
+ * @param  mixed ...$args
  * @ignore
  */
 function _deprecated_post_reimport_tax( ...$args ){
@@ -649,7 +651,7 @@ add_filter( 'vimeotheque\allow_import', '_deprecated_allow_import', 10, 4 );
 /**
  * @deprecated
  *
- * @param mixed ...$args
+ * @param  mixed ...$args
  * @ignore
  */
 function _deprecated_import_before( ...$args ){
@@ -773,7 +775,7 @@ add_filter( 'vimeotheque\import_post_date', '_deprecated_post_date_filter', 10, 
 /**
  * @deprecated
  *
- * @param mixed ...$args
+ * @param  mixed ...$args
  * @ignore
  */
 function _deprecated_post_success( ...$args ){
@@ -977,7 +979,6 @@ add_filter( 'vimeotheque\admin\import_meta_panel\button_text', '_deprecated_impo
 /**
  * @deprecated
  * @ignore
- *
  */
 function _deprecated_video_list_scripts(){
 	/**
@@ -995,12 +996,12 @@ add_action( 'vimeotheque\admin\video_list_modal_print_scripts', '_deprecated_vid
 // playlist theme functions
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_thumbnail()
- * @see \Vimeotheque\Themes\Helper::get_thumbnail()
+ * @see        \Vimeotheque\Themes\Helper::get_thumbnail()
  *
- * @param string $size
- * @param string $before
- * @param string $after
- * @param bool $echo
+ * @param string  $size
+ * @param string  $before
+ * @param string  $after
+ * @param boolean $echo
  *
  * @return string|void
  * @ignore
@@ -1011,11 +1012,11 @@ function cvm_output_thumbnail( $size = 'small', $before = '', $after = '', $echo
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::image_preloader()
- * @see \Vimeotheque\Themes\Helper::image_preloader()
+ * @see        \Vimeotheque\Themes\Helper::image_preloader()
  *
- * @param string $size
- * @param string $class
- * @param bool $echo
+ * @param string  $size
+ * @param string  $class
+ * @param boolean $echo
  *
  * @return string|void
  * @ignore
@@ -1026,12 +1027,12 @@ function cvm_image_preload_output( $size = 'small', $class="cvm-preload", $echo 
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_title()
- * @see \Vimeotheque\Themes\Helper::get_title()
+ * @see        \Vimeotheque\Themes\Helper::get_title()
  *
- * @param bool $include_duration
- * @param string $before
- * @param string $after
- * @param bool $echo
+ * @param boolean $include_duration
+ * @param string  $before
+ * @param string  $after
+ * @param boolean $echo
  *
  * @return string|void
  * @ignore
@@ -1042,11 +1043,11 @@ function cvm_output_title( $include_duration = true,  $before = '', $after = '',
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_video_data_attributes()
- * @see \Vimeotheque\Themes\Helper::get_video_data_attributes()
+ * @see        \Vimeotheque\Themes\Helper::get_video_data_attributes()
  *
- * @param string $before
- * @param string $after
- * @param bool $echo
+ * @param string  $before
+ * @param string  $after
+ * @param boolean $echo
  *
  * @return string|void
  * @ignore
@@ -1057,11 +1058,11 @@ function cvm_output_video_data( $before = " ", $after="", $echo = true ){
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_post_permalink()
- * @see \Vimeotheque\Themes\Helper::get_post_permalink()
+ * @see        \Vimeotheque\Themes\Helper::get_post_permalink()
  *
- * @param bool $echo
+ * @param boolean $echo
  *
- * @return bool|false|string|void|WP_Error
+ * @return boolean|false|string|void|WP
  * @ignore
  */
 function cvm_video_post_permalink( $echo  = true ){
@@ -1070,11 +1071,11 @@ function cvm_video_post_permalink( $echo  = true ){
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_width()
- * @see \Vimeotheque\Themes\Helper::get_width()
+ * @see        \Vimeotheque\Themes\Helper::get_width()
  *
- * @param string $before
- * @param string $after
- * @param bool $echo
+ * @param string  $before
+ * @param string  $after
+ * @param boolean $echo
  *
  * @return string
  * @ignore
@@ -1085,11 +1086,11 @@ function cvm_output_width( $before = ' style="', $after='"', $echo = true ){
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_player_size()
- * @see \Vimeotheque\Themes\Helper::get_player_size()
+ * @see        \Vimeotheque\Themes\Helper::get_player_size()
  *
- * @param string $before
- * @param string $after
- * @param bool $echo
+ * @param string  $before
+ * @param string  $after
+ * @param boolean $echo
  *
  * @return string
  * @ignore
@@ -1110,9 +1111,9 @@ function cvm_get_player_options(){
 
 /**
  * @deprecated use \Vimeotheque\Themes\Helper::get_player_data_attributes()
- * @see \Vimeotheque\Themes\Helper::get_player_data_attributes()
+ * @see        \Vimeotheque\Themes\Helper::get_player_data_attributes()
  *
- * @param bool $echo
+ * @param boolean $echo
  *
  * @return string
  * @ignore

@@ -11,41 +11,47 @@ if( !defined('ABSPATH') ){
 
 /**
  * Admin page Interface
+ *
  * @ignore
  */
 interface Page_Interface{
 	/**
 	 * Returns the page output
+  *
 	 * @return string
 	 */
 	public function get_html();
 
 	/**
 	 * The page "on_load" callback function
+  *
 	 * @return mixed
 	 */
 	public function on_load();
 
 	/**
 	 * Returns the page title
+  *
 	 * @return string
 	 */
 	public function get_page_title();
 
 	/**
 	 * Returns the menu title
+  *
 	 * @return string
 	 */
 	public function get_menu_title();
 
 	/**
 	 * Returns the menu slug
+  *
 	 * @return string
 	 */
 	public function get_menu_slug();
 
 	/**
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
 	 * @return mixed
 	 */

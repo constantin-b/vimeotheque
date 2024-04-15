@@ -8,8 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class User_Resource
+ *
  * @package Vimeotheque
- * @link https://developer.vimeo.com/api/reference/videos#get_videos
+ * @link    https://developer.vimeo.com/api/reference/videos#get_videos
  * @ignore
  */
 class User_Resource extends Resource_Abstract implements Resource_Interface {
@@ -17,8 +18,8 @@ class User_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * User_Resource constructor.
 	 *
-	 * @param bool $user_id
-	 * @param array $params
+	 * @param boolean $user_id
+	 * @param array   $params
 	 */
 	public function __construct( $user_id = false, $params = [] ) {
 		parent::__construct( false, $user_id, $params );
@@ -61,7 +62,7 @@ class User_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Can import newly added videos after importing the entire feed
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function can_import_new_videos() {
 		return true;
@@ -70,7 +71,7 @@ class User_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * Feed can use date limit
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_date_limit(){
 		return true;

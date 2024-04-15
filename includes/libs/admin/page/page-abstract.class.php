@@ -13,6 +13,7 @@ if( !defined('ABSPATH') ){
 
 /**
  * Admin page base class, all pages should extend from this
+ *
  * @ignore
  */
 abstract class Page_Abstract implements Page_Interface {
@@ -79,12 +80,12 @@ abstract class Page_Abstract implements Page_Interface {
 	/**
 	 * Page_Abstract constructor.
 	 *
-	 * @param Admin $admin
+	 * @param Admin      $admin
 	 * @param $page_title
 	 * @param $menu_title
 	 * @param $slug
-	 * @param bool $parent
-	 * @param string $capability
+	 * @param boolean    $parent
+	 * @param string     $capability
 	 */
 	public function __construct( Admin $admin, $page_title, $menu_title, $slug, $parent = false, $capability = 'activate_plugins' ){
 		$this->admin = $admin;
@@ -140,7 +141,7 @@ abstract class Page_Abstract implements Page_Interface {
 	}
 
 	/**
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -154,6 +155,7 @@ abstract class Page_Abstract implements Page_Interface {
 
 	/**
 	 * Returns the page title
+  *
 	 * @return string
 	 */
 	public function get_page_title() {
@@ -162,6 +164,7 @@ abstract class Page_Abstract implements Page_Interface {
 
 	/**
 	 * Returns the menu title
+  *
 	 * @return string
 	 */
 	public function get_menu_title() {
@@ -171,7 +174,7 @@ abstract class Page_Abstract implements Page_Interface {
 	/**
 	 * @param $name
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	protected function get_var( $name ) {
 		return Helper::get_var( $name );
@@ -189,7 +192,7 @@ abstract class Page_Abstract implements Page_Interface {
 	}
 
 	/**
-	 * @return int|null
+	 * @return integer|null
 	 */
 	public function get_item_id() {
 		return $this->item_id;
@@ -214,7 +217,7 @@ abstract class Page_Abstract implements Page_Interface {
 	}
 
 	/**
-	 * @return bool|string|Page_Interface
+	 * @return boolean|string|Page
 	 */
 	public function get_parent() {
 		return $this->parent;
@@ -232,7 +235,7 @@ abstract class Page_Abstract implements Page_Interface {
 	 * Useful to check if hooking to admin_notices and don't want to do additional checking in class
 	 * to see if the registered page is the same with the one calling the callback.
      *
-     * @return bool
+     * @return boolean
 	 */
 	protected function is_current_page() {
 		$screen = get_current_screen();
@@ -244,7 +247,7 @@ abstract class Page_Abstract implements Page_Interface {
      *
 	 * @param $code
 	 * @param $message
-	 * @param null $data
+	 * @param null    $data
 	 */
 	protected function set_error( $code, $message, $data = null ) {
 	    $this->error = new WP_Error( $code, $message, $data );

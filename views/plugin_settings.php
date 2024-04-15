@@ -529,8 +529,9 @@ use Vimeotheque\Helper;
                                     $api_set = empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] );
                                     /**
                                      * Allow hiding or showing of OAuth setup instructions
+                                     *
                                      * @ignore
-                                     * @param bool Show (true) or hide (false) the options.
+                                     * @param  bool Show (true) or hide (false) the options.
                                      */
                                     $show = apply_filters( 'vimeotheque\admin\settings\show_oauth_instructions', $api_set );
 
@@ -539,7 +540,7 @@ use Vimeotheque\Helper;
                                             '<div class="api-instructions"><p>%s</p> <p>%s</p> <p>%s</p></div>',
                                             __('In order to be able to import videos using Vimeotheque, you must register a new Vimeo App (requires a Vimeo account).', 'codeflavors-vimeo-video-post-lite'),
                                             sprintf(
-                                                __( 'Make sure that you set up option %s in your APP settings on Vimeo to be: %s' , 'codeflavors-vimeo-video-post-lite' ),
+                                                __( 'Make sure that you set up option %1$s in your APP settings on Vimeo to be: %2$s' , 'codeflavors-vimeo-video-post-lite' ),
                                                 'APP Callback URL',
                                                 sprintf(
                                                     '<span class="emphasize">%s</span>',

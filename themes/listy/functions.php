@@ -6,7 +6,7 @@ namespace Vimeotheque\Theme\Listy;
  * Display the post content.
  *
  * @private
- * @return void
+ * @return  void
  * @ignore
  */
 function the_video_content() {

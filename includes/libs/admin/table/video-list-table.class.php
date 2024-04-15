@@ -31,11 +31,13 @@ class Video_List_Table extends \WP_List_Table{
 
 	/**
 	 * Store view post type
+  *
 	 * @var string
 	 */
 	private $post_type;
 	/**
 	 * Store view category taxonomy
+  *
 	 * @var string
 	 */
 	private $taxonomy;
@@ -43,7 +45,7 @@ class Video_List_Table extends \WP_List_Table{
 	/**
 	 * Class contructor
 	 *
-	 * @param array $args
+	 * @param  array $args
 	 * @return null
 	 */
 	function __construct( $args = [] ){
@@ -66,7 +68,7 @@ class Video_List_Table extends \WP_List_Table{
 	/**
 	 * Default column
 	 *
-	 * @param array $item
+	 * @param array  $item
 	 * @param string $column
 	 *
 	 * @return mixed
@@ -221,6 +223,7 @@ class Video_List_Table extends \WP_List_Table{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see WP_List_Table::extra_tablenav()
 	 */
 	function extra_tablenav($which){
@@ -264,6 +267,7 @@ class Video_List_Table extends \WP_List_Table{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see WP_List_Table::get_views()
 	 */
 	function get_views(){
@@ -315,6 +319,7 @@ class Video_List_Table extends \WP_List_Table{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see WP_List_Table::get_columns()
 	 */
 	function get_columns(){
@@ -331,6 +336,7 @@ class Video_List_Table extends \WP_List_Table{
 
 	/**
      * (non-PHPdoc)
+  *
      * @see WP_List_Table::prepare_items()
      */
     function prepare_items() {

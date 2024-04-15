@@ -32,13 +32,12 @@ add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\block_editor' );
 
 /**
  * @private
- * @return string
- * @since 2.0.15
+ * @return  string
+ * @since   2.0.15
  *
  * @ignore
  *
  * Get the image size name based on playlist option 'original_thumbnail_size' value
- *
  */
 function get_image_size() {
 	$options = Helper::get_player_options();

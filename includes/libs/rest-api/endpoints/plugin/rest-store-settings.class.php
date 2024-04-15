@@ -94,9 +94,9 @@ class Rest_Store_Settings
 	/**
 	 * Process options.
 	 *
-	 * @param array $defaults       The default options.
-	 * @param array $options        The existing options.
-	 * @param array $new_options    The new options.
+	 * @param array $defaults    The default options.
+	 * @param array $options     The existing options.
+	 * @param array $new_options The new options.
 	 *
 	 * @return array    The processed options.
 	 */

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Customizer
+ *
  * @package Vimeotheque\Admin\Customizer
  * @ignore
  */
@@ -153,7 +154,6 @@ class Customizer {
 	 * @param $args
 	 *
 	 * @return mixed
-	 *
 	 */
 	public function add_setting( $id, array $args ){
 		return $this->settings[ $id ] = $this->wp_customizer->add_setting(
@@ -166,7 +166,7 @@ class Customizer {
 	 * @param $id
 	 * @param \WP_Customize_Section $section
 	 * @param \WP_Customize_Setting $setting
-	 * @param array $args
+	 * @param array                 $args
 	 */
 	public function add_control( $id, \WP_Customize_Section $section, \WP_Customize_Setting $setting, array $args ){
 		$args['settings'] = $setting->id;

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author  CodeFlavors
+ * @author CodeFlavors
  */
 
 namespace Vimeotheque\Theme\Listy;

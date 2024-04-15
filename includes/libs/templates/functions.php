@@ -60,8 +60,8 @@ function vimeotheque_get_template_part( $slug, $name = '' ){
  *
  * Used on single video pages, returns the next video post.
  *
- * @param bool         $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
- * @param int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
+ * @param  boolean      $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
+ * @param  int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
  * @return WP_Post|null|string Post object if successful. Null if global $post is not set. Empty string if no
  *                             corresponding post exists.
  */
@@ -74,8 +74,8 @@ function vimeotheque_get_next_post(  $in_same_term = false, $excluded_terms = ''
  *
  * Used on single video pages, returns the previous video post.
  *
- * @param bool         $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
- * @param int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
+ * @param  boolean      $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
+ * @param  int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
  * @return WP_Post|null|string Post object if successful. Null if global $post is not set. Empty string if no
  *                             corresponding post exists.
  */

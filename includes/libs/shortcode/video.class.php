@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Video
+ *
  * @package Vimeotheque\Shortcode
  * @ignore
  */
@@ -25,7 +26,7 @@ class Video extends Shortcode_Abstract implements Shortcode_Interface {
 	 * @param $atts
 	 * @param $content
 	 *
-	 * @return bool|string|void
+	 * @return boolean|string|void
 	 */
 	public function get_output( $atts, $content ) {
 		parent::set_atts( $atts );

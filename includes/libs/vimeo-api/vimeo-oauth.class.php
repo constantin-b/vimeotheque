@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Vimeo_Api_Oauth
+ *
  * @ignore
  */
 class Vimeo_Oauth extends Vimeo{
@@ -17,21 +18,25 @@ class Vimeo_Oauth extends Vimeo{
 
 	/**
 	 * Stores Vimeo token
+  *
 	 * @var string
 	 */
 	protected $token;
 	/**
 	 * oAuth client ID
+  *
 	 * @var string
 	 */
 	protected $client_id;
 	/**
 	 * oAuth client secret
+  *
 	 * @var string
 	 */
 	protected $client_secret;
 	/**
 	 * oAuth redirect URL
+  *
 	 * @var string
 	 */
 	protected $redirect_url;
@@ -39,9 +44,9 @@ class Vimeo_Oauth extends Vimeo{
 	/**
 	 * Constructor, sets up client id, client secret and token
 	 *
-	 * @param string $client_id - oAuth client ID
-	 * @param string $client_secret - oAuth client secret
-	 * @param string $token - authorization token
+	 * @param string       $client_id     - oAuth client ID
+	 * @param string       $client_secret - oAuth client secret
+	 * @param string       $token         - authorization token
 	 * @param $redirect_url
 	 */
 	public function __construct( $client_id, $client_secret, $token = null, $redirect_url = '' ){
@@ -99,6 +104,7 @@ class Vimeo_Oauth extends Vimeo{
 
 	/**
 	 * Returns the value of the redirect URL set up by child class
+  *
 	 * @return string
 	 */
 	public function get_redirect_url(){

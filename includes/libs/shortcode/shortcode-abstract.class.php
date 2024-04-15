@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Shortcode_Abstract
+ *
  * @package Vimeotheque\Shortcode
  * @ignore
  */

@@ -11,6 +11,7 @@ use WP_Error;
 
 /**
  * Class Posts_Import
+ *
  * @package Vimeotheque
  */
 class Posts_Import{
@@ -80,6 +81,7 @@ class Posts_Import{
 
 				/**
 				 * Generate an error and pass it for debugging
+     *
 				 * @var WP_Error
 				 */
 				$error = new WP_Error(
@@ -145,6 +147,7 @@ class Posts_Import{
 
 					/**
 					 * Generate an error and pass it for debugging
+      *
 					 * @var WP_Error
 					 */
 					$error = new WP_Error(
@@ -208,7 +211,7 @@ class Posts_Import{
 	}
 
 	/**
-	 * @param array $raw_feed
+	 * @param array     $raw_feed
 	 * @param $post_type
 	 *
 	 * @return array
@@ -274,7 +277,7 @@ class Posts_Import{
 	 *
 	 * @param array $args
 	 *
-	 * @return bool|int
+	 * @return boolean|integer
 	 */
 	public function import_video( $args = [] ){
 
@@ -339,6 +342,7 @@ class Posts_Import{
 		if( !$allow_import ){
 			/**
 			 * Generate an error and pass it for debugging
+    *
 			 * @var WP_Error
 			 */
 			$error = new WP_Error(

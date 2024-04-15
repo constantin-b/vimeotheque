@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Image_Import
+ *
  * @package Vimeotheque
  */
 class Image_Import {
@@ -26,9 +27,9 @@ class Image_Import {
 	}
 
 	/**
-	 * @param bool $refresh
+	 * @param boolean $refresh
 	 *
-	 * @return array|bool|void
+	 * @return array|boolean|void
 	 */
 	public function set_featured_image( $refresh = false ){
 		if( !$this->video_post->video_id ){
@@ -101,7 +102,7 @@ class Image_Import {
 	}
 
 	/**
-	 * @return array|bool
+	 * @return array|boolean
 	 */
 	private function import_from_api(){
 		$q = new Video_Import( 'thumbnails', $this->video_post->video_id );
@@ -158,7 +159,7 @@ class Image_Import {
 	 *
 	 * @param $image_uri
 	 *
-	 * @return false|int|\WP_Post
+	 * @return false|integer|\WP
 	 */
 	private function check_duplicate( $image_uri ){
 
@@ -181,7 +182,7 @@ class Image_Import {
 	/**
 	 * @param $image_url
 	 *
-	 * @return array|bool
+	 * @return array|boolean
 	 */
 	private function import_to_media( $image_url ){
 		if( !$image_url ){

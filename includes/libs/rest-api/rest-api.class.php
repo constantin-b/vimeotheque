@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * REST API implementation
  * Add all meta fields to video post
- * @author CodeFlavors
  *
+ * @author CodeFlavors
  */
 class Rest_Api{
 	/**
@@ -26,6 +26,7 @@ class Rest_Api{
 
 	/**
 	 * Custom post type class reference
+  *
 	 * @var Post_Type
 	 */
 	private $cpt;
@@ -56,7 +57,7 @@ class Rest_Api{
 	 */
 	private function register_rest_field(){
 
-		$objects = array();
+		$objects = [];
 		$post_types = Plugin::instance()->get_registered_post_types()->get_post_types();
 		foreach( $post_types as $post_type ){
 			$objects[] = $post_type->get_post_type()->name;

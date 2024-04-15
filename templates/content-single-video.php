@@ -1,7 +1,6 @@
 <?php
 /**
  * Template part for displaying a single video post.
- *
  */
 ?>
 
@@ -44,12 +43,12 @@ vimeotheque_get_template_part( 'single-video/media', 'video' );
             );
 
             wp_link_pages(
-                array(
+                [
                     'before'      => '<div class="page-links">' . __( 'Pages:', 'vimeotheque' ),
                     'after'       => '</div>',
                     'link_before' => '<span class="page-number">',
                     'link_after'  => '</span>',
-                )
+                ]
             );
         ?>
 

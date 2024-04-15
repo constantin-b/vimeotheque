@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -36,7 +36,7 @@ class Player {
 	 * Player constructor.
 	 *
 	 * @param Video_Post $post
-	 * @param array $options
+	 * @param array      $options
 	 */
 	public function __construct( Video_Post $post, $options = [] ) {
 		$this->post           = $post;
@@ -47,9 +47,9 @@ class Player {
 	/**
 	 * Embed output
 	 *
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
-	 * @param bool $width
+	 * @param boolean $width
 	 *
 	 * @return string|void
 	 */
@@ -159,7 +159,7 @@ class Player {
 	/**
 	 * Get the maximum height, if anu
 	 *
-	 * @return false|int
+	 * @return false|integer
 	 */
 	private function get_max_height(){
 		/**

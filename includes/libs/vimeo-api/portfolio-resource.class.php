@@ -8,8 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Portfolio_Resource
+ *
  * @package Vimeotheque
- * @link https://developer.vimeo.com/api/reference/portfolios
+ * @link    https://developer.vimeo.com/api/reference/portfolios
  * @ignore
  */
 class Portfolio_Resource extends Resource_Abstract implements Resource_Interface {
@@ -19,7 +20,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	 *
 	 * @param $resource_id
 	 * @param $user_id
-	 * @param array $params
+	 * @param array       $params
 	 */
 	public function __construct( $resource_id, $user_id = '', $params = [] ) {
 		parent::__construct( $resource_id, $user_id, $params );
@@ -56,7 +57,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	/**
 	 * Feed can use date limit
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function has_date_limit(){
 		return true;
@@ -78,7 +79,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	/**
 	 * @see Resource_Interface::requires_user_id()
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function requires_user_id() {
 		return true;
@@ -87,7 +88,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	/**
 	 * @see Resource_Interface::label_user_id()
 	 *
-	 * @return bool|string|void
+	 * @return boolean|string|void
 	 */
 	public function label_user_id() {
 		return __( 'Portfolio user ID', 'codeflavors-vimeo-video-post-lite' );
@@ -96,7 +97,7 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	/**
 	 * @see Resource_Interface::placeholder_user_id()
 	 *
-	 * @return bool|string|void
+	 * @return boolean|string|void
 	 */
 	public function placeholder_user_id() {
 		return __( 'Portfolio owner user ID' );

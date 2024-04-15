@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Showcase_Resource extends Album_Resource {
 	/**
-	 * @param string    $resource_id
-	 * @param false     $user_id
-	 * @param array     $params
+	 * @param string $resource_id
+	 * @param false  $user_id
+	 * @param array  $params
 	 */
 	public function __construct( $resource_id, $user_id = false, $params = [] ) {
 		parent::__construct( $resource_id, $user_id, $params );

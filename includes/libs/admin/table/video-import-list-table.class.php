@@ -10,6 +10,7 @@ use Vimeotheque\Video_Import;
 
 /**
  * Class Video_Import_List_Table
+ *
  * @package Vimeotheque\Admin
  * @ignore
  */
@@ -35,7 +36,8 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Default column
-	 * @param array $item
+  *
+	 * @param array  $item
 	 * @param string $column
 	 */
 	function column_default( $item, $column ){
@@ -57,6 +59,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Checkbox column
+  *
 	 * @param array $item
 	 */
 	function column_cb( $item ){
@@ -68,6 +71,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Title column
+  *
 	 * @param array $item
 	 */
 	function column_title( $item ){	
@@ -96,6 +100,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Column for video duration
+  *
 	 * @param array $item
 	 */
 	function column_duration( $item ){		
@@ -104,6 +109,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Rating column
+  *
 	 * @param array $item 
 	 */
 	function column_likes( $item ){
@@ -117,6 +123,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Views column
+  *
 	 * @param array $item
 	 */
 	function column_views( $item ){
@@ -128,6 +135,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 	
 	/**
 	 * Date when the video was published
+  *
 	 * @param array $item
 	 */
 	function column_published( $item ){
@@ -142,6 +150,7 @@ class Video_Import_List_Table extends \WP_List_Table{
 		
 	/**
      * (non-PHPdoc)
+  *
      * @see WP_List_Table::get_bulk_actions()
      */
     function get_bulk_actions() {    	
@@ -179,6 +188,7 @@ class Video_Import_List_Table extends \WP_List_Table{
     
     /**
      * (non-PHPdoc)
+     *
      * @see WP_List_Table::prepare_items()
      */    
     function prepare_items() {

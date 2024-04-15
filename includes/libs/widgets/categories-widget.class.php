@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Categories_Widget
+ *
  * @package Vimeotheque\Widgets
  * @ignore
  */
@@ -41,6 +42,7 @@ class Categories_Widget extends \WP_Widget{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @see WP_Widget::widget()
 	 */
 	function widget( $args, $instance ){
@@ -75,11 +77,12 @@ class Categories_Widget extends \WP_Widget{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @param $new_instance
 	 * @param $old_instance
 	 *
 	 * @return array
-	 * @see WP_Widget::update()
+	 * @see    WP_Widget::update()
 	 */
 	function update($new_instance, $old_instance){
 
@@ -94,6 +97,7 @@ class Categories_Widget extends \WP_Widget{
 
 	/**
 	 * (non-PHPdoc)
+  *
 	 * @param $instance
 	 *
 	 * @see WP_Widget::form()

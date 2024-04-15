@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Helper_Admin
+ *
  * @package Vimeotheque\Admin
  * @ignore
  */
@@ -27,8 +28,8 @@ class Helper_Admin {
 	}
 
 	/**
-	 * @param array $args
-	 * @param bool $echo
+	 * @param array   $args
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -58,8 +59,8 @@ class Helper_Admin {
 	}
 
 	/**
-	 * @param array $args
-	 * @param bool $echo
+	 * @param array   $args
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -124,7 +125,7 @@ class Helper_Admin {
 
 	/**
 	 * @param $val
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -142,8 +143,8 @@ class Helper_Admin {
 
 	/**
 	 * @param $name
-	 * @param bool $selected
-	 * @param string $id
+	 * @param boolean $selected
+	 * @param string  $id
 	 *
 	 * @return string
 	 */
@@ -180,9 +181,9 @@ class Helper_Admin {
 
 	/**
 	 * @param $name
-	 * @param bool $selected
-	 * @param string $id
-	 * @param string $class
+	 * @param boolean $selected
+	 * @param string  $id
+	 * @param string  $class
 	 *
 	 * @return string
 	 */
@@ -212,9 +213,9 @@ class Helper_Admin {
 
 	/**
 	 * @param $name
-	 * @param bool $selected
-	 * @param string $id
-	 * @param string $class
+	 * @param boolean $selected
+	 * @param string  $id
+	 * @param string  $class
 	 *
 	 * @return string
 	 */
@@ -237,9 +238,9 @@ class Helper_Admin {
 
 	/**
 	 * @param $name
-	 * @param bool $selected
-	 * @param string $id
-	 * @param string $class
+	 * @param boolean $selected
+	 * @param string  $id
+	 * @param string  $class
 	 *
 	 * @return string|void
 	 */
@@ -287,8 +288,8 @@ class Helper_Admin {
 	}
 
 	/**
-	 * @param string $path
-	 * @param string $medium
+	 * @param string      $path
+	 * @param string      $medium
 	 * @param null|string $campaign
 	 *
 	 * @return string

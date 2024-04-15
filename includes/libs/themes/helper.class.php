@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -75,10 +75,10 @@ class Helper {
 	/**
 	 * Returns or outputs the thumbnail of current video in loop
 	 *
-	 * @param string $size
-	 * @param string $before
-	 * @param string $after
-	 * @param bool $echo
+	 * @param string  $size
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -120,9 +120,9 @@ class Helper {
 	/**
 	 * Output an image preloader
 	 *
-	 * @param string $size
-	 * @param string $class
-	 * @param bool $echo
+	 * @param string  $size
+	 * @param string  $class
+	 * @param boolean $echo
 	 *
 	 * @return string|void
 	 */
@@ -151,10 +151,10 @@ class Helper {
 	}
 
 	/**
-	 * @param bool $include_duration
-	 * @param string $before
-	 * @param string $after
-	 * @param bool $echo
+	 * @param boolean $include_duration
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string|void
 	 */
@@ -180,9 +180,9 @@ class Helper {
 	/**
 	 * Get the video duration
 	 *
-	 * @param string $before
-	 * @param string $after
-	 * @param bool   $echo
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string|void
 	 */
@@ -207,9 +207,9 @@ class Helper {
 	}
 
 	/**
-	 * @param string $before
-	 * @param string $after
-	 * @param bool   $echo
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string|void
 	 */
@@ -260,6 +260,7 @@ class Helper {
 
 			/**
 			 * This filter is documented in wp-includes/post-template.php
+    *
 			 * @ignore
 			 */
 			$text = apply_filters( 'the_content', $text );
@@ -305,9 +306,9 @@ class Helper {
 
 
 	/**
-	 * @param string $before
-	 * @param string $after
-	 * @param bool $echo
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string|void
 	 */
@@ -337,9 +338,9 @@ class Helper {
 	}
 
 	/**
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
-	 * @return bool|false|string|void|\WP_Error
+	 * @return boolean|false|string|void|\WP
 	 */
 	public static function get_post_permalink( $echo  = true ){
 		$video = self::current_video_post();
@@ -355,9 +356,9 @@ class Helper {
 	}
 
 	/**
-	 * @param string $before
-	 * @param string $after
-	 * @param bool $echo
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -370,9 +371,9 @@ class Helper {
 	}
 
 	/**
-	 * @param string $before
-	 * @param string $after
-	 * @param bool $echo
+	 * @param string  $before
+	 * @param string  $after
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */
@@ -412,7 +413,7 @@ class Helper {
 	}
 
 	/**
-	 * @param bool $echo
+	 * @param boolean $echo
 	 *
 	 * @return string
 	 */

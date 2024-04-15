@@ -58,7 +58,7 @@ class Widgets_Factory{
 	}
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	private function is_public(){
 		$options = $this->plugin->get_options();

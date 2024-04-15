@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Playlist
+ *
  * @package Vimeotheque\Shortcode
  * @ignore
  */
@@ -287,7 +288,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 	/**
 	 * Returns all post ids for the given categories
 	 *
-	 * @param array $categories - array of terms IDs
+	 * @param array     $categories - array of terms IDs
 	 * @param $post_type
 	 *
 	 * @return array|void

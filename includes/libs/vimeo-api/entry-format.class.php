@@ -10,8 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * All fields are detailed here: https://developer.vimeo.com/api/reference/responses/video
  *
  * Class Entry_Format
+ *
  * @package Vimeotheque
- * @link https://developer.vimeo.com/api/reference/responses/video
+ * @link    https://developer.vimeo.com/api/reference/responses/video
  * @ignore
  */
 class Entry_Format{
@@ -107,7 +108,7 @@ class Entry_Format{
 	}
 
 	/**
-	 * @return bool|mixed
+	 * @return boolean|mixed
 	 */
 	private function get_publish_date(){
 		$publish_date = false;
@@ -193,7 +194,7 @@ class Entry_Format{
 	}
 
 	/**
-	 * @return bool|string
+	 * @return boolean|string
 	 */
 	private function get_privacy(){
 		/**

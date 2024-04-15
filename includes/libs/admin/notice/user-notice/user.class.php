@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project Vimeotheque 2.0 Lite
  */
 
@@ -37,19 +37,19 @@ class User {
 	/**
 	 * Constructor
 	 *
-	 * @param string $meta_name
-	 * @param string $capability
-	 * @param int $delay
+	 * @param string  $meta_name
+	 * @param string  $capability
+	 * @param integer $delay
 	 */
 	public function __construct( $meta_name, $delay = 7, $capability = 'manage_options' ){
 		$this->capability = $capability;
 		$this->meta_name = $meta_name;
 		$this->delay = $delay;
 
-		add_action( 'admin_init', array(
+		add_action( 'admin_init', [
 			$this,
 			'check_option'
-		), 9999999 );
+		], 9999999 );
 	}
 
 	/**
@@ -82,15 +82,15 @@ class User {
 		if( isset( $_GET[ $this->meta_name ] ) ){
 			check_admin_referer( 'vimeotheque_review_action', 'vmtq_nonce' );
 
-			$answers = array(
+			$answers = [
 				'yes',
 				'later'
-			);
+			];
 			if( in_array( $_GET[ $this->meta_name ], $answers ) ){
-				$option = array(
+				$option = [
 					'answer' => $_GET[ $this->meta_name ],
 					'time' => time()
-				);
+				];
 				update_user_meta( get_current_user_id(), $this->meta_name, $option );
 			}
 		}
@@ -114,7 +114,7 @@ class User {
 	 * @return array
 	 */
 	public function get_query_arg( $type = 'no' ){
-		$r = array();
+		$r = [];
 		$r[ $this->meta_name ] = $type;
 		$r[ 'vmtq_nonce' ] = wp_create_nonce( 'vimeotheque_review_action' );
 		return $r;

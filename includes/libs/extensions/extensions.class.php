@@ -1,6 +1,6 @@
 <?php
 /**
- * @author CodeFlavors
+ * @author  CodeFlavors
  * @project codeflavors-vimeo-video-post-lite
  */
 
@@ -14,8 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Extensions
+ *
  * @package Vimeotheque\Extensions
- * @since 2.1
+ * @since   2.1
  * @ignore
  */
 class Extensions {

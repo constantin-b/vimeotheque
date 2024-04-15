@@ -12,31 +12,36 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin options management class
  * All plugin options should be retrieved by using this class
  * Implements Singleton pattern
+ *
  * @ignore
  */
 class Options{
 	
 	/**
 	 * Option defaults, stored as array
+  *
 	 * @var array
 	 */
 	private $defaults;
 	/**
 	 * Database option name
+  *
 	 * @var string
 	 */
 	private $option_name;
 	/**
 	 * Stores options retrieved from plugin options for the first time.
 	 * Every subsequent request will return this value instead of making a new query.
+  *
 	 * @var array
 	 */
 	private $options;
 
 	/**
 	 * Private constructor. Use CVM_Plugin_Options::get_instance()
+  *
 	 * @param string $option_name
-	 * @param array $defaults
+	 * @param array  $defaults
 	 */
 	public function __construct( $option_name, $defaults = [] ){
 		$this->defaults = $defaults;
@@ -55,8 +60,8 @@ class Options{
 	 *
 	 * Returns an array containing all the options.
 	 *
-	 * @param bool $refresh     Get from cache (false) or retrieve from database (true).
-	 * @param array $exclude    Array containing the name of excluded options.
+	 * @param boolean $refresh Get from cache (false) or retrieve from database (true).
+	 * @param array   $exclude Array containing the name of excluded options.
 	 *
 	 * @return array
 	 */
@@ -104,6 +109,7 @@ class Options{
 
 	/**
 	 * Allows updating of options. 
+  *
 	 * @param array $values
 	 */
 	public function update_options( $values ){
@@ -112,7 +118,8 @@ class Options{
 	
 	/**
 	 * Wrapper for WP function that retrieves option
-	 * @return array|bool
+  *
+	 * @return array|boolean
 	 */
 	private function _get_wp_option(){
 		return get_option( $this->option_name, $this->defaults );
@@ -120,8 +127,9 @@ class Options{
 	
 	/**
 	 * Wrapper for WP function that updates option
-	 * @param array $values - new values to be set up in option
-	 * @return bool
+  *
+	 * @param  array $values - new values to be set up in option
+	 * @return boolean
 	 */
 	private function _update_wp_option( $values ){
 		return update_option( $this->option_name , $values );
@@ -129,6 +137,7 @@ class Options{
 
 	/**
 	 * Returns option name
+  *
 	 * @return string
 	 */
 	public function get_option_name(){

@@ -12,12 +12,14 @@ use Vimeotheque\Post\Post_Type;
 
 /**
  * Meta panels callbacks
+ *
  * @author CodeFlavors
  * @ignore
  */
 class Posts_Import_Meta_Panels{
 	/**
 	 * Stores the Post_Type object
+  *
 	 * @var Post_Type
 	 */
 	private $cpt;
@@ -113,6 +115,7 @@ class Posts_Import_Meta_Panels{
 		    <?php submit_button(
                     /**
                      * Filter import button text.
+                     *
                      * @ignore
                      *
                      * @param string $text  The button text
@@ -233,6 +236,7 @@ class Posts_Import_Meta_Panels{
     private function get_post_type(){
 	    /**
 	     * Filter import meta panel post type
+      *
          * @ignore
          *
          * @param string $post_type The post type
@@ -251,6 +255,7 @@ class Posts_Import_Meta_Panels{
 	private function get_tag_taxonomy(){
 		/**
 		 * Filter meta panel tag taxonomy
+   *
          * @ignore
          *
          * @param string $taxonomy  The taxonomy
