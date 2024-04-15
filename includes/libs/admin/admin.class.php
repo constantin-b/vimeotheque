@@ -375,7 +375,7 @@ class Admin{
 		}
 
 		$policy_content = sprintf(
-			__( 'By using the embed feature of this plugin you will be agreeing to Vimeo\'s privacy policy. More details can be found here: %s', 'cvm-video' ),
+			__( 'By using the embed feature of this plugin you will be agreeing to Vimeo\'s privacy policy. More details can be found here: %s', 'codeflavors-vimeo-video-post-lite' ),
 			'https://vimeo.com/privacy'
 		);
 

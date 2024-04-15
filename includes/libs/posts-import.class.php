@@ -153,7 +153,7 @@ class Posts_Import{
 					$error = new WP_Error(
 						'cvm_import_skip_private_video',
 						sprintf(
-							__( 'Skipped private video having ID %s because of plugin settings.', 'cvm-video' ),
+							__( 'Skipped private video having ID %s because of plugin settings.', 'codeflavors-vimeo-video-post-lite' ),
 							$video['video_id']
 						),
 						[

@@ -327,7 +327,7 @@ use Vimeotheque\Helper;
 						<tr>
 							<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 							<td>
-								<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>
+								<label for="cvm_aspect_ratio"><?php _e('Aspect ratio', 'codeflavors-vimeo-video-post-lite');?> :</label>
 								<?php 
 									$args = [
 										'name' 		=> 'aspect_ratio',
@@ -623,7 +623,7 @@ use Vimeotheque\Helper;
 			<!-- /Tab auth options -->
 
 			<?php foreach( $extra_tabs as $tab_id => $hook ):?>
-                <div id="<?php esc_attr_e( $tab_id );?>" class="cvwp-panel hide-if-js">
+                <div id="<?php echo esc_attr( $tab_id );?>" class="cvwp-panel hide-if-js">
 					<?php call_user_func( $hook['callback'] );?>
                 </div>
 			<?php endforeach;?>

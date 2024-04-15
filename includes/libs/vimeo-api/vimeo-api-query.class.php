@@ -104,7 +104,7 @@ class Vimeo_Api_Query extends Vimeo {
 			// send a debug message for any client listening to plugin messages
 			Helper::debug_message(
 				sprintf(
-					__( 'Endpoint API returned an error: %s.' ),
+					__( 'Endpoint API returned an error: %s.', 'codeflavors-vimeo-video-post-lite'),
 					$endpoint->get_error_message()
 				)
 			);
@@ -115,7 +115,7 @@ class Vimeo_Api_Query extends Vimeo {
 		// send a debug message for any client listening to plugin messages
 		Helper::debug_message(
 			sprintf(
-				__( 'Making %1$s remote request to: %2$s.' ),
+				__( 'Making %1$s remote request to: %2$s.', 'codeflavors-vimeo-video-post-lite' ),
 				$api_resource->get_request_method(),
 				$endpoint
 			)
@@ -147,7 +147,7 @@ class Vimeo_Api_Query extends Vimeo {
 			// send a debug message for any client listening to plugin messages
 			Helper::debug_message(
 				sprintf(
-					__( 'The request is sending the following variables: %s.' ),
+					__( 'The request is sending the following variables: %s.', 'codeflavors-vimeo-video-post-lite' ),
 					implode( ', ', array_keys( $request_args['body'] ) )
 				)
 			);
@@ -160,7 +160,7 @@ class Vimeo_Api_Query extends Vimeo {
 			// send a debug message for any client listening to plugin messages
 			Helper::debug_message(
 				sprintf( 
-					__( 'Current rate limit: %1$s (%2$s remaining). Limit reset time set at %3$s.' ), 
+					__( 'Current rate limit: %1$s (%2$s remaining). Limit reset time set at %3$s.', 'codeflavors-vimeo-video-post-lite' ),
 					$rate_limit, 
 					wp_remote_retrieve_header( $request , 'x-ratelimit-remaining' ),
 					wp_remote_retrieve_header( $request , 'x-ratelimit-reset' )

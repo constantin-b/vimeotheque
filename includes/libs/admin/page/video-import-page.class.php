@@ -362,7 +362,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			
 			<% if( status === 'queued' ){ %>
 			<a href=\"#\" class=\"button single-import\">
-				" . __( 'Import now!' ) . "
+				" . __( 'Import now!', 'codeflavors-vimeo-video-post-lite' ) . "
 			</a>
 			<% } %>
 		</div>

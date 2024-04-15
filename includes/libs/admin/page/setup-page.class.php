@@ -330,7 +330,7 @@ class Setup_Page extends Page_Abstract implements Page_Interface {
                     if(empty( $options['vimeo_consumer_key'] ) || empty( $options['vimeo_secret_key'] )):
                 ?>
                 <div class="oauth-instructions">
-                    <a href="#" class="toggler" data-toggle="#oauth-instructions" data-show_text="<?php esc_attr_e('View instructions ');?>"  data-hide_text="<?php esc_attr_e('Hide instructions ');?>"><?php _e( 'View instructions','codeflavors-vimeo-video-post-lite' );?></a>
+                    <a href="#" class="toggler" data-toggle="#oauth-instructions" data-show_text="<?php esc_attr_e('View instructions ', 'codeflavors-vimeo-video-post-lite');?>"  data-hide_text="<?php esc_attr_e('Hide instructions ', 'codeflavors-vimeo-video-post-lite');?>"><?php _e( 'View instructions','codeflavors-vimeo-video-post-lite' );?></a>
 
                     <div id="oauth-instructions">
                         <p><?php _e( 'In order to be able to import videos using Vimeotheque, you must register a new Vimeo App (requires a Vimeo account).', 'codeflavors-vimeo-video-post-lite' );?></p>

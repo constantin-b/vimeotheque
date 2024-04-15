@@ -120,6 +120,6 @@ class Album_Resource extends Resource_Abstract implements Resource_Interface {
 	 * @return boolean|string|void
 	 */
 	public function placeholder_user_id() {
-		return __( 'Album owner user ID' );
+		return __( 'Album owner user ID', 'codeflavors-vimeo-video-post-lite' );
 	}
 }

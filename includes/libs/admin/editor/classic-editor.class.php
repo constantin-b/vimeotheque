@@ -196,10 +196,10 @@ class Classic_Editor{
 				<th><label for="cvm_aspect_ratio"><?php _e('Player size', 'codeflavors-vimeo-video-post-lite');?>:</label></th>
 				<td>
 					<?php if( $this->is_option_override() ):?>
-						<?php $this->option_override( 'width', sprintf( __( '%1$s X %2$s px' ), $plugin_options['width'], Helper::calculate_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
+						<?php $this->option_override( 'width', sprintf( __( '%1$s X %2$s px', 'codeflavors-vimeo-video-post-lite' ), $plugin_options['width'], Helper::calculate_player_height( $plugin_options['aspect_ratio'], $plugin_options['width'] ) ) );?>
 						<?php $this->option_override( 'aspect_ratio', sprintf( __( '/ Aspect ratio: %s', 'codeflavors-vimeo-video-post-lite' ), $plugin_options['aspect_ratio'] ) );?>
 					<?php else: // is not option override?>
-						<label for="cvm_aspect_ratio"><?php _e('Aspect ratio');?> :</label>
+						<label for="cvm_aspect_ratio"><?php _e('Aspect ratio', 'codeflavors-vimeo-video-post-lite');?> :</label>
 						<?php
 						$args = [
 							'name' => 'aspect_ratio',
@@ -416,7 +416,7 @@ class Classic_Editor{
 		<p><?php _e('Add video/playlist into post.', 'codeflavors-vimeo-video-post-lite');?>
 		<p>
 		<a class="button" href="#" id="cvm-shortcode-2-post"
-		   title="<?php _e('Add shortcode');?>"><?php _e('Add video shortcode');?></a>
+		   title="<?php _e('Add shortcode', 'codeflavors-vimeo-video-post-lite');?>"><?php _e('Add video shortcode', 'codeflavors-vimeo-video-post-lite');?></a>
 		<?php
 	}
 
@@ -780,7 +780,7 @@ class Classic_Editor{
                     'cvm_thumb_message',
                     [
 					    'loading'       => __( '... importing thumbnail', 'codeflavors-vimeo-video-post-lite' ),
-					    'still_loading' => __( '... hold on, still loading' )
+					    'still_loading' => __( '... hold on, still loading', 'codeflavors-vimeo-video-post-lite' )
 				    ]
                 );
 			}

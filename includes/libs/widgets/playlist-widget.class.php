@@ -133,7 +133,7 @@ class Playlist_Widget extends WP_Widget {
 				}
 				?>
                 <li>
-                    <a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php esc_attr_e( apply_filters( 'the_title', $post->post_title ) ); ?>">
+                    <a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo esc_attr( apply_filters( 'the_title', $post->post_title ) ); ?>">
                         <?php echo $thumbnail; ?><br/>
                         <?php echo apply_filters( 'post_title', $post->post_title ); ?>
                     </a>

@@ -186,7 +186,7 @@ class Resource_Abstract implements Resource_Interface {
 			return new \WP_Error(
 				'cvm-unknown-sort-options',
 				sprintf(
-					__('Sort option "%s" is not available in feed resource.'),
+					__('Sort option "%s" is not available in feed resource.', 'codeflavors-vimeo-video-post-lite'),
 					$this->params['sort']
 				)
 			);

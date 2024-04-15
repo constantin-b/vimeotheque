@@ -52,7 +52,7 @@ class Ajax_Actions{
 		$this->__check_referer( 'api_query' );
 		if( !current_user_can( 'edit_posts' ) ){
 			header('HTTP/1.1 401 Unauthorized');
-			_e( 'You do not have the neccessary permissions.', 'cvm_vimeo' );
+			_e( 'You do not have the neccessary permissions.', 'codeflavors-vimeo-video-post-lite' );
 			die();
 		}
 		
@@ -114,7 +114,7 @@ class Ajax_Actions{
 	public function import_thumbnail(){		
 		if( !current_user_can( 'upload_files' ) ){
 			header('HTTP/1.1 401 Unauthorized');
-			_e( 'You do not have the neccessary permissions.', 'cvm_vimeo' );
+			_e( 'You do not have the neccessary permissions.', 'codeflavors-vimeo-video-post-lite' );
 			die();
 		}
 		
@@ -147,7 +147,7 @@ class Ajax_Actions{
 		$this->__check_referer( 'list_view_import_videos' );
 		if( !current_user_can( 'edit_posts' ) ){
 			header('HTTP/1.1 401 Unauthorized');
-			_e( 'You do not have the neccessary permissions.', 'cvm_vimeo' );
+			_e( 'You do not have the neccessary permissions.', 'codeflavors-vimeo-video-post-lite' );
 			die();
 		}
 
@@ -196,7 +196,7 @@ class Ajax_Actions{
 		$this->__check_referer( 'api_query' );
 		if( !current_user_can( 'edit_posts' ) ){
 			header('HTTP/1.1 401 Unauthorized');
-			_e( 'You do not have the neccessary permissions.', 'cvm_vimeo' );
+			_e( 'You do not have the neccessary permissions.', 'codeflavors-vimeo-video-post-lite' );
 			die();
 		}
 
@@ -305,7 +305,7 @@ class Ajax_Actions{
 	public function __check_referer( $key ){
 		$action = $this->__get_action_data( $key );
 		if( !$action ){
-			wp_die( sprintf( __( 'Action %s not found. Please review!' ), $key ) );
+			wp_die( sprintf( __( 'Action %s not found. Please review!', 'codeflavors-vimeo-video-post-lite' ), $key ) );
 		}
 		
 		check_admin_referer( $action['nonce']['action'], $action['nonce']['name'] );		
@@ -323,7 +323,7 @@ class Ajax_Actions{
 		if( array_key_exists( $key, $actions ) ){
 			return $actions[ $key ];
 		}else{
-			trigger_error( sprintf( __( 'Action %s not found.'), $key ), E_USER_WARNING);
+			trigger_error( sprintf( __( 'Action %s not found.', 'codeflavors-vimeo-video-post-lite'), $key ), E_USER_WARNING);
 		}
 	}
 

@@ -37,14 +37,14 @@ vimeotheque_get_template_part( 'single-video/media', 'video' );
             the_content(
                 sprintf(
                 /* translators: %s: Post title. */
-                    __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'vimeotheque' ),
+                    __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'codeflavors-vimeo-video-post-lite' ),
                     get_the_title()
                 )
             );
 
             wp_link_pages(
                 [
-                    'before'      => '<div class="page-links">' . __( 'Pages:', 'vimeotheque' ),
+                    'before'      => '<div class="page-links">' . __( 'Pages:', 'codeflavors-vimeo-video-post-lite' ),
                     'after'       => '</div>',
                     'link_before' => '<span class="page-number">',
                     'link_after'  => '</span>',
@@ -63,7 +63,7 @@ vimeotheque_get_template_part( 'single-video/media', 'video' );
             edit_post_link(
                 sprintf(
                 /* translators: %s: Name of current post */
-                    __( 'Edit<span class="screen-reader-text"> "%s"</span>', 'twentysixteen' ),
+                    __( 'Edit<span class="screen-reader-text"> "%s"</span>', 'codeflavors-vimeo-video-post-lite' ),
                     get_the_title()
                 ),
                 '<span class="edit-link">',

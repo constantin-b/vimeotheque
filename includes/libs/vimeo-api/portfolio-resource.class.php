@@ -100,6 +100,6 @@ class Portfolio_Resource extends Resource_Abstract implements Resource_Interface
 	 * @return boolean|string|void
 	 */
 	public function placeholder_user_id() {
-		return __( 'Portfolio owner user ID' );
+		return __( 'Portfolio owner user ID', 'codeflavors-vimeo-video-post-lite' );
 	}
 }
