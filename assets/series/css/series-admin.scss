@@ -1,0 +1,164 @@
+@import './colors';
+@import './playlist_controls';
+@import './content_select';
+@import './themes';
+@import './item_list';
+
+#vimeotheque-series-videos{
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+/**
+ * The posts modal class.
+ */
+.vimeotheque-posts-list-modal{
+  /**
+   * Alter the header display.
+   */
+  .components-modal__header{
+    .components-modal__header-heading-container{
+      flex-grow: initial!important;
+    }
+  }
+}
+
+.vimeotheque-series-items-list{
+
+  .vimeotheque-series-list-item{
+
+    margin-bottom: 15px;
+
+    &.selectable{
+      cursor: pointer;
+
+      &.selected{
+        transform: scale(.99, .99);
+      }
+    }
+
+    .column{
+      &.column-{
+        &title{
+          font-size: 1.2em;
+          font-weight: bold;
+          align-self: flex-start;
+          padding: 5px 10px;
+        }
+      }
+    }
+
+    .thumbnail{
+
+      display: block;
+      position: relative;
+      width: 200px;
+      height: 123px;
+      overflow: hidden;
+
+      &.video-preloaded{
+        background-color: #000000;
+      }
+
+      img{
+        max-width: 200px;
+        border-radius: 7px;
+        box-shadow: 1px 1px 2px #5b5b5b;
+        //filter: grayscale(100%);
+      }
+
+      .image-preload{
+        width: 200px;
+        height:123px;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        background-color: #e0e0e0;
+      }
+
+      .duration{
+        display: inline-block;
+        position: absolute;
+        bottom:10px;
+        right:10px;
+        background: rgba(0, 0, 0, 0.50);
+        color:#FFFFFF;
+        padding:1px 3px;
+        border-radius: 3px;
+      }
+
+    }
+
+    /**
+     * Action links
+     */
+    .action{
+
+      text-decoration: none!important;
+
+      &:focus,
+      &:active{
+        outline: none!important;
+        box-shadow: none!important;
+      }
+
+      &.action-{
+        /**
+         * Item drag to reorder list.
+         */
+        &drag{
+          color: #8d8d8d!important;
+          cursor: move!important;
+        }
+        /**
+         * Selected item.
+         */
+        &selected{
+          color: $blue!important;
+        }
+        /**
+         * Remove item action.
+         */
+        &remove{
+          color: $red!important;
+        }
+
+      }
+    }
+
+  }
+
+  .no-results{
+    text-align: center;
+    font-size: 1.5em;
+    margin-top:100px;
+  }
+
+  .action-bar{
+    position: fixed;
+    bottom: 0;
+    left:0px;
+    width: 100%;
+    background-color: #E8F0FE;
+    box-shadow: 2px 0px 7px #5b5b5b;
+
+    font-size: 1em;
+
+    .inside{
+      padding:10px;
+    }
+
+    .actions{
+      .components-flex-item{
+          vertical-align: middle;
+      }
+
+      button{
+        font-size: 1em;
+      }
+
+    }
+
+  }
+
+}

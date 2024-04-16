@@ -234,6 +234,9 @@ class Plugin{
 
 			}, -999, 3
 		);
+
+        require VIMEOTHEQUE_PATH . 'includes/libs/series/Plugin.php';
+
 	}
 
 	public function init(){

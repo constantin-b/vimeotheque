@@ -1,0 +1,30 @@
+.vimeotheque-series-themes{
+
+  @import "playlist_controls";
+
+  .themes-list{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+
+    .theme{
+
+      max-width: 200px;
+      width:100%;
+      text-align: center;
+      border: 3px transparent solid;
+
+      img{
+        max-width: 200px;
+        width: 100%;
+      }
+
+      &.selected{
+        border: 3px #3274F3 solid;
+      }
+    }
+  }
+
+
+
+}
