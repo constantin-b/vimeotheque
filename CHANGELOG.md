@@ -1,5 +1,11 @@
 *** Vimeotheque Lite Changelog ***
 
+- Version 2.3
+- Solved issues with translations missing domain or having mismatched domain name;
+- Updated videos playlist script to set a CSS class on the currently running video from the playlist;
+- Applied and implemented suggestion from PHP Code Sniffer;
+- Solved deprecation notices in PHP 8;
+
 2024-04-03 - Version 2.2.9
 - Added "embed_url" to video Rest API fields;
 - Introduced Query Monitor support;
