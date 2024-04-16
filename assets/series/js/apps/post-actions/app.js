@@ -51,7 +51,7 @@ const PostActionsApp = props => {
                             >
                                 <ButtonSave
                                     enabled={ 'draft' != post.status }
-                                    text={ 'draft' == post.status ? __('Save draft', 'vimeotheque-series') : __( 'Switch to draft', 'vimeotheque-series' ) }
+                                    text={ 'draft' == post.status ? __('Save draft', 'codeflavors-vimeo-video-post-lite') : __( 'Switch to draft', 'codeflavors-vimeo-video-post-lite' ) }
                                     isPrimary={false}
                                     isSecondary={true}
                                     onClick={
@@ -67,7 +67,7 @@ const PostActionsApp = props => {
                                     enabled={ 'draft' == post.status }
                                     isPrimary={true}
                                     isSecondary={false}
-                                    text={ 'draft' == post.status ? __('Publish', 'vimeotheque-series') : __('Update', 'vimeotheque-series') }
+                                    text={ 'draft' == post.status ? __('Publish', 'codeflavors-vimeo-video-post-lite') : __('Update', 'codeflavors-vimeo-video-post-lite') }
                                     onClick={
                                         () => {
                                             dispatch('core').editEntityRecord( 'postType', 'series', getEditedPostId(), { 'status': 'publish' })

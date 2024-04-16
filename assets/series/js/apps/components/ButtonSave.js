@@ -51,7 +51,7 @@ const ButtonSave = props => {
             if( isSaving ){
                 return (
                     <>
-                        <Spinner /> {__('Saving...', 'vimeotheque-series')}
+                        <Spinner /> {__('Saving...', 'codeflavors-vimeo-video-post-lite')}
                     </>
                 )
             }
@@ -80,7 +80,7 @@ const ButtonSave = props => {
 
 ButtonSave.defaultProps = {
     enabled: false,
-    text: __('Save', 'vimeotheque-series'),
+    text: __('Save', 'codeflavors-vimeo-video-post-lite'),
     isPrimary: true,
     isSecondary: false,
     onClick: () => {},

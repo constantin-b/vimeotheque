@@ -97,7 +97,7 @@ const VideoList = props => {
             {
                 items.length == 0 &&
                 <>
-                    {__('Choose some videos to display into the playlist.', 'vimeotheque-series')}
+                    {__('Choose some videos to display into the playlist.', 'codeflavors-vimeo-video-post-lite')}
                 </>
 
             }

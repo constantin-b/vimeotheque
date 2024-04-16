@@ -43,7 +43,7 @@ const Search = props => {
         <SearchControl
             value={search}
             onChange={setSearch}
-            placeholder={__('Type and hit Enter', 'vimeotheque-series')}
+            placeholder={__('Type and hit Enter', 'codeflavors-vimeo-video-post-lite')}
             onKeyPress={
                 event => {
                     if( event.key === 'Enter' ){

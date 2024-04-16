@@ -31,7 +31,7 @@ const PlaybackTime = props => {
             {
                 'posts' == displayContent && totalTime > 0 &&
 					<div>
-						{__('Active playback time: ', 'vimeotheque-series')}
+						{__('Active playback time: ', 'codeflavors-vimeo-video-post-lite')}
 						<strong>
                             {new Date(totalTime * 1000).toISOString().slice(11, 19)}
 						</strong>

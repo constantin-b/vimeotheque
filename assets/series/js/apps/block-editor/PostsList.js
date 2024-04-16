@@ -126,32 +126,32 @@ const PostsList = props => {
 				className='vimeotheque-item header'
 			>
 				<FlexItem>
-					<strong>{__('ID', 'vimeotheque-series')}</strong>
+					<strong>{__('ID', 'codeflavors-vimeo-video-post-lite')}</strong>
 				</FlexItem>
 				<FlexItem
 					isBlock={true}
 				>
-					<strong>{__('Name', 'vimeotheque-series')}</strong>
+					<strong>{__('Name', 'codeflavors-vimeo-video-post-lite')}</strong>
 				</FlexItem>
 				<FlexItem
 					isBlock={true}
 				>
-					<strong>{__('Status', 'vimeotheque-series')}</strong>
+					<strong>{__('Status', 'codeflavors-vimeo-video-post-lite')}</strong>
 				</FlexItem>
 				<FlexItem
 					isBlock={true}
 				>
-					<strong>{__('Type', 'vimeotheque-series')}</strong>
+					<strong>{__('Type', 'codeflavors-vimeo-video-post-lite')}</strong>
 				</FlexItem>
 				<FlexItem
 					isBlock={true}
 				>
-					<strong>{__('Theme', 'vimeotheque-series')}</strong>
+					<strong>{__('Theme', 'codeflavors-vimeo-video-post-lite')}</strong>
 				</FlexItem>
 				<FlexItem
 					isBlock={true}
 				>
-					<strong>{__('Actions', 'vimeotheque-series')}</strong>
+					<strong>{__('Actions', 'codeflavors-vimeo-video-post-lite')}</strong>
 				</FlexItem>
 			</Flex>
 
@@ -168,8 +168,8 @@ const PostsList = props => {
 						<p>
 							{
 								search !== ''
-									? __('No matching results! Try another search.', 'vimeotheque-series')
-									: __( 'Nothing found.', 'vimeotheque-series' )
+									? __('No matching results! Try another search.', 'codeflavors-vimeo-video-post-lite')
+									: __( 'Nothing found.', 'codeflavors-vimeo-video-post-lite' )
 							}
 						</p>
 					</div>
@@ -178,7 +178,7 @@ const PostsList = props => {
 			{
 				isLoading &&
 				<>
-					<Spinner /> {__('Loading, please wait...', 'vimeotheque-series')}
+					<Spinner /> {__('Loading, please wait...', 'codeflavors-vimeo-video-post-lite')}
 				</>
 			}
 
@@ -201,7 +201,7 @@ const PostsList = props => {
 								<FlexItem
 									isBlock={true}
 								>
-									{ sprintf( __( 'Selected playlist ID %d: "%s"', 'vimeotheque-series' ), selected.id, selected.title.rendered || __('(no title)', 'vimeotheque-series') ) }
+									{ sprintf( __( 'Selected playlist ID %d: "%s"', 'codeflavors-vimeo-video-post-lite' ), selected.id, selected.title.rendered || __('(no title)', 'codeflavors-vimeo-video-post-lite') ) }
 								</FlexItem>
 
 								<FlexItem>
@@ -209,7 +209,7 @@ const PostsList = props => {
 										isPrimary={true}
 										onClick={onSelect}
 									>
-										{__('Set playlist', 'vimeotheque-series')}
+										{__('Set playlist', 'codeflavors-vimeo-video-post-lite')}
 									</Button>
 								</FlexItem>
 							</Flex>

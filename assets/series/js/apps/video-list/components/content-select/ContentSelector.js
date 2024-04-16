@@ -37,7 +37,7 @@ const ContentSelector = props => {
             isLink={true}
             onClick={() => setContent('posts')}
         >
-            {__('A playlist made of individual videos that I choose myself', 'vimeotheque-series')}
+            {__('A playlist made of individual videos that I choose myself', 'codeflavors-vimeo-video-post-lite')}
         </Button>
     ]
 
@@ -51,7 +51,7 @@ const ContentSelector = props => {
                 className="step-1">
 
                 <h2>
-                    {__('What will you build today?', 'vimeotheque-series')}
+                    {__('What will you build today?', 'codeflavors-vimeo-video-post-lite')}
                 </h2>
 
                 <p>

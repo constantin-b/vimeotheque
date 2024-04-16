@@ -103,17 +103,17 @@ class Playlist {
             if( empty( $this->content_type ) ){
                 $error->add(
                     'vimeotheque-series-no-content-selected',
-                    esc_html__( 'No content type selected for the playlist.', 'vimeotheque-series' )
+                    esc_html__( 'No content type selected for the playlist.', 'codeflavors-vimeo-video-post-lite' )
                 );
             }else if( 'posts' == $this->content_type && !$this->items ){
                 $error->add(
                     'vimeotheque-series-no-videos-selected',
-                    esc_html__( 'No videos selected for the playlist.', 'vimeotheque-series' )
+                    esc_html__( 'No videos selected for the playlist.', 'codeflavors-vimeo-video-post-lite' )
                 );
             }else{
                 $error->add(
                     'vimeotheque-series-playlist-not-loaded',
-                    esc_html__('Playlist not loaded.', 'vimeotheque-series' )
+                    esc_html__('Playlist not loaded.', 'codeflavors-vimeo-video-post-lite' )
                 );
             }
 
@@ -183,7 +183,7 @@ class Playlist {
                     '<hr /><h3>%s</h3>',
                     esc_html__(
                         'Playlist not loaded',
-                        'vimeotheque-series'
+                        'codeflavors-vimeo-video-post-lite'
                     )
                 );
                 $result .= sprintf(
@@ -195,7 +195,7 @@ class Playlist {
                     '<p><em>%s</em></p><hr />',
                     esc_html__(
                         'This notice is displayed only for playlist editors!',
-                        'vimeotheque-series'
+                        'codeflavors-vimeo-video-post-lite'
                     )
                 );
             }

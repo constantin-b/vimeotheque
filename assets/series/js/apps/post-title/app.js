@@ -52,7 +52,7 @@ const PostTitleApp = props => {
             {
                 isLoading &&
                     <>
-                        <Spinner /> {__('Loading the post, please wait...', 'vimeotheque-series')}
+                        <Spinner /> {__('Loading the post, please wait...', 'codeflavors-vimeo-video-post-lite')}
                     </>
             }
             {

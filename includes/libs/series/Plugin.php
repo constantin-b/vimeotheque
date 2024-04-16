@@ -60,7 +60,7 @@ class Plugin {
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'vimeotheque-series' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Plugin {
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'vimeotheque-series' ), '2.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Something went wrong.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 	}
 
 	/**
@@ -127,7 +127,7 @@ class Plugin {
         $this->themes = new Themes\Themes(
             new Theme(
                   Helper::get_path() . 'themes-series/default/theme.php',
-                __( 'Default', 'vimeotheque-series' ),
+                __( 'Default', 'codeflavors-vimeo-video-post-lite' ),
                 'assets/js/script.js',
                 'assets/css/style.css'
             )
@@ -136,7 +136,7 @@ class Plugin {
         $this->themes->register_theme(
             new Theme(
                 Helper::get_path() . 'themes-series/list/theme.php',
-                __( 'List', 'vimeotheque-series' ),
+                __( 'List', 'codeflavors-vimeo-video-post-lite' ),
                 'assets/js/script.js',
                 'assets/css/style.css'
             )
@@ -146,7 +146,7 @@ class Plugin {
         $this->metaboxes = new Metabox_Factory(
             new Video_List_Metabox(
                 'vimeotheque-series-video-list-metabox',
-                esc_html__( 'Videos', 'vimeotheque-series' ),
+                esc_html__( 'Videos', 'codeflavors-vimeo-video-post-lite' ),
                 $this->post_type->get_post_name()
             )
         );
@@ -154,7 +154,7 @@ class Plugin {
         $this->metaboxes->register_meta_box(
             new Theme_Metabox(
                 'vimeotheque-series-theme-metabox',
-                esc_html__( 'Theme', 'vimeotheque-series' ),
+                esc_html__( 'Theme', 'codeflavors-vimeo-video-post-lite' ),
                 $this->post_type->get_post_name()
             )
         );
@@ -162,7 +162,7 @@ class Plugin {
         $this->metaboxes->register_meta_box(
             new Post_Actions(
                 'vimeotheque-series-post-actions-metabox',
-                esc_html__( 'Actions', 'vimeotheque-series' ),
+                esc_html__( 'Actions', 'codeflavors-vimeo-video-post-lite' ),
                 $this->post_type->get_post_name(),
                 'side'
             )
@@ -171,7 +171,7 @@ class Plugin {
         $this->metaboxes->register_meta_box(
             new Player_Metabox(
                 'vimeotheque-series-player-metabox',
-                esc_html__('Video Player', 'vimeotheque-series'),
+                esc_html__('Video Player', 'codeflavors-vimeo-video-post-lite'),
                 $this->post_type->get_post_name(),
                 'side'
             )

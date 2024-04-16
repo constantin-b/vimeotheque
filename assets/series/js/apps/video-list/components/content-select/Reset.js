@@ -32,19 +32,19 @@ const Reset = props => {
                 onClick={ () =>  setShowConfirm( true ) }
                 showTooltip={ true }
                 tooltipPosition='top'
-                label={ __('Reset content settings', 'vimeotheque-series') }
+                label={ __('Reset content settings', 'codeflavors-vimeo-video-post-lite') }
             />
 
             {
                 showConfirm &&
                     <Modal
-                        title={__( 'Reset playlist content', 'vimeotheque-series' )}
+                        title={__( 'Reset playlist content', 'codeflavors-vimeo-video-post-lite' )}
                         onRequestClose={ () => setShowConfirm(false) }
                         isFullScreen={false}
                         shouldCloseOnClickOutside={true}
                         shouldCloseOnEsc={true}
                     >
-                        <p>{ __('This action will reset all content settings and will allow you to start over with new settings.', 'vimeotheque-series') }</p>
+                        <p>{ __('This action will reset all content settings and will allow you to start over with new settings.', 'codeflavors-vimeo-video-post-lite') }</p>
                         <Flex
                             justify='flex-end'
                         >
@@ -53,7 +53,7 @@ const Reset = props => {
                                     isSecondary={true}
                                     onClick={ () => setShowConfirm(false) }
                                 >
-                                    {__('Cancel', 'vimeotheque-series')}
+                                    {__('Cancel', 'codeflavors-vimeo-video-post-lite')}
                                 </Button>
                             </FlexItem>
                             <FlexItem>
@@ -72,7 +72,7 @@ const Reset = props => {
                                         }
                                     }
                                 >
-                                    {__('Proceed', 'vimeotheque-series')}
+                                    {__('Proceed', 'codeflavors-vimeo-video-post-lite')}
                                 </Button>
                             </FlexItem>
                         </Flex>

@@ -34,8 +34,8 @@ const ListControls = props => {
 
     const shuffleLabel = () => {
         return shuffle ?
-            __('Disable shuffle', 'vimeotheque-series'):
-            __('Enable shuffle for the playlist', 'vimeotheque-series')
+            __('Disable shuffle', 'codeflavors-vimeo-video-post-lite'):
+            __('Enable shuffle for the playlist', 'codeflavors-vimeo-video-post-lite')
     }
 
     return (
@@ -56,7 +56,7 @@ const ListControls = props => {
                                 {
                                     applyFilters(
                                         'vimeotheque-series-button-add-content-text',
-                                        __( 'Add videos', 'vimeotheque-series' ),
+                                        __( 'Add videos', 'codeflavors-vimeo-video-post-lite' ),
                                         displayContent
                                     )
                                 }

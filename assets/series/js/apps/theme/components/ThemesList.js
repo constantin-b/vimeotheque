@@ -40,7 +40,7 @@ const ThemesList = props => {
                 {
                     isLoading &&
                     <>
-                        <Spinner/> {__('Loading themes, please wait...', 'vimeotheque-series')}
+                        <Spinner/> {__('Loading themes, please wait...', 'codeflavors-vimeo-video-post-lite')}
                     </>
                 }
 

@@ -58,7 +58,7 @@ const VideoListApp = props => {
             {
                 isLoading &&
                     <>
-                        <Spinner /> {__( 'Loading the settings, please wait...', 'vimeotheque-series' )}
+                        <Spinner /> {__( 'Loading the settings, please wait...', 'codeflavors-vimeo-video-post-lite' )}
                     </>
             }
 

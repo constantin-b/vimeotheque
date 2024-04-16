@@ -45,7 +45,7 @@ const Initialize = props => {
 					isBlock={false}
 				>
 					<TextControl
-						label={ __( 'Maximum width', 'vimeotheque-series' ) }
+						label={ __( 'Maximum width', 'codeflavors-vimeo-video-post-lite' ) }
 						type="number"
 						step={5}
 						value={width}
@@ -67,7 +67,7 @@ const Initialize = props => {
 					isBlock={true}
 				>
 					<RangeControl
-						label={__('Volume', 'vimeotheque-series')}
+						label={__('Volume', 'codeflavors-vimeo-video-post-lite')}
 						currentInput='35'
 						value={volume}
 						marks={[

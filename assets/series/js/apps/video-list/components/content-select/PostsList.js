@@ -131,8 +131,8 @@ const PostsList = props => {
 						<p>
 							{
 								search !== ''
-									? __('No matching results! Try another search.', 'vimeotheque-series')
-									: __( 'Nothing found.', 'vimeotheque-series' )
+									? __('No matching results! Try another search.', 'codeflavors-vimeo-video-post-lite')
+									: __( 'Nothing found.', 'codeflavors-vimeo-video-post-lite' )
 							}
 						</p>
 					</div>
@@ -141,7 +141,7 @@ const PostsList = props => {
 			{
 				isLoading &&
 				<>
-					<Spinner /> {__('Loading videos, please wait...', 'vimeotheque-series')}
+					<Spinner /> {__('Loading videos, please wait...', 'codeflavors-vimeo-video-post-lite')}
 				</>
 			}
 
@@ -164,7 +164,7 @@ const PostsList = props => {
 								<FlexItem
 									isBlock={true}
 								>
-									{ sprintf( _n( '%d selected', '%d selected', items.length, 'vimeotheque-series' ), items.length ) }
+									{ sprintf( _n( '%d selected', '%d selected', items.length, 'codeflavors-vimeo-video-post-lite' ), items.length ) }
 								</FlexItem>
 
 								<FlexItem>
@@ -172,7 +172,7 @@ const PostsList = props => {
 										isPrimary={true}
 										onClick={onSelect}
 									>
-										{__('Add videos', 'vimeotheque-series')}
+										{__('Add videos', 'codeflavors-vimeo-video-post-lite')}
 									</Button>
 								</FlexItem>
 							</Flex>

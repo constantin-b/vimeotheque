@@ -56,7 +56,7 @@ const Edit = ( props ) => {
 
     const EmptyResponse = () => {
         return (
-            <>{__('No content found.', 'vimeotheque-series')}</>
+            <>{__('No content found.', 'codeflavors-vimeo-video-post-lite')}</>
         )
     }
 
@@ -113,14 +113,14 @@ const Edit = ( props ) => {
             {
                 0 == playlist &&
                     <Placeholder
-                        instructions={__('Display Vimeotheque Series into the post.', 'vimeotheque-series')}
-                        label={__('Vimeotheque Series', 'vimeotheque-series')}
+                        instructions={__('Display Vimeotheque Series into the post.', 'codeflavors-vimeo-video-post-lite')}
+                        label={__('Vimeotheque Series', 'codeflavors-vimeo-video-post-lite')}
                     >
                         <Button
                             isPrimary={true}
                             onClick={ toggleModal }
                         >
-                            {__('Choose Series Playlist', 'vimeotheque-series')}
+                            {__('Choose Series Playlist', 'codeflavors-vimeo-video-post-lite')}
                         </Button>
                     </Placeholder>
             }
@@ -133,7 +133,7 @@ const Edit = ( props ) => {
                         onRequestClose={ toggleModal }
                         shouldCloseOnClickOutside={false}
                         shouldCloseOnEsc={true}
-                        title={__('Vimeotheque Series', 'vimeotheque-series')}
+                        title={__('Vimeotheque Series', 'codeflavors-vimeo-video-post-lite')}
                         headerActions={
                             (
                                 <Search />

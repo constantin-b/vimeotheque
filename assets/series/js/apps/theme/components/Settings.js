@@ -40,7 +40,7 @@ const Settings = props => {
 						icon='admin-settings'
 						onClick={ () => setOpen(!open) }
 					>
-						{__('Settings', 'vimeotheque-series')}
+						{__('Settings', 'codeflavors-vimeo-video-post-lite')}
 					</Button>
 				</FlexItem>
 			</Flex>
@@ -53,7 +53,7 @@ const Settings = props => {
 						onRequestClose={ () => setOpen( !open ) }
 						shouldCloseOnClickOutside={true}
 						shouldCloseOnEsc={true}
-						title={__('Theme Settings', 'vimeotheque-series')}
+						title={__('Theme Settings', 'codeflavors-vimeo-video-post-lite')}
 					>
 						{themeSettings}
 					</Modal>

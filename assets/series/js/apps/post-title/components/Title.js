@@ -29,7 +29,7 @@ const Title = props => {
 			<>
 				<TextControl
 					value={title||''}
-					placeholder={__( 'Enter a title for this collection', 'vimeotheque-series' )}
+					placeholder={__( 'Enter a title for this collection', 'codeflavors-vimeo-video-post-lite' )}
 					onChange={
 						value => {
 							dispatch( 'vimeotheque-series/playlist-options' ).updateOption('postTitle', value)

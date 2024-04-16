@@ -42,7 +42,7 @@ const VideoLoad = props => {
             {
                 isLoading &&
                 <>
-                    <Spinner /> {__('Loading the videos...', 'vimeotheque-series')}
+                    <Spinner /> {__('Loading the videos...', 'codeflavors-vimeo-video-post-lite')}
                 </>
             }
         </>

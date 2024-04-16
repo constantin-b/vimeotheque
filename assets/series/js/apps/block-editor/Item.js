@@ -51,7 +51,7 @@ const Item = props => {
 					isLink={true}
 					onClick={ props.onClick }
 				>
-					{renderedTitle || __('(no title)', 'vimeotheque-series')}
+					{renderedTitle || __('(no title)', 'codeflavors-vimeo-video-post-lite')}
 				</Button>
 			</FlexItem>
 			<FlexItem

@@ -72,7 +72,7 @@ const Initialize = props => {
                 open &&
                     <Modal
                         className='vimeotheque-posts-list-modal'
-                        title={ applyFilters( 'vimeotheque-series-content-modal-title', __( 'Add videos', 'vimeotheque-series' ), displayContent ) }
+                        title={ applyFilters( 'vimeotheque-series-content-modal-title', __( 'Add videos', 'codeflavors-vimeo-video-post-lite' ), displayContent ) }
                         onRequestClose={ onCloseModal }
                         isFullScreen={ applyFilters( 'vimeotheque-series-content-modal-fs', true, displayContent ) }
                         shouldCloseOnClickOutside={false}

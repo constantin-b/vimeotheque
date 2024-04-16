@@ -37,7 +37,7 @@ class Rest_Themes_Controller extends Rest_Controller_Abstract implements Rest_Co
         if( !current_user_can( 'edit_posts' ) ){
             return new \WP_Error(
                 'vimeotheque-series-rest-no-access',
-                __( "You don't have access to this resource.", 'vimeotheque-series' )
+                __( "You don't have access to this resource.", 'codeflavors-vimeo-video-post-lite' )
             );
         }
 

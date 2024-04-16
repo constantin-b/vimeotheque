@@ -65,19 +65,19 @@ class Series extends Abstract_Post_Type implements Interface_Post_Type {
 	 */
 	private function get_labels(){
 		return [
-			'name' 					=> _x('Video Series', 'Video Series', 'vimeotheque-series'),
-			'singular_name' 		=> _x('Video Series', 'Video Series', 'vimeotheque-series'),
-			'add_new' 				=> _x('Add New', 'Series', 'vimeotheque-series'),
-			'add_new_item' 			=> __('Add New Series', 'vimeotheque-series'),
-			'edit_item' 			=> __('Edit Series', 'vimeotheque-series'),
-			'new_item'				=> __('New Series', 'vimeotheque-series'),
-			'all_items' 			=> __('All Series', 'vimeotheque-series'),
-			'view_item' 			=> __('View', 'vimeotheque-series'),
-			'search_items' 			=> __('Search', 'vimeotheque-series'),
-			'not_found' 			=> __('No Series found', 'vimeotheque-series'),
-			'not_found_in_trash' 	=> __('No Series in trash', 'vimeotheque-series'),
+			'name' 					=> _x('Video Series', 'Video Series', 'codeflavors-vimeo-video-post-lite'),
+			'singular_name' 		=> _x('Video Series', 'Video Series', 'codeflavors-vimeo-video-post-lite'),
+			'add_new' 				=> _x('Add New', 'Series', 'codeflavors-vimeo-video-post-lite'),
+			'add_new_item' 			=> __('Add New Series', 'codeflavors-vimeo-video-post-lite'),
+			'edit_item' 			=> __('Edit Series', 'codeflavors-vimeo-video-post-lite'),
+			'new_item'				=> __('New Series', 'codeflavors-vimeo-video-post-lite'),
+			'all_items' 			=> __('All Series', 'codeflavors-vimeo-video-post-lite'),
+			'view_item' 			=> __('View', 'codeflavors-vimeo-video-post-lite'),
+			'search_items' 			=> __('Search', 'codeflavors-vimeo-video-post-lite'),
+			'not_found' 			=> __('No Series found', 'codeflavors-vimeo-video-post-lite'),
+			'not_found_in_trash' 	=> __('No Series in trash', 'codeflavors-vimeo-video-post-lite'),
 			'parent_item_colon' 	=> '',
-			'menu_name' 			=> __('Series', 'vimeotheque-series')
+			'menu_name' 			=> __('Series', 'codeflavors-vimeo-video-post-lite')
 		];
 	}
 	
