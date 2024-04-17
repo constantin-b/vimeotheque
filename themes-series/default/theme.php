@@ -33,7 +33,8 @@ use function Vimeotheque_Series\Theme_Default\css_classes;
                                 'video_align'=>'align-center',
                                 'width'=> $playlist->width,
                                 'playlist_loop' => 1,
-                                'transparent'=> false
+                                'transparent'=> false,
+                                'shuffle' => $playlist->shuffle
                             ]
                     )
                 ?>

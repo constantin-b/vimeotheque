@@ -12,7 +12,7 @@ use function Vimeotheque_Series\Theme_List\css_classes;
  * @var Playlist $playlist
  */
 ?>
-<div class="<?php css_classes( $playlist,'vimeotheque-series playlist list', true ) ?>">
+<div class="<?php css_classes( $playlist,'vimeotheque-series playlist list', true ) ?>" data-shuffle="<?php echo esc_attr( $playlist->shuffle )?>">
 
     <?php while( $query->have_posts() ): ?>
 
