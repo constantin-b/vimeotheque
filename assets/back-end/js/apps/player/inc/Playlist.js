@@ -49,12 +49,23 @@ $.fn.VimeoPlaylist = function( params ){
         return;
     }
 
-    const
-          items = $(this).find( options.items ),
-          {
+    let items = $(this).find( options.items )
+
+    const {
               playlist_loop,
-              volume
+              volume,
+              shuffle,
           } = $(player).data()
+
+    if( shuffle ){
+        if ( items.length > 2 ) {
+            // Note the -2 (instead of -1) and the i > 1 (instead of i > 0):
+            for (let i = items.length - 1; i > 1; --i) {
+                const j = 1 + Math.floor(Math.random() * i);
+                [items[i], items[j]] = [items[j], items[i]];
+            }
+        }
+    }
 
     let currentItem	= 0,
         playlistLoop = parseInt( playlist_loop )
@@ -149,5 +160,5 @@ $.fn.VimeoPlaylist = function( params ){
 $.fn.VimeoPlaylist.defaults = {
     'player' 	: '.vimeotheque-player',
     'items'	 	: '.cvm-playlist-item a[data-video_id]',
-    'loadVideo'	: function(){}
+    'loadVideo'	: function(){},
 }
