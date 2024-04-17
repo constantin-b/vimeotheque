@@ -18,5 +18,8 @@
     "cross-env": "^7.0.3",
     "webpack": "^5.42.0",
     "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+      "@dnd-kit/sortable": "^8.0.0"
   }
 }
