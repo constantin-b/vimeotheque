@@ -47,7 +47,11 @@ use function Vimeotheque_Series\Theme_Default\css_classes;
 
             <?php endif ;?>
 
-                <div class="video-item <?php echo !has_post_thumbnail() ? 'no-thumbnail' : 'with-thumbnail' ?>" data-video_id="<?php echo esc_attr($video->video_id ) ?>">
+                <div
+                        class="video-item <?php echo !has_post_thumbnail() ? 'no-thumbnail' : 'with-thumbnail' ?>"
+                        data-video_id="<?php echo esc_attr($video->video_id ) ?>"
+                        data-size_ratio="<?php echo esc_attr($video->size['ratio'] ) ?>"
+                >
 
                     <?php the_title( '<div class="video-title">', '</div>' ) ?>
 
