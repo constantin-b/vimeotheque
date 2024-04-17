@@ -15,7 +15,6 @@ const {
         Button,
         Modal,
         Placeholder,
-        SearchControl,
         Tooltip,
         ToolbarGroup,
         ToolbarItem,
@@ -44,15 +43,7 @@ const Edit = ( props ) => {
         className
     } = props
 
-    const {
-        loadMore,
-        open,
-    } = useSelect(
-        select => ({
-            loadMore: select('vimeotheque-series/app-options').getOption( 'loadMore' ),
-            open: select('vimeotheque-series/app-options').getOption( 'openContentModal' ),
-        })
-    )
+    const [open, setOpen] = useState(false)
 
     const EmptyResponse = () => {
         return (
@@ -61,7 +52,7 @@ const Edit = ( props ) => {
     }
 
     const toggleModal = () => {
-        dispatch('vimeotheque-series/app-options').updateOption( 'openContentModal', !open )
+        setOpen(!open)
     }
 
     return (
@@ -144,6 +135,7 @@ const Edit = ( props ) => {
                             onSelect={
                                 item => {
                                     setAttributes({playlist: item.id})
+                                    toggleModal()
                                 }
                             }
                         />
