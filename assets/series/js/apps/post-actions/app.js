@@ -79,6 +79,24 @@ const PostActionsApp = props => {
                 }
             </Flex>
 
+            {
+                post && post.status !== 'auto-draft' && post.preview_link !== '' &&
+                    <Flex
+                        justify='flex-end'
+                        className='second-line'
+                    >
+                        <FlexItem>
+                            <Button
+                                target='_blank'
+                                href={post.preview_link}
+                                isLink={true}
+                            >
+                                {__('View', 'codeflavors-vimeo-video-post-lite')}
+                            </Button>
+                        </FlexItem>
+                    </Flex>
+            }
+
         </div>
     )
 }
