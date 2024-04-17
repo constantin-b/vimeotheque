@@ -8,10 +8,11 @@ vimeotheque.series = vimeotheque.series || {};
 
 vimeotheque.series.themeList = () => {
 
-    if( $('.vimeotheque-series.playlist.list').length > 0 ){
+    const initiatePlaylist = playlist => {
 
         const
-            elements = $('.vimeotheque-series.playlist.list .video-item'),
+            shuffle = $(playlist).data('shuffle'),
+            elements = $(playlist).find('.video-item'),
             // The video element
             videoEl = $('<div />', {
                 class: 'video-embed vimeotheque-player'
@@ -31,6 +32,16 @@ vimeotheque.series.themeList = () => {
                         .removeClass('loaded')
                         .removeAttr('data-embed_url data-aspect_ratio data-size_ratio data-volume data-autoplay data-video_id style');
                 })
+
+        if( shuffle ){
+            if ( elements.length > 2 ) {
+                // Note the -2 (instead of -1) and the i > 1 (instead of i > 0):
+                for (let i = elements.length - 1; i > 1; --i) {
+                    const j = 1 + Math.floor(Math.random() * i);
+                    [elements[i], elements[j]] = [elements[j], elements[i]];
+                }
+            }
+        }
 
         let	current = 0,
             total = elements.length
@@ -171,8 +182,15 @@ vimeotheque.series.themeList = () => {
                 window.vimeotheque.resize( videoEl )
             }
         )
-
     }
+
+    if( $('.vimeotheque-series.playlist.list').length > 0 ){
+
+        $('.vimeotheque-series.playlist.list').each(
+            (index, item) => initiatePlaylist( item )
+        )
+    }
+
 }
 
 $(document).ready( () => vimeotheque.series.themeList() )
