@@ -1,7 +1,7 @@
 import '../_store/paginationStore'
 import '../video-list/store/itemsLoaded'
 import {omit} from 'lodash'
-import Item from "./Item";
+import Item from "./Item"
 
 const {
     components: {
