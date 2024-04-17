@@ -94,6 +94,23 @@ class Series_Rest_Fields{
             ]
         );
 
+        register_rest_field(
+            'series',
+            'preview_link',
+            [
+                'get_callback' => function( $object ){
+                    $link = false;
+                    if( current_user_can( 'edit_post', $object['id'] ) ){
+                        $link = get_preview_post_link( $object['id'] );
+                    }
+
+                    return $link;
+                }
+            ]
+        );
+
+
+
     }
 
 }
