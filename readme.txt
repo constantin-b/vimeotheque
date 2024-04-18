@@ -4,7 +4,7 @@ Tags: vimeo, video embed, video gallery, featured video, video post
 Requires at least: 5.2
 Tested up to: 6.5.2
 Requires PHP: 7.4
-Stable tag: 2.2.9
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,13 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3 =
+- Introduced Series, a feature that allow you to create video galleries from imported videos and display them in posts or pages using the Block Editor;
+- Solved missing or mismatched translations in plugin;
+- Solved unsanitized output issue signaled by PHP Code Sniffer;
+- Solved PHP 8 deprecation notice for dynamically generated properties;
+- Unified code writing using PHP Code Standards and WP Standards.
+
 = 2.2.9 =
 - Added "embed_url" to video Rest API fields;
 - Introduced Query Monitor support;
