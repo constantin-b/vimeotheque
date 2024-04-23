@@ -1,0 +1,30 @@
+.vimeotheque-series-items-list{
+  .vimeotheque-item{
+    &.line{
+
+      &:nth-child(odd){
+        background-color: rgba(238, 238, 238, 0.39);
+      }
+
+    }
+
+    &.header{
+      padding: 10px 0;
+      margin-bottom: 10px;
+      background-color: rgba(238, 238, 238, 0.39);
+    }
+
+    div{
+      &:first-child{
+        padding-left: 10px;
+        min-width: 90px;
+      }
+
+      &:last-child{
+        text-align: right!important;
+        margin-right: 10px;
+      }
+    }
+
+  }
+}

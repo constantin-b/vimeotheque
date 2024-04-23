@@ -24,7 +24,23 @@ module.exports = {
 
         'themes/default/assets/js/block/app.build'  : './themes/default/assets/js/block/block.js',
         'themes/simple/assets/script'               : './themes/simple/assets/app/app.js',
-        'themes/listy/assets/script'                : './themes/listy/assets/app/app.js'
+        'themes/listy/assets/script'                : './themes/listy/assets/app/app.js',
+
+        // Series
+        'assets/series/js/video-list'       : './assets/series/js/apps/video-list/app.js',
+        'assets/series/js/theme'            : './assets/series/js/apps/theme/app.js',
+        'assets/series/js/post-actions'     : './assets/series/js/apps/post-actions/app.js',
+        'assets/series/js/post-title'       : './assets/series/js/apps/post-title/app.js',
+        'assets/series/js/player'           : './assets/series/js/apps/player/app.js',
+        'assets/series/js/block-editor'     : './assets/series/js/apps/block-editor/app.js',
+
+        // Theme Default
+        'themes-series/default/assets/js/script': './themes-series/default/assets/js/app/app.js',
+        'themes-series/default/assets/js/editor': './themes-series/default/assets/js/editor/app.js',
+
+        // Theme List
+        'themes-series/list/assets/js/script': './themes-series/list/assets/js/app/app.js',
+        'themes-series/list/assets/js/editor': './themes-series/list/assets/js/editor/app.js',
     },
     output: {
         path: __dirname,

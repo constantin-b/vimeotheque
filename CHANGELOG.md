@@ -1,6 +1,7 @@
 *** Vimeotheque Lite Changelog ***
 
-- Version 2.3
+2024-04-23 - Version 2.3
+- Introduced Series, a feature that allow you to create video galleries from imported videos and display them in posts or pages using the Block Editor;
 - Solved issues with translations missing domain or having mismatched domain name;
 - Updated videos playlist script to set a CSS class on the currently running video from the playlist;
 - Applied and implemented suggestion from PHP Code Sniffer;

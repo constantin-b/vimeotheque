@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "vimeotheque-series/series",
+    "title": "Series Playlist",
+    "category": "text",
+    "icon": "playlist-video",
+    "description": "Embed a series playlist.",
+    "keywords": [ "video", "playlist", "gallery", "vimeo", "vimeotheque" ],
+    "version": "1.0",
+    "textdomain": "vimeotheque-series",
+    "attributes": {
+        "playlist": {
+            "type": "integer",
+            "default": 0
+        }
+    },
+    "supports": {
+        "align": false,
+        "anchor": false,
+        "html": false,
+        "multiple": true,
+        "reusable": true
+    },
+    "editorScript": "file:../js/block-editor.js",
+    "editorStyle": "file:../css/series-admin.css"
+}
