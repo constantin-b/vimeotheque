@@ -24,6 +24,8 @@ class Series extends Abstract_Post_Type implements Interface_Post_Type {
 
 	public function register_post_type(){
 
+        $slug = \Vimeotheque\Plugin::instance()->get_options_obj()->get_option( 'series_slug' );
+
 		register_post_type(
 			parent::get_post_name(),
 			[
@@ -44,6 +46,10 @@ class Series extends Abstract_Post_Type implements Interface_Post_Type {
 				'hierarchical' => false,
 
 				'show_in_rest' => true,
+
+                'rewrite'				=> [
+                    'slug' => $slug
+                ],
 
 				'supports' => [
                     'series'
