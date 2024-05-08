@@ -209,6 +209,16 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 			}
 		}
 
+        if( isset( $_POST['series_slug'] ) ){
+            $series_slug = sanitize_title( $_POST['series_slug'] );
+            if( !empty( $_POST['series_slug'] ) && $plugin_settings['series_slug'] !== $series_slug ){
+                $defaults['series_slug'] = $series_slug;
+                $flush_rules = true;
+            }else{
+                $defaults['series_slug'] = $plugin_settings['series_slug'];
+            }
+        }
+
 		// reset OAuth if user changes the keys
 		if( isset( $_POST['vimeo_consumer_key'] ) && isset( $_POST['vimeo_secret_key'] ) ){
 			if(
@@ -228,10 +238,8 @@ class Settings_Page extends Page_Abstract implements Page_Interface{
 		$this->options_obj()->update_options( $defaults );
 
 		if( $flush_rules ){
-			// create rewrite ( soft )
-			// register custom post
-			Plugin::instance()->get_cpt()->register_post();
-			flush_rewrite_rules();
+			// Set transient to signal that slugs were updated.
+            set_transient( 'vimeotheque_updated_slugs', 1 );
 		}
 
 		return $defaults;
