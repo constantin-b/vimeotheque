@@ -339,6 +339,7 @@ class Plugin{
 			'post_slug'	=> 'vimeo-video',
 			'taxonomy_slug' => 'vimeo-videos',
 			'tag_slug' => 'vimeo-tag',
+            'series_slug' => 'series',
 			'import_tags' => true, // import tags retrieved from Vimeo
 			'max_tags' => 3, // how many tags to import
 			'import_title' => true, // import titles on custom posts
