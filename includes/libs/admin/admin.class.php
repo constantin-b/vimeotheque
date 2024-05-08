@@ -120,6 +120,20 @@ class Admin{
 				}
 			}
 		);
+
+        /**
+         * Flush rewrite rules if slugs were changed.
+         * @see Settings_Page::update_settings()
+         */
+        add_action(
+            'init',
+            function(){
+                if( get_transient('vimeotheque_updated_slugs') ){
+                    flush_rewrite_rules();
+                    delete_transient('vimeotheque_updated_slugs');
+                }
+            }
+        );
 	}
 
 	/**
