@@ -1,5 +1,9 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-05-08 - Version 2.3.1
+- Introduced option for customizable Series slug;
+- Solved a bug that generated "404 - Not found" pages when changing slugs for post type, tag or video category from the Vimeotheque Settings page.
+
 2024-04-23 - Version 2.3
 - Introduced Series, a feature that allow you to create video galleries from imported videos and display them in posts or pages using the Block Editor;
 - Solved issues with translations missing domain or having mismatched domain name;
