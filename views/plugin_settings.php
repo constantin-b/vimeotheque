@@ -161,6 +161,12 @@ use Vimeotheque\Helper;
 								<input type="text" id="tag_slug" name="tag_slug" value="<?php echo $options['tag_slug'];?>" />
 							</td>
 						</tr>
+                        <tr>
+							<th scope="row"><label for="series_slug"><?php _e('Series slug', 'codeflavors-vimeo-video-post-lite')?> :</label></th>
+							<td>
+								<input type="text" id="series_slug" name="series_slug" value="<?php echo $options['series_slug'];?>" />
+							</td>
+						</tr>
 					</tbody>
 				</table>
 				<?php submit_button(__('Save settings', 'codeflavors-vimeo-video-post-lite'));?>
