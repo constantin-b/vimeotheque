@@ -13,23 +13,31 @@ $(document).ready( () => {
             console.log('started playing')
             console.log(data)
         },
-
+        //*/
+        /*
         onPlayback: ( data )=>{
             console.log('playing')
             console.log(data)
         },
+        //*/
+        /*
         onPause: ( data ) => {
             console.log( 'paused' )
             console.log( data )
         },
-        onLoad: ( data ) => {
-            console.log( 'loaded' )
-            console.log( data )
+        //*/
+        /*
+        onLoad: ( player ) => {
+            player.play()
         },
+        //*/
+        /*
         onFinish: ( data ) => {
             console.log( 'finished' )
             console.log( data )
         },
+        //*/
+        /*
         onError: ( data ) => {
             console.log( 'error' )
             console.log( data )
@@ -54,12 +62,17 @@ $(document).ready( () => {
                                 frameborder: 0,
                                 allowFullScreen: '',
                                 mozallowfullscreen: '',
-                                webkitallowfullscreen: ''
+                                webkitallowfullscreen: '',
+                                allow: 'autoplay; fullscreen',
                             }
                         )
                     )
                     .removeClass('lazy-load')
-                    .VimeoPlayer( playersData )
+                    .VimeoPlayer( {
+                        onLoad: ( player ) => {
+                            player.play()
+                        }
+                    } )
             }
         )
     //*/
