@@ -1,5 +1,8 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-05-23 - Version 2.3.2
+- Attempt to autoplay lazy-loaded videos when user clicks play. See https://developer.chrome.com/blog/autoplay/ for more details on autoplay.
+
 2024-05-08 - Version 2.3.1
 - Introduced option for customizable Series slug;
 - Solved a bug that generated "404 - Not found" pages when changing slugs for post type, tag or video category from the Vimeotheque Settings page.
