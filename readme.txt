@@ -4,7 +4,7 @@ Tags: vimeo, video embed, video gallery, featured video, video post
 Requires at least: 5.2
 Tested up to: 6.5.3
 Requires PHP: 7.4
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Intuitive Vimeo WordPress Plugin to help you create video posts in seconds and s
 
 == Description ==
 
-= Vimeo WordPress Plugin =
+= Vimeo WordPress Video Gallery Plugin =
 
 Looking for a powerful and easy-to-use solution to embed Vimeo videos on your WordPress site? Look no further than Vimeotheque – the ultimate plugin for managing Vimeo videos on WordPress.
 
@@ -135,6 +135,9 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3.2 =
+- - Attempt to autoplay lazy-loaded videos when user clicks play. See [https://developer.chrome.com/blog/autoplay/](https://developer.chrome.com/blog/autoplay/) for more details on autoplay.
+
 = 2.3.1=
 - Introduced option for customizable Series slug;
 - Solved a bug that generated "404 - Not found" pages when changing slugs for post type, tag or video category from the Vimeotheque Settings page.
