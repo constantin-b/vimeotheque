@@ -136,9 +136,9 @@ For each video post created by the plugin, you can import the video image as the
 
 == Changelog ==
 = 2.3.2 =
-- - Attempt to autoplay lazy-loaded videos when user clicks play. See [https://developer.chrome.com/blog/autoplay/](https://developer.chrome.com/blog/autoplay/) for more details on autoplay.
+- Attempt to autoplay lazy-loaded videos when user clicks play. See [https://developer.chrome.com/blog/autoplay/](https://developer.chrome.com/blog/autoplay/) for more details on autoplay.
 
-= 2.3.1=
+= 2.3.1 =
 - Introduced option for customizable Series slug;
 - Solved a bug that generated "404 - Not found" pages when changing slugs for post type, tag or video category from the Vimeotheque Settings page.
 
