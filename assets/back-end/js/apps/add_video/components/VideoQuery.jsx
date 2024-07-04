@@ -1,19 +1,29 @@
 import {videoQueryApplyWithSelect} from "../query/videoQueryApplyWithSelect";
 import Video from "./Video";
 
-const
-    {
-        useState,
-        useEffect
-    } = wp.element,
-    {
+const {
+    components: {
         Spinner,
         Notice,
-        Placeholder
-    } = wp.components,
-    { __ } = wp.i18n
+        Placeholder,
+    },
+    element: {
+        useState,
+        useEffect,
+    },
+    i18n: {
+        __
+    }
+} = wp
 
-const VideoQueryBase = ( props ) => {
+const VideoQueryBase = ({
+    loading = false,
+    response = false,
+    error = false,
+    query = '',
+    onSubmit = () => {},
+    onCancel = () => {},
+}) => {
 
     const [showNotice, setShowNotice] = useState( true )
 
@@ -21,12 +31,12 @@ const VideoQueryBase = ( props ) => {
         if( !showNotice ){
             setShowNotice(true)
         }
-    }, [props.loading] )
+    }, [loading] )
 
     return (
         <>
             {
-                props.loading ?
+                loading ?
                     <Placeholder
                         className='loading'
                         label={__('Making query to Vimeo', 'codeflavors-vimeo-video-post-lite')}
@@ -37,38 +47,30 @@ const VideoQueryBase = ( props ) => {
                     :
                     <div>
                         {
-                            props.error ?
+                            error ?
                                 showNotice &&
                                     <Notice
                                         status='error'
                                         onRemove={
                                             () => {
-                                                props.onCancel()
+                                                onCancel()
                                                 setShowNotice( false )
                                             }
                                         }
                                     >
-                                        {props.error.message}
+                                        {error.message}
                                     </Notice>
                                 :
                                 <Video
-                                    data={props.response}
-                                    onClick={props.onSubmit}
-                                    onCancel={props.onCancel}
+                                    data={response}
+                                    onClick={onSubmit}
+                                    onCancel={onCancel}
                                 />
                         }
                     </div>
             }
         </>
     )
-}
-
-VideoQueryBase.defaultProps = {
-    loading: false,
-    response: false,
-    error: false,
-    query: '',
-    onSubmit: () => {}
 }
 
 const VideoQuery = videoQueryApplyWithSelect( VideoQueryBase )

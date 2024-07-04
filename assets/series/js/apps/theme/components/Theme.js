@@ -17,9 +17,15 @@ const {
     }
 } = wp
 
-const Theme = props => {
+const Theme = ({
+   theme = {
+	   screenshot: '',
+	   name: '',
+	   folder: '',
+   }
+}) => {
 
-	const theme = useSelect(
+	const currentTheme = useSelect(
 		select => select('vimeotheque-series/playlist-options').getOption('theme')
 	)
 
@@ -27,11 +33,11 @@ const Theme = props => {
 		screenshot,
 		name,
 		folder,
-	} = props.theme
+	} = theme
 
     return (
         <div
-            className={`theme ${ theme==folder ? 'selected' : '' }`}
+            className={`theme ${ currentTheme == folder ? 'selected' : '' }`}
         >
 			<img
 				src={screenshot}
@@ -46,14 +52,6 @@ const Theme = props => {
 			/>
         </div>
     )
-}
-
-Theme.defaultProps = {
-	theme: {
-		screenshot: '',
-		name: '',
-		folder: '',
-	}
 }
 
 export default Theme

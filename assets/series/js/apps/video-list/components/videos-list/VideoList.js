@@ -37,7 +37,9 @@ import {
 } from '@dnd-kit/sortable'
 
 
-const VideoList = props => {
+const VideoList = ({
+   item = false
+}) => {
 
     const items = useSelect( select => select('vimeotheque-series/items-store').getItems() )
 
@@ -88,9 +90,9 @@ const VideoList = props => {
             className="video-list vimeotheque-series-items-list"
         >
             {
-                props.item.items && props.item.items.length > 0 &&
+                item.items && item.items.length > 0 &&
                     <VideoLoad
-                        item={props.item}
+                        item={item}
                     />
             }
 
@@ -116,10 +118,6 @@ const VideoList = props => {
             </DndContext>
         </div>
     )
-}
-
-VideoList.defaultProps = {
-    item: false
 }
 
 export default VideoList

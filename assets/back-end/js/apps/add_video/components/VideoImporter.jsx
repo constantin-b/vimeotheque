@@ -1,20 +1,29 @@
 import {postCreateApplyWithSelect} from "../query/videoQueryApplyWithSelect";
 
 const {
+    components: {
         Spinner,
         Notice,
         Placeholder,
         Button,
-        ButtonGroup
-    } = wp.components,
-    { __ } = wp.i18n
+    },
+    i18n: {
+        __,
+    }
+} = wp
 
-const VideoImporterBase = props => {
+const VideoImporterBase = ({
+   video = {},
+   loading = false,
+   response = false,
+   error = false,
+   onMessageClose = () => {}
+}) => {
 
     return (
         <>
             {
-                props.loading ?
+                loading ?
                     <Placeholder
                         className='loading'
                         label={__('Saving video', 'codeflavors-vimeo-video-post-lite')}
@@ -25,40 +34,32 @@ const VideoImporterBase = props => {
                     :
                     <div>
                         {
-                            props.error ?
+                            error ?
                                 <Notice
                                     status='error'
-                                    onRemove={
-                                        () => {
-                                            props.onMessageClose()
-                                        }
-                                    }
+                                    onRemove={onMessageClose}
                                 >
-                                    {props.error.message}
+                                    {error.message}
                                 </Notice>
                                 :
                                 <Placeholder
-                                    label={ props.response.message }
+                                    label={ response.message }
                                 >
                                     <Button
                                         isPrimary
-                                        href={props.response.editLink}
+                                        href={response.editLink}
                                     >
                                         { __( 'Edit post', 'codeflavors-vimeo-video-post-lite' ) }
                                     </Button>
                                     <Button
                                         isSecondary
-                                        href={props.response.viewLink}
+                                        href={response.viewLink}
                                     >
                                         { __( 'View post', 'codeflavors-vimeo-video-post-lite' ) }
                                     </Button>
                                     <Button
                                         isTertiary
-                                        onClick={
-                                            () => {
-                                                props.onMessageClose()
-                                            }
-                                        }
+                                        onClick={onMessageClose}
                                     >
                                         { __( 'Import another video', 'codeflavors-vimeo-video-post-lite' ) }
                                     </Button>
@@ -68,14 +69,6 @@ const VideoImporterBase = props => {
             }
         </>
     )
-}
-
-VideoImporterBase.defaultProps = {
-    video: {},
-    loading: false,
-    response: false,
-    error: false,
-    onMessageClose: () => {}
 }
 
 const VideoImporter = postCreateApplyWithSelect( VideoImporterBase )

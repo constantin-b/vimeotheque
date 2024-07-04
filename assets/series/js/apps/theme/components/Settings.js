@@ -63,6 +63,4 @@ const Settings = props => {
     )
 }
 
-Settings.defaultProps = {}
-
 export default Settings

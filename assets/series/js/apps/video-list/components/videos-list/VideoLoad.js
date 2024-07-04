@@ -15,15 +15,17 @@ const {
     }
 } = wp
 
-const VideoLoad = props => {
+const VideoLoad = ({
+   item = false
+}) => {
 
     const {
         posts,
         isLoading
     } = useSelect(
         select => ({
-            posts: select('core').getEntityRecords( 'postType', 'vimeo-video', {include: props.item.items, orderby: 'include'} ),
-            isLoading: select('core/data').isResolving( 'core', 'getEntityRecords', ['postType', 'vimeo-video', {include: props.item.items, orderby: 'include'}] )
+            posts: select('core').getEntityRecords( 'postType', 'vimeo-video', {include: item.items, orderby: 'include'} ),
+            isLoading: select('core/data').isResolving( 'core', 'getEntityRecords', ['postType', 'vimeo-video', {include: item.items, orderby: 'include'}] )
         })
     )
 
@@ -47,10 +49,6 @@ const VideoLoad = props => {
             }
         </>
     )
-}
-
-VideoLoad.defaultProps = {
-    item: false
 }
 
 export default VideoLoad

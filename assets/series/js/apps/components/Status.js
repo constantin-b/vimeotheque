@@ -14,15 +14,17 @@ const {
     }
 } = wp
 
-const Status = props => {
+const Status = ({
+    status = 'publish'
+}) => {
 
 	const {
-		status,
+		currentStatus,
 		isLoading,
 	} = useSelect(
 		select => ({
-			status: select('core').getStatus( props.status ),
-			isLoading: select('core/data').isResolving('core', 'getStatus', props.status)
+            currentStatus: select('core').getStatus( status ),
+			isLoading: select('core/data').isResolving('core', 'getStatus', status)
 		})
 	)
 
@@ -33,14 +35,10 @@ const Status = props => {
 					<Spinner />
 			}
 			{
-				status && status.name
+                currentStatus && currentStatus.name
 			}
         </>
     )
-}
-
-Status.defaultProps = {
-	status: 'publish'
 }
 
 export default Status

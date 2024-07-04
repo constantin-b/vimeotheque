@@ -63,6 +63,4 @@ const ThemesList = props => {
     )
 }
 
-ThemesList.defaultProps = {}
-
 export default ThemesList

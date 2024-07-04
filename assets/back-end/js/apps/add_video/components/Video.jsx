@@ -1,12 +1,21 @@
 const {
+    components: {
         Icon,
         Button,
-        ButtonGroup
-    } = wp.components,
-    {applyFilters} = wp.hooks,
-    { __ } = wp.i18n
+    },
+    hooks: {
+        applyFilters,
+    },
+    i18n: {
+        __,
+    }
+} = wp
 
-const Video = ( props ) => {
+const Video = ({
+    data = {},
+    onClick = ()=>{},
+    onCancel = ()=>{}
+}) => {
     /**
      * Filter that allows extra parameters to be set.
      * Used in conjunction with filter "vimeotheque.single-import.import-actions"
@@ -17,34 +26,34 @@ const Video = ( props ) => {
         <div className='vimeotheque-video'>
             <div className='image'>
                 <img
-                    src={ props.data.thumbnails[2] }
-                    alt={ props.data.title }
+                    src={ data.thumbnails[2] }
+                    alt={ data.title }
                 />
                 <span className='duration'>
-                    {props.data._duration}
+                    {data._duration}
                 </span>
                 {
-                    ( 'public' != props.data.privacy ) &&
+                    ( 'public' != data.privacy ) &&
                     <Icon
                         icon='lock'
                     />
                 }
             </div>
             <div className='video'>
-                <h1>{ props.data.title }</h1>
+                <h1>{ data.title }</h1>
                 <div className='meta'>
                     <span className='published'>
-                        {props.data._published}
+                        {data._published}
                     </span>
                     <span className='by'>
-                        {`by ${props.data.uploader}`}
+                        {`by ${data.uploader}`}
                     </span>
                 </div>
                 <Button
                     isPrimary
                     onClick={
                         ()=>{
-                            props.onClick( props.data, params )
+                            onClick( data, params )
                         }
                     }
                 >
@@ -52,7 +61,7 @@ const Video = ( props ) => {
                 </Button>
                 <Button
                     isSecondary
-                    onClick={props.onCancel}
+                    onClick={onCancel}
                 >
                     { __( 'Cancel', 'codeflavors-vimeo-video-post-lite' ) }
                 </Button>
@@ -66,12 +75,6 @@ const Video = ( props ) => {
             </div>
         </div>
     )
-}
-
-Video.defaultProps = {
-    data: {},
-    onClick: ()=>{},
-    onCancel: ()=>{}
 }
 
 export default Video

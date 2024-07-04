@@ -42,6 +42,4 @@ const Title = props => {
     )
 }
 
-Title.defaultProps = {}
-
 export default Title

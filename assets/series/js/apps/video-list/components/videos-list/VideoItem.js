@@ -29,7 +29,36 @@ const {
     }
 } = wp
 
-const VideoItem = props => {
+const VideoItem = ({
+    // Post item
+    item = {
+       id: '',
+       title: {
+           rendered: ''
+       },
+       featured_media: '',
+       vimeo_video: {
+           '_duration': ''
+       }
+
+    },
+    /**
+    * Item can be dragged and reordered.
+    */
+    draggable = false,
+    /**
+    * Item can be removed from a list.
+    */
+    removable = false,
+    /**
+    * Item can be selected into a list.
+    */
+    selectable = false,
+
+    onRemove = () => {},
+    onMouseDown = () => {},
+    onMouseUp = () => {},
+}) => {
 
     const {
         id,
@@ -40,13 +69,13 @@ const VideoItem = props => {
         vimeo_video: {
             _duration: videoDuration
         }
-    } = props.item
+    } = item
 
     const [mouseOver, setMouseOver] = useState( false )
 
     const
         items = useSelect( select => select('vimeotheque-series/items-selection').getItems() ),
-        selected = includes( items, props.item )
+        selected = includes( items, item )
 
     const {
         attributes,
@@ -54,7 +83,7 @@ const VideoItem = props => {
         setNodeRef,
         transform,
         transition,
-    } = useSortable({id: props.id});
+    } = useSortable({id: id});
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -63,11 +92,11 @@ const VideoItem = props => {
 
     return (
         <div
-            className={`video-item vimeotheque-series-list-item ${props.selectable ? 'selectable' : ''} ${selected ? 'selected' : ''}`}
+            className={`video-item vimeotheque-series-list-item ${selectable ? 'selectable' : ''} ${selected ? 'selected' : ''}`}
             onClick={
                 () => {
-                    if( props.selectable ) {
-                        dispatch( 'vimeotheque-series/items-selection' ).manageItem( props.item )
+                    if( selectable ) {
+                        dispatch( 'vimeotheque-series/items-selection' ).manageItem( item )
                     }
                 }
             }
@@ -77,7 +106,7 @@ const VideoItem = props => {
 			<Flex>
                 {
                     // Draggable Item
-                    props.draggable &&
+                    draggable &&
 						<FlexItem>
                             <Button
                                 className='action action-drag'
@@ -91,7 +120,7 @@ const VideoItem = props => {
 
                 {
                     // Selectable Item
-                    props.selectable && selected &&
+                    selectable && selected &&
 						<FlexItem>
                             <Button
                                 className='action action-selected'
@@ -134,7 +163,7 @@ const VideoItem = props => {
                         mouseOver &&
                             <>
                                 <iframe
-                                    src={addQueryArgs(props.item.vimeo_video.embed_url, {muted: 1, background: 1})}
+                                    src={addQueryArgs(item.vimeo_video.embed_url, {muted: 1, background: 1})}
                                     width="100%"
                                     height="100%"
                                     frameBorder="0"
@@ -164,50 +193,19 @@ const VideoItem = props => {
                 </FlexItem>
                 {
                     // Delete button
-                    props.removable &&
+                    removable &&
 						<FlexItem>
                             <Button
                                 className='action action-remove'
                                 href='#'
                                 icon='no'
-                                onClick={ props.onRemove }
+                                onClick={ onRemove }
                             />
 						</FlexItem>
                 }
             </Flex>
         </div>
     )
-}
-
-VideoItem.defaultProps = {
-    // Post item
-    item: {
-        id: '',
-        title: {
-            rendered: ''
-        },
-        featured_media: '',
-        vimeo_video: {
-            '_duration': ''
-        }
-
-    },
-	/**
-	 * Item can be dragged and reordered.
-	 */
-	draggable: false,
-	/**
-	 * Item can be removed from a list.
-	 */
-    removable: false,
-	/**
-	 * Item can be selected into a list.
-	 */
-	selectable: false,
-
-    onRemove: () => {},
-    onMouseDown: () => {},
-    onMouseUp: () => {},
 }
 
 export default VideoItem
