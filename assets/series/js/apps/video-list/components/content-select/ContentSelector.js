@@ -62,6 +62,4 @@ const ContentSelector = props => {
     )
 }
 
-ContentSelector.defaultProps = {}
-
 export default ContentSelector
