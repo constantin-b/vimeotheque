@@ -18,13 +18,19 @@ const {
     }
 } = wp
 
-const ButtonSave = props => {
+const ButtonSave = ( {
+    enabled = false,
+    text = __('Save', 'codeflavors-vimeo-video-post-lite'),
+    isPrimary = true,
+    isSecondary = false,
+    onClick = () => {}
+} ) => {
 
     const hasEdits = useSelect( select => select('core').hasEditsForEntityRecord('postType', 'series', getEditedPostId() ) )
 
     const save = async () => {
 
-        props.onClick()
+        onClick()
 
         await dispatch('core').saveEditedEntityRecord( 'postType', 'series', getEditedPostId() )
     }
@@ -38,7 +44,7 @@ const ButtonSave = props => {
 
     const isDisabled = () => {
         let disabled = true
-        if( props.enabled || hasEdits ){
+        if( enabled || hasEdits ){
             disabled = false
         }
 
@@ -56,9 +62,9 @@ const ButtonSave = props => {
                 )
             }
 
-            return props.text
+            return text
         }else{
-            return props.text
+            return text
         }
     }
 
@@ -67,8 +73,8 @@ const ButtonSave = props => {
             {
                 <Button
                     disabled={ isDisabled() }
-                    isPrimary={props.isPrimary}
-                    isSecondary={props.isSecondary}
+                    isPrimary={isPrimary}
+                    isSecondary={isSecondary}
                     onClick={save}
                 >
                     {buttonText()}
@@ -76,14 +82,6 @@ const ButtonSave = props => {
             }
         </>
     )
-}
-
-ButtonSave.defaultProps = {
-    enabled: false,
-    text: __('Save', 'codeflavors-vimeo-video-post-lite'),
-    isPrimary: true,
-    isSecondary: false,
-    onClick: () => {},
 }
 
 export default ButtonSave
