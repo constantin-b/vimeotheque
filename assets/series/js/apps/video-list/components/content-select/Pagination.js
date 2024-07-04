@@ -10,7 +10,14 @@ const {
 	}
 } = wp
 
-const Pagination = props => {
+const Pagination = ({
+	path = '',
+	queryArgs = {
+		page: 1,
+		per_page: 20
+	},
+	onPageChange = () => {}
+}) => {
 
 	/**
 	 * Hack to replace missing functionality in WP that will be implemented
@@ -24,7 +31,7 @@ const Pagination = props => {
 	} = useSelect(
 		select => {
 			return select('vimeotheque-series/pagination-store')
-				.getPagination( addQueryArgs( props.path, omit( props.queryArgs, ['page'] ) ) )
+				.getPagination( addQueryArgs( path, omit( queryArgs, ['page'] ) ) )
 		}
 	)
 
@@ -35,15 +42,6 @@ const Pagination = props => {
 
         </div>
     )
-}
-
-Pagination.defaultProps = {
-	path: '',
-	queryArgs: {
-		page: 1,
-		per_page: 20
-	},
-	onPageChange: () => {}
 }
 
 export default Pagination
