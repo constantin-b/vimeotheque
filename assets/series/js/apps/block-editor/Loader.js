@@ -12,12 +12,14 @@ const {
     }
 } = wp
 
-const Loader = props => {
+const Loader = ({
+    onComplete = () => {}
+}) => {
 
     useEffect(
         () => {
             // unmount component
-            return () => props.onComplete()
+            return () => onComplete()
         }
     )
 
@@ -26,10 +28,6 @@ const Loader = props => {
             <Spinner /> {__('Loading block, please wait...', 'codeflavors-vimeo-video-post-lite')}
         </Placeholder>
     )
-}
-
-Loader.defaultProps = {
-    onComplete: () => {}
 }
 
 export default Loader
