@@ -18,7 +18,9 @@ const {
     }
 } = wp
 
-const ContentSelect = props => {
+const ContentSelect = ({
+    onSelect = () => {}
+}) => {
 
     const loadMore = useSelect( select => select('vimeotheque-series/app-options').getOption( 'loadMore' ) )
 
@@ -29,14 +31,10 @@ const ContentSelect = props => {
         >
             <PostsList
                 loadMore={loadMore}
-                onSelect={ props.onSelect }
+                onSelect={ onSelect }
             />
         </div>
     )
-}
-
-ContentSelect.defaultProps = {
-    onSelect: () => {}
 }
 
 export default ContentSelect
