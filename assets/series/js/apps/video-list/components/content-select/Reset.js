@@ -83,6 +83,4 @@ const Reset = props => {
     )
 }
 
-Reset.defaultProps = {}
-
 export default Reset
