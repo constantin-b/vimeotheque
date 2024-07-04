@@ -55,6 +55,4 @@ const Search = props => {
     )
 }
 
-Search.defaultProps = {}
-
 export default Search
