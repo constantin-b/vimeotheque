@@ -16,7 +16,10 @@ const {
     }
 } = wp
 
-const Item = props => {
+const Item = ({
+	  item = {},
+	  onClick = () => {}
+}) => {
 
 	const {
 		id,
@@ -34,7 +37,7 @@ const Item = props => {
 		},
 		edit_link: editLink
 
-	} = props.item
+	} = item
 
     return (
 		<Flex
@@ -49,7 +52,7 @@ const Item = props => {
 			>
 				<Button
 					isLink={true}
-					onClick={ props.onClick }
+					onClick={ onClick }
 				>
 					{renderedTitle || __('(no title)', 'codeflavors-vimeo-video-post-lite')}
 				</Button>
@@ -94,11 +97,6 @@ const Item = props => {
 			</FlexItem>
         </Flex>
     )
-}
-
-Item.defaultProps = {
-	item: {},
-	onClick: () => {}
 }
 
 export default Item
