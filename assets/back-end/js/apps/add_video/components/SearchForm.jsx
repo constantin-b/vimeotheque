@@ -1,14 +1,19 @@
 const {
-        useState
-    } = wp.element,
-    { __ } = wp.i18n,
-    {
+    components: {
         TextControl,
         Button,
-        Spinner
-    } = wp.components
+    },
+    element: {
+        useState,
+    },
+    i18n: {
+        __,
+    }
+} = wp
 
-const SearchForm = ( props ) => {
+const SearchForm = ({
+    onSubmit = () => {}
+}) => {
 
     const [query, setQuery] = useState( '' )
 
@@ -28,7 +33,7 @@ const SearchForm = ( props ) => {
                 isPrimary
                 onClick={
                     () => {
-                        props.onSubmit( query )
+                        onSubmit( query )
                     }
                 }
             >
@@ -36,10 +41,6 @@ const SearchForm = ( props ) => {
             </Button>
         </div>
     )
-}
-
-SearchForm.defaultProps = {
-    onSubmit: () => {}
 }
 
 export default SearchForm
