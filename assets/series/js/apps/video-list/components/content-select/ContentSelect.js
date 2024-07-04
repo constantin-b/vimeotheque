@@ -48,6 +48,4 @@ const ContentSelect = props => {
     )
 }
 
-ContentSelect.defaultProps = {}
-
 export default ContentSelect
