@@ -102,6 +102,7 @@ registerBlockType( 'vimeotheque/video', {
                                     <Tooltip
                                         text={__('Change video', 'codeflavors-vimeo-video-post-lite')}
                                         position="top"
+                                        placement="top"
                                     >
                                         <Button
                                             onClick={ openModal }

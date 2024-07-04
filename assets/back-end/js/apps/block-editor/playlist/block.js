@@ -200,6 +200,7 @@ registerBlockType( 'vimeotheque/video-playlist', {
                                 <Tooltip
                                     text={__('Edit playlist', 'codeflavors-vimeo-video-post-lite')}
                                     position="top"
+                                    placement="top"
                                 >
                                     <Button
                                         onClick={ openModal }
