@@ -28,7 +28,11 @@ const {
 	}
 } = wp
 
-const PostsList = props => {
+const PostsList = ({
+   loadMore = false,
+   currentPage = 1,
+   onSelect = () => {}
+}) => {
 	const
 	 	page = useSelect( select => select('vimeotheque-series/app-options').getOption('currentPage') ),
 		search = useSelect( select => select('vimeotheque-series/app-options').getOption( 'search' ) ),
@@ -83,12 +87,12 @@ const PostsList = props => {
 
 	useEffect(
 		() => {
-			if( props.loadMore ){
+			if( loadMore ){
 				if( page + 1 <= totalPages ){
 					dispatch( 'vimeotheque-series/app-options' ).updateOption('currentPage', page+1 )
 				}
 			}
-		}, [props.loadMore]
+		}, [loadMore]
 	)
 
 	const list = series.map(
@@ -111,8 +115,8 @@ const PostsList = props => {
 		setSelected(false)
 	}
 
-	const onSelect = () => {
-		props.onSelect(selected)
+	const onSelection = () => {
+		onSelect(selected)
 		// Close the modal window
 		dispatch('vimeotheque-series/app-options').updateOption('openContentModal', false)
 	}
@@ -207,7 +211,7 @@ const PostsList = props => {
 								<FlexItem>
 									<Button
 										isPrimary={true}
-										onClick={onSelect}
+										onClick={onSelection}
 									>
 										{__('Set playlist', 'codeflavors-vimeo-video-post-lite')}
 									</Button>
@@ -219,12 +223,6 @@ const PostsList = props => {
 
         </div>
     )
-}
-
-PostsList.defaultProps = {
-	loadMore: false,
-	currentPage: 1,
-	onSelect: () => {}
 }
 
 export default PostsList
