@@ -16,15 +16,17 @@ const {
     }
 } = wp
 
-const FeaturedImage = props => {
+const FeaturedImage = ({
+    id = ''
+}) => {
 
 	const {
 		image,
 		isLoading
 	} = useSelect(
 		select => ({
-			image: select('core').getEntityRecord( 'postType', 'attachment', props.id ),
-			isLoading: select('core/data').isResolving( 'core', 'getEntityRecord', ['postType', 'attachment', props.id] )
+			image: select('core').getEntityRecord( 'postType', 'attachment', id ),
+			isLoading: select('core/data').isResolving( 'core', 'getEntityRecord', ['postType', 'attachment', id] )
 		})
 	)
 
@@ -63,10 +65,6 @@ const FeaturedImage = props => {
 			}
         </>
     )
-}
-
-FeaturedImage.defaultProps = {
-	id: ''
 }
 
 export default FeaturedImage
