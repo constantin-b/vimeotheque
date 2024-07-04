@@ -26,7 +26,12 @@ const {
     }
 } = wp
 
-const ListControls = props => {
+const ListControls = ({
+    canAdd = true,
+    canShuffle = true,
+    totalTime = false,
+    onAdd = () => {}
+}) => {
 
     const
         shuffle = useSelect( select => select('vimeotheque-series/playlist-options').getOption( 'shuffle' ) ),
@@ -47,10 +52,10 @@ const ListControls = props => {
                 	isBlock={true}
                 >
                     {
-                        props.canAdd &&
+                        canAdd &&
                         	<Button
 								icon='plus'
-								onClick={ props.onAdd }
+								onClick={ onAdd }
                                 isSecondary={true}
                             >
                                 {
@@ -70,13 +75,13 @@ const ListControls = props => {
                 </FlexItem>
                 <FlexItem>
                     {
-                        props.totalTime && 'posts' == displayContent &&
+                        totalTime && 'posts' == displayContent &&
                             <PlaybackTime />
                     }
                 </FlexItem>
                 <FlexItem>
                     {
-                        props.canShuffle && 'posts' == displayContent &&
+                        canShuffle && 'posts' == displayContent &&
                             <Button
                                 onClick={
                                     () => {
@@ -97,13 +102,6 @@ const ListControls = props => {
             </Flex>
         </div>
     )
-}
-
-ListControls.defaultProps = {
-    canAdd: true,
-    canShuffle: true,
-    totalTime: false,
-    onAdd: () => {}
 }
 
 export default ListControls
