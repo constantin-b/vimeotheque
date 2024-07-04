@@ -8,31 +8,31 @@ const /*ServerSideRender = wp.serverSideRender || wp.components.ServerSideRender
     { Placeholder, Spinner } = wp.components,
     { __ } = wp.i18n
 
-const ServerSideEmbed = props => {
-
-    const [loading, setLoading] = useState( true )
+const ServerSideEmbed = ({
+    block = '',
+    attributes = {},
+    onComplete = () => {},
+    isSelected = false,
+}) => {
 
     return (
         <>
             <ServerSideRender
-                {...props}
+                block={block}
+                attributes={attributes}
                 LoadingResponsePlaceholder={
                     () => {
                         return (
-                            <Loader
-                                onComplete={
-                                    () => {
-                                        props.onComplete()
-                                        setLoading( false )
-                                    }
-                                }
-                            />
+                            <Placeholder>
+                                {__('Loading, please wait...', 'codeflavors-vimeo-video-post-lite')}
+                                <Spinner/>
+                            </Placeholder>
                         )
                     }
                 }
             />
             {
-                !props.isSelected &&
+                !isSelected &&
                 (
                     <div
                         style={
@@ -49,27 +49,6 @@ const ServerSideEmbed = props => {
             }
         </>
     )
-}
-
-const Loader = props => {
-    useEffect( () => {
-        // unmount component, loading over
-        return () => {
-            props.onComplete()
-        }
-    })
-
-    return (
-        <Placeholder>
-            {__('Loading, please wait...', 'codeflavors-vimeo-video-post-lite')}
-            <Spinner/>
-        </Placeholder>
-    )
-}
-
-ServerSideEmbed.defaultProps = {
-    onComplete: false,
-    isSelected: false
 }
 
 export default ServerSideEmbed
