@@ -25,7 +25,9 @@ const {
     }
 } = wp
 
-const Initialize = props => {
+const Initialize = ({
+    item = false
+}) => {
     /**
      * Modal open.
      */
@@ -54,7 +56,7 @@ const Initialize = props => {
             {
                 'posts' == displayContent &&
                     <VideoList
-                        item={props.item}
+                        item={item}
                     />
             }
 
@@ -91,10 +93,6 @@ const Initialize = props => {
             }
         </>
     )
-}
-
-Initialize.defaultProps = {
-    item: false
 }
 
 export default Initialize
