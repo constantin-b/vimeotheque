@@ -1,5 +1,8 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-07-04 - Version 2.3.3
+- Updated Block Editor/React components to the new standards imposed by React (ie. removed defaultProps from components) and checked compatibility with WordPress 6.6.
+
 2024-05-23 - Version 2.3.2
 - Attempt to autoplay lazy-loaded videos when user clicks play. See https://developer.chrome.com/blog/autoplay/ for more details on autoplay.
 
