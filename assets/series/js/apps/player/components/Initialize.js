@@ -97,8 +97,4 @@ const Initialize = props => {
     )
 }
 
-Initialize.defaultProps = {
-	item: false
-}
-
 export default Initialize
