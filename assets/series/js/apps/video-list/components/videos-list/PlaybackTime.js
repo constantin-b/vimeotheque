@@ -43,6 +43,4 @@ const PlaybackTime = props => {
     )
 }
 
-PlaybackTime.defaultProps = {}
-
 export default PlaybackTime
