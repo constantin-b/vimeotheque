@@ -3,12 +3,13 @@ import VideoQuery from "./components/VideoQuery"
 import VideoImporter from "./components/VideoImporter";
 
 const {
-        render,
-        useState
-    } = wp.element,
-    { Placeholder, Spinner } = wp.components
+    element: {
+        createRoot,
+        useState,
+    }
+} = wp
 
-const VideoImportApp  = ( props ) => {
+const VideoImportApp  = () => {
 
     const [query, setQuery] = useState( '' )
     const [video, setVideo] = useState( false )
@@ -63,7 +64,5 @@ const VideoImportApp  = ( props ) => {
     )
 }
 
-render(
-    <VideoImportApp />,
-    document.getElementById('vimeotheque-import-video')
-)
+const root = createRoot( document.getElementById( 'vimeotheque-import-video' ) )
+root.render( <VideoImportApp /> )
