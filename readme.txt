@@ -1,8 +1,8 @@
 === Vimeotheque: Vimeo WordPress Plugin ===
 Contributors: codeflavors, constantin.boiangiu
-Tags: vimeo, video embed, video gallery, featured video, video post
+Tags: vimeo, video , video gallery, featured video, video post
 Requires at least: 5.2
-Tested up to: 6.5.3
+Tested up to: 6.6
 Requires PHP: 7.4
 Stable tag: 2.3.2
 License: GPLv2 or later
@@ -135,6 +135,9 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3.3 =
+- Updated Block Editor/React components to the new standards imposed by React (ie. removed defaultProps from components) and checked compatibility with WordPress 6.6.
+
 = 2.3.2 =
 - Attempt to autoplay lazy-loaded videos when user clicks play. See [https://developer.chrome.com/blog/autoplay/](https://developer.chrome.com/blog/autoplay/) for more details on autoplay.
 
