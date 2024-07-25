@@ -187,7 +187,14 @@ vimeotheque.series.themeList = () => {
     if( $('.vimeotheque-series.playlist.list').length > 0 ){
 
         $('.vimeotheque-series.playlist.list').each(
-            (index, item) => initiatePlaylist( item )
+            (index, item) => {
+
+                const withModal = $(item).data('modal')
+
+                if( withModal ) {
+                    initiatePlaylist(item)
+                }
+            }
         )
     }
 
