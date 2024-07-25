@@ -1,5 +1,5 @@
 import $ from 'jQuery'
-import './jquery-modal'
+import 'jquery-modal'
 
 
 /** @namespace vimeotheque */
