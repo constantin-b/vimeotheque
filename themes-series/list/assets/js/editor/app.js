@@ -36,6 +36,7 @@ addFilter(
     options => {
 
         options.columns = 3
+        options.playback = 'modal'
 
         return options
     }
@@ -46,5 +47,6 @@ addAction(
     'vimeotheque-theme-list-items-init',
     post => {
         dispatch( 'vimeotheque-series/playlist-options' ).updateOption( 'columns', post.columns )
+        dispatch( 'vimeotheque-series/playlist-options' ).updateOption( 'playback', post.playback )
     }
 )
