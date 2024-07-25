@@ -25,7 +25,13 @@ add_action(
     'rest_api_init',
     function(){
         $fields = [
-            'columns' => 3
+            'columns'   => 3,
+            /**
+             * Video playback type. Possible values:
+             * modal: Video click plays video in modal window;
+             * post: Video click opens the single video page.
+             */
+            'playback'  => 'modal',
         ];
 
         foreach ( $fields as $field => $default_value ) {
@@ -68,6 +74,7 @@ add_action(
 /**
  * Outputs element classes.
  *
+ * @param Playlist $playlist
  * @param string $class A given CSS class.
  * @param bool $echo Output the classes.
  * @return string
@@ -92,4 +99,50 @@ function css_classes( Playlist $playlist, $class = '', $echo = true ) {
     }
 
     return $output;
+}
+
+/**
+ * Output the video image.
+ *
+ * @param Playlist $playlist
+ * @param $size
+ * @return void
+ */
+function the_image( Playlist $playlist, $size = 'large' ){
+
+    $post = $playlist->post;
+
+    $playback = get_post_meta($post->ID, 'playback', true);
+
+    if( !$playback ){
+        $playback = 'modal';
+    }
+
+    $image = get_the_post_thumbnail( null, $size );
+
+    if( 'post' == $playback ){
+        $image = sprintf(
+            '<a href="%s" title="%s">%s</a>',
+            get_permalink(),
+            the_title_attribute(['echo' => false]),
+            $image
+        );
+    }
+
+    echo $image;
+}
+
+/**
+ * @param Playlist $playlist
+ * @return bool
+ */
+function has_modal( Playlist $playlist ){
+    $post = $playlist->post;
+
+    $playback = get_post_meta($post->ID, 'playback', true);
+    if( !$playback ){
+        $playback = 'modal';
+    }
+
+    return 'modal' == $playback;
 }
