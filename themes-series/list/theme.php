@@ -6,13 +6,15 @@
 
 use Vimeotheque_Series\Series\Playlist;
 use function Vimeotheque_Series\Theme_List\css_classes;
+use function Vimeotheque_Series\Theme_List\has_modal;
+use function Vimeotheque_Series\Theme_List\the_image;
 
 /**
  * @var WP_Query $query
  * @var Playlist $playlist
  */
 ?>
-<div class="<?php css_classes( $playlist,'vimeotheque-series playlist list', true ) ?>" data-shuffle="<?php echo esc_attr( $playlist->shuffle )?>">
+<div class="<?php css_classes( $playlist,'vimeotheque-series playlist list', true ) ?>" data-shuffle="<?php echo esc_attr( $playlist->shuffle )?>" data-modal="<?php echo (int) has_modal($playlist) ?>">
 
     <?php while( $query->have_posts() ): ?>
 
@@ -26,7 +28,7 @@ use function Vimeotheque_Series\Theme_List\css_classes;
 
     <?php if( 0 == $query->current_post ) :?>
 
-    <div class="video-items" data-modal="1">
+    <div class="video-items">
 
         <?php endif ;?>
 
@@ -46,7 +48,7 @@ use function Vimeotheque_Series\Theme_List\css_classes;
 
             </div><!-- .video-duration -->
 
-            <?php the_post_thumbnail( 'large' ); ?>
+            <?php the_image( $playlist, 'large' ); ?>
 
         </div><!-- .video-item -->
 
