@@ -3,6 +3,7 @@ const externals = {
     react: 'React',
     'react-dom': 'ReactDOM',
     lodash: 'lodash',
+    jquery: 'jQuery',
     jQuery: 'jQuery',
     Vimeo: 'Vimeo'
 };
@@ -46,7 +47,7 @@ module.exports = {
         path: __dirname,
         filename: '[name].js',
     },
-    externals,
+    externals: externals,
     module: {
         rules: [
             {
