@@ -1,0 +1,1 @@
+(()=>{var e=wp,t=e.hooks.addFilter,s=e.i18n.__;t("vimeotheque-series-theme-settings","vimeotheque-series-theme-carousel-settings",(function(e,t){return"carousel"==t&&(e=React.createElement("p",null,s("No available settings.","codeflavors-vimeo-video-post-lite"))),e}))})();
