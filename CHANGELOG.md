@@ -1,5 +1,9 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-07-26 - Version 2.3.4
+- Updated Series theme List options to allow direct navigation to the video post instead of opening the video into the modal window;
+- Created new Series theme called Carousel that uses script Flexslider by WooThemes.
+
 2024-07-04 - Version 2.3.3
 - Updated Block Editor/React components to the new standards imposed by React (ie. removed defaultProps from components) and checked compatibility with WordPress 6.6.
 
