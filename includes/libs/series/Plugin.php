@@ -142,6 +142,15 @@ class Plugin {
             )
         );
 
+        $this->themes->register_theme(
+            new Theme(
+                Helper::get_path() . 'themes-series/carousel/theme.php',
+                __('Carousel', 'codeflavors-vimeo-video-post-lite'),
+                'assets/js/script.js',
+                'assets/css/style.css'
+            )
+        );
+
         // Meta boxes
         $this->metaboxes = new Metabox_Factory(
             new Video_List_Metabox(
