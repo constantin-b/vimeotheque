@@ -42,6 +42,10 @@ module.exports = {
         // Theme List
         'themes-series/list/assets/js/script': './themes-series/list/assets/js/app/app.js',
         'themes-series/list/assets/js/editor': './themes-series/list/assets/js/editor/app.js',
+
+        // Theme Carousel
+        'themes-series/carousel/assets/js/script': './themes-series/carousel/assets/js/app/app.js',
+        'themes-series/carousel/assets/js/editor': './themes-series/carousel/assets/js/editor/app.js',
     },
     output: {
         path: __dirname,
