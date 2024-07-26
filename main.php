@@ -4,7 +4,7 @@
  * Plugin URI: https://vimeotheque.com
  * Description: Vimeotheque imports public Vimeo videos as WordPress posts. It is a perfect fit for membership, portfolio, online courses or any type of video collection.
  * Author: CodeFlavors
- * Version: 2.3.3
+ * Version: 2.3.4
  * Author URI: https://codeflavors.com
  * Text Domain: codeflavors-vimeo-video-post-lite
  * Domain Path: /languages
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'VIMEOTHEQUE_FILE', __FILE__ );
 define( 'VIMEOTHEQUE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIMEOTHEQUE_URL', plugin_dir_url( __FILE__ ) );
-define( 'VIMEOTHEQUE_VERSION', '2.3.3' );
+define( 'VIMEOTHEQUE_VERSION', '2.3.4' );
 define( 'VIMEOTHEQUE_TEMPLATE_DEBUG_MODE', false );
 /**
  * Minimum WP version.
