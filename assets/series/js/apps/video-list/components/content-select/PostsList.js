@@ -143,7 +143,7 @@ const PostsList = ({
 			}
 
 			{
-				isLoading &&
+				items.length == 0 && isLoading &&
 				<>
 					<Spinner /> {__('Loading videos, please wait...', 'codeflavors-vimeo-video-post-lite')}
 				</>
@@ -170,6 +170,15 @@ const PostsList = ({
 								>
 									{ sprintf( _n( '%d selected', '%d selected', items.length, 'codeflavors-vimeo-video-post-lite' ), items.length ) }
 								</FlexItem>
+
+								{
+									isLoading &&
+									<FlexItem
+										isBlock={true}
+									>
+										<Spinner /> {__('Loading videos, please wait...', 'codeflavors-vimeo-video-post-lite')}
+									</FlexItem>
+								}
 
 								<FlexItem>
 									<Button
