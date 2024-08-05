@@ -4,7 +4,7 @@ Tags: vimeo, video , video gallery, featured video, video post
 Requires at least: 5.2
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 2.3.4
+Stable tag: 2.3.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,8 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3.4.1 =
+- Fixed a pagination issue in Series that prevented video posts from being displayed when selecting content.
 
 = 2.3.4 =
 - Updated Series theme List options to allow direct navigation to the video post instead of opening the video into the modal window;
