@@ -87,7 +87,7 @@ const PostsList = ({
 
 	useEffect(
 		() => {
-			if( loadMore ){
+			if( !isLoading && loadMore ){
 				if( page + 1 <= totalPages ){
 					dispatch( 'vimeotheque-series/app-options' ).updateOption('currentPage', page+1 )
 				}
