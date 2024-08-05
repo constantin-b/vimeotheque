@@ -1,5 +1,8 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-08-05 - Version 2.3.4.1
+- Fixed a pagination issue in Series that prevented video posts from being displayed when selecting content.
+
 2024-07-26 - Version 2.3.4
 - Updated Series theme List options to allow direct navigation to the video post instead of opening the video into the modal window;
 - Created new Series theme called Carousel that uses script Flexslider by WooThemes.
