@@ -1,5 +1,10 @@
 *** Vimeotheque Lite Changelog ***
 
+2024-08-27 - Version 2.3.4.2
+- Implemented shortcode support for Series playlists;
+- Implemented shortcode display in Series playlist edit screen;
+- Added theme Carousel script to namespace "vimeotheque".
+
 2024-08-05 - Version 2.3.4.1
 - Fixed a pagination issue in Series that prevented video posts from being displayed when selecting content.
 
