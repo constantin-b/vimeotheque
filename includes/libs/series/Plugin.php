@@ -9,12 +9,14 @@ use Vimeotheque_Series\Admin\Admin;
 use Vimeotheque_Series\Admin\Metabox\Metabox_Factory;
 use Vimeotheque_Series\Admin\Metabox\Player_Metabox;
 use Vimeotheque_Series\Admin\Metabox\Post_Actions;
+use Vimeotheque_Series\Admin\Metabox\Shortcode_Metabox;
 use Vimeotheque_Series\Admin\Metabox\Theme_Metabox;
 use Vimeotheque_Series\Admin\Metabox\Video_List_Metabox;
 use Vimeotheque_Series\Post_Type\Series;
 use Vimeotheque_Series\Rest_Api\Rest_Endpoint_Factory;
 use Vimeotheque_Series\Rest_Api\Series_Rest_Fields;
 use Vimeotheque_Series\Series\Block_Editor;
+use Vimeotheque_Series\Series\Playlist;
 use Vimeotheque_Series\Series\Single_Post;
 use Vimeotheque_Series\Themes\Theme;
 
@@ -106,6 +108,26 @@ class Plugin {
 			$this,
 			'init_admin'
 		], -99 );
+
+        add_action(
+            'init',
+            function(){
+                add_shortcode(
+                    'vimeotheque_series',
+                    function( $atts ){
+
+                        if( isset( $atts['id'] ) ){
+                            $post = get_post($atts['id']);
+                            if( $post && 'series' == $post->post_type && 'publish' == $post->post_status ){
+                                $playlist = new Playlist($atts['id'] );
+                                return $playlist->get_content();
+                            }
+                        }
+                    }
+                );
+            }
+        );
+
 	}
 
 	/**
@@ -181,6 +203,15 @@ class Plugin {
             new Player_Metabox(
                 'vimeotheque-series-player-metabox',
                 esc_html__('Video Player', 'codeflavors-vimeo-video-post-lite'),
+                $this->post_type->get_post_name(),
+                'side'
+            )
+        );
+
+        $this->metaboxes->register_meta_box(
+            new Shortcode_Metabox(
+                'vimeotheque-series-shortcode-metabox',
+                esc_html__( 'Shortcode', 'codeflavors-vimeo-video-post-lite' ),
                 $this->post_type->get_post_name(),
                 'side'
             )
