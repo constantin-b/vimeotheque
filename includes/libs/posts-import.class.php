@@ -224,7 +224,7 @@ class Posts_Import{
 
 		$video_ids = [];
 		foreach( $raw_feed as $video ){
-			$video_ids[] = $video['video_id'];
+			$video_ids[] = preg_replace( '/[^a-zA-Z0-9]/', '', $video['video_id'] );
 		}
 		/**
 		 * @var \WP_Query
