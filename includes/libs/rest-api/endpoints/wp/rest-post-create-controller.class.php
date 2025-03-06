@@ -64,13 +64,20 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 			);
 		}
 
+        if( !is_string( $video['video_id'] ) || !ctype_alnum( $video['video_id'] ) ){
+            return new \WP_Error(
+                'vimeotheque_malformed_video_id',
+                __('There was an error with your request, please try again. If this error persists, please contact the server administrator.', 'codeflavors-vimeo-video-post-lite')
+            );
+        }
+
 		$duplicates = Plugin::instance()
-      ->get_posts_importer()
-      ->get_duplicate_posts(
-				[ $video ],
-				Plugin::instance()->get_cpt()->get_post_type(),
-				$request
-			);
+          ->get_posts_importer()
+          ->get_duplicate_posts(
+                    [ $video ],
+                    Plugin::instance()->get_cpt()->get_post_type(),
+                    $request
+                );
 
 		if( $duplicates ){
 			$post_id = $duplicates[ $video['video_id'] ][0];
@@ -95,10 +102,10 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		}
 
 		$import_post_id = Plugin::instance()
-      ->get_posts_importer()
-      ->import_video(
-				$params
-			);
+          ->get_posts_importer()
+          ->import_video(
+                    $params
+                );
 
 		if( !$import_post_id ){
 			return new \WP_Error(
