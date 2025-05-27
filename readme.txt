@@ -2,9 +2,9 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video , video gallery, featured video, video post
 Requires at least: 5.2
-Tested up to: 6.6
+Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 2.3.4.3
+Stable tag: 2.3.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
