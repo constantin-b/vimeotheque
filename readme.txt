@@ -135,6 +135,9 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3.4.4 =
+- Solved a bug that emitted errors when allowing permissions.
+
 = 2.3.4.3 =
 - Solved a bug that could allow SQL injection in certain special cases.
 

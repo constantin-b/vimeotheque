@@ -1,5 +1,8 @@
 *** Vimeotheque Lite Changelog ***
 
+2025-05-27 - Version 2.3.4.4
+- Solved a bug that emitted errors when allowing permissions.
+
 2025-03-06 - Version 2.3.4.3
 - Solved a bug that could allow SQL injection in certain special cases.
 
