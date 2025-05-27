@@ -245,9 +245,11 @@ class Admin{
 		$capabilities = $this->get_capability();
 		// admin always has access
 		$admin = get_role('administrator');
-		foreach ( $capabilities as $cap ) {
-			$admin->add_cap( $cap['capability'] );
-		}
+        if( $admin ) {
+            foreach ($capabilities as $cap) {
+                $admin->add_cap($cap['capability']);
+            }
+        }
 
 		$roles = $this->get_roles();
 		foreach( $roles as $role => $name ){
