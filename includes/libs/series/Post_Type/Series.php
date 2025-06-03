@@ -18,7 +18,7 @@ class Series extends Abstract_Post_Type implements Interface_Post_Type {
 
 		parent::__construct( 'series' );
 
-		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'init', [ $this, 'register_post_type' ] );
 	}
 
 	public function register_post_type() {
@@ -68,7 +68,7 @@ class Series extends Abstract_Post_Type implements Interface_Post_Type {
 	 * @return array
 	 */
 	private function get_labels() {
-		return array(
+		return [
 			'name'               => _x( 'Video Series', 'Video Series', 'codeflavors-vimeo-video-post-lite' ),
 			'singular_name'      => _x( 'Video Series', 'Video Series', 'codeflavors-vimeo-video-post-lite' ),
 			'add_new'            => _x( 'Add New', 'Series', 'codeflavors-vimeo-video-post-lite' ),
@@ -82,6 +82,6 @@ class Series extends Abstract_Post_Type implements Interface_Post_Type {
 			'not_found_in_trash' => __( 'No Series in trash', 'codeflavors-vimeo-video-post-lite' ),
 			'parent_item_colon'  => '',
 			'menu_name'          => __( 'Series', 'codeflavors-vimeo-video-post-lite' ),
-		);
+		];
 	}
 }

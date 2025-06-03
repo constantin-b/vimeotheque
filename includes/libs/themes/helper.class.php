@@ -95,7 +95,7 @@ class Helper {
 		$classes = apply_filters(
 			'vimeotheque\themes\image_class',
 			// class no-lazy is needed for W3 Total Cache to avoid lazy loading images and breaking scripts
-			array( 'vimeotheque-playlist', 'image', 'no-lazy' ),
+			[ 'vimeotheque-playlist', 'image', 'no-lazy' ],
 			self::current_video_post()
 		);
 
@@ -320,13 +320,13 @@ class Helper {
 
 		$options = $video->get_embed_options();
 
-		$data = array(
+		$data = [
 			'video_id'     => $video->video_id,
 			'autoplay'     => $options['autoplay'],
 			'volume'       => $options['volume'],
 			'size_ratio'   => $video->size['ratio'],
 			'aspect_ratio' => $options['aspect_ratio'],
-		);
+		];
 
 		$output = \Vimeotheque\Helper::data_attributes( $data, false );
 

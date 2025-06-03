@@ -65,10 +65,10 @@ class Front_End {
 		// filter content to embed video
 		add_filter(
 			'the_content',
-			array(
+			[
 				$this,
 				'embed_video',
-			),
+			],
 			$this->embed_filter_priority,
 			1
 		);
@@ -76,18 +76,18 @@ class Front_End {
 		// add player script
 		add_action(
 			'wp_print_scripts',
-			array(
+			[
 				$this,
 				'add_player_script',
-			)
+			]
 		);
 
 		add_action(
 			'post_thumbnail_html',
-			array(
+			[
 				$this,
 				'filter_thumbnail_html',
-			),
+			],
 			10,
 			2
 		);
@@ -100,10 +100,10 @@ class Front_End {
 		if ( ! is_admin() ) {
 			add_filter(
 				'get_the_terms',
-				array(
+				[
 					$this,
 					'filter_video_terms',
-				),
+				],
 				10,
 				3
 			);
@@ -159,10 +159,10 @@ class Front_End {
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
 		add_filter(
 			'the_content',
-			array(
+			[
 				$GLOBALS['wp_embed'],
 				'autoembed',
-			),
+			],
 			8
 		);
 

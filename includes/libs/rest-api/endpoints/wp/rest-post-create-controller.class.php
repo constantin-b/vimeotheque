@@ -72,8 +72,8 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
         }
 
 		$duplicates = Plugin::instance()
-          ->get_posts_importer()
-          ->get_duplicate_posts(
+      ->get_posts_importer()
+      ->get_duplicate_posts(
                     [ $video ],
                     Plugin::instance()->get_cpt()->get_post_type(),
                     $request
@@ -102,8 +102,8 @@ class Rest_Post_Create_Controller extends Rest_Controller_Abstract implements Re
 		}
 
 		$import_post_id = Plugin::instance()
-          ->get_posts_importer()
-          ->import_video(
+      ->get_posts_importer()
+      ->import_video(
                     $params
                 );
 

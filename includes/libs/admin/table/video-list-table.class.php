@@ -190,11 +190,11 @@ class Video_List_Table extends \WP_List_Table {
 			$out = [];
 			foreach ( $terms as $t ) {
 				$url = add_query_arg(
-					array(
+					[
 						'view' => Helper::get_var( 'view', 'GET' ) ? Helper::get_var( 'view', 'GET' ) : Plugin::instance()->get_cpt()->get_post_type(),
 						'page' => 'cvm_videos',
 						'cat'  => $t->term_id,
-					),
+					],
 					'edit.php'
 				);
 
@@ -240,7 +240,7 @@ class Video_List_Table extends \WP_List_Table {
 			$selected = $_GET['cat'];
 		}
 
-		$args              = array(
+		$args              = [
 			//'show_option_all' => __('Most recent videos', 'codeflavors-vimeo-video-post-lite'),
 			'show_option_none'  => __( 'Most recent videos', 'codeflavors-vimeo-video-post-lite' ),
 			'option_none_value' => 0,
@@ -252,7 +252,7 @@ class Video_List_Table extends \WP_List_Table {
 			'hide_empty'        => false,
 			'hide_if_empty'     => false,
 			'echo'              => false,
-		);
+		];
 		$categories_select = wp_dropdown_categories( $args );
 		if ( ! $categories_select ) {
 			return;
@@ -277,7 +277,7 @@ class Video_List_Table extends \WP_List_Table {
 		$url = menu_page_url( 'cvm_videos', false ) . '&view=%s';
 		$lt  = '<a href="' . $url . '" title="%s" class="%s">%s</a>';
 
-		$views = array();
+		$views = [];
 
 		foreach ( Plugin::instance()->get_registered_post_types()->get_post_types() as $_post_type ) {
 			$views[] = sprintf(
@@ -326,14 +326,14 @@ class Video_List_Table extends \WP_List_Table {
 	 * @see WP_List_Table::get_columns()
 	 */
 	function get_columns() {
-		$columns = array(
+		$columns = [
 			'cb'         => '<input type="checkbox" class="cvm-video-list-select-all" />',
 			'post_title' => __( 'Title', 'codeflavors-vimeo-video-post-lite' ),
 			'video_id'   => __( 'Video ID', 'codeflavors-vimeo-video-post-lite' ),
 			'duration'   => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
 			'category'   => __( 'Category', 'codeflavors-vimeo-video-post-lite' ),
 			'post_date'  => __( 'Date', 'codeflavors-vimeo-video-post-lite' ),
-		);
+		];
 		return $columns;
 	}
 
@@ -345,10 +345,10 @@ class Video_List_Table extends \WP_List_Table {
 	function prepare_items() {
 
 		$columns  = $this->get_columns();
-		$hidden   = array();
+		$hidden   = [];
 		$sortable = $this->get_sortable_columns();
 
-		$this->_column_headers = array( $columns, $hidden, $sortable );
+		$this->_column_headers = [ $columns, $hidden, $sortable ];
 
 		$per_page     = 20;
 		$current_page = $this->get_pagenum();
@@ -363,7 +363,7 @@ class Video_List_Table extends \WP_List_Table {
 			$category = $_GET['cat'];
 		}
 
-		$args = array(
+		$args = [
 			'post_type'      => $this->post_type,
 			'orderby'        => 'post_date',
 			'order'          => 'DESC',
@@ -371,25 +371,25 @@ class Video_List_Table extends \WP_List_Table {
 			'offset'         => ( $current_page - 1 ) * $per_page,
 			'post_status'    => 'publish',
 			's'              => $search_for,
-		);
+		];
 		if ( 'post' == $this->post_type ) {
-			$args['meta_query'] = array(
+			$args['meta_query'] = [
 				[
 					'key'     => '__cvm_is_video',
 					'value'   => true,
 					'compare' => '==',
 				],
-			);
+			];
 		}
 
 		if ( $category ) {
-			$args['tax_query'] = array(
+			$args['tax_query'] = [
 				[
 					'taxonomy' => $this->taxonomy,
 					'field'    => 'id',
 					'terms'    => $category,
 				],
-			);
+			];
 		}
 
 		// remove all filters added by third party plugins or themes
@@ -398,7 +398,7 @@ class Video_List_Table extends \WP_List_Table {
 		// run the query
 		$query = new WP_Query( $args );
 
-		$data = array();
+		$data = [];
 		if ( $query->posts ) {
 			foreach ( $query->posts as $k => $item ) {
 				$data[ $k ] = (array) $item;
@@ -409,11 +409,11 @@ class Video_List_Table extends \WP_List_Table {
 		$this->items = $data;
 
 		$this->set_pagination_args(
-			array(
+			[
 				'total_items' => $total_items,
 				'per_page'    => $per_page,
 				'total_pages' => ceil( $total_items / $per_page ),
-			)
+			]
 		);
 	}
 }

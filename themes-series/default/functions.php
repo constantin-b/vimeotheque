@@ -13,7 +13,7 @@ add_action(
 		wp_enqueue_script(
 			'vimeotheque-series-theme-default-editor',
 			Helper::get_url() . 'themes-series/default/assets/js/editor.js',
-			array( 'wp-element', 'wp-editor', 'lodash' ),
+			[ 'wp-element', 'wp-editor', 'lodash' ],
 			Helper::get_version()
 		);
 	}

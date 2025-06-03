@@ -28,7 +28,7 @@ class Rest_Endpoint_Factory {
 	public function __construct() {
 		add_action(
 			'rest_api_init',
-			array( $this, 'init' )
+			[ $this, 'init' ]
 		);
 	}
 

@@ -26,10 +26,10 @@ class Admin {
 	public function __construct() {
 		add_action(
 			'wp_loaded',
-			array(
+			[
 				$this,
 				'init',
-			),
+			],
 			0
 		);
 	}
@@ -64,7 +64,7 @@ class Admin {
 				if ( Plugin::instance()->get_post_type()->get_post_name() == $post->post_type ) {
 					$script_handle = Helper::enqueue_script(
 						'post-title',
-						array( 'wp-element', 'wp-editor', 'lodash' ),
+						[ 'wp-element', 'wp-editor', 'lodash' ],
 						true
 					);
 

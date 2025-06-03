@@ -150,8 +150,8 @@ class Post_Type {
 
 		$this->category_taxonomy = register_taxonomy(
 			$this->taxonomy,
-			array( $this->post_type ),
-			array(
+			[ $this->post_type ],
+			[
 				'public'            => $is_public,
 				'show_ui'           => true,
 				'show_in_nav_menus' => $is_public,
@@ -165,7 +165,7 @@ class Post_Type {
 				'capabilities'      => [ 'edit_posts' ],
 				'labels'            => $cat_labels,
 				'query_var'         => true,
-			)
+			]
 		);
 
 		/**
@@ -192,8 +192,8 @@ class Post_Type {
 
 		register_taxonomy(
 			$this->tag,
-			array( $this->post_type ),
-			array(
+			[ $this->post_type ],
+			[
 				'public'            => $is_public,
 				'show_ui'           => true,
 				'show_in_nav_menus' => $is_public,
@@ -207,7 +207,7 @@ class Post_Type {
 				'capabilities'      => [ 'edit_posts' ],
 				'labels'            => $tag_labels,
 				'query_var'         => true,
-			)
+			]
 		);
 	}
 

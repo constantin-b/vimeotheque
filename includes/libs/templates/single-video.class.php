@@ -21,7 +21,7 @@ class Single_Video {
 
 		add_action(
 			'wp_head',
-			array( $this, 'add_scripts' )
+			[ $this, 'add_scripts' ]
 		);
 
 		add_filter(

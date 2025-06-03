@@ -106,10 +106,10 @@ class Plugin {
 
 		add_action(
 			'init',
-			array(
+			[
 				$this,
 				'init_admin',
-			),
+			],
 			-99
 		);
 

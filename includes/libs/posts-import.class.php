@@ -68,7 +68,7 @@ class Posts_Import {
 			'skipped'  => 0,
 			'total'    => count( $raw_feed ),
 			'ids'      => [],
-			'error'    => array(),
+			'error'    => [],
 		];
 
 		$duplicates = $this->get_duplicate_posts( $raw_feed, $this->post_type->get_post_type() );

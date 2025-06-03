@@ -39,10 +39,10 @@ class Post_Edit_Page {
 
 		add_action(
 			'admin_enqueue_scripts',
-			array(
+			[
 				$this,
 				'current_screen',
-			),
+			],
 			-999999999
 		);
 
@@ -50,29 +50,29 @@ class Post_Edit_Page {
 		//*
 		add_action(
 			'load-post-new.php',
-			array(
+			[
 				$this,
 				'post_new_onload',
-			)
+			]
 		);
 		//*/
 
 		// Gutenberg action
 		add_action(
 			'enqueue_block_editor_assets',
-			array(
+			[
 				$this,
 				'block_editor_assets',
-			)
+			]
 		);
 
 		// save data from meta boxes
 		add_action(
 			'save_post',
-			array(
+			[
 				$this,
 				'save_post',
-			),
+			],
 			10,
 			2
 		);
@@ -163,7 +163,7 @@ class Post_Edit_Page {
 			wp_enqueue_script(
 				$handle,
 				VIMEOTHEQUE_URL . 'assets/back-end/js/apps/add_video/app.build.js',
-				array( 'wp-element', 'wp-editor' ),
+				[ 'wp-element', 'wp-editor' ],
 				'1.0'
 			);
 
@@ -198,7 +198,7 @@ class Post_Edit_Page {
 			wp_enqueue_style(
 				'vimeotheque-import-video-react-app',
 				VIMEOTHEQUE_URL . 'assets/back-end/js/apps/add_video/style.css',
-				array( 'wp-editor' )
+				[ 'wp-editor' ]
 			);
 
 			wp_enqueue_style( 'wp-editor' );

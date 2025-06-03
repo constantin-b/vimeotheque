@@ -21,7 +21,7 @@ class Video_Position extends Shortcode_Abstract implements Shortcode_Interface {
 	public function __construct( $name ) {
 		parent::__construct( $name );
 
-		add_filter( 'the_content', array( $this, 'search_shortcode' ), -99999999 );
+		add_filter( 'the_content', [ $this, 'search_shortcode' ], -99999999 );
 	}
 
 	public function search_shortcode( $content ) {

@@ -62,7 +62,7 @@ class Template_Loader {
 		} elseif ( is_post_type_archive() ) {
 			$pt = get_query_var( 'post_type' );
 			if ( ! is_array( $pt ) ) {
-				$pt = array( $pt );
+				$pt = [ $pt ];
 			}
 
 			if ( in_array( Plugin::instance()->get_cpt()->get_post_type(), $pt ) ) {
@@ -81,7 +81,7 @@ class Template_Loader {
 
 	private function get_template_loader_files( $default_file ) {
 
-		$templates = array();
+		$templates = [];
 
 		if ( is_singular( Plugin::instance()->get_cpt()->get_post_type() ) ) {
 			$object       = get_queried_object();

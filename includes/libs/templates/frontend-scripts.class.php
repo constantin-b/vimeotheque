@@ -19,12 +19,12 @@ class Frontend_Scripts {
 
 		add_action(
 			'wp_enqueue_scripts',
-			array( $this, 'enqueue_styles' )
+			[ $this, 'enqueue_styles' ]
 		);
 
 		add_action(
 			'wp_enqueue_scripts',
-			array( $this, 'enqueue_scripts' )
+			[ $this, 'enqueue_scripts' ]
 		);
 	}
 
@@ -64,12 +64,12 @@ class Frontend_Scripts {
 		return apply_filters(
 			'vimeotheque\templates\enqueue_styles',
 			[
-				'vimeotheque-styles' => array(
+				'vimeotheque-styles' => [
 					'src'     => \Vimeotheque\Helper::get_url() . 'assets/front-end/css/vimeotheque.css',
 					'deps'    => '',
 					'version' => \Vimeotheque\Helper::get_plugin_version(),
 					'media'   => 'all',
-				),
+				],
 			]
 		);
 	}
@@ -86,7 +86,7 @@ class Frontend_Scripts {
 				wp_enqueue_script(
 					'vimeotheque-end-video-card',
 					\Vimeotheque\Helper::get_url() . 'assets/front-end/js/load-next-video.js',
-					array( 'jquery', 'cvm-video-player' ),
+					[ 'jquery', 'cvm-video-player' ],
 					\Vimeotheque\Helper::get_plugin_version(),
 					true
 				);

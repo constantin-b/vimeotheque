@@ -136,7 +136,7 @@ class Helper {
 				'2.11'
 			);
 
-			$js_dependency = $js_dependency ? array( 'jquery', 'vimeo-video-player-sdk', $js_dependency ) : array( 'jquery', 'vimeo-video-player-sdk' );
+			$js_dependency = $js_dependency ? [ 'jquery', 'vimeo-video-player-sdk', $js_dependency ] : [ 'jquery', 'vimeo-video-player-sdk' ];
 
 			wp_enqueue_script(
 				'cvm-video-player',
@@ -170,7 +170,7 @@ class Helper {
 		$width = absint( $width );
 
 		$override = Plugin::instance()->get_embed_options_obj()
-			->get_option( 'aspect_override' );
+      ->get_option( 'aspect_override' );
 
 		if ( ! is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ) {
 			$height = floor( $width / $ratio );
@@ -205,7 +205,7 @@ class Helper {
 		$height = absint( $height );
 
 		$override = Plugin::instance()->get_embed_options_obj()
-			->get_option( 'aspect_override' );
+      ->get_option( 'aspect_override' );
 
 		if ( ! is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ) {
 			$width = floor( $height * $ratio );

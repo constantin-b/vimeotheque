@@ -152,18 +152,18 @@ class Plugin {
 		// activation hook to add the rewrite rules for the custom post type
 		register_activation_hook(
 			VIMEOTHEQUE_FILE,
-			array(
+			[
 				$this,
 				'activation_hook',
-			)
+			]
 		);
 
 		add_action(
 			'plugins_loaded',
-			array(
+			[
 				$this,
 				'init',
-			),
+			],
 			1
 		);
 
@@ -172,10 +172,10 @@ class Plugin {
 		// in admin page can also run
 		add_action(
 			'init',
-			array(
+			[
 				$this,
 				'admin_init',
-			),
+			],
 			-9999999
 		);
 
@@ -348,7 +348,7 @@ class Plugin {
 	 * Set plugin options
 	 */
 	private function set_plugin_options() {
-		$defaults = array(
+		$defaults = [
 			'enable_templates'   => false, // use the video templates for themes
 			'public'             => true, // post type is public or not
 			'archives'           => false, // display video embed on archive pages
@@ -367,7 +367,7 @@ class Plugin {
 			'vimeo_consumer_key' => '',
 			'vimeo_secret_key'   => '',
 			'oauth_token'        => '', // retrieved from Vimeo; gets set after entering valid client ID and client secret
-		);
+		];
 
 		/**
 		 * Options filter.
@@ -386,7 +386,7 @@ class Plugin {
 	 * Set video player options
 	 */
 	private function set_player_options() {
-		$defaults = array(
+		$defaults = [
 			'title'           => 1,   // show video title
 			'byline'          => 1,  // show player controls. Values: 0 or 1
 			'portrait'        => 1,    // show author image
@@ -411,7 +411,7 @@ class Plugin {
 			'muted'           => false, // load video muted
 			'background'      => false, // load video in background mode (hides controls and mutes video)
 			'transparent'     => false, // video embed should be with background (false) or without it (true)
-		);
+		];
 
 		/**
 		 * Player options filter.

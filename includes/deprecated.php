@@ -415,7 +415,7 @@ function _deprecatead_settings_page_load_event( $options ) {
 	 */
 	do_action_deprecated(
 		'cvm_settings_on_load',
-		array( $options ),
+		[ $options ],
 		'2.0',
 		'vimeotheque\admin\page\settings_load'
 	);
@@ -438,7 +438,7 @@ function _deprecated_settings_tabs( $tabs ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_register_plugin_settings_tab',
-		array( $tabs ),
+		[ $tabs ],
 		'2.0',
 		'vimeotheque\admin\page\settings_tabs'
 	);
@@ -460,7 +460,7 @@ function _deprecated_embed_filter_priority( $priority ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_plugin_embed_content_filter_priority',
-		array( $priority ),
+		[ $priority ],
 		'2.0',
 		'vimeotheque\embed_filter_priority'
 	);
@@ -481,7 +481,7 @@ function _deprecated_allow_video_embed( $allow ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_automatic_video_embed',
-		array( $allow ),
+		[ $allow ],
 		'2.0',
 		'vimeotheque\post_content_embed'
 	);
@@ -502,7 +502,7 @@ function _deprecated_vimeo_access_token( $token ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_vimeo_access_token',
-		array( $token ),
+		[ $token ],
 		'2.0',
 		'vimeotheque\vimeo_api\access_token'
 	);
@@ -542,7 +542,7 @@ function _deprecated_image_timeout( $timeout ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_image_request_timeout',
-		array( $timeout ),
+		[ $timeout ],
 		'2.0',
 		'vimeotheque\image_request_timeout'
 	);
@@ -620,7 +620,7 @@ function _deprecated_post_format( $format ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_import_post_format',
-		array( $format ),
+		[ $format ],
 		'2.0',
 		'vimeotheque\import_post_format'
 	);
@@ -822,7 +822,7 @@ function _deprecated_request_timeout( $timeout ) {
 	 */
 	return apply_filters_deprecated(
 		'cvm_feed_request_timeout',
-		array( $timeout ),
+		[ $timeout ],
 		'2.0',
 		'vimeotheque\vimeo_api\request_timeout'
 	);
@@ -986,7 +986,7 @@ function _deprecated_video_list_scripts() {
 	 */
 	do_action_deprecated(
 		'cvm_video_list_modal_print_scripts',
-		array(),
+		[],
 		'2.0',
 		'vimeotheque\admin\video_list_modal_print_scripts'
 	);

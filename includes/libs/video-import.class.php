@@ -100,7 +100,7 @@ class Video_Import {
 		$entries     = [];
 		foreach ( $raw_entries as $entry ) {
 			$_entry = $this->api->get_api_resource()
-				->get_formatted_entry( $entry );
+       ->get_formatted_entry( $entry );
 
 			if ( ! is_null( $_entry ) ) {
 				$entries[] = $_entry;

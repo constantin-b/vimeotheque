@@ -15,7 +15,7 @@ add_action(
 		wp_enqueue_script(
 			'vimeotheque-series-theme-carousel-editor',
 			Helper::get_url() . 'themes-series/carousel/assets/js/editor.js',
-			array( 'wp-element', 'wp-editor', 'lodash' ),
+			[ 'wp-element', 'wp-editor', 'lodash' ],
 			Helper::get_version()
 		);
 	}

@@ -107,63 +107,63 @@ class Resource_Objects {
 				'label'     => __( 'Newest', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'date',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'alphabetical_asc'  => [
 				'label'     => __( 'Alphabetical &#x1F81D;', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'alphabetical',
 				'direction' => 'asc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'alphabetical_desc' => [
 				'label'     => __( 'Alphabetical &#x1F81F;', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'alphabetical',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
 
 			'duration'          => [
 				'label'     => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'duration',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'old'               => [
 				'label'     => __( 'Oldest', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'date',
 				'direction' => 'asc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'played'            => [
 				'label'     => __( 'Plays', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'plays',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'likes'             => [
 				'label'     => __( 'Likes', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'likes',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'comments'          => [
 				'label'     => __( 'Comments', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'comments',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
 			'relevant'          => [
 				'label'     => __( 'Relevancy', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'relevant',
 				'direction' => 'desc',
-				'resources' => array(),
+				'resources' => [],
 			],
-			'default'           => array(
+			'default'           => [
 				'label'     => __( 'Default order', 'codeflavors-vimeo-video-post-lite' ),
 				'sort'      => 'default',
 				'direction' => false,
-				'resources' => array(),
-			),
+				'resources' => [],
+			],
 		];
 	}
 

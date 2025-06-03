@@ -408,7 +408,7 @@ class Video_Post {
 			return;
 		}
 
-		$statuses = array( 'publish', 'pending', 'draft', 'private' );
+		$statuses = [ 'publish', 'pending', 'draft', 'private' ];
 		if ( ! in_array( $post_status, $statuses ) ) {
 			trigger_error(
 				sprintf(

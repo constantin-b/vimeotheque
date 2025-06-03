@@ -44,46 +44,46 @@ class Classic_Editor {
 		// create edit meta boxes
 		add_action(
 			'admin_head',
-			array(
+			[
 				$this,
 				'add_meta_boxes',
-			)
+			]
 		);
 
 		// shortcode modal window output
 		add_action(
 			'admin_footer',
-			array(
+			[
 				$this,
 				'shortcode_modal',
-			)
+			]
 		);
 
 		// add tinymce plugin
 		add_action(
 			'admin_head',
-			array(
+			[
 				$this,
 				'tinymce',
-			)
+			]
 		);
 
 		// assets needed in various pages
 		add_action(
 			'admin_enqueue_scripts',
-			array(
+			[
 				$this,
 				'post_edit_assets',
-			)
+			]
 		);
 
 		// post thumbnails
 		add_filter(
 			'admin_post_thumbnail_html',
-			array(
+			[
 				$this,
 				'post_thumbnail_meta_panel',
-			),
+			],
 			10,
 			2
 		);
@@ -695,17 +695,17 @@ class Classic_Editor {
 
 			add_filter(
 				'mce_external_plugins',
-				array(
+				[
 					$this,
 					'tinymce_plugins',
-				)
+				]
 			);
 			add_filter(
 				'mce_buttons',
-				array(
+				[
 					$this,
 					'tinymce_buttons',
-				)
+				]
 			);
 		}
 	}

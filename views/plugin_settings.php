@@ -291,15 +291,15 @@ use Vimeotheque\Helper;
 							<th scope="row"><label for="import_status"><?php _e( 'Import status', 'codeflavors-vimeo-video-post-lite' ); ?>:</label></th>
 							<td>
 								<?php
-									$args = array(
-										'options'  => array(
+									$args = [
+										'options'  => [
 											'publish' => __( 'Published', 'codeflavors-vimeo-video-post-lite' ),
 											'draft'   => __( 'Draft', 'codeflavors-vimeo-video-post-lite' ),
 											'pending' => __( 'Pending', 'codeflavors-vimeo-video-post-lite' ),
-										),
+										],
 										'name'     => 'import_status',
 										'selected' => $options['import_status'],
-									);
+									];
 									Helper_Admin::select( $args );
 									?>
 								<p class="description"><?php _e( 'Imported videos will have this status.', 'codeflavors-vimeo-video-post-lite' ); ?></p>
@@ -335,12 +335,12 @@ use Vimeotheque\Helper;
 							<td>
 								<label for="cvm_aspect_ratio"><?php _e( 'Aspect ratio', 'codeflavors-vimeo-video-post-lite' ); ?> :</label>
 								<?php
-									$args = array(
+									$args = [
 										'name'     => 'aspect_ratio',
 										'id'       => 'cvm_aspect_ratio',
 										'class'    => 'cvm_aspect_ratio',
 										'selected' => $player_opt['aspect_ratio'],
-									);
+									];
 									Helper_Admin::aspect_ratio_select( $args );
 									?>
 								<label for="cvm_width"><?php _e( 'Width', 'codeflavors-vimeo-video-post-lite' ); ?> :</label>
@@ -371,16 +371,16 @@ use Vimeotheque\Helper;
 							<th><label for="cvm_video_position"><?php _e( 'Display video', 'codeflavors-vimeo-video-post-lite' ); ?>:</label></th>
 							<td>
 								<?php
-								$args = array(
-									'options'  => array(
+								$args = [
+									'options'  => [
 										'above-content' => __( 'Above post content', 'codeflavors-vimeo-video-post-lite' ),
 										'below-content' => __( 'Below post content', 'codeflavors-vimeo-video-post-lite' ),
 										'replace-featured-image' => __( 'Replace featured image', 'codeflavors-vimeo-video-post-lite' ),
-									),
+									],
 									'name'     => 'video_position',
 									'id'       => 'cvm_video_position',
 									'selected' => $player_opt['video_position'],
-								);
+								];
 								Helper_Admin::select( $args );
 								?>
 							</td>
@@ -410,16 +410,16 @@ use Vimeotheque\Helper;
 							<th><label for="cvm_video_align"><?php _e( 'Align video', 'codeflavors-vimeo-video-post-lite' ); ?>:</label></th>
 							<td>
 								<?php
-								$args = array(
-									'options'  => array(
+								$args = [
+									'options'  => [
 										'align-left'   => __( 'Left', 'codeflavors-vimeo-video-post-lite' ),
 										'align-center' => __( 'Center', 'codeflavors-vimeo-video-post-lite' ),
 										'align-right'  => __( 'Right', 'codeflavors-vimeo-video-post-lite' ),
-									),
+									],
 									'name'     => 'video_align',
 									'id'       => 'cvm_video_align',
 									'selected' => $player_opt['video_align'],
-								);
+								];
 								Helper_Admin::select( $args );
 								?>
 							</td>

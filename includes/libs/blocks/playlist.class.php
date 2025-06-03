@@ -84,30 +84,30 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					'videos'                  => [
 						'type'    => 'array',
 						'default' => [],
-						'items'   => array(
+						'items'   => [
 							'type' => 'number',
-						),
+						],
 					],
 					'post_ids'                => [
 						'type'    => 'array',
 						'default' => [],
-						'items'   => array(
+						'items'   => [
 							'type' => 'number',
-						),
+						],
 					],
 					'categories'              => [
 						'type'    => 'array',
 						'default' => [],
-						'items'   => array(
+						'items'   => [
 							'type' => 'number',
-						),
+						],
 					],
 					'cat_ids'                 => [
 						'type'    => 'array',
 						'default' => [],
-						'items'   => array(
+						'items'   => [
 							'type' => 'number',
-						),
+						],
 					],
 					/**
 					 * Posts order:
@@ -117,10 +117,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					 * - oldest: posts displayed by date, ascending
 					 * - alphabetical: posts displayed alphabetically
 					 */
-					'order'                   => array(
+					'order'                   => [
 						'type'    => 'string',
 						'default' => 'manual',
-					),
+					],
 				],
 				'editor_script'   => parent::get_script_handle(),
 				'editor_style'    => parent::get_editor_style_handle(),
@@ -228,7 +228,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	 */
 	private function set_rest_meta_queries() {
 		$post_types = [ 'post', Plugin::instance()->get_cpt()->get_post_type() ];
-		$taxonomies = array( 'category', Plugin::instance()->get_cpt()->get_post_tax() );
+		$taxonomies = [ 'category', Plugin::instance()->get_cpt()->get_post_tax() ];
 
 		foreach ( $post_types as $post_type ) {
 			add_filter( 'rest_' . $post_type . '_query', [ $this, 'meta_queries' ], 10, 2 );
@@ -250,10 +250,10 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	public function meta_queries( $args, $request ) {
 		if ( $request->get_param( 'vimeothequeMetaKey' ) ) {
 			$args['meta_query'] = [
-				array(
+				[
 					'key'     => Plugin::instance()->get_cpt()->get_post_settings()->get_meta_video_data(),
 					'compare' => 'EXISTS',
-				),
+				],
 			];
 		}
 

@@ -13,7 +13,7 @@ add_action(
 		wp_enqueue_script(
 			'vimeotheque-series-theme-list-editor',
 			Helper::get_url() . 'themes-series/list/assets/js/editor.js',
-			array( 'wp-element', 'wp-editor', 'lodash' ),
+			[ 'wp-element', 'wp-editor', 'lodash' ],
 			Helper::get_version()
 		);
 	}
@@ -121,7 +121,7 @@ function the_image( Playlist $playlist, $size = 'large' ) {
 		$image = sprintf(
 			'<a href="%s" title="%s">%s</a>',
 			get_permalink(),
-			the_title_attribute( array( 'echo' => false ) ),
+			the_title_attribute( [ 'echo' => false ] ),
 			$image
 		);
 	}

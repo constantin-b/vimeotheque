@@ -70,13 +70,13 @@ class Rest_Themes_Controller extends Rest_Controller_Abstract implements Rest_Co
 			parent::get_namespace(),
 			parent::get_rest_base(),
 			[
-				array(
+				[
 					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_items' ),
+					'callback'            => [ $this, 'get_items' ],
 					'permission_callback' => function () {
 						return current_user_can( 'edit_posts' );
 					},
-				),
+				],
 			]
 		);
 	}

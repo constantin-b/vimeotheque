@@ -73,16 +73,16 @@ class Vimeo_Oauth extends Vimeo {
 		// make request
 		$request = wp_remote_post(
 			$endpoint,
-			array(
+			[
 				'body'      => [
 					'grant_type' => 'client_credentials',
 				],
 				'method'    => 'POST',
 				'sslverify' => false,
-				'headers'   => array(
+				'headers'   => [
 					'authorization' => 'basic ' . base64_encode( $this->client_id . ':' . $this->client_secret ),
-				),
-			)
+				],
+			]
 		);
 
 		// if request failed for some reason, return the error
