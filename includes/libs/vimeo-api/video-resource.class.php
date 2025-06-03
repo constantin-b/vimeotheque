@@ -28,7 +28,7 @@ class Video_Resource extends Resource_Abstract implements Resource_Interface {
 	/**
 	 * @return boolean
 	 */
-	public function is_single_entry(){
+	public function is_single_entry() {
 		return true;
 	}
 

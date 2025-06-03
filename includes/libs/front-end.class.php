@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Vimeotheque
  */
-class Front_End{
+class Front_End {
 	/**
 	 * @var Plugin
 	 */
@@ -34,7 +34,7 @@ class Front_End{
 
 	/**
 	 * Front_End constructor.
-     *
+	 *
 	 * @param Plugin $plugin
 	 */
 	public function __construct( Plugin $plugin ) {
@@ -48,7 +48,7 @@ class Front_End{
 	 * Will set all filters and actions needed by the plugin to do embeds and perform front-end
 	 * tasks. Used for internal purposes, should not be called manually.
 	 */
-	public function init(){
+	public function init() {
 
 		$this->embed_filter_priority = intval(
 			/**
@@ -63,32 +63,50 @@ class Front_End{
 		);
 
 		// filter content to embed video
-		add_filter( 'the_content', [
-			$this,
-			'embed_video'
-		], $this->embed_filter_priority, 1 );
+		add_filter(
+			'the_content',
+			array(
+				$this,
+				'embed_video',
+			),
+			$this->embed_filter_priority,
+			1
+		);
 
 		// add player script
-		add_action( 'wp_print_scripts', [
-			$this,
-			'add_player_script'
-		] );
+		add_action(
+			'wp_print_scripts',
+			array(
+				$this,
+				'add_player_script',
+			)
+		);
 
-		add_action( 'post_thumbnail_html', [
-			$this,
-			'filter_thumbnail_html'
-		], 10, 2 );
+		add_action(
+			'post_thumbnail_html',
+			array(
+				$this,
+				'filter_thumbnail_html',
+			),
+			10,
+			2
+		);
 
 		/**
 		 * Template function the_term() works by default only for post_tag taxonomy.
 		 * This filter will add the plugin taxonomy for plugin custom post type
 		 */
 		// add this filter only in front-end
-		if( ! is_admin() ){
-			add_filter( 'get_the_terms', [
-				$this,
-				'filter_video_terms'
-			], 10, 3 );
+		if ( ! is_admin() ) {
+			add_filter(
+				'get_the_terms',
+				array(
+					$this,
+					'filter_video_terms',
+				),
+				10,
+				3
+			);
 		}
 	}
 
@@ -98,11 +116,11 @@ class Front_End{
 	 * or below the post content, depending on the setting from the plugin Settings or the individual post options.
 	 *
 	 * @param string $content The post content
-     *
+	 *
 	 * @return string   The post content
 	 */
-	public function embed_video( $content ){
-		if( ! Helper::video_is_visible() ){
+	public function embed_video( $content ) {
+		if ( ! Helper::video_is_visible() ) {
 			return $content;
 		}
 
@@ -110,39 +128,43 @@ class Front_End{
 
 		$_post = get_post( $post );
 
-		if( !$_post ){
+		if ( ! $_post ) {
 			return $content;
 		}
 
 		// check if post is password protected
-		if( post_password_required( $_post ) ){
+		if ( post_password_required( $_post ) ) {
 			return $content;
 		}
 
 		// check if filters prevent auto embedding
-		if( !Helper::is_autoembed_allowed() ){
+		if ( ! Helper::is_autoembed_allowed() ) {
 			return $content;
 		}
 
 		// if video is in skipped auto embed list (has block or the video position shortcode in content), don't embed
-		if( $this->skipped_autoembed( $_post ) ){
+		if ( $this->skipped_autoembed( $_post ) ) {
 			return $content;
 		}
 
 		$video_post = Helper::get_video_post( $_post );
-		$settings = $video_post->get_embed_options();
+		$settings   = $video_post->get_embed_options();
 
-		if( !in_array( $settings['video_position'], [ 'above-content', 'below-content' ] ) ){
+		if ( ! in_array( $settings['video_position'], [ 'above-content', 'below-content' ] ) ) {
 			return $content;
 		}
 
 		$video_container = Helper::embed_video( $_post, [], false );
 
 		// put the filter back for other posts; remove in method 'prevent_autoembeds'
-		add_filter( 'the_content', [
-			$GLOBALS[ 'wp_embed' ],
-			'autoembed'
-		], 8 );
+		add_filter(
+			'the_content',
+			array(
+				$GLOBALS['wp_embed'],
+				'autoembed',
+			),
+			8
+		);
 
 		/**
 		 * Fires before the video embed is placed into the post content.
@@ -155,9 +177,9 @@ class Front_End{
 			$video_post
 		);
 
-		if( 'below-content' === $settings[ 'video_position' ] ){
+		if ( 'below-content' === $settings['video_position'] ) {
 			return $content . $video_container;
-		}else{
+		} else {
 			return $video_container . $content;
 		}
 	}
@@ -171,19 +193,19 @@ class Front_End{
 	 *
 	 * @return mixed|void
 	 */
-	public function filter_thumbnail_html( $html, $post_id ){
+	public function filter_thumbnail_html( $html, $post_id ) {
 
-		if( ! Helper::video_is_visible() ){
+		if ( ! Helper::video_is_visible() ) {
 			return $html;
 		}
 
 		$video = Helper::get_video_post( $post_id );
-		if( !$video->is_video() ){
+		if ( ! $video->is_video() ) {
 			return $html;
 		}
 
 		$options = $video->get_embed_options();
-		if( 'replace-featured-image' !== $options['video_position'] ){
+		if ( 'replace-featured-image' !== $options['video_position'] ) {
 			return $html;
 		}
 
@@ -212,7 +234,7 @@ class Front_End{
 	 *
 	 * @return boolean
 	 */
-	private function skipped_autoembed( \WP_Post $post ){
+	private function skipped_autoembed( \WP_Post $post ) {
 		return in_array( $post->ID, $this->skip_autoembed );
 	}
 
@@ -223,36 +245,36 @@ class Front_End{
 	 *
 	 * @return void
 	 */
-	public function add_player_script(){
-		if( ! Helper::video_is_visible() ){
+	public function add_player_script() {
+		if ( ! Helper::video_is_visible() ) {
 			return;
 		}
 		Helper::enqueue_player();
 	}
 
-    /**
-     * Filter the tags for the custom post type implemented by this plugin.
-     * Useful in template pages using function the_tags() - this function works
-     * only for the default post_tag taxonomy; the filter adds functionality
-     * for plugin post type tag taxonomy
-     *
-     * @param array $terms  The terms found.
-     * @param integer $post_id The id of the post.
-     * @param string $taxonomy The taxonomy searched for.
-     *
-     * @return array|false|\WP_Error|\WP_Term[]
-     * @ignore Internal functionality
-     */
-	public function filter_video_terms( $terms, $post_id, $taxonomy ){
+	/**
+	 * Filter the tags for the custom post type implemented by this plugin.
+	 * Useful in template pages using function the_tags() - this function works
+	 * only for the default post_tag taxonomy; the filter adds functionality
+	 * for plugin post type tag taxonomy
+	 *
+	 * @param array $terms  The terms found.
+	 * @param integer $post_id The id of the post.
+	 * @param string $taxonomy The taxonomy searched for.
+	 *
+	 * @return array|false|\WP_Error|\WP_Term[]
+	 * @ignore Internal functionality
+	 */
+	public function filter_video_terms( $terms, $post_id, $taxonomy ) {
 		// get the current post
 		$post = get_post( $post_id );
-		if( ! $post ){
+		if ( ! $post ) {
 			return $terms;
 		}
 		// check only for the custom post type of the plugin
-		if( $this->plugin->get_cpt()->get_post_type() == $post->post_type ){
+		if ( $this->plugin->get_cpt()->get_post_type() == $post->post_type ) {
 			// the_tags() will check only for taxonomy post_tag. Check if this is what it's looking for and replace if true
-			if( $taxonomy != $this->plugin->get_cpt()->get_tag_tax() && 'post_tag' == $taxonomy ){
+			if ( $taxonomy != $this->plugin->get_cpt()->get_tag_tax() && 'post_tag' == $taxonomy ) {
 				return get_the_terms( $post_id, $this->plugin->get_cpt()->get_tag_tax() );
 			}
 		}
@@ -264,7 +286,7 @@ class Front_End{
 	 *
 	 * @return integer
 	 */
-	public function get_embed_filter_priority(){
+	public function get_embed_filter_priority() {
 		return $this->embed_filter_priority;
 	}
 
@@ -273,11 +295,11 @@ class Front_End{
 	 * prevents automatic video embed above or below content when called.
 	 *
 	 * @param  integer|false $post_id The post ID registered to skip the auto embedding for.
-     *
-     * @ignore Internal functionality
+	 *
+	 * @ignore Internal functionality
 	 */
-	public function prevent_post_autoembed( $post_id = false ){
-		if( !$post_id ){
+	public function prevent_post_autoembed( $post_id = false ) {
+		if ( ! $post_id ) {
 			/**
 			 * @var \WP_Post
 			 */

@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Vimeotheque
  * @ignore
  */
-interface Resource_Interface{
+interface Resource_Interface {
 	/**
 	 * Must return the endpoint URI with all neccessary parameters
 	 *

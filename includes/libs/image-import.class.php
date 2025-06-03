@@ -31,8 +31,8 @@ class Image_Import {
 	 *
 	 * @return array|boolean|void
 	 */
-	public function set_featured_image( $refresh = false ){
-		if( !$this->video_post->video_id ){
+	public function set_featured_image( $refresh = false ) {
+		if ( ! $this->video_post->video_id ) {
 			return;
 		}
 
@@ -43,25 +43,25 @@ class Image_Import {
 			)
 		);
 
-		if( $refresh ){
+		if ( $refresh ) {
 			$result = $this->import_from_api();
-		}else{
+		} else {
 
 			$args = [
-				'post_type' => 'attachment',
-				'meta_key'  	=> 'video_thumbnail',
-				'meta_value'	=> $this->video_post->video_id
+				'post_type'  => 'attachment',
+				'meta_key'   => 'video_thumbnail',
+				'meta_value' => $this->video_post->video_id,
 			];
 
-			if( !empty( $this->video_post->image_uri ) ){
-				$args['meta_key'] = '__vimeo_image_uri';
-				$args['meta_value']  = $this->video_post->image_uri;
+			if ( ! empty( $this->video_post->image_uri ) ) {
+				$args['meta_key']   = '__vimeo_image_uri';
+				$args['meta_value'] = $this->video_post->image_uri;
 			}
 
 			// check if thumbnail was already imported
 			$attachment = get_posts( $args );
 			// if thumbnail exists, return it
-			if( $attachment ){
+			if ( $attachment ) {
 				// set image as featured for current post
 				set_post_thumbnail( $this->video_post->get_post()->ID, $attachment[0]->ID );
 
@@ -74,25 +74,24 @@ class Image_Import {
 				);
 
 				$result = [
-					'post_id' 		=> $this->video_post->get_post()->ID,
-					'attachment_id' => $attachment[0]->ID
+					'post_id'       => $this->video_post->get_post()->ID,
+					'attachment_id' => $attachment[0]->ID,
 				];
-			}else{
+			} else {
 				$image_url = end( $this->video_post->thumbnails );
-				$result = $this->import_to_media( $image_url );
+				$result    = $this->import_to_media( $image_url );
 
-				if( isset( $result['attachment_id'] ) && !empty( $this->video_post->image_uri ) ){
+				if ( isset( $result['attachment_id'] ) && ! empty( $this->video_post->image_uri ) ) {
 					update_post_meta(
 						$result['attachment_id'],
 						'__vimeo_image_uri',
 						$this->video_post->image_uri
 					);
 				}
-
 			}
 		}
 
-		if( !$result ){
+		if ( ! $result ) {
 			Helper::debug_message(
 				'Error, the featured image was not imported.'
 			);
@@ -104,14 +103,14 @@ class Image_Import {
 	/**
 	 * @return array|boolean
 	 */
-	private function import_from_api(){
-		$q = new Video_Import( 'thumbnails', $this->video_post->video_id );
+	private function import_from_api() {
+		$q          = new Video_Import( 'thumbnails', $this->video_post->video_id );
 		$thumbnails = $q->get_feed();
-		if( $thumbnails ){
+		if ( $thumbnails ) {
 
 			$exists = $this->check_duplicate( $thumbnails['uri'] );
 
-			if( $exists ){
+			if ( $exists ) {
 
 				Helper::debug_message(
 					sprintf(
@@ -121,14 +120,14 @@ class Image_Import {
 					)
 				);
 
-				set_post_thumbnail( $this->video_post->get_post()->ID, $exists->ID);
+				set_post_thumbnail( $this->video_post->get_post()->ID, $exists->ID );
 
 				return [
-					'post_id' => $this->video_post->get_post()->ID,
-					'attachment_id' => $exists->ID
+					'post_id'       => $this->video_post->get_post()->ID,
+					'attachment_id' => $exists->ID,
 				];
 
-			}else{
+			} else {
 				$img    = end( $thumbnails['images'] );
 				$result = $this->import_to_media( $img );
 
@@ -161,17 +160,19 @@ class Image_Import {
 	 *
 	 * @return false|integer|\WP
 	 */
-	private function check_duplicate( $image_uri ){
+	private function check_duplicate( $image_uri ) {
 
 		$args = [
-			'post_type' => 'attachment',
-			'numberposts' => 1,
+			'post_type'        => 'attachment',
+			'numberposts'      => 1,
 			'suppress_filters' => true,
-			'meta_query' => [[
-				'key' => '__vimeo_image_uri',
-				'value' => $image_uri,
-				'compare' => 'LIKE'
-			]]
+			'meta_query'       => [
+				[
+					'key'     => '__vimeo_image_uri',
+					'value'   => $image_uri,
+					'compare' => 'LIKE',
+				],
+			],
 		];
 
 		$posts = get_posts( $args );
@@ -184,8 +185,8 @@ class Image_Import {
 	 *
 	 * @return array|boolean
 	 */
-	private function import_to_media( $image_url ){
-		if( !$image_url ){
+	private function import_to_media( $image_url ) {
+		if ( ! $image_url ) {
 			Helper::debug_message(
 				sprintf(
 					'Post #%d featured image not set because no image URL was detected.',
@@ -201,18 +202,18 @@ class Image_Import {
 			$image_url,
 			[
 				'user-agent' => Helper::request_user_agent(),
-				'sslverify' => false,
+				'sslverify'  => false,
 				/**
 				 * Request timeout filter.
 				 * Video image import request timeout in seconds.
 				 *
 				 * @param int $timeout Remote request timeout in seconds.
 				 */
-				'timeout' => apply_filters( 'vimeotheque\image_request_timeout', 30 )
+				'timeout'    => apply_filters( 'vimeotheque\image_request_timeout', 30 ),
 			]
 		);
 
-		if( is_wp_error( $request ) || 200 != wp_remote_retrieve_response_code( $request ) ) {
+		if ( is_wp_error( $request ) || 200 != wp_remote_retrieve_response_code( $request ) ) {
 
 			$error_message = is_wp_error( $request ) ?
 				sprintf( 'generated error "%s"', $request->get_error_message() ) :
@@ -231,15 +232,15 @@ class Image_Import {
 		}
 
 		$image_contents = $request['body'];
-		$image_type = wp_remote_retrieve_header( $request, 'content-type' );
+		$image_type     = wp_remote_retrieve_header( $request, 'content-type' );
 		// Translate MIME type into an extension
-		if ( $image_type == 'image/jpeg' ){
+		if ( $image_type == 'image/jpeg' ) {
 			$image_extension = '.jpg';
-		}elseif ( $image_type == 'image/png' ){
+		} elseif ( $image_type == 'image/png' ) {
 			$image_extension = '.png';
 		}
 
-		if( !isset( $image_extension ) ){
+		if ( ! isset( $image_extension ) ) {
 			Helper::debug_message(
 				sprintf(
 					'Could not determine extension for image "%s".',
@@ -251,10 +252,10 @@ class Image_Import {
 		}
 
 		// Construct a file name using post slug and extension
-		$fname = urldecode( basename( get_permalink( $this->video_post->get_post()->ID ) ) ) ;
+		$fname        = urldecode( basename( get_permalink( $this->video_post->get_post()->ID ) ) );
 		$new_filename = preg_replace( '/[^A-Za-z0-9\-]/', '', $fname ) .
-		                '-vimeo-thumbnail' .
-		                $image_extension;
+						'-vimeo-thumbnail' .
+						$image_extension;
 
 		// Save the image bits using the new filename
 		$upload = wp_upload_bits( $new_filename, null, $image_contents );
@@ -271,7 +272,7 @@ class Image_Import {
 		}
 
 		$_image_url = $upload['url'];
-		$filename = $upload['file'];
+		$filename   = $upload['file'];
 
 		/**
 		 * Action that allows modification of image that will be attached to video post.
@@ -288,16 +289,16 @@ class Image_Import {
 		);
 
 		$wp_filetype = wp_check_filetype( basename( $filename ), null );
-		$attachment = [
-			'post_mime_type'	=> $wp_filetype['type'],
-			'post_title'		=> get_the_title( $this->video_post->get_post()->ID ).' - Vimeo thumbnail',
-			'post_content'		=> '',
-			'post_status'		=> 'inherit',
-			'guid'				=> $_image_url
+		$attachment  = [
+			'post_mime_type' => $wp_filetype['type'],
+			'post_title'     => get_the_title( $this->video_post->get_post()->ID ) . ' - Vimeo thumbnail',
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+			'guid'           => $_image_url,
 		];
-		$attach_id = wp_insert_attachment( $attachment, $filename, $this->video_post->get_post()->ID );
+		$attach_id   = wp_insert_attachment( $attachment, $filename, $this->video_post->get_post()->ID );
 
-		if( is_wp_error( $attach_id ) ){
+		if ( is_wp_error( $attach_id ) ) {
 			Helper::debug_message(
 				sprintf(
 					'The following error was encountered when trying to insert the new attachment into the database: "%s".',
@@ -309,7 +310,7 @@ class Image_Import {
 
 		// you must first include the image.php file
 		// for the function wp_generate_attachment_metadata() to work
-		require_once( ABSPATH . 'wp-admin/includes/image.php' );
+		require_once ABSPATH . 'wp-admin/includes/image.php';
 		$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
 		wp_update_attachment_metadata( $attach_id, $attach_data );
 
@@ -351,9 +352,8 @@ class Image_Import {
 		);
 
 		return [
-			'post_id' 		=> $this->video_post->get_post()->ID,
-			'attachment_id' => $attach_id
+			'post_id'       => $this->video_post->get_post()->ID,
+			'attachment_id' => $attach_id,
 		];
 	}
-
 }

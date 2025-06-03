@@ -11,10 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @ignore
  */
-class Widgets_Factory{
-/**
-	 * @var Plugin
-	 */
+class Widgets_Factory {
+	/**
+		 * @var Plugin
+		 */
 	private $plugin;
 
 	/**
@@ -25,14 +25,14 @@ class Widgets_Factory{
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;
 		add_action( 'widgets_init', [ $this, 'register_widgets' ] );
-		add_action('admin_print_scripts-widgets.php', [ $this, 'enqueue_assets' ] );
+		add_action( 'admin_print_scripts-widgets.php', [ $this, 'enqueue_assets' ] );
 	}
 
 	/**
 	 * Widgets registration
 	 */
-	public function register_widgets(){
-		if( $this->is_public() ){
+	public function register_widgets() {
+		if ( $this->is_public() ) {
 			register_widget( __NAMESPACE__ . '\Categories_Widget' );
 			register_widget( __NAMESPACE__ . '\Playlist_Widget' );
 		}
@@ -41,8 +41,8 @@ class Widgets_Factory{
 	/**
 	 * Enqueue assets
 	 */
-	public function enqueue_assets(){
-		if( $this->is_public() ){
+	public function enqueue_assets() {
+		if ( $this->is_public() ) {
 			wp_enqueue_script(
 				'cvm-video-edit',
 				VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
@@ -60,7 +60,7 @@ class Widgets_Factory{
 	/**
 	 * @return boolean
 	 */
-	private function is_public(){
+	private function is_public() {
 		$options = $this->plugin->get_options();
 		return $options['public'];
 	}

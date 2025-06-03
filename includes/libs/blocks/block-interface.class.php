@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @ignore
  */
-interface Block_Interface{
+interface Block_Interface {
 	/**
 	 * Returns handle for block main script
 	 *

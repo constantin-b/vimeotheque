@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Vimeotheque
  * @ignore
  */
-class Notice extends Notice_Abstract implements Notice_Interface{
+class Notice extends Notice_Abstract implements Notice_Interface {
 	/**
 	 * @var string
 	 */
@@ -26,14 +26,14 @@ class Notice extends Notice_Abstract implements Notice_Interface{
 	/**
 	 * @param $message
 	 */
-	public function __construct( $message ){
+	public function __construct( $message ) {
 		$this->message = $message;
 		parent::__construct();
 	}
 
 	/**
 	 * Returns notice content
-  *
+ *
 	 * @return mixed
 	 */
 	public function get_notice() {

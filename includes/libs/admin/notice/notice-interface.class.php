@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Vimeotheque
  * @ignore
  */
-interface Notice_Interface{
+interface Notice_Interface {
 	/**
 	 * Returns notice content
-  *
+ *
 	 * @return mixed
 	 */
 	public function get_notice();

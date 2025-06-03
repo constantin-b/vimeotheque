@@ -40,11 +40,11 @@ class Shortcode_Abstract implements Shortcode_Interface {
 		$this->add_shortcode();
 	}
 
-	protected function set_atts( $atts ){
+	protected function set_atts( $atts ) {
 		$this->atts = $atts;
 	}
 
-	protected function set_content( $content ){
+	protected function set_content( $content ) {
 		$this->content = $content;
 	}
 
@@ -62,8 +62,8 @@ class Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return mixed
 	 */
-	public function get_attr( $attr ){
-		if( isset( $this->atts[ $attr ] ) ){
+	public function get_attr( $attr ) {
+		if ( isset( $this->atts[ $attr ] ) ) {
 			return $this->atts[ $attr ];
 		}
 
@@ -81,14 +81,14 @@ class Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return string|void
 	 */
-	public function get_css_classes(){
+	public function get_css_classes() {
 		$classes = [
-			$this->get_attr('layout'),
-			$this->get_attr( 'align' )
+			$this->get_attr( 'layout' ),
+			$this->get_attr( 'align' ),
 		];
 
-		foreach( $classes as $i => $v ){
-			if( is_wp_error( $v ) || empty( $v ) ){
+		foreach ( $classes as $i => $v ) {
+			if ( is_wp_error( $v ) || empty( $v ) ) {
 				unset( $classes[ $i ] );
 			}
 		}
@@ -119,18 +119,18 @@ class Shortcode_Abstract implements Shortcode_Interface {
 	/**
 	 * Add the shortcode
 	 */
-	public function add_shortcode(){
-		if( !$this->shortcode_name ){
+	public function add_shortcode() {
+		if ( ! $this->shortcode_name ) {
 			return;
 		}
 
-		$names = !is_array( $this->shortcode_name ) ? [ $this->shortcode_name ] : $this->shortcode_name;
-		foreach( $names as $tag ){
+		$names = ! is_array( $this->shortcode_name ) ? [ $this->shortcode_name ] : $this->shortcode_name;
+		foreach ( $names as $tag ) {
 			add_shortcode(
 				$tag,
 				[
 					$this,
-					'get_output'
+					'get_output',
 				]
 			);
 		}

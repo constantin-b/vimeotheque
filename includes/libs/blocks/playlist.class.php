@@ -1,5 +1,6 @@
 <?php
 namespace Vimeotheque\Blocks;
+
 use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 
@@ -31,82 +32,82 @@ class Playlist extends Block_Abstract implements Block_Interface {
 		parent::register_block_type(
 			'vimeotheque/video-playlist',
 			[
-				'attributes' => [
-					'theme' => [
-						'type' => 'string',
-						'default' => 'default'
+				'attributes'      => [
+					'theme'                   => [
+						'type'    => 'string',
+						'default' => 'default',
 					],
-					'layout' => [
-						'type' => 'string',
-						'default' => ''
+					'layout'                  => [
+						'type'    => 'string',
+						'default' => '',
 					],
-					'show_excerpts' => [
-						'type' => 'boolean',
-						'default' => false
-					],
-					'use_original_thumbnails' => [
-						'type' => 'boolean',
+					'show_excerpts'           => [
+						'type'    => 'boolean',
 						'default' => false,
 					],
-					'aspect_ratio' => [
-						'type' => 'string',
-						'default' => '16x9'
+					'use_original_thumbnails' => [
+						'type'    => 'boolean',
+						'default' => false,
 					],
-					'width' => [
-						'type' => 'string',
-						'default' => 900
+					'aspect_ratio'            => [
+						'type'    => 'string',
+						'default' => '16x9',
 					],
-					'align' => [
-						'type' => 'string',
-						'default' => 'align-left'
+					'width'                   => [
+						'type'    => 'string',
+						'default' => 900,
 					],
-					'volume' => [
-						'type' => 'string',
-						'default' => 70
+					'align'                   => [
+						'type'    => 'string',
+						'default' => 'align-left',
 					],
-					'title' => [
-						'type' => 'boolean',
-						'default' => true
+					'volume'                  => [
+						'type'    => 'string',
+						'default' => 70,
 					],
-					'byline' => [
-						'type' => 'boolean',
-						'default' => true
+					'title'                   => [
+						'type'    => 'boolean',
+						'default' => true,
 					],
-					'portrait' => [
-						'type' => 'boolean',
-						'default' => true
+					'byline'                  => [
+						'type'    => 'boolean',
+						'default' => true,
 					],
-					'playlist_loop' => [
-						'type' => 'boolean',
-						'default' => false
+					'portrait'                => [
+						'type'    => 'boolean',
+						'default' => true,
 					],
-					'videos' => [
-						'type' => 'array',
+					'playlist_loop'           => [
+						'type'    => 'boolean',
+						'default' => false,
+					],
+					'videos'                  => [
+						'type'    => 'array',
 						'default' => [],
-						'items' => [
-							'type' => 'number'
-						]
+						'items'   => array(
+							'type' => 'number',
+						),
 					],
-					'post_ids' => [
-						'type' => 'array',
+					'post_ids'                => [
+						'type'    => 'array',
 						'default' => [],
-						'items' => [
-							'type' => 'number'
-						]
+						'items'   => array(
+							'type' => 'number',
+						),
 					],
-					'categories' => [
-						'type' => 'array',
+					'categories'              => [
+						'type'    => 'array',
 						'default' => [],
-						'items' => [
-							'type' => 'number'
-						]
+						'items'   => array(
+							'type' => 'number',
+						),
 					],
-					'cat_ids' => [
-						'type' => 'array',
+					'cat_ids'                 => [
+						'type'    => 'array',
 						'default' => [],
-						'items' => [
-							'type' => 'number'
-						]
+						'items'   => array(
+							'type' => 'number',
+						),
 					],
 					/**
 					 * Posts order:
@@ -116,19 +117,19 @@ class Playlist extends Block_Abstract implements Block_Interface {
 					 * - oldest: posts displayed by date, ascending
 					 * - alphabetical: posts displayed alphabetically
 					 */
-					'order' => [
-						'type' => 'string',
-						'default' => 'manual'
-					]
+					'order'                   => array(
+						'type'    => 'string',
+						'default' => 'manual',
+					),
 				],
-				'editor_script' => parent::get_script_handle(),
-				'editor_style' => parent::get_editor_style_handle(),
-				'render_callback' => function( $attr ){
-					$attr['videos'] = implode( ',', $attr['post_ids'] );
+				'editor_script'   => parent::get_script_handle(),
+				'editor_style'    => parent::get_editor_style_handle(),
+				'render_callback' => function ( $attr ) {
+					$attr['videos']     = implode( ',', $attr['post_ids'] );
 					$attr['categories'] = implode( ',', $attr['cat_ids'] );
-					$playlist = new \Vimeotheque\Shortcode\Playlist();
+					$playlist           = new \Vimeotheque\Shortcode\Playlist();
 					return $playlist->get_output( $attr, false );
-				}
+				},
 			]
 		);
 
@@ -136,7 +137,7 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			'enqueue_block_editor_assets',
 			[
 				$this,
-				'editor_assets'
+				'editor_assets',
 			],
 			-999999999
 		);
@@ -147,18 +148,18 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	/**
 	 * Enqueue editor assets if needed
 	 */
-	public function editor_assets(){
+	public function editor_assets() {
 
-		if( !parent::is_active() ){
+		if ( ! parent::is_active() ) {
 			return;
 		}
 
-		$themes = Plugin::instance()->get_playlist_themes()->get_themes();
+		$themes  = Plugin::instance()->get_playlist_themes()->get_themes();
 		$_themes = [];
-		foreach( $themes as $key => $theme ){
+		foreach ( $themes as $key => $theme ) {
 			$_themes[] = [
 				'label' => $theme->get_theme_name(),
-				'value' => $key
+				'value' => $key,
 			];
 
 			wp_enqueue_script(
@@ -174,28 +175,28 @@ class Playlist extends Block_Abstract implements Block_Interface {
 
 		}
 
-		$post_types = Plugin::instance()->get_registered_post_types()->get_post_types();
+		$post_types  = Plugin::instance()->get_registered_post_types()->get_post_types();
 		$_post_types = [];
-		foreach( $post_types as $post_type ){
+		foreach ( $post_types as $post_type ) {
 			$_post_types[ $post_type->get_post_type()->name ] = [
-				'post_type' => $post_type->get_post_type(),
-				'taxonomy' => $post_type->get_taxonomy(),
+				'post_type'          => $post_type->get_post_type(),
+				'taxonomy'           => $post_type->get_taxonomy(),
 				'post_type_endpoint' => $post_type->get_post_type_rest_endpoint(),
-				'taxonomy_endpoint' => $post_type->get_taxonomy_rest_endpoint()
+				'taxonomy_endpoint'  => $post_type->get_taxonomy_rest_endpoint(),
 			];
 		}
 
-		$posts_order = [
-			'manual' => __( 'Manual order', 'codeflavors-vimeo-video-post-lite' ),
-		    'newest' => __( 'Newest first', 'codeflavors-vimeo-video-post-lite' ),
-		    'oldest' => __( 'Oldest first', 'codeflavors-vimeo-video-post-lite' ),
-		    'alphabetical' => __( 'Alphabetically', 'codeflavors-vimeo-video-post-lite' )
+		$posts_order  = [
+			'manual'       => __( 'Manual order', 'codeflavors-vimeo-video-post-lite' ),
+			'newest'       => __( 'Newest first', 'codeflavors-vimeo-video-post-lite' ),
+			'oldest'       => __( 'Oldest first', 'codeflavors-vimeo-video-post-lite' ),
+			'alphabetical' => __( 'Alphabetically', 'codeflavors-vimeo-video-post-lite' ),
 		];
 		$_posts_order = [];
-		foreach( $posts_order as $value => $label ){
+		foreach ( $posts_order as $value => $label ) {
 			$_posts_order[] = [
 				'label' => $label,
-				'value' => $value
+				'value' => $value,
 			];
 		}
 
@@ -204,9 +205,9 @@ class Playlist extends Block_Abstract implements Block_Interface {
 			'vmtq',
 			[
 				'noImageUrl' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg',
-				'themes' => $_themes,
-				'postTypes' => $_post_types,
-				'order' => $_posts_order
+				'themes'     => $_themes,
+				'postTypes'  => $_post_types,
+				'order'      => $_posts_order,
 			]
 		);
 
@@ -222,18 +223,18 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	/**
 	 * By default, REST api doesn't allow queries from React to be made for meta keys.
 	 * Register meta query queries for post types.
-  *
+ *
 	 * @see \WP_REST_Posts_Controller::get_items() line 269
 	 */
-	private function set_rest_meta_queries(){
+	private function set_rest_meta_queries() {
 		$post_types = [ 'post', Plugin::instance()->get_cpt()->get_post_type() ];
-		$taxonomies = ['category', Plugin::instance()->get_cpt()->get_post_tax() ];
+		$taxonomies = array( 'category', Plugin::instance()->get_cpt()->get_post_tax() );
 
-		foreach( $post_types as $post_type ){
+		foreach ( $post_types as $post_type ) {
 			add_filter( 'rest_' . $post_type . '_query', [ $this, 'meta_queries' ], 10, 2 );
 		}
 
-		foreach( $taxonomies as $taxonomy ){
+		foreach ( $taxonomies as $taxonomy ) {
 			add_filter( 'rest_' . $taxonomy . '_query', [ $this, 'tax_queries' ], 10, 2 );
 		}
 	}
@@ -246,26 +247,27 @@ class Playlist extends Block_Abstract implements Block_Interface {
 	 *
 	 * @return mixed
 	 */
-	public function meta_queries( $args, $request ){
-		if( $request->get_param( 'vimeothequeMetaKey' ) ){
+	public function meta_queries( $args, $request ) {
+		if ( $request->get_param( 'vimeothequeMetaKey' ) ) {
 			$args['meta_query'] = [
-				[
+				array(
 					'key'     => Plugin::instance()->get_cpt()->get_post_settings()->get_meta_video_data(),
-					'compare' => 'EXISTS'
-				]
+					'compare' => 'EXISTS',
+				),
 			];
 		}
 
-		if( $request->get_param( 'vimeothequeAllPostType' ) ){
+		if ( $request->get_param( 'vimeothequeAllPostType' ) ) {
 			$args['post_type'] = [
-				'post', Plugin::instance()->get_cpt()->get_post_type()
+				'post',
+				Plugin::instance()->get_cpt()->get_post_type(),
 			];
 		}
 
 		return $args;
 	}
 
-	public function tax_queries( $args, $request ){
+	public function tax_queries( $args, $request ) {
 		return $args;
 	}
 }

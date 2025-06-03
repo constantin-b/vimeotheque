@@ -21,14 +21,13 @@ class Video_Position extends Shortcode_Abstract implements Shortcode_Interface {
 	public function __construct( $name ) {
 		parent::__construct( $name );
 
-		add_filter( 'the_content', [$this, 'search_shortcode'], -99999999 );
-
+		add_filter( 'the_content', array( $this, 'search_shortcode' ), -99999999 );
 	}
 
-	public function search_shortcode( $content ){
-		$names =  !is_array( parent::get_shortcode_name() ) ? [ parent::get_shortcode_name() ] : parent::get_shortcode_name();
-		foreach( $names as $tag ){
-			if( has_shortcode( $content, $tag ) ){
+	public function search_shortcode( $content ) {
+		$names = ! is_array( parent::get_shortcode_name() ) ? [ parent::get_shortcode_name() ] : parent::get_shortcode_name();
+		foreach ( $names as $tag ) {
+			if ( has_shortcode( $content, $tag ) ) {
 				Plugin::instance()->get_front_end()->prevent_post_autoembed();
 				break;
 			}
@@ -42,8 +41,8 @@ class Video_Position extends Shortcode_Abstract implements Shortcode_Interface {
 	 *
 	 * @return string|void
 	 */
-	public function get_output( $atts, $content ){
-		if( !is_singular() ){
+	public function get_output( $atts, $content ) {
+		if ( ! is_singular() ) {
 			return;
 		}
 
@@ -53,12 +52,11 @@ class Video_Position extends Shortcode_Abstract implements Shortcode_Interface {
 		global $post;
 		$_post = Helper::get_video_post( $post );
 
-		if( !$_post->is_video() ){
+		if ( ! $_post->is_video() ) {
 			return;
 		}
 
 		$player = new Player( $_post );
 		return $player->get_output( false );
 	}
-
 }

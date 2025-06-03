@@ -14,7 +14,7 @@ use WP_Error;
  * @package Vimeotheque
  * @ignore
  */
-abstract class Vimeo{
+abstract class Vimeo {
 
 	/**
 	 * Vimeo API endpoint
@@ -23,10 +23,10 @@ abstract class Vimeo{
 
 	/**
 	 * API version to be requested
-  *
+ *
 	 * @see https://developer.vimeo.com/api/changelog
 	 */
-	const VERSION_STRING 	= 'application/vnd.vimeo.*+json; version=3.4';
+	const VERSION_STRING = 'application/vnd.vimeo.*+json; version=3.4';
 
 	/**
 	 * Generates a WP_Error
@@ -37,7 +37,7 @@ abstract class Vimeo{
 	 *
 	 * @return WP_Error
 	 */
-	protected function error( $code, $message, $data = false ){
+	protected function error( $code, $message, $data = false ) {
 		return new WP_Error( $code, $message, $data );
 	}
 
@@ -48,21 +48,21 @@ abstract class Vimeo{
 	 *
 	 * @return WP_Error
 	 */
-	protected function api_error( $data ){
-		if( isset( $data['developer_message'] ) ){
+	protected function api_error( $data ) {
+		if ( isset( $data['developer_message'] ) ) {
 			$message = sprintf(
 				__( '%1$s: %2$s (error code: %3$s)', 'codeflavors-vimeo-video-post-lite' ),
-				__( 'Vimeo API error encountered', 'codeflavors-vimeo-video-post-lite' ) ,
+				__( 'Vimeo API error encountered', 'codeflavors-vimeo-video-post-lite' ),
 				$data['developer_message'],
 				$data['error_code']
 			);
-		}elseif ( isset( $data['error'] ) ){
+		} elseif ( isset( $data['error'] ) ) {
 			$message = sprintf(
 				'%s: %s',
 				__( 'Vimeo API error encountered', 'codeflavors-vimeo-video-post-lite' ),
 				$data['error']
 			);
-		}else{
+		} else {
 			$message = __( 'An unknown Vimeo API error has happened. Please try again.', 'codeflavors-vimeo-video-post-lite' );
 		}
 		// the error is Vimeo specific, flag it as such

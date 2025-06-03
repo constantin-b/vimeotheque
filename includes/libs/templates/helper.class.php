@@ -23,7 +23,7 @@ class Helper {
 	 *
 	 * @return boolean
 	 */
-	public static function is_video_taxonomy(){
+	public static function is_video_taxonomy() {
 		return is_tax( get_object_taxonomies( Plugin::instance()->get_cpt()->get_post_type() ) );
 	}
 
@@ -32,7 +32,7 @@ class Helper {
 	 *
 	 * @return mixed|void
 	 */
-	public static function template_path(){
+	public static function template_path() {
 		/**
 		 * Rename theme template folder.
 		 *
@@ -48,7 +48,7 @@ class Helper {
 	 * Retrieves the adjacent post.
 	 *
 	 * Can either be next or previous post.
-  *
+ *
 	 * @param  boolean      $in_same_term   Optional. Whether post should be in a same taxonomy term. Default false.
 	 * @param  int[]|string $excluded_terms Optional. Array or comma-separated list of excluded term IDs. Default empty string.
 	 * @param  boolean      $previous       Optional. Whether to retrieve previous post. Default true
@@ -56,7 +56,7 @@ class Helper {
 	 * @return WP_Post|null|string Post object if successful. Null if global $post is not set. Empty string if no
 	 *                             corresponding post exists.
 	 */
-	public static function get_adjacent_post(  $in_same_term = false, $excluded_terms = '', $previous = true, $taxonomy = 'vimeo-videos' ){
+	public static function get_adjacent_post( $in_same_term = false, $excluded_terms = '', $previous = true, $taxonomy = 'vimeo-videos' ) {
 		$post = get_adjacent_post( $in_same_term, $excluded_terms, $previous, $taxonomy );
 		return $post;
 	}
@@ -68,7 +68,7 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	public static function get_the_video_duration(){
+	public static function get_the_video_duration() {
 
 		$post = \Vimeotheque\Helper::get_video_post();
 

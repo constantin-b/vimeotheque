@@ -51,9 +51,9 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 		parent::__construct();
 
 		$this->option_name = $option_name;
-		$this->delay = $delay;
-		$this->message = $message;
-		$this->user = $user;
+		$this->delay       = $delay;
+		$this->message     = $message;
+		$this->user        = $user;
 
 		// pass user object to message object
 		$this->message->set_user( $this->user );
@@ -71,17 +71,17 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 		 * @param bool $allow   Allow notice to be displayed (true) or prevent it (false)
 		 */
 		$allow = apply_filters( 'vimeotheque\admin\notice\review_notice', true );
-		if( !$allow ){
+		if ( ! $allow ) {
 			return;
 		}
 
 		// check if user can see the message
-		if( !$this->user->can_see() ){
+		if ( ! $this->user->can_see() ) {
 			return;
 		}
 
 		// check if timer is expired
-		if( $this->timer_expired() ){
+		if ( $this->timer_expired() ) {
 			$this->message->display();
 		}
 	}
@@ -91,9 +91,9 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 *
 	 * @return array - the option
 	 */
-	private function get_option(){
+	private function get_option() {
 		$option = get_option( $this->option_name, false );
-		if( ! $option ){
+		if ( ! $option ) {
 			$option = $this->_set_option();
 		}
 		return $option;
@@ -104,9 +104,9 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 *
 	 * @return array - the option
 	 */
-	private function _set_option(){
+	private function _set_option() {
 		$option = [
-			'timestamp' => time()
+			'timestamp' => time(),
 		];
 
 		update_option( $this->option_name, $option );
@@ -118,7 +118,7 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 *
 	 * @return integer - number of seconds
 	 */
-	private function delay_in_seconds(){
+	private function delay_in_seconds() {
 		return DAY_IN_SECONDS * $this->delay;
 	}
 
@@ -128,12 +128,12 @@ class Review_Notice extends Notice_Abstract implements Notice_Interface {
 	 * @param  boolean $extended - when true, $this->delay will be doubled
 	 * @return boolean - timer is expired (true) or not (false)
 	 */
-	private function timer_expired( $extended = false ){
+	private function timer_expired( $extended = false ) {
 		$option = $this->get_option();
-		$delay = $this->delay_in_seconds();
-		if( $extended ){
+		$delay  = $this->delay_in_seconds();
+		if ( $extended ) {
 			$delay *= 2;
 		}
-		return ( time() - $option[ 'timestamp' ] >= $delay );
+		return ( time() - $option['timestamp'] >= $delay );
 	}
 }

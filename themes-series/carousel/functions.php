@@ -9,16 +9,14 @@ namespace Vimeotheque_Series\Theme_Carousel;
 use Vimeotheque_Series\Helper;
 
 add_action(
-    'vimeotheque-series/before-enqueue-script',
-    function(){
+	'vimeotheque-series/before-enqueue-script',
+	function () {
 
-        wp_enqueue_script(
-            'vimeotheque-series-theme-carousel-editor',
-            Helper::get_url() . 'themes-series/carousel/assets/js/editor.js',
-            ['wp-element', 'wp-editor', 'lodash'],
-            Helper::get_version()
-        );
-
-    }
-
+		wp_enqueue_script(
+			'vimeotheque-series-theme-carousel-editor',
+			Helper::get_url() . 'themes-series/carousel/assets/js/editor.js',
+			array( 'wp-element', 'wp-editor', 'lodash' ),
+			Helper::get_version()
+		);
+	}
 );

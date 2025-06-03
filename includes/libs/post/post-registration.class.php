@@ -40,8 +40,8 @@ class Post_Registration {
 	 * @param \WP_Taxonomy|false $taxonomy
 	 * @param \WP_Taxonomy|false $tag_taxonomy
 	 */
-	public function register( \WP_Post_Type $post_type, $taxonomy, $tag_taxonomy = false ){
-		if( !did_action( 'init' ) ){
+	public function register( \WP_Post_Type $post_type, $taxonomy, $tag_taxonomy = false ) {
+		if ( ! did_action( 'init' ) ) {
 			_doing_it_wrong( __FUNCTION__, 'Post types must be registered only after "init" hook is fired.' );
 		}
 
@@ -55,7 +55,7 @@ class Post_Registration {
 	/**
 	 * @return Register_Post[]
 	 */
-	public function get_post_types(){
+	public function get_post_types() {
 		return $this->types;
 	}
 
@@ -64,8 +64,8 @@ class Post_Registration {
 	 *
 	 * @return null|Register_Post
 	 */
-	public function get_post_type( $post_type ){
-		if( $this->is_registered_post_type( $post_type ) ){
+	public function get_post_type( $post_type ) {
+		if ( $this->is_registered_post_type( $post_type ) ) {
 			return $this->types[ $post_type ];
 		}
 
@@ -77,7 +77,7 @@ class Post_Registration {
 	 *
 	 * @return boolean
 	 */
-	public function is_registered_post_type( $post_type ){
+	public function is_registered_post_type( $post_type ) {
 		return isset( $this->types[ $post_type ] );
 	}
 }

@@ -23,9 +23,9 @@ class Helper {
 	 *
 	 * @return array|false|mixed|string|string[]|void
 	 */
-	public static function get_thumbnail_url( $size = 'small' ){
+	public static function get_thumbnail_url( $size = 'small' ) {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
@@ -48,24 +48,24 @@ class Helper {
 				'original'  => 3, // original image size ratio
 				'hd_small'  => 4, // 640x360 px
 				'hd_medium' => 5, // 1280x720 px
-				'hd_big'    => 6  // 1920x1080 px
+				'hd_big'    => 6,  // 1920x1080 px
 			]
 		);
 
-		if( !array_key_exists( $size, $sizes ) ){
+		if ( ! array_key_exists( $size, $sizes ) ) {
 			$size = 'small';
 		}
 
 		$thumbnails = array_values( $video->thumbnails );
 
-		if( isset( $thumbnails[ $sizes[ $size ] ] ) ){
+		if ( isset( $thumbnails[ $sizes[ $size ] ] ) ) {
 			$result = $thumbnails[ $sizes[ $size ] ];
-			if( is_ssl() ){
-				$result = str_replace( 'http://' , 'https://', $thumbnails[ $sizes[ $size ] ] );
+			if ( is_ssl() ) {
+				$result = str_replace( 'http://', 'https://', $thumbnails[ $sizes[ $size ] ] );
 			}
 		}
 
-		if( 'original' === $size ){
+		if ( 'original' === $size ) {
 			$result = remove_query_arg( 'r', $result );
 		}
 
@@ -82,7 +82,7 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	public static function get_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ){
+	public static function get_thumbnail( $size = 'small', $before = '', $after = '', $echo = true ) {
 
 		$img_url = self::get_thumbnail_url( $size );
 
@@ -95,7 +95,7 @@ class Helper {
 		$classes = apply_filters(
 			'vimeotheque\themes\image_class',
 			// class no-lazy is needed for W3 Total Cache to avoid lazy loading images and breaking scripts
-			['vimeotheque-playlist', 'image', 'no-lazy'],
+			array( 'vimeotheque-playlist', 'image', 'no-lazy' ),
 			self::current_video_post()
 		);
 
@@ -110,7 +110,7 @@ class Helper {
 				) :
 				'';
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $before . $output . $after;
 		}
 
@@ -126,24 +126,24 @@ class Helper {
 	 *
 	 * @return string|void
 	 */
-	public static function image_preloader( $size = 'small', $class="cvm-preload", $echo = true ){
+	public static function image_preloader( $size = 'small', $class = 'cvm-preload', $echo = true ) {
 
 		$img_url = self::get_thumbnail_url( $size );
 
 		$blank = VIMEOTHEQUE_URL . '/assets/front-end/images/blank.png';
 
-		if( $img_url ){
+		if ( $img_url ) {
 			$output = sprintf(
 				'<img data-src="%s" alt="" src="%s" class="%s" />',
 				$img_url,
 				$blank,
 				$class
 			);
-		}else{
+		} else {
 			$output = '';
 		}
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $output;
 		}
 
@@ -158,23 +158,23 @@ class Helper {
 	 *
 	 * @return string|void
 	 */
-	public static function get_title( $include_duration = true,  $before = '', $after = '', $echo = true ){
+	public static function get_title( $include_duration = true, $before = '', $after = '', $echo = true ) {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
 		$output = $video->get_post()->post_title;
 
-		if( $include_duration ){
+		if ( $include_duration ) {
 			$output .= self::get_duration( '<span class="duration">[', ']</span>', false );
 		}
 
-		if( $echo ){
-			echo $before.$output.$after;
+		if ( $echo ) {
+			echo $before . $output . $after;
 		}
 
-		return $before.$output.$after;
+		return $before . $output . $after;
 	}
 
 	/**
@@ -186,9 +186,9 @@ class Helper {
 	 *
 	 * @return string|void
 	 */
-	public static function get_duration( $before = '<span class="duration">', $after = '</span>', $echo = true ){
+	public static function get_duration( $before = '<span class="duration">', $after = '</span>', $echo = true ) {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
@@ -199,7 +199,7 @@ class Helper {
 			$after
 		);
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $output;
 		}
 
@@ -213,24 +213,24 @@ class Helper {
 	 *
 	 * @return string|void
 	 */
-	public static function get_excerpt( $before = '<div class="description">', $after = '</div>', $echo  = true ){
+	public static function get_excerpt( $before = '<div class="description">', $after = '</div>', $echo = true ) {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
 		$options = self::get_player_options();
-		if( !isset( $options['show_excerpts'] ) || !$options['show_excerpts']  ){
+		if ( ! isset( $options['show_excerpts'] ) || ! $options['show_excerpts'] ) {
 			return;
 		}
 
 		$excerpt = self::trim_excerpt();
 
-		if( empty( $excerpt ) ){
+		if ( empty( $excerpt ) ) {
 			return;
 		}
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $before . $excerpt . $after;
 		}
 
@@ -242,16 +242,16 @@ class Helper {
 	 *
 	 * @return string|void
 	 */
-	private static function trim_excerpt(){
+	private static function trim_excerpt() {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
 		$post = $video->get_post();
 		$text = get_the_excerpt( $post );
 
-		if( !$text ){
+		if ( ! $text ) {
 
 			$text = get_the_content( '', false, $post );
 
@@ -260,7 +260,7 @@ class Helper {
 
 			/**
 			 * This filter is documented in wp-includes/post-template.php
-    *
+	*
 			 * @ignore
 			 */
 			$text = apply_filters( 'the_content', $text );
@@ -312,25 +312,25 @@ class Helper {
 	 *
 	 * @return string|void
 	 */
-	public static function get_video_data_attributes( $before = " ", $after="", $echo = true ){
+	public static function get_video_data_attributes( $before = ' ', $after = '', $echo = true ) {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
 		$options = $video->get_embed_options();
 
-		$data = [
-			'video_id' 	 => $video->video_id,
-			'autoplay' 	 => $options['autoplay'],
-			'volume'  	 => $options['volume'],
-			'size_ratio' => $video->size['ratio'],
-			'aspect_ratio'=> $options['aspect_ratio']
-		];
+		$data = array(
+			'video_id'     => $video->video_id,
+			'autoplay'     => $options['autoplay'],
+			'volume'       => $options['volume'],
+			'size_ratio'   => $video->size['ratio'],
+			'aspect_ratio' => $options['aspect_ratio'],
+		);
 
 		$output = \Vimeotheque\Helper::data_attributes( $data, false );
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $before . $output . $after;
 		}
 
@@ -342,14 +342,14 @@ class Helper {
 	 *
 	 * @return boolean|false|string|void|\WP
 	 */
-	public static function get_post_permalink( $echo  = true ){
+	public static function get_post_permalink( $echo = true ) {
 		$video = self::current_video_post();
-		if( !$video ){
+		if ( ! $video ) {
 			return;
 		}
 
 		$pl = get_permalink( $video->get_post()->ID );
-		if( $echo ){
+		if ( $echo ) {
 			echo $pl;
 		}
 		return $pl;
@@ -362,12 +362,12 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	public static function get_width( $before = ' style="', $after='"', $echo = true ){
+	public static function get_width( $before = ' style="', $after = '"', $echo = true ) {
 		$player = \Vimeotheque\Helper::get_embed_options( self::get_player_options() );
-		if( $echo ){
-			echo $before . 'width: ' . $player['width'].'px; ' . $after;
+		if ( $echo ) {
+			echo $before . 'width: ' . $player['width'] . 'px; ' . $after;
 		}
-		return $before . 'width: ' . $player['width'].'px; ' . $after;
+		return $before . 'width: ' . $player['width'] . 'px; ' . $after;
 	}
 
 	/**
@@ -377,7 +377,7 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	public static function get_player_size( $before = ' style="', $after='"', $echo = true ){
+	public static function get_player_size( $before = ' style="', $after = '"', $echo = true ) {
 		$player = \Vimeotheque\Helper::get_embed_options( self::get_player_options() );
 		$height = \Vimeotheque\Helper::calculate_player_height( $player['aspect_ratio'], $player['width'] );
 
@@ -387,7 +387,7 @@ class Helper {
 			$height
 		);
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $before . $output . $after;
 		}
 
@@ -401,11 +401,11 @@ class Helper {
 	 *
 	 * @return Video_Post
 	 */
-	public static function current_video_post(){
+	public static function current_video_post() {
 		global $cvm_video;
 
-		if( !$cvm_video ){
-			_doing_it_wrong(__METHOD__, 'You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ '.__METHOD__.'(); } ', '3.0');
+		if ( ! $cvm_video ) {
+			_doing_it_wrong( __METHOD__, 'You should use this into a foreach() loop. Correct usage is: <br />foreach( $videos as $cvm_video ){ ' . __METHOD__ . '(); } ', '3.0' );
 			return false;
 		}
 
@@ -417,18 +417,18 @@ class Helper {
 	 *
 	 * @return string
 	 */
-	public static function get_player_data_attributes( $echo = true ){
-		$player = \Vimeotheque\Helper::get_embed_options( self::get_player_options() );
+	public static function get_player_data_attributes( $echo = true ) {
+		$player     = \Vimeotheque\Helper::get_embed_options( self::get_player_options() );
 		$attributes = \Vimeotheque\Helper::data_attributes( $player, $echo );
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $attributes;
 		}
 
 		return $attributes;
 	}
 
-	public static function get_player_options(){
+	public static function get_player_options() {
 		global $CVM_PLAYER_SETTINGS;
 		return $CVM_PLAYER_SETTINGS;
 	}

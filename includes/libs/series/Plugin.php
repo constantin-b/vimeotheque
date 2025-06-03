@@ -39,18 +39,18 @@ class Plugin {
 	 * @var Series
 	 */
 	private $post_type;
-    /**
-     * Theme manager.
-     *
-     * @var Themes\Themes
-     */
-    private $themes;
-    /**
-     * @var Metabox_Factory
-     */
-    private $metaboxes;
+	/**
+	 * Theme manager.
+	 *
+	 * @var Themes\Themes
+	 */
+	private $themes;
+	/**
+	 * @var Metabox_Factory
+	 */
+	private $metaboxes;
 
-    /**
+	/**
 	 * Clone.
 	 *
 	 * Disable class cloning and throw an error on object clone.
@@ -98,137 +98,140 @@ class Plugin {
 	/**
 	 * Class constructors - sets all filters and hooks
 	 */
-	private function __construct(){
+	private function __construct() {
 		// start the autoloader
 		$this->register_autoloader();
-			
+
 		$this->init();
-		
-		add_action( 'init', [
-			$this,
-			'init_admin'
-		], -99 );
 
-        add_action(
-            'init',
-            function(){
-                add_shortcode(
-                    'vimeotheque_series',
-                    function( $atts ){
+		add_action(
+			'init',
+			array(
+				$this,
+				'init_admin',
+			),
+			-99
+		);
 
-                        if( isset( $atts['id'] ) ){
-                            $post = get_post($atts['id']);
-                            if( $post && 'series' == $post->post_type && 'publish' == $post->post_status ){
-                                $playlist = new Playlist($atts['id'] );
-                                return $playlist->get_content();
-                            }
-                        }
-                    }
-                );
-            }
-        );
+		add_action(
+			'init',
+			function () {
+				add_shortcode(
+					'vimeotheque_series',
+					function ( $atts ) {
 
+						if ( isset( $atts['id'] ) ) {
+							$post = get_post( $atts['id'] );
+							if ( $post && 'series' == $post->post_type && 'publish' == $post->post_status ) {
+								$playlist = new Playlist( $atts['id'] );
+								return $playlist->get_content();
+							}
+						}
+					}
+				);
+			}
+		);
 	}
 
 	/**
 	 * Register the autoloader
 	 */
-	private function register_autoloader(){
+	private function register_autoloader() {
 		require VIMEOTHEQUE_PATH . 'includes/libs/series/Autoload.php';
-        Autoload::run();
+		Autoload::run();
 	}
 
-	private function init(){
+	private function init() {
 		$this->post_type = new Series();
-        // Initiate rest fields
-        new Series_Rest_Fields();
+		// Initiate rest fields
+		new Series_Rest_Fields();
 
-        // Initiate the themes Rest Controller.
-        new Rest_Endpoint_Factory();
+		// Initiate the themes Rest Controller.
+		new Rest_Endpoint_Factory();
 
-        $this->themes = new Themes\Themes(
-            new Theme(
-                  Helper::get_path() . 'themes-series/default/theme.php',
-                __( 'Default', 'codeflavors-vimeo-video-post-lite' ),
-                'assets/js/script.js',
-                'assets/css/style.css'
-            )
-        );
+		$this->themes = new Themes\Themes(
+			new Theme(
+				Helper::get_path() . 'themes-series/default/theme.php',
+				__( 'Default', 'codeflavors-vimeo-video-post-lite' ),
+				'assets/js/script.js',
+				'assets/css/style.css'
+			)
+		);
 
-        $this->themes->register_theme(
-            new Theme(
-                Helper::get_path() . 'themes-series/list/theme.php',
-                __( 'List', 'codeflavors-vimeo-video-post-lite' ),
-                'assets/js/script.js',
-                'assets/css/style.css'
-            )
-        );
+		$this->themes->register_theme(
+			new Theme(
+				Helper::get_path() . 'themes-series/list/theme.php',
+				__( 'List', 'codeflavors-vimeo-video-post-lite' ),
+				'assets/js/script.js',
+				'assets/css/style.css'
+			)
+		);
 
-        $this->themes->register_theme(
-            new Theme(
-                Helper::get_path() . 'themes-series/carousel/theme.php',
-                __('Carousel', 'codeflavors-vimeo-video-post-lite'),
-                'assets/js/script.js',
-                'assets/css/style.css'
-            )
-        );
+		$this->themes->register_theme(
+			new Theme(
+				Helper::get_path() . 'themes-series/carousel/theme.php',
+				__( 'Carousel', 'codeflavors-vimeo-video-post-lite' ),
+				'assets/js/script.js',
+				'assets/css/style.css'
+			)
+		);
 
-        // Meta boxes
-        $this->metaboxes = new Metabox_Factory(
-            new Video_List_Metabox(
-                'vimeotheque-series-video-list-metabox',
-                esc_html__( 'Videos', 'codeflavors-vimeo-video-post-lite' ),
-                $this->post_type->get_post_name()
-            )
-        );
+		// Meta boxes
+		$this->metaboxes = new Metabox_Factory(
+			new Video_List_Metabox(
+				'vimeotheque-series-video-list-metabox',
+				esc_html__( 'Videos', 'codeflavors-vimeo-video-post-lite' ),
+				$this->post_type->get_post_name()
+			)
+		);
 
-        $this->metaboxes->register_meta_box(
-            new Theme_Metabox(
-                'vimeotheque-series-theme-metabox',
-                esc_html__( 'Theme', 'codeflavors-vimeo-video-post-lite' ),
-                $this->post_type->get_post_name()
-            )
-        );
+		$this->metaboxes->register_meta_box(
+			new Theme_Metabox(
+				'vimeotheque-series-theme-metabox',
+				esc_html__( 'Theme', 'codeflavors-vimeo-video-post-lite' ),
+				$this->post_type->get_post_name()
+			)
+		);
 
-        $this->metaboxes->register_meta_box(
-            new Post_Actions(
-                'vimeotheque-series-post-actions-metabox',
-                esc_html__( 'Actions', 'codeflavors-vimeo-video-post-lite' ),
-                $this->post_type->get_post_name(),
-                'side'
-            )
-        );
+		$this->metaboxes->register_meta_box(
+			new Post_Actions(
+				'vimeotheque-series-post-actions-metabox',
+				esc_html__( 'Actions', 'codeflavors-vimeo-video-post-lite' ),
+				$this->post_type->get_post_name(),
+				'side'
+			)
+		);
 
-        $this->metaboxes->register_meta_box(
-            new Player_Metabox(
-                'vimeotheque-series-player-metabox',
-                esc_html__('Video Player', 'codeflavors-vimeo-video-post-lite'),
-                $this->post_type->get_post_name(),
-                'side'
-            )
-        );
+		$this->metaboxes->register_meta_box(
+			new Player_Metabox(
+				'vimeotheque-series-player-metabox',
+				esc_html__( 'Video Player', 'codeflavors-vimeo-video-post-lite' ),
+				$this->post_type->get_post_name(),
+				'side'
+			)
+		);
 
-        $this->metaboxes->register_meta_box(
-            new Shortcode_Metabox(
-                'vimeotheque-series-shortcode-metabox',
-                esc_html__( 'Shortcode', 'codeflavors-vimeo-video-post-lite' ),
-                $this->post_type->get_post_name(),
-                'side'
-            )
-        );
+		$this->metaboxes->register_meta_box(
+			new Shortcode_Metabox(
+				'vimeotheque-series-shortcode-metabox',
+				esc_html__( 'Shortcode', 'codeflavors-vimeo-video-post-lite' ),
+				$this->post_type->get_post_name(),
+				'side'
+			)
+		);
 
-        if( !is_admin() ){
-            new Single_Post();
-        }
+		if ( ! is_admin() ) {
+			new Single_Post();
+		}
 
-        new Block_Editor();
+		new Block_Editor();
 	}
-	
+
 	/**
 	 * Initialize administration
 	 */
-	public function init_admin(){
-		if( is_admin() ){
+	public function init_admin() {
+		if ( is_admin() ) {
 			$this->admin = new Admin();
 		}
 	}
@@ -240,21 +243,19 @@ class Plugin {
 		return $this->post_type;
 	}
 
-    /**
-     * @return Themes\Themes
-     */
-    public function get_themes_manager (): Themes\Themes {
-        return $this->themes;
-    }
+	/**
+	 * @return Themes\Themes
+	 */
+	public function get_themes_manager(): Themes\Themes {
+		return $this->themes;
+	}
 
-    /**
-     * @return Metabox_Factory
-     */
-    public function get_metaboxes (): Metabox_Factory {
-        return $this->metaboxes;
-    }
-
-
+	/**
+	 * @return Metabox_Factory
+	 */
+	public function get_metaboxes(): Metabox_Factory {
+		return $this->metaboxes;
+	}
 }
 
 Plugin::instance();

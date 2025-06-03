@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @author CodeFlavors
  */
-class Rest_Api{
+class Rest_Api {
 	/**
 	 * @var Rest_Endpoint_Factory
 	 */
@@ -26,7 +26,7 @@ class Rest_Api{
 
 	/**
 	 * Custom post type class reference
-  *
+ *
 	 * @var Post_Type
 	 */
 	private $cpt;
@@ -36,7 +36,7 @@ class Rest_Api{
 	 *
 	 * @param Post_Type $cpt
 	 */
-	public function __construct( Post_Type $cpt ){
+	public function __construct( Post_Type $cpt ) {
 		// store custom post type reference
 		$this->cpt = $cpt;
 		// add init action
@@ -48,18 +48,18 @@ class Rest_Api{
 	/**
 	 * REST API init callback
 	 */
-	public function api_init(){
+	public function api_init() {
 		$this->register_rest_field();
 	}
 
 	/**
 	 * Register new Rest API fields
 	 */
-	private function register_rest_field(){
+	private function register_rest_field() {
 
-		$objects = [];
+		$objects    = [];
 		$post_types = Plugin::instance()->get_registered_post_types()->get_post_types();
-		foreach( $post_types as $post_type ){
+		foreach ( $post_types as $post_type ) {
 			$objects[] = $post_type->get_post_type()->name;
 		}
 
@@ -81,34 +81,34 @@ class Rest_Api{
 	 *
 	 * @return array|null
 	 */
-	public function register_field( $object ){
-		$video = Helper::get_video_post( $object['id'] );
-		$response = NULL;
+	public function register_field( $object ) {
+		$video    = Helper::get_video_post( $object['id'] );
+		$response = null;
 
-		if( $video->is_video() ){
+		if ( $video->is_video() ) {
 			$response = [
-				'video_id'		=> $video->video_id,
-				'uploader'		=> $video->uploader,
-				'uploader_uri'	=> $video->uploader_uri,
-				'published' 	=> $video->published,
-				'_published'	=> $video->_published,
-				'updated'		=> $video->updated,
-				'title'			=> $video->title,
-				'description' 	=> $video->description,
-				'tags'			=> $video->tags,
-				'duration'		=> $video->duration,
-				'_duration'		=> $video->_duration,
-				'thumbnails'	=> $video->thumbnails,
-				'stats'			=> $video->stats,
-				'privacy'		=> $video->privacy, // set by the plugin
-				'view_privacy'	=> $video->view_privacy, // the original Vimeo privacy setting
+				'video_id'      => $video->video_id,
+				'uploader'      => $video->uploader,
+				'uploader_uri'  => $video->uploader_uri,
+				'published'     => $video->published,
+				'_published'    => $video->_published,
+				'updated'       => $video->updated,
+				'title'         => $video->title,
+				'description'   => $video->description,
+				'tags'          => $video->tags,
+				'duration'      => $video->duration,
+				'_duration'     => $video->_duration,
+				'thumbnails'    => $video->thumbnails,
+				'stats'         => $video->stats,
+				'privacy'       => $video->privacy, // set by the plugin
+				'view_privacy'  => $video->view_privacy, // the original Vimeo privacy setting
 				'embed_privacy' => $video->embed_privacy, // the original Vimeo privacy embed setting
-				'size'			=> $video->size,
+				'size'          => $video->size,
 				// Vimeo on Demand
-				'type' 	=> $video->type,
-				'uri'	=> $video->uri,
-				'link'	=> $video->link,
-                'embed_url' => $video->get_embed_url(),
+				'type'          => $video->type,
+				'uri'           => $video->uri,
+				'link'          => $video->link,
+				'embed_url'     => $video->get_embed_url(),
 			];
 		}
 

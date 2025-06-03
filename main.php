@@ -37,15 +37,15 @@ if ( ! version_compare( PHP_VERSION, VIMEOTHEQUE_PHP_COMPAT, '>=' ) ) {
 	add_action( 'admin_notices', 'vimeotheque_fail_php_version' );
 } elseif ( ! version_compare( get_bloginfo( 'version' ), VIMEOTHEQUE_WP_COMPAT, '>=' ) ) {
 	add_action( 'admin_notices', 'vimeotheque_fail_wp_version' );
-}else{
+} else {
 
-    // Start the timer:
-    do_action( 'qm/start', 'Vimeotheque Lite' );
+	// Start the timer:
+	do_action( 'qm/start', 'Vimeotheque Lite' );
 
-    require_once VIMEOTHEQUE_PATH . 'includes/libs/plugin.class.php';
+	require_once VIMEOTHEQUE_PATH . 'includes/libs/plugin.class.php';
 
-    // Stop the timer:
-    do_action( 'qm/stop', 'Vimeotheque Lite' );
+	// Stop the timer:
+	do_action( 'qm/stop', 'Vimeotheque Lite' );
 }
 
 /**
@@ -56,7 +56,7 @@ if ( ! version_compare( PHP_VERSION, VIMEOTHEQUE_PHP_COMPAT, '>=' ) ) {
  */
 function vimeotheque_fail_php_version() {
 	/* translators: %s: PHP version */
-	$message = sprintf(
+	$message      = sprintf(
 		esc_html__(
 			'Vimeotheque requires PHP version %s+, plugin is currently NOT RUNNING.',
 			'codeflavors-vimeo-video-post-lite'
@@ -75,7 +75,7 @@ function vimeotheque_fail_php_version() {
  */
 function vimeotheque_fail_wp_version() {
 	/* translators: %s: WordPress version */
-	$message = sprintf(
+	$message      = sprintf(
 		esc_html__(
 			'Vimeotheque requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.',
 			'codeflavors-vimeo-video-post-lite'

@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Vimeotheque
  */
-class Plugin{
+class Plugin {
 
 	/**
 	* Holds the plugin instance.
@@ -53,7 +53,7 @@ class Plugin{
 	private $cpt;
 	/**
 	 * Store admin instance
-  *
+ *
 	 * @var Admin
 	 */
 	private $admin;
@@ -143,39 +143,50 @@ class Plugin{
 	/**
 	 * Class constructors - sets all filters and hooks
 	 */
-	private function __construct(){
+	private function __construct() {
 		// start the autoloader
 		$this->register_autoloader();
 		// load dependency files
 		$this->load();
 
 		// activation hook to add the rewrite rules for the custom post type
-		register_activation_hook( VIMEOTHEQUE_FILE, [
-			$this,
-			'activation_hook'
-		] );
+		register_activation_hook(
+			VIMEOTHEQUE_FILE,
+			array(
+				$this,
+				'activation_hook',
+			)
+		);
 
-		add_action( 'plugins_loaded', [
-			$this,
-			'init'
-		], 1 );
+		add_action(
+			'plugins_loaded',
+			array(
+				$this,
+				'init',
+			),
+			1
+		);
 
 		// run this admin init on init to have access to earlier hooks
 		// priority must be set to run very early so that init hooks set
 		// in admin page can also run
-		add_action( 'init', [
-			$this,
-			'admin_init'
-		], -9999999 );
+		add_action(
+			'init',
+			array(
+				$this,
+				'admin_init',
+			),
+			-9999999
+		);
 
 		new Amp();
 		new Templates_Init();
 
 		add_action(
 			'after_setup_theme',
-			function(){
+			function () {
 				$options = $this->get_options();
-				if( $options['enable_templates'] && !current_theme_supports( 'vimeotheque' ) ){
+				if ( $options['enable_templates'] && ! current_theme_supports( 'vimeotheque' ) ) {
 					/**
 					 * Support for Video templates.
 					 */
@@ -186,7 +197,8 @@ class Plugin{
 					 */
 					add_theme_support( 'vimeotheque-next-video-card' );
 				}
-			}, 1
+			},
+			1
 		);
 
 		add_filter(
@@ -200,25 +212,25 @@ class Plugin{
 			 * @param array $all_options        All the plugin options.
 			 * @param string $wp_option_name    The WP option name.
 			 */
-			function( $result, $all_options, $wp_option_name ){
+			function ( $result, $all_options, $wp_option_name ) {
 
-				if( $this->get_options_obj()->get_option_name() == $wp_option_name ){
+				if ( $this->get_options_obj()->get_option_name() == $wp_option_name ) {
 
-					if( get_theme_support( 'vimeotheque' ) ){
+					if ( get_theme_support( 'vimeotheque' ) ) {
 						$all_options['enable_templates'] = true;
-						if( isset( $result['enable_templates'] ) ) {
+						if ( isset( $result['enable_templates'] ) ) {
 							$result['enable_templates'] = true;
 						}
 					}
 
-					if( $all_options['enable_templates'] ) {
+					if ( $all_options['enable_templates'] ) {
 						// When templates are enabled, these options will always have the same predefined value.
 						$options = [
 							'archives'           => false,
 							'public'             => true,
 							'import_title'       => true,
 							'import_description' => 'content',
-							'featured_image'      => true
+							'featured_image'     => true,
 						];
 
 						// Set the options to the predefined value.
@@ -231,15 +243,15 @@ class Plugin{
 				}
 
 				return $result;
-
-			}, -999, 3
+			},
+			-999,
+			3
 		);
 
-        require VIMEOTHEQUE_PATH . 'includes/libs/series/Plugin.php';
-
+		require VIMEOTHEQUE_PATH . 'includes/libs/series/Plugin.php';
 	}
 
-	public function init(){
+	public function init() {
 		// register the post type
 		$this->set_post_type();
 		// set the importer
@@ -284,7 +296,7 @@ class Plugin{
 	/**
 	 * Register the autoloader
 	 */
-	private function register_autoloader(){
+	private function register_autoloader() {
 		require VIMEOTHEQUE_PATH . 'includes/libs/autoload.class.php';
 		Autoload::run();
 	}
@@ -292,21 +304,25 @@ class Plugin{
 	/**
 	 * Register the post type
 	 */
-	private function set_post_type(){
+	private function set_post_type() {
 		$this->cpt = new Post_Type( $this );
-		add_action( 'init', function(){
-			$this->registered_post_types = new Post_Registration(
-				$this->cpt->get_wp_post_type_object(),
-				$this->cpt->get_category_taxonomy_object(),
-				get_taxonomy( $this->cpt->get_tag_tax() )
-			);
-		}, 2 );
+		add_action(
+			'init',
+			function () {
+				$this->registered_post_types = new Post_Registration(
+					$this->cpt->get_wp_post_type_object(),
+					$this->cpt->get_category_taxonomy_object(),
+					get_taxonomy( $this->cpt->get_tag_tax() )
+				);
+			},
+			2
+		);
 	}
 
 	/**
 	 * Loads the automatic importer
 	 */
-	private function load_importer(){
+	private function load_importer() {
 		/**
 		 * Posts importer filter.
 		 *
@@ -321,7 +337,7 @@ class Plugin{
 	/**
 	 * Loads the front-end
 	 */
-	private function load_front_end(){
+	private function load_front_end() {
 		// start the REST API compatibility
 		$this->rest_api = new Rest_Api( $this->get_cpt() );
 		// start the front-end functionality
@@ -331,27 +347,27 @@ class Plugin{
 	/**
 	 * Set plugin options
 	 */
-	private function set_plugin_options(){
-		$defaults = [
-			'enable_templates' => false, // use the video templates for themes
-			'public' => true, // post type is public or not
-			'archives' => false, // display video embed on archive pages
-			'post_slug'	=> 'vimeo-video',
-			'taxonomy_slug' => 'vimeo-videos',
-			'tag_slug' => 'vimeo-tag',
-            'series_slug' => 'series',
-			'import_tags' => true, // import tags retrieved from Vimeo
-			'max_tags' => 3, // how many tags to import
-			'import_title' => true, // import titles on custom posts
+	private function set_plugin_options() {
+		$defaults = array(
+			'enable_templates'   => false, // use the video templates for themes
+			'public'             => true, // post type is public or not
+			'archives'           => false, // display video embed on archive pages
+			'post_slug'          => 'vimeo-video',
+			'taxonomy_slug'      => 'vimeo-videos',
+			'tag_slug'           => 'vimeo-tag',
+			'series_slug'        => 'series',
+			'import_tags'        => true, // import tags retrieved from Vimeo
+			'max_tags'           => 3, // how many tags to import
+			'import_title'       => true, // import titles on custom posts
 			'import_description' => 'content', // import descriptions on custom posts
-			'import_date' => true, // import video date as post date
-			'featured_image' => true, // set thumbnail as featured image; default import on video feed import (takes more time)
-			'import_status' => 'publish', // default import status of videos
+			'import_date'        => true, // import video date as post date
+			'featured_image'     => true, // set thumbnail as featured image; default import on video feed import (takes more time)
+			'import_status'      => 'publish', // default import status of videos
 			// Vimeo oAuth
 			'vimeo_consumer_key' => '',
-			'vimeo_secret_key' => '',
-			'oauth_token' => '' // retrieved from Vimeo; gets set after entering valid client ID and client secret
-		];
+			'vimeo_secret_key'   => '',
+			'oauth_token'        => '', // retrieved from Vimeo; gets set after entering valid client ID and client secret
+		);
 
 		/**
 		 * Options filter.
@@ -369,33 +385,33 @@ class Plugin{
 	/**
 	 * Set video player options
 	 */
-	private function set_player_options(){
-		$defaults = [
-			'title'	=> 1, 	// show video title
-			'byline' => 1, 	// show player controls. Values: 0 or 1
-			'portrait' => 1, 	// show author image
-			'loop' => 0,
+	private function set_player_options() {
+		$defaults = array(
+			'title'           => 1,   // show video title
+			'byline'          => 1,  // show player controls. Values: 0 or 1
+			'portrait'        => 1,    // show author image
+			'loop'            => 0,
 			// Autoplay may be blocked in some environments, such as IOS, Chrome 66+, and Safari 11+. In these cases, we’ll revert to standard playback requiring viewers to initiate playback.
-			'autoplay' => 0, 	// 0 - on load, player won't play video; 1 - on load player plays video automatically
-			'color'		=> '', 	// no color set by default; will use Vimeo's settings
-			'dnt' => 0, // block Vimeo player from tracking session data or cookies (1) or allow it (0);
+			'autoplay'        => 0,    // 0 - on load, player won't play video; 1 - on load player plays video automatically
+			'color'           => '',  // no color set by default; will use Vimeo's settings
+			'dnt'             => 0, // block Vimeo player from tracking session data or cookies (1) or allow it (0);
 			// extra settings
-			'aspect_ratio' => '16x9',
-			'width'	=> 900,
-			'max_height' => 0, // allows setup of a maximum embed height; must be a value over 50px to work
-			'video_position' => 'below-content', // in front-end custom post, where to display the video: above or below post content
-			'video_align' => 'align-left', // video alignment
-			'lazy_load' => false, // lazy load videos
+			'aspect_ratio'    => '16x9',
+			'width'           => 900,
+			'max_height'      => 0, // allows setup of a maximum embed height; must be a value over 50px to work
+			'video_position'  => 'below-content', // in front-end custom post, where to display the video: above or below post content
+			'video_align'     => 'align-left', // video alignment
+			'lazy_load'       => false, // lazy load videos
 			'play_icon_color' => '#FF0000', // lazy load play icon color
-			'volume' => 45, // video default volume
+			'volume'          => 45, // video default volume
 			// extra player settings controllable by widgets/shortcodes
-			'playlist_loop' => 0,
+			'playlist_loop'   => 0,
 			'aspect_override' => true,
-			'start_time' => 0, // time in seconds when playback should start
-			'muted' => false, // load video muted
-			'background' => false, // load video in background mode (hides controls and mutes video)
-			'transparent' => false, // video embed should be with background (false) or without it (true)
-		];
+			'start_time'      => 0, // time in seconds when playback should start
+			'muted'           => false, // load video muted
+			'background'      => false, // load video in background mode (hides controls and mutes video)
+			'transparent'     => false, // video embed should be with background (false) or without it (true)
+		);
 
 		/**
 		 * Player options filter.
@@ -417,7 +433,7 @@ class Plugin{
 	 *
 	 * @return void
 	 */
-	public function activation_hook(){
+	public function activation_hook() {
 		$this->set_post_type();
 		// register custom post
 		$this->get_cpt()->register_post();
@@ -427,8 +443,8 @@ class Plugin{
 		$this->add_admin();
 
 		$wp_option = get_option( $this->get_options_obj()->get_option_name() );
-		if( !$wp_option ){
-			set_transient( 'vimeotheque_setup_activated' , time(), 30 );
+		if ( ! $wp_option ) {
+			set_transient( 'vimeotheque_setup_activated', time(), 30 );
 		}
 	}
 
@@ -437,7 +453,7 @@ class Plugin{
 	 *
 	 * @return array
 	 */
-	public function get_options(){
+	public function get_options() {
 		$options = $this->get_options_obj();
 		return $options->get_options( is_customize_preview() );
 	}
@@ -447,8 +463,8 @@ class Plugin{
 	 *
 	 * @return Options
 	 */
-	public function get_options_obj(){
-		if( !$this->options ){
+	public function get_options_obj() {
+		if ( ! $this->options ) {
 			$this->set_plugin_options();
 		}
 
@@ -460,8 +476,8 @@ class Plugin{
 	 *
 	 * @return Options
 	 */
-	public function get_embed_options_obj(){
-		if( !$this->player_options ){
+	public function get_embed_options_obj() {
+		if ( ! $this->player_options ) {
 			$this->set_player_options();
 		}
 
@@ -471,7 +487,7 @@ class Plugin{
 	/**
 	 * @return array
 	 */
-	public function get_embed_options(){
+	public function get_embed_options() {
 		$options = $this->get_embed_options_obj();
 		return $options->get_options( is_customize_preview() );
 	}
@@ -479,7 +495,7 @@ class Plugin{
 	/**
 	 * Callback function for hook "admin_init"
 	 */
-	public function admin_init(){
+	public function admin_init() {
 		$this->add_customizer();
 		$this->add_admin();
 	}
@@ -487,8 +503,8 @@ class Plugin{
 	/**
 	 * Implements WP customizer functionality
 	 */
-	private function add_customizer(){
-		if( is_admin() || is_customize_preview() ) {
+	private function add_customizer() {
+		if ( is_admin() || is_customize_preview() ) {
 			$this->customizer = new Customizer();
 
 		}
@@ -497,8 +513,8 @@ class Plugin{
 	/**
 	 * Adds plugin administration functionality
 	 */
-	private function add_admin(){
-		if( is_admin() || Helper::is_ajax() ) {
+	private function add_admin() {
+		if ( is_admin() || Helper::is_ajax() ) {
 			$this->admin = new Admin( $this->get_cpt() );
 		}
 	}
@@ -509,28 +525,28 @@ class Plugin{
 	 * @return array|mixed
 	 * @throws \Exception
 	 */
-	public function get_capability( $cap = false ){
+	public function get_capability( $cap = false ) {
 		return $this->admin->get_capability( $cap );
 	}
 
 	/**
 	 * @return array
 	 */
-	public function get_roles(){
+	public function get_roles() {
 		return $this->admin->get_roles();
 	}
 
 	/**
 	 * @return Post_Type
 	 */
-	public function get_cpt(){
+	public function get_cpt() {
 		return $this->cpt;
 	}
 
 	/**
 	 * @return Posts_Import
 	 */
-	public function get_posts_importer(){
+	public function get_posts_importer() {
 		return $this->posts_import;
 	}
 
@@ -542,8 +558,8 @@ class Plugin{
 	 *
 	 * @return Admin
 	 */
-	public function get_admin(){
-		if( is_null( $this->admin ) ){
+	public function get_admin() {
+		if ( is_null( $this->admin ) ) {
 			$this->add_admin();
 		}
 		return $this->admin;
@@ -552,7 +568,7 @@ class Plugin{
 	/**
 	 * @return Front_End
 	 */
-	public function get_front_end(){
+	public function get_front_end() {
 		return $this->front_end;
 	}
 
@@ -576,14 +592,14 @@ class Plugin{
 	/**
 	 * @return Blocks_Factory
 	 */
-	public function get_blocks(){
+	public function get_blocks() {
 		return $this->blocks_factory;
 	}
 
 	/**
 	 * @return Post_Registration
 	 */
-	public function get_registered_post_types(){
+	public function get_registered_post_types() {
 		return $this->registered_post_types;
 	}
 
@@ -603,13 +619,16 @@ class Plugin{
 
 	/**
 	 * Load dependencies
-  *
+ *
 	 * @return void
 	 */
-	private function load(){
-		add_action( 'vimeotheque_pro_loaded', function(){
-			include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
-		} );
+	private function load() {
+		add_action(
+			'vimeotheque_pro_loaded',
+			function () {
+				include_once VIMEOTHEQUE_PATH . 'includes/deprecated.php';
+			}
+		);
 	}
 }
 

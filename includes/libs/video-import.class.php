@@ -14,7 +14,7 @@ use WP_Error;
  *
  * @package Vimeotheque
  */
-class Video_Import{
+class Video_Import {
 	/**
 	 * The results array containing all videos
 	 *
@@ -78,73 +78,73 @@ class Video_Import{
 	 *      @type string  $password               Password for password restricted resources (ie. showcases).
 	 * }
 	 */
-	public function __construct( $resource_type, $resource_id = false, $user_id = false, $args = [] ){
+	public function __construct( $resource_type, $resource_id = false, $user_id = false, $args = [] ) {
 
 		$this->api = new Vimeo_Api_Query( $resource_type, $resource_id, $user_id, $args );
-		$request = $this->api->request_feed();
+		$request   = $this->api->request_feed();
 		// stop on error
-		if( is_wp_error( $request ) ){
+		if ( is_wp_error( $request ) ) {
 			$this->errors = $request;
 			return;
 		}
-		
+
 		$result = json_decode( $request['body'], true );
-		
+
 		/* single video entry */
-		if( $this->api->get_api_resource()->is_single_entry() ){
+		if ( $this->api->get_api_resource()->is_single_entry() ) {
 			$this->results = $this->api->get_api_resource()->get_formatted_entry( $result );
 			return;
 		}
 
 		$raw_entries = isset( $result['data'] ) ? $result['data'] : [];
-		$entries =	[];
-		foreach ( $raw_entries as $entry ){
+		$entries     = [];
+		foreach ( $raw_entries as $entry ) {
 			$_entry = $this->api->get_api_resource()
-       ->get_formatted_entry( $entry );
+				->get_formatted_entry( $entry );
 
-			if( !is_null( $_entry ) ) {
+			if ( ! is_null( $_entry ) ) {
 				$entries[] = $_entry;
 			}
-		}		
-		
-		$this->results = $entries;
-		$this->end = ( !isset( $result['paging']['next'] ) || empty( $result['paging']['next'] ) );
+		}
+
+		$this->results     = $entries;
+		$this->end         = ( ! isset( $result['paging']['next'] ) || empty( $result['paging']['next'] ) );
 		$this->total_items = isset( $result['total'] ) ? $result['total'] : 0;
-		$this->page = isset( $result['page'] ) ? $result['page'] : 0;
+		$this->page        = isset( $result['page'] ) ? $result['page'] : 0;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function get_feed(){
+	public function get_feed() {
 		return $this->results;
 	}
 
 	/**
 	 * @return integer
 	 */
-	public function get_total_items(){
+	public function get_total_items() {
 		return $this->total_items;
 	}
 
 	/**
 	 * @return integer
 	 */
-	public function get_page(){
+	public function get_page() {
 		return $this->page;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function has_ended(){
+	public function has_ended() {
 		return $this->end;
 	}
 
 	/**
 	 * @return array|string|WP_Error
 	 */
-	public function get_errors(){
+	public function get_errors() {
 		return $this->errors;
 	}
 }

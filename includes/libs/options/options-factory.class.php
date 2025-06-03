@@ -12,17 +12,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @ignore
  */
-class Options_Factory{
+class Options_Factory {
 	/**
 	 * Stores references to all instantiated Options classes
 	 * Used internally
-  *
+ *
 	 * @var array Options
 	 */
 	private static $storage = [];
 	/**
 	 * Store class reference
-  *
+ *
 	 * @var Options_Factory
 	 */
 	private static $instance;
@@ -35,9 +35,9 @@ class Options_Factory{
 	 *
 	 * @return Options
 	 */
-	public static function get( $option_name, $defaults ){
-		if( null === self::$instance ){
-			self::$instance = new Options_Factory;
+	public static function get( $option_name, $defaults ) {
+		if ( null === self::$instance ) {
+			self::$instance = new Options_Factory();
 		}
 		return self::_get( $option_name, $defaults );
 	}
@@ -46,19 +46,19 @@ class Options_Factory{
 	 * Private constructor to prevent instantiation
 	 * Options_Factory constructor.
 	 */
-	private function __construct(){}
+	private function __construct() {}
 
 	/**
 	 * Gets the Options object for the key passed.
 	 * If already existing, returns existing instance, otherwise will create it
-  *
+ *
 	 * @param $option_name
 	 * @param $defaults
 	 *
 	 * @return mixed
 	 */
-	private static function _get( $option_name, $defaults ){
-		if( !array_key_exists( $option_name, self::$storage ) ){
+	private static function _get( $option_name, $defaults ) {
+		if ( ! array_key_exists( $option_name, self::$storage ) ) {
 			self::_add( $option_name, $defaults );
 		}
 		return self::$storage[ $option_name ];
@@ -66,11 +66,11 @@ class Options_Factory{
 
 	/**
 	 * Add new Options instance to storage
-  *
+ *
 	 * @param $option_name
 	 * @param $defaults
 	 */
-	private static function _add( $option_name, $defaults ){
+	private static function _add( $option_name, $defaults ) {
 		self::$storage[ $option_name ] = new Options( $option_name, $defaults );
 	}
 }

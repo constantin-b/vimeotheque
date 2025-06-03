@@ -6,7 +6,6 @@
 
 namespace Vimeotheque_Series\Post_Type;
 
-
 interface Interface_Post_Type {
 
 	public function get_post_name();

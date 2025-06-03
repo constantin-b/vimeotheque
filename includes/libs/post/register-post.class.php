@@ -37,8 +37,8 @@ class Register_Post {
 	 * @param \WP_Taxonomy|false $tag_taxonomy
 	 */
 	public function __construct( \WP_Post_Type $post_type, $taxonomy, $tag_taxonomy = false ) {
-		$this->post_type = $post_type;
-		$this->taxonomy  = $taxonomy;
+		$this->post_type    = $post_type;
+		$this->taxonomy     = $taxonomy;
 		$this->tag_taxonomy = $tag_taxonomy;
 	}
 
@@ -46,7 +46,7 @@ class Register_Post {
 	 * @return \WP_Taxonomy
 	 */
 	public function get_taxonomy() {
-		if( !$this->taxonomy instanceof \WP_Taxonomy ){
+		if ( ! $this->taxonomy instanceof \WP_Taxonomy ) {
 			return false;
 		}
 
@@ -61,7 +61,7 @@ class Register_Post {
 	 * @return false|\WP_Taxonomy
 	 */
 	public function get_tag_taxonomy() {
-		if( !$this->tag_taxonomy instanceof \WP_Taxonomy ){
+		if ( ! $this->tag_taxonomy instanceof \WP_Taxonomy ) {
 			return false;
 		}
 
@@ -75,18 +75,16 @@ class Register_Post {
 		return $this->post_type;
 	}
 
-	public function get_post_type_rest_endpoint(){
+	public function get_post_type_rest_endpoint() {
 		return '/vimeotheque/v1/get_posts';
 	}
 
-	public function get_taxonomy_rest_endpoint(){
-		if( !$this->taxonomy instanceof \WP_Taxonomy ){
+	public function get_taxonomy_rest_endpoint() {
+		if ( ! $this->taxonomy instanceof \WP_Taxonomy ) {
 			return false;
 		}
 
 		$rest_base = ! empty( $this->taxonomy->rest_base ) ? $this->taxonomy->rest_base : $this->taxonomy->name;
 		return '/wp/v2/' . $rest_base;
 	}
-
-
 }

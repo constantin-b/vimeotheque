@@ -50,29 +50,29 @@ final class Theme {
 		$this->file = $file;
 		$this->name = $name;
 
-		$this->url = plugin_dir_url( $file );
-		$this->path = plugin_dir_path( $file );
+		$this->url         = plugin_dir_url( $file );
+		$this->path        = plugin_dir_path( $file );
 		$this->folder_name = basename( dirname( $file ) );
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_style_url(){
+	public function get_style_url() {
 		return $this->get_url() . 'assets/stylesheet.css';
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_js_url(){
+	public function get_js_url() {
 		return $this->get_url() . 'assets/script.js';
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_theme_name(){
+	public function get_theme_name() {
 		return $this->name;
 	}
 

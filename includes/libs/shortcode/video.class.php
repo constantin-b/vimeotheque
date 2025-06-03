@@ -32,15 +32,15 @@ class Video extends Shortcode_Abstract implements Shortcode_Interface {
 		parent::set_atts( $atts );
 		parent::set_content( $content );
 
-		if( parent::get_attr( 'id' ) ){
-			$this->post = Helper::get_video_post( parent::get_attr('id') );
+		if ( parent::get_attr( 'id' ) ) {
+			$this->post = Helper::get_video_post( parent::get_attr( 'id' ) );
 		}
 
-		if( !$this->post || !$this->post->is_video() ){
+		if ( ! $this->post || ! $this->post->is_video() ) {
 			return;
 		}
 
-		$vars = shortcode_atts( $this->post->get_embed_options(), parent::get_atts() );
+		$vars   = shortcode_atts( $this->post->get_embed_options(), parent::get_atts() );
 		$player = new Player( $this->post, $vars );
 
 		Helper::enqueue_player();

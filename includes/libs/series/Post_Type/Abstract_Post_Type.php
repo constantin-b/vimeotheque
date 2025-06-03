@@ -39,10 +39,10 @@ abstract class Abstract_Post_Type {
 	 * @param null      $category_taxonomy
 	 * @param null      $tag_taxonomy
 	 */
-	public function __construct( $post_name, $category_taxonomy = null, $tag_taxonomy = null ){
-		$this->post_name = $post_name;
+	public function __construct( $post_name, $category_taxonomy = null, $tag_taxonomy = null ) {
+		$this->post_name         = $post_name;
 		$this->category_taxonomy = $category_taxonomy;
-		$this->tag_taxonomy = $tag_taxonomy;
+		$this->tag_taxonomy      = $tag_taxonomy;
 	}
 
 	/**

@@ -24,5 +24,4 @@ function the_video_content() {
 		'__return_false',
 		9870234
 	);
-
 }

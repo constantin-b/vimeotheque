@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Vimeotheque
  */
-class Video_Post{
+class Video_Post {
 
 	/**
 	 * Vimeo video ID.
@@ -171,7 +171,7 @@ class Video_Post{
 	 * @var string
 	 */
 	public $link = '';
-	
+
 	/**
 	 * Vimeo video player embed URL.
 	 *
@@ -179,7 +179,7 @@ class Video_Post{
 	 * @var   string
 	 */
 	public $player_embed_url = '';
-	
+
 	/**
 	 * The WP_Post object.
 	 *
@@ -204,21 +204,21 @@ class Video_Post{
 		$this->_image = new Image_Import( $this );
 
 		$meta = $this->get_video_data();
-		if( $meta ){
+		if ( $meta ) {
 			$this->_set_properties( $meta );
 		}
 	}
 
 	/**
 	 * Set class properties
-  *
+ *
 	 * @ignore
 	 *
 	 * @param $data
 	 */
-	private function _set_properties( $data ){
-		foreach( $data as $key => $value ){
-			if( property_exists( $this, $key ) ){
+	private function _set_properties( $data ) {
+		foreach ( $data as $key => $value ) {
+			if ( property_exists( $this, $key ) ) {
 				$this->$key = $value;
 			}
 		}
@@ -229,8 +229,8 @@ class Video_Post{
 	 *
 	 * @return boolean
 	 */
-	public function is_video(){
-		if( !$this->get_post() ){
+	public function is_video() {
+		if ( ! $this->get_post() ) {
 			return false;
 		}
 
@@ -250,8 +250,8 @@ class Video_Post{
 	 *
 	 * @return mixed|void
 	 */
-	public function get_video_data(){
-		if( !$this->get_post() ){
+	public function get_video_data() {
+		if ( ! $this->get_post() ) {
 			return [];
 		}
 
@@ -259,8 +259,8 @@ class Video_Post{
 			$this->cpt()->get_post_settings()->get_meta_video_data()
 		);
 
-		if( isset( $meta['video_id'] ) && stristr( $meta['video_id'] , ':' ) ){
-			$parts = explode( ':', $meta['video_id'] );
+		if ( isset( $meta['video_id'] ) && stristr( $meta['video_id'], ':' ) ) {
+			$parts            = explode( ':', $meta['video_id'] );
 			$meta['video_id'] = $parts[0];
 		}
 
@@ -274,19 +274,19 @@ class Video_Post{
 	 *
 	 * @return boolean|integer|void
 	 */
-	public function set_video_data( $data ){
-		if( !$this->_post ){
+	public function set_video_data( $data ) {
+		if ( ! $this->_post ) {
 			return;
 		}
 
 		$_data = $this->get_video_data();
-		if( $_data ) {
+		if ( $_data ) {
 			foreach ( $data as $key => $value ) {
 				if ( isset( $_data[ $key ] ) ) {
 					$_data[ $key ] = $value;
 				}
 			}
-		}else{
+		} else {
 			// if set for the first time, set the entire data as post meta
 			$_data = $data;
 			$this->_set_properties( $data );
@@ -305,33 +305,33 @@ class Video_Post{
 	 *
 	 * @return array|mixed|void
 	 */
-	public function get_embed_options( $output = false ){
-		if( !$this->_post ){
+	public function get_embed_options( $output = false ) {
+		if ( ! $this->_post ) {
 			return;
 		}
 		/**
 		 * @var Options
 		 */
 		$options_obj = Plugin::instance()->get_embed_options_obj();
-		$override = $options_obj->get_option( 'allow_override' );
+		$override    = $options_obj->get_option( 'allow_override' );
 
-		if( !is_wp_error( $override ) && $override ){
+		if ( ! is_wp_error( $override ) && $override ) {
 			$options = $options_obj->get_options();
-		}else{
+		} else {
 			$options = $this->get_meta( $this->cpt()->get_post_settings()->get_meta_embed_settings() );
-			foreach ( $options_obj->get_options() as $key => $value ){
-				if( !isset( $options[ $key ] ) ){
+			foreach ( $options_obj->get_options() as $key => $value ) {
+				if ( ! isset( $options[ $key ] ) ) {
 					$options[ $key ] = $value;
 				}
 				// when values are in output booleans needs to be 0 or 1
-				if( $output && is_bool( $value ) ){
+				if ( $output && is_bool( $value ) ) {
 					$options[ $key ] = absint( $options[ $key ] );
 				}
 			}
 		}
 
 		$options['size_ratio'] = false;
-		if( $options_obj->get_option('aspect_override') ){
+		if ( $options_obj->get_option( 'aspect_override' ) ) {
 			$options['size_ratio'] = isset( $this->size['ratio'] ) ? $this->size['ratio'] : false;
 		}
 
@@ -346,33 +346,33 @@ class Video_Post{
 	 *
 	 * @return void
 	 */
-	public function set_embed_options( $values = [], $_use_defaults = false ){
-		if( !$this->_post ){
+	public function set_embed_options( $values = [], $_use_defaults = false ) {
+		if ( ! $this->_post ) {
 			return;
 		}
 
 		$defaults = Helper::get_embed_options();
 
-		foreach( $defaults as $key => $val ){
-			if( is_numeric( $val ) ){
-				if( isset( $values[ $key ] ) ){
-					$defaults[ $key ] = (int)$values[ $key ];
-				}else{
+		foreach ( $defaults as $key => $val ) {
+			if ( is_numeric( $val ) ) {
+				if ( isset( $values[ $key ] ) ) {
+					$defaults[ $key ] = (int) $values[ $key ];
+				} else {
 					// if flagged to use the default values, just skip the setting and allow the default
-					if( $_use_defaults ){
+					if ( $_use_defaults ) {
 						continue;
 					}
 
 					// some defaults are numeric but can only have value 1 or 0
 					// if so, the option is a checkbox that is unchecked, set it to 0
-					if( 0 == $defaults[$key] || 1 == $defaults[$key] ){
+					if ( 0 == $defaults[ $key ] || 1 == $defaults[ $key ] ) {
 						$defaults[ $key ] = 0;
 					}
 				}
 				continue;
 			}
-			if( is_bool( $val ) ){
-				if( $_use_defaults ){
+			if ( is_bool( $val ) ) {
+				if ( $_use_defaults ) {
 					continue;
 				}
 
@@ -380,7 +380,7 @@ class Video_Post{
 				continue;
 			}
 
-			if( isset( $values[ $key ] ) ){
+			if ( isset( $values[ $key ] ) ) {
 				$defaults[ $key ] = $values[ $key ];
 			}
 		}
@@ -394,7 +394,7 @@ class Video_Post{
 	/**
 	 * Unpublish the post by changing its status
 	 */
-	public function unpublish(){
+	public function unpublish() {
 		$this->set_post_status( 'pending' );
 	}
 
@@ -403,13 +403,13 @@ class Video_Post{
 	 *
 	 * @return integer|void|\WP
 	 */
-	private function set_post_status( $post_status = 'publish' ){
-		if( !$this->_post ){
+	private function set_post_status( $post_status = 'publish' ) {
+		if ( ! $this->_post ) {
 			return;
 		}
 
-		$statuses = ['publish', 'pending', 'draft', 'private'];
-		if( !in_array( $post_status, $statuses ) ){
+		$statuses = array( 'publish', 'pending', 'draft', 'private' );
+		if ( ! in_array( $post_status, $statuses ) ) {
 			trigger_error(
 				sprintf(
 					'Post status cannot be changed to %s. Allowed values are: %s.',
@@ -421,17 +421,19 @@ class Video_Post{
 			return;
 		}
 
-		return wp_update_post([
-			'post_status' => $post_status,
-			'ID' => $this->_post->ID
-		]);
+		return wp_update_post(
+			[
+				'post_status' => $post_status,
+				'ID'          => $this->_post->ID,
+			]
+		);
 	}
 
 	/**
 	 * Set video ID meta
 	 */
-	public function set_video_id_meta(){
-		if( $this->video_id ) {
+	public function set_video_id_meta() {
+		if ( $this->video_id ) {
 			$this->update_meta(
 				$this->cpt()->get_post_settings()->get_meta_video_id(),
 				$this->video_id
@@ -442,8 +444,8 @@ class Video_Post{
 	/**
 	 * Set video url meta
 	 */
-	public function set_video_url_meta(){
-		if( $this->link ){
+	public function set_video_url_meta() {
+		if ( $this->link ) {
 			$this->update_meta(
 				$this->cpt()->get_post_settings()->get_meta_video_url(),
 				$this->link
@@ -457,8 +459,8 @@ class Video_Post{
 	 *
 	 * @return boolean|integer
 	 */
-	protected function update_meta( $key, $value ){
-		if( $this->_post ) {
+	protected function update_meta( $key, $value ) {
+		if ( $this->_post ) {
 			return update_post_meta(
 				$this->_post->ID,
 				$key,
@@ -474,8 +476,8 @@ class Video_Post{
 	 *
 	 * @return mixed
 	 */
-	public function get_meta( $key, $single = true, $default = [] ){
-		if( $this->_post ){
+	public function get_meta( $key, $single = true, $default = [] ) {
+		if ( $this->_post ) {
 			$meta = get_post_meta(
 				$this->_post->ID,
 				$key,
@@ -495,7 +497,7 @@ class Video_Post{
 	 *
 	 * @return array|boolean|void
 	 */
-	public function set_featured_image( $refresh = false ){
+	public function set_featured_image( $refresh = false ) {
 		return $this->_image->set_featured_image( $refresh );
 	}
 
@@ -504,20 +506,20 @@ class Video_Post{
 	 *
 	 * @return string
 	 */
-	public function get_iso_duration(){
-		$seconds = $this->duration;
+	public function get_iso_duration() {
+		$seconds    = $this->duration;
 		$iso_format = 'PT';
 
 		if ( $seconds > 3600 ) {
-			$hours = floor( $seconds / 3600 );
+			$hours       = floor( $seconds / 3600 );
 			$iso_format .= $hours . 'H';
-			$seconds = $seconds - ( $hours * 3600 );
+			$seconds     = $seconds - ( $hours * 3600 );
 		}
 
 		if ( $seconds > 60 ) {
-			$minutes = floor( $seconds / 60 );
+			$minutes     = floor( $seconds / 60 );
 			$iso_format .= $minutes . 'M';
-			$seconds = $seconds - ( $minutes * 60 );
+			$seconds     = $seconds - ( $minutes * 60 );
 		}
 
 		if ( $seconds > 0 ) {
@@ -532,35 +534,34 @@ class Video_Post{
 	 *
 	 * @return string
 	 */
-	public function get_embed_url(){
+	public function get_embed_url() {
 		$embed_url = $this->player_embed_url;
-		
+
 		/**
 		 * Parameter player_embed_url was added in Vimeotheque 2.2.4.
 		 * If the video was imported by a previous plugin version the URL will be empty.
 		 */
-		if( empty( $embed_url ) ) {
+		if ( empty( $embed_url ) ) {
 			$embed_url = sprintf(
 				'https://player.vimeo.com/video/%s',
 				$this->video_id
 			);
 		}
-		
+
 		return $embed_url;
 	}
 
 	/**
 	 * @return Post_Type
 	 */
-	private function cpt(){
+	private function cpt() {
 		return Plugin::instance()->get_cpt();
 	}
 
 	/**
 	 * @return array|\WP_Post|null
 	 */
-	public function get_post(){
+	public function get_post() {
 		return $this->_post;
 	}
-
 }

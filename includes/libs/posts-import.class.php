@@ -14,7 +14,7 @@ use WP_Error;
  *
  * @package Vimeotheque
  */
-class Posts_Import{
+class Posts_Import {
 	/**
 	 * @var Post_Type
 	 */
@@ -38,7 +38,7 @@ class Posts_Import{
 	 *
 	 * @return array|void
 	 */
-	public function run_import( $raw_feed, $import_options ){
+	public function run_import( $raw_feed, $import_options ) {
 		/**
 		 * @var array $native_tax
 		 * @var array $native_tag
@@ -53,7 +53,7 @@ class Posts_Import{
 		// get import options
 		$options = Plugin::instance()->get_options();
 
-		if( !$options['enable_templates'] ) {
+		if ( ! $options['enable_templates'] ) {
 			// overwrite plugin import settings with import settings
 			$options['import_description'] = $import_description;
 			$options['import_title']       = $import_title;
@@ -63,28 +63,28 @@ class Posts_Import{
 
 		// store results
 		$result = [
-			'private' 	=> 0,
-			'imported' 	=> 0,
-			'skipped' 	=> 0,
-			'total'		=> count( $raw_feed ),
-			'ids'		=> [],
-			'error'		=> []
+			'private'  => 0,
+			'imported' => 0,
+			'skipped'  => 0,
+			'total'    => count( $raw_feed ),
+			'ids'      => [],
+			'error'    => array(),
 		];
 
 		$duplicates = $this->get_duplicate_posts( $raw_feed, $this->post_type->get_post_type() );
 
 		// parse feed
-		foreach( $raw_feed as $video ){
+		foreach ( $raw_feed as $video ) {
 
 			// video already exists, don't do anything
-			if( array_key_exists( $video['video_id'], $duplicates ) ){
+			if ( array_key_exists( $video['video_id'], $duplicates ) ) {
 
 				/**
 				 * Generate an error and pass it for debugging
-     *
+	 *
 				 * @var WP_Error
 				 */
-				$error = new WP_Error(
+				$error             = new WP_Error(
 					'cvm_import_skip_existing_video',
 					sprintf(
 						'%s %s',
@@ -98,8 +98,8 @@ class Posts_Import{
 						)
 					),
 					[
-						'video_data' => $video,
-						'existing_posts' => $duplicates[ $video['video_id'] ]
+						'video_data'     => $video,
+						'existing_posts' => $duplicates[ $video['video_id'] ],
 					]
 				);
 				$result['error'][] = $error;
@@ -113,7 +113,7 @@ class Posts_Import{
 					$error
 				);
 
-				foreach( $duplicates[ $video['video_id'] ] as $_post_id ){
+				foreach ( $duplicates[ $video['video_id'] ] as $_post_id ) {
 					// retrieve the post object for backwards compatibility
 					$post = get_post( $_post_id );
 
@@ -127,7 +127,8 @@ class Posts_Import{
 					 * @param string $tag_taxonomy       The tag taxonomy that must be set up.
 					 * @param string $tag_taxonomy_value The tag taxonomy value that must be set for the post.
 					 */
-					do_action( 'vimeotheque\import_duplicate_taxonomies',
+					do_action(
+						'vimeotheque\import_duplicate_taxonomies',
 						$post,
 						$this->post_type->get_post_tax(),
 						$native_tax,
@@ -140,24 +141,24 @@ class Posts_Import{
 				continue;
 			}
 
-			if( 'private' == $video['privacy'] ){
+			if ( 'private' == $video['privacy'] ) {
 				$result['private'] += 1;
-				if( 'skip' == $options['import_privacy'] ){
+				if ( 'skip' == $options['import_privacy'] ) {
 					$result['skipped'] += 1;
 
 					/**
 					 * Generate an error and pass it for debugging
-      *
+	 *
 					 * @var WP_Error
 					 */
-					$error = new WP_Error(
+					$error             = new WP_Error(
 						'cvm_import_skip_private_video',
 						sprintf(
 							__( 'Skipped private video having ID %s because of plugin settings.', 'codeflavors-vimeo-video-post-lite' ),
 							$video['video_id']
 						),
 						[
-							'video_data' => $video
+							'video_data' => $video,
 						]
 					);
 					$result['error'][] = $error;
@@ -175,19 +176,21 @@ class Posts_Import{
 				}
 			}
 
-			$post_id = $this->import_video( [
-				'video' 		=> $video, // video details retrieved from Vimeo
-				'category' 		=> $native_tax, // category name (if any) - will be created if category_id is false
-				'tags'			=> $native_tag,
-				'user'			=> ( isset( $import_user ) ? absint( $import_user ) : false ), // save as a given user if any
-				'post_format'	=> 'video', // post format will default to video
-				'status'		=> $this->post_type->get_post_settings()->post_status( $import_status ), // post status
-				'options'		=> $options
-			] );
+			$post_id = $this->import_video(
+				[
+					'video'       => $video, // video details retrieved from Vimeo
+					'category'    => $native_tax, // category name (if any) - will be created if category_id is false
+					'tags'        => $native_tag,
+					'user'        => ( isset( $import_user ) ? absint( $import_user ) : false ), // save as a given user if any
+					'post_format' => 'video', // post format will default to video
+					'status'      => $this->post_type->get_post_settings()->post_status( $import_status ), // post status
+					'options'     => $options,
+				]
+			);
 
-			if( $post_id ){
+			if ( $post_id ) {
 				$result['imported'] += 1;
-				$result['ids'][] = $post_id;
+				$result['ids'][]     = $post_id;
 
 				$video = Helper::get_video_post( $post_id );
 				$video->set_embed_options(
@@ -216,14 +219,14 @@ class Posts_Import{
 	 *
 	 * @return array
 	 */
-	public function get_duplicate_posts( $raw_feed, $post_type ){
+	public function get_duplicate_posts( $raw_feed, $post_type ) {
 
-		if( !$raw_feed ){
+		if ( ! $raw_feed ) {
 			return [];
 		}
 
 		$video_ids = [];
-		foreach( $raw_feed as $video ){
+		foreach ( $raw_feed as $video ) {
 			$video_ids[] = preg_replace( '/[^a-zA-Z0-9]/', '', $video['video_id'] );
 		}
 		/**
@@ -238,16 +241,16 @@ class Posts_Import{
 			ON {$wpdb->postmeta}.post_id = {$wpdb->posts}.ID
 			WHERE
 			{$wpdb->posts}.post_type LIKE '%s' 
-			AND meta_value IN(" . implode( ',', $video_ids ) . ")
-			",
+			AND meta_value IN(" . implode( ',', $video_ids ) . ')
+			',
 			$post_type
 		);
 
 		$existing = $wpdb->get_results( $query );
-		$_result = [];
+		$_result  = [];
 
-		if( $existing ){
-			foreach( $existing as $r ){
+		if ( $existing ) {
+			foreach ( $existing as $r ) {
 				$_result[ $r->meta_value ][] = $r->post_id;
 			}
 		}
@@ -260,7 +263,7 @@ class Posts_Import{
 		 */
 		$result = apply_filters( 'vimeotheque\duplicate_posts_found', $_result );
 
-		if( $_result !== $result ){
+		if ( $_result !== $result ) {
 			Helper::debug_message(
 				sprintf(
 					'Detected duplicate posts override by filter "%s".',
@@ -279,17 +282,17 @@ class Posts_Import{
 	 *
 	 * @return boolean|integer
 	 */
-	public function import_video( $args = [] ){
+	public function import_video( $args = [] ) {
 
 		$defaults = [
-			'video' 			=> [], // video details retrieved from Vimeo
-			'post_id'           => false,
-			'category' 			=> false, // category name (if any) - will be created if category_id is false
-			'tags'				=> false,
-			'user'				=> false, // save as a given user if any
-			'post_format'		=> 'video', // post format will default to video
-			'status'			=> 'draft', // post status
-			'options'			=> false,
+			'video'       => [], // video details retrieved from Vimeo
+			'post_id'     => false,
+			'category'    => false, // category name (if any) - will be created if category_id is false
+			'tags'        => false,
+			'user'        => false, // save as a given user if any
+			'post_format' => 'video', // post format will default to video
+			'status'      => 'draft', // post status
+			'options'     => false,
 		];
 		/**
 		 * @var array $video
@@ -303,12 +306,12 @@ class Posts_Import{
 		 */
 		extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
-		if( !$options ){
+		if ( ! $options ) {
 			$options = Plugin::instance()->get_options();
 		}
 
 		// if no video details, bail out
-		if( !$video ){
+		if ( ! $video ) {
 			return false;
 		}
 
@@ -339,10 +342,10 @@ class Posts_Import{
 			false
 		);
 
-		if( !$allow_import ){
+		if ( ! $allow_import ) {
 			/**
 			 * Generate an error and pass it for debugging
-    *
+	*
 			 * @var WP_Error
 			 */
 			$error = new WP_Error(
@@ -367,27 +370,27 @@ class Posts_Import{
 		}
 
 		// plugin settings; caller can pass their own import options
-		if( !$options ){
+		if ( ! $options ) {
 			$options = Plugin::instance()->get_options();
 		}
 
-		if( 'private' == $video['privacy'] && 'pending' == $options['import_privacy'] ){
+		if ( 'private' == $video['privacy'] && 'pending' == $options['import_privacy'] ) {
 			$status = 'pending';
 		}
 
 		// post content
 		$post_content = '';
-		if( 'content' == $options['import_description'] || 'content_excerpt' == $options['import_description'] ){
+		if ( 'content' == $options['import_description'] || 'content_excerpt' == $options['import_description'] ) {
 			$post_content = $video['description'];
 		}
 		// post excerpt
 		$post_excerpt = '';
-		if( 'excerpt' == $options['import_description'] || 'content_excerpt' == $options['import_description'] ){
+		if ( 'excerpt' == $options['import_description'] || 'content_excerpt' == $options['import_description'] ) {
 			$post_excerpt = $video['description'];
 		}
 
 		// post title
-		$post_title 	= $options['import_title'] ? $video['title'] : '';
+		$post_title = $options['import_title'] ? $video['title'] : '';
 
 		/**
 		 * Action that runs before the post is inserted into the database.
@@ -411,7 +414,7 @@ class Posts_Import{
 			 * @param array $video      The video details.
 			 * @param bool $false       Unused parameter.
 			 */
-			'post_title' 	=> apply_filters(
+			'post_title'   => apply_filters(
 				'vimeotheque\import_post_title',
 				$post_title,
 				$video,
@@ -425,7 +428,7 @@ class Posts_Import{
 			 * @param array $video      The video details.
 			 * @param false $false      Unused parameter.
 			 */
-			'post_content' 	=> apply_filters(
+			'post_content' => apply_filters(
 				'vimeotheque\import_post_content',
 				$post_content,
 				$video,
@@ -439,13 +442,13 @@ class Posts_Import{
 			 * @param array $video      The video details.
 			 * @param false $false      Unused parameter.
 			 */
-			'post_excerpt'	=> apply_filters(
+			'post_excerpt' => apply_filters(
 				'vimeotheque\import_post_excerpt',
 				$post_excerpt,
 				$video,
 				false
 			),
-			'post_type'		=> $this->post_type->get_post_type(),
+			'post_type'    => $this->post_type->get_post_type(),
 
 			/**
 			 * Post status filter before the post is inserted into the database.
@@ -454,15 +457,15 @@ class Posts_Import{
 			 * @param array $video      The video details.
 			 * @param false $false      Unused parameter.
 			 */
-			'post_status'	=> apply_filters(
+			'post_status'  => apply_filters(
 				'vimeotheque\import_post_status',
 				$status,
 				$video,
 				false
-			)
+			),
 		];
 
-		$pd = $options['import_date'] ? date('Y-m-d H:i:s', strtotime( $video['published'] )) : current_time( 'mysql' );
+		$pd = $options['import_date'] ? date( 'Y-m-d H:i:s', strtotime( $video['published'] ) ) : current_time( 'mysql' );
 
 		/**
 		 * Post date filter before the post is inserted into the database.
@@ -478,24 +481,24 @@ class Posts_Import{
 			false
 		);
 
-		if( isset( $options['import_date'] ) && $options['import_date'] ){
+		if ( isset( $options['import_date'] ) && $options['import_date'] ) {
 			$post_data['post_date_gmt'] = $post_date;
-			$post_data['edit_date']		= $post_date;
-			$post_data['post_date']		= $post_date;
+			$post_data['edit_date']     = $post_date;
+			$post_data['post_date']     = $post_date;
 		}
 
 		// set user
-		if( $user ){
+		if ( $user ) {
 			$post_data['post_author'] = $user;
 		}
 		/**
 		 * @var int|\WP_Error $post_id
 		 */
 		// single video import will pass post ID
-		if( isset( $post_id ) && $post_id ){
+		if ( isset( $post_id ) && $post_id ) {
 			$post_data['ID'] = $post_id;
-			$post_id = wp_update_post( $post_data, true );
-		}else {
+			$post_id         = wp_update_post( $post_data, true );
+		} else {
 			// allow empty insert into post content
 			add_filter(
 				'wp_insert_post_empty_content',
@@ -505,7 +508,7 @@ class Posts_Import{
 			$post_id = wp_insert_post( $post_data, true );
 		}
 
-		if( is_wp_error( $post_id ) ){
+		if ( is_wp_error( $post_id ) ) {
 			Helper::debug_message(
 				sprintf(
 					'Video with ID %s generated the following database error on insert: "%s"; video post could not be created.',
@@ -516,29 +519,29 @@ class Posts_Import{
 		}
 
 		// check if post was created
-		if( !is_wp_error( $post_id ) ){
+		if ( ! is_wp_error( $post_id ) ) {
 
 			// set post format
-			if( $post_format  ){
+			if ( $post_format ) {
 				set_post_format( $post_id, $post_format );
 			}
 
 			// set post category
-			if( $category ){
+			if ( $category ) {
 				$category = is_array( $category ) ? $category : [ $category ];
 				wp_set_post_terms( $post_id, $category, $this->post_type->get_post_tax() );
 			}
 
-			if( $tags ){
+			if ( $tags ) {
 				wp_set_post_terms( $post_id, $tags, $this->post_type->get_tag_tax() );
 			}
 
 			// insert tags
-			if( ( isset( $options['import_tags'] ) && $options['import_tags'] ) && $this->post_type->get_tag_tax() ){
-				if( isset( $video['tags'] ) && is_array( $video['tags'] ) ){
+			if ( ( isset( $options['import_tags'] ) && $options['import_tags'] ) && $this->post_type->get_tag_tax() ) {
+				if ( isset( $video['tags'] ) && is_array( $video['tags'] ) ) {
 					$count = absint( $options['max_tags'] );
-					$tags = array_slice( $video['tags'], 0, $count );
-					if( $tags ){
+					$tags  = array_slice( $video['tags'], 0, $count );
+					if ( $tags ) {
 						wp_set_post_terms( $post_id, $tags, $this->post_type->get_tag_tax(), true );
 					}
 				}
@@ -579,7 +582,7 @@ class Posts_Import{
 			);
 
 			// import image
-			if( $options['featured_image'] ){
+			if ( $options['featured_image'] ) {
 				$_post->set_featured_image();
 			}
 
@@ -597,18 +600,18 @@ class Posts_Import{
 	 *
 	 * @return array
 	 */
-	private function get_import_options( $source = [] ){
-		$taxonomy = $this->post_type->get_post_tax();
-		$tag_tax = $this->post_type->get_tag_tax();
+	private function get_import_options( $source = [] ) {
+		$taxonomy   = $this->post_type->get_post_tax();
+		$tag_tax    = $this->post_type->get_tag_tax();
 		$native_tax = isset( $source['tax_input'][ $taxonomy ] ) ? (array) $source['tax_input'][ $taxonomy ] : [];
 		$native_tag = isset( $source['tax_input'][ $tag_tax ] ) ? (array) $source['tax_input'][ $tag_tax ] : [];
 
 		$import_options = [
-			'native_tax'		=> $native_tax,
-			'native_tag'		=> $native_tag,
+			'native_tax'         => $native_tax,
+			'native_tag'         => $native_tag,
 			'import_description' => $source['import_description'],
-			'import_status' => $source['import_status'],
-			'import_title' => isset( $source['import_title'] )
+			'import_status'      => $source['import_status'],
+			'import_title'       => isset( $source['import_title'] ),
 		];
 
 		return $import_options;

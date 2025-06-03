@@ -11,18 +11,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Vimeotheque
  */
-class Helper{
+class Helper {
 	/**
 	 * Return the access token for the Vimeo API.
 	 *
 	 * @return boolean|string  The access token or bool false if no token is set
 	 */
-	public static function get_access_token(){
+	public static function get_access_token() {
 		$options = Plugin::instance()->get_options();
-		$token = false;
-		if( !empty( $options['oauth_secret'] ) ){
+		$token   = false;
+		if ( ! empty( $options['oauth_secret'] ) ) {
 			$token = $options['oauth_secret'];
-		}elseif( !empty( $options['oauth_token'] ) ){
+		} elseif ( ! empty( $options['oauth_token'] ) ) {
 			$token = $options['oauth_token'];
 		}
 
@@ -41,7 +41,7 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	public static function request_user_agent(){
+	public static function request_user_agent() {
 		return 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' );
 	}
 
@@ -53,8 +53,8 @@ class Helper{
 	 *
 	 * @return Video_Post
 	 */
-	public static function get_video_post( $post = false ){
-		if( $post instanceof Video_Post ){
+	public static function get_video_post( $post = false ) {
+		if ( $post instanceof Video_Post ) {
 			return $post;
 		}
 
@@ -69,14 +69,14 @@ class Helper{
 	 *
 	 * @return array|boolean   An array with structure ['width' => (int), 'height' => (int)] or false if the post was not imported by Vimeotheque.
 	 */
-	public static function get_post_player_size( $post ){
+	public static function get_post_player_size( $post ) {
 		$_post = self::get_video_post( $post );
-		if( $_post->is_video() ){
+		if ( $_post->is_video() ) {
 			$options = $_post->get_embed_options();
-			$height = self::calculate_player_height( $options['aspect_ratio'], $options['width'] );
+			$height  = self::calculate_player_height( $options['aspect_ratio'], $options['width'] );
 			return [
-				'width' => $options['width'],
-				'height' => $height
+				'width'  => $options['width'],
+				'height' => $height,
 			];
 		}
 
@@ -93,22 +93,22 @@ class Helper{
 	 *
 	 * @return string   The resulting attributes string.
 	 */
-	public static function data_attributes( $attributes, $echo = false ){
+	public static function data_attributes( $attributes, $echo = false ) {
 		$result = [];
 		// these variables are not needed by js and will be skipped
 		$exclude = [ 'video_position', 'aspect_override' ];
 		// loop attributes
-		foreach( $attributes as $key=>$value ){
+		foreach ( $attributes as $key => $value ) {
 			// skip values from $exclude
-			if( in_array( $key, $exclude ) ){
+			if ( in_array( $key, $exclude ) ) {
 				continue;
 			}
 			$result[] = sprintf( 'data-%s="%s"', $key, $value );
 		}
-		if( $echo ){
-			echo implode(' ', $result);
-		}else{
-			return implode(' ', $result);
+		if ( $echo ) {
+			echo implode( ' ', $result );
+		} else {
+			return implode( ' ', $result );
 		}
 	}
 
@@ -122,13 +122,13 @@ class Helper{
 	 *
 	 * @return array
 	 */
-	public static function enqueue_player( $include_js = true,  $js_dependency = false, $css_dependency = false  ){
+	public static function enqueue_player( $include_js = true, $js_dependency = false, $css_dependency = false ) {
 		$handles = [
-			'js' => false,
-			'css' => 'cvm-video-player'
+			'js'  => false,
+			'css' => 'cvm-video-player',
 		];
 
-		if( $include_js ) {
+		if ( $include_js ) {
 			wp_register_script(
 				'vimeo-video-player-sdk',
 				'https://player.vimeo.com/api/player.js',
@@ -136,7 +136,7 @@ class Helper{
 				'2.11'
 			);
 
-			$js_dependency = $js_dependency ? ['jquery', 'vimeo-video-player-sdk', $js_dependency] : ['jquery', 'vimeo-video-player-sdk'];
+			$js_dependency = $js_dependency ? array( 'jquery', 'vimeo-video-player-sdk', $js_dependency ) : array( 'jquery', 'vimeo-video-player-sdk' );
 
 			wp_enqueue_script(
 				'cvm-video-player',
@@ -166,22 +166,22 @@ class Helper{
 	 *
 	 * @return float    The player height.
 	 */
-	public static function calculate_player_height( $aspect_ratio, $width, $ratio =  false ){
-		$width = absint($width);
+	public static function calculate_player_height( $aspect_ratio, $width, $ratio = false ) {
+		$width = absint( $width );
 
 		$override = Plugin::instance()->get_embed_options_obj()
-      ->get_option('aspect_override');
+			->get_option( 'aspect_override' );
 
-		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
+		if ( ! is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ) {
 			$height = floor( $width / $ratio );
-		}else{
-			switch( $aspect_ratio ){
+		} else {
+			switch ( $aspect_ratio ) {
 				case '4x3':
-					$height = floor( ($width * 3) / 4 );
+					$height = floor( ( $width * 3 ) / 4 );
 					break;
 				case '16x9':
 				default:
-					$height = floor( ($width * 9) / 16 );
+					$height = floor( ( $width * 9 ) / 16 );
 					break;
 				case '2.35x1':
 					$height = floor( $width / 2.35 );
@@ -201,22 +201,22 @@ class Helper{
 	 *
 	 * @return float    The player width.
 	 */
-	public static function calculate_player_width( $aspect_ratio, $height, $ratio = false ){
+	public static function calculate_player_width( $aspect_ratio, $height, $ratio = false ) {
 		$height = absint( $height );
 
 		$override = Plugin::instance()->get_embed_options_obj()
-      ->get_option('aspect_override');
+			->get_option( 'aspect_override' );
 
-		if( !is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ){
+		if ( ! is_wp_error( $override ) && $override && is_numeric( $ratio ) && $ratio > 0 ) {
 			$width = floor( $height * $ratio );
-		}else{
-			switch( $aspect_ratio ){
+		} else {
+			switch ( $aspect_ratio ) {
 				case '4x3':
-					$width = floor( ($height * 4) / 3 );
+					$width = floor( ( $height * 4 ) / 3 );
 					break;
 				case '16x9':
 				default:
-				$width = floor( ($height * 16) / 9 );
+					$width = floor( ( $height * 16 ) / 9 );
 					break;
 				case '2.35x1':
 					$width = floor( $height * 2.35 );
@@ -235,12 +235,12 @@ class Helper{
 	 *
 	 * @return array    The array of options.
 	 */
-	public static function get_embed_options( array $_options = [] ){
-		$embed_options	= Plugin::instance()->get_embed_options();
+	public static function get_embed_options( array $_options = [] ) {
+		$embed_options = Plugin::instance()->get_embed_options();
 
-		if( $_options ){
-			foreach( $_options as $k => $v ){
-				if( isset( $_options[ $k ] ) ){
+		if ( $_options ) {
+			foreach ( $_options as $k => $v ) {
+				if ( isset( $_options[ $k ] ) ) {
 					$embed_options[ $k ] = $_options[ $k ];
 				}
 			}
@@ -256,19 +256,19 @@ class Helper{
 	 * @param  integer $seconds Number of seconds.
 	 * @return string       The formatted time.
 	 */
-	public static function human_time( $seconds ){
+	public static function human_time( $seconds ) {
 
 		$seconds = absint( $seconds );
 
-		if( $seconds < 0 ){
+		if ( $seconds < 0 ) {
 			return;
 		}
 
 		$h = floor( $seconds / 3600 );
 		$m = floor( $seconds % 3600 / 60 );
-		$s = floor( $seconds %3600 % 60 );
+		$s = floor( $seconds % 3600 % 60 );
 
-		return ( ($h > 0 ? $h . ":" : "") . ( ($m < 10 ? "0" : "") . $m . ":" ) . ($s < 10 ? "0" : "") . $s);
+		return ( ( $h > 0 ? $h . ':' : '' ) . ( ( $m < 10 ? '0' : '' ) . $m . ':' ) . ( $s < 10 ? '0' : '' ) . $s );
 	}
 
 	/**
@@ -283,7 +283,7 @@ class Helper{
 	public static function get_var( $name, $type = false, $sanitize = false ) {
 		$result = false;
 
-		switch( $type ){
+		switch ( $type ) {
 			case 'POST':
 				$result = isset( $_POST[ $name ] ) ? $_POST[ $name ] : false;
 				break;
@@ -291,15 +291,15 @@ class Helper{
 				$result = isset( $_GET[ $name ] ) ? $_GET[ $name ] : false;
 				break;
 			default:
-				if( isset( $_GET[ $name ] ) ){
+				if ( isset( $_GET[ $name ] ) ) {
 					$result = $_GET[ $name ];
-				}elseif ( isset( $_POST[ $name ] ) ){
+				} elseif ( isset( $_POST[ $name ] ) ) {
 					$result = $_POST[ $name ];
 				}
 				break;
 		}
 
-		if( $sanitize ){
+		if ( $sanitize ) {
 			$result = call_user_func( $sanitize, $result );
 		}
 
@@ -315,9 +315,9 @@ class Helper{
 	 *
 	 * @return string|void  The HTML for the embed.
 	 */
-	public static function embed_video( $post, $options = [], $echo = true ){
+	public static function embed_video( $post, $options = [], $echo = true ) {
 		$_post = self::get_video_post( $post );
-		if( !$_post->is_video() ){
+		if ( ! $_post->is_video() ) {
 			return;
 		}
 
@@ -331,24 +331,24 @@ class Helper{
 	 *
 	 * @return boolean Embed is allowed (true) or is prevented (false).
 	 */
-	public static function is_autoembed_allowed(){
+	public static function is_autoembed_allowed() {
 
-		if( !is_admin() ){
+		if ( ! is_admin() ) {
 			/**
 			 * Filter that can prevent video embedding into the post content.
 			 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
 			 *
 			 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
 			 */
-			$allowed =  apply_filters( 'vimeotheque\post_content_embed', true );
-		}else{
+			$allowed = apply_filters( 'vimeotheque\post_content_embed', true );
+		} else {
 			/**
 			 * Filter that can prevent video embedding into the post content for the admin area.
 			 * Preventing the video embedding into the post content is useful when using custom theme templates for the video posts.
 			 *
 			 * @param bool $allow Allow automatic embedding into the post content (true) or prevent it (false).
 			 */
-			$allowed =  apply_filters( 'vimeotheque\admin_post_content_embed', true );
+			$allowed = apply_filters( 'vimeotheque\admin_post_content_embed', true );
 		}
 
 		return $allowed;
@@ -361,10 +361,10 @@ class Helper{
 	 *
 	 * @return boolean Video is visible (true) or is hidden (false);
 	 */
-	public static function video_is_visible(){
-		$options = Plugin::instance()->get_options();
-		$is_visible = $options[ 'archives' ] ? true : is_single();
-		if( is_admin() || ! $is_visible || !self::get_video_post()->is_video() ){
+	public static function video_is_visible() {
+		$options    = Plugin::instance()->get_options();
+		$is_visible = $options['archives'] ? true : is_single();
+		if ( is_admin() || ! $is_visible || ! self::get_video_post()->is_video() ) {
 			return false;
 		}
 		return true;
@@ -378,12 +378,12 @@ class Helper{
 	 *
 	 * @return array|\WP_Error  The video details.
 	 */
-	public static function query_video( $video_id ){
-		$vimeo = new Video_Import( 'video', $video_id );
+	public static function query_video( $video_id ) {
+		$vimeo  = new Video_Import( 'video', $video_id );
 		$result = $vimeo->get_feed();
-		if( !$result ){
+		if ( ! $result ) {
 			$error = $vimeo->get_errors();
-			if( is_wp_error( $error ) ){
+			if ( is_wp_error( $error ) ) {
 				return $error;
 			}
 		}
@@ -399,7 +399,7 @@ class Helper{
 	 *
 	 * @return void
 	 */
-	public static function debug_message( $message, $separator = "\n", $data = false ){
+	public static function debug_message( $message, $separator = "\n", $data = false ) {
 		/**
 		 * Fires a debug message action.
 		 *
@@ -415,7 +415,7 @@ class Helper{
 	 *
 	 * By default, an empty string is returned if `$single` is true, or an empty array
 	 * if it's false.
-  *
+ *
 	 * @param  string  $meta_type Type of object metadata is for. Accepts 'post', 'comment', 'term', 'user',
 	 *                           or any other object type with an associated meta table.
 	 * @param  integer $object_id ID of the object metadata is for.
@@ -424,12 +424,12 @@ class Helper{
 	 *                           This parameter has no effect if meta_key is not specified. Default false.
 	 * @return mixed Single metadata value, or array of values.
 	 */
-	public static function get_metadata_default( $meta_type, $object_id, $meta_key, $single = true ){
-		if( function_exists( 'get_metadata_default' ) ){
+	public static function get_metadata_default( $meta_type, $object_id, $meta_key, $single = true ) {
+		if ( function_exists( 'get_metadata_default' ) ) {
 			return \get_metadata_default( $meta_type, $object_id, $meta_key, $single );
-		}elseif( $single ) {
+		} elseif ( $single ) {
 			return '';
-		}else{
+		} else {
 			return [];
 		}
 	}
@@ -442,15 +442,15 @@ class Helper{
 	 *
 	 * @return boolean     True is the error was returned by the Vimeo API or false if it's a generic WP error.
 	 */
-	public static function is_vimeo_api_error( $wp_error ){
-		if( !is_wp_error( $wp_error ) ){
+	public static function is_vimeo_api_error( $wp_error ) {
+		if ( ! is_wp_error( $wp_error ) ) {
 			return false;
 		}
 
 		$error_data = $wp_error->get_error_data();
 		/**
 		 * Key 'vimeo_api_error' is set in \Vimeotheque\Vimeo_Api\Vimeo::api_error()
-   *
+	*
 		 * @see   \Vimeotheque\Vimeo_Api\Vimeo::api_error()
 		 * @since 2.0
 		 */
@@ -466,12 +466,12 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	public static function embed_by_video_id( $video_id, $args = [], $echo = true ){
+	public static function embed_by_video_id( $video_id, $args = [], $echo = true ) {
 		$default = [
-			'title' => 1,
-			'byline' => 1,
+			'title'    => 1,
+			'byline'   => 1,
 			'portrait' => 1,
-			'dnt' => 1
+			'dnt'      => 1,
 		];
 
 		$args = wp_parse_args(
@@ -488,7 +488,7 @@ class Helper{
 			)
 		);
 
-		if( $echo ){
+		if ( $echo ) {
 			echo $embed;
 		}
 
@@ -502,7 +502,7 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	public static function get_plugin_version(){
+	public static function get_plugin_version() {
 		return VIMEOTHEQUE_VERSION;
 	}
 
@@ -513,7 +513,7 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	public static function get_path(){
+	public static function get_path() {
 		return VIMEOTHEQUE_PATH;
 	}
 
@@ -524,7 +524,7 @@ class Helper{
 	 *
 	 * @return string
 	 */
-	public static function get_url(){
+	public static function get_url() {
 		return VIMEOTHEQUE_URL;
 	}
 
@@ -535,7 +535,7 @@ class Helper{
 	 *
 	 * @return boolean
 	 */
-	public static function is_video(){
+	public static function is_video() {
 		return is_singular( Plugin::instance()->get_cpt()->get_post_type() );
 	}
 
@@ -546,10 +546,9 @@ class Helper{
 	 *
 	 * @return boolean
 	 */
-	public static function is_ajax(){
-		$ajax = defined('DOING_AJAX') && DOING_AJAX;
-		$rest = defined('REST_REQUEST') && REST_REQUEST;
+	public static function is_ajax() {
+		$ajax = defined( 'DOING_AJAX' ) && DOING_AJAX;
+		$rest = defined( 'REST_REQUEST' ) && REST_REQUEST;
 		return $ajax || $rest;
 	}
 }
-

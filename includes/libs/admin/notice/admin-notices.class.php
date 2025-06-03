@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @ignore
  */
-class Admin_Notices{
+class Admin_Notices {
 	/**
 	 * Instance.
 	 *
@@ -80,9 +80,9 @@ class Admin_Notices{
 	/**
 	 * @param Notice_Interface $notice
 	 */
-	public function register( Notice_Interface $notice ){
-		if( did_action( 'admin_notices' ) ){
-			_doing_it_wrong( __METHOD__,  __('You must register the notice before "admin_notices" hook is triggered.', 'codeflavors-vimeo-video-post-lite'), '2.0' );
+	public function register( Notice_Interface $notice ) {
+		if ( did_action( 'admin_notices' ) ) {
+			_doing_it_wrong( __METHOD__, __( 'You must register the notice before "admin_notices" hook is triggered.', 'codeflavors-vimeo-video-post-lite' ), '2.0' );
 		}
 
 		$this->notices[] = $notice;
@@ -91,8 +91,8 @@ class Admin_Notices{
 	/**
 	 * Show the notice
 	 */
-	public function show_notices(){
-		foreach( $this->notices as $notice ){
+	public function show_notices() {
+		foreach ( $this->notices as $notice ) {
 			$notice->get_notice();
 		}
 	}
@@ -100,7 +100,7 @@ class Admin_Notices{
 	/**
 	 * @return Notice_Interface[]
 	 */
-	public function get_notices(){
+	public function get_notices() {
 		return $this->notices;
 	}
 }

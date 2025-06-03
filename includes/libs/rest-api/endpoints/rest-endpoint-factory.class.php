@@ -28,14 +28,14 @@ class Rest_Endpoint_Factory {
 	public function __construct() {
 		add_action(
 			'rest_api_init',
-			[$this, 'init']
+			array( $this, 'init' )
 		);
 	}
 
 	/**
 	 * Initialize endpoints
 	 */
-	public function init(){
+	public function init() {
 		$this->store_endpoint( new Rest_Pictures_Controller() );
 		$this->store_endpoint( new Rest_Video_Controller() );
 		$this->store_endpoint( new Rest_Search_Controller() );
@@ -47,14 +47,14 @@ class Rest_Endpoint_Factory {
 	/**
 	 * @param Rest_Controller_Interface $controller
 	 */
-	public function store_endpoint( Rest_Controller_Interface $controller ){
+	public function store_endpoint( Rest_Controller_Interface $controller ) {
 		$this->endpoints[ $controller->get_rest_base() ] = $controller;
 	}
 
 	/**
 	 * @return Rest_Controller_Interface[]
 	 */
-	public function get_endpoints(){
+	public function get_endpoints() {
 		return $this->endpoints;
 	}
 
@@ -63,8 +63,7 @@ class Rest_Endpoint_Factory {
 	 *
 	 * @return Rest_Controller_Interface|null
 	 */
-	public function get_endpoint( $rest_base ){
+	public function get_endpoint( $rest_base ) {
 		return isset( $this->endpoints[ $rest_base ] ) ? $this->endpoints[ $rest_base ] : null;
 	}
-
 }

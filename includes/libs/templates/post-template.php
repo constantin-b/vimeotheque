@@ -14,25 +14,25 @@ use Vimeotheque\Video_Post;
  * @param  boolean $echo Echo the output.
  * @return string
  */
-function vimeotheque_the_video_embed( $echo  = true ){
-	$post = \Vimeotheque\Helper::get_video_post();
+function vimeotheque_the_video_embed( $echo = true ) {
+	$post   = \Vimeotheque\Helper::get_video_post();
 	$player = new Player( $post );
-	
+
 	/**
 	 * Filter the player output.
 	 *
 	 * @since 2.2.4
 	 *
-	 * @param string $output	The video embed output.
-	 * @param Video_Post $post 	The video post object reference.
-	 * @param Player $player	The video player object reference.
+	 * @param string $output    The video embed output.
+	 * @param Video_Post $post  The video post object reference.
+	 * @param Player $player    The video player object reference.
 	 */
 	$output = apply_filters( 'vimeotheque\the_video_embed', $player->get_output( false ), $post, $player );
-	
-	if( $echo ){
+
+	if ( $echo ) {
 		echo $output;
 	}
-	
+
 	return $output;
 }
 
@@ -46,10 +46,10 @@ function vimeotheque_the_video_embed( $echo  = true ){
  *
  * @return void
  */
-function vimeotheque_the_video_duration( $before = '<span class="video-duration">', $after = '</span>' ){
+function vimeotheque_the_video_duration( $before = '<span class="video-duration">', $after = '</span>' ) {
 	$duration = vimeotheque_get_the_video_duration();
 
-	if( $duration ){
+	if ( $duration ) {
 		echo $before . $duration . $after;
 	}
 }
@@ -61,7 +61,7 @@ function vimeotheque_the_video_duration( $before = '<span class="video-duration"
  *
  * @return string
  */
-function vimeotheque_get_the_video_duration(){
+function vimeotheque_get_the_video_duration() {
 	return Helper::get_the_video_duration();
 }
 
@@ -75,7 +75,7 @@ function vimeotheque_get_the_video_duration(){
  *
  * @return string
  */
-function vimeotheque_the_video_views( $before = '<span class="video-views">', $after = '</span>' ){
+function vimeotheque_the_video_views( $before = '<span class="video-views">', $after = '</span>' ) {
 	$post = \Vimeotheque\Helper::get_video_post();
 
 	$output = $before . number_format_i18n( $post->stats['views'] ) . $after;
@@ -95,7 +95,7 @@ function vimeotheque_the_video_views( $before = '<span class="video-views">', $a
  *
  * @return string
  */
-function vimeotheque_the_video_likes( $before = '<span class="video-likes">', $after = '</span>' ){
+function vimeotheque_the_video_likes( $before = '<span class="video-likes">', $after = '</span>' ) {
 	$post = \Vimeotheque\Helper::get_video_post();
 
 	$output = $before . number_format_i18n( $post->stats['likes'] ) . $after;
@@ -116,11 +116,11 @@ function vimeotheque_the_video_likes( $before = '<span class="video-likes">', $a
  *
  * @return void
  */
-function vimeotheque_the_post_thumbnail( $size = 'post-thumbnail', $attr = '', $with_overlay = true ){
+function vimeotheque_the_post_thumbnail( $size = 'post-thumbnail', $attr = '', $with_overlay = true ) {
 
 	$thumbnail = get_the_post_thumbnail( null, $size, $attr );
 
-	if( !empty( $thumbnail ) && $with_overlay ){
+	if ( ! empty( $thumbnail ) && $with_overlay ) {
 		$overlay = sprintf(
 			'<div class="play-btn" style="display: none;"><img src="%s" class="overlay" /></div>',
 			\Vimeotheque\Helper::get_url() . 'assets/front-end/svg/play-solid.svg'
@@ -142,7 +142,7 @@ function vimeotheque_the_post_thumbnail( $size = 'post-thumbnail', $attr = '', $
 	echo $thumbnail;
 }
 
-if( !function_exists( 'vimeotheque_the_entry_taxonomies' ) ) {
+if ( ! function_exists( 'vimeotheque_the_entry_taxonomies' ) ) {
 	/**
 	 * Print category and tags.
 	 *
@@ -153,20 +153,30 @@ if( !function_exists( 'vimeotheque_the_entry_taxonomies' ) ) {
 	function vimeotheque_the_entry_taxonomies() {
 		$post = get_post();
 
-		$categories_list = get_the_term_list( $post->ID,
-			Plugin::instance()->get_cpt()->get_post_tax(), '', ', ' );
+		$categories_list = get_the_term_list(
+			$post->ID,
+			Plugin::instance()->get_cpt()->get_post_tax(),
+			'',
+			', '
+		);
 
 		if ( $categories_list ) {
-			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
+			printf(
+				'<span class="cat-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
 				_x( 'Categories', 'Used before category names.', 'codeflavors-vimeo-video-post-lite' ),
 				$categories_list
 			);
 		}
 
-		$tags_list = get_the_term_list( $post->ID,
-			Plugin::instance()->get_cpt()->get_tag_tax(), '', ', ' );
+		$tags_list = get_the_term_list(
+			$post->ID,
+			Plugin::instance()->get_cpt()->get_tag_tax(),
+			'',
+			', '
+		);
 		if ( $tags_list ) {
-			printf( '<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
+			printf(
+				'<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
 				_x( 'Tags', 'Used before tag names.', 'codeflavors-vimeo-video-post-lite' ),
 				$tags_list
 			);

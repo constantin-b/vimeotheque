@@ -46,7 +46,7 @@ abstract class Rest_Controller_Abstract {
 	 *
 	 * @return string
 	 */
-	public function get_route(){
+	public function get_route() {
 		return $this->get_namespace() . $this->get_rest_base();
 	}
 }

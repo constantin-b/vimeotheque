@@ -15,7 +15,7 @@ use Vimeotheque\Post\Post_Type;
  * @package Vimeotheque
  * @ignore
  */
-abstract class Notice_Abstract{
+abstract class Notice_Abstract {
 	/**
 	 * @var \Vimeotheque\Post\Post_Type
 	 */
@@ -31,14 +31,14 @@ abstract class Notice_Abstract{
 	/**
 	 * Dismiss the notice
 	 */
-	public function dismiss_notice(){
+	public function dismiss_notice() {
 		// Override in concrete implementation
 	}
 
 	/**
 	 * @return Post_Type
 	 */
-	public function get_cpt(){
+	public function get_cpt() {
 		return $this->cpt;
 	}
 }

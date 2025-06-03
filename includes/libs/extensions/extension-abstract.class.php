@@ -62,16 +62,16 @@ class Extension_Abstract {
 	 *
 	 * @param string $slug
 	 */
-	protected function set_slug( $slug ){
-		$path_parts = pathinfo( $slug );
-		$this->dirname = $path_parts['dirname'];
+	protected function set_slug( $slug ) {
+		$path_parts     = pathinfo( $slug );
+		$this->dirname  = $path_parts['dirname'];
 		$this->filename = $path_parts['basename'];
 	}
 
 	/**
 	 * @param string $name
 	 */
-	protected function set_name( $name ){
+	protected function set_name( $name ) {
 		$this->name = $name;
 	}
 
@@ -110,7 +110,7 @@ class Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function get_slug(){
+	public function get_slug() {
 		return $this->dirname;
 	}
 
@@ -121,15 +121,15 @@ class Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function activation_url( $redirect_to = false ){
-		$action = 'activate';
+	public function activation_url( $redirect_to = false ) {
+		$action       = 'activate';
 		$nonce_action = $action . '-plugin_' . $this->get_file();
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->get_file()
+					'plugin' => $this->get_file(),
 				],
 				admin_url( 'plugins.php' )
 			),
@@ -144,15 +144,15 @@ class Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function deactivation_url( $redirect_to = false ){
-		$action = 'deactivate';
+	public function deactivation_url( $redirect_to = false ) {
+		$action       = 'deactivate';
 		$nonce_action = $action . '-plugin_' . $this->get_file();
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->get_file()
+					'plugin' => $this->get_file(),
 				],
 				admin_url( 'plugins.php' )
 			),
@@ -165,15 +165,15 @@ class Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function install_url(){
-		$action = 'install-plugin';
+	public function install_url() {
+		$action       = 'install-plugin';
 		$nonce_action = $action . '_' . $this->dirname;
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->dirname
+					'plugin' => $this->dirname,
 				],
 				admin_url( 'update.php' )
 			),
@@ -186,15 +186,15 @@ class Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function upgrade_url(){
-		$action = 'upgrade-plugin';
+	public function upgrade_url() {
+		$action       = 'upgrade-plugin';
 		$nonce_action = $action . '_' . $this->get_file();
 
 		return wp_nonce_url(
 			add_query_arg(
 				[
 					'action' => $action,
-					'plugin' => $this->get_file()
+					'plugin' => $this->get_file(),
 				],
 				admin_url( 'update.php' )
 			),
@@ -207,7 +207,7 @@ class Extension_Abstract {
 	 *
 	 * @return false
 	 */
-	public function is_pro_addon(){
+	public function is_pro_addon() {
 		return $this->pro_addon;
 	}
 
@@ -216,7 +216,7 @@ class Extension_Abstract {
 	 *
 	 * @return string
 	 */
-	public function get_name(){
+	public function get_name() {
 		return $this->name;
 	}
 
@@ -229,13 +229,13 @@ class Extension_Abstract {
 	 *
 	 * @return array|false
 	 */
-	public function get_plugin_data(){
-		if( null !== $this->plugin_data ){
+	public function get_plugin_data() {
+		if ( null !== $this->plugin_data ) {
 			return $this->plugin_data;
 		}
 
 		$plugin_file = trailingslashit( WP_PLUGIN_DIR ) . $this->get_file();
-		if( file_exists( $plugin_file ) ){
+		if ( file_exists( $plugin_file ) ) {
 			$this->plugin_data = get_plugin_data( $plugin_file );
 		}
 
@@ -247,7 +247,7 @@ class Extension_Abstract {
 	 *
 	 * @return boolean
 	 */
-	public function is_installed(){
+	public function is_installed() {
 		return $this->get_plugin_data() ? true : false;
 	}
 
@@ -267,7 +267,7 @@ class Extension_Abstract {
 	 *
 	 * @return boolean
 	 */
-	public function is_activated(){
+	public function is_activated() {
 		return is_plugin_active( $this->get_file() );
 	}
 
@@ -276,7 +276,7 @@ class Extension_Abstract {
 	 *
 	 * @return false|integer
 	 */
-	public function get_file_id(){
+	public function get_file_id() {
 		return $this->file_id;
 	}
 }

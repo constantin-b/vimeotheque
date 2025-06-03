@@ -14,7 +14,7 @@ use Vimeotheque\Templates\Helper;
  * @param mixed  $slug Template slug.
  * @param string $name Template name (default: '').
  */
-function vimeotheque_get_template_part( $slug, $name = '' ){
+function vimeotheque_get_template_part( $slug, $name = '' ) {
 	if ( $name ) {
 		$template = VIMEOTHEQUE_TEMPLATE_DEBUG_MODE ? '' : locate_template(
 			[
@@ -65,7 +65,7 @@ function vimeotheque_get_template_part( $slug, $name = '' ){
  * @return WP_Post|null|string Post object if successful. Null if global $post is not set. Empty string if no
  *                             corresponding post exists.
  */
-function vimeotheque_get_next_post(  $in_same_term = false, $excluded_terms = '' ){
+function vimeotheque_get_next_post( $in_same_term = false, $excluded_terms = '' ) {
 	return Helper::get_adjacent_post( $in_same_term, $excluded_terms, false );
 }
 
@@ -79,7 +79,7 @@ function vimeotheque_get_next_post(  $in_same_term = false, $excluded_terms = ''
  * @return WP_Post|null|string Post object if successful. Null if global $post is not set. Empty string if no
  *                             corresponding post exists.
  */
-function vimeotheque_get_previous_post(  $in_same_term = false, $excluded_terms = '' ){
+function vimeotheque_get_previous_post( $in_same_term = false, $excluded_terms = '' ) {
 	$post = get_adjacent_post( $in_same_term, $excluded_terms, true );
 	return $post;
 }
@@ -91,6 +91,6 @@ function vimeotheque_get_previous_post(  $in_same_term = false, $excluded_terms 
  *
  * @return void
  */
-function vimeotheque_get_sidebar(){
+function vimeotheque_get_sidebar() {
 	vimeotheque_get_template_part( 'global/sidebar.php' );
 }

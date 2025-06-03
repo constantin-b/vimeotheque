@@ -7,7 +7,7 @@ use Vimeotheque\Helper;
 use Vimeotheque\Plugin;
 use WP_Error;
 
-if( !defined('ABSPATH') ){
+if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
@@ -45,15 +45,15 @@ abstract class Page_Abstract implements Page_Interface {
 	private $menu_title;
 
 	/**
-     * Parent page
-     *
+	 * Parent page
+	 *
 	 * @var bool|string|Page_Interface
 	 */
 	private $parent = false;
 
 	/**
-     * Capability needed to view page
-     *
+	 * Capability needed to view page
+	 *
 	 * @var string
 	 */
 	private $capability = '';
@@ -87,12 +87,12 @@ abstract class Page_Abstract implements Page_Interface {
 	 * @param boolean    $parent
 	 * @param string     $capability
 	 */
-	public function __construct( Admin $admin, $page_title, $menu_title, $slug, $parent = false, $capability = 'activate_plugins' ){
-		$this->admin = $admin;
-		$this->slug = $slug;
+	public function __construct( Admin $admin, $page_title, $menu_title, $slug, $parent = false, $capability = 'activate_plugins' ) {
+		$this->admin      = $admin;
+		$this->slug       = $slug;
 		$this->page_title = $page_title;
 		$this->menu_title = $menu_title;
-		$this->parent = $parent;
+		$this->parent     = $parent;
 		$this->capability = $capability;
 
 		add_action( 'admin_notices', [ $this, 'notice' ] );
@@ -102,10 +102,10 @@ abstract class Page_Abstract implements Page_Interface {
 	 * Callback for admin notices action
 	 */
 	public function notice() {
-		if( ( $this->get_var( 'message' ) || is_wp_error( $this->get_error() ) ) && $this->is_current_page() ){
-		    $class = is_wp_error( $this->get_error() ) ? 'notice-error' : 'notice-success is-dismissible';
+		if ( ( $this->get_var( 'message' ) || is_wp_error( $this->get_error() ) ) && $this->is_current_page() ) {
+			$class = is_wp_error( $this->get_error() ) ? 'notice-error' : 'notice-success is-dismissible';
 			?>
-			<div class="notice <?php echo $class;?>">
+			<div class="notice <?php echo $class; ?>">
 				<p><?php echo is_wp_error( $this->get_error() ) ? $this->get_error()->get_error_message() : $this->get_message( $this->get_var( 'message' ) ); ?></p>
 			</div>
 			<?php
@@ -117,7 +117,7 @@ abstract class Page_Abstract implements Page_Interface {
 	 *
 	 * @param $code
 	 */
-	public function get_message( $code ){}
+	public function get_message( $code ) {}
 
 	/**
 	 * @return Plugin
@@ -146,8 +146,8 @@ abstract class Page_Abstract implements Page_Interface {
 	 * @return string
 	 */
 	public function get_menu_page( $echo = true ) {
-		$menu_page_url =  menu_page_url( $this->get_menu_slug(), false );
-		if( $echo ){
+		$menu_page_url = menu_page_url( $this->get_menu_slug(), false );
+		if ( $echo ) {
 			echo $menu_page_url;
 		}
 		return $menu_page_url;
@@ -155,7 +155,7 @@ abstract class Page_Abstract implements Page_Interface {
 
 	/**
 	 * Returns the page title
-  *
+ *
 	 * @return string
 	 */
 	public function get_page_title() {
@@ -164,7 +164,7 @@ abstract class Page_Abstract implements Page_Interface {
 
 	/**
 	 * Returns the menu title
-  *
+ *
 	 * @return string
 	 */
 	public function get_menu_title() {
@@ -186,7 +186,7 @@ abstract class Page_Abstract implements Page_Interface {
 	 * @param string $var_name
 	 */
 	protected function set_item_id( $var_name = 'item_id' ) {
-		if( Helper::get_var( 'item_id' ) ) {
+		if ( Helper::get_var( 'item_id' ) ) {
 			$this->item_id = absint( $this->get_var( $var_name ) );
 		}
 	}
@@ -234,8 +234,8 @@ abstract class Page_Abstract implements Page_Interface {
 	 * Determines if current admin page is the same with the page registered.
 	 * Useful to check if hooking to admin_notices and don't want to do additional checking in class
 	 * to see if the registered page is the same with the one calling the callback.
-     *
-     * @return boolean
+	 *
+	 * @return boolean
 	 */
 	protected function is_current_page() {
 		$screen = get_current_screen();
@@ -243,22 +243,22 @@ abstract class Page_Abstract implements Page_Interface {
 	}
 
 	/**
-     * Set an error
-     *
+	 * Set an error
+	 *
 	 * @param $code
 	 * @param $message
 	 * @param null    $data
 	 */
 	protected function set_error( $code, $message, $data = null ) {
-	    $this->error = new WP_Error( $code, $message, $data );
-    }
+		$this->error = new WP_Error( $code, $message, $data );
+	}
 
 	/**
-     * Get the error
-     *
+	 * Get the error
+	 *
 	 * @return WP_Error|null
 	 */
-    protected function get_error() {
-	    return $this->error;
-    }
+	protected function get_error() {
+		return $this->error;
+	}
 }

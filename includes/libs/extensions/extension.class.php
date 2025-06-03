@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Extension extends Extension_Abstract implements Extension_Interface {
 
-	public function __construct( $slug, $name, $description ){
+	public function __construct( $slug, $name, $description ) {
 		parent::set_slug( $slug );
 		parent::set_name( $name );
 		parent::set_description( $description );

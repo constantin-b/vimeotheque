@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Vimeotheque\Admin
  * @ignore
  */
-class Resource_Objects{
+class Resource_Objects {
 	/**
 	 * @var Resource_Abstract[]
 	 */
@@ -101,70 +101,70 @@ class Resource_Objects{
 	/**
 	 * Set sorting options
 	 */
-	private function set_sort_options(){
+	private function set_sort_options() {
 		$this->sort_options = [
-			'new' => [
-				'label' => __( 'Newest', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'date',
+			'new'               => [
+				'label'     => __( 'Newest', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'date',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'alphabetical_asc' => [
-				'label' => __( 'Alphabetical &#x1F81D;', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'alphabetical',
+			'alphabetical_asc'  => [
+				'label'     => __( 'Alphabetical &#x1F81D;', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'alphabetical',
 				'direction' => 'asc',
-				'resources' => []
+				'resources' => array(),
 			],
 			'alphabetical_desc' => [
-				'label' => __( 'Alphabetical &#x1F81F;', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'alphabetical',
+				'label'     => __( 'Alphabetical &#x1F81F;', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'alphabetical',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
 
-			'duration' => [
-				'label' => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'duration',
+			'duration'          => [
+				'label'     => __( 'Duration', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'duration',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'old' => [
-				'label' => __( 'Oldest', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'date',
+			'old'               => [
+				'label'     => __( 'Oldest', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'date',
 				'direction' => 'asc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'played' => [
-				'label' => __( 'Plays', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'plays',
+			'played'            => [
+				'label'     => __( 'Plays', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'plays',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'likes'	=> [
-				'label' => __( 'Likes', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'likes',
+			'likes'             => [
+				'label'     => __( 'Likes', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'likes',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'comments' => [
-				'label' => __( 'Comments', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'comments',
+			'comments'          => [
+				'label'     => __( 'Comments', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'comments',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'relevant' => [
-				'label' => __( 'Relevancy', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'relevant',
+			'relevant'          => [
+				'label'     => __( 'Relevancy', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'relevant',
 				'direction' => 'desc',
-				'resources' => []
+				'resources' => array(),
 			],
-			'default' => [
-				'label' => __( 'Default order', 'codeflavors-vimeo-video-post-lite' ),
-				'sort' => 'default',
+			'default'           => array(
+				'label'     => __( 'Default order', 'codeflavors-vimeo-video-post-lite' ),
+				'sort'      => 'default',
 				'direction' => false,
-				'resources' => []
-			]
- 		];
+				'resources' => array(),
+			),
+		];
 	}
 
 	/**
@@ -172,11 +172,11 @@ class Resource_Objects{
 	 *
 	 * @param Resource_Interface $resource
 	 */
-	private function register_sort_options( Resource_Interface $resource ){
+	private function register_sort_options( Resource_Interface $resource ) {
 		$_sort_options = $resource->get_sort_options();
 
-		foreach( $this->sort_options as $k => $option ){
-			if( in_array( $option['sort'], $_sort_options ) ){
+		foreach ( $this->sort_options as $k => $option ) {
+			if ( in_array( $option['sort'], $_sort_options ) ) {
 				$this->sort_options[ $k ]['resources'][ $resource->get_name() ] = $resource;
 			}
 		}
@@ -196,8 +196,8 @@ class Resource_Objects{
 	 *
 	 * @return array
 	 */
-	public function get_sort_option( $option ){
-		if( isset( $this->sort_options[ $option ] ) ){
+	public function get_sort_option( $option ) {
+		if ( isset( $this->sort_options[ $option ] ) ) {
 			return $this->sort_options[ $option ];
 		}
 
@@ -207,7 +207,7 @@ class Resource_Objects{
 	/**
 	 * @param Resource_Interface $resource
 	 */
-	public function register_resource( Resource_Interface $resource ){
+	public function register_resource( Resource_Interface $resource ) {
 		$this->resources[ $resource->get_name() ] = $resource;
 		$this->register_sort_options( $resource );
 	}
@@ -215,7 +215,7 @@ class Resource_Objects{
 	/**
 	 * @return resource
 	 */
-	public function get_resources(){
+	public function get_resources() {
 		return $this->resources;
 	}
 
@@ -224,8 +224,8 @@ class Resource_Objects{
 	 *
 	 * @return resource
 	 */
-	public function get_resource( $name ){
-		if( !isset( $this->resources[ $name ] ) ){
+	public function get_resource( $name ) {
+		if ( ! isset( $this->resources[ $name ] ) ) {
 			return new \WP_Error(
 				'vimeotheque-api-query-resource-unknown',
 				sprintf( __( 'Resource %s is not registered.', 'codeflavors-vimeo-video-post-lite' ), $name )

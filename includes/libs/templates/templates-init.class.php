@@ -26,11 +26,11 @@ class Templates_Init {
 	 *
 	 * Check for theme support and if found initialize the templates.
 	 */
-	public function __construct(){
+	public function __construct() {
 		add_action(
 			'after_setup_theme',
-			function(){
-				if( current_theme_supports( 'vimeotheque' ) ){
+			function () {
+				if ( current_theme_supports( 'vimeotheque' ) ) {
 					$this->init();
 				}
 			}
@@ -42,10 +42,10 @@ class Templates_Init {
 	 *
 	 * @return void
 	 */
-	private function init(){
+	private function init() {
 		$this->initialize();
 
-		if( !is_admin() ){
+		if ( ! is_admin() ) {
 			$this->template_loader = new Template_Loader();
 			new Frontend_Scripts();
 			new Single_Video();
@@ -53,7 +53,7 @@ class Templates_Init {
 
 		add_filter(
 			'vimeotheque\post_content_embed',
-			function(){
+			function () {
 				$post = get_post();
 				return $post->post_type != Plugin::instance()->get_cpt()->get_post_type();
 			}
@@ -69,5 +69,4 @@ class Templates_Init {
 		require_once \Vimeotheque\Helper::get_path() . 'includes/libs/templates/functions.php';
 		require_once \Vimeotheque\Helper::get_path() . 'includes/libs/templates/post-template.php';
 	}
-
 }

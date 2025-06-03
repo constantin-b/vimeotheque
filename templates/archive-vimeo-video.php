@@ -6,7 +6,7 @@
  *
  * @version 1.0
  */
-if( !defined( 'ABSPATH' ) ){
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // exit if accessed directly
 }
 
@@ -21,12 +21,12 @@ get_header(); ?>
 	do_action( 'vimeotheque_before_main_content' );
 	?>
 
-    <?php
-        /*
-         * Include the post format-specific template for the content.
-         */
-        vimeotheque_get_template_part( 'archive/content', 'archive' );
-    ;?>
+	<?php
+		/*
+		 * Include the post format-specific template for the content.
+		 */
+		vimeotheque_get_template_part( 'archive/content', 'archive' );
+	?>
 
 	<?php
 	/**
@@ -43,7 +43,7 @@ get_header(); ?>
 	 *
 	 * Action that runs for the sidebar display.
 	 */
-	do_action('vimeotheque_sidebar');
+	do_action( 'vimeotheque_sidebar' );
 	?>
 
 <?php
