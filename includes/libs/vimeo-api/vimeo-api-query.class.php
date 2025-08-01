@@ -180,7 +180,13 @@ class Vimeo_Api_Query extends Vimeo {
 				)
 			);
 
-			$data['response'] = $request['response'];
+            if( is_wp_error($request) ){
+                $data['response'] = $request->get_error_message();
+            }else if( isset( $request['response'] ) ){
+                $data['response'] = $request['response'];
+            }else{
+                $data['response'] = esc_html__( 'Unknown Vimeo API query error', 'codeflavors-vimeo-video-post-lite' );
+            }
 
 			return parent::api_error( $data );
 		}	
