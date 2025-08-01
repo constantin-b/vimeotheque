@@ -54,7 +54,7 @@ class Remote_Loader {
 			$r = wp_remote_get(
 				$this->get_rest_api_endpoint(),
 				[
-					'timeout'   => 30,
+					'timeout'   => 3,
 					'sslverify' => false,
 				]
 			);
