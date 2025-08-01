@@ -1,5 +1,10 @@
 *** Vimeotheque Lite Changelog ***
 
+2025-08-01 - Version 2.3.5.1
+- Load plugin add-ons information only when needed;
+- Changed timeout for the add-ons information to 3s;
+- Manage errors returned from Vimeo API queries in a more granular way.
+
 2025-05-27 - Version 2.3.4.4
 - Solved a bug that emitted errors when allowing permissions.
 
