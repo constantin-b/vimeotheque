@@ -63,9 +63,8 @@ class Admin{
 	public function __construct( Post_Type $post_type ){
 		// store object reference
 		$this->post_type = $post_type;
-		$this->extensions = new Extensions();
 
-		add_action( 'wp_loaded', [ $this, 'init' ], -20 );
+        add_action( 'wp_loaded', [ $this, 'init' ], -20 );
 
 		// add admin capabilities
 		add_action( 'init', [
@@ -452,7 +451,12 @@ class Admin{
 	 * @return Extensions
 	 */
 	public function get_extensions() {
-		return $this->extensions;
+        if( !is_null($this->extensions) ){
+            return $this->extensions;
+        }
+
+        $this->extensions = new Extensions();
+        return $this->extensions;
 	}
 
 	/**
