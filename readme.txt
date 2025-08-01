@@ -4,7 +4,7 @@ Tags: vimeo, video , video gallery, featured video, video post
 Requires at least: 5.2
 Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 2.3.5
+Stable tag: 2.3.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,11 @@ For each video post created by the plugin, you can import the video image as the
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3.5.1 =
+- Load plugin add-ons information only when needed;
+- Changed timeout for the add-ons information to 3s;
+- Manage errors returned from Vimeo API queries in a more granular way.
+
 = 2.3.5 =
 - Updated code formatting according to WP standards.
 
