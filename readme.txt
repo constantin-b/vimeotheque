@@ -1,6 +1,6 @@
 === Vimeotheque – Vimeo WordPress Plugin & Video Gallery ===
 Contributors: codeflavors, constantin.boiangiu
-Tags: vimeo, video, video gallery, playlist, gutenberg, elementor
+Tags: vimeo, video, video gallery, playlist, gutenberg
 Requires at least: 5.2
 Tested up to: 6.8.3
 Requires PHP: 7.4
@@ -8,7 +8,7 @@ Stable tag: 2.3.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Vimeo WordPress plugin to import & embed Vimeo videos, build galleries/playlists, auto-sync showcases/channels, and use Gutenberg blocks (Elementor friendly).
+Import & embed Vimeo in WordPress. Create video galleries & playlists, auto-sync showcases. Gutenberg blocks & Elementor support.
 
 == Description ==
 
@@ -37,7 +37,7 @@ Vimeotheque helps you bring Vimeo into WordPress the right way: import videos as
 **Live demo & Docs**
 - [Live demo](http://vvp-demo.codeflavors.com)
 - [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme)
-- [Getting started with Vimeo OAuth](https://vimeotheque.com/documentation/getting-started/vimeo-oauth/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme)
+- [Getting started with Vimeo OAuth](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme)
 
 == Blocks ==
 This plugin provides the following blocks:
@@ -51,7 +51,6 @@ This plugin provides the following blocks:
    Create an app at Vimeo: [developer.vimeo.com/apps/new](https://developer.vimeo.com/apps/new)
    Step-by-step guides:
    - [How to create a new Vimeo App](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme)
-   - [Vimeo OAuth setup](https://vimeotheque.com/documentation/getting-started/vimeo-oauth/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme)
 3. Import a single video by URL or use **Bulk Import** for channels, showcases, portfolios, folders, groups, user uploads, or search.
 4. Add videos/playlists via the Gutenberg blocks or the Classic Editor shortcode.
 
