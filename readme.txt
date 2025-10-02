@@ -1,126 +1,88 @@
-=== Vimeotheque: Vimeo WordPress Plugin ===
+=== Vimeotheque – Vimeo WordPress Plugin & Video Gallery ===
 Contributors: codeflavors, constantin.boiangiu
-Tags: vimeo, video , video gallery, featured video, video post
+Tags: vimeo, video, video gallery, playlist, gutenberg, elementor
 Requires at least: 5.2
-Tested up to: 6.8.1
+Tested up to: 6.8.3
 Requires PHP: 7.4
 Stable tag: 2.3.5.1
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Intuitive Vimeo WordPress Plugin to help you create video posts in seconds and sync your Vimeo collections with your WordPress website.
+Vimeo WordPress plugin to import & embed Vimeo videos, build galleries/playlists, auto-sync showcases/channels, and use Gutenberg blocks (Elementor friendly).
 
 == Description ==
 
-= Vimeo WordPress Video Gallery Plugin =
+= The Vimeo plugin for WordPress that imports, embeds, and organizes your videos =
+Vimeotheque helps you bring Vimeo into WordPress the right way: import videos as posts, auto-sync collections (channels, showcases, portfolios, folders, user uploads), and display beautiful, responsive players and playlists with Gutenberg blocks or shortcodes. Perfect for membership sites, portfolios, online courses and video libraries.
 
-Looking for a powerful and easy-to-use solution to embed Vimeo videos on your WordPress site? Look no further than Vimeotheque – the ultimate plugin for managing Vimeo videos on WordPress.
+**Highlights**
+- **Import & Sync** – Single videos or bulk from channels, showcases, groups, portfolios, folders, user uploads, or Vimeo search.
+- **Video as Content** – Creates complete WP posts (title, description, thumbnail, embed) using a dedicated `vimeo-video` post type.
+- **Blocks & Shortcodes** – Add single videos, set video position in posts, or build playlists with native Gutenberg blocks. Classic Editor shortcode included.
+- **Responsive & Fast** – Uses the latest Vimeo HTML5 player, lazy-load options, “one-video-at-a-time” playback to avoid conflicts, and a no-tracking embed parameter.
+- **Elementor-friendly** – Works cleanly inside Elementor layouts; playlists and single embeds drop into any section/column.
+- **Templates (optional)** – Enable the plugin’s template system or override in your theme for full design control.
 
-With Vimeotheque, you can easily import videos from Vimeo into your WordPress site as custom post types. The plugin supports the latest Vimeo HTML5 video player, making it easy to embed responsive videos that look great on any device.
+**Use cases**
+- **Membership / LMS** – Embed lessons and restrict access with your membership/LMS plugin.
+- **Portfolio / Showcase** – Auto-sync a Vimeo showcase/portfolio to your site.
+- **Blog / Magazine** – Import as posts and surface videos in archives and widgets.
 
-Whether you want to embed a single video or a playlist of videos, Vimeotheque has you covered. The plugin is optimized to display multiple videos on the same page, and allows only one video to play at a time to prevent conflicts.
+= PRO adds even more =
+- **Automatic bulk imports** (schedule & hands-off sync).
+- **Private video imports**.
+- **Import as regular posts** (not just the custom post type).
+- **Video theme compatibility** and **priority support**.
 
-Vimeotheque is also fully compatible with the WordPress Block Editor and comes with three blocks that allow you to quickly insert and edit your videos. You can even use the plugin's widget to display your latest videos in your site's sidebar.
+**Live demo & Docs**
+- [Live demo](http://vvp-demo.codeflavors.com)
+- [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme)
+- [Getting started with Vimeo OAuth](https://vimeotheque.com/documentation/getting-started/vimeo-oauth/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme)
 
-With the Pro version of Vimeotheque, you get even more features, including automatic bulk import, support for private videos, and compatibility with video themes. Plus, you'll receive priority support to ensure that any issues are resolved quickly and efficiently.
-
-= Vimeotheque Video Importers =
-
-Vimeotheque provides multiple options to import Vimeo videos into WordPress. You can use a Vimeo video URL, search for videos, or import entire channels, categories, showcases, groups, portfolios, or user uploads and then select the videos you want to add.
-
-However, it's important to note that before you can start importing videos, you must create a Vimeo App and enter the credentials into the Vimeotheque Settings page.
-
-= Features =
-
-* **Responsive design**: All Vimeo video embeds managed by Vimeotheque are fully responsive and will fit any screen size, ensuring that your videos look great on any device.
-* **Vimeo HTML5 video player support**: Vimeotheque uses the latest Vimeo player embed and follows the Vimeo embed recommendations, providing an optimized viewing experience for your visitors.
-* **Multiple video embeds on the same page**: Optimized to display multiple videos into the same page (i.e. on post archive pages), Vimeotheque will allow only one video to play at a time, preventing conflicts between videos.
-* **Compatible with the WordPress Block Editor**: Vimeotheque features 3 blocks that allow you to quickly insert and edit them, making it easy to add videos to your posts and pages.
-* **Latest videos widget**: The widget allows you to show video lists or playlists in your sidebars, giving your visitors quick access to your latest video content.
-* **Single video shortcode**: Vimeotheque also keeps compatibility with the Classic editor, providing a shortcode that allows you to embed a single video anywhere on your site.
-* **Import as custom post**: Video posts created by Vimeotheque have post type vimeo-video to allow themes to customize the display of video posts, providing maximum flexibility in how you display your videos.
-* **Full video import**: Vimeotheque will create complete WordPress posts from the Vimeo videos, including title, description, thumbnail, and video. This feature makes it easy to import large amounts of video content into your site.
-* **Single video import**: An intuitive importer that requires only the video URL from Vimeo, allowing you to quickly import individual videos into your site.
-* **Manual bulk import**: The bulk video importer allows you to import multiple videos from channels, showcases, groups, user uploads, Vimeo searches, or portfolios. This feature saves time and makes it easy to import large amounts of video content.
-* **Playlist themes**: Vimeotheque can embed video playlists containing imported videos into other WordPress posts by using custom playlist themes, providing an easy way to showcase your video content.
-
-= PRO Version Features =
-
-* **Automatic bulk import**: The importer will import entire channels, showcases, groups, folders, user uploads, or portfolios automatically, without any intervention, making it easy to keep your site up-to-date with your latest video content.
-* **Import private Vimeo videos**: Videos with view privacy setup set to private can be queried and imported into WordPress, giving you more flexibility in managing your video content.
-* **WordPress Theme support**: For video themes, Vimeotheque PRO can import videos and create posts that have all custom fields required by the theme filled automatically, ensuring that your video content looks great on your site.
-* **Import videos as regular post type**: Vimeotheque PRO can import videos as a regular post type instead of the custom post type implemented by the plugin, providing maximum compatibility with your site's existing structure.
-* **Priority support**: With the PRO version, you'll receive priority support to ensure that any issues are resolved quickly and efficiently.
-
-= Important Links =
-
-* [Vimeotheque PRO live demo](http://vvp-demo.codeflavors.com "Vimeotheque PRO live demo")
-* [Vimeotheque plugin homepage](https://vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeotheque - Vimeo WordPress plugin")
-* [Vimeotheque Knowledgebase and Help Center](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "Vimeotheque Knowledgebase and Help Center")
-
-**Block Editor Support**
-
-https://vimeo.com/512419883
+== Blocks ==
+This plugin provides the following blocks:
+1. **Vimeotheque – Video Position** (place the player inside single video posts)
+2. **Vimeotheque – Single Video** (embed a specific Vimeo video anywhere)
+3. **Vimeotheque – Playlist** (build playlists from imported videos)
 
 == Installation ==
-
-Like any other plugin, it can be installed manually or directly from WordPress installation Plugins page. 
-
-Once activated a new menu entry will be created called **Videos** (look for the Vimeo logo).
-
-In order to be able to perform any imports, you will first need to register the plugin as an app on Vimeo website. Registration can be made [here](https://developer.vimeo.com/apps/new "register Vimeo app"). Please note that you must have a Vimeo account before you can register the app.
-After registration, go to plugin page **Settings** and under **Vimeo authentication** enter your consumer and secret key provided by Vimeo. Now you can make bulk imports.
-
-For a detailed tutorial on how to set up Vimeo access registration, please see [this tutorial](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme "How to set up Vimeo OAuth").
+1. Install and activate from **Plugins → Add New**.
+2. In **Vimeotheque → Settings → Vimeo authentication**, add your **Vimeo App** credentials (Client ID & Secret).
+   Create an app at Vimeo: [developer.vimeo.com/apps/new](https://developer.vimeo.com/apps/new)
+   Step-by-step guides:
+   - [How to create a new Vimeo App](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme)
+   - [Vimeo OAuth setup](https://vimeotheque.com/documentation/getting-started/vimeo-oauth/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme)
+3. Import a single video by URL or use **Bulk Import** for channels, showcases, portfolios, folders, groups, user uploads, or search.
+4. Add videos/playlists via the Gutenberg blocks or the Classic Editor shortcode.
 
 == Frequently Asked Questions ==
 
-= What is Vimeotheque? =
+= Do I need a Vimeo account or app? =
+Yes. Create a free Vimeo account, then a Vimeo App and paste the credentials in **Settings → Vimeo authentication** to enable importing.
+Step-by-step guide: [docs.vimeotheque.com/how-to-create-a-new-vimeo-app](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme)
 
-Vimeotheque is a WordPress plugin that allows you to easily import Vimeo videos into your WordPress site as custom post types. It supports the latest Vimeo HTML5 video player and allows you to embed responsive videos that look great on any device.
+= Can I embed multiple Vimeo videos on one page? =
+Yes. Vimeotheque is optimized for multiple embeds and ensures **only one video plays at a time** to prevent conflicts.
 
-= Is Vimeotheque free? =
+= Does it work with Gutenberg and Elementor? =
+Yes. You get **three native blocks** for Gutenberg and the output works smoothly inside Elementor sections, columns or templates.
 
-Yes, Vimeotheque is available as a free plugin on the WordPress plugin repository. However, there is also a Pro version available that offers additional features.
+= Can I auto-sync from a Vimeo Showcase, Channel, Portfolio or Folder? =
+Yes. Use **Bulk Import** (free) for manual syncing; **Automatic bulk import** (PRO) handles scheduled syncing.
 
-= What features are included in the Pro version of Vimeotheque? =
+= Can I import private/hidden Vimeo videos? =
+Yes, with **Vimeotheque PRO** (subject to Vimeo privacy and API permissions).
 
-The Pro version of Vimeotheque includes automatic bulk import, support for private videos, compatibility with video themes, and the ability to import videos as regular post types.
+= Will thumbnails become featured images? =
+Yes. The importer can set the Vimeo thumbnail as the WP featured image on the created post.
 
-= Can I embed multiple Vimeo videos on the same page with Vimeotheque? =
+= Is there a no-tracking player option? =
+Yes. There’s a player parameter to avoid tracking (no cookies/stats). Enable it in the plugin’s embed options.
 
-Yes, Vimeotheque is optimized to display multiple videos on the same page. However, only one video will play at a time to prevent conflicts.
-
-= Is Vimeotheque compatible with the WordPress Block Editor? =
-
-Yes, Vimeotheque is fully compatible with the WordPress Block Editor and comes with three blocks that allow you to quickly insert and edit your videos.
-
-= Can I display my latest Vimeo videos in my site's sidebar with Vimeotheque? =
-
-Yes, Vimeotheque comes with a widget that allows you to display your latest videos in your site's sidebar.
-
-= How do I import videos from Vimeo with Vimeotheque? =
-
-Before you can import Vimeo videos as WordPress posts, you need to create a Vimeo App for the plugin and enter the credentials into the plugin Settings page. Follow this tutorial on how to set up Vimeo access registration: [https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/](https://docs.vimeotheque.com/how-to-create-a-new-vimeo-app/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "How to set up Vimeo OAuth"). You can import videos from Vimeo with Vimeotheque using the intuitive importer that requires only the video URL from Vimeo. You can also use the manual bulk importer to import multiple videos from channels, showcases, groups, user uploads, Vimeo searches or portfolios.
-
-= What post type does Vimeotheque create for video posts? =
-
-Vimeotheque creates video posts as custom post types with the post type vimeo-video, which allows themes to customize the display of video posts.
-
-= Does Vimeotheque offer priority support? =
-
-Yes, the Pro version of Vimeotheque offers priority support to ensure that any issues are resolved quickly and efficiently.
-
-= Can I import hidden Vimeo videos as WordPress posts? =
-
-Yes, but you will need the Vimeotheque PRO version to import hidden Vimeo videos as WordPress posts.
-
-= How do I import the video image as the post featured image? =
-
-For each video post created by the plugin, you can import the video image as the post featured image. This option is available in the "Featured Image" metabox on the post edit screen. Simply click the "Import Video image" button and the plugin will take care of the rest.
+= Where can I get help? =
+Check the [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeotheque-readme) or open a support topic; PRO users receive priority support.
 
 == Screenshots ==
-
 1. Vimeotheque import single video - step 1
 2. Vimeotheque import single video - step 2
 3. Vimeotheque import single video - step 3
@@ -541,11 +503,7 @@ For each video post created by the plugin, you can import the video image as the
 * Initial release
 
 == Upgrade Notice ==
-
-= 1.2.6 =
-After upgrading to this version, single video imports won't work anymore unless you enter your Vimeo App client identifier and client secret. More about how to register an App on Vimeo here: [How to setup Vimeo OAuth](https://vimeotheque.com/documentation/getting-started/vimeo-oauth-new-interface/?utm_source=wordpressorg&utm_medium=readme&utm_campaign=vimeo-lite-plugin-readme "Vimeo OAuth setup")
+There are no special upgrade notices for now.
 
 == Troubleshooting ==
-
-Plugin was tested with latest WordPress version and all default WordPress themes in all major browsers and also mobile devices. 
-If anything is wrong on your installation, please submit a support request and tell us the theme you're using, WordPress version and browser/device used for testing.
+Tested with the latest WordPress and default themes across major browsers and mobile. If something looks off, please open a support request and include theme, WP version, and browser/device details.
