@@ -20,10 +20,10 @@ class Shortcode_Metabox extends Abstract_Metabox implements Metabox_Interface {
 
 		switch ( $post->post_status ) {
 			case 'publish':
-				$message = esc_html_e( 'Copy the shortcode and paste it into other posts or pages to show this playlist.' );
+				$message = esc_html__( 'Copy the shortcode and paste it into other posts or pages to show this playlist.' );
 				break;
 			default:
-				$message = esc_html_e( 'You must publish the playlist for the shortcode to display it.' );
+				$message = esc_html__( 'You must publish the playlist for the shortcode to display it.' );
 				break;
 		}
 		?>
