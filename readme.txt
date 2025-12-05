@@ -2,9 +2,9 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video, video gallery, playlist, gutenberg
 Requires at least: 5.2
-Tested up to: 6.8.3
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.5.1
+Stable tag: 2.3.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,11 @@ Check the [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg
 12. Vimeotheque create status report
 
 == Changelog ==
+= 2.3.5.2 =
+- Solved WordPress notices that translations were loaded too early;
+- Solved bugs related to text used in translations not being displayed or missing translation domain;
+- Compatibility with WordPress 6.9.
+
 = 2.3.5.1 =
 - Load plugin add-ons information only when needed;
 - Changed timeout for the add-ons information to 3s;
