@@ -266,28 +266,13 @@ class Plugin {
 
 		new Widgets_Factory( $this );
 
-        add_action('init', function(){
-            $this->playlist_themes = new Themes(
-                new Theme(
-                    VIMEOTHEQUE_PATH . 'themes/default/player.php',
-                    __( 'Default', 'codeflavors-vimeo-video-post-lite' )
-                )
-            );
-
-            $this->playlist_themes->register_theme(
-                new Theme(
-                    VIMEOTHEQUE_PATH . 'themes/simple/theme.php',
-                    __( 'Simple', 'codeflavors-vimeo-video-post-lite' )
-                )
-            );
-
-            $this->playlist_themes->register_theme(
-                new Theme(
-                    VIMEOTHEQUE_PATH . 'themes/listy/theme.php',
-                    __( 'Listy', 'codeflavors-vimeo-video-post-lite' )
-                )
-            );
-        });
+        if( Helper::vimeotheque_is_pro_version_above('2.1.8') ){
+            add_action('init', function(){
+                $this->init_playlist_themes();
+            });
+        }else{
+            $this->init_playlist_themes();
+        }
 
 		// internalization
 		load_plugin_textdomain(
@@ -296,6 +281,29 @@ class Plugin {
 			basename( dirname( VIMEOTHEQUE_FILE ) ) . '/languages/'
 		);
 	}
+
+    private function init_playlist_themes(){
+        $this->playlist_themes = new Themes(
+            new Theme(
+                VIMEOTHEQUE_PATH . 'themes/default/player.php',
+                __( 'Default', 'codeflavors-vimeo-video-post-lite' )
+            )
+        );
+
+        $this->playlist_themes->register_theme(
+            new Theme(
+                VIMEOTHEQUE_PATH . 'themes/simple/theme.php',
+                __( 'Simple', 'codeflavors-vimeo-video-post-lite' )
+            )
+        );
+
+        $this->playlist_themes->register_theme(
+            new Theme(
+                VIMEOTHEQUE_PATH . 'themes/listy/theme.php',
+                __( 'Listy', 'codeflavors-vimeo-video-post-lite' )
+            )
+        );
+    }
 
 	/**
 	 * Register the autoloader

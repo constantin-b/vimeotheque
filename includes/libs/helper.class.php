@@ -551,4 +551,45 @@ class Helper {
 		$rest = defined( 'REST_REQUEST' ) && REST_REQUEST;
 		return $ajax || $rest;
 	}
+
+
+    /**
+     * Check for Vimeotheque PRO to avoid errors.
+     *
+     * @param string $version   Pro plugin version to check for.
+     * @return bool
+     */
+    public static function vimeotheque_is_pro_version_above ( $version ): bool {
+
+        if (!function_exists('is_plugin_active')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        $plugin_slug = 'vimeo-video-post/main.php';
+
+        if (!is_plugin_active($plugin_slug)) {
+            return false;
+        }
+
+        $plugin_file = WP_PLUGIN_DIR . '/' . $plugin_slug;
+
+        if (!file_exists($plugin_file)) {
+            return false;
+        }
+
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        $data = get_plugin_data($plugin_file, false, false);
+
+        if (empty($data['Version'])) {
+            return false;
+        }
+
+        $current_version = $data['Version'];
+
+        return version_compare($current_version, $version, '>=');
+    }
+
 }
