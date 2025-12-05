@@ -19,7 +19,7 @@
 						apply_filters( 'vimeotheque-author-avatar-size', 49 )
 				);
 				?>
-			<span class="screen-reader-text"><?php _x( 'Author', 'Used before post author name.', 'codeflavors-vimeo-video-post-lite' ); ?></span>
+			<span class="screen-reader-text"><?php echo _x( 'Author', 'Used before post author name.', 'codeflavors-vimeo-video-post-lite' ); ?></span>
 			<a class="url fn n" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
 				<?php the_author(); ?>
 			</a>
