@@ -1,5 +1,10 @@
 *** Vimeotheque Lite Changelog ***
 
+2025-12-05 - Version 2.3.5.2
+- Solved WordPress notices that translations were loaded too early;
+- Merged pull requests from @DAnn2012 related to bugs for text translations not being outputted and translation functions used wrong; 
+- Compatibility with WordPress 6.9.
+
 2025-08-01 - Version 2.3.5.1
 - Load plugin add-ons information only when needed;
 - Changed timeout for the add-ons information to 3s;
