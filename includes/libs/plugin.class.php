@@ -248,7 +248,9 @@ class Plugin {
 			3
 		);
 
-		require VIMEOTHEQUE_PATH . 'includes/libs/series/Plugin.php';
+        add_action('after_setup_theme', function(){
+            require VIMEOTHEQUE_PATH . 'includes/libs/series/Plugin.php';
+        });
 	}
 
 	public function init() {
@@ -264,26 +266,28 @@ class Plugin {
 
 		new Widgets_Factory( $this );
 
-		$this->playlist_themes = new Themes(
-			new Theme(
-				VIMEOTHEQUE_PATH . 'themes/default/player.php',
-				__( 'Default', 'codeflavors-vimeo-video-post-lite' )
-			)
-		);
+        add_action('init', function(){
+            $this->playlist_themes = new Themes(
+                new Theme(
+                    VIMEOTHEQUE_PATH . 'themes/default/player.php',
+                    __( 'Default', 'codeflavors-vimeo-video-post-lite' )
+                )
+            );
 
-		$this->playlist_themes->register_theme(
-			new Theme(
-				VIMEOTHEQUE_PATH . 'themes/simple/theme.php',
-				__( 'Simple', 'codeflavors-vimeo-video-post-lite' )
-			)
-		);
+            $this->playlist_themes->register_theme(
+                new Theme(
+                    VIMEOTHEQUE_PATH . 'themes/simple/theme.php',
+                    __( 'Simple', 'codeflavors-vimeo-video-post-lite' )
+                )
+            );
 
-		$this->playlist_themes->register_theme(
-			new Theme(
-				VIMEOTHEQUE_PATH . 'themes/listy/theme.php',
-				__( 'Listy', 'codeflavors-vimeo-video-post-lite' )
-			)
-		);
+            $this->playlist_themes->register_theme(
+                new Theme(
+                    VIMEOTHEQUE_PATH . 'themes/listy/theme.php',
+                    __( 'Listy', 'codeflavors-vimeo-video-post-lite' )
+                )
+            );
+        });
 
 		// internalization
 		load_plugin_textdomain(
