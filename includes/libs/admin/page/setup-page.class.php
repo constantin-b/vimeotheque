@@ -498,14 +498,14 @@ class Setup_Page extends Page_Abstract implements Page_Interface {
 			'vimeotheque-setup',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/setup-page.css',
 			false,
-			VIMEOTHEQUE_VERSION
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		wp_enqueue_script(
 			'vimeotheque-setup',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/setup.js',
 			[ 'jquery', 'wp-color-picker' ],
-			VIMEOTHEQUE_VERSION
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
         wp_localize_script(
