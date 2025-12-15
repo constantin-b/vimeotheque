@@ -97,7 +97,7 @@ class Playlist extends Shortcode_Abstract implements Shortcode_Interface {
 				'vimeotheque-theme-' . strtolower( $theme->get_folder_name() ) . '-script-dependencies',
 				$handles['js']
 			),
-			'1.0'
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		wp_enqueue_style(
