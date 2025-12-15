@@ -47,7 +47,7 @@ class Widgets_Factory {
 				'cvm-video-edit',
 				VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
 				[ 'jquery' ],
-				'1.0'
+                \Vimeotheque\Helper::get_plugin_version()
 			);
 
 			wp_enqueue_style(
