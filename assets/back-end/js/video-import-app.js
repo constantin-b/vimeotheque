@@ -1,48 +1,41 @@
 'use strict';
-var CvmVideos = CvmVideos || {};
 (function ($, $$) {
-    $$.AppRouter = Backbone.Router.extend({
-        routes: {
-            "": "home",
-            "load/:feed/:query/:order/:album_user/:search_results": 'load'
+    (function ($, $$) {
+        var restNonce = ($$ && ($$.rest_nonce || $$.nonce)) ? ($$.rest_nonce || $$.nonce) : null;
+        if (restNonce) {
+            var originalSync_1 = Backbone.sync;
+            Backbone.sync = function (method, model, options) {
+                if (options === void 0) { options = {}; }
+                var prevBeforeSend = options.beforeSend;
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', restNonce);
+                    if (typeof prevBeforeSend === 'function') {
+                        return prevBeforeSend.apply(this, arguments);
+                    }
+                };
+                return originalSync_1.call(this, method, model, options);
+            };
         }
-    });
-    $(document).ready(function () {
-        $$.videosCollection = new $$.VideosCollection;
-        $$.appView = new $$.AppView;
-        $$.appRouter = new $$.AppRouter;
-        $$.appRouter.on('route:home', function () {
-        });
-        $$.appRouter.on('route:load', function (feed, query, order, album_user, search_results) {
-            $('#cvm_feed').val(feed).trigger('change');
-            $('#cvm_query').val(decodeURIComponent(query));
-            $('#cvm_order').val(order);
-            $('#cvm_album_user').val(album_user == '0' ? '' : album_user);
-            $('#cvm_search_results').val(search_results == '0' ? '' : search_results);
-            $$.appView.loadMore();
-        });
-        Backbone.history.start();
-    });
-})(jQuery, CvmVideos);
-(function ($, $$) {
+    })(jQuery, CvmVideos);
     $$.AdminAjaxSyncableMixin = {
-        url: ajaxurl,
+        url: (typeof ajaxurl !== 'undefined') ? ajaxurl : '',
         action: 'cvm_get_videos',
         sync: function (method, object, options) {
+            if (options === void 0) { options = {}; }
             if (typeof options.data === 'undefined') {
                 options.data = {};
             }
             options.data.nonce = $$.nonce;
             options.data.action_type = method;
-            if (undefined === options.data.action && undefined !== this.action) {
+            if (options.data.action === undefined && this.action !== undefined) {
                 options.data.action = this.action;
             }
-            if ('read' === method) {
+            if (method === 'read') {
                 return Backbone.sync(method, object, options);
             }
             var json = this.toJSON();
             var formattedJSON = {};
-            if (json instanceof Array) {
+            if (Array.isArray(json)) {
                 formattedJSON.models = json;
             }
             else {
@@ -63,34 +56,35 @@ var CvmVideos = CvmVideos || {};
         var n = {};
         var nameArray = function (s) {
             var result = [];
-            var t = s.replace(/\[(.*?)\]/g, function (a) {
-                result.push(a.replace('[', '').replace(']', ''));
+            var t = s.replace(/\[(.*?)\]/g, function (match) {
+                result.push(match.replace('[', '').replace(']', ''));
                 return '';
             });
             result.unshift(t);
             return result;
         };
-        $.each(a, function () {
-            var arr = nameArray(this.name);
+        $.each(a, function (_i, field) {
+            var arr = nameArray(field.name);
             if (arr.length > 1) {
-                n[this.name] = arr;
+                n[field.name] = arr;
             }
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
+            if (o[field.name] !== undefined) {
+                if (!Array.isArray(o[field.name])) {
+                    o[field.name] = [o[field.name]];
                 }
-                o[this.name].push(this.value || '');
+                o[field.name].push(field.value || '');
             }
             else {
-                o[this.name] = this.value || '';
+                o[field.name] = field.value || '';
             }
         });
         var x = function (obj, keys, value) {
-            if (!obj)
+            if (!obj) {
                 return;
-            var i, t;
+            }
+            var t;
             var l = keys.length - 1;
-            for (i = 0; i < keys.length; i++) {
+            for (var i = 0; i < keys.length; i++) {
                 if (!t) {
                     t = obj[keys[i]] = {};
                 }
@@ -115,83 +109,17 @@ var CvmVideos = CvmVideos || {};
         o = $.extend({}, o, result);
         return o;
     };
-})(jQuery, CvmVideos);
-(function ($, $$) {
-    $$.VideosCollection = $$.BaseCollection.extend({
-        action: 'cvm_get_videos',
-        info: {
-            page: 1,
-            results: 0,
-            end: false
-        },
-        runningRequest: false,
-        initialize: function () {
-            this.model = $$.VideoModel;
-            this.on('error', this.processError, this);
-        },
-        parse: function (response) {
-            this.info = {
-                page: (response.data.page + 1),
-                results: response.data.results,
-                end: response.data.end
-            };
-            if (response.data.end) {
-                this.trigger('finished', this);
+    (function ($, $$) {
+        $$.getRestBase = function () {
+            if ($$ && $$.rest_url) {
+                return $$.rest_url.replace(/\/$/, '');
             }
-            this.runningRequest = false;
-            return response.data.videos;
-        },
-        processError: function () {
-            this.info = {
-                page: 1,
-                results: 0,
-                end: false
-            };
-            this.runningRequest = false;
-        },
-        fetch: function (options) {
-            this.runningRequest = true;
-            this.trigger('fetch', this, options);
-            options.data.page = this.info.page;
-            return Backbone.Collection.prototype.fetch.call(this, options);
-        },
-        reset: function (models, options) {
-            if (!models) {
-                this.info.page = 1;
-                this.info.end = false;
+            if (window.wpApiSettings && window.wpApiSettings.root) {
+                return (window.wpApiSettings.root + 'vimeotheque/v1').replace(/\/$/, '');
             }
-            Backbone.Collection.prototype.reset.call(this, models, options);
-        },
-        pageInfo: function () {
-            return this.info;
-        },
-        getQueued: function () {
-            return this.where({ status: 'queued' });
-        },
-        getImported: function () {
-            return this.where({ status: 'done' });
-        },
-        getFilter: function (where) {
-            if (!where) {
-                return {};
-            }
-            var w;
-            switch (where) {
-                case 'queued':
-                    w = { status: 'queued' };
-                    break;
-                case 'imported':
-                    w = { status: 'done' };
-                    break;
-                default:
-                    throw new Error("Unknown filtering method '" + where + "'.");
-            }
-            return w;
-        },
-        isRequestRunning: function () {
-            return this.runningRequest;
-        }
-    });
+            return '/wp-json/vimeotheque/v1';
+        };
+    })(jQuery, CvmVideos);
 })(jQuery, CvmVideos);
 (function ($$) {
     $$.FilterModel = Backbone.Model.extend({
@@ -368,12 +296,6 @@ var CvmVideos = CvmVideos || {};
                         });
                     }
                     break;
-                case 'reset':
-                    this.set({
-                        css: 'idle',
-                        message: l10n.info_search
-                    });
-                    break;
             }
         }
     });
@@ -392,6 +314,15 @@ var CvmVideos = CvmVideos || {};
     $$.VideoModel = $$.BaseModel.extend({
         idAttribute: 'video_id',
         action: 'cvm_import_video',
+        url: function () {
+            if (typeof $$.getRestBase === 'function') {
+                return $$.getRestBase() + '/video/import';
+            }
+            if ($$.rest_url) {
+                return $$.rest_url.replace(/\/$/, '') + '/video/import';
+            }
+            return (typeof ajaxurl !== 'undefined') ? ajaxurl : '';
+        },
         defaults: {
             post_id: false,
             edit_link: false,
@@ -412,22 +343,124 @@ var CvmVideos = CvmVideos || {};
             this.trigger('saving', this, key, val, options);
             return Backbone.Model.prototype.save.call(this, key, val, options);
         },
-        processResponse: function (m, r, o) {
+        processResponse: function (m, r) {
             var params = {
                 status: 'done'
             };
-            if (r.success && 1 == r.data.imported) {
-                params.post_id = r.data.ids[0];
-                params.edit_link = r.data.links[0].edit_link;
-                params.permalink = r.data.links[0].permalink;
+            var data = r && r.data ? r.data : r;
+            if (data && data.imported === 1) {
+                params.post_id = data.ids[0];
+                if (data.links && data.links[0]) {
+                    params.edit_link = data.links[0].edit_link;
+                    params.permalink = data.links[0].permalink;
+                }
             }
             this.set(params);
         },
-        processError: function (m, r, o) {
+        processError: function (m, r) {
+            var message = 'Unknown error';
+            if (r && r.responseJSON) {
+                var json = r.responseJSON;
+                if (json.data &&
+                    json.data.details &&
+                    Array.isArray(json.data.details.error) &&
+                    json.data.details.error.length > 0) {
+                    message = json.data.details.error[0];
+                }
+                else if (json.message) {
+                    message = json.message;
+                }
+            }
             this.set({
                 status: 'error',
-                error: r.responseJSON.data.error[0] || l10n.unknown_error
+                error: message,
+                saving: false,
+                importing: 'done'
             });
+        }
+    });
+})(jQuery, CvmVideos);
+(function ($, $$) {
+    $$.VideosCollection = $$.BaseCollection.extend({
+        url: function () {
+            if ($$.getRestBase) {
+                return $$.getRestBase() + '/videos';
+            }
+            return (typeof ajaxurl !== 'undefined') ? ajaxurl : '';
+        },
+        action: 'cvm_get_videos',
+        info: {
+            page: 1,
+            results: 0,
+            end: false
+        },
+        runningRequest: false,
+        initialize: function () {
+            this.model = $$.VideoModel;
+            this.on('error', this.processError, this);
+        },
+        parse: function (response) {
+            var data = response || {};
+            this.info = {
+                page: (data.page || 0) + 1,
+                results: data.results || 0,
+                end: !!data.end
+            };
+            if (data.end) {
+                this.trigger('finished', this);
+            }
+            this.runningRequest = false;
+            return data.videos || [];
+        },
+        processError: function () {
+            this.info = {
+                page: 1,
+                results: 0,
+                end: false
+            };
+            this.runningRequest = false;
+        },
+        fetch: function (options) {
+            this.runningRequest = true;
+            this.trigger('fetch', this, options);
+            options.data.page = this.info.page;
+            return Backbone.Collection.prototype.fetch.call(this, options);
+        },
+        reset: function (models, options) {
+            if (!models) {
+                this.info.page = 1;
+                this.info.end = false;
+            }
+            Backbone.Collection.prototype.reset.call(this, models, options);
+        },
+        pageInfo: function () {
+            return this.info;
+        },
+        getQueued: function () {
+            return this.where({ status: 'queued' });
+        },
+        getImported: function () {
+            return this.where({ status: 'done' });
+        },
+        getFilter: function (where) {
+            if (!where) {
+                return {};
+            }
+            var w;
+            switch (where) {
+                case 'queued':
+                    w = { status: 'queued' };
+                    break;
+                case 'imported':
+                    w = { status: 'done' };
+                    break;
+                default:
+                    throw new Error("Unknown filtering method '" + where + "'.");
+            }
+            return w;
+        },
+        isRequestRunning: function () {
+            return this.runningRequest;
         }
     });
 })(jQuery, CvmVideos);
@@ -532,14 +565,10 @@ var CvmVideos = CvmVideos || {};
         initialize: function () {
             this.template = _.template($('#filter-view').html());
             this.listenTo(this.model, 'change', this.render);
-            this.listenTo($$.videosCollection, 'reset', this.reset);
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
-        },
-        reset: function () {
-            this.$el.html('');
         }
     });
 })(jQuery, CvmVideos);
@@ -572,7 +601,6 @@ var CvmVideos = CvmVideos || {};
         initialize: function () {
             this.template = _.template($('#load-more-template').html());
             this.listenTo(this.model, 'change', this.render);
-            this.listenTo($$.videosCollection, 'reset', this.reset);
         },
         render: function (params) {
             this.$el.html(this.template(this.model.toJSON()));
@@ -583,9 +611,6 @@ var CvmVideos = CvmVideos || {};
                 this.$el.show();
             }
             return this;
-        },
-        reset: function () {
-            this.$el.html('');
         }
     });
 })(jQuery, CvmVideos);
@@ -642,8 +667,7 @@ var CvmVideos = CvmVideos || {};
     $$.SearchFormView = Backbone.View.extend({
         el: '#cvm_load_feed_form',
         events: {
-            'submit': 'doSubmit',
-            'change #cvm_feed': 'formChanged'
+            'submit': 'doSubmit'
         },
         initialize: function () {
             this.formData = false;
@@ -686,12 +710,6 @@ var CvmVideos = CvmVideos || {};
             });
             return false;
         },
-        formChanged: function () {
-            $('#cvm_query').val('');
-            $('#cvm_album_user').val('');
-            $('#cvm_search_results').val('');
-            $$.videosCollection.reset();
-        },
         hasChanged: function () {
             return !(this.$el.serialize() === this.formData);
         },
@@ -699,8 +717,8 @@ var CvmVideos = CvmVideos || {};
             return ('' === $('#cvm_query').val());
         },
         route: function () {
-            var q = encodeURIComponent($('#cvm_query').val()), t = encodeURIComponent($('#cvm_feed').val()), a = encodeURIComponent($('#cvm_album_user').val() || 0), o = encodeURIComponent($('#cvm_order').val()), sr = encodeURIComponent($('#cvm_search_results').val()) || 0;
-            $$.appRouter.navigate('load/' + t + '/' + q + '/' + o + '/' + a + '/' + sr);
+            var q = encodeURIComponent($('#cvm_query').val()), t = encodeURIComponent($('#cvm_feed').val()), a = encodeURIComponent($('#cvm_album_user').val()), o = encodeURIComponent($('#cvm_order').val());
+            $$.appRouter.navigate('load/' + t + '/' + q + '/' + o + '/' + a);
         }
     });
 })(jQuery, CvmVideos);
@@ -753,5 +771,29 @@ var CvmVideos = CvmVideos || {};
         detachView: function () {
             this.element = this.$el.detach();
         }
+    });
+})(jQuery, CvmVideos);
+var CvmVideos = CvmVideos || {};
+(function ($, $$) {
+    $$.AppRouter = Backbone.Router.extend({
+        routes: {
+            "": "home",
+            "load/:feed/:query/:order/:album_user": 'load'
+        }
+    });
+    $(document).ready(function () {
+        $$.videosCollection = new $$.VideosCollection;
+        $$.appView = new $$.AppView;
+        $$.appRouter = new $$.AppRouter;
+        $$.appRouter.on('route:home', function () {
+        });
+        $$.appRouter.on('route:load', function (feed, query, order, album_user) {
+            $('#cvm_feed').val(feed).trigger('change');
+            $('#cvm_query').val(decodeURIComponent(query));
+            $('#cvm_order').val(order);
+            $('#cvm_album_user').val(album_user);
+            $$.appView.loadMore();
+        });
+        Backbone.history.start();
     });
 })(jQuery, CvmVideos);
