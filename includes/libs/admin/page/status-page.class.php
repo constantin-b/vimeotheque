@@ -86,6 +86,10 @@ class Status_Page extends Page_Abstract implements Page_Interface {
                         <th scope="row" data-export-label="WordPress multisite"><?php _e( 'WordPress multisite', 'codeflavors-vimeo-video-post-lite' );?></th>
                         <td data-value="<?php echo esc_attr( $wp_info['multisite'] );?>"><?php $this->translate( $wp_info['multisite'] );?></td>
                     </tr>
+                    <tr>
+                        <th scope="row" data-export-label="WP Rest API enabled"><?php _e( 'Rest API enabled', 'codeflavors-vimeo-video-post-lite' );?></th>
+                        <td data-value="<?php echo esc_attr( $wp_info['rest_api_enabled'] );?>"><?php $this->translate( $wp_info['rest_api_enabled'] );?></td>
+                    </tr>
                     </tbody>
                 </table>
 
@@ -220,7 +224,8 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 		wp_enqueue_script(
 		    'vimeotheque-status',
             VIMEOTHEQUE_URL . 'assets/back-end/js/status-page.js',
-            ['jquery']
+            ['jquery'],
+            \Vimeotheque\Helper::get_plugin_version()
         );
 	}
 
@@ -300,6 +305,7 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 		$wp_data['locale']       = get_locale();
 		$wp_data['version']      = get_bloginfo( 'version' );
 		$wp_data['multisite']    = is_multisite() ? 'Yes' : 'No';
+        $wp_data['rest_api_enabled'] = $this->rest_api_is_fully_enabled() ?  'Yes' : 'No';
 
 		return $wp_data;
 	}
@@ -364,4 +370,36 @@ class Status_Page extends Page_Abstract implements Page_Interface {
 
 	    return $response;
     }
+
+    private function rest_api_is_fully_enabled() : bool {
+
+        // 1. Test direct request
+        $response = wp_remote_get( rest_url() );
+        if ( is_wp_error( $response ) ) {
+            return false;
+        }
+        $code = wp_remote_retrieve_response_code( $response );
+        if ( ! in_array( $code, [200,301,302], true ) ) {
+            return false;
+        }
+
+        // 2. Filter rest_enabled
+        if ( ! apply_filters( 'rest_enabled', true ) ) {
+            return false;
+        }
+
+        // 3. No rule is blocking
+        $auth = apply_filters( 'rest_authentication_errors', null );
+        if ( ! empty( $auth ) && is_wp_error( $auth ) ) {
+            return false;
+        }
+
+        // 4. Routes
+        if ( has_action( 'rest_api_init' ) === false ) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
