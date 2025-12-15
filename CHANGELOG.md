@@ -1,5 +1,28 @@
 *** Vimeotheque Lite Changelog ***
 
+2025-12-15 - Version 2.3.6
+- Replaced all remaining admin-ajax.php actions with WordPress REST API endpoints.
+- Added new routes: GET /vimeotheque/v1/videos, POST /vimeotheque/v1/video/import, POST /vimeotheque/v1/video/<id>/thumbnail, POST /vimeotheque/v1/videos/bulk-import.
+- Implemented permission callbacks (`edit_posts`, `upload_files`) for all routes.
+- Standardized server responses using WP_REST_Response and WP_Error.
+- Updated Backbone models and collections to communicate with REST endpoints.
+- Removed outdated sync() overrides and emulateJSON usage.
+- Replaced jQuery AJAX calls with wp.apiFetch across all import scripts.
+- Updated grid pagination and data parsing to use REST response format {results, page, end, videos}.
+- Refactored bulk import script to build proper JSON arrays and validate selections.
+- Added client-side validation preventing bulk import when no videos are selected.
+- Migrated thumbnail import to REST API with Gutenberg and Classic Editor compatibility.
+- Improved Featured Image updates in Gutenberg using core/editor data store.
+- Updated Classic Editor thumbnail importer to use REST instead of admin-ajax.
+- Improved UI validation for empty search queries and missing selections.
+- Removed legacy dependencies and reduced reliance on global variables.
+- Added TypeScript-based replacements for legacy scripts.
+- Fixed errors related to missing admin includes during thumbnail import.
+- Fixed pagination issues and incorrect forced POST handling.
+- Fixed duplicate import handling and incorrect parameter mappings.
+- Ensured X-WP-Nonce is properly applied to all REST requests.
+- Improved error handling and normalized error messages across all endpoints.
+
 2025-12-05 - Version 2.3.5.2
 - Solved WordPress notices that translations were loaded too early;
 - Merged pull requests from @DAnn2012 related to bugs for text translations not being outputted and translation functions used wrong; 
