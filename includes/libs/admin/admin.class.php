@@ -42,12 +42,6 @@ class Admin{
 	 */
 	private $post_type;
 	/**
-	 * Ajax Class reference
-	 * 
-	 * @var Ajax_Actions
-	 */
-	private $ajax;
-	/**
 	 * @var Menu_Pages
 	 */
 	private $admin_menu;
@@ -139,10 +133,7 @@ class Admin{
 	 * Initialize
 	 */
 	public function init(){
-		// start AJAX actions
-		$this->ajax = new Ajax_Actions( $this->post_type );
 		// start post edit single video page
-
 		new Post_Edit_Page( $this );
 
 		$this->register_pages();
@@ -457,13 +448,6 @@ class Admin{
 
         $this->extensions = new Extensions();
         return $this->extensions;
-	}
-
-	/**
-	 * @return Ajax_Actions
-	 */
-	public function get_ajax(){
-		return $this->ajax;
 	}
 
 	/**
