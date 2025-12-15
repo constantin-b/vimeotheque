@@ -769,7 +769,7 @@ class Classic_Editor {
 			'cvm-shortcode-modal',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/shortcode-modal.js',
 			[ 'jquery-ui-dialog' ],
-			'1.0'
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		wp_localize_script(
@@ -798,7 +798,7 @@ class Classic_Editor {
 				'cvm-video-edit',
 				VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
 				[ 'jquery', 'wp-color-picker' ],
-				'1.0'
+                \Vimeotheque\Helper::get_plugin_version()
 			);
 
 			wp_enqueue_style( 'wp-color-picker' );
@@ -815,8 +815,8 @@ class Classic_Editor {
 				wp_enqueue_script(
 					'cvm-video-thumbnail',
 					VIMEOTHEQUE_URL . 'assets/back-end/js/video-thumbnail.js',
-					[ 'jquery' ],
-					'1.0'
+					[ 'jquery', 'wp-api' ],
+                    \Vimeotheque\Helper::get_plugin_version()
 				);
 
 				wp_localize_script(
