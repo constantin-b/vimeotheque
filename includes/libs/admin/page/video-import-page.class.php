@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Vimeotheque\Admin\Admin;
-use Vimeotheque\Admin\Ajax_Actions;
 use Vimeotheque\Admin\Posts_Import_Meta_Panels;
 use Vimeotheque\Admin\Table\Video_Import_List_Table;
 use Vimeotheque\Helper;
@@ -42,12 +41,6 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	 */
 	private $meta;
 	/**
-	 * Ajax Class reference
-  *
-	 * @var Ajax_Actions
-	 */
-	private $ajax_obj;
-	/**
 	 * @var \Vimeotheque\Post\Post_Type
 	 */
 	private $cpt;
@@ -65,7 +58,6 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	public function __construct( Admin $admin, $page_title, $menu_title, $slug, $parent, $capability ){
 		parent::__construct( $admin, $page_title, $menu_title, $slug, $parent, $capability );
 		$this->meta = new Posts_Import_Meta_Panels( $admin->get_post_type() );
-		$this->ajax_obj = $admin->get_ajax();
 		$this->cpt = $admin->get_post_type();
 	}
 
@@ -135,10 +127,6 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 		        	<form method="post" action="" <?php echo implode( ' ', $attrs );?>>	        	 
 			        	<div id="post-body-content">					
                         <?php
-                            // add nonce field
-                            wp_nonce_field( $this->ajax_obj->get_nonce_action('list_view_import_videos') , $this->ajax_obj->get_nonce_name( 'list_view_import_videos' ) );
-                            // adds action hidden input
-                            $this->input( 'action', $this->ajax_obj->get_action( 'list_view_import_videos' ), 'hidden', 'cvm_ajax_action' );
                             // add source hidden input
                             $this->input( 'cvm_source', 'vimeo' );
                             // add feed type hidden input field
@@ -234,8 +222,8 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 		wp_enqueue_script(
 				'cvm-video-search-js',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/video-import.js',
-				[ 'jquery' ],
-				'1.0'
+				[ 'jquery', 'wp-api' ],
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		wp_localize_script('cvm-video-search-js', 'cvm_importMessages', [
@@ -249,7 +237,7 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 			'cvm-video-search-css',
 			VIMEOTHEQUE_URL . 'assets/back-end/css/video-import.css',
 			[],
-			'1.0'
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		/**
@@ -268,7 +256,8 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 		wp_enqueue_script(
 				'cvm-video-import-grid',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/video-import-app.js',
-				[ 'jquery', 'underscore', 'backbone' ]
+				[ 'jquery', 'underscore', 'backbone' ],
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 	
 		$data = [
@@ -283,12 +272,11 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 				'info_search'	=> __('Ready to accept queries, please use the form to search for videos.', 'codeflavors-vimeo-video-post-lite')
 			],
 			'assets' => [
-				'no_image' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg'
-			]
+				'no_image' => VIMEOTHEQUE_URL . 'assets/back-end/images/no-image.jpg',
+			],
+            'rest_url' => esc_url_raw( rest_url( 'vimeotheque/v1' ) ),
+            'rest_nonce' => wp_create_nonce( 'wp_rest' ),
 		];
-		// add the nonce
-		$data[ $this->ajax_obj->get_nonce_name( 'save_video' ) ] = wp_create_nonce( $this->ajax_obj->get_nonce_action( 'save_video' ) );
-		
 	
 		wp_localize_script( 'cvm-video-import-grid', 'CvmVideos', $data );
 	
