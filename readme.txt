@@ -100,65 +100,60 @@ Check the [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg
 
 **Major modernization release.** This update replaces all remaining `admin-ajax.php` actions with secure, scalable, and performant **WordPress REST API** endpoints, improving speed, reliability, and compatibility with modern WordPress versions.
 
-=== New: Full REST API Integration ===
+**New: Full REST API Integration**
 
-* Replaced legacy AJAX actions with REST routes:
+- Replaced legacy AJAX actions with REST routes
+- Added proper capability checks (`edit_posts`, `upload_files`).
+- Standardized error and success responses using `WP_REST_Response` and `WP_Error`.
 
-  * `cvm_get_videos` → **GET** `/vimeotheque/v1/videos`
-  * `cvm_import_video` → **POST** `/vimeotheque/v1/video/import`
-  * `cvm_import_video_thumbnail` → **POST** `/vimeotheque/v1/video/<id>/thumbnail`
-  * `cvm_import_videos` → **POST** `/vimeotheque/v1/videos/bulk-import`
-* Added proper capability checks (`edit_posts`, `upload_files`).
-* Standardized error and success responses using `WP_REST_Response` and `WP_Error`.
+**Improved JavaScript Architecture**
 
-=== Improved JavaScript Architecture ===
-
-* Replaced all jQuery AJAX calls with **`wp.apiFetch`** for automatic authentication (nonce) and structured error handling.
-* Updated Backbone models and collections to use REST endpoints (no more custom sync hacks).
-* Removed outdated `emulateJSON` workarounds.
-* Unified REST response format for grid loading:
+- Replaced all jQuery AJAX calls with **`wp.apiFetch`** for automatic authentication (nonce) and structured error handling.
+- Updated Backbone models and collections to use REST endpoints (no more custom sync hacks).
+- Removed outdated `emulateJSON` workarounds.
+- Unified REST response format for grid loading:
   `{ results, page, end, videos }`
 
-=== Bulk Import Enhancements ===
+**Bulk Import Enhancements**
 
-* Bulk List View now uses `/videos/bulk-import` endpoint.
-* Normalized payload handling for `cvm_import[]` selections.
-* Added detailed result reporting (imported, skipped, private, error).
-* Added UI validation when no videos are selected.
+- Bulk List View now uses `/videos/bulk-import` endpoint.
+- Normalized payload handling for `cvm_import[]` selections.
+- Added detailed result reporting (imported, skipped, private, error).
+- Added UI validation when no videos are selected.
 
-=== Thumbnail Import Improvements ===
+**Thumbnail Import Improvements**
 
-* Thumbnail import is now handled by REST:
+- Thumbnail import is now handled by REST:
   `/video/<id>/thumbnail`
-* **Gutenberg support:** featured image updates automatically.
-* **Classic Editor support:** standalone script rewritten for REST API.
+- **Gutenberg support:** featured image updates automatically.
+- **Classic Editor support:** standalone script rewritten for REST API.
 
-=== UI / UX Enhancements ===
+**UI / UX Enhancements**
 
-* Updated search messages, loaders, filters, and pagination to reflect REST logic.
-* Added validation for empty search queries.
-* Improved user feedback during import operations.
+- Updated search messages, loaders, filters, and pagination to reflect REST logic.
+- Added validation for empty search queries.
+- Improved user feedback during import operations.
 
-=== Performance Improvements ===
+**Performance Improvements**
 
-* Reduced admin load by removing all `admin-ajax.php`-based processes.
-* Eliminated redundant JSON encoding and forced POST requests.
-* Faster and more stable background operations.
+- Reduced admin load by removing all `admin-ajax.php`-based processes.
+- Eliminated redundant JSON encoding and forced POST requests.
+- Faster and more stable background operations.
 
-=== Codebase Modernization ===
+**Codebase Modernization**
 
-* Added TypeScript-based rebuild of legacy scripts.
-* Reduced reliance on global variables.
-* Introduced consistent ES5/ESNext transpilation workflow.
-* Decoupled unrelated modules for cleaner architecture.
+- Added TypeScript-based rebuild of legacy scripts.
+- Reduced reliance on global variables.
+- Introduced consistent ES5/ESNext transpilation workflow.
+- Decoupled unrelated modules for cleaner architecture.
 
-=== Bug Fixes ===
+**Bug Fixes**
 
-* Fixed thumbnail rendering issues caused by missing admin includes.
-* Fixed incorrect pagination responses from old AJAX format.
-* Fixed duplicate import handling (“already exists” states).
-* Fixed parameter mismatches (`action_top`, `action2`) in bulk import.
-* Ensured REST requests always include proper nonce authentication.
+- Fixed thumbnail rendering issues caused by missing admin includes.
+- Fixed incorrect pagination responses from old AJAX format.
+- Fixed duplicate import handling (“already exists” states).
+- Fixed parameter mismatches (`action_top`, `action2`) in bulk import.
+- Ensured REST requests always include proper nonce authentication.
 
 = 2.3.5.2 =
 - Solved WordPress notices that translations were loaded too early;
