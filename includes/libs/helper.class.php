@@ -142,7 +142,7 @@ class Helper {
 				'cvm-video-player',
 				VIMEOTHEQUE_URL . 'assets/back-end/js/apps/player/app.build.js',
 				$js_dependency,
-				'1.0'
+                self::get_plugin_version()
 			);
 			$handles['js'] = 'cvm-video-player';
 		}
@@ -568,13 +568,13 @@ class Helper {
         $plugin_slug = 'vimeo-video-post/main.php';
 
         if (!is_plugin_active($plugin_slug)) {
-            return false;
+            return true;
         }
 
         $plugin_file = WP_PLUGIN_DIR . '/' . $plugin_slug;
 
         if (!file_exists($plugin_file)) {
-            return false;
+            return true;
         }
 
         if (!function_exists('get_plugin_data')) {
