@@ -164,7 +164,7 @@ class Post_Edit_Page {
 				$handle,
 				VIMEOTHEQUE_URL . 'assets/back-end/js/apps/add_video/app.build.js',
 				[ 'wp-element', 'wp-editor' ],
-				'1.0'
+                \Vimeotheque\Helper::get_plugin_version()
 			);
 
 			/**
@@ -238,7 +238,7 @@ class Post_Edit_Page {
 			'cvm-gutenberg',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/gutenberg/video-thumbnail.js',
 			[ 'jquery' ],
-			'1.0'
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 	}
 }
