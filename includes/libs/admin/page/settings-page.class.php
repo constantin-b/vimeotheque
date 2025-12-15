@@ -342,20 +342,22 @@ class Settings_Page extends Page_Abstract implements Page_Interface {
 		wp_enqueue_script(
 			'cvm-tabs',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/tabs.js',
-			[ 'jquery', 'jquery-ui-tabs' ]
+			[ 'jquery', 'jquery-ui-tabs' ],
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		wp_enqueue_script(
 			'cvm-settings',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/plugin-settings.js',
-			[ 'jquery' ]
+			[ 'jquery' ],
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 
 		wp_enqueue_script(
 			'cvm-video-edit',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/video-edit.js',
 			[ 'jquery', 'wp-color-picker' ],
-			'1.0'
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 		wp_enqueue_style( 'wp-color-picker' );
 	}
