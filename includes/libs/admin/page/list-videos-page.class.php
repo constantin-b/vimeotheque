@@ -40,7 +40,7 @@ class List_Videos_Page extends Page_Abstract implements Page_Interface {
 			'cvm-video-list-modal',
 			VIMEOTHEQUE_URL . 'assets/back-end/js/video-list-modal.js',
 			[ 'jquery' ],
-			'1.0'
+            \Vimeotheque\Helper::get_plugin_version()
 		);
 		/**
 		 * @ignore
