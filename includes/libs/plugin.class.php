@@ -4,6 +4,7 @@ namespace Vimeotheque;
 
 use Vimeotheque\Admin\Admin;
 use Vimeotheque\Admin\Customizer\Customizer;
+use Vimeotheque\Admin\Rest_Actions;
 use Vimeotheque\Amp\Amp;
 use Vimeotheque\Blocks\Block_Abstract;
 use Vimeotheque\Blocks\Blocks_Factory;
@@ -529,6 +530,8 @@ class Plugin {
 		if ( is_admin() || Helper::is_ajax() ) {
 			$this->admin = new Admin( $this->get_cpt() );
 		}
+
+        new Rest_Actions($this->get_cpt());
 	}
 
 	/**
