@@ -23,7 +23,7 @@ function block_editor() {
 		'vimeotheque-theme-default-attributes',
 		plugin_dir_url( __FILE__ ) . 'assets/js/block/app.build.js',
 		[ Plugin::instance()->get_block( 'playlist' )->get_script_handle() ],
-		'1.0.0',
+        \Vimeotheque\Helper::get_plugin_version(),
 		true
 	);
 }
