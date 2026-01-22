@@ -1,5 +1,9 @@
 *** Vimeotheque Lite Changelog ***
 
+2026-01-22 - Version 2.3.6.1
+- Fixed PHP warning when Vimeo API returns incomplete error data;
+- Improved error output escaping for admin notices.
+
 2025-12-15 - Version 2.3.6
 - Replaced all remaining admin-ajax.php actions with WordPress REST API endpoints.
 - Added new routes: GET /vimeotheque/v1/videos, POST /vimeotheque/v1/video/import, POST /vimeotheque/v1/video/<id>/thumbnail, POST /vimeotheque/v1/videos/bulk-import.
