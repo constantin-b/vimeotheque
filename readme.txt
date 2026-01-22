@@ -4,7 +4,7 @@ Tags: vimeo, video, video gallery, playlist, gutenberg
 Requires at least: 5.2
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.6
+Stable tag: 2.3.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,11 @@ Check the [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg
 12. Vimeotheque create status report
 
 == Changelog ==
+
+= 2.3.6.1 =
+* Fixed a PHP warning when handling Vimeo API errors.
+* Improved sanitization of error output in the admin area.
+
 = 2.3.6 – REST API Migration Update =
 
 **Major modernization release.** This update replaces all remaining `admin-ajax.php` actions with secure, scalable, and performant **WordPress REST API** endpoints, improving speed, reliability, and compatibility with modern WordPress versions.
