@@ -482,7 +482,17 @@ class Video_Import_Page extends Page_Abstract implements Page_Interface{
 	    $data		= $error->get_error_data( $code );
 
 	    $output = '<strong>'.$message.'</strong></p>';
-	    $output.= sprintf( __('Vimeo error code: %1$s (<em>%2$s</em>) - <strong>%3$s</strong>', 'codeflavors-vimeo-video-post-lite'), $data['code'], $data['msg'], $data['expl'] );
+        if( is_array( $data ) ) {
+            $output .= sprintf(
+                '%s: %s (<em>%s</em>) - <strong>%s</strong>',
+                esc_html__('Vimeo error code', 'codeflavors-vimeo-video-post-lite'),
+                esc_html( $data['code'] ),
+                esc_html( $data['msg'] ),
+                esc_html( $data['expl'] )
+            );
+        }else{
+            $output .= esc_html__( 'Unknown Vimeo error.', 'codeflavors-vimeo-video-post-lite' );
+        }
 
 	    if( 401 == $data['code'] ){
 		    $url = menu_page_url('cvm_settings', false).'#vimeo_consumer_key';
