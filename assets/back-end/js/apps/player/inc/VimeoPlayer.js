@@ -21,7 +21,8 @@ $.fn.VimeoPlayer = function( params ){
      * Initialize player variable
      */
     let player,
-        initialVolumeSet = false
+        initialVolumeSet = false,
+        lastLoadVideoPromise = Promise.resolve()
 
     /**
      * Used to check if the player issued any errors
@@ -117,6 +118,7 @@ $.fn.VimeoPlayer = function( params ){
         )
     } )
     player.on( 'error', data => {
+        self.isError = data
         options.onError( data, self )
     } )
     // If user changes volume manually, before the playback is initiated, don't reset the volume on playback
@@ -131,13 +133,31 @@ $.fn.VimeoPlayer = function( params ){
      * @return {$.fn.VimeoPlayer}
      */
     this.loadVideo = id => {
-        player.loadVideo( id ).then( id => {
+        self.isError = false
 
+        lastLoadVideoPromise = player.loadVideo( id ).then( id => {
+            self.isError = false
+
+            return id
         } ).catch( error => {
-            //console.log(error)
+            self.isError = error
+            options.onError( error, self )
+
+            throw error
         } )
 
+        lastLoadVideoPromise.catch( () => {} )
+
         return self
+    }
+
+    /**
+     * Get the promise returned by the latest loadVideo() call.
+     *
+     * @return Promise
+     */
+    this.getLoadVideoPromise = () => {
+        return lastLoadVideoPromise
     }
 
     /**
