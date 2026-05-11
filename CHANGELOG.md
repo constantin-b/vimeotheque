@@ -1,5 +1,13 @@
 *** Vimeotheque Lite Changelog ***
 
+2026-05-11 - Version 2.3.7
+- Added Default Series theme settings for showing or hiding the featured video title and content.
+- Displayed the selected Series video title and content under the featured player, with a collapsible "See more" control for longer content.
+- Added REST API support for the new Default Series theme display settings.
+- Fixed Vimeo playlist handling when a selected video cannot be loaded due to privacy or access errors.
+- Improved Vimeo playlist state updates so the active item changes only after the new video is successfully loaded.
+- Updated plugin version to 2.3.7.
+
 2026-01-22 - Version 2.3.6.1
 - Fixed PHP warning when Vimeo API returns incomplete error data;
 - Improved error output escaping for admin notices.
