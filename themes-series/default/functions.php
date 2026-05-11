@@ -23,7 +23,9 @@ add_action(
 	'rest_api_init',
 	function () {
 		$fields = [
-			'columns' => 3,
+			'columns'      => 3,
+			'show_title'   => 'yes',
+			'show_content' => 'yes',
 		];
 
 		foreach ( $fields as $field => $default_value ) {
@@ -39,14 +41,13 @@ add_action(
 							$meta = (int) $meta;
 						}
 
-						/**
-						 * If not already set, set the default value.
-						 */
-						if ( ! $meta ) {
+						// Use strict empty check so string '0' or 'no' are not treated as unset.
+						if ( '' === $meta ) {
 							update_post_meta( $object['id'], $field, $default_value );
+							$meta = $default_value;
 						}
 
-						return $meta ?: $default_value;
+						return $meta;
 					},
 					/**
 					 * @param array $value      The new value
