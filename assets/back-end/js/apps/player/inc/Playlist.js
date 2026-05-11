@@ -68,6 +68,7 @@ $.fn.VimeoPlaylist = function( params ){
     }
 
     let currentItem	= 0,
+        loadRequest = 0,
         playlistLoop = parseInt( playlist_loop )
 
     /**
@@ -89,7 +90,9 @@ $.fn.VimeoPlaylist = function( params ){
             $(item).on( 'click', e => {
                 e.preventDefault()
 
-                player.getVolume().then( volume => {
+                player.getVolume().catch( () => {
+                    return false
+                } ).then( volume => {
                     loadItem( item, i, volume )
                 } )
 
@@ -118,8 +121,7 @@ $.fn.VimeoPlaylist = function( params ){
                 aspect_ratio
             } = $(item).data()
 
-        $(items[currentItem]).removeClass('active-video');
-        $(item).addClass('active-video');
+        const currentLoadRequest = ++loadRequest
 
         player
             .loadVideo( video_id )
@@ -128,17 +130,26 @@ $.fn.VimeoPlaylist = function( params ){
                 'data-aspect_ratio': aspect_ratio
             })
 
-        if( volume )
-            player.setVolume( volume )
+        player.getLoadVideoPromise().then( () => {
+            if( currentLoadRequest !== loadRequest ){
+                return
+            }
 
-        vimeotheque.resize(player)
+            $(items[currentItem]).removeClass('active-video');
+            $(item).addClass('active-video');
 
-        currentItem = index
+            if( false !== volume )
+                player.setVolume( volume )
 
-        /**
-         * Trigger loadVideo event
-         */
-        options.loadVideo.call( self, item, index, player )
+            vimeotheque.resize(player)
+
+            currentItem = index
+
+            /**
+             * Trigger loadVideo event
+             */
+            options.loadVideo.call( self, item, index, player )
+        } ).catch( () => {} )
     },
 
     /**
