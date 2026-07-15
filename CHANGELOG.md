@@ -1,4 +1,9 @@
 *** Vimeotheque Lite Changelog ***
+2026-07-15 - Version 2.3.7.1
+- Passed the current import request to the "vimeotheque\duplicate_posts_found" filter so add-ons can read import options (such as duplicate handling) that are no longer available in $_POST.
+- Declared compatibility with WordPress 7.0.
+- Updated plugin version to 2.3.7.1.
+
 
 2026-05-11 - Version 2.3.7
 - Added Default Series theme settings for showing or hiding the featured video title and content.
