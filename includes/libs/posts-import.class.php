@@ -71,7 +71,7 @@ class Posts_Import {
 			'error'    => [],
 		];
 
-		$duplicates = $this->get_duplicate_posts( $raw_feed, $this->post_type->get_post_type() );
+		$duplicates = $this->get_duplicate_posts( $raw_feed, $this->post_type->get_post_type(), $import_options );
 
 		// parse feed
 		foreach ( $raw_feed as $video ) {
@@ -214,12 +214,15 @@ class Posts_Import {
 	}
 
 	/**
-	 * @param array     $raw_feed
-	 * @param $post_type
+	 * @param array                     $raw_feed
+	 * @param string                    $post_type
+	 * @param \WP_REST_Request|array|null $request The REST request (or params array) that triggered the import, if any.
+	 *                                             Passed on to the "vimeotheque\duplicate_posts_found" filter so add-ons
+	 *                                             can read import options (e.g. import_duplicates) that are no longer in $_POST.
 	 *
 	 * @return array
 	 */
-	public function get_duplicate_posts( $raw_feed, $post_type ) {
+	public function get_duplicate_posts( $raw_feed, $post_type, $request = null ) {
 
 		if ( ! $raw_feed ) {
 			return [];
@@ -259,9 +262,10 @@ class Posts_Import {
 		 * Filter the duplicate posts found by the plugin.
 		 * When perfoming imports, the filter runs when duplicate imports are detected.
 		 *
-		 * @param array $_result    The post IDs found as duplicates.
+		 * @param array                      $_result The post IDs found as duplicates.
+		 * @param \WP_REST_Request|array|null $request The REST request (or params array) that triggered the import, if any.
 		 */
-		$result = apply_filters( 'vimeotheque\duplicate_posts_found', $_result );
+		$result = apply_filters( 'vimeotheque\duplicate_posts_found', $_result, $request );
 
 		if ( $_result !== $result ) {
 			Helper::debug_message(
