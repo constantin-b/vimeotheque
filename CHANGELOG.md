@@ -1,6 +1,8 @@
 *** Vimeotheque Lite Changelog ***
 2026-10-12 - Version 2.3.7.2
 - Fixed the Series editor displaying only the first 10 videos of manually created playlists; all videos in the playlist can now be viewed, reordered and removed.
+- Declared compatibility with WordPress 7.1.2.
+- Updated plugin version to 2.3.7.2.
 
 
 2026-07-15 - Version 2.3.7.1

@@ -2,9 +2,9 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video, video gallery, playlist, gutenberg
 Requires at least: 5.2
-Tested up to: 7.0
+Tested up to: 7.1.2
 Requires PHP: 7.4
-Stable tag: 2.3.7.1
+Stable tag: 2.3.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,11 @@ Check the [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg
 12. Vimeotheque create status report
 
 == Changelog ==
+
+= 2.3.7.2 =
+- Fixed the Series editor displaying only the first 10 videos of manually created playlists; all videos in the playlist can now be viewed, reordered and removed.
+- Declared compatibility with WordPress 7.1.2.
+- Updated plugin version to 2.3.7.2.
 
 = 2.3.7.1 =
 - Passed the current import request to the "vimeotheque\duplicate_posts_found" filter so add-ons can read import options (such as duplicate handling) that are no longer available in $_POST.
