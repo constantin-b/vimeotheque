@@ -24,8 +24,8 @@ const VideoLoad = ({
         isLoading
     } = useSelect(
         select => ({
-            posts: select('core').getEntityRecords( 'postType', 'vimeo-video', {include: item.items, orderby: 'include'} ),
-            isLoading: select('core/data').isResolving( 'core', 'getEntityRecords', ['postType', 'vimeo-video', {include: item.items, orderby: 'include'}] )
+            posts: select('core').getEntityRecords( 'postType', 'vimeo-video', {include: item.items, orderby: 'include', per_page: -1} ),
+            isLoading: select('core/data').isResolving( 'core', 'getEntityRecords', ['postType', 'vimeo-video', {include: item.items, orderby: 'include', per_page: -1}] )
         })
     )
 
