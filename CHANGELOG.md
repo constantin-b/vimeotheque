@@ -2,6 +2,7 @@
 2026-10-19 - Version 2.3.7.3
 - Fixed video players keeping a taller, non-16:9 height when their container width changed after page load (theme layout shifts, late loading styles, sidebars); players now resize automatically using ResizeObserver.
 - Declared compatibility with WordPress 7.1.3.
+- Updated plugin version to 2.3.7.3.
 
 
 2026-10-12 - Version 2.3.7.2
