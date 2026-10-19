@@ -2,7 +2,7 @@
 Contributors: codeflavors, constantin.boiangiu
 Tags: vimeo, video, video gallery, playlist, gutenberg
 Requires at least: 5.2
-Tested up to: 7.1.2
+Tested up to: 7.1.3
 Requires PHP: 7.4
 Stable tag: 2.3.7.2
 License: GPLv2 or later
@@ -96,6 +96,10 @@ Check the [Knowledge Base](https://docs.vimeotheque.com/?utm_source=wordpressorg
 12. Vimeotheque create status report
 
 == Changelog ==
+
+= 2.3.7.3 =
+- Fixed video players keeping a taller, non-16:9 height when their container width changed after page load (theme layout shifts, late loading styles, sidebars); players now resize automatically using ResizeObserver.
+- Declared compatibility with WordPress 7.1.3.
 
 = 2.3.7.2 =
 - Fixed the Series editor displaying only the first 10 videos of manually created playlists; all videos in the playlist can now be viewed, reordered and removed.

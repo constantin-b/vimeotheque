@@ -5,6 +5,25 @@ import $ from 'jQuery'
 
 (function( exports ){
 
+    /**
+     * Last known width of each observed player, used to skip
+     * observer callbacks triggered only by height changes.
+     */
+    const widths = new WeakMap()
+
+    /**
+     * Resize players when their width changes for any reason (theme layout,
+     * late loading CSS, sidebars, etc.), not only on window resize.
+     */
+    const observer = 'undefined' !== typeof window.ResizeObserver ?
+        new ResizeObserver( entries => {
+            entries.forEach( entry => {
+                if( widths.get( entry.target ) !== $(entry.target).width() ){
+                    resize( entry.target )
+                }
+            })
+        }) : false
+
     const
     /**
      * Resize all player in page
@@ -20,6 +39,12 @@ import $ from 'jQuery'
      * @param element
      */
     resize = element => {
+        // allow jQuery objects to be passed
+        element = $(element).get(0)
+        if( !element ){
+            return
+        }
+
         const size_ratio = parseFloat( $(element).attr('data-size_ratio') || 0 ),
             aspect_ratio = $(element).attr('data-aspect_ratio'),
             width = $(element).width()
@@ -44,6 +69,13 @@ import $ from 'jQuery'
         }
 
         $(element).css({ height: height })
+
+        if( observer ){
+            if( !widths.has( element ) ){
+                observer.observe( element )
+            }
+            widths.set( element, width )
+        }
     }
 
     exports.resizeAll = resizeAll
